@@ -1,0 +1,16 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: gnome-initial-setup
+Upstream-Contact: gnome-doc-list@gnome.org
+Source: http://ftp.gnome.org/pub/GNOME/sources/gnome-initial-setup
+
+Files: *
+Copyright: Mattias Clasen <mclasen@redhat.com>
+	   Jasper St. Pierre <jstpierre@mecheye.net>
+	   Ray Strode <rstrode@redhat.com>
+	   William Jon McCann <jmccann@redhat.com>
+	   Jakub Steiner <jimmac@gmail.com>
+License: GPL-2+
+
+Files: debian/*
+Copyright: 2013 Javier Martinez Canillas <javier.martinez@collabora.co.uk>
+License: GPL-2+

@@ -1,0 +1,243 @@
+gnome-initial-setup (0.12-0co2endless30) unstable; urgency=low
+
+  * debian/patches/endless-create-user-keyring.patch:
+    Create user keyring as the same time as the account is created.
+    [endlessm/eos-shell#1852]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 15 Apr 2014 16:19:21 +0200
+
+gnome-initial-setup (0.12-0co2endless29) unstable; urgency=low
+
+  * debian/patches/endless-remove-weak-password-warning.patch:
+    Do not show a warning mark for weak passwords.
+    [endlessm/eos-shell#2180]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 08 Apr 2014 11:55:06 +0200
+
+gnome-initial-setup (0.12-0co2endless28) unstable; urgency=low
+
+  * debian/patches/endless-disable-lockscreen-when-autologin.patch
+    When setting automatic login, disable lock screen for the user.
+    [endlessm/eos-shell#2176]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 25 Mar 2014 10:28:23 +0100
+
+gnome-initial-setup (0.12-0co2endless27) unstable; urgency=low
+
+  * debian/patches/endless-no-automatic-fbe-for-shared-account.patch:
+    Do not run automatically for Shared Account.
+    [endlessm/eos-shell#2077]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Thu, 13 Mar 2014 18:17:19 +0100
+
+gnome-initial-setup (0.12-0co2endless26) unstable; urgency=low
+
+  * debian/patches/endless-switch-for-shared-account.patch:
+    Add switch to enable/disable Shared Account.
+    [endlessm/eos-shell#2075]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 11 Mar 2014 18:56:13 +0100
+
+gnome-initial-setup (0.12-0co2endless25) unstable; urgency=low
+
+  * debian/patches/endless-create-shared-account.patch:
+    Create a passwordless shared account.
+    [endlessm/eos-shell#1621]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Thu, 27 Feb 2014 13:25:51 +0100
+
+gnome-initial-setup (0.12-0co2endless24) unstable; urgency=low
+
+  * debian/patches/endless-remove-strength-label.patch:
+    Do not show strength label, as weak passwords are accepted.
+    [endlessm/eos-shell#2047]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Wed, 26 Feb 2014 17:46:04 +0100
+
+gnome-initial-setup (0.12-0co2endless23) unstable; urgency=low
+
+  * debian/patches/endless-fix-missing-default-location.patch:
+    Be more robust against a missing default timezone in personality.
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Tue, 18 Feb 2014 11:40:28 -0800
+
+gnome-initial-setup (0.12-0co2endless22) unstable; urgency=low
+
+  * debian/patches/endless-add-automatic-timezone.patch:
+    Use geoclue to set up the initial timezone.
+    [endlessm/eos-shell#1765]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 11 Feb 2014 17:58:43 +0100
+
+gnome-initial-setup (0.12-0co2endless21) unstable; urgency=low
+
+  * debian/patches/endless-Set-automatic-login-after-setting-the-password.patch:
+    Configure automatic login after setting the password.
+    [endlessm/eos-shell#1752]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Mon, 13 Jan 2014 13:37:54 +0100
+
+gnome-initial-setup (0.12-0co2endless20) unstable; urgency=low
+
+  * debian/patches/endless-goa-fix-double-free.patch:
+    Cherry-pick a fix for a double free from upstream.
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Fri, 10 Jan 2014 17:39:11 -0800
+
+gnome-initial-setup (0.12-0co2endless19) UNRELEASED; urgency=low
+
+  * debian/patches/endless-goa-Sync-code-to-be-closer-to-g-c-c-panel.patch:
+    debian/patches/endless-Update-add-accounts-goa-dialog.patch:
+    debian/patches/endless-goa-show-the-add-dialog.patch:
+    Cherry-pick some fixes from upstream.
+    [endlessm/eos-shell#1736]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Thu, 09 Jan 2014 14:47:12 +0100
+
+gnome-initial-setup (0.12-0co2endless18) UNRELEASED; urgency=low
+
+  * Merged endless-gnome-initial-setup-timezone.patch into endless-gnome-initial-setup-configure-time.patch
+  * Made NTP updates while GIS is open reflect on the date
+
+ -- Srdjan Grubor <sgnn7@sgnn7.org>  Tue, 17 Dec 2013 00:53:40 -0600
+
+gnome-initial-setup (0.12-0co2endless17) unstable; urgency=low
+
+  * debian/patches/endless-goa-page-Port-to-new-async-provider-API.patch:
+    Backport an upstream patch to build against new g-o-a.
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Wed, 11 Dec 2013 17:22:50 -0800
+
+gnome-initial-setup (0.12-0co2endless16) UNRELEASED; urgency=low
+
+  * debian/patches/endlessm-add-autologin.patch:
+    Add automatic login option.
+    [endlessm/eos-shell#1569]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Wed, 04 Dec 2013 15:40:52 +0100
+
+gnome-initial-setup (0.12-0co2endless15) UNRELEASED; urgency=low
+
+  * debian/patches/endless-focus-on-next-button.patch:
+    Set focus on 'Next' button
+    [endlessm/eos-shell#1577]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Mon, 02 Dec 2013 14:27:13 +0100
+
+gnome-initial-setup (0.12-0co2endless14) UNRELEASED; urgency=low
+
+  * debian/patches/endless-no-empty-passwords.patch:
+    Disable empty passwords.
+    [endlessm/eos-shell#1409]
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 26 Nov 2013 11:12:30 +0100
+
+gnome-initial-setup (0.12-0co2endless13) UNRELEASED; urgency=low
+
+  * debian/patches/endless-upstream-fix-wireless-essid.patch
+    Backport a patch from upstream to fix WiFi connections.
+    [endlessm/eos-shell#1515]
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Tue, 19 Nov 2013 12:39:01 -0800
+
+gnome-initial-setup (0.12-0co2endless12) unstable; urgency=low
+
+  * debian/patches/endless-set-language-at-startup.patch:
+    Make sure to properly set localed language at startup.
+    [endlessm/eos-shell#1505]
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Mon, 18 Nov 2013 11:02:05 -0800
+
+gnome-initial-setup (0.12-0co2endless11) eos; urgency=low
+
+  * debian/patches/endless-gnome-initial-setup-timezone.patch:
+    Read the default timezone out of the personality configuration 
+    file.
+    [endlessm/eos-shell#1303]
+
+ -- John Hiesey <john@endlessm.com>  Wed, 06 Nov 2013 19:19:58 +0000
+
+gnome-initial-setup (0.12-0co2endless10) eos; urgency=low
+
+  * debian/patches/endless-getting-started-video-visible.patch:
+    Only remove the gnome-welcome-tour file once the video is
+    finished.
+    [endlessm/eos-shell#1369]
+
+ -- John Hiesey <john@endlessm.com>  Mon, 04 Nov 2013 17:57:07 -0800
+
+gnome-initial-setup (0.12-0co2endless9) unstable; urgency=low
+
+  * debian/patches/endless-getting-started-video-hardcoding.patch:
+    Fix hardcoding of locations in gnome-welcome-tour script.
+    [endlessm/eos-shell#1130]
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Fri, 01 Nov 2013 14:38:00 -0700
+
+gnome-initial-setup (0.12-0co2endless8) unstable; urgency=low
+
+  * debian/patches/endless-gnome-initial-setup-missing-translations.patch:
+    Add missing translations.
+    [endlessm/eos-shell#1329].
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Thu, 31 Oct 2013 18:16:21 +0100
+
+gnome-initial-setup (0.12-0co2endless7) unstable; urgency=low
+
+  * debian/patches/endless-gnome-initial-hide-enterprise-login.patch
+    Hide Enterprise Login
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Wed, 30 Oct 2013 13:07:53 +0100
+
+gnome-initial-setup (0.12-0co2endless6) unstable; urgency=low
+
+  * debian/patches/endless-getting-started-video.patch:
+    Add a patch to change the initial setup video.
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Tue, 29 Oct 2013 16:10:55 -0700
+
+gnome-initial-setup (0.12-0co2endless5) unstable; urgency=low
+
+  * debian/patches/endless-gnome-initial-setup-endless-in-summary.patch:
+    Replace "GNOME 3" by "Endless" in the summary page
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 29 Oct 2013 16:27:26 +0100
+
+gnome-initial-setup (0.12-0co2endless4) unstable; urgency=low
+
+  * debian/patches/endless-gnome-initial-configure-time.patch:
+    Extend location page to set up date and time
+
+ -- Juan A. Suarez Romero <jasuarez@igalia.com>  Tue, 29 Oct 2013 10:33:46 +0100
+
+gnome-initial-setup (0.12-0co2endless3) unstable; urgency=low
+
+  * debian/patches/endless-gnome-initial-setup-l10n.patch:
+    Update for new personality file format
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Thu, 24 Oct 2013 14:31:45 -0700
+
+gnome-initial-setup (0.12-0co2endless2) eos; urgency=low
+
+  * Added endless-gnome-initial-setup-languages.patch to fix default languages
+
+ -- John Hiesey <john@endlessm.com>  Mon, 21 Oct 2013 10:43:41 -0700
+
+gnome-initial-setup (0.12-0co2endless1) unstable; urgency=low
+
+  * Add patch to enable localization of initial setup
+
+ -- Cosimo Cecchi <cosimoc@endless>  Thu, 17 Oct 2013 11:03:07 -0700
+
+gnome-initial-setup (0.12-0co2) singularity; urgency=low
+
+  * debian/patches/pollkit-allow-NM.patch:
+    - Added. Allow the gnome-initial-setup user to control the network
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Tue, 13 Aug 2013 09:29:47 +0200
+
+gnome-initial-setup (0.12-0co1) singularity; urgency=low
+
+  * Initial release.
+
+ -- Javier Martinez <javier.martinez@collabora.co.uk>  Mon, 05 Aug 2013 14:38:10 +0200

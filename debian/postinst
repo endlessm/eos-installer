@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -eu
+
+# creating gnome-initial-setup user if it isn't already there
+if ! getent passwd gnome-initial-setup >/dev/null; then
+        adduser --system --force-badname --quiet \
+            --home /run/gnome-initial-setup/ --no-create-home \
+            --shell /bin/false \
+            gnome-initial-setup
+fi
+
+#DEBHELPER#
+
+exit 0
