@@ -39,8 +39,6 @@
 #include <cheese-gtk.h>
 #endif
 
-#include <egg-list-box.h>
-
 #include "pages/language/gis-language-page.h"
 #include "pages/keyboard/gis-keyboard-page.h"
 #include "pages/display/gis-display-page.h"
@@ -275,7 +273,6 @@ main (int argc, char *argv[])
   }
 #endif
 
-  g_type_ensure (EGG_TYPE_LIST_BOX);
   gis_ensure_login_keyring ("gis");
 
   driver = gis_driver_new (get_mode ());
