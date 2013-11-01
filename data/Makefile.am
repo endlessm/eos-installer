@@ -5,10 +5,15 @@ edit = $(AM_V_GEN) sed \
 	-e 's|@SYSCONFDIR[@]|$(sysconfdir)|g' \
 	-e 's|@LIBDIR[@]|$(libdir)|g' \
 	-e 's|@LIBEXECDIR[@]|$(libexecdir)|g' \
-	-e 's|@LOCALSTATEDIR[@]|$(localstatedir)|g'
+	-e 's|@LOCALSTATEDIR[@]|$(localstatedir)|g' \
+	-e 's|@DATADIR[@]|$(datadir)|g'
 
 %.desktop.in: %.desktop.in.in Makefile
 	$(edit) $< >$@
+
+gnome-welcome-tour: gnome-welcome-tour.in Makefile
+	$(edit) $< >$@
+	chmod +x $@
 
 @INTLTOOL_DESKTOP_RULE@
 
@@ -29,13 +34,13 @@ desktop_DATA =						\
 
 EXTRA_DIST =						\
 	20-gnome-initial-setup.rules			\
-	gnome-welcome-tour				\
 	setup-shell.desktop				\
 	gnome-welcome-tour.desktop.in.in		\
 	gnome-initial-setup-first-login.desktop.in.in	\
 	gnome-initial-setup.desktop.in.in		\
 	gnome-initial-setup-copy-worker.desktop.in.in	\
 	gnome-initial-setup.session			\
+	gnome-welcome-tour.in				\
 	initial-setup.json				\
 	$(NULL)
 
@@ -47,6 +52,7 @@ CLEANFILES =						\
 	gnome-initial-setup-first-login.desktop		\
 	gnome-welcome-tour.desktop.in			\
 	gnome-welcome-tour.desktop			\
+	gnome-welcome-tour				\
 	$(NULL)
 
 autostartdir = $(sysconfdir)/xdg/autostart
@@ -56,5 +62,6 @@ autostart_DATA =					\
 	gnome-initial-setup-first-login.desktop		\
 	$(NULL)
 
-libexec_SCRIPTS =						\
-	gnome-welcome-tour
+bin_SCRIPTS =						\
+	gnome-welcome-tour				\
+	$(NULL)

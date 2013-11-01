@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
 Name=Welcome
-Exec=@LIBEXECDIR@/gnome-welcome-tour
+Exec=gnome-welcome-tour
 AutostartCondition=if-exists run-welcome-tour
 OnlyShowIn=GNOME;
