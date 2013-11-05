@@ -7,8 +7,6 @@ full_locale=$LANG
 locale=`echo $full_locale | sed -e 's/\..*//'`
 lang=`echo $locale | sed -e 's/_.*//'`
 
-rm -f $cfgdir/run-welcome-tour
-
 for name in $locale $lang 'C'; do
         if test -f "$prefix/$name/$suffix" ; then
                 intro_path="$prefix/$name/$suffix"
@@ -17,3 +15,4 @@ for name in $locale $lang 'C'; do
 done
 
 @LIBEXECDIR@/gnome-initial-setup-player $intro_path
+rm -f $cfgdir/run-welcome-tour
