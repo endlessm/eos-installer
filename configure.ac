@@ -53,7 +53,9 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   gdm >= $GDM_REQUIRED_VERSION
                   pango >= $PANGO_REQUIRED_VERSION
                   pwquality
-                  egg-list-box-uninstalled)
+                  egg-list-box-uninstalled
+		  libsecret-1
+		  gcr-3)
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
 

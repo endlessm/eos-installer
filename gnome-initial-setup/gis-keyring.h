@@ -1,6 +1,7 @@
+
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
- * Copyright (C) 2012 Red Hat
+ * Copyright (C) 2014 Red Hat
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -13,31 +14,21 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  * Written by:
- *     Jasper St. Pierre <jstpierre@mecheye.net>
+ *     Matthias Clasen <mclasen@redhat.com>
  */
 
-#ifndef __GNOME_INITIAL_SETUP_H__
-#define __GNOME_INITIAL_SETUP_H__
+#ifndef __GIS_KEYRING_H__
+#define __GIS_KEYRING_H__
 
-#include <gtk/gtk.h>
-#include <gio/gio.h>
-#include <glib/gi18n.h>
+#include <glib-object.h>
 
-typedef struct _GisDriver    GisDriver;
-typedef struct _GisAssistant GisAssistant;
-typedef struct _GisPage      GisPage;
+G_BEGIN_DECLS
 
-#include "gis-driver.h"
-#include "gis-assistant.h"
-#include "gis-page.h"
-#include "gis-keyring.h"
+void	gis_ensure_keyring	(void);
 
-void gis_add_setup_done_file (void);
+G_END_DECLS
 
-#endif /* __GNOME_INITIAL_SETUP_H__ */
-
+#endif /* __GIS_KEYRING_H__ */
