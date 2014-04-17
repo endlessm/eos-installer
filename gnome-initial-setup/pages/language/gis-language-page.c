@@ -192,6 +192,8 @@ gis_language_page_constructed (GObject *object)
 {
   GisLanguagePage *page = GIS_LANGUAGE_PAGE (object);
   GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
+  GisDriver *driver = GIS_PAGE (page)->driver;
+  const gchar *lang_override;
   GDBusConnection *bus;
 
   g_type_ensure (CC_TYPE_LANGUAGE_CHOOSER);
@@ -201,12 +203,18 @@ gis_language_page_constructed (GObject *object)
   gtk_container_add (GTK_CONTAINER (page), WID ("language-page"));
 
   priv->language_chooser = WID ("language-chooser");
+
+  lang_override = gis_driver_get_language_override (driver);
+  if (lang_override) {
+    cc_language_chooser_set_language (CC_LANGUAGE_CHOOSER (priv->language_chooser), lang_override);
+  }
+
   g_signal_connect (priv->language_chooser, "notify::language",
                     G_CALLBACK (language_changed), page);
 
 
   /* If we're in new user mode then we're manipulating system settings */
-  if (gis_driver_get_mode (GIS_PAGE (page)->driver) == GIS_DRIVER_MODE_NEW_USER)
+  if (gis_driver_get_mode (driver) == GIS_DRIVER_MODE_NEW_USER)
     {
       priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, NULL);
 

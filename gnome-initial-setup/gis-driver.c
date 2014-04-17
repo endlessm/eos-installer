@@ -32,6 +32,10 @@
 
 #define GIS_TYPE_DRIVER_MODE (gis_driver_mode_get_type ())
 
+#define PERSONALITY_FILE_PATH "/etc/EndlessOS/personality.conf"
+#define INITIAL_CONFIG_GROUP "Setup"
+#define LANGUAGE_KEY "DefaultLanguage"
+
 /* Statically include this for now. Maybe later
  * we'll generate this from glib-mkenums. */
 GType
@@ -73,6 +77,7 @@ struct _GisDriverPrivate {
   const gchar *user_password;
 
   gchar *lang_id;
+  gchar *lang_override;
 
   GisDriverMode mode;
 };
@@ -87,6 +92,7 @@ gis_driver_finalize (GObject *object)
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
 
   g_free (priv->lang_id);
+  g_free (priv->lang_override);
 
   G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
 }
@@ -188,6 +194,13 @@ gis_driver_get_mode (GisDriver *driver)
   return priv->mode;
 }
 
+const gchar *
+gis_driver_get_language_override (GisDriver *driver)
+{
+  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
+  return priv->lang_override;  
+}
+
 static void
 gis_driver_get_property (GObject      *object,
                          guint         prop_id,
@@ -249,12 +262,36 @@ window_realize_cb (GtkWidget *widget, gpointer user_data)
 }
 
 static void
+gis_driver_read_personality_file (GisDriver *driver)
+{
+  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
+  GKeyFile *keyfile = g_key_file_new ();
+  gchar *language = NULL;
+
+  if (g_key_file_load_from_file (keyfile, PERSONALITY_FILE_PATH,
+                                 G_KEY_FILE_NONE, NULL)) {
+    language = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
+                                      LANGUAGE_KEY, NULL);
+  }
+
+  g_free (priv->lang_override);
+  priv->lang_override = language;
+  if (language) {
+    setlocale (LC_MESSAGES, language);
+  }
+
+  g_key_file_free (keyfile);
+}
+
+static void
 gis_driver_startup (GApplication *app)
 {
   GisDriver *driver = GIS_DRIVER (app);
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
 
   G_APPLICATION_CLASS (gis_driver_parent_class)->startup (app);
+
+  gis_driver_read_personality_file (driver);
 
   priv->main_window = g_object_new (GTK_TYPE_APPLICATION_WINDOW,
                                     "application", app,
