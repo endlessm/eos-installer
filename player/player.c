@@ -34,7 +34,7 @@
 static int ret = EXIT_SUCCESS;
 
 #define FADE_OUT_TIME 500
-#define BG_COLOR "#d3d8ce"
+#define BG_COLOR "#fcfcfc"
 static ClutterColor bg_color;
 
 static ClutterActor *stage;

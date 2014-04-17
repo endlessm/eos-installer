@@ -1,8 +1,8 @@
 #! /bin/sh
 
 cfgdir=${XDG_CONFIG_DIR:-$HOME/.config}
-prefix=/usr/share/help
-suffix=gnome-help/figures/gnome-yelp-intro.webm
+prefix=/usr/share/EndlessOS/getting-started
+suffix=endless-getting-started.mov
 full_locale=$LANG
 locale=`echo $full_locale | sed -e 's/\..*//'`
 lang=`echo $locale | sed -e 's/_.*//'`
