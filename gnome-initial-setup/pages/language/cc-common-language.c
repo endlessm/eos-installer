@@ -301,14 +301,9 @@ cc_common_language_get_initial_languages (void)
         ht = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
         insert_language (ht, "en_US");
-        insert_language (ht, "en_GB");
-        insert_language (ht, "de_DE");
-        insert_language (ht, "fr_FR");
-        insert_language (ht, "es_ES");
-        insert_language (ht, "zh_CN");
-        insert_language (ht, "ja_JP");
-        insert_language (ht, "ru_RU");
-        insert_language (ht, "ar_EG");
+        insert_language (ht, "es_GT");
+        insert_language (ht, "es_MX");
+        insert_language (ht, "pt_BR");
 
         insert_user_languages (ht);
 
