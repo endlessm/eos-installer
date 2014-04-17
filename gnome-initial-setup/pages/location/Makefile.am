@@ -32,6 +32,7 @@ libgislocation_la_SOURCES =	\
 	tz.c tz.h \
 	cc-timezone-map.c cc-timezone-map.h \
 	gis-location-page.c gis-location-page.h \
+	date-endian.c date-endian.h \
 	$(BUILT_SOURCES)
 
 libgislocation_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) -I "$(srcdir)/../.."

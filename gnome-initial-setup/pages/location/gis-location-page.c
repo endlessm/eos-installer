@@ -27,6 +27,7 @@
 
 #include "config.h"
 #include "cc-datetime-resources.h"
+#include "date-endian.h"
 #include "location-resources.h"
 #include "gis-location-page.h"
 
@@ -42,13 +43,21 @@
 #include "cc-timezone-map.h"
 #include "timedated.h"
 
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-wall-clock.h>
+
 #define DEFAULT_TZ "Europe/London"
 
 struct _GisLocationPagePrivate
 {
   CcTimezoneMap *map;
   TzLocation *current_location;
+
+  GDateTime *date;
+  GnomeWallClock *clock_tracker;
+
   Timedate1 *dtm;
+  GCancellable *cancellable;
 };
 typedef struct _GisLocationPagePrivate GisLocationPagePrivate;
 
@@ -56,6 +65,13 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisLocationPage, gis_location_page, GIS_TYPE_PAGE);
 
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE (page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
+
+/* Forward declarations to avoid calls before definitions */
+static void
+day_changed (GtkWidget *widget, GisLocationPage *page);
+
+static void
+month_year_changed (GtkWidget *widget, GisLocationPage *page);
 
 static void
 set_timezone_cb (GObject      *source,
@@ -195,6 +211,289 @@ location_changed (GObject *object, GParamSpec *param, GisLocationPage *page)
   gweather_location_unref (gloc);
 }
 
+static void
+set_using_ntp_cb (GObject *object, GAsyncResult *res, gpointer user_data)
+{
+  GisLocationPage *page = user_data;
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  GError *error = NULL;
+
+  if (!timedate1_call_set_ntp_finish (priv->dtm, res, &error))
+    {
+      g_warning ("Could not set system to use NTP: %s", error->message);
+      g_error_free (error);
+    }
+}
+
+static void
+queue_set_ntp (GisLocationPage *page)
+{
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  gboolean using_ntp;
+
+  using_ntp = gtk_switch_get_active (GTK_SWITCH (WID ("network_time_switch")));
+
+  timedate1_call_set_ntp (priv->dtm,
+                          using_ntp,
+                          TRUE,
+                          priv->cancellable,
+                          set_using_ntp_cb,
+                          page);
+}
+
+static void
+update_widget_state_for_ntp (GisLocationPage *page, gboolean using_ntp)
+{
+  gtk_widget_set_sensitive (WID ("time-grid"), !using_ntp);
+  gtk_widget_set_sensitive (WID ("date-box"), !using_ntp);
+}
+
+static void
+change_ntp (GObject *object, GParamSpec *pspec, GisLocationPage *page)
+{
+  update_widget_state_for_ntp (page, gtk_switch_get_active (GTK_SWITCH (object)));
+  queue_set_ntp (page);
+}
+
+
+static void
+update_ntp_switch_from_system (GisLocationPage *page)
+{
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  gboolean using_ntp;
+  GtkWidget *switch_widget;
+
+  using_ntp = timedate1_get_ntp (priv->dtm);
+
+  switch_widget = WID ("network_time_switch");
+  g_signal_handlers_block_by_func (switch_widget, change_ntp, page);
+  gtk_switch_set_active (GTK_SWITCH (switch_widget), using_ntp);
+  update_widget_state_for_ntp (page, using_ntp);
+  g_signal_handlers_unblock_by_func (switch_widget, change_ntp, page);
+}
+
+static void
+update_time (GisLocationPage *page)
+{
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  char *label;
+  gint i;
+
+  /* Update the hours label */
+  label = g_date_time_format (priv->date, "%H");
+  gtk_label_set_text (GTK_LABEL (WID ("hours_label")), label);
+  g_free (label);
+
+  /* Update the minutes label */
+  label = g_date_time_format (priv->date, "%M");
+  gtk_label_set_text (GTK_LABEL (WID ("minutes_label")), label);
+  g_free (label);
+}
+
+static void
+update_date (GisLocationPage *page)
+{
+  GtkWidget *day_widget = WID ("day-spinbutton");
+  GtkWidget *month_widget = WID ("month-combobox");
+  GtkWidget *year_widget = WID ("year-spinbutton");
+
+  /* Disable the system time updates while the UI is redrawn */
+  g_signal_handlers_block_by_func (day_widget, day_changed, page);
+  g_signal_handlers_block_by_func (month_widget, month_year_changed, page);
+  g_signal_handlers_block_by_func (year_widget, month_year_changed, page);
+
+  /* Update the UI */
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+
+  gint day_of_month = g_date_time_get_day_of_month (priv->date);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (day_widget), day_of_month);
+
+  gint month = g_date_time_get_month (priv->date);
+  gtk_combo_box_set_active (GTK_COMBO_BOX (month_widget), month - 1);
+
+  gint year = g_date_time_get_year (priv->date);
+  gtk_spin_button_set_value (GTK_SPIN_BUTTON (year_widget), year);
+
+
+  /* Re-enable the system time updates from the UI */
+  g_signal_handlers_unblock_by_func (day_widget, day_changed, page);
+  g_signal_handlers_unblock_by_func (month_widget, month_year_changed, page);
+  g_signal_handlers_unblock_by_func (year_widget, month_year_changed, page);
+}
+
+static void
+set_time_cb (GObject *source, GAsyncResult *res, gpointer user_data)
+{
+  GisLocationPage *page = user_data;
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  GError *error = NULL;
+
+  if(!timedate1_call_set_time_finish (priv->dtm, res, &error))
+    {
+      g_warning ("Could not set system time: %s", error->message);
+      g_error_free (error);
+    }
+  else
+    {
+      update_time (page);
+      update_date (page);
+    }
+}
+
+static void
+queue_set_datetime (GisLocationPage *page)
+{
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  gint64 unixtime;
+
+  /* timedated expects number of microseconds since 1 Jan 1970 UTC */
+  unixtime = g_date_time_to_unix (priv->date);
+
+  timedate1_call_set_time (priv->dtm,
+                           unixtime * G_TIME_SPAN_SECOND,
+                           FALSE,
+                           TRUE,
+                           priv->cancellable,
+                           set_time_cb,
+                           page);
+}
+
+static void
+change_time (GtkButton *button, GisLocationPage *page)
+{
+  GDateTime *old_date;
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  const gchar *widget_name;
+  gint direction;
+
+  old_date = priv->date;
+  widget_name = gtk_buildable_get_name (GTK_BUILDABLE (button));
+
+  if (strstr (widget_name, "up"))
+    direction = 1;
+  else
+    direction = -1;
+
+  if (widget_name[0] == 'h')
+    {
+      priv->date = g_date_time_add_hours (old_date, direction);
+    }
+  else if (widget_name[0] == 'm')
+    {
+      priv->date = g_date_time_add_minutes (old_date, direction);
+    }
+  else
+    {
+      int hour;
+      hour = g_date_time_get_hour (old_date);
+      if (hour >= 12)
+        priv->date = g_date_time_add_hours (old_date, -12);
+      else
+        priv->date = g_date_time_add_hours (old_date, 12);
+    }
+
+  g_date_time_unref (old_date);
+
+  update_time (page);
+  queue_set_datetime (page);
+}
+
+static void
+reorder_date_widget (DateEndianess endianess, GisLocationPage *page)
+{
+  GtkBox *box;
+  GtkWidget *month, *day, *year;
+
+  if (endianess = DATE_ENDIANESS_MIDDLE)
+    return;
+
+  month = WID ("month-combobox");
+  day = WID ("day-spinbutton");
+  year = WID ("year-spinbutton");
+
+  box = GTK_BOX (WID ("date-box"));
+
+  switch (endianess)
+    {
+    case DATE_ENDIANESS_LITTLE:
+      gtk_box_reorder_child (box, month, 0);
+      gtk_box_reorder_child (box, day, 0);
+      gtk_box_reorder_child (box, year, -1);
+      break;
+
+    case DATE_ENDIANESS_BIG:
+      gtk_box_reorder_child (box, month, 0);
+      gtk_box_reorder_child (box, year, 0);
+      gtk_box_reorder_child (box, day, -1);
+      break;
+
+    case DATE_ENDIANESS_MIDDLE:
+      /* We already handle this case, but cover to avoid warnings in the compiler */
+      g_assert_not_reached();
+      break;
+    }
+}
+
+static void
+change_date (GisLocationPage *page)
+{
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  GDateTime *old_date = priv->date;
+  guint month, year, day;
+
+  month = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (WID ("month-combobox")));
+  year = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (WID ("year-spinbutton")));
+  day = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (WID ("day-spinbutton")));
+
+  priv->date = g_date_time_new_local (year, month, day,
+                                      g_date_time_get_hour (old_date),
+                                      g_date_time_get_minute (old_date),
+                                      g_date_time_get_second (old_date));
+  g_date_time_unref (old_date);
+  queue_set_datetime (page);
+}
+
+static void
+month_year_changed (GtkWidget *widget, GisLocationPage *page)
+{
+  GtkAdjustment *adj;
+  GtkSpinButton *day_spin;
+  guint month;
+  guint num_days;
+  guint year;
+
+  month = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (WID ("month-combobox")));
+  year = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (WID ("year-spinbutton")));
+
+  num_days = g_date_get_days_in_month (month, year);
+
+  day_spin = GTK_SPIN_BUTTON (WID ("day-spinbutton"));
+  adj = GTK_ADJUSTMENT (gtk_spin_button_get_adjustment (day_spin));
+  gtk_adjustment_set_upper (adj, num_days + 1);
+
+  if (gtk_spin_button_get_value_as_int (day_spin) > num_days)
+    gtk_spin_button_set_value (day_spin, num_days);
+
+  change_date (page);
+}
+
+static void
+day_changed (GtkWidget *widget, GisLocationPage *page)
+{
+  change_date (page);
+}
+
+static void
+clock_changed (GnomeWallClock *clock, GParamSpec *pspec, GisLocationPage *page)
+{
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+
+  g_date_time_unref (priv->date);
+  priv->date = g_date_time_new_now_local ();
+  update_time (page);
+  update_date (page);
+}
+
 #define WANT_GEOCLUE 0
 
 #if WANT_GEOCLUE
@@ -271,6 +570,13 @@ gis_location_page_constructed (GObject *object)
   GWeatherLocation *world;
   GError *error;
   const gchar *timezone;
+  DateEndianess endianess;
+  GtkWidget *widget;
+  gint i;
+  guint num_days;
+  GtkAdjustment *adjustment;
+  gchar *time_buttons[] = { "hour_up_button", "hour_down_button",
+                            "min_up_button", "min_down_button" };
 
   G_OBJECT_CLASS (gis_location_page_parent_class)->constructed (object);
 
@@ -278,6 +584,7 @@ gis_location_page_constructed (GObject *object)
 
   frame = WID("location-map-frame");
 
+  priv->cancellable = g_cancellable_new ();
   error = NULL;
   priv->dtm = timedate1_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                 G_DBUS_PROXY_FLAGS_NONE,
@@ -316,14 +623,25 @@ gis_location_page_constructed (GObject *object)
   timezone = timedate1_get_timezone (priv->dtm);
 
   if (!cc_timezone_map_set_timezone (priv->map, timezone)) {
-    g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone, DEFAULT_TZ);
-    cc_timezone_map_set_timezone (priv->map, DEFAULT_TZ);
+    GisDriver *driver = GIS_PAGE (page)->driver;
+    const gchar *default_timezone = gis_driver_get_default_timezone (driver);
+
+    if (default_timezone == NULL) {
+      default_timezone = DEFAULT_TZ;
+    }
+
+    g_warning ("Timezone '%s' is unhandled, setting %s as default",
+               timezone, default_timezone);
+    cc_timezone_map_set_timezone (priv->map, default_timezone);
+
+    priv->current_location = cc_timezone_map_get_location (priv->map);
+    queue_set_timezone (page);
   }
   else {
     g_debug ("System timezone is '%s'", timezone);
+    priv->current_location = cc_timezone_map_get_location (priv->map);
   }
 
-  priv->current_location = cc_timezone_map_get_location (priv->map);
   update_timezone (page);
 
   g_signal_connect (G_OBJECT (entry), "notify::location",
@@ -339,6 +657,59 @@ gis_location_page_constructed (GObject *object)
   gtk_widget_hide (WID ("location-auto-button"));
 #endif
 
+  /* set up network time button */
+  update_ntp_switch_from_system (page);
+  g_signal_connect(WID ("network_time_switch"), "notify::active",
+                   G_CALLBACK (change_ntp), page);
+
+  /* set up time editing widgets */
+  for (i = 0; i < G_N_ELEMENTS (time_buttons); i++)
+    {
+      g_signal_connect (WID (time_buttons[i]), "clicked",
+                        G_CALLBACK (change_time), page);
+    }
+
+  /* set up date editing widgets */
+  priv->date = g_date_time_new_now_local ();
+  endianess = date_endian_get_default (FALSE);
+  reorder_date_widget (endianess, page);
+
+  /* Force the direction for the time, so that the time is presented
+     correctly for RTL languages */
+  gtk_widget_set_direction (WID ("time-grid"), GTK_TEXT_DIR_LTR);
+
+  widget = WID ("month-combobox");
+  gtk_combo_box_set_active (GTK_COMBO_BOX (widget),
+                            g_date_time_get_month (priv->date) - 1);
+  g_signal_connect (widget, "changed",
+                    G_CALLBACK (month_year_changed), page);
+
+  num_days = g_date_get_days_in_month (g_date_time_get_month (priv->date),
+                                       g_date_time_get_year (priv->date));
+  adjustment = (GtkAdjustment *) gtk_adjustment_new (g_date_time_get_day_of_month (priv->date),
+                                                     1, num_days, 1, 10, 1);
+  widget = WID ("day-spinbutton");
+  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (widget), adjustment);
+
+  g_signal_connect (widget, "value-changed",
+                    G_CALLBACK (day_changed), page);
+
+  adjustment = (GtkAdjustment *) gtk_adjustment_new (g_date_time_get_year (priv->date),
+                                                     1900, 9999, 1, 10, 1);
+  widget = WID ("year-spinbutton");
+  gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (widget), adjustment);
+  g_signal_connect (widget, "value-changed",
+                    G_CALLBACK (month_year_changed), page);
+
+  month_year_changed(widget, page);
+
+  /* set up the time itself */
+  priv->clock_tracker = g_object_new (GNOME_TYPE_WALL_CLOCK, NULL);
+  g_signal_connect (priv->clock_tracker, "notify::clock",
+                    G_CALLBACK (clock_changed), page);
+
+  update_time (page);
+
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 
   gtk_widget_show (GTK_WIDGET (page));
@@ -351,6 +722,12 @@ gis_location_page_dispose (GObject *object)
   GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
 
   g_clear_object (&priv->dtm);
+  g_clear_object (&priv->clock_tracker);
+  g_clear_pointer (&priv->date, g_date_time_unref);
+  if (priv->cancellable) {
+    g_cancellable_cancel (priv->cancellable);
+    g_clear_object (&priv->cancellable);
+  }
 
   G_OBJECT_CLASS (gis_location_page_parent_class)->dispose (object);
 }

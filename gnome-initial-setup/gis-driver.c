@@ -35,6 +35,7 @@
 #define PERSONALITY_FILE_PATH "/etc/EndlessOS/personality.conf"
 #define INITIAL_CONFIG_GROUP "Setup"
 #define LANGUAGE_KEY "DefaultLanguage"
+#define TIMEZONE_KEY "DefaultTimezone"
 
 /* Statically include this for now. Maybe later
  * we'll generate this from glib-mkenums. */
@@ -78,6 +79,7 @@ struct _GisDriverPrivate {
 
   gchar *lang_id;
   gchar *lang_override;
+  gchar *default_timezone;
 
   GisDriverMode mode;
 };
@@ -93,6 +95,7 @@ gis_driver_finalize (GObject *object)
 
   g_free (priv->lang_id);
   g_free (priv->lang_override);
+  g_free (priv->default_timezone);
 
   G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
 }
@@ -201,6 +204,13 @@ gis_driver_get_language_override (GisDriver *driver)
   return priv->lang_override;  
 }
 
+const gchar *
+gis_driver_get_default_timezone (GisDriver *driver)
+{
+  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
+  return priv->default_timezone;
+}
+
 static void
 gis_driver_get_property (GObject      *object,
                          guint         prop_id,
@@ -267,11 +277,14 @@ gis_driver_read_personality_file (GisDriver *driver)
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   GKeyFile *keyfile = g_key_file_new ();
   gchar *language = NULL;
+  gchar *timezone = NULL;
 
   if (g_key_file_load_from_file (keyfile, PERSONALITY_FILE_PATH,
                                  G_KEY_FILE_NONE, NULL)) {
     language = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
                                       LANGUAGE_KEY, NULL);
+    timezone = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
+                                      TIMEZONE_KEY, NULL);
   }
 
   g_free (priv->lang_override);
@@ -279,6 +292,9 @@ gis_driver_read_personality_file (GisDriver *driver)
   if (language) {
     setlocale (LC_MESSAGES, language);
   }
+
+  g_free (priv->default_timezone);
+  priv->default_timezone = timezone;
 
   g_key_file_free (keyfile);
 }
