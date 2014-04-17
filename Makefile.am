@@ -2,7 +2,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 AM_CFLAGS = ${WARN_CFLAGS}
 
-SUBDIRS = egg-list-box data gnome-initial-setup po
+SUBDIRS = egg-list-box data gnome-initial-setup player po
 
 EXTRA_DIST = \
     autogen.sh \
