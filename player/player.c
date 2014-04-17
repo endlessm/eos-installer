@@ -31,8 +31,6 @@
 #include <clutter/x11/clutter-x11.h>
 #include <clutter-gst/clutter-gst.h>
 
-static int ret = EXIT_SUCCESS;
-
 #define FADE_OUT_TIME 500
 #define BG_COLOR "#fcfcfc"
 static ClutterColor bg_color;
@@ -69,7 +67,6 @@ key_press_cb (ClutterActor *stage,
   switch (clutter_event_get_key_symbol ( (event)))
     {
     case CLUTTER_Escape:
-      ret = EXIT_FAILURE;
       clutter_actor_destroy (stage);
       break;
     }
@@ -186,5 +183,5 @@ main (int argc, char *argv[])
   clutter_actor_show (stage);
   clutter_main ();
 
-  return ret;
+  return EXIT_SUCCESS;
 }
