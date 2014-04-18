@@ -647,7 +647,7 @@ gis_location_page_constructed (GObject *object)
     GisDriver *driver = GIS_PAGE (page)->driver;
     const gchar *default_timezone = gis_driver_get_default_timezone (driver);
 
-    if (default_timezone == NULL) {
+    if (default_timezone == NULL || default_timezone[0] == '\0') {
       default_timezone = DEFAULT_TZ;
     }
 
