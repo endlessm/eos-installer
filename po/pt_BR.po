@@ -121,6 +121,10 @@ msgid "A_utomatic Login"
 msgstr "Início a_utomático de sessão"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid "Enable _Shared Account"
+msgstr "Habilitar _Conta Compartilhada"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid "page 1"
 msgstr "página 1"
 
