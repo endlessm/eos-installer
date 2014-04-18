@@ -358,31 +358,21 @@ update_password_entries (GisAccountPage *page)
   GtkWidget *confirm_entry;
   GtkWidget *username_combo;
   GtkWidget *password_strength;
-  GtkWidget *strength_label;
   gdouble strength;
   gint strength_level;
   const gchar *hint;
   const gchar *long_hint = NULL;
-  gchar *strength_hint;
 
   password_entry = WID("account-password-entry");
   confirm_entry = WID("account-confirm-entry");
   username_combo = WID("account-username-combo");
   password_strength = WID("account-password-strength");
-  strength_label = WID("account-password-strength-label");
 
   password = gtk_entry_get_text (GTK_ENTRY (password_entry));
   username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (username_combo));
 
   strength = pw_strength (password, NULL, username, &hint, &long_hint, &strength_level);
   gtk_level_bar_set_value (GTK_LEVEL_BAR (password_strength), strength_level);
-
-  if (strlen (password) == 0)
-    strength_hint = g_strdup ("");
-  else
-    strength_hint = g_strdup_printf (_("Strength: %s"), hint);
-  gtk_label_set_label (GTK_LABEL (strength_label), strength_hint);
-  g_free (strength_hint);
 
   if (strength == 0.0) {
     priv->password_reason = long_hint ? long_hint : hint;
