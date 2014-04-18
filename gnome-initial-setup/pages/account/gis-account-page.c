@@ -448,11 +448,13 @@ local_create_user (GisAccountPage *page)
   const gchar *password;
   const gchar *fullname;
   const gchar *language;
+  gboolean autologin_active;
   GError *error = NULL;
 
   username = gtk_combo_box_text_get_active_text (OBJ(GtkComboBoxText*, "account-username-combo"));
   fullname = gtk_entry_get_text (OBJ (GtkEntry*, "account-fullname-entry"));
   password = gtk_entry_get_text (OBJ (GtkEntry*, "account-password-entry"));
+  autologin_active = gtk_switch_get_active (OBJ(GtkSwitch*, "account-autologin-switch"));
 
   priv->act_user = act_user_manager_create_user (priv->act_client, username, fullname, priv->account_type, &error);
   if (error != NULL) {
@@ -472,6 +474,7 @@ local_create_user (GisAccountPage *page)
   if (language)
     act_user_set_language (priv->act_user, language);
 
+  act_user_set_automatic_login (priv->act_user, autologin_active);
   gis_driver_set_user_permissions (GIS_PAGE (page)->driver,
                                    priv->act_user,
                                    password);

@@ -112,6 +112,10 @@ msgstr ""
 "minúsculas y uno o dos números"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "A_utomatic Login"
+msgstr "_Inicio de sesión automático"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid "page 1"
 msgstr "página 1"
 
