@@ -42,6 +42,9 @@
 #include <cheese-gtk.h>
 #endif
 
+#define SHARED_ACCOUNT_USERNAME "shared"
+#define SHARED_ACCOUNT_FULLNAME "Shared Account"
+
 static void        join_show_prompt    (GisAccountPage *page,
                                         GError *error);
 
@@ -431,6 +434,34 @@ confirm_entry_focus_out (GtkWidget      *widget,
 }
 
 static void
+create_shared_user (GisAccountPage *page)
+{
+  GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
+  GError *error = NULL;
+  ActUser *shared_user;
+  const gchar *language;
+
+  shared_user = act_user_manager_create_user (priv->act_client,
+                                              SHARED_ACCOUNT_USERNAME,
+                                              SHARED_ACCOUNT_FULLNAME,
+                                              ACT_USER_ACCOUNT_TYPE_STANDARD,
+                                              &error);
+  if (error != NULL) {
+    g_warning ("Failed to created shared user: %s", error->message);
+    g_error_free (error);
+    return;
+  }
+
+  act_user_set_password_mode (shared_user, ACT_USER_PASSWORD_MODE_NONE);
+
+  language = gis_driver_get_user_language (GIS_PAGE (page)->driver);
+  if (language)
+    act_user_set_language (shared_user, language);
+
+  g_object_unref (shared_user);
+}
+
+static void
 local_create_user (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
@@ -440,6 +471,8 @@ local_create_user (GisAccountPage *page)
   const gchar *language;
   gboolean autologin_active;
   GError *error = NULL;
+
+  create_shared_user (page);
 
   username = gtk_combo_box_text_get_active_text (OBJ(GtkComboBoxText*, "account-username-combo"));
   fullname = gtk_entry_get_text (OBJ (GtkEntry*, "account-fullname-entry"));
