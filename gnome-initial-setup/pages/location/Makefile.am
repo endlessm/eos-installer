@@ -7,6 +7,14 @@ BUILT_SOURCES =
 AM_CPPFLAGS = \
 	-DGNOMECC_DATA_DIR="\"$(datadir)/gnome-control-center\""
 
+geoclue.c: geoclue.h
+geoclue.h: $(GEOCLUE_DBUS_INTERFACE_XML)
+	$(AM_V_GEN) gdbus-codegen \
+               --interface-prefix org.freedesktop.GeoClue2 \
+               --generate-c-code geoclue \
+               --c-namespace Geoclue $<
+BUILT_SOURCES += geoclue.c geoclue.h
+
 timedated.c: timedated.h
 timedated.h: $(srcdir)/timedated1-interface.xml
 	$(AM_V_GEN) gdbus-codegen \
@@ -30,7 +38,9 @@ BUILT_SOURCES += location-resources.c location-resources.h
 
 libgislocation_la_SOURCES =	\
 	tz.c tz.h \
+	weather-tz.c weather-tz.h \
 	cc-timezone-map.c cc-timezone-map.h \
+	cc-timezone-monitor.c cc-timezone-monitor.h \
 	gis-location-page.c gis-location-page.h \
 	date-endian.c date-endian.h \
 	$(BUILT_SOURCES)

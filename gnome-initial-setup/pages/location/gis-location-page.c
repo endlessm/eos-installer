@@ -41,6 +41,7 @@
 #include <libgweather/location-entry.h>
 
 #include "cc-timezone-map.h"
+#include "cc-timezone-monitor.h"
 #include "timedated.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -58,6 +59,8 @@ struct _GisLocationPagePrivate
 
   Timedate1 *dtm;
   GCancellable *cancellable;
+
+  CcTimezoneMonitor *timezone_monitor;
 };
 typedef struct _GisLocationPagePrivate GisLocationPagePrivate;
 
@@ -155,6 +158,24 @@ location_changed_cb (CcTimezoneMap   *map,
   g_debug ("location changed to %s/%s", location->country, location->zone);
 
   priv->current_location = location;
+
+  update_timezone (page);
+
+  queue_set_timezone (page);
+}
+
+static void
+timezone_changed_cb (CcTimezoneMonitor *timezone_monitor,
+                     TzLocation        *location,
+                     GisLocationPage   *page)
+{
+  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+
+  g_debug ("timezone changed to %s/%s", location->country, location->zone);
+
+  priv->current_location = location;
+
+  cc_timezone_map_set_timezone (priv->map, location->zone);
 
   update_timezone (page);
 
@@ -708,6 +729,11 @@ gis_location_page_constructed (GObject *object)
   g_signal_connect (priv->clock_tracker, "notify::clock",
                     G_CALLBACK (clock_changed), page);
 
+  /* add automatic timezone */
+  priv->timezone_monitor = cc_timezone_monitor_new ();
+  g_signal_connect (priv->timezone_monitor, "timezone-changed",
+                    G_CALLBACK (timezone_changed_cb), page);
+
   update_time (page);
 
   gis_page_set_complete (GIS_PAGE (page), TRUE);
@@ -723,6 +749,7 @@ gis_location_page_dispose (GObject *object)
 
   g_clear_object (&priv->dtm);
   g_clear_object (&priv->clock_tracker);
+  g_clear_object (&priv->timezone_monitor);
   g_clear_pointer (&priv->date, g_date_time_unref);
   if (priv->cancellable) {
     g_cancellable_cancel (priv->cancellable);

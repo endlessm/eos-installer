@@ -42,6 +42,8 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                   gstreamer-1.0
                   fontconfig
+                  geoclue-2.0
+                  geocode-glib-1.0
                   gweather-3.0
                   goa-1.0
                   goa-backend-1.0
@@ -53,6 +55,12 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   egg-list-box-uninstalled)
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0)
+
+GEOCLUE_DBUS_INTERFACE_XML=`pkg-config --variable=dbus_interface geoclue-2.0`
+if test "x$GEOCLUE_DBUS_INTERFACE_XML" = "x"; then
+   AC_MSG_ERROR([Cannot find dbus_interface variable in geoclue-2.0.pc])
+fi
+AC_SUBST(GEOCLUE_DBUS_INTERFACE_XML)
 
 AC_ARG_ENABLE(ibus,
         AS_HELP_STRING([--disable-ibus],
