@@ -62,6 +62,9 @@ set_localed_locale (GisLanguagePage *self)
   GVariantBuilder *b;
   gchar *s;
 
+  if (!priv->localed)
+    return;
+
   b = g_variant_builder_new (G_VARIANT_TYPE ("as"));
   s = g_strconcat ("LANG=", priv->new_locale_id, NULL);
   g_variant_builder_add (b, "s", s);
@@ -118,21 +121,13 @@ _selection_done (gpointer driver)
 }
 
 static void
-language_changed (CcLanguageChooser  *chooser,
-                  GParamSpec         *pspec,
-                  GisLanguagePage    *page)
+set_language (GisLanguagePage *page)
 {
   GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
   ActUser *user;
   GisDriver *driver;
 
-  if (priv->selection_done_source > 0)
-    {
-      g_source_remove (priv->selection_done_source);
-      priv->selection_done_source = 0;
-    }
-
-  priv->new_locale_id = cc_language_chooser_get_language (chooser);
+  priv->new_locale_id = cc_language_chooser_get_language (CC_LANGUAGE_CHOOSER (priv->language_chooser));
   driver = GIS_PAGE (page)->driver;
 
   setlocale (LC_MESSAGES, priv->new_locale_id);
@@ -160,31 +155,55 @@ language_changed (CcLanguageChooser  *chooser,
                       g_strdup (priv->new_locale_id));
 
   gis_driver_set_user_language (driver, priv->new_locale_id);
+}
+
+static void
+language_changed (CcLanguageChooser *chooser,
+                  GParamSpec        *pspec,
+                  GisLanguagePage   *page)
+{
+  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
+  GisDriver *driver;
+
+  driver = GIS_PAGE (page)->driver;
+
+  if (priv->selection_done_source > 0)
+    {
+      g_source_remove (priv->selection_done_source);
+      priv->selection_done_source = 0;
+    }
+
+  set_language (page);
 
   priv->selection_done_source = g_timeout_add (500, _selection_done,
                                                (gpointer)driver);
 }
 
 static void
-localed_proxy_ready (GObject      *source,
-                     GAsyncResult *res,
-                     gpointer      data)
+ensure_localed_proxy (GisLanguagePage *page)
 {
-  GisLanguagePage *self = data;
-  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (self);
-  GDBusProxy *proxy;
+  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
+  GDBusConnection *bus;
   GError *error = NULL;
 
-  proxy = g_dbus_proxy_new_finish (res, &error);
+  priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, NULL);
 
-  if (!proxy) {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("Failed to contact localed: %s\n", error->message);
-      g_error_free (error);
-      return;
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
+  priv->localed = g_dbus_proxy_new_sync (bus,
+                                         G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES,
+                                         NULL,
+                                         "org.freedesktop.locale1",
+                                         "/org/freedesktop/locale1",
+                                         "org.freedesktop.locale1",
+                                         priv->cancellable,
+                                         &error);
+  g_object_unref (bus);
+
+  if (error != NULL) {
+    if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+      g_warning ("Failed to contact localed: %s\n", error->message);
+    g_error_free (error);
   }
-
-  priv->localed = proxy;
 }
 
  static void
@@ -194,7 +213,6 @@ gis_language_page_constructed (GObject *object)
   GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
   GisDriver *driver = GIS_PAGE (page)->driver;
   const gchar *lang_override;
-  GDBusConnection *bus;
 
   g_type_ensure (CC_TYPE_LANGUAGE_CHOOSER);
 
@@ -204,32 +222,21 @@ gis_language_page_constructed (GObject *object)
 
   priv->language_chooser = WID ("language-chooser");
 
+  /* Set initial language override */
   lang_override = gis_driver_get_language_override (driver);
-  if (lang_override) {
+  if (lang_override)
     cc_language_chooser_set_language (CC_LANGUAGE_CHOOSER (priv->language_chooser), lang_override);
-  }
 
+  /* Now connect to language chooser changes */
   g_signal_connect (priv->language_chooser, "notify::language",
                     G_CALLBACK (language_changed), page);
 
-
   /* If we're in new user mode then we're manipulating system settings */
   if (gis_driver_get_mode (driver) == GIS_DRIVER_MODE_NEW_USER)
-    {
-      priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-locale", NULL, NULL, NULL);
+    ensure_localed_proxy (page);
 
-      bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, NULL);
-      g_dbus_proxy_new (bus,
-                        G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES,
-                        NULL,
-                        "org.freedesktop.locale1",
-                        "/org/freedesktop/locale1",
-                        "org.freedesktop.locale1",
-                        priv->cancellable,
-                        (GAsyncReadyCallback) localed_proxy_ready,
-                        object);
-      g_object_unref (bus);
-  }
+  /* Propagate initial language setting to localed/AccountsService */
+  set_language (page);
 
   gis_page_set_complete (GIS_PAGE (page), TRUE);
   gtk_widget_show (GTK_WIDGET (page));
