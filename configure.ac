@@ -40,6 +40,7 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   accountsservice
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
+                  gnome-keyring-1
                   gstreamer-1.0
                   fontconfig
                   geoclue-2.0

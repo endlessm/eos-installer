@@ -31,6 +31,7 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <gnome-keyring.h>
 
 #include <act/act-user-manager.h>
 
@@ -484,10 +485,12 @@ local_create_user (GisAccountPage *page)
 
   act_user_set_user_name (priv->act_user, username);
   act_user_set_account_type (priv->act_user, priv->account_type);
-  if (strlen (password) == 0)
+  if (strlen (password) == 0) {
     act_user_set_password_mode (priv->act_user, ACT_USER_PASSWORD_MODE_NONE);
-  else
+  } else {
     act_user_set_password (priv->act_user, password, "");
+    gnome_keyring_create_sync ("login", password);
+  }
 
   language = gis_driver_get_user_language (GIS_PAGE (page)->driver);
   if (language)
