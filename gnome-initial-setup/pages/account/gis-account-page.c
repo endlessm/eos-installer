@@ -72,7 +72,6 @@ struct _GisAccountPagePrivate
   gboolean valid_name;
   gboolean valid_username;
   gboolean valid_confirm;
-  const gchar *password_reason;
   guint reason_timeout;
   ActUserAccountType account_type;
 
@@ -329,8 +328,6 @@ reason_timeout_cb (gpointer data)
 
   if (strlen (password) == 0)
     set_entry_validation_error (GTK_ENTRY (password_entry), _("No password"));
-  else
-    set_entry_validation_error (GTK_ENTRY (password_entry), priv->password_reason);
 
   if (strlen (verify) > 0 && !priv->valid_confirm)
     set_entry_validation_error (GTK_ENTRY (confirm_entry), _("Passwords do not match"));
@@ -361,7 +358,6 @@ update_password_entries (GisAccountPage *page)
   GtkWidget *confirm_entry;
   GtkWidget *username_combo;
   GtkWidget *password_strength;
-  gdouble strength;
   gint strength_level;
   const gchar *hint;
   const gchar *long_hint = NULL;
@@ -374,12 +370,8 @@ update_password_entries (GisAccountPage *page)
   password = gtk_entry_get_text (GTK_ENTRY (password_entry));
   username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (username_combo));
 
-  strength = pw_strength (password, NULL, username, &hint, &long_hint, &strength_level);
+  pw_strength (password, NULL, username, &hint, &long_hint, &strength_level);
   gtk_level_bar_set_value (GTK_LEVEL_BAR (password_strength), strength_level);
-
-  if (strength == 0.0) {
-    priv->password_reason = long_hint ? long_hint : hint;
-  }
 
   update_valid_confirm (page);
 
