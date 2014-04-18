@@ -243,7 +243,7 @@ update_valid_confirm (GisAccountPage *page)
   password = gtk_entry_get_text (GTK_ENTRY (WID("account-password-entry")));
   verify = gtk_entry_get_text (GTK_ENTRY (WID("account-confirm-entry")));
 
-  priv->valid_confirm = strcmp (password, verify) == 0;
+  priv->valid_confirm = password && *password != '\0' && strcmp (password, verify) == 0;
 }
 
 static void
