@@ -471,6 +471,7 @@ local_create_user (GisAccountPage *page)
   const gchar *language;
   gboolean autologin_active;
   gboolean enable_shared;
+  GSettings *lock_settings;
   GError *error = NULL;
 
   enable_shared = gtk_switch_get_active (OBJ(GtkSwitch*, "account-shared-account-switch"));
@@ -504,6 +505,12 @@ local_create_user (GisAccountPage *page)
   gis_driver_set_user_permissions (GIS_PAGE (page)->driver,
                                    priv->act_user,
                                    password);
+
+  if (autologin_active) {
+    lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
+    g_settings_set_boolean (lock_settings, "lock-enabled", FALSE);
+    g_object_unref (lock_settings);
+  }
 }
 
 static void
