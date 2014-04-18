@@ -36,5 +36,7 @@ typedef struct _GisPage      GisPage;
 #include "gis-assistant.h"
 #include "gis-page.h"
 
+void gis_add_setup_done_file (void);
+
 #endif /* __GNOME_INITIAL_SETUP_H__ */
 

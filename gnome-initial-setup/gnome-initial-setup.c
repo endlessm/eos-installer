@@ -185,16 +185,34 @@ rebuild_pages_cb (GisDriver *driver)
 }
 
 static gboolean
-is_running_as_gnome_initial_setup_user (void)
+is_running_as_user (const gchar *username)
 {
   struct passwd pw, *pwp;
   char buf[4096];
 
-  getpwnam_r ("gnome-initial-setup", &pw, buf, sizeof (buf), &pwp);
+  getpwnam_r (username, &pw, buf, sizeof (buf), &pwp);
   if (pwp == NULL)
     return FALSE;
 
   return pw.pw_uid == getuid ();
+}
+
+void
+gis_add_setup_done_file (void)
+{
+  gchar *gis_done_path;
+  GError *error = NULL;
+
+  gis_done_path = g_build_filename (g_get_user_config_dir (),
+                                    "gnome-initial-setup-done",
+                                    NULL);
+
+  if (!g_file_set_contents (gis_done_path, "yes", -1, &error)) {
+      g_warning ("Unable to create %s: %s", gis_done_path, error->message);
+      g_clear_error (&error);
+  }
+
+  g_free (gis_done_path);
 }
 
 static GisDriverMode
@@ -202,7 +220,7 @@ get_mode (void)
 {
   if (force_new_user_mode)
     return GIS_DRIVER_MODE_NEW_USER;
-  else if (is_running_as_gnome_initial_setup_user ())
+  else if (is_running_as_user ("gnome-initial-setup"))
     return GIS_DRIVER_MODE_NEW_USER;
   else
     return GIS_DRIVER_MODE_EXISTING_USER;
@@ -229,6 +247,13 @@ main (int argc, char *argv[])
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
+
+  /* If initial-setup has been automatically launched and this is the Shared
+     Account user, just quit quietly */
+  if (is_running_as_user ("shared")) {
+      gis_add_setup_done_file ();
+      return EXIT_SUCCESS;
+  }
 
 #ifdef HAVE_CHEESE
   cheese_gtk_init (NULL, NULL);
