@@ -1,3 +1,9 @@
+gnome-initial-setup (3.10.1.1) unstable; urgency=low
+
+  * Update to new upstream/rebase on git.
+
+ -- Cosimo Cecchi <cosimo@endlessm.com>  Fri, 18 Apr 2014 16:43:26 -0700
+
 gnome-initial-setup (0.12-0co2endless30) unstable; urgency=low
 
   * debian/patches/endless-create-user-keyring.patch:
