@@ -55,7 +55,7 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   pwquality
                   egg-list-box-uninstalled)
 
-PKG_CHECK_MODULES(COPY_WORKER, gio-2.0)
+PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
 
 GEOCLUE_DBUS_INTERFACE_XML=`pkg-config --variable=dbus_interface geoclue-2.0`
 if test "x$GEOCLUE_DBUS_INTERFACE_XML" = "x"; then

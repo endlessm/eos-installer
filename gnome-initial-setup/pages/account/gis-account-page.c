@@ -407,6 +407,16 @@ password_entry_focus_out (GtkWidget      *widget,
   return FALSE;
 }
 
+static void
+save_user_password (const gchar *password)
+{
+  gchar *file;
+
+  file = g_build_filename (g_get_user_config_dir (), "password", NULL);
+  g_file_set_contents (file, password, -1, NULL);
+  g_free (file);
+}
+
 static gboolean
 confirm_entry_focus_out (GtkWidget      *widget,
                          GdkEventFocus  *event,
@@ -490,6 +500,7 @@ local_create_user (GisAccountPage *page)
   } else {
     act_user_set_password (priv->act_user, password, "");
     gnome_keyring_create_sync ("login", password);
+    save_user_password (password);
   }
 
   language = gis_driver_get_user_language (GIS_PAGE (page)->driver);

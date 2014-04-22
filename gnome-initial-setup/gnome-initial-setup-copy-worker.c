@@ -6,6 +6,7 @@
 #include <pwd.h>
 #include <string.h>
 #include <gio/gio.h>
+#include <gnome-keyring.h>
 #include <stdlib.h>
 
 static char *
@@ -65,6 +66,23 @@ move_file_from_tmpfs (GFile       *src_base,
   }
 }
 
+static void
+unlock_keyring (const gchar *initial_setup_homedir)
+{
+  gchar *file;
+  gchar *password = NULL;
+
+  file = g_build_filename (initial_setup_homedir, ".config/password", NULL);
+  if (g_file_get_contents (file, &password, NULL, NULL))
+    gnome_keyring_unlock_sync ("login", password);
+  else
+    g_warning ("Unable to read user password file");
+
+  g_remove (file);
+  g_free (file);
+  g_free (password);
+}
+
 int
 main (int    argc,
       char **argv)
@@ -94,6 +112,8 @@ main (int    argc,
   FILE (".config/dconf/user");
   FILE (".config/goa-1.0/accounts.conf");
   FILE (".local/share/keyrings/login.keyring");
+
+  unlock_keyring (initial_setup_homedir);
 
   gis_done_file_path = g_build_filename (g_get_user_config_dir (),
                                          "gnome-initial-setup-done",
