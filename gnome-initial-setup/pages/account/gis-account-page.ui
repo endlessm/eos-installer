@@ -588,7 +588,7 @@
     </child>
     <child>
       <object class="GtkToggleButton" id="page-toggle">
-        <property name="visible">True</property>
+        <property name="visible">False</property>
         <property name="use_underline">True</property>
         <property name="label" translatable="true">_Use Enterprise Login</property>
         <property name="halign">start</property>

@@ -86,7 +86,7 @@ struct _GisAccountPagePrivate
   GCancellable *cancellable;
   gboolean join_prompted;
 
-  GtkWidget *action;
+  GtkAccelGroup *accel_group;
 };
 typedef struct _GisAccountPagePrivate GisAccountPagePrivate;
 
@@ -233,8 +233,6 @@ set_has_enterprise (GisAccountPage *page,
 
   if (!has_enterprise)
     set_mode (page, UM_LOCAL);
-
-  gtk_widget_set_visible (priv->action, has_enterprise);
 }
 
 static void
@@ -1112,11 +1110,14 @@ on_entry_changed (GtkEditable *editable,
 }
 
 static void
-toggle_mode (GtkToggleButton *button,
-             gpointer         user_data)
+switch_login_mode (GisAccountPage *page)
 {
-  set_mode (GIS_ACCOUNT_PAGE (user_data),
-            gtk_toggle_button_get_active (button) ? UM_ENTERPRISE : UM_LOCAL);
+  GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
+
+  if (priv->mode == UM_LOCAL)
+    set_mode (page, UM_ENTERPRISE);
+  else
+    set_mode (page, UM_LOCAL);
 }
 
 static gboolean
@@ -1206,9 +1207,13 @@ gis_account_page_constructed (GObject *object)
 
   priv->has_enterprise = FALSE;
 
-  priv->action = WID("page-toggle");
-  g_signal_connect (priv->action, "toggled", G_CALLBACK (toggle_mode), page);
-  g_object_bind_property (page, "applying", priv->action, "sensitive", G_BINDING_INVERT_BOOLEAN);
+  priv->accel_group = gtk_accel_group_new ();
+  GClosure *closure = g_cclosure_new_swap (G_CALLBACK (switch_login_mode), page, NULL);
+
+  /* Use Ctrl+Alt+e to activate the enterprise login mode */
+  gtk_accel_group_connect (priv->accel_group, GDK_KEY_e, GDK_CONTROL_MASK | GDK_MOD1_MASK, 0, closure);
+  g_closure_unref (closure);
+ 
 
   /* force a refresh by setting to an invalid value */
   priv->mode = NUM_MODES;
@@ -1233,8 +1238,18 @@ gis_account_page_dispose (GObject *object)
   g_clear_object (&priv->realm_manager);
   g_clear_object (&priv->realm);
   g_clear_object (&priv->cancellable);
+  g_clear_object (&priv->accel_group);
 
   G_OBJECT_CLASS (gis_account_page_parent_class)->dispose (object);
+}
+
+static GtkAccelGroup *
+gis_account_page_get_accel_group (GisPage *page)
+{
+  GisAccountPage *account_page = GIS_ACCOUNT_PAGE (page);
+  GisAccountPagePrivate *priv = gis_account_page_get_instance_private (account_page);
+
+  return priv->accel_group;
 }
 
 static void
@@ -1251,6 +1266,7 @@ gis_account_page_class_init (GisAccountPageClass *klass)
 
   page_class->page_id = PAGE_ID;
   page_class->locale_changed = gis_account_page_locale_changed;
+  page_class->get_accel_group = gis_account_page_get_accel_group;
   page_class->apply = gis_account_page_apply;
   page_class->save_data = gis_account_page_save_data;
   object_class->constructed = gis_account_page_constructed;

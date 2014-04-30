@@ -60,6 +60,7 @@ struct _GisPageClass
 
   GtkBuilder * (*get_builder) (GisPage *page);
   void         (*locale_changed) (GisPage *page);
+  GtkAccelGroup * (*get_accel_group) (GisPage *page);
   gboolean     (*apply) (GisPage *page,
                          GCancellable *cancellable);
   void         (*save_data) (GisPage *page);
@@ -73,6 +74,7 @@ void         gis_page_set_title (GisPage *page, char *title);
 gboolean     gis_page_get_complete (GisPage *page);
 void         gis_page_set_complete (GisPage *page, gboolean complete);
 GtkWidget *  gis_page_get_action_widget (GisPage *page);
+GtkAccelGroup *  gis_page_get_accel_group (GisPage *page);
 void         gis_page_locale_changed (GisPage *page);
 void         gis_page_apply_begin (GisPage *page, GisPageApplyCallback callback, gpointer user_data);
 void         gis_page_apply_cancel (GisPage *page);
