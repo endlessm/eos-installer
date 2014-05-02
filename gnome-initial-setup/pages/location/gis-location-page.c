@@ -81,12 +81,10 @@ set_timezone_cb (GObject      *source,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  GisLocationPage *page = user_data;
-  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
   GError *error;
 
   error = NULL;
-  if (!timedate1_call_set_timezone_finish (priv->dtm,
+  if (!timedate1_call_set_timezone_finish (TIMEDATE1 (source),
                                            res,
                                            &error)) {
     /* TODO: display any error in a user friendly way */
@@ -235,11 +233,9 @@ location_changed (GObject *object, GParamSpec *param, GisLocationPage *page)
 static void
 set_using_ntp_cb (GObject *object, GAsyncResult *res, gpointer user_data)
 {
-  GisLocationPage *page = user_data;
-  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
   GError *error = NULL;
 
-  if (!timedate1_call_set_ntp_finish (priv->dtm, res, &error))
+  if (!timedate1_call_set_ntp_finish (TIMEDATE1 (object), res, &error))
     {
       g_warning ("Could not set system to use NTP: %s", error->message);
       g_error_free (error);
@@ -346,10 +342,9 @@ static void
 set_time_cb (GObject *source, GAsyncResult *res, gpointer user_data)
 {
   GisLocationPage *page = user_data;
-  GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
   GError *error = NULL;
 
-  if(!timedate1_call_set_time_finish (priv->dtm, res, &error))
+  if(!timedate1_call_set_time_finish (TIMEDATE1 (source), res, &error))
     {
       g_warning ("Could not set system time: %s", error->message);
       g_error_free (error);
