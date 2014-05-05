@@ -728,6 +728,7 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
                         add_input_row (self, type, id, name, app_info);
                         update_buttons (self);
                         update_input (self);
+                        select_input (self, id);
 
                         g_free (id);
                         g_free (name);
