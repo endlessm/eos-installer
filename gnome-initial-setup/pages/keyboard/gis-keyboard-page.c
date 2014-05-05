@@ -524,6 +524,23 @@ input_sources_changed (GSettings     *settings,
         }
 }
 
+static void
+current_input_source_changed (GisKeyboardPage *self)
+{
+        GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+        GList *all_inputs;
+        GtkWidget *current_input;
+        guint current_input_index;
+
+        current_input_index = g_settings_get_uint (priv->input_settings, KEY_CURRENT_INPUT_SOURCE);
+        all_inputs = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
+        current_input = g_list_nth_data (all_inputs, current_input_index);
+        if (current_input)
+                egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), current_input);
+
+        g_list_free (all_inputs);
+}
+
 
 static void
 update_buttons (GisKeyboardPage *self)
@@ -550,6 +567,24 @@ update_buttons (GisKeyboardPage *self)
                 gtk_widget_set_visible (priv->show_config, app_info != NULL);
                 gtk_widget_set_sensitive (priv->show_layout, TRUE);
                 gtk_widget_set_sensitive (priv->remove_input, multiple_sources);
+        }
+}
+
+static void
+update_current_input (GisKeyboardPage *self)
+{
+        GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+        GtkWidget *selected;
+        GList *children;
+        guint index;
+
+        selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
+        if (selected) {
+                children = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
+                index = g_list_index (children, selected);
+                g_settings_set_uint (priv->input_settings, KEY_CURRENT_INPUT_SOURCE, index);
+                g_settings_apply (priv->input_settings);
+                g_list_free (children);
         }
 }
 
@@ -966,10 +1001,17 @@ setup_input_section (GisKeyboardPage *self)
         g_signal_connect_swapped (priv->input_list, "child-selected",
                                   G_CALLBACK (update_buttons), self);
 
+        g_signal_connect_swapped (priv->input_list, "child-selected",
+                                  G_CALLBACK (update_current_input), self);
+
         g_signal_connect (priv->input_settings, "changed::" KEY_INPUT_SOURCES,
                           G_CALLBACK (input_sources_changed), self);
 
+        g_signal_connect_swapped (priv->input_settings, "changed::" KEY_CURRENT_INPUT_SOURCE,
+                                  G_CALLBACK (current_input_source_changed), self);
+
         add_default_input_source_for_locale (self);
+        current_input_source_changed (self);
 }
 
 static void
@@ -1091,6 +1133,8 @@ localed_proxy_ready (GObject      *source,
         priv->localed = proxy;
 
         add_input_sources_from_localed (self);
+        update_input (self);
+        current_input_source_changed (self);
         update_buttons (self);
 }
 
