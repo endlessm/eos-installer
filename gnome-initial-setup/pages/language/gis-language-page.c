@@ -44,7 +44,6 @@ struct _GisLanguagePagePrivate
   GDBusProxy *localed;
   GPermission *permission;
   const gchar *new_locale_id;
-  guint selection_done_source;
 
   GCancellable *cancellable;
 };
@@ -158,31 +157,11 @@ set_language (GisLanguagePage *page)
 }
 
 static void
-set_language_and_change_page (GisLanguagePage *page)
-{
-  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
-  GisDriver *driver;
-
-  driver = GIS_PAGE (page)->driver;
-
-  if (priv->selection_done_source > 0)
-    {
-      g_source_remove (priv->selection_done_source);
-      priv->selection_done_source = 0;
-    }
-
-  set_language (page);
-
-  priv->selection_done_source = g_timeout_add (500, _selection_done,
-                                               (gpointer)driver);
-}
-
-static void
 language_activated (CcLanguageChooser *chooser,
                     gchar             *language,
                     GisLanguagePage   *page)
 {
-  set_language_and_change_page (page);
+  set_language (page);
 }
 
 static void
@@ -190,7 +169,7 @@ language_changed (CcLanguageChooser *chooser,
                   GParamSpec        *pspec,
                   GisLanguagePage   *page)
 {
-  set_language_and_change_page (page);
+  set_language (page);
 }
 
 static void
@@ -270,7 +249,6 @@ gis_language_page_dispose (GObject *object)
   GisLanguagePage *page = GIS_LANGUAGE_PAGE (object);
   GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
 
-  g_source_remove (priv->selection_done_source);
   g_clear_object (&priv->permission);
   g_clear_object (&priv->localed);
   g_clear_object (&priv->cancellable);
