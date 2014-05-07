@@ -69,6 +69,7 @@ struct _GisKeyboardPagePrivate {
         GtkWidget *show_config;
         GtkWidget *show_layout;
         GtkWidget *input_scrolledwindow;
+        GList *selected_input_sorted;
         guint n_input_rows;
         GPid gkbd_pid;
         GPermission *permission;
@@ -108,6 +109,7 @@ gis_keyboard_page_finalize (GObject *object)
                 g_cancellable_cancel (priv->ibus_cancellable);
         g_clear_object (&priv->ibus_cancellable);
         g_clear_pointer (&priv->ibus_engines, g_hash_table_destroy);
+        g_clear_pointer (&priv->selected_input_sorted, g_list_free);
 #endif
 
 	G_OBJECT_CLASS (gis_keyboard_page_parent_class)->finalize (object);
@@ -387,6 +389,7 @@ add_input_row (GisKeyboardPage   *self,
 
         gtk_widget_show_all (row);
         gtk_container_add (GTK_CONTAINER (priv->input_list), row);
+        priv->selected_input_sorted = g_list_prepend (priv->selected_input_sorted, row);
 
         g_object_set_data (G_OBJECT (row), "label", label);
         g_object_set_data (G_OBJECT (row), "type", (gpointer)type);
@@ -477,6 +480,7 @@ clear_input_sources (GisKeyboardPage *self)
                 gtk_container_remove (GTK_CONTAINER (priv->input_list), GTK_WIDGET (l->data));
         }
         g_list_free (list);
+        g_clear_pointer (&priv->selected_input_sorted, g_list_free);
 
         priv->n_input_rows = 0;
         adjust_input_list_scrolling (self);
@@ -524,6 +528,23 @@ input_sources_changed (GSettings     *settings,
         }
 }
 
+static void
+current_input_source_changed (GisKeyboardPage *self)
+{
+        GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+        GList *all_inputs;
+        GtkWidget *current_input;
+        guint current_input_index;
+
+        current_input_index = g_settings_get_uint (priv->input_settings, KEY_CURRENT_INPUT_SOURCE);
+        all_inputs = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
+        current_input = g_list_nth_data (all_inputs, current_input_index);
+        if (current_input)
+                egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), current_input);
+
+        g_list_free (all_inputs);
+}
+
 
 static void
 update_buttons (GisKeyboardPage *self)
@@ -550,6 +571,28 @@ update_buttons (GisKeyboardPage *self)
                 gtk_widget_set_visible (priv->show_config, app_info != NULL);
                 gtk_widget_set_sensitive (priv->show_layout, TRUE);
                 gtk_widget_set_sensitive (priv->remove_input, multiple_sources);
+        }
+}
+
+static void
+update_current_input (GisKeyboardPage *self)
+{
+        GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+        GtkWidget *selected;
+        GList *children;
+        guint index;
+
+        selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
+        if (selected) {
+                children = gtk_container_get_children (GTK_CONTAINER (priv->input_list));
+                index = g_list_index (children, selected);
+                g_settings_set_uint (priv->input_settings, KEY_CURRENT_INPUT_SOURCE, index);
+                g_settings_apply (priv->input_settings);
+                g_list_free (children);
+
+                /* Put the selected input in the head */
+                priv->selected_input_sorted = g_list_remove (priv->selected_input_sorted, selected);
+                priv->selected_input_sorted = g_list_prepend (priv->selected_input_sorted, selected);
         }
 }
 
@@ -693,6 +736,7 @@ input_response (GtkWidget *chooser, gint response_id, gpointer data)
                         add_input_row (self, type, id, name, app_info);
                         update_buttons (self);
                         update_input (self);
+                        select_input (self, id);
 
                         g_free (id);
                         g_free (name);
@@ -732,36 +776,6 @@ add_input (GisKeyboardPage *self)
         show_input_chooser (self);
 }
 
-static GtkWidget *
-find_sibling (GtkContainer *container, GtkWidget *child)
-{
-        GList *list, *c;
-        GList *l;
-        GtkWidget *sibling;
-
-        list = gtk_container_get_children (container);
-        c = g_list_find (list, child);
-
-        for (l = c->next; l; l = l->next) {
-                sibling = l->data;
-                if (gtk_widget_get_visible (sibling) && gtk_widget_get_child_visible (sibling))
-                        goto out;
-        }
-
-        for (l = c->prev; l; l = l->prev) {
-                sibling = l->data;
-                if (gtk_widget_get_visible (sibling) && gtk_widget_get_child_visible (sibling))
-                        goto out;
-        }
-
-        sibling = NULL;
-
-out:
-        g_list_free (list);
-
-        return sibling;
-}
-
 static void
 do_remove_selected_input (GisKeyboardPage *self)
 {
@@ -773,9 +787,13 @@ do_remove_selected_input (GisKeyboardPage *self)
         if (selected == NULL)
                 return;
 
-        sibling = find_sibling (GTK_CONTAINER (priv->input_list), selected);
+        priv->selected_input_sorted = g_list_delete_link (priv->selected_input_sorted,
+                                                          priv->selected_input_sorted);
         gtk_container_remove (GTK_CONTAINER (priv->input_list), selected);
-        egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), sibling);
+        if (priv->selected_input_sorted)
+                egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), priv->selected_input_sorted->data);
+        else
+                egg_list_box_select_child (EGG_LIST_BOX (priv->input_list), NULL);
 
         priv->n_input_rows -= 1;
         adjust_input_list_scrolling (self);
@@ -966,10 +984,17 @@ setup_input_section (GisKeyboardPage *self)
         g_signal_connect_swapped (priv->input_list, "child-selected",
                                   G_CALLBACK (update_buttons), self);
 
+        g_signal_connect_swapped (priv->input_list, "child-selected",
+                                  G_CALLBACK (update_current_input), self);
+
         g_signal_connect (priv->input_settings, "changed::" KEY_INPUT_SOURCES,
                           G_CALLBACK (input_sources_changed), self);
 
+        g_signal_connect_swapped (priv->input_settings, "changed::" KEY_CURRENT_INPUT_SOURCE,
+                                  G_CALLBACK (current_input_source_changed), self);
+
         add_default_input_source_for_locale (self);
+        current_input_source_changed (self);
 }
 
 static void
@@ -1091,6 +1116,8 @@ localed_proxy_ready (GObject      *source,
         priv->localed = proxy;
 
         add_input_sources_from_localed (self);
+        update_input (self);
+        current_input_source_changed (self);
         update_buttons (self);
 }
 
