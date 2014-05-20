@@ -28,6 +28,9 @@
 
 #define PAGE_ID "language"
 
+#define OSRELEASE_FILE      "/etc/os-release"
+#define SERIAL_VERSION_FILE "/sys/devices/virtual/dmi/id/product_serial"
+
 #include "config.h"
 #include "language-resources.h"
 #include "cc-language-chooser.h"
@@ -37,6 +40,7 @@
 #include <polkit/polkit.h>
 #include <locale.h>
 #include <gtk/gtk.h>
+#include <zint.h>
 
 struct _GisLanguagePagePrivate
 {
@@ -46,6 +50,8 @@ struct _GisLanguagePagePrivate
   const gchar *new_locale_id;
 
   GCancellable *cancellable;
+
+  GtkAccelGroup *accel_group;
 };
 typedef struct _GisLanguagePagePrivate GisLanguagePagePrivate;
 
@@ -199,12 +205,210 @@ ensure_localed_proxy (GisLanguagePage *page)
   }
 }
 
- static void
+static gchar *
+create_serial_barcode (const gchar *serial)
+{
+  gchar *savefile;
+  struct zint_symbol *barcode;
+
+  savefile = g_build_filename (g_get_user_cache_dir (), "product_serial.png", NULL);
+
+  barcode = ZBarcode_Create();
+  strncpy ((char *) barcode->outfile, savefile, 4096);
+  if (ZBarcode_Encode_and_Print (barcode, (gchar *) serial, 0, 0)) {
+    g_warning ("Error while generating barcode: %s", barcode->errtxt);
+  }
+  ZBarcode_Delete (barcode);
+
+  return savefile;
+}
+
+static gchar *
+get_serial_version (void)
+{
+  GError *error = NULL;
+  gchar *serial = NULL;
+
+  g_file_get_contents (SERIAL_VERSION_FILE, &serial, NULL, &error);
+
+  if (error) {
+    g_warning ("Error when reading " SERIAL_VERSION_FILE ": %s", error->message);
+    g_error_free (error);
+    return NULL;
+  }
+
+  return serial;
+}
+
+static gchar *
+get_software_version (void)
+{
+  GDataInputStream *datastream;
+  GError *error = NULL;
+  GFile *osrelease_file = NULL;
+  GFileInputStream *filestream;
+  GString *software_version;
+  gchar *line;
+  gchar *name = NULL;
+  gchar *version = NULL;
+  gchar *version_string = NULL;
+
+  osrelease_file = g_file_new_for_path (OSRELEASE_FILE);
+  filestream = g_file_read (osrelease_file, NULL, &error);
+  if (error) {
+    goto bailout;
+  }
+
+  datastream = g_data_input_stream_new (G_INPUT_STREAM (filestream));
+
+  while ((!name || !version) &&
+         (line = g_data_input_stream_read_line (datastream, NULL, NULL, &error))) {
+    if (g_str_has_prefix (line, "NAME=")) {
+      name = line;
+    } else if (g_str_has_prefix (line, "VERSION=")) {
+      version = line;
+    } else {
+      g_free (line);
+    }
+  }
+
+  if (error) {
+    goto bailout;
+  }
+
+  software_version = g_string_new ("");
+
+  if (name) {
+    g_string_append (software_version, name + strlen ("NAME=\""));
+    g_string_erase (software_version, software_version->len - 1, 1);
+  }
+
+  if (version) {
+    if (name) {
+      g_string_append_c (software_version, ' ');
+    }
+    g_string_append (software_version, version + strlen ("VERSION=\""));
+    g_string_erase (software_version, software_version->len - 1, 1);
+  }
+
+  version_string = g_string_free (software_version, FALSE);
+
+ bailout:
+  g_free (name);
+  g_free (version);
+
+  if (error) {
+    g_warning ("Error reading " OSRELEASE_FILE ": %s", error->message);
+    g_error_free (error);
+  }
+
+  g_clear_object (&datastream);
+  g_clear_object (&filestream);
+  g_clear_object (&osrelease_file);
+
+  if (version_string) {
+    return version_string;
+  } else {
+    return g_strdup ("");
+  }
+}
+
+static void
+system_poweroff (gpointer data)
+{
+  GDBusConnection *bus;
+  GError *error = NULL;
+  GPermission *permission;
+
+  permission = polkit_permission_new_sync ("org.freedesktop.login1.power-off", NULL, NULL, &error);
+  if (error) {
+    g_warning ("Failed getting permission to power off: %s", error->message);
+    g_error_free (error);
+    return;
+  }
+
+  if (!g_permission_get_allowed (permission)) {
+    g_warning ("Not allowed to power off");
+    g_object_unref (permission);
+    return;
+  }
+
+  g_object_unref (permission);
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (error) {
+    g_warning ("Failed to get system bus: %s", error->message);
+    g_error_free (error);
+    return;
+  }
+
+  g_dbus_connection_call (bus,
+                          "org.freedesktop.login1",
+                          "/org/freedesktop/login1",
+                          "org.freedesktop.login1.Manager",
+                          "PowerOff",
+                          g_variant_new ("(b)", FALSE),
+                          NULL, 0, G_MAXINT, NULL, NULL, NULL);
+
+  g_object_unref (bus);
+}
+
+static void
+show_factory_dialog (GisLanguagePage *page)
+{
+  GtkButton *poweroff_button;
+  GtkDialog *factory_dialog;
+  GtkImage *serial_image;
+  GtkLabel *serial_label;
+  GtkLabel *version_label;
+  gchar *barcode;
+  gchar *serial;
+  gchar *version;
+
+  factory_dialog = OBJ (GtkDialog *, "factory-dialog");
+  version_label = OBJ (GtkLabel *, "software-version");
+  serial_label = OBJ (GtkLabel *, "serial-text");
+  serial_image = OBJ (GtkImage *, "serial-barcode");
+  poweroff_button = OBJ (GtkButton *, "poweroff-button");
+
+  version = get_software_version ();
+  gtk_label_set_text (version_label, version);
+
+  serial = get_serial_version ();
+  if (serial) {
+    gtk_label_set_text (serial_label, serial);
+
+    barcode = create_serial_barcode (serial);
+    gtk_image_set_from_file (serial_image, barcode);
+  } else {
+    gtk_widget_set_visible (serial_label, FALSE);
+    gtk_widget_set_visible (serial_image, FALSE);
+  }
+
+  g_signal_connect_swapped (poweroff_button, "clicked",
+                            G_CALLBACK (system_poweroff), NULL);
+
+  gtk_window_set_transient_for (GTK_WINDOW (factory_dialog),
+                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
+  gtk_window_set_modal (GTK_WINDOW (factory_dialog), TRUE);
+  gtk_window_present (GTK_WINDOW (factory_dialog));
+
+  if (serial) {
+    g_remove (barcode);
+    g_free (barcode);
+    g_free (serial);
+  }
+
+  g_free (version);
+}
+
+static void
 gis_language_page_constructed (GObject *object)
 {
   GisLanguagePage *page = GIS_LANGUAGE_PAGE (object);
   GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
   GisDriver *driver = GIS_PAGE (page)->driver;
+  GClosure *closure;
   const gchar *lang_override;
 
   g_type_ensure (CC_TYPE_LANGUAGE_CHOOSER);
@@ -233,6 +437,12 @@ gis_language_page_constructed (GObject *object)
   /* Propagate initial language setting to localed/AccountsService */
   set_language (page);
 
+  /* Use ctrl+f to show factory dialog */
+  priv->accel_group = gtk_accel_group_new ();
+  closure = g_cclosure_new_swap (G_CALLBACK (show_factory_dialog), page, NULL);
+  gtk_accel_group_connect (priv->accel_group, GDK_KEY_f, GDK_CONTROL_MASK, 0, closure);
+  g_closure_unref (closure);
+
   gis_page_set_complete (GIS_PAGE (page), TRUE);
   gtk_widget_show (GTK_WIDGET (page));
 }
@@ -252,6 +462,16 @@ gis_language_page_dispose (GObject *object)
   g_clear_object (&priv->permission);
   g_clear_object (&priv->localed);
   g_clear_object (&priv->cancellable);
+  g_clear_object (&priv->accel_group);
+}
+
+static GtkAccelGroup *
+gis_language_page_get_accel_group (GisPage *page)
+{
+  GisLanguagePage *language_page = GIS_LANGUAGE_PAGE (page);
+  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (language_page);
+
+  return priv->accel_group;
 }
 
 static void
@@ -262,6 +482,7 @@ gis_language_page_class_init (GisLanguagePageClass *klass)
 
   page_class->page_id = PAGE_ID;
   page_class->locale_changed = gis_language_page_locale_changed;
+  page_class->get_accel_group = gis_language_page_get_accel_group;
   object_class->constructed = gis_language_page_constructed;
   object_class->dispose = gis_language_page_dispose;
 }

@@ -63,6 +63,20 @@ if test "x$GEOCLUE_DBUS_INTERFACE_XML" = "x"; then
 fi
 AC_SUBST(GEOCLUE_DBUS_INTERFACE_XML)
 
+# Zint barcode
+AC_CHECK_LIB(zint, ZBarcode_Render,
+        [have_libzint=yes], [have_libzint=no])
+if test "x$have_libzint" = "xno" ; then
+   AC_MSG_ERROR([*** libzint not found ***])
+fi
+LIBZINT_CFLAGS=""
+LIBZINT_LIBS="-lzint"
+AC_SUBST(LIBZINT_CFLAGS)
+AC_SUBST(LIBZINT_LIBS)
+
+INITIAL_SETUP_CFLAGS="$INITIAL_SETUP_CFLAGS $LIBZINT_CFLAGS"
+INITIAL_SETUP_LIBS="$INITIAL_SETUP_LIBS $LIBZINT_LIBS"
+
 AC_ARG_ENABLE(ibus,
         AS_HELP_STRING([--disable-ibus],
                        [Disable IBus support]),
