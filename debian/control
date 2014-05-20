@@ -31,7 +31,8 @@ Build-Depends: cdbs (>= 0.4.41),
 	       libkrb5-dev,
 	       iso-codes,
 	       libclutter-gst-2.0-dev,
-	       valac
+	       valac,
+	       zint-devel
 Standards-Version: 3.9.4
 Homepage: https://git.gnome.org/browse/gnome-initial-setup/
 
