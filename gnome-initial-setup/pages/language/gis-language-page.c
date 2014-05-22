@@ -232,8 +232,15 @@ get_serial_version (void)
   g_file_get_contents (SERIAL_VERSION_FILE, &serial, NULL, &error);
 
   if (error) {
-    g_warning ("Error when reading " SERIAL_VERSION_FILE ": %s", error->message);
+    g_warning ("Error when reading %s: %s", SERIAL_VERSION_FILE, error->message);
     g_error_free (error);
+    return NULL;
+  }
+
+  /* ZBarcode_Encode_and_Print() needs UTF-8 */
+  if (!g_utf8_validate (serial, -1, NULL)) {
+    g_warning ("Error when reading %s: not a valid UTF-8 string", SERIAL_VERSION_FILE);
+    g_free (serial);
     return NULL;
   }
 
@@ -381,8 +388,8 @@ show_factory_dialog (GisLanguagePage *page)
     barcode = create_serial_barcode (serial);
     gtk_image_set_from_file (serial_image, barcode);
   } else {
-    gtk_widget_set_visible (serial_label, FALSE);
-    gtk_widget_set_visible (serial_image, FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (serial_label), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (serial_image), FALSE);
   }
 
   g_signal_connect_swapped (poweroff_button, "clicked",
@@ -392,6 +399,8 @@ show_factory_dialog (GisLanguagePage *page)
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
   gtk_window_set_modal (GTK_WINDOW (factory_dialog), TRUE);
   gtk_window_present (GTK_WINDOW (factory_dialog));
+  g_signal_connect (factory_dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   if (serial) {
     g_remove (barcode);
