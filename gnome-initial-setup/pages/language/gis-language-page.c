@@ -232,7 +232,7 @@ get_serial_version (void)
   g_file_get_contents (SERIAL_VERSION_FILE, &serial, NULL, &error);
 
   if (error) {
-    g_warning ("Error when reading " SERIAL_VERSION_FILE ": %s", error->message);
+    g_warning ("Error when reading %s: %s", SERIAL_VERSION_FILE, error->message);
     g_error_free (error);
     return NULL;
   }
