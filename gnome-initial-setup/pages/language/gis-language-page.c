@@ -392,6 +392,8 @@ show_factory_dialog (GisLanguagePage *page)
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
   gtk_window_set_modal (GTK_WINDOW (factory_dialog), TRUE);
   gtk_window_present (GTK_WINDOW (factory_dialog));
+  g_signal_connect (factory_dialog, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   if (serial) {
     g_remove (barcode);
