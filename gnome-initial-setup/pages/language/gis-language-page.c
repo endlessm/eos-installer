@@ -381,8 +381,8 @@ show_factory_dialog (GisLanguagePage *page)
     barcode = create_serial_barcode (serial);
     gtk_image_set_from_file (serial_image, barcode);
   } else {
-    gtk_widget_set_visible (serial_label, FALSE);
-    gtk_widget_set_visible (serial_image, FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (serial_label), FALSE);
+    gtk_widget_set_visible (GTK_WIDGET (serial_image), FALSE);
   }
 
   g_signal_connect_swapped (poweroff_button, "clicked",
