@@ -38,7 +38,8 @@ Homepage: https://git.gnome.org/browse/gnome-initial-setup/
 
 Package: gnome-initial-setup
 Architecture: any
-Depends: ${misc:Depends},
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
          gdm3,
 	 policykit-1 (>= 0.106)
 Recommends: gnome-getting-started-docs
