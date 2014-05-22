@@ -237,6 +237,13 @@ get_serial_version (void)
     return NULL;
   }
 
+  /* ZBarcode_Encode_and_Print() needs UTF-8 */
+  if (!g_utf8_validate (serial, -1, NULL)) {
+    g_warning ("Error when reading %s: not a valid UTF-8 string", SERIAL_VERSION_FILE);
+    g_free (serial);
+    return NULL;
+  }
+
   return serial;
 }
 
