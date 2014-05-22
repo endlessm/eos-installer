@@ -42,6 +42,7 @@ EXTRA_DIST =						\
 	gnome-initial-setup.session			\
 	gnome-welcome-tour.in				\
 	initial-setup.json				\
+	product_serial.conf                             \
 	$(NULL)
 
 CLEANFILES =						\
@@ -53,7 +54,6 @@ CLEANFILES =						\
 	gnome-welcome-tour.desktop.in			\
 	gnome-welcome-tour.desktop			\
 	gnome-welcome-tour				\
-        product_serial.conf                             \
 	$(NULL)
 
 autostartdir = $(sysconfdir)/xdg/autostart
@@ -65,8 +65,8 @@ autostart_DATA =					\
 
 tmpfilesdir = $(sysconfdir)/tmpfiles.d
 tmpfiles_DATA =                                         \
-        product_serial.conf                             \
-        $(NULL)
+	product_serial.conf                             \
+	$(NULL)
 
 bin_SCRIPTS =						\
 	gnome-welcome-tour				\
