@@ -292,15 +292,18 @@ on_client_proxy_ready (GObject      *source_object,
 {
         GError *error = NULL;
         CcTimezoneMonitor *self = user_data;
-        CcTimezoneMonitorPrivate *priv = GET_PRIVATE (self);
+        GeoclueClient *client;
+        CcTimezoneMonitorPrivate *priv;
 
-        priv->geoclue_client = geoclue_client_proxy_new_for_bus_finish (res, &error);
+        client = geoclue_client_proxy_new_for_bus_finish (res, &error);
         if (error != NULL) {
                 g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
                 g_error_free (error);
                 return;
         }
 
+        priv = GET_PRIVATE (self);
+        priv->geoclue_client = client;
         //geoclue_client_set_desktop_id (priv->geoclue_client, DESKTOP_ID);
         geoclue_client_set_distance_threshold (priv->geoclue_client,
                                                GEOCODE_LOCATION_ACCURACY_CITY);
@@ -352,15 +355,18 @@ on_manager_proxy_ready (GObject      *source_object,
 
         GError *error = NULL;
         CcTimezoneMonitor *self = user_data;
-        CcTimezoneMonitorPrivate *priv = GET_PRIVATE (self);
+        CcTimezoneMonitorPrivate *priv;
+        GeoclueManager *manager;
 
-        priv->geoclue_manager = geoclue_manager_proxy_new_for_bus_finish (res, &error);
+        manager = geoclue_manager_proxy_new_for_bus_finish (res, &error);
         if (error != NULL) {
                 g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
                 g_error_free (error);
                 return;
         }
 
+        priv = GET_PRIVATE (self);
+        priv->geoclue_manager = manager;
         geoclue_manager_call_get_client (priv->geoclue_manager,
                                          priv->cancellable,
                                          on_get_client_ready,
