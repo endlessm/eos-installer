@@ -63,7 +63,7 @@ autostart_DATA =					\
 	gnome-initial-setup-first-login.desktop		\
 	$(NULL)
 
-tmpfilesdir = $(sysconfdir)/tmpfiles.d
+tmpfilesdir = $(libdir)/tmpfiles.d
 tmpfiles_DATA =                                         \
 	product_serial.conf                             \
 	$(NULL)
