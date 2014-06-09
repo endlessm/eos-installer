@@ -419,7 +419,7 @@ reorder_date_widget (DateEndianess endianess, GisLocationPage *page)
   GtkBox *box;
   GtkWidget *month, *day, *year;
 
-  if (endianess = DATE_ENDIANESS_MIDDLE)
+  if (endianess == DATE_ENDIANESS_MIDDLE)
     return;
 
   month = WID ("month-combobox");
