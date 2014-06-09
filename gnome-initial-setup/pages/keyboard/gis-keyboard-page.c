@@ -781,7 +781,6 @@ do_remove_selected_input (GisKeyboardPage *self)
 {
         GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
         GtkWidget *selected;
-        GtkWidget *sibling;
 
         selected = egg_list_box_get_selected_child (EGG_LIST_BOX (priv->input_list));
         if (selected == NULL)

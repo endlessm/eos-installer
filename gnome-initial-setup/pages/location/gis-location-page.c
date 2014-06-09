@@ -294,7 +294,6 @@ update_time (GisLocationPage *page)
 {
   GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
   char *label;
-  gint i;
 
   /* Update the hours label */
   label = g_date_time_format (priv->date, "%H");

@@ -164,10 +164,8 @@ process_location (CcTimezoneMonitor *self,
                   GeocodePlace       *place)
 {
         GeocodeLocation *location;
-        CcTimezoneMonitorPrivate *priv = GET_PRIVATE (self);
         TzLocation *new_tzlocation;
         const gchar *country_code;
-        const gchar *new_timezone;
 
         country_code = geocode_place_get_country_code (place);
         location = geocode_place_get_location (place);

@@ -39,6 +39,7 @@
 #include <act/act-user-manager.h>
 #include <polkit/polkit.h>
 #include <locale.h>
+#include <glib/gstdio.h>
 #include <gtk/gtk.h>
 #include <zint.h>
 
@@ -115,14 +116,6 @@ user_loaded (GObject    *object,
   act_user_set_language (ACT_USER (object), new_locale_id);
 
   g_free (new_locale_id);
-}
-
-static gboolean
-_selection_done (gpointer driver)
-{
-  gis_assistant_next_page (gis_driver_get_assistant (GIS_DRIVER (driver)));
-
-  return FALSE;
 }
 
 static void
@@ -215,7 +208,7 @@ create_serial_barcode (const gchar *serial)
 
   barcode = ZBarcode_Create();
   strncpy ((char *) barcode->outfile, savefile, 4096);
-  if (ZBarcode_Encode_and_Print (barcode, (gchar *) serial, 0, 0)) {
+  if (ZBarcode_Encode_and_Print (barcode, (guchar *) serial, 0, 0)) {
     g_warning ("Error while generating barcode: %s", barcode->errtxt);
   }
   ZBarcode_Delete (barcode);
