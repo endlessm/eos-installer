@@ -29,7 +29,7 @@
 #define PAGE_ID "language"
 
 #define OSRELEASE_FILE      "/etc/os-release"
-#define SERIAL_VERSION_FILE "/sys/devices/virtual/dmi/id/product_serial"
+#define SERIAL_VERSION_FILE "/sys/devices/virtual/dmi/id/product_uuid"
 
 #include "config.h"
 #include "language-resources.h"
@@ -223,28 +223,76 @@ create_serial_barcode (const gchar *serial)
   return savefile;
 }
 
-static gchar *
-get_serial_version (void)
+static gboolean
+get_serial_version (gchar **display_serial,
+                    gchar **barcode_serial)
 {
   GError *error = NULL;
   gchar *serial = NULL;
+  gchar **split;
+  GString *display, *barcode;
+  gchar *display_str, *barcode_str;
+  gint idx;
 
   g_file_get_contents (SERIAL_VERSION_FILE, &serial, NULL, &error);
 
   if (error) {
     g_warning ("Error when reading %s: %s", SERIAL_VERSION_FILE, error->message);
     g_error_free (error);
-    return NULL;
+    return FALSE;
   }
+
+  /* Drop hyphens */
+  split = g_strsplit (serial, "-", -1);
+  g_free (serial);
+  serial = g_strstrip (g_strjoinv (NULL, split));
+  g_strfreev (split);
+
+  display = g_string_new (NULL);
+  barcode = g_string_new (NULL);
+
+  /* Each byte is encoded here as two characters; valid bytes are
+   * followed by markers (same length), and we need to get the first 6
+   * valid bytes only.
+   * So, 6 * 4 = 24 below...
+   */
+  for (idx = 0; idx < MIN (strlen (serial), 24); idx++) {
+    /* Discard markers */
+    if (idx % 4 > 1)
+      continue;
+
+    g_string_append_c (display, serial[idx]);
+    g_string_append_c (barcode, serial[idx]);
+
+    /* Space out valid bytes in the display version of the string */
+    if (idx % 4 == 1)
+      g_string_append_c (display, ' ');
+  }
+
+  g_free (serial);
+
+  display_str = g_strstrip (g_string_free (display, FALSE));
+  barcode_str = g_strstrip (g_string_free (barcode, FALSE));
 
   /* ZBarcode_Encode_and_Print() needs UTF-8 */
-  if (!g_utf8_validate (serial, -1, NULL)) {
+  if (!g_utf8_validate (barcode_str, -1, NULL)) {
     g_warning ("Error when reading %s: not a valid UTF-8 string", SERIAL_VERSION_FILE);
-    g_free (serial);
-    return NULL;
+    g_free (barcode_str);
+    g_free (display_str);
+    return FALSE;
   }
 
-  return serial;
+  if (barcode_serial)
+    *barcode_serial = barcode_str;
+  else
+    g_free (barcode_str);
+
+  if (display_serial)
+    *display_serial = display_str;
+  else
+    g_free (display_str);
+
+  return TRUE;
 }
 
 static gchar *
@@ -369,8 +417,9 @@ show_factory_dialog (GisLanguagePage *page)
   GtkLabel *serial_label;
   GtkLabel *version_label;
   gchar *barcode;
-  gchar *serial;
+  gchar *barcode_serial, *display_serial;
   gchar *version;
+  gboolean have_serial;
 
   factory_dialog = OBJ (GtkDialog *, "factory-dialog");
   version_label = OBJ (GtkLabel *, "software-version");
@@ -381,11 +430,12 @@ show_factory_dialog (GisLanguagePage *page)
   version = get_software_version ();
   gtk_label_set_text (version_label, version);
 
-  serial = get_serial_version ();
-  if (serial) {
-    gtk_label_set_text (serial_label, serial);
+  have_serial = get_serial_version (&display_serial, &barcode_serial);
 
-    barcode = create_serial_barcode (serial);
+  if (have_serial) {
+    gtk_label_set_text (serial_label, display_serial);
+
+    barcode = create_serial_barcode (barcode_serial);
     gtk_image_set_from_file (serial_image, barcode);
   } else {
     gtk_widget_set_visible (GTK_WIDGET (serial_label), FALSE);
@@ -402,10 +452,11 @@ show_factory_dialog (GisLanguagePage *page)
   g_signal_connect (factory_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
-  if (serial) {
+  if (have_serial) {
     g_remove (barcode);
     g_free (barcode);
-    g_free (serial);
+    g_free (barcode_serial);
+    g_free (display_serial);
   }
 
   g_free (version);
