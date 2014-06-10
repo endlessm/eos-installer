@@ -294,7 +294,6 @@ update_time (GisLocationPage *page)
 {
   GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
   char *label;
-  gint i;
 
   /* Update the hours label */
   label = g_date_time_format (priv->date, "%H");
@@ -420,7 +419,7 @@ reorder_date_widget (DateEndianess endianess, GisLocationPage *page)
   GtkBox *box;
   GtkWidget *month, *day, *year;
 
-  if (endianess = DATE_ENDIANESS_MIDDLE)
+  if (endianess == DATE_ENDIANESS_MIDDLE)
     return;
 
   month = WID ("month-combobox");

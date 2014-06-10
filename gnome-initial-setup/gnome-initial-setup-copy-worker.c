@@ -6,6 +6,7 @@
 #include <pwd.h>
 #include <string.h>
 #include <gio/gio.h>
+#include <glib/gstdio.h>
 #include <gnome-keyring.h>
 #include <stdlib.h>
 
