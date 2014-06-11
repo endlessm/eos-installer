@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-10 12:36+0200\n"
+"POT-Creation-Date: 2014-06-11 19:51+0200\n"
 "PO-Revision-Date: 2013-08-29 19:42-0300\n"
 "Last-Translator: Georges Basile Stavracas Neto <georges.stavracas@gmail."
 "com>\n"
@@ -337,16 +337,16 @@ msgid "Other"
 msgstr "Outro"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
-msgid "Input Sources"
-msgstr "Fontes de entrada"
+msgid "Keyboard Layouts"
+msgstr "Disposições de teclado"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
 msgstr "Selecionar as disposições do teclado"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-msgid "Add an Input Source"
-msgstr "Adicionar uma fonte de entrada"
+msgid "Add a Keyboard Layout"
+msgstr "Adicionar uma disposição de teclado"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
@@ -502,6 +502,12 @@ msgstr ""
 msgid "_Start using GNOME 3"
 msgstr "Começar a usar o _GNOME 3"
 
+#~ msgid "Input Sources"
+#~ msgstr "Fontes de entrada"
+
+#~ msgid "Add an Input Source"
+#~ msgstr "Adicionar uma fonte de entrada"
+
 #~ msgid "Strength: %s"
 #~ msgstr "Intensidade: %s"
 
@@ -538,9 +544,6 @@ msgstr "Começar a usar o _GNOME 3"
 
 #~ msgid "Select an input source"
 #~ msgstr "Selecione uma fonte de entrada"
-
-#~ msgid "Keyboard Layout"
-#~ msgstr "Disposição do teclado"
 
 #~ msgid "Remove Input Source"
 #~ msgstr "Remover fonte de entrada"
