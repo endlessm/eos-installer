@@ -136,6 +136,7 @@ data/Makefile
 gnome-initial-setup/Makefile
 gnome-initial-setup/pages/Makefile
 gnome-initial-setup/pages/language/Makefile
+gnome-initial-setup/pages/endless-eula/Makefile
 gnome-initial-setup/pages/eulas/Makefile
 gnome-initial-setup/pages/account/Makefile
 gnome-initial-setup/pages/location/Makefile
