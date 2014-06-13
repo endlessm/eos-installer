@@ -42,6 +42,7 @@
 
 #include "pages/language/gis-language-page.h"
 #include "pages/keyboard/gis-keyboard-page.h"
+#include "pages/endless-eula/gis-endless-eula-page.h"
 #include "pages/eulas/gis-eula-pages.h"
 #include "pages/network/gis-network-page.h"
 #include "pages/account/gis-account-page.h"
@@ -70,6 +71,7 @@ static PageData page_table[] = {
   PAGE (language),
   PAGE (keyboard),
   PAGE (eula),
+  PAGE (endless_eula),
   PAGE (network),
   PAGE (account),
   PAGE (location),
