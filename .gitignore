@@ -17,7 +17,7 @@ config.status
 config.guess
 config.rpath
 config.sub
-config
+/config
 configure
 depcomp
 gnome-doc-utils.make
