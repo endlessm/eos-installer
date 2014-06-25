@@ -55,6 +55,7 @@
 static gboolean force_new_user_mode;
 static const gchar *system_setup_pages[] = {
     "account",
+    "endless_eula",
     "location"
 };
 
