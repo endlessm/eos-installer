@@ -5,9 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"initial-setup&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-13 16:59+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-02 12:21-0700\n"
 "PO-Revision-Date: 2013-09-17 22:23-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -23,58 +22,53 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "ਮੁੱਢਲਾ ਸੈਟਅੱਪ"
 
-#: ../gnome-initial-setup/gis-assistant.c:418
+#: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
 msgstr "ਅੱਗੇ(_N)"
 
-#: ../gnome-initial-setup/gis-assistant.c:419
+#: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
 msgstr "ਪਿੱਛੇ(_P)"
 
-#: ../gnome-initial-setup/gis-assistant.c:420
+#: ../gnome-initial-setup/gis-assistant.c:417
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "ਰੱਦ ਕਰੋ(_C)"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:220
+#: ../gnome-initial-setup/gnome-initial-setup.c:241
 msgid "Force new user mode"
 msgstr "ਨਵੇਂ ਯੂਜ਼ਰ ਮੋਡ ਲਈ ਮਜ਼ਬੂਰ"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:224
+#: ../gnome-initial-setup/gnome-initial-setup.c:245
 msgid "- GNOME initial setup"
 msgstr "- ਗਨੋਮ ਮੁੱਢਲਾ ਸੈਟਅੱਪ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 msgid "No password"
 msgstr "ਪਾਸਵਰਡ ਨਹੀਂ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:436
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
 msgid "Passwords do not match"
 msgstr "ਪਾਸਵਰਡ ਆਪਸ ਵਿੱਚ ਨਹੀਂ ਮਿਲਦੇ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:383
-#, c-format
-msgid "Strength: %s"
-msgstr "ਮਜ਼ਬੂਤੀ: %s"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:510
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
 msgid "Failed to register account"
 msgstr "ਅਕਾਊਂਟ ਰਜਿਸਟਰ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:718
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
 msgid "No supported way to authenticate with this domain"
 msgstr "ਇਹ ਡੋਮੇਨ ਨਾਲ ਪਰਮਾਣਕਿਤਾ ਦਾ ਕੋਈ ਸਹਾਇਕ ਢੰਗ ਨਹੀਂ ਹੈ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
 msgid "Failed to join domain"
 msgstr "ਡੋਮੇਨ ਜੁਆਇੰਨ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:826
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
 msgid "Failed to log into domain"
 msgstr "ਡੋਮੇਨ ਵਿੱਚ ਲਾਗਇਨ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1211
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
 msgid "Login"
 msgstr "ਲਾਗਇਨ"
 
@@ -107,34 +101,41 @@ msgid ""
 "Try to use at least 8 different characters. Mix upper and lower case and use "
 "a number or two."
 msgstr ""
-"ਘੱਟੋ-ਘੱਟ 8 ਵੱਖਰੇ ਅੱਖਰ ਵਰਤ ਕੇ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਵੱਡੇ ਤੇ ਛੋਟੇ ਅੱਖਰ ਦੇ ਨਾਲ ਨਾਲ ਇੱਕ ਜਾਂ "
-"ਦੋ ਅੰਕ ਵੀ ਵਰਤੋਂ।"
+"ਘੱਟੋ-ਘੱਟ 8 ਵੱਖਰੇ ਅੱਖਰ ਵਰਤ ਕੇ ਕੋਸ਼ਿਸ਼ ਕਰੋ। ਵੱਡੇ ਤੇ ਛੋਟੇ ਅੱਖਰ ਦੇ ਨਾਲ ਨਾਲ ਇੱਕ ਜਾਂ ਦੋ ਅੰਕ ਵੀ ਵਰਤੋਂ।"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "A_utomatic Login"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid "Enable _Shared Account"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr "ਪੇਜ਼ 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "Create an Enterprise Account"
 msgstr "ਇੰਟਰਪਰਾਈਜ਼ ਅਕਾਊਂਟ ਬਣਾਓ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "_Domain"
 msgstr "ਡੋਮੇਨ(_D)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Enterprise domain or realm name"
 msgstr "ਇੰਟਰਪਰਾਈਜ਼ ਡੋਮੇਨ ਜਾਂ ਸਨਦ ਨਾਂ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "C_ontinue"
 msgstr "ਜਾਰੀ ਰੱਖੋ(_o)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Domain Administrator Login"
 msgstr "ਡੋਮੇਨ ਪਰਸ਼ਾਸ਼ਕੀ ਲਾਗਇਨ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -146,15 +147,15 @@ msgstr ""
 "ਦਿਉ ਅਤੇ ਆਪਣੇ ਕੰਪਿਊਟਰ ਲਈ ਵਿਲੱਖਣ ਕੰਪਿਊਟਰ ਨਾਂ\n"
 "ਚੁਣੋ।"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "_Computer"
 msgstr "ਕੰਪਿਊਟਰ(_C)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator _Name"
 msgstr "ਪਰਸ਼ਾਸ਼ਕੀ ਨਾਂ(_N)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "Administrator Password"
 msgstr "ਪਰਸ਼ਾਸ਼ਕੀ ਪਾਸਵਰਡ"
 
@@ -238,6 +239,46 @@ msgstr ""
 "  ➣ਅੰਕ\n"
 "  ➣ '.', '-' ਅਤੇ '_' ਵਿੱਚੋਂ ਕੋਈ ਵੀ"
 
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+msgid ""
+"Endless collects metrics on user behavior and actions.\n"
+"All data sent is anonymous.\n"
+"We use the data to improve the system."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+msgid "Privacy Policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#, fuzzy
+msgid "Privacy and License Agreements"
+msgstr "ਲਾਈਸੈਂਸ ਇਕਰਾਰਨਾਮਾ"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
+msgid "Enable metrics collection."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+msgid ""
+"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Third-party Software"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"Endless uses third-party software to display Flash, MP3 and other media. "
+"Some of this software is closed-source. The software is subject to the "
+"license terms included with the software's documentation."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "I agree to the license terms"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
@@ -250,7 +291,6 @@ msgid ""
 msgstr "ਮੈਂ ਇਹ ਅੰਤਿਮ ਯੂਜ਼ਰ ਲਾਈਸੈਂਸ ਇਕਰਾਰਨਾਮੇ ਦੀਆਂ ਸ਼ਰਤਾਂ ਨਾਲ ਸਹਿਮਤ ਹਾਂ(_a)।"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
-#| msgid "Other"
 msgctxt "Online Account"
 msgid "Other"
 msgstr "ਹੋਰ"
@@ -276,27 +316,27 @@ msgstr "ਗੱਲਬਾਤ"
 msgid "Resources"
 msgstr "ਸਰੋਤ"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:127
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
 msgstr "ਅਕਾਊਂਟ ਬਣਾਉਣ ਦੌਰਾਨ ਗਲਤੀ"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:157
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
 msgstr "ਅਕਾਊਂਟ ਹਟਾਉਣਾ ਦੌਰਾਨ ਗਲਤੀ"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:183
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
 msgstr "ਕੀ ਤੁਸੀਂ ਅਕਾਊਂਟ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:185
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
 msgstr "ਇਹ ਸਰਵਰ ਤੋਂ ਅਕਾਊਂਟ ਨਹੀਂ ਹਟਾਏਗਾ।"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:186
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
 msgstr "ਹਟਾਓ(_R)"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:448
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
 msgstr "ਆਨਲਾਈਨ ਅਕਾਊਂਟ"
 
@@ -309,8 +349,7 @@ msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
 msgstr ""
-"ਅਕਾਊਂਟ ਜੋੜਨ ਨਾਲ ਤੁਹਾਨੂੰ ਤੁਹਾਡੇ ਆਨਲਾਈਨ ਫੋਟੋ, ਸੰਪਰਕ, ਮੇਲ ਅਤੇ ਹੋਰ ਚੀਜ਼ਾਂ ਨਾਲ ਸੌਖੀ "
-"ਤਰ੍ਹਾਂ ਕੁਨੈਕਟ ਕਰਨ "
+"ਅਕਾਊਂਟ ਜੋੜਨ ਨਾਲ ਤੁਹਾਨੂੰ ਤੁਹਾਡੇ ਆਨਲਾਈਨ ਫੋਟੋ, ਸੰਪਰਕ, ਮੇਲ ਅਤੇ ਹੋਰ ਚੀਜ਼ਾਂ ਨਾਲ ਸੌਖੀ ਤਰ੍ਹਾਂ ਕੁਨੈਕਟ ਕਰਨ "
 "ਲਈ ਮੱਦਦ ਮਿਲੇਗੀ।"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
@@ -318,7 +357,7 @@ msgid "_Add Account"
 msgstr "ਅਕਾਊਂਟ ਸ਼ਾਮਲ(_A)"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:181
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "…ਹੋਰ"
 
@@ -330,32 +369,41 @@ msgstr "ਕੋਈ ਇੰਪੁੱਟ ਸਰੋਤ ਨਹੀਂ ਲੱਭਾ"
 msgid "Other"
 msgstr "ਹੋਰ"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:166
-msgid "Input Sources"
-msgstr "ਇੰਪੁੱਟ ਸਰੋਤ"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#, fuzzy
+msgid "Keyboard Layouts"
+msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-#| msgid "Show Keyboard Layout"
 msgid "Select keyboard layouts"
 msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ ਚੁਣੋ"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-msgid "Add an Input Source"
-msgstr "ਇੰਪੁੱਟ ਸਰੋਤ ਸ਼ਾਮਲ ਕਰੋ"
+#, fuzzy
+msgid "Add a Keyboard Layout"
+msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:198
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
 msgstr "ਕੋਈ ਭਾਸ਼ਾ ਨਹੀਂ ਲੱਭੀ।"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:233
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
 msgid "Welcome"
 msgstr "ਜੀ ਆਇਆਂ ਨੂੰ"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:305
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "label"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
 msgid "Search for a location"
 msgstr "ਟਿਕਾਣਾ ਖੋਜੋ"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:361
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "Location"
 msgstr "ਟਿਕਾਣਾ"
@@ -371,6 +419,71 @@ msgstr "ਆਪਣਾ ਟਿਕਾਣਾ ਆਪਣੇ-ਆਪ ਲੱਭੋ(_D)"
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "Time Zone"
 msgstr "ਸਮਾਂ ਖੇਤਰ"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+#, fuzzy
+msgid "Network Time"
+msgstr "ਨੈੱਟਵਰਕ"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+msgid "16"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+msgid "45"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
+msgid ":"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
+msgid "January"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+msgid "February"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+msgid "March"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+msgid "April"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "May"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "June"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+msgid "July"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "August"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "September"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "October"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "November"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid "December"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:305
 msgctxt "Wireless access point"
@@ -397,13 +510,17 @@ msgstr "ਨੈੱਟਵਰਕ"
 msgid "Wireless Networks"
 msgstr "ਬੇਤਾਰ ਨੈੱਟਵਰਕ"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:349
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+#, fuzzy
+msgid "No wireless available"
+msgstr "ਨੈੱਟਵਰਕ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ।"
+
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
-#| msgid "_Start using GNOME 3"
 msgid "_Start using %s"
 msgstr "%s ਵਰਤਣਾ ਸ਼ੁਰੂ ਕਰੋ(_S)"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:375
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
 msgstr "ਧੰਨਵਾਦ ਜੀ"
 
@@ -418,6 +535,15 @@ msgstr "ਤੁਸੀਂ ਇਹ ਚੋਣਾਂ ਨੂੰ ਬਾਅਦ ਵਿੱ�
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "ਗਨੋਮ ੩ ਵਰਤਣਾ ਸ਼ੁਰੂ ਕਰੋ(_S)"
+
+#~ msgid "Strength: %s"
+#~ msgstr "ਮਜ਼ਬੂਤੀ: %s"
+
+#~ msgid "Input Sources"
+#~ msgstr "ਇੰਪੁੱਟ ਸਰੋਤ"
+
+#~ msgid "Add an Input Source"
+#~ msgstr "ਇੰਪੁੱਟ ਸਰੋਤ ਸ਼ਾਮਲ ਕਰੋ"
 
 #~ msgid "_Back"
 #~ msgstr "ਪਿੱਛੇ(_B)"
@@ -460,9 +586,6 @@ msgstr "ਗਨੋਮ ੩ ਵਰਤਣਾ ਸ਼ੁਰੂ ਕਰੋ(_S)"
 #~| msgid "_Local Account"
 #~ msgid "_Use Local Login"
 #~ msgstr "ਲੋਕਲ ਅਕਾਊਂਟ ਵਰਤੋਂ(_L)"
-
-#~ msgid "Keyboard Layout"
-#~ msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ"
 
 #~ msgid "Remove Input Source"
 #~ msgstr "ਇੰਪੁੱਟ ਸਰੋਤ ਹਟਾਓ"
