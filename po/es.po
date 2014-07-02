@@ -1,22 +1,23 @@
-# Spanish translation for gnome-initial-setup.
-# Copyright (C) 2012 gnome-initial-setup's COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome-initial-setup package.
-# Daniel Mustieles <daniel.mustieles@gmail.com>, 2012, 2013, 2014.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# c.sanchez <cassandra@endlessm.com>, 2014
+# Daniel Mustieles <daniel.mustieles@gmail.com>, 2012-2014
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-initial-setup master\n"
+"Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-11 19:49+0200\n"
-"PO-Revision-Date: 2014-02-27 17:42+0100\n"
-"Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
-"Language-Team: Español <gnome-es-list@gnome.org>\n"
-"Language: es\n"
+"POT-Creation-Date: 2014-06-16 15:05-0700\n"
+"PO-Revision-Date: 2014-07-01 17:48+0000\n"
+"Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Gtranslator 2.91.5\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
@@ -36,11 +37,11 @@ msgstr "_Anterior"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:238
+#: ../gnome-initial-setup/gnome-initial-setup.c:240
 msgid "Force new user mode"
 msgstr "Forzar el modo del nuevo usuario"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:242
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "- GNOME initial setup"
 msgstr "- Configuración inicial de GNOME"
 
@@ -99,11 +100,9 @@ msgstr "_Confirmar contraseña"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid ""
-"Try to use at least 8 different characters. Mix upper and lower case and use "
-"a number or two."
-msgstr ""
-"Pruebe a usar al menos 8 caracteres diferentes. Mezcle mayúsculas, "
-"minúsculas y uno o dos números"
+"Try to use at least 8 different characters. Mix upper and lower case and use"
+" a number or two."
+msgstr "Pruebe a usar al menos 8 caracteres diferentes. Mezcle mayúsculas, minúsculas y uno o dos números"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "A_utomatic Login"
@@ -143,11 +142,7 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
-"Para usar los inicios de sesión empresariales, este equipo debe estar\n"
-"incluido en el dominio. Pida al administrador de su red que escriba\n"
-"aquí la contraseña del dominio y elija un nombre de equipo único\n"
-"para su equipo."
+msgstr "Para usar los inicios de sesión empresariales, este equipo debe estar\nincluido en el dominio. Pida al administrador de su red que escriba\naquí la contraseña del dominio y elija un nombre de equipo único\npara su equipo."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "_Computer"
@@ -235,11 +230,46 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
+msgstr "El nombre de usuario debe consistir de:\n ➣ letras del alfabeto inglés\n ➣ dígitos\n ➣ cualquiera de los caracteres «.», «-» y «_»"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:74
+msgid ""
+"Endless collects metrics on user behavior and actions.\n"
+"All data sent is anonymous.\n"
+"We use the data to improve the system."
+msgstr "Endless colecciona métricos de la conducta y de las acciones de los usuarios.\nToda la información se manda anónimamente.\nUsamos la información para mejorar el sistema."
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:99
+msgid "Privacy Policy"
+msgstr "Política de privacidad"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:157
+msgid "Privacy and License Agreements"
+msgstr "Privacidad y condiciones"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
+msgid "Enable metrics collection."
+msgstr "Permite colección de métricos"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+msgid ""
+"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+msgstr "<a href='metrics-privacy-policy'>Haz clic aquí</a> para ver nuestra política de privacidad"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Third-party Software"
+msgstr "Software de terceros"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"Endless uses third-party software to display Flash, MP3 and other media. "
+"Some of this software is closed-source. The software is subject to the "
+"license terms included with the software's documentation."
 msgstr ""
-"El nombre de usuario debe consistir de:\n"
-" ➣ letras del alfabeto inglés\n"
-" ➣ dígitos\n"
-" ➣ cualquiera de los caracteres «.», «-» y «_»"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "I agree to the license terms"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -250,9 +280,7 @@ msgstr "Acuerdo de licencia"
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr ""
-"He leído y _acepto los términos y las condiciones de este contrato de "
-"licencia del usuario final."
+msgstr "He leído y _acepto los términos y las condiciones de este contrato de licencia del usuario final."
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
@@ -312,9 +340,7 @@ msgstr "Conectarse a sus datos en la nube"
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr ""
-"Añadir cuentas le permite conectarse de manera transparente a sus "
-"aplicaciones en línea de fotos, contactos, correo-e y más."
+msgstr "Añadir cuentas le permite conectarse de manera transparente a sus aplicaciones en línea de fotos, contactos, correo-e y más."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
@@ -388,15 +414,15 @@ msgstr "Hora de red"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "45"
-msgstr ""
+msgstr "45"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "January"
@@ -495,122 +521,3 @@ msgstr "Puede cambiar estas opciones en cualquier momento en Configuración."
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Empezar a usar GNOME 3"
-
-#~ msgid "Input Sources"
-#~ msgstr "Fuentes de entrada"
-
-#~ msgid "Add an Input Source"
-#~ msgstr "Añadir fuente de entrada"
-
-#~ msgid "Strength: %s"
-#~ msgstr "Fuerza: %s"
-
-#~ msgid "Login settings are used by all users when logging into the system"
-#~ msgstr ""
-#~ "La configuración de inicio de sesión la usan todos los usuarios cuando "
-#~ "inician sesión en el sistema"
-
-#~ msgid "Select input sources"
-#~ msgstr "Seleccionar las fuentes de entrada"
-
-#~ msgid "_Back"
-#~ msgstr "A_trás"
-
-#~ msgid "Sorry"
-#~ msgstr "Disculpe"
-
-#~ msgid "Input methods can't be used on the login screen"
-#~ msgstr ""
-#~ "Los métodos de entrada no se pueden usar en la pantalla de inicio de "
-#~ "sesión"
-
-#~ msgid "No input source selected"
-#~ msgstr "No se ha seleccionado ninguna fuente de entrada"
-
-#~ msgid "Your session needs to be restarted for changes to take effect"
-#~ msgstr "Debe reiniciar la sesión para que se apliquen los cambios"
-
-#~ msgid "Restart Now"
-#~ msgstr "Reiniciar ahora"
-
-#~ msgctxt "Language"
-#~ msgid "None"
-#~ msgstr "Ninguno"
-
-#~ msgid "Select an input source"
-#~ msgstr "Seleccionar una fuente de entrada"
-
-#~ msgid "Unspecified"
-#~ msgstr "No especificado"
-
-#~ msgid "Use _Enterprise Login"
-#~ msgstr "Usar inicio de s_esión corporativo"
-
-#~ msgid "_Use Local Login"
-#~ msgstr "_Usar inicio de sesión local"
-
-#~ msgid "Remove Input Source"
-#~ msgstr "Quitar fuente de entrada"
-
-#~ msgid "Move Input Source Up"
-#~ msgstr "Subir fuente de entrada"
-
-#~ msgid "English"
-#~ msgstr "Inglés"
-
-#~ msgid "British English"
-#~ msgstr "Inglés británico"
-
-#~ msgid "German"
-#~ msgstr "Alemán"
-
-#~ msgid "French"
-#~ msgstr "Francés"
-
-#~ msgid "Spanish"
-#~ msgstr "Español"
-
-#~ msgid "Chinese (simplified)"
-#~ msgstr "Chino (simplificado)"
-
-#~ msgid "Use %s"
-#~ msgstr "Usar %s"
-
-#~ msgid "_Login Name"
-#~ msgstr "Nombre de _inicio de sesión"
-
-#~ msgid "Link other accounts"
-#~ msgstr "Enlazar otras cuentas"
-
-#~ msgid "Remove"
-#~ msgstr "Quitar"
-
-#~ msgid "Enjoy GNOME!"
-#~ msgstr "Disfrute de GNOME"
-
-#~ msgid "New to GNOME 3 and need help finding your way around?"
-#~ msgstr "¿Es nuevo en GNOME 3 y necesita buscar ayuda para empezar?"
-
-#~ msgid "_Take a Tour"
-#~ msgstr "_Hacer un tour"
-
-#~ msgid "Choose How to Login"
-#~ msgstr "Elegir cómo iniciar sesión"
-
-#~ msgid "Show _all"
-#~ msgstr "Mostrar _todos"
-
-#~ msgid "_Require a password to use this account"
-#~ msgstr "_Requerir una contraseña para usar esta cuenta"
-
-#~ msgid "_Act as administrator of this computer"
-#~ msgstr "_Actuar como administrador de este equipo"
-
-#~ msgid "Disable image"
-#~ msgstr "Desactivar imagen"
-
-#~ msgid "Take a photo..."
-#~ msgstr "Tomar una foto…"
-
-#~ msgid "_Done"
-#~ msgstr "_Hecho"
