@@ -5,9 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"initial-setup&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-29 20:13+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-02 12:21-0700\n"
 "PO-Revision-Date: 2013-09-04 10:19+0200\n"
 "Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: Serbian <gnom@prevod.org>\n"
@@ -15,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : "
-"n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
@@ -24,58 +23,53 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "Почетно подешавање"
 
-#: ../gnome-initial-setup/gis-assistant.c:396
+#: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
 msgstr "_Следеће"
 
-#: ../gnome-initial-setup/gis-assistant.c:397
+#: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
 msgstr "_Претходно"
 
-#: ../gnome-initial-setup/gis-assistant.c:398
+#: ../gnome-initial-setup/gis-assistant.c:417
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_Откажи"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:220
+#: ../gnome-initial-setup/gnome-initial-setup.c:241
 msgid "Force new user mode"
 msgstr "Приморај режим новог корисника"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:224
+#: ../gnome-initial-setup/gnome-initial-setup.c:245
 msgid "- GNOME initial setup"
 msgstr "— Почетно подешавање Гнома"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 msgid "No password"
 msgstr "Без лозинке"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:436
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
 msgid "Passwords do not match"
 msgstr "Лозинке се не подударају"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:383
-#, c-format
-msgid "Strength: %s"
-msgstr "Јачина: %s"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:510
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
 msgid "Failed to register account"
 msgstr "Нисам успео да упишем налог"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:718
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
 msgid "No supported way to authenticate with this domain"
 msgstr "Нема подржаног начина за потврђивање идентитета са овим доменом"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
 msgid "Failed to join domain"
 msgstr "Нисам успео да приступим домену"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:826
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
 msgid "Failed to log into domain"
 msgstr "Нисам успео да се пријавим на домен"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1211
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
 msgid "Login"
 msgstr "Пријава"
 
@@ -113,30 +107,38 @@ msgstr ""
 "слова и користите један број или два."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "A_utomatic Login"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid "Enable _Shared Account"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr "страница 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "Create an Enterprise Account"
 msgstr "Направите пословни налог"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "_Domain"
 msgstr "_Домен"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Enterprise domain or realm name"
 msgstr "Пословни домен или назив подручја"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "C_ontinue"
 msgstr "_Настави"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Domain Administrator Login"
 msgstr "Пријављивање администратора домена"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -147,15 +149,15 @@ msgstr ""
 "уписан у домену. Нека администратор ваше мреже овде упише лозинку\n"
 "њихових домена, и да изабере јединствени назив за ваш рачунар."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "_Computer"
 msgstr "_Рачунар"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator _Name"
 msgstr "Име _администратора"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "Administrator Password"
 msgstr "Лозинка администратора"
 
@@ -228,11 +230,6 @@ msgid "The username cannot start with a '-'"
 msgstr "Корисничко име не може почети са „-“"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:158
-#| msgid ""
-#| "The username must consist of:\n"
-#| " ➣ letters from the English alphabet\n"
-#| " ➣ digits\n"
-#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -243,6 +240,46 @@ msgstr ""
 " ➣ слова из енглеског алфабета\n"
 " ➣ бројеве\n"
 " ➣ било који од знакова: . - _"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+msgid ""
+"Endless collects metrics on user behavior and actions.\n"
+"All data sent is anonymous.\n"
+"We use the data to improve the system."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+msgid "Privacy Policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#, fuzzy
+msgid "Privacy and License Agreements"
+msgstr "Уговор о коришћењу"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
+msgid "Enable metrics collection."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+msgid ""
+"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Third-party Software"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"Endless uses third-party software to display Flash, MP3 and other media. "
+"Some of this software is closed-source. The software is subject to the "
+"license terms included with the software's documentation."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "I agree to the license terms"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -257,7 +294,6 @@ msgstr ""
 "Слажем се са _одредбама и условима о коришћењу наведеним у овој лиценци."
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
-#| msgid "Other"
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Друго"
@@ -283,27 +319,27 @@ msgstr "Ћаскање"
 msgid "Resources"
 msgstr "Изворишта"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:127
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
 msgstr "Грешка у стварању налога"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:157
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
 msgstr "Грешка у уклањању налога"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:183
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
 msgstr "Да ли сте сигурни да желите да уклоните налог?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:185
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
 msgstr "Ово неће уклонити налог на серверу."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:186
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
 msgstr "_Уклони"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:448
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
 msgstr "Налози на мрежи"
 
@@ -324,7 +360,7 @@ msgid "_Add Account"
 msgstr "_Додај налог"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:181
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "Још…"
 
@@ -336,36 +372,41 @@ msgstr "Нисам пронашао изворе улаза"
 msgid "Other"
 msgstr "Друго"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:166
-msgid "Input Sources"
-msgstr "Извори улаза"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#, fuzzy
+msgid "Keyboard Layouts"
+msgstr "Изаберите распореде тастатуре"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
 msgstr "Изаберите распореде тастатуре"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-msgid "Login settings are used by all users when logging into the system"
-msgstr ""
-"Подешавања пријављивања користе сви корисници када се пријављују на систем"
-
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-msgid "Add an Input Source"
-msgstr "Додајте извор улаза"
+#, fuzzy
+msgid "Add a Keyboard Layout"
+msgstr "Изаберите распореде тастатуре"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:198
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
 msgstr "Нисам пронашао језик"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:233
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
 msgid "Welcome"
 msgstr "Добродошли"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:305
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "label"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
 msgid "Search for a location"
 msgstr "Потражите место"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:361
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "Location"
 msgstr "Место"
@@ -381,6 +422,71 @@ msgstr "_Сам одреди моје место"
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "Time Zone"
 msgstr "Временска зона"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+#, fuzzy
+msgid "Network Time"
+msgstr "Мрежа"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+msgid "16"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+msgid "45"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
+msgid ":"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
+msgid "January"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+msgid "February"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+msgid "March"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+msgid "April"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "May"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "June"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+msgid "July"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "August"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "September"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "October"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "November"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid "December"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:305
 msgctxt "Wireless access point"
@@ -408,13 +514,17 @@ msgstr "Мрежа"
 msgid "Wireless Networks"
 msgstr "Бежичне мреже"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:349
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+#, fuzzy
+msgid "No wireless available"
+msgstr "Мрежа није доступна."
+
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
-#| msgid "_Start using GNOME 3"
 msgid "_Start using %s"
 msgstr "_Почни да користиш %s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:375
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
 msgstr "Хвала вам"
 
@@ -429,3 +539,16 @@ msgstr "Ове поставке можете да измените било ка
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Почни да користиш Гном 3"
+
+#~ msgid "Strength: %s"
+#~ msgstr "Јачина: %s"
+
+#~ msgid "Input Sources"
+#~ msgstr "Извори улаза"
+
+#~ msgid "Login settings are used by all users when logging into the system"
+#~ msgstr ""
+#~ "Подешавања пријављивања користе сви корисници када се пријављују на систем"
+
+#~ msgid "Add an Input Source"
+#~ msgstr "Додајте извор улаза"

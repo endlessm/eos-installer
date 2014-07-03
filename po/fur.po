@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup gnome-3-6\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"initial-setup&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-08-15 13:52+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-02 12:21-0700\n"
 "PO-Revision-Date: 2013-08-25 11:29+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <fur@li.org>\n"
@@ -23,60 +22,53 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "Impostazions Iniziai"
 
-#: ../gnome-initial-setup/gis-assistant.c:389
+#: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
 msgstr "_Indenant"
 
-#: ../gnome-initial-setup/gis-assistant.c:390
+#: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
 msgstr "_Precedent"
 
-#: ../gnome-initial-setup/gis-assistant.c:391
+#: ../gnome-initial-setup/gis-assistant.c:417
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_Anule"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:220
+#: ../gnome-initial-setup/gnome-initial-setup.c:241
 msgid "Force new user mode"
 msgstr "Sfuarçâ modalitât gnûf utent"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:224
-#| msgid "Initial Setup"
+#: ../gnome-initial-setup/gnome-initial-setup.c:245
 msgid "- GNOME initial setup"
 msgstr "- Impostazions Iniziai di GNOME"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
-#| msgid "_Password"
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 msgid "No password"
 msgstr "No password"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:434
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
 msgid "Passwords do not match"
 msgstr "Lis password a no corispuindin"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:383
-#, c-format
-msgid "Strength: %s"
-msgstr "Fuarce: %s"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:509
-#| msgid "Link other accounts"
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
 msgid "Failed to register account"
 msgstr "Regjistrazion account falide"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:712
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:751
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
 msgid "Failed to join domain"
 msgstr "Falît tal zontâsi al domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:818
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
 msgid "Failed to log into domain"
 msgstr "Acès tal domini falît"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1197
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
 msgid "Login"
 msgstr "Acès"
 
@@ -103,7 +95,6 @@ msgid "_Password"
 msgstr "_Password"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-#| msgid "_Confirm Password"
 msgid "_Confirm password"
 msgstr "_Ribat le Password"
 
@@ -116,31 +107,38 @@ msgstr ""
 "e dopre un numar o doi."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "A_utomatic Login"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid "Enable _Shared Account"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr "pagjine 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-#| msgid "Create a Local Account"
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "Create an Enterprise Account"
 msgstr "Cree un Accout Enterprise"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "_Domain"
 msgstr "_Domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Enterprise domain or realm name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "C_ontinue"
 msgstr "C_ontinue"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Domain Administrator Login"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -148,16 +146,15 @@ msgid ""
 "name for your computer."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "_Computer"
 msgstr "_Computer"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator _Name"
 msgstr "_Non aministradôr"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
-#| msgid "_Confirm Password"
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "Administrator Password"
 msgstr "Password di aministradôr"
 
@@ -230,11 +227,6 @@ msgid "The username cannot start with a '-'"
 msgstr "Il username nol pues tacâ cun '-'"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:158
-#| msgid ""
-#| "The username must consist of:\n"
-#| " ➣ letters from the English alphabet\n"
-#| " ➣ digits\n"
-#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -246,7 +238,47 @@ msgstr ""
 " ➣ numars\n"
 " ➣ cualsisei di chescj caratars '.', '-' e '_'"
 
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:323
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+msgid ""
+"Endless collects metrics on user behavior and actions.\n"
+"All data sent is anonymous.\n"
+"We use the data to improve the system."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+msgid "Privacy Policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#, fuzzy
+msgid "Privacy and License Agreements"
+msgstr "Acuardi di licenze"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
+msgid "Enable metrics collection."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+msgid ""
+"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Third-party Software"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"Endless uses third-party software to display Flash, MP3 and other media. "
+"Some of this software is closed-source. The software is subject to the "
+"license terms included with the software's documentation."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "I agree to the license terms"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
 msgstr "Acuardi di licenze"
@@ -259,32 +291,54 @@ msgstr ""
 "O _aceti i tiermins e lis condizions di chest acuardi di licenze da l'utent "
 "finâl."
 
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
+#, fuzzy
+msgctxt "Online Account"
+msgid "Other"
+msgstr "Altri"
+
 #. translators: This is the title of the "Add Account" dialog.
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:253
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
 msgstr "Zonte un Account"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:106
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
+msgid "Mail"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
+msgid "Contacts"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
+msgid "Resources"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
 msgstr "Erôr tal creà l'account"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:138
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
 msgstr "Erôr tal rimovi l'account"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:164
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
 msgstr "Sêstu sigûr di rimovi l'account?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:166
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
 msgstr "Chest a nol gjavarà l'account tal server."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:167
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
 msgstr "_Rimôf"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:429
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
 msgstr "Account online"
 
@@ -301,58 +355,57 @@ msgstr ""
 "foto in rêt, contats, mail e altri."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
-#| msgid "Add Account"
 msgid "_Add Account"
 msgstr "Zonte un _Account"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:181
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "Ancjemò..."
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
-#| msgid "No network devices found."
 msgid "No input sources found"
 msgstr "Nissune sorzint di input cjatade"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
-#| msgctxt "Wireless access point"
-#| msgid "Other..."
 msgid "Other"
 msgstr "Altri"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:167
-msgid "Input Sources"
-msgstr "Sorzints input"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#, fuzzy
+msgid "Keyboard Layouts"
+msgstr "Selezione disposizion tastiere"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
 msgstr "Selezione disposizion tastiere"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-#, fuzzy
-msgid "Login settings are used by all users when logging into the system"
-msgstr ""
-"Lis impostazions di acès a son dopradis di ducj i utents cuant che a jentrin "
-"tal sisteme"
-
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-msgid "Add an Input Source"
-msgstr "Zonte une sorzint di input"
+#, fuzzy
+msgid "Add a Keyboard Layout"
+msgstr "Selezione disposizion tastiere"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:198
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
 msgstr "Nissune lenghe cjatade"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:236
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
 msgid "Welcome"
 msgstr "Benvignût"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:301
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "label"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
 msgid "Search for a location"
 msgstr "Cîr une posizion"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:357
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "Location"
 msgstr "Posizion"
@@ -369,26 +422,89 @@ msgstr "_Determine la tô posizion in automatic."
 msgid "Time Zone"
 msgstr "Fûs orari"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:306
-#| msgctxt "Wireless access point"
-#| msgid "Other..."
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+#, fuzzy
+msgid "Network Time"
+msgstr "Rêt"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+msgid "16"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+msgid "45"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
+msgid ":"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
+msgid "January"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+msgid "February"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+msgid "March"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+msgid "April"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "May"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "June"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+msgid "July"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "August"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "September"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "October"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "November"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid "December"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:305
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Altri..."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:344
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:343
 msgid "Network is not available."
 msgstr "Rêt no disponibil."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:346
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:345
 msgid "No network devices found."
 msgstr "Nissun argagn di rêt cjatât."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:396
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:395
 msgid "Checking for available wireless networks"
 msgstr "Verifiche des rêts wireless disponibilis."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:648
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:647
 msgid "Network"
 msgstr "Rêt"
 
@@ -396,24 +512,25 @@ msgstr "Rêt"
 msgid "Wireless Networks"
 msgstr "Rêts Wireless"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:349
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+#, fuzzy
+msgid "No wireless available"
+msgstr "Rêt no disponibil."
+
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, fuzzy, c-format
-#| msgid "_Start using GNOME 3"
 msgid "_Start using %s"
 msgstr "_Tache a doprâ GNOME 3"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:375
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
 msgstr "Gracie"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
-#| msgid "Your new account is ready to use."
 msgid "Your computer is ready to use."
 msgstr "Il tô computer al è pront par jessi doprât."
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
-#| msgid ""
-#| "You may change any of these options at any time in the System Settings."
 msgid "You may change these options at any time in Settings."
 msgstr ""
 "Tu puedis cambiâ dutis lis opzions cuant che tu vûs in Impostazions di "
@@ -422,6 +539,21 @@ msgstr ""
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Tache a doprâ GNOME 3"
+
+#~ msgid "Strength: %s"
+#~ msgstr "Fuarce: %s"
+
+#~ msgid "Input Sources"
+#~ msgstr "Sorzints input"
+
+#, fuzzy
+#~ msgid "Login settings are used by all users when logging into the system"
+#~ msgstr ""
+#~ "Lis impostazions di acès a son dopradis di ducj i utents cuant che a "
+#~ "jentrin tal sisteme"
+
+#~ msgid "Add an Input Source"
+#~ msgstr "Zonte une sorzint di input"
 
 #~ msgid "_Back"
 #~ msgstr "_Indaûr"

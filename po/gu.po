@@ -5,9 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug."
-"cgi?product=gnome-initial-setup&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-07-18 11:38+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-02 12:21-0700\n"
 "PO-Revision-Date: 2013-07-26 13:57+0530\n"
 "Last-Translator: \n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -23,57 +22,53 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "પ્રારંભિક સુયોજન"
 
-#: ../gnome-initial-setup/gis-assistant.c:389
+#: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
 msgstr "આગળ (_N)"
 
-#: ../gnome-initial-setup/gis-assistant.c:390
+#: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
 msgstr "પહેલાંનુ (_P)"
 
-#: ../gnome-initial-setup/gis-assistant.c:391
+#: ../gnome-initial-setup/gis-assistant.c:417
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "રદ કરો (_C)"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:220
+#: ../gnome-initial-setup/gnome-initial-setup.c:241
 msgid "Force new user mode"
 msgstr "નવી વપરાશકર્તા સ્થિતિ પર દબાણ કરો"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:224
+#: ../gnome-initial-setup/gnome-initial-setup.c:245
 msgid "- GNOME initial setup"
 msgstr "- GNOME પ્રારંભિક સુયોજન"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 msgid "No password"
 msgstr "પાસવર્ડ નથી"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:434
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
 msgid "Passwords do not match"
 msgstr "પાસવર્ડો બંધબેસતા નથી"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:383
-#, c-format
-msgid "Strength: %s"
-msgstr "મજબૂતાઈ: %s"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:509
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
 msgid "Failed to register account"
 msgstr "ખાતાને રજીસ્ટર કરવામાં નિષ્ફળ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:712
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
 msgid "No supported way to authenticate with this domain"
 msgstr "આ ડોમેઇન સાથે આ રીતે સત્તાધિકરણ કરવાનું આધારભૂત નથી"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:751
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
 msgid "Failed to join domain"
 msgstr "ડોમેઇન સાથે જોડાવામાં નિષ્ફળ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:818
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
 msgid "Failed to log into domain"
 msgstr "ડોમેઇનમાં પ્રવેશ કરવામાં નિષ્ફળતા"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1197
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
 msgid "Login"
 msgstr "પ્રવેશ"
 
@@ -110,30 +105,38 @@ msgstr ""
 "એક નંબર અથવા બેને વાપરો."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "A_utomatic Login"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid "Enable _Shared Account"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr "પાનું 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "Create an Enterprise Account"
 msgstr "એન્ટરપ્રાઇઝ ખાતાને બનાવો"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "_Domain"
 msgstr "ડોમેઇન (_D)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Enterprise domain or realm name"
 msgstr "એન્ટરપ્રાઇઝ ડોમેઇન અથવા ક્ષેત્ર નામ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "C_ontinue"
 msgstr "ચાલુ રાખો (_o)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Domain Administrator Login"
 msgstr "ડોમેઇન સંચાલક પ્રવેશ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -144,15 +147,15 @@ msgstr ""
 "કરવાની જરૂર છે. મહેરબાની કરીને તમારુ નેટવર્ક સંચાલકને લઇને તેનાં ડોમેઇન પાસવર્ડને અહિં ટાઇપ\n"
 "કરો, અને તમારાં કમ્પ્યૂટર માટે અનન્ય કમ્પ્યૂટર નામને પસંદ કરો."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "_Computer"
 msgstr "કમ્પ્યૂટર (_C)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator _Name"
 msgstr "સંચાલક નામ (_N)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "Administrator Password"
 msgstr "સંચાલક પાસવર્ડ"
 
@@ -236,37 +239,105 @@ msgstr ""
 " ➣ આંકડા\n"
 " ➣ '.', '-' અને '_' અક્ષરોમાંનુ કોઇપણ"
 
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:323
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+msgid ""
+"Endless collects metrics on user behavior and actions.\n"
+"All data sent is anonymous.\n"
+"We use the data to improve the system."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+msgid "Privacy Policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#, fuzzy
+msgid "Privacy and License Agreements"
+msgstr "લાઇસન્સ સંમતિ"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
+msgid "Enable metrics collection."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+msgid ""
+"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Third-party Software"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"Endless uses third-party software to display Flash, MP3 and other media. "
+"Some of this software is closed-source. The software is subject to the "
+"license terms included with the software's documentation."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "I agree to the license terms"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
 msgstr "લાઇસન્સ સંમતિ"
 
+#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
+msgid ""
+"I have _agreed to the terms and conditions in this end user license "
+"agreement."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
+#, fuzzy
+msgctxt "Online Account"
+msgid "Other"
+msgstr "બીજુ"
+
 #. translators: This is the title of the "Add Account" dialog.
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:253
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
 msgstr "ખાતુ ઉમેરો"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:106
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
+msgid "Mail"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
+msgid "Contacts"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
+msgid "Chat"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
+msgid "Resources"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
 msgstr "ખાતાને બનાવતી વખતે ભૂલ"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:138
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
 msgstr "ખાતાને દૂર કરી રહ્યા હોય ત્યારે ભૂલ"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:164
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
 msgstr "શું તમે ખરેખર ખાતાને દૂર કરવા માંગો છો?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:166
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
 msgstr "આ સર્વર પર ખાતાને દૂર કરશે નહિં."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:167
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
 msgstr "દૂર કરો (_R)"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:429
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
 msgstr "ઓનલાઇન ખાતા"
 
@@ -287,7 +358,7 @@ msgid "_Add Account"
 msgstr "ખાતાને ઉમેરો (_A)"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:181
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "વધારે…"
 
@@ -299,35 +370,39 @@ msgstr "ઇનપુટ સ્ત્રોત મળ્યા નથી"
 msgid "Other"
 msgstr "બીજુ"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:167
-msgid "Input Sources"
-msgstr "ઇનપુટ સ્ત્રોત"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+msgid "Keyboard Layouts"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select input sources"
-msgstr "ઇનપુટ સ્ત્રોતને પસંદ કરો"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-msgid "Login settings are used by all users when logging into the system"
-msgstr "બધા વપરાશકર્તાઓ દ્દારા પ્રવેશ સુયોજનો વાપરેલ છે જ્યારે સિસ્ટમમાં પ્રવેશી રહ્યા છે"
+msgid "Select keyboard layouts"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-msgid "Add an Input Source"
-msgstr "ઇનપુટ સ્ત્રોત ઉમેરો "
+msgid "Add a Keyboard Layout"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:198
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
 msgstr "ભાષાઓ મળી નથી"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:218
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
 msgid "Welcome"
 msgstr "સ્વાગત"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:301
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "label"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
 msgid "Search for a location"
 msgstr "સ્થાન માટે શોધો"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:357
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "Location"
 msgstr "સ્થાન"
@@ -344,24 +419,89 @@ msgstr "આપમેળે તમારા સ્થાનને નક્કી
 msgid "Time Zone"
 msgstr "ટાઈમ ઝોન"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:306
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+#, fuzzy
+msgid "Network Time"
+msgstr "નેટવર્ક"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+msgid "16"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+msgid "45"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
+msgid ":"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
+msgid "January"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+msgid "February"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+msgid "March"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+msgid "April"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "May"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "June"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+msgid "July"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "August"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "September"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "October"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "November"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid "December"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:305
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "બીજું..."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:344
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:343
 msgid "Network is not available."
 msgstr "નેટવર્ક ઉપલબ્ધ નથી."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:346
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:345
 msgid "No network devices found."
 msgstr "નેટવર્ક ઉપકરણો મળ્યા નથી."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:396
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:395
 msgid "Checking for available wireless networks"
 msgstr "ઉપલબ્ધ વાયરલેસ નેટવર્ક માટે ચકાસી રહ્યા છે"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:648
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:647
 msgid "Network"
 msgstr "નેટવર્ક"
 
@@ -369,7 +509,17 @@ msgstr "નેટવર્ક"
 msgid "Wireless Networks"
 msgstr "વાયરલેસ નેટવર્ક"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:318
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+#, fuzzy
+msgid "No wireless available"
+msgstr "નેટવર્ક ઉપલબ્ધ નથી."
+
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
+#, fuzzy, c-format
+msgid "_Start using %s"
+msgstr "GNOME 3 મદદથી શરૂ કરો (_S)"
+
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
 msgstr "તમારો આભાર"
 
@@ -384,6 +534,21 @@ msgstr "તમે સુયોજનોમાં કોઇપણ સમયે �
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "GNOME 3 મદદથી શરૂ કરો (_S)"
+
+#~ msgid "Strength: %s"
+#~ msgstr "મજબૂતાઈ: %s"
+
+#~ msgid "Input Sources"
+#~ msgstr "ઇનપુટ સ્ત્રોત"
+
+#~ msgid "Select input sources"
+#~ msgstr "ઇનપુટ સ્ત્રોતને પસંદ કરો"
+
+#~ msgid "Login settings are used by all users when logging into the system"
+#~ msgstr "બધા વપરાશકર્તાઓ દ્દારા પ્રવેશ સુયોજનો વાપરેલ છે જ્યારે સિસ્ટમમાં પ્રવેશી રહ્યા છે"
+
+#~ msgid "Add an Input Source"
+#~ msgstr "ઇનપુટ સ્ત્રોત ઉમેરો "
 
 #~ msgid "_Back"
 #~ msgstr "પાછળ (_B)"

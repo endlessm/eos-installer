@@ -6,9 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"initial-setup&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-18 20:38+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-02 12:21-0700\n"
 "PO-Revision-Date: 2013-09-19 20:38+0300\n"
 "Last-Translator: Mattias Põldaru <mahfiaz@gmail.com>\n"
 "Language-Team: Estonian <gnome-et-list@gnome.org>\n"
@@ -19,68 +18,87 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.5.4\n"
 
+#: ../data/gnome-initial-setup.desktop.in.in.h:1
+#: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
 msgstr "Esialgne seadistus"
 
+#: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
 msgstr "_Edasi"
 
+#: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
 msgstr "_Eelmine"
 
+#: ../gnome-initial-setup/gis-assistant.c:417
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_Loobu"
 
+#: ../gnome-initial-setup/gnome-initial-setup.c:241
 msgid "Force new user mode"
 msgstr "Uue kasutaja režiimi sundimine"
 
+#: ../gnome-initial-setup/gnome-initial-setup.c:245
 msgid "- GNOME initial setup"
 msgstr "- GNOME esialgne seadistus"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 msgid "No password"
 msgstr "Parooli pole"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
 msgid "Passwords do not match"
 msgstr "Paroolid ei kattu"
 
-#, c-format
-msgid "Strength: %s"
-msgstr "Tugevus: %s"
-
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
 msgid "Failed to register account"
 msgstr "Konto registreerimine nurjus"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
 msgid "No supported way to authenticate with this domain"
 msgstr "Pole ühtegi toetatud viisi, kuidas end selles domeenis autentida"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
 msgid "Failed to join domain"
 msgstr "Domeeniga liitumine nurjus"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
 msgid "Failed to log into domain"
 msgstr "Domeeni sisselogimine nurjus"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
 msgid "Login"
 msgstr "Logi sisse"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Local Account"
 msgstr "Kohaliku konto loomine"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid "_Full Name"
 msgstr "_Täisnimi"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Username"
 msgstr "_Kasutajanimi"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "This will be used to name your home folder and can't be changed."
 msgstr ""
 "Selle järgi saab nime sinu kodukataloog ning seda pole võimalik hiljem muuta."
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Password"
 msgstr "_Parool"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Confirm password"
 msgstr "_Parooli kinnitus"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid ""
 "Try to use at least 8 different characters. Mix upper and lower case and use "
 "a number or two."
@@ -88,24 +106,39 @@ msgstr ""
 "Kasuta vähemalt 8 erinevat märki. Kasuta vaheldumisi suur- ja väiketähti "
 "ning lisa mõni number."
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "A_utomatic Login"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid "Enable _Shared Account"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr "leht 1"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "Create an Enterprise Account"
 msgstr "Ettevõtte konto loomine"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "_Domain"
 msgstr "_Domeen"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Enterprise domain or realm name"
 msgstr "Ettevõtte domeen või valduse (realm) nimi"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "C_ontinue"
 msgstr "_Jätka"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Domain Administrator Login"
 msgstr "Domeeni halduri sisselogimine"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -117,68 +150,87 @@ msgstr ""
 "halduriga ning lase tal domeeni parool siia sisestada ning\n"
 "vali arvutile unikaalne nimi."
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "_Computer"
 msgstr "_Arvuti"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator _Name"
 msgstr "Halduri _nimi"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "Administrator Password"
 msgstr "Halduri parool"
 
+#: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
 msgid "Too short"
 msgstr "Liiga lühike"
 
+#: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
 msgstr "Pole piisavalt hea"
 
+#: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
 msgid "Weak"
 msgstr "Nõrk"
 
+#: ../gnome-initial-setup/pages/account/pw-utils.c:111
 msgctxt "Password strength"
 msgid "Fair"
 msgstr "Piisav"
 
+#: ../gnome-initial-setup/pages/account/pw-utils.c:114
 msgctxt "Password strength"
 msgid "Good"
 msgstr "Hea"
 
+#: ../gnome-initial-setup/pages/account/pw-utils.c:117
 msgctxt "Password strength"
 msgid "Strong"
 msgstr "Tugev"
 
+#: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
 msgstr "Seda liiki domeeniga pole võimalik automaatselt liituda"
 
+#: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
 msgid "No such domain or realm found"
 msgstr "Sellist domeeni või valdust (realm) ei leitud"
 
+#: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
+#: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Kasutajana %s polnud võimalik %s domeeni sisse logida"
 
+#: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
 msgstr "Vale parool. Palun proovi uuesti."
 
+#: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "%s domeeniga pole võimalik ühenduda: %s"
 
+#: ../gnome-initial-setup/pages/account/um-utils.c:148
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Kasutajanimi '%s' on juba kasutusel"
 
+#: ../gnome-initial-setup/pages/account/um-utils.c:152
 #, c-format
 msgid "The username is too long"
 msgstr "Kasutajanimi on liiga pikk"
 
+#: ../gnome-initial-setup/pages/account/um-utils.c:155
 msgid "The username cannot start with a '-'"
 msgstr "Kasutajanimi ei saa alata märgiga '-'"
 
+#: ../gnome-initial-setup/pages/account/um-utils.c:158
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -190,55 +242,112 @@ msgstr ""
 " ➣ numbrid\n"
 " ➣ märgid '.', '-' ja '_'"
 
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+msgid ""
+"Endless collects metrics on user behavior and actions.\n"
+"All data sent is anonymous.\n"
+"We use the data to improve the system."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+msgid "Privacy Policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#, fuzzy
+msgid "Privacy and License Agreements"
+msgstr "Litsentsileping"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
+msgid "Enable metrics collection."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+msgid ""
+"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Third-party Software"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"Endless uses third-party software to display Flash, MP3 and other media. "
+"Some of this software is closed-source. The software is subject to the "
+"license terms included with the software's documentation."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "I agree to the license terms"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
+#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
 msgstr "Litsentsileping"
 
+#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
 msgstr "Ma _nõustun lõppkasutaja litsentsi sätete ja tingimustega."
 
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Muu"
 
 #. translators: This is the title of the "Add Account" dialog.
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
 msgstr "Konto lisamine"
 
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
 msgstr "E-mail"
 
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
 msgstr "Kontaktid"
 
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
 msgstr "Vestlus"
 
+#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
 msgstr "Ressursid"
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
 msgstr "Viga konto loomisel"
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
 msgstr "Viga konto eemaldamisel"
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
 msgstr "Kas sa oled kindel, et tahad konto eemaldada?"
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
 msgstr "See eemaldab serverist selle konto."
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
 msgstr "_Eemalda"
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
 msgstr "Veebikontod"
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
 msgstr "Pilves asuvate andmete ühendamine"
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
@@ -246,88 +355,201 @@ msgstr ""
 "Kontode lisamine võimaldab kasutada veebis asuvaid piltide, kontakte, e-"
 "posti ja muud."
 
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
 msgstr "_Lisa konto"
 
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "Veel…"
 
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Ühtegi sisendallikat ei leitud"
 
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
 msgid "Other"
 msgstr "Muu"
 
-msgid "Input Sources"
-msgstr "Sisendid"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#, fuzzy
+msgid "Keyboard Layouts"
+msgstr "Klaviatuuripaigutus"
 
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
 msgstr "Klaviatuuripaigutuse valimine"
 
-msgid "Add an Input Source"
-msgstr "Sisendi lisamine"
+#: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
+#, fuzzy
+msgid "Add a Keyboard Layout"
+msgstr "Klaviatuuripaigutus"
 
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
 msgstr "Ühtegi keelt ei leitud"
 
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
 msgid "Welcome"
 msgstr "Tere tulemast"
 
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "label"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
 msgid "Search for a location"
 msgstr "Otsi asukoha järgi"
 
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "Location"
 msgstr "Asukoht"
 
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "Choose Your Location"
 msgstr "Sinu asukoha valimine"
 
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "_Determine your location automatically"
 msgstr "_Määra asukoht automaatselt"
 
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "Time Zone"
 msgstr "Ajavöönd"
 
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+#, fuzzy
+msgid "Network Time"
+msgstr "Võrk"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+msgid "16"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+msgid "45"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
+msgid ":"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
+msgid "January"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+msgid "February"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+msgid "March"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+msgid "April"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "May"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "June"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+msgid "July"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "August"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "September"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "October"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "November"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid "December"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:305
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Muu…"
 
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:343
 msgid "Network is not available."
 msgstr "Võrk pole saadaval."
 
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:345
 msgid "No network devices found."
 msgstr "Võrguseadmeid ei leitud."
 
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:395
 msgid "Checking for available wireless networks"
 msgstr "Saadaolevate juhtmeta võrkude otsimine"
 
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:647
 msgid "Network"
 msgstr "Võrk"
 
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
 msgid "Wireless Networks"
 msgstr "Juhtmeta võrgud"
 
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+#, fuzzy
+msgid "No wireless available"
+msgstr "Võrk pole saadaval."
+
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
 msgid "_Start using %s"
 msgstr "_Alusta %s kasutamist"
 
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
 msgstr "Aitäh"
 
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
 msgid "Your computer is ready to use."
 msgstr "Su arvuti on kasutamiseks valmis."
 
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
 msgid "You may change these options at any time in Settings."
 msgstr "Sa võid muuta neid valikuid hiljem süsteemi sätete alt."
 
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Alusta GNOME 3 kasutamist"
 
+#~ msgid "Strength: %s"
+#~ msgstr "Tugevus: %s"
+
+#~ msgid "Input Sources"
+#~ msgstr "Sisendid"
+
+#~ msgid "Add an Input Source"
+#~ msgstr "Sisendi lisamine"
+
 #~ msgid "_Back"
 #~ msgstr "_Tagasi"
-
-#~ msgid "Keyboard Layout"
-#~ msgstr "Klaviatuuripaigutus"
 
 #~ msgid "Select input sources"
 #~ msgstr "Sisendite valimine"

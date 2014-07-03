@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-initial-setup&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-13 16:59+0000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-02 12:21-0700\n"
 "PO-Revision-Date: 2013-10-08 19:41+0330\n"
 "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
 "Language-Team: Persian\n"
@@ -22,59 +22,53 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "برپاسازی ابتدایی"
 
-#: ../gnome-initial-setup/gis-assistant.c:418
+#: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
 msgstr "_بعدی"
 
-#: ../gnome-initial-setup/gis-assistant.c:419
+#: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
 msgstr "_قبلی"
 
-#: ../gnome-initial-setup/gis-assistant.c:420
+#: ../gnome-initial-setup/gis-assistant.c:417
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_لغو"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:220
+#: ../gnome-initial-setup/gnome-initial-setup.c:241
 msgid "Force new user mode"
 msgstr "اجبار به حالت کاربر جدید"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:224
+#: ../gnome-initial-setup/gnome-initial-setup.c:245
 msgid "- GNOME initial setup"
 msgstr "- برپاسازی اولیه گنوم"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
-#| msgid "_Confirm password"
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 msgid "No password"
 msgstr "بدون گذرواژه"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:436
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
 msgid "Passwords do not match"
 msgstr "گذرواژه مطابقت ندارد"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:383
-#, c-format
-msgid "Strength: %s"
-msgstr "قدرت: %s"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:510
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
 msgid "Failed to register account"
 msgstr "ثبت حساب شکست خورد"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:718
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
 msgid "No supported way to authenticate with this domain"
 msgstr "هیچ روش پشتیبانی شده‌ای برای تصدیق‌هویت با این دامنه وجود ندارد"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
 msgid "Failed to join domain"
 msgstr "پیوستن به دامنه شکست خورد"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:826
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
 msgid "Failed to log into domain"
 msgstr "ورود به دامنه شکست خورد"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1211
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
 msgid "Login"
 msgstr "ورود به سیستم"
 
@@ -92,7 +86,8 @@ msgstr "_نام‌کاربری"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "This will be used to name your home folder and can't be changed."
-msgstr "این جهت نام‌گذاری پوشه‌ی خانگی شما استفاده خواهد شد و قابل تغییر نخواهد بود."
+msgstr ""
+"این جهت نام‌گذاری پوشه‌ی خانگی شما استفاده خواهد شد و قابل تغییر نخواهد بود."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Password"
@@ -103,34 +98,46 @@ msgid "_Confirm password"
 msgstr "_تایید گذرواژه"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
-msgid "Try to use at least 8 different characters. Mix upper and lower case and use a number or two."
-msgstr "سعی کنید حداقل از ۸ نویسه متفاوت استفاده کنید. تلفیقی از حروف بزرگ و کوچک همراه با یک یا دو عدد."
+msgid ""
+"Try to use at least 8 different characters. Mix upper and lower case and use "
+"a number or two."
+msgstr ""
+"سعی کنید حداقل از ۸ نویسه متفاوت استفاده کنید. تلفیقی از حروف بزرگ و کوچک "
+"همراه با یک یا دو عدد."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "A_utomatic Login"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid "Enable _Shared Account"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr "صفحه یک"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "Create an Enterprise Account"
 msgstr "ساخت یک حساب تجاری"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "_Domain"
 msgstr "_دامنه"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Enterprise domain or realm name"
 msgstr "نام دامنه یا ناحیه تجاری"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "C_ontinue"
 msgstr "_ادامه"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Domain Administrator Login"
 msgstr "ورود مدیر دامنه"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -142,15 +149,15 @@ msgstr ""
 "گذرواژه دامنه خود را در اینجا وارد کنند، و یک نام رایانه‌ی اختصاصی\n"
 "برای این سیستم انتخاب کنند."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "_Computer"
 msgstr "_رایانه"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator _Name"
 msgstr "نام _مدیر"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "Administrator Password"
 msgstr "گذرواژه مدیر"
 
@@ -223,11 +230,6 @@ msgid "The username cannot start with a '-'"
 msgstr "نام‌کاربری نمی‌توان به یک «-» شروع شود"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:158
-#| msgid ""
-#| "The username must consist of:\n"
-#| " ➣ letters from the English alphabet\n"
-#| " ➣ digits\n"
-#| " ➣ any of the characters '.', '-' and '_'"
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -239,18 +241,58 @@ msgstr ""
 " - اعداد\n"
 " - هر کدام از نویسه‌های «.»، «-» و «_»"
 
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+msgid ""
+"Endless collects metrics on user behavior and actions.\n"
+"All data sent is anonymous.\n"
+"We use the data to improve the system."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+msgid "Privacy Policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#, fuzzy
+msgid "Privacy and License Agreements"
+msgstr "گواهی توافقنامه"
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
+msgid "Enable metrics collection."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+msgid ""
+"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Third-party Software"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"Endless uses third-party software to display Flash, MP3 and other media. "
+"Some of this software is closed-source. The software is subject to the "
+"license terms included with the software's documentation."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "I agree to the license terms"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
 msgstr "گواهی توافقنامه"
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
-msgid "I have _agreed to the terms and conditions in this end user license agreement."
+msgid ""
+"I have _agreed to the terms and conditions in this end user license "
+"agreement."
 msgstr "من با شرایط و ضوابطِ این موافقتنامه‌ی کاربر نهایی _موافقت کرده‌ام."
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
-#| msgctxt "Wireless access point"
-#| msgid "Other…"
 msgctxt "Online Account"
 msgid "Other"
 msgstr "موارد دیگر"
@@ -276,27 +318,27 @@ msgstr "گپ"
 msgid "Resources"
 msgstr "منابع"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:127
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
 msgstr "خطا در ساخت حساب"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:157
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
 msgstr "خطا در حذف حساب"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:183
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
 msgstr "آیا مطمئنید که می‌خواهید این حساب را حذف کنید؟"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:185
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
 msgstr "این کار حساب شما را بر روی کارگزار حذف نمی‌کند."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:186
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
 msgstr "_حذف"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:448
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
 msgstr "حساب‌های برخط"
 
@@ -305,58 +347,65 @@ msgid "Connect to your existing data in the cloud"
 msgstr "به اطلاعات موجود خود در ابرها متصل شوید"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
-msgid "Adding accounts will allow you to transparently connect to your online photos, contacts, mail, and more."
-msgstr "اضافه کردن حساب‌ها باعث می‌شود که بتوانید به عکس‌ها، آشناها، پست‌های الکترونیکی و... برخط خود متصل شوید."
+msgid ""
+"Adding accounts will allow you to transparently connect to your online "
+"photos, contacts, mail, and more."
+msgstr ""
+"اضافه کردن حساب‌ها باعث می‌شود که بتوانید به عکس‌ها، آشناها، پست‌های الکترونیکی "
+"و... برخط خود متصل شوید."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
-#| msgid "Add Account"
 msgid "_Add Account"
 msgstr "اضافه کردن _حساب"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:181
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "بیشتر..."
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
-#| msgid "Move Input Source Down"
 msgid "No input sources found"
 msgstr "هیچ منبع ورودی پیدا نشد"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
-#| msgctxt "Wireless access point"
-#| msgid "Other…"
 msgid "Other"
 msgstr "موارد دیگر"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:166
-#| msgid "Add Input Source"
-msgid "Input Sources"
-msgstr "منابع ورودی"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#, fuzzy
+msgid "Keyboard Layouts"
+msgstr "چیدمان صفحه‌کلید"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-#| msgid "Show Keyboard Layout"
 msgid "Select keyboard layouts"
 msgstr "چیدمان‌های صفحه‌کلید را انتخاب کنید"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-#| msgid "Add Input Source"
-msgid "Add an Input Source"
-msgstr "اضافه کردن یک منبع ورودی"
+#, fuzzy
+msgid "Add a Keyboard Layout"
+msgstr "چیدمان صفحه‌کلید"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:198
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
 msgstr "هیچ زبانی پیدا نشد"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:233
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
 msgid "Welcome"
 msgstr "خوش‌آمدید"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:305
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "label"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
 msgid "Search for a location"
 msgstr "جستجو برای یک مکان"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:361
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "Location"
 msgstr "مکان"
@@ -372,6 +421,71 @@ msgstr "مکان خود را خودکار _تشخیص دهید"
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "Time Zone"
 msgstr "ناحیه زمانی"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+#, fuzzy
+msgid "Network Time"
+msgstr "شبکه"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+msgid "16"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+msgid "45"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
+msgid ":"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
+msgid "January"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+msgid "February"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+msgid "March"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+msgid "April"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "May"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "June"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+msgid "July"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "August"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "September"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "October"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "November"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid "December"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:305
 msgctxt "Wireless access point"
@@ -398,13 +512,17 @@ msgstr "شبکه"
 msgid "Wireless Networks"
 msgstr "شبکه‌های بی‌سیم"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:349
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+#, fuzzy
+msgid "No wireless available"
+msgstr "شبکه در دسترس نیست."
+
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
-#| msgid "_Start using GNOME 3"
 msgid "_Start using %s"
 msgstr "_شروع به استفاده از %s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:375
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
 msgstr "متشکریم"
 
@@ -420,11 +538,19 @@ msgstr "شما می‌توانید این گزینه‌ها را در هر زم�
 msgid "_Start using GNOME 3"
 msgstr "_شروع به استفاده از گنوم ۳"
 
+#~ msgid "Strength: %s"
+#~ msgstr "قدرت: %s"
+
+#~| msgid "Add Input Source"
+#~ msgid "Input Sources"
+#~ msgstr "منابع ورودی"
+
+#~| msgid "Add Input Source"
+#~ msgid "Add an Input Source"
+#~ msgstr "اضافه کردن یک منبع ورودی"
+
 #~ msgid "_Back"
 #~ msgstr "_قبلی"
-
-#~ msgid "Keyboard Layout"
-#~ msgstr "چیدمان صفحه‌کلید"
 
 #~ msgid "Select input sources"
 #~ msgstr "انتخاب منابع ورودی"
