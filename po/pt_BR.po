@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-16 15:05-0700\n"
+"POT-Creation-Date: 2014-07-02 12:21-0700\n"
 "PO-Revision-Date: 2014-06-16 22:11+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/gnome-initial-setup/language/pt_BR/)\n"
@@ -35,11 +35,11 @@ msgstr ""
 msgid "_Cancel"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:240
+#: ../gnome-initial-setup/gnome-initial-setup.c:241
 msgid "Force new user mode"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:244
+#: ../gnome-initial-setup/gnome-initial-setup.c:245
 msgid "- GNOME initial setup"
 msgstr ""
 
@@ -230,18 +230,18 @@ msgid ""
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:74
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
 msgid ""
 "Endless collects metrics on user behavior and actions.\n"
 "All data sent is anonymous.\n"
 "We use the data to improve the system."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:99
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
 msgid "Privacy Policy"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:157
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
 msgid "Privacy and License Agreements"
 msgstr ""
 
