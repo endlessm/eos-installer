@@ -89,7 +89,7 @@
               <object class="GtkLabel" id="serial-text">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">label</property>
+                <property name="label" translatable="no">label</property>
                 <attributes>
                   <attribute name="font-desc" value="&lt;Enter Value&gt; 26"/>
                   <attribute name="weight" value="bold"/>

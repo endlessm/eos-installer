@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 12:21-0700\n"
+"POT-Creation-Date: 2014-07-09 12:54-0700\n"
 "PO-Revision-Date: 2013-09-13 20:20+0100\n"
 "Last-Translator: Benjamin Steinwender <b@stbe.at>\n"
 "Language-Team: Deutsch <gnome-de@gnome.org>\n"
@@ -408,10 +408,6 @@ msgstr "Willkommen"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
-msgid "label"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:627

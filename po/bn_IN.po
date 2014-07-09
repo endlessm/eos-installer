@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-02 12:21-0700\n"
+"POT-Creation-Date: 2014-07-09 12:54-0700\n"
 "PO-Revision-Date: 2012-10-29 02:53+0530\n"
 "Last-Translator: Sayak Sarkar <sayak.bugsmith@gmail.com>\n"
 "Language-Team: Bengali (India) <anubad@lists.ankur.org.in>\n"
@@ -395,10 +395,6 @@ msgstr "স্বাগত"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
-msgid "label"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:627
