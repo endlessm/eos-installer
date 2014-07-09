@@ -26,6 +26,7 @@ libtool
 ltmain.sh
 missing
 mkinstalldirs
+data/gnome-welcome-tour
 po/*.gmo
 po/*.header
 po/*.sed
@@ -59,6 +60,8 @@ gnome-initial-setup/pages/location/cc-datetime-resources.[ch]
 gnome-initial-setup/pages/location/location-resources.[ch]
 gnome-initial-setup/pages/goa/goa-resources.[ch]
 gnome-initial-setup/pages/summary/summary-resources.[ch]
+gnome-initial-setup/pages/endless-eula/endless-eula-resources.[ch]
+gnome-initial-setup/pages/location/geoclue.[ch]
 
 gnome-initial-setup-first-login.desktop
 gnome-initial-setup.desktop
