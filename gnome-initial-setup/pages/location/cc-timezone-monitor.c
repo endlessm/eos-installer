@@ -302,7 +302,7 @@ on_client_proxy_ready (GObject      *source_object,
 
         priv = GET_PRIVATE (self);
         priv->geoclue_client = client;
-        //geoclue_client_set_desktop_id (priv->geoclue_client, DESKTOP_ID);
+        geoclue_client_set_desktop_id (priv->geoclue_client, DESKTOP_ID);
         geoclue_client_set_distance_threshold (priv->geoclue_client,
                                                GEOCODE_LOCATION_ACCURACY_CITY);
         //geoclue_client_set_requested_accuracy_level (priv->geoclue_client,
