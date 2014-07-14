@@ -99,9 +99,11 @@ gis_keyboard_page_finalize (GObject *object)
         g_cancellable_cancel (priv->cancellable);
         g_clear_object (&priv->cancellable);
 
+        g_signal_handlers_disconnect_by_data (priv->input_settings, self);
+        g_clear_object (&priv->input_settings);
+
         g_clear_object (&priv->permission);
         g_clear_object (&priv->localed);
-        g_clear_object (&priv->input_settings);
         g_clear_object (&priv->xkb_info);
 #ifdef HAVE_IBUS
         g_clear_object (&priv->ibus);
