@@ -31,7 +31,6 @@
 
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <gnome-keyring.h>
 
 #include <act/act-user-manager.h>
 
@@ -467,7 +466,9 @@ local_create_user (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
   const gchar *username;
+  const gchar *old_username;
   const gchar *password;
+  const gchar *old_password;
   const gchar *fullname;
   const gchar *language;
   gboolean autologin_active;
@@ -491,13 +492,16 @@ local_create_user (GisAccountPage *page)
     return;
   }
 
+  gis_driver_get_user_permissions (GIS_PAGE (page)->driver, &old_username, &old_password);
+  if (!old_password)
+    old_password = "gis";
+
   act_user_set_user_name (priv->act_user, username);
   act_user_set_account_type (priv->act_user, priv->account_type);
   if (strlen (password) == 0) {
     act_user_set_password_mode (priv->act_user, ACT_USER_PASSWORD_MODE_NONE);
   } else {
     act_user_set_password (priv->act_user, password, "");
-    gnome_keyring_create_sync ("login", password);
     save_user_password (password);
   }
 
@@ -509,6 +513,8 @@ local_create_user (GisAccountPage *page)
   gis_driver_set_user_permissions (GIS_PAGE (page)->driver,
                                    priv->act_user,
                                    password);
+
+  gis_update_login_keyring_password (old_password, password);
 
   if (autologin_active) {
     lock_settings = g_settings_new ("org.gnome.desktop.screensaver");

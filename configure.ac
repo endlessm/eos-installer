@@ -40,7 +40,6 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   polkit-gobject-1 >= $POLKIT_REQUIRED_VERSION
                   accountsservice
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
-                  gnome-keyring-1
                   gstreamer-1.0
                   fontconfig
                   geoclue-2.0
@@ -53,7 +52,8 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   gdm >= $GDM_REQUIRED_VERSION
                   pango >= $PANGO_REQUIRED_VERSION
                   pwquality
-                  egg-list-box-uninstalled)
+                  egg-list-box-uninstalled
+		  libsecret-1)
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
 
