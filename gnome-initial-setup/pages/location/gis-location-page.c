@@ -293,11 +293,26 @@ static void
 update_time (GisLocationPage *page)
 {
   GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
+  GisDriver *driver = GIS_PAGE (page)->driver;
+  const gchar *time_format;
   char *label;
 
-  /* Update the hours label */
-  label = g_date_time_format (priv->date, "%H");
-  gtk_label_set_text (GTK_LABEL (WID ("hours_label")), label);
+  time_format = gis_driver_get_default_time_format (driver);
+
+  if (!time_format || time_format[0] == '2') {
+    /* Update the hours label in 24h format */
+    label = g_date_time_format (priv->date, "%H");
+    gtk_label_set_text (GTK_LABEL (WID ("hours_label")), label);
+    gtk_widget_set_visible (WID ("ampm_label"), FALSE);
+  } else {
+    /* Update the hours label in AM/PM format */
+    label = g_date_time_format (priv->date, "%I");
+    gtk_label_set_text (GTK_LABEL (WID ("hours_label")), label);
+    g_free (label);
+    label = g_date_time_format (priv->date, "%p");
+    gtk_label_set_text (GTK_LABEL (WID ("ampm_label")), label);
+    gtk_widget_set_visible (WID ("ampm_label"), TRUE);
+  }
   g_free (label);
 
   /* Update the minutes label */
