@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.16.1 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
+  <requires lib="gtk+" version="3.0"/>
+  <object class="GtkListStore" id="month-liststore">
+    <columns>
+      <!-- column-name month -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">January</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">February</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">March</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">April</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">May</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">June</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">July</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">August</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">September</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">October</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">November</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">December</col>
+      </row>
+    </data>
+  </object>
   <object class="GtkGrid" id="location-page">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -335,6 +380,29 @@
                       </packing>
                     </child>
                     <child>
+                      <object class="GtkLabel" id="ampm_label">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label">PM</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="scale" value="2.5"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="left_attach">3</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">1</property>
+                        <property name="height">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child>
                       <placeholder/>
                     </child>
                     <child>
@@ -433,49 +501,5 @@
     <child>
       <placeholder/>
     </child>
-  </object>
-  <object class="GtkListStore" id="month-liststore">
-    <columns>
-      <!-- column-name month -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">January</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">February</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">March</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">April</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">May</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">June</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">July</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">August</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">September</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">October</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">November</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">December</col>
-      </row>
-    </data>
   </object>
 </interface>

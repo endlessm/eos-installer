@@ -36,6 +36,7 @@
 #define INITIAL_CONFIG_GROUP "Setup"
 #define LANGUAGE_KEY "DefaultLanguage"
 #define TIMEZONE_KEY "DefaultTimezone"
+#define TIMEFORMAT_KEY "DefaultTimeFormat"
 
 /* Statically include this for now. Maybe later
  * we'll generate this from glib-mkenums. */
@@ -80,6 +81,7 @@ struct _GisDriverPrivate {
   gchar *lang_id;
   gchar *lang_override;
   gchar *default_timezone;
+  gchar *default_time_format;
 
   GisDriverMode mode;
 };
@@ -96,6 +98,7 @@ gis_driver_finalize (GObject *object)
   g_free (priv->lang_id);
   g_free (priv->lang_override);
   g_free (priv->default_timezone);
+  g_free (priv->default_time_format);
 
   G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
 }
@@ -211,6 +214,13 @@ gis_driver_get_default_timezone (GisDriver *driver)
   return priv->default_timezone;
 }
 
+const gchar *
+gis_driver_get_default_time_format (GisDriver *driver)
+{
+  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
+  return priv->default_time_format;
+}
+
 static void
 gis_driver_get_property (GObject      *object,
                          guint         prop_id,
@@ -278,6 +288,7 @@ gis_driver_read_personality_file (GisDriver *driver)
   GKeyFile *keyfile = g_key_file_new ();
   gchar *language = NULL;
   gchar *timezone = NULL;
+  gchar *time_format = NULL;
 
   if (g_key_file_load_from_file (keyfile, PERSONALITY_FILE_PATH,
                                  G_KEY_FILE_NONE, NULL)) {
@@ -285,6 +296,8 @@ gis_driver_read_personality_file (GisDriver *driver)
                                       LANGUAGE_KEY, NULL);
     timezone = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
                                       TIMEZONE_KEY, NULL);
+    time_format = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
+                                         TIMEFORMAT_KEY, NULL);
   }
 
   g_free (priv->lang_override);
@@ -295,6 +308,7 @@ gis_driver_read_personality_file (GisDriver *driver)
 
   g_free (priv->default_timezone);
   priv->default_timezone = timezone;
+  priv->default_time_format = time_format;
 
   g_key_file_free (keyfile);
 }
