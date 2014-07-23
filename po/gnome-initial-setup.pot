@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 12:54-0700\n"
+"POT-Creation-Date: 2014-07-23 07:32-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,32 +43,32 @@ msgstr ""
 msgid "- GNOME initial setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
 msgid "No password"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
 msgid "Passwords do not match"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:553
 msgid "Failed to register account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:761
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:801
 msgid "Failed to join domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:869
 msgid "Failed to log into domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1261
 msgid "Login"
 msgstr ""
 
@@ -107,34 +107,30 @@ msgid "A_utomatic Login"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid "Enable _Shared Account"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Create an Enterprise Account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "_Domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "Enterprise domain or realm name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "C_ontinue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Domain Administrator Login"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -142,15 +138,15 @@ msgid ""
 "name for your computer."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid "_Computer"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "Administrator _Name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator Password"
 msgstr ""
 
@@ -357,7 +353,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
 msgid "Keyboard Layouts"
 msgstr ""
 
@@ -381,89 +377,89 @@ msgstr ""
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:774
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
-msgid "Choose Your Location"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
-msgid "_Determine your location automatically"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
-msgid "Time Zone"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
-msgid "Network Time"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
-msgid "16"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
-msgid "45"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
-msgid ":"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "January"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "Choose Your Location"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "_Determine your location automatically"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "Time Zone"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "Network Time"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "16"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "45"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid ":"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:305

@@ -472,13 +472,10 @@ local_create_user (GisAccountPage *page)
   const gchar *fullname;
   const gchar *language;
   gboolean autologin_active;
-  gboolean enable_shared;
   GSettings *lock_settings;
   GError *error = NULL;
 
-  enable_shared = gtk_switch_get_active (OBJ(GtkSwitch*, "account-shared-account-switch"));
-  if (enable_shared)
-    create_shared_user (page);
+  create_shared_user (page);
 
   username = gtk_combo_box_text_get_active_text (OBJ(GtkComboBoxText*, "account-username-combo"));
   fullname = gtk_entry_get_text (OBJ (GtkEntry*, "account-fullname-entry"));
