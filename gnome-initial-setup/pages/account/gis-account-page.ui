@@ -28,9 +28,9 @@
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">start</property>
-                <property name="margin_bottom">8</property>
+                <property name="margin_bottom">0</property>
                 <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Create a Local Account</property>
+                <property name="label" translatable="yes">Create a Personal Account</property>
                 <attributes>
                   <attribute name="weight" value="bold"/>
                   <attribute name="scale" value="1.2"/>
@@ -40,6 +40,48 @@
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
                 <property name="width">2</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="local-subtitle1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="margin_bottom">0</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Create a new account in just a few steps: type in your full name, your desired username and a password that you'll remember.</property>
+                <property name="wrap">True</property>
+                <attributes>
+                  <attribute name="scale" value="0.8"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">3</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="local-subtitle2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="margin_bottom">12</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">You may want to write down your password. Make sure you pay attention to upper case letters. If the caps lock key is pressed, the symbol /!\ will appear at the right side of the space in which you're writing. You'll need to type in this password identically each time you access your account.</property>
+                <property name="wrap">True</property>
+                <attributes>
+                  <attribute name="scale" value="0.8"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+                <property name="width">3</property>
                 <property name="height">1</property>
               </packing>
             </child>
@@ -55,7 +97,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
+                <property name="top_attach">3</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -70,7 +112,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
+                <property name="top_attach">3</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -87,7 +129,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
+                <property name="top_attach">4</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -107,7 +149,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">2</property>
+                <property name="top_attach">4</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -118,7 +160,7 @@
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin_bottom">12</property>
-                <property name="label" translatable="yes">This will be used to name your home folder and can't be changed.</property>
+                <property name="label" translatable="yes">The username will be used to name your personal folder, and it cannot be changed.</property>
                 <property name="wrap">True</property>
                 <attributes>
                   <attribute name="scale" value="0.8"/>
@@ -126,7 +168,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">3</property>
+                <property name="top_attach">5</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -143,7 +185,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
+                <property name="top_attach">6</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -158,7 +200,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">4</property>
+                <property name="top_attach">6</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -175,7 +217,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
+                <property name="top_attach">7</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -191,7 +233,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">5</property>
+                <property name="top_attach">7</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -201,7 +243,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
-                <property name="label" translatable="yes">Try to use at least 8 different characters. Mix upper and lower case and use a number or two.</property>
+                <property name="label" translatable="yes">To make your password more secure, you can use letters and numbers together. This is optional.</property>
                 <property name="wrap">True</property>
                 <attributes>
                   <attribute name="scale" value="0.8"/>
@@ -209,7 +251,7 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">8</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -255,7 +297,7 @@
               </object>
               <packing>
                 <property name="left_attach">2</property>
-                <property name="top_attach">4</property>
+                <property name="top_attach">6</property>
                 <property name="width">1</property>
                 <property name="height">2</property>
               </packing>
@@ -272,7 +314,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">7</property>
+                <property name="top_attach">9</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -298,8 +340,29 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">7</property>
+                <property name="top_attach">9</property>
                 <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="local-continue">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="margin_bottom">0</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">To continue, please make sure you fill in all the blanks.</property>
+                <property name="wrap">True</property>
+                <attributes>
+                  <attribute name="scale" value="0.8"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">10</property>
+                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
