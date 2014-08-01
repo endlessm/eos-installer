@@ -76,7 +76,7 @@
                 <property name="yalign">0</property>
                 <property name="margin_bottom">12</property>
                 <property name="hexpand">True</property>
-                <property name="label" translatable="yes">You may want to write down your password. Make sure you pay attention to upper case letters. If the caps lock key is pressed, the symbol /!\ will appear at the right side of the space in which you're writing. You'll need to type in this password identically each time you access your account.</property>
+                <property name="label" translatable="yes">You may want to write down your password. Make sure you pay attention to upper case letters. If the caps lock key is pressed, the symbol ⚠ will appear at the right side of the space in which you're writing. You'll need to type in this password identically each time you access your account.</property>
                 <property name="wrap">True</property>
                 <attributes>
                   <attribute name="scale" value="0.8"/>
