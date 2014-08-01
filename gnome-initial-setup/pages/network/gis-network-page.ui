@@ -55,8 +55,8 @@
     <child>
       <object class="GtkLabel" id="network-subtitle2">
         <property name="visible">True</property>
-        <property name="label" translatable="yes">TIP: If you do not have internet now, you can use Endless without it. If you get an internet connection in the future, you can set it up in "Network Settings."</property>
-	<property name="wrap">True</property>
+        <property name="label" translatable="yes">TIP: You can use your computer without internet if you do not have a connection now. If you get an internet connection in the future, you can set it up in "Network Settings."</property>
+        <property name="wrap">True</property>
         <property name="hexpand">False</property>
         <property name="halign">start</property>
         <property name="valign">start</property>
