@@ -109,14 +109,16 @@ prepare_main_window (GisDriver *driver)
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   GdkGeometry size_hints;
 
-  size_hints.min_width = 680;
-  size_hints.min_height = 440;
+  size_hints.min_width = 747;
+  size_hints.min_height = 539;
+  size_hints.max_width = 747;
+  size_hints.max_height = 539;
   size_hints.win_gravity = GDK_GRAVITY_CENTER;
 
   gtk_window_set_geometry_hints (priv->main_window,
                                  GTK_WIDGET (priv->main_window),
                                  &size_hints,
-                                 GDK_HINT_MIN_SIZE | GDK_HINT_WIN_GRAVITY);
+                                 GDK_HINT_MIN_SIZE | GDK_HINT_MAX_SIZE | GDK_HINT_WIN_GRAVITY);
 
   gtk_window_set_titlebar (priv->main_window,
                            gis_assistant_get_titlebar (priv->assistant));
@@ -328,7 +330,7 @@ gis_driver_startup (GApplication *app)
                                     "type", GTK_WINDOW_TOPLEVEL,
                                     "border-width", 12,
                                     "icon-name", "preferences-system",
-                                    "resizable", FALSE,
+                                    "resizable", TRUE,
                                     "window-position", GTK_WIN_POS_CENTER_ALWAYS,
                                     "deletable", FALSE,
                                     NULL);

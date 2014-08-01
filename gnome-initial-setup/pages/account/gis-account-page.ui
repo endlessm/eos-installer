@@ -247,6 +247,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
                 <property name="label" translatable="yes">To make your password more secure, you can use letters and numbers together. This is optional.</property>
                 <property name="wrap">True</property>
                 <attributes>
@@ -256,7 +258,7 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
+                <property name="width">2</property>
                 <property name="height">1</property>
               </packing>
             </child>
