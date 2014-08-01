@@ -6,14 +6,15 @@
 # c.sanchez <cassandra@endlessm.com>, 2014
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2012-2014
 # Nuritzi Sanchez <ns@endlessm.com>, 2014
+# Philip Chimento <philip.chimento@gmail.com>, 2014
 # Roddy Shuler <roddy@endlessm.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 12:54-0700\n"
-"PO-Revision-Date: 2014-07-14 18:28+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2014-07-31 19:42-0700\n"
+"PO-Revision-Date: 2014-08-01 03:09+0000\n"
+"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,114 +48,130 @@ msgstr "Forzar el modo del nuevo usuario"
 msgid "- GNOME initial setup"
 msgstr "- Configuración inicial de GNOME"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
 msgid "No password"
 msgstr "Sin contraseña"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:553
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:761
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:801
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:869
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1261
 msgid "Login"
 msgstr "Iniciar sesión"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-msgid "Create a Local Account"
-msgstr "Crear una cuenta local"
+msgid "Create a Personal Account"
+msgstr "Crea tu cuenta personal"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
+msgid ""
+"Create a new account in just a few steps: type in your full name, your "
+"desired username and a password that you'll remember."
+msgstr "Crea tu cuenta personal siguiendo estos pasos: escribe tu nombre completo, el nombre de usuario que deseas y una contraseña que puedas recordar."
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+msgid ""
+"You may want to write down your password. Make sure you pay attention to "
+"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
+"appear at the right side of the space in which you're writing. You'll need "
+"to type in this password identically each time you access your account."
+msgstr "Si quieres, puedes anotar tu contraseña para recordarla. Presta atención a las mayúsculas: si la tecla que las activa está presionada, aparecerá este símbolo ⚠ a la derecha del espacio en el que estás escribiendo. Cada vez que quieras entrar a tu cuenta deberás escribir tu contraseña idénticamente."
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_Nombre completo"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Username"
 msgstr "Nombre de _usuario"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
-msgid "This will be used to name your home folder and can't be changed."
-msgstr "Esto se usará para nombrar su carpeta personal y no se puede cambiar"
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+msgid ""
+"The username will be used to name your personal folder, and it cannot be "
+"changed."
+msgstr "Tu nombre de usuario será usado para nombrar tu carpeta personal y no se puede cambiar después."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
 msgstr "_Contraseña"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "_Confirm password"
 msgstr "_Confirmar contraseña"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"Try to use at least 8 different characters. Mix upper and lower case and use"
-" a number or two."
-msgstr "Pruebe a usar al menos 8 caracteres diferentes. Mezcle mayúsculas, minúsculas y uno o dos números"
+"To make your password more secure, you can use letters and numbers together."
+" This is optional."
+msgstr "Puedes mezclar letras y números para que tu contraseña sea más segura."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "A_utomatic Login"
 msgstr "_Inicio de sesión automático"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid "Enable _Shared Account"
-msgstr "Activar Cu_enta Compartida"
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr "Para poder continuar, debes llenar todos los espacios en blanco."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
 msgstr "página 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
 msgstr "Crear una cuenta corporativa"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
 msgstr "_Dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
 msgstr "Dominio de la empresa o nombre del reino"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
 msgstr "C_ontinuar"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "Inicio de sesión del administrador del dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr "Para usar los inicios de sesión empresariales, este equipo debe estar\nincluido en el dominio. Pida al administrador de su red que escriba\naquí la contraseña del dominio y elija un nombre de equipo único\npara su equipo."
+msgstr "Para empezar a usar cuentas corporativas, esta computadora necesitará estar\nincluida en el dominio empresarial. El administrador de tu red necesitará\nentrar su contraseña del dominio aquí y elegir un nombre único\npara tu computadora."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
-msgstr "_Equipo"
+msgstr "_Computadora"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
 msgstr "_Nombre del administrador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
 msgstr "Contraseña del administrador"
 
@@ -166,7 +183,7 @@ msgstr "Demasiado corta"
 #: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr "Todavía no es suficientemente buena"
+msgstr "No suficientemente segura"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
@@ -205,7 +222,7 @@ msgstr "No se puede iniciar sesión como %s en el dominio %s"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr "Contraseña no válida, inténtelo de nuevo"
+msgstr "Contraseña no está válida, inténtelo de nuevo"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
@@ -316,19 +333,19 @@ msgstr "Error al crear la cuenta"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
-msgstr "Error al quitar la cuenta"
+msgstr "Error al eliminar la cuenta"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
-msgstr "¿Está seguro de que quiere quitar la cuenta?"
+msgstr "¿Estás seguro de que quieres eliminar esta cuenta?"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
-msgstr "Esto no quitará la cuenta en el servidor."
+msgstr "Esto no eliminará la cuenta en el servidor."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
-msgstr "Quita_r"
+msgstr "_Eliminar"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
@@ -336,13 +353,13 @@ msgstr "Cuentas en línea"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
-msgstr "Conectarse a sus datos en la nube"
+msgstr "Conectate a tus datos en la nube"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr "Añadir cuentas le permite conectarse de manera transparente a sus aplicaciones en línea de fotos, contactos, correo-e y más."
+msgstr "Añadiendo las cuentas de tus apps en línea favoritas, podrás acceder fácilmente a tus fotos, contactos, correo y más."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
@@ -355,27 +372,27 @@ msgstr "Más…"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
-msgstr "No se han encontrado fuentes de entrada"
+msgstr "No se encontraron fuentes de entrada"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
 msgid "Other"
 msgstr "Otra"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
 msgid "Keyboard Layouts"
 msgstr "Formatos de teclado"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
-msgstr "Seleccionar los formatos de teclado"
+msgstr "Selecciona los formatos de teclado que usarás"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
 msgid "Add a Keyboard Layout"
-msgstr "Añadir un formato de teclado"
+msgstr "Añade otro formato de teclado"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
-msgstr "No se han encontrado idiomas"
+msgstr "No se encontraron idiomas"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:506
 msgid "Welcome"
@@ -385,90 +402,90 @@ msgstr "Bienvenido"
 msgid "Power Off"
 msgstr "Apagar"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
 msgstr "Buscar una ubicación"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:774
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "Ubicación"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
-msgid "Choose Your Location"
-msgstr "Elegir su ubicación"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
-msgid "_Determine your location automatically"
-msgstr "_Determinar su ubicación automáticamente"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
-msgid "Time Zone"
-msgstr "Zona horaria"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
-msgid "Network Time"
-msgstr "Hora de red"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
-msgid "16"
-msgstr "16"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
-msgid "45"
-msgstr "45"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
-msgid ":"
-msgstr ":"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "January"
 msgstr "Enero"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
 msgstr "Febrero"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
 msgstr "Marzo"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
 msgstr "Abril"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
 msgstr "Mayo"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
 msgstr "Junio"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
 msgstr "Julio"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
 msgstr "Agosto"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
 msgstr "Septiembre"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
 msgstr "Octubre"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
 msgstr "Noviembre"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
 msgstr "Diciembre"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
+msgid "Choose Your Location"
+msgstr "Elige tu ubicación"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
+msgid "_Determine your location automatically"
+msgstr "_Determina tu ubicación automáticamente"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
+msgid "Time Zone"
+msgstr "Zona horaria"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
+msgid "Network Time"
+msgstr "Hora de red"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
+msgid "16"
+msgstr "16"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
+msgid "45"
+msgstr "45"
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
+msgid ":"
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:305
 msgctxt "Wireless access point"
@@ -481,7 +498,7 @@ msgstr "La red no está disponible."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:345
 msgid "No network devices found."
-msgstr "No se han encontrado dispositivos de red."
+msgstr "No se encontraron dispositivos de red."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:395
 msgid "Checking for available wireless networks"
@@ -496,6 +513,21 @@ msgid "Wireless Networks"
 msgstr "Redes inalámbricas"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+msgid ""
+"Do you have wireless internet (WiFi)? If you do, connect your computer to "
+"the internet by clicking on the name of your WiFi network and entering the "
+"network password. This password may be different from your computer "
+"password."
+msgstr "¿Tienes internet inalámbrico (WiFi)? Para conectar tu computadora al internet, haz clic en el nombre de tu red WiFi y después ingresa la contraseña de la red. Esta contraseña puede ser diferente a la contraseña que ingresaste para esta computadora."
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
+msgid ""
+"TIP: You can use your computer without internet if you do not have a "
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
+msgstr "Consejo: Puedes usar tu computadora aunque no tengas internet en este momento. Si algún día tienes acceso a una conexión, podrás agregar la red en \"Configuración de red.\""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
 msgstr "La red inalámbrica no está disponible"
 
@@ -510,11 +542,11 @@ msgstr "Gracias"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
 msgid "Your computer is ready to use."
-msgstr "Su equipo está listo para usarse."
+msgstr "¡Tu computadora está lista!"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
 msgid "You may change these options at any time in Settings."
-msgstr "Puede cambiar estas opciones en cualquier momento en Configuración."
+msgstr "Puedes cambiar estas opciones en cualquier momento en Configuración."
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"

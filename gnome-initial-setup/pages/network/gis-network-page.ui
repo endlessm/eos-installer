@@ -15,7 +15,9 @@
         <property name="hexpand">False</property>
         <property name="halign">start</property>
         <property name="valign">start</property>
-        <property name="margin-bottom">18</property>
+        <property name="xalign">0</property>
+        <property name="yalign">0</property>
+        <property name="margin-bottom">8</property>
         <attributes>
           <attribute name="weight" value="bold"/>
           <attribute name="scale" value="1.2"/>
@@ -24,6 +26,50 @@
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="network-subtitle1">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">Do you have wireless internet (WiFi)? If you do, connect your computer to the internet by clicking on the name of your WiFi network and entering the network password. This password may be different from your computer password.</property>
+	<property name="wrap">True</property>
+        <property name="hexpand">False</property>
+        <property name="halign">start</property>
+        <property name="valign">start</property>
+        <property name="xalign">0</property>
+        <property name="yalign">0</property>
+        <property name="margin-bottom">2</property>
+        <attributes>
+          <attribute name="scale" value="0.8"/>
+        </attributes>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="network-subtitle2">
+        <property name="visible">True</property>
+        <property name="label" translatable="yes">TIP: You can use your computer without internet if you do not have a connection now. If you get an internet connection in the future, you can set it up in "Network Settings."</property>
+        <property name="wrap">True</property>
+        <property name="hexpand">False</property>
+        <property name="halign">start</property>
+        <property name="valign">start</property>
+        <property name="xalign">0</property>
+        <property name="yalign">0</property>
+        <property name="margin-bottom">18</property>
+        <attributes>
+          <attribute name="scale" value="0.8"/>
+        </attributes>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">2</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
@@ -51,7 +97,7 @@
       </object>
       <packing>
         <property name="left_attach">0</property>
-        <property name="top_attach">1</property>
+        <property name="top_attach">3</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-09 12:54-0700\n"
+"POT-Creation-Date: 2014-07-23 07:32-0700\n"
 "PO-Revision-Date: 2014-02-28 14:30+0630\n"
 "Last-Translator: \n"
 "Language-Team: Kannada <kn@li.org>\n"
@@ -45,32 +45,32 @@ msgstr "ಹೊಸ ಬಳಕೆದಾರ ಕ್ರಮಕ್ಕೆ ಒತ್ತಾ
 msgid "- GNOME initial setup"
 msgstr "- GNOME ಆರಂಭಿಕ ಏರ್ಪಾಡು"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
 msgid "No password"
 msgstr "ಗುಪ್ತಪದ ಇಲ್ಲ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:332
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:430
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
 msgid "Passwords do not match"
 msgstr "ಗುಪ್ತಪದಗಳು ತಾಳೆಯಾಗುವುದಿಲ್ಲ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:550
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:553
 msgid "Failed to register account"
 msgstr "ಖಾತೆಯನ್ನು ನೋಂದಾಯಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:758
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:761
 msgid "No supported way to authenticate with this domain"
 msgstr "ಈ ಡೊಮೇನ್‌ನೊಂದಿಗೆ ದೃಢೀಕರಿಸಲು ಯಾವುದೆ ಬೆಂಬಲಿತ ಮಾರ್ಗವಿಲ್ಲ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:798
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:801
 msgid "Failed to join domain"
 msgstr "ಡೊಮೇನ್ ಅನ್ನು ಸೇರುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:866
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:869
 msgid "Failed to log into domain"
 msgstr "ಡೊಮೇನ್ ಗೆ ಪ್ರವೇಶಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1258
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1261
 msgid "Login"
 msgstr "ಪ್ರವೇಶ"
 
@@ -113,34 +113,30 @@ msgid "A_utomatic Login"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid "Enable _Shared Account"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "page 1"
 msgstr "ಪುಟ 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Create an Enterprise Account"
 msgstr "ಒಂದು ಎಂಟರ್ಪ್ರೈಸ್ ಖಾತೆಯನ್ನು ರಚಿಸಿ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "_Domain"
 msgstr "ಡೊಮೇನ್ (_D)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "Enterprise domain or realm name"
 msgstr "ಎಂಟರ್ಪ್ರೈಸ್ ಡೊಮೈನ್ ಅಥವ ಕ್ಷೇತ್ರದ ಹೆಸರು"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "C_ontinue"
 msgstr "ಮುಂದುವರೆ (_o)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Domain Administrator Login"
 msgstr "ಡೊಮೇನ್ ವ್ಯವಸ್ಥಾಪಕ ಪ್ರವೇಶ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -152,15 +148,15 @@ msgstr ""
 "ಗುಪ್ತಪದವನ್ನು ಇಲ್ಲಿ ನಮೂದಿಸಲು ಸೂಚಿಸಿ, ಮತ್ತು ನಿಮ್ಮ ಗಣಕಕ್ಕಾಗಿ ವಿಶಿಷ್ಟವಾದ\n"
 "ಹೆಸರನ್ನು ಆರಿಸಿ."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid "_Computer"
 msgstr "ಗಣಕ (_C)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
 msgid "Administrator _Name"
 msgstr "ವ್ಯವಸ್ಥಾಪಕದ ಹೆಸರು (_N)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
 msgid "Administrator Password"
 msgstr "ವ್ಯವಸ್ಥಾಪಕ ದಾಟುಪದ"
 
@@ -375,7 +371,7 @@ msgstr "ಯಾವುದೆ ಇನ್‌ಪುಟ್ ಆಕರಗಳು ಕಂಡ
 msgid "Other"
 msgstr "ಇತರೆ"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:169
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
 #, fuzzy
 msgid "Keyboard Layouts"
 msgstr "ಕೀಲಿಮಣೆ ವಿನ್ಯಾಸಗಳನ್ನು ಆರಿಸಿ"
@@ -401,90 +397,90 @@ msgstr "ಸುಸ್ವಾಗತ"
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:627
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
 msgstr "ಒಂದು ಸ್ಥಳಕ್ಕಾಗಿ ಹುಡುಕು"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:759
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:774
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "ಸ್ಥಳ"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
+msgid "January"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
+msgid "February"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
+msgid "March"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
+msgid "April"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+msgid "May"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+msgid "June"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+msgid "July"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
+msgid "August"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
+msgid "September"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
+msgid "October"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
+msgid "November"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
+msgid "December"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
 msgstr "ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಆರಿಸಿ"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
 msgid "_Determine your location automatically"
 msgstr "ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ನಿರ್ಧರಿಸಿ (_D)"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
 msgstr "ಕಾಲ ವಲಯ"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 #, fuzzy
 msgid "Network Time"
 msgstr "ಜಾಲಬಂಧ"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
+#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
-msgid ":"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
-msgid "January"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
-msgid "February"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
-msgid "March"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
-msgid "April"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
-msgid "May"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
-msgid "June"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
-msgid "July"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
-msgid "August"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-msgid "September"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
-msgid "October"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
-msgid "November"
-msgstr ""
-
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
-msgid "December"
+msgid ":"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:305
