@@ -15,6 +15,8 @@
         <property name="hexpand">False</property>
         <property name="halign">start</property>
         <property name="valign">start</property>
+        <property name="xalign">0</property>
+        <property name="yalign">0</property>
         <property name="margin-bottom">8</property>
         <attributes>
           <attribute name="weight" value="bold"/>
@@ -36,6 +38,8 @@
         <property name="hexpand">False</property>
         <property name="halign">start</property>
         <property name="valign">start</property>
+        <property name="xalign">0</property>
+        <property name="yalign">0</property>
         <property name="margin-bottom">2</property>
         <attributes>
           <attribute name="scale" value="0.8"/>
@@ -56,6 +60,8 @@
         <property name="hexpand">False</property>
         <property name="halign">start</property>
         <property name="valign">start</property>
+        <property name="xalign">0</property>
+        <property name="yalign">0</property>
         <property name="margin-bottom">18</property>
         <attributes>
           <attribute name="scale" value="0.8"/>
