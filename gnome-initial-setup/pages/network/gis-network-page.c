@@ -66,6 +66,21 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisNetworkPage, gis_network_page, GIS_TYPE_PAGE);
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
 
+static void
+sync_page_complete (GisNetworkPage *page)
+{
+  GisNetworkPagePrivate *priv = gis_network_page_get_instance_private (page);
+  GtkWidget *widget;
+  gboolean skip_network, network_configured;
+
+  widget = WID ("skip-network-button");
+  skip_network = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+  network_configured = !!(nm_client_get_state (priv->nm_client) ==
+                          NM_STATE_CONNECTED_GLOBAL);
+
+  gis_page_set_complete (GIS_PAGE (page), skip_network || network_configured);
+}
+
 static GPtrArray *
 get_strongest_unique_aps (const GPtrArray *aps)
 {
@@ -561,7 +576,7 @@ gis_network_page_constructed (GObject *object)
   DBusGConnection *bus;
   GError *error;
   gboolean visible = TRUE;
-  GtkWidget *box;
+  GtkWidget *box, *skip_button;
 
   G_OBJECT_CLASS (gis_network_page_parent_class)->constructed (object);
 
@@ -573,6 +588,8 @@ gis_network_page_constructed (GObject *object)
 
   g_signal_connect (priv->nm_client, "notify::active-connections",
                     G_CALLBACK (active_connections_changed), page);
+  g_signal_connect_swapped (priv->nm_client, "notify::state",
+                            G_CALLBACK (sync_page_complete), page);
 
   devices = nm_client_get_devices (priv->nm_client);
   if (devices) {
@@ -619,9 +636,16 @@ gis_network_page_constructed (GObject *object)
   g_signal_connect (box, "child-activated",
                     G_CALLBACK (child_activated), page);
 
+  skip_button = WID ("skip-network-button");
+
+  g_object_bind_property (skip_button, "active", box, "sensitive",
+                          G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
+  g_signal_connect_swapped (skip_button, "notify::active",
+                            G_CALLBACK (sync_page_complete), page);
+
   refresh_wireless_list (page);
 
-  gis_page_set_complete (GIS_PAGE (page), TRUE);
+  gis_page_set_complete (GIS_PAGE (page), FALSE);
 
  out:
   gtk_widget_set_visible (GTK_WIDGET (page), visible);
