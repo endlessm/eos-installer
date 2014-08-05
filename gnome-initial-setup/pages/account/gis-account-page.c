@@ -480,7 +480,8 @@ local_create_user (GisAccountPage *page)
   username = gtk_combo_box_text_get_active_text (OBJ(GtkComboBoxText*, "account-username-combo"));
   fullname = gtk_entry_get_text (OBJ (GtkEntry*, "account-fullname-entry"));
   password = gtk_entry_get_text (OBJ (GtkEntry*, "account-password-entry"));
-  autologin_active = gtk_switch_get_active (OBJ(GtkSwitch*, "account-autologin-switch"));
+  autologin_active = gtk_toggle_button_get_active (OBJ (GtkToggleButton*,
+                                                   "account-autologin-button"));
 
   priv->act_user = act_user_manager_create_user (priv->act_client, username, fullname, priv->account_type, &error);
   if (error != NULL) {
