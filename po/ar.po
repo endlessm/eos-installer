@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-31 19:42-0700\n"
-"PO-Revision-Date: 2014-08-05 21:26+0000\n"
-"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
+"POT-Creation-Date: 2014-08-05 14:30-0700\n"
+"PO-Revision-Date: 2014-08-05 22:22+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,23 +53,23 @@ msgstr "بلا كلمة السر"
 msgid "Passwords do not match"
 msgstr "لا تتطابق كلمتا السر"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:553
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:554
 msgid "Failed to register account"
 msgstr "فشل تسجيل الحساب"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:761
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:762
 msgid "No supported way to authenticate with this domain"
 msgstr "لا توجد طريقة مدعومة للاستيثاق مع هذا النطاق"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:801
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:802
 msgid "Failed to join domain"
 msgstr "فشل الانضمام إلى النطاق"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:869
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:870
 msgid "Failed to log into domain"
 msgstr "فشل الولوج إلى النطاق"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1261
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
 msgid "Login"
 msgstr "الولوج"
 
@@ -483,24 +483,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:305
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "أخرى…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:343
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
 msgid "Network is not available."
 msgstr "لا تتوفر شبكة."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:345
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
 msgid "No network devices found."
 msgstr "لم يُعثر أجهزة اتصال شبكي."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:395
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
 msgid "Checking for available wireless networks"
 msgstr "يبحث عن شبكات اللاسلكي المتاحة"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:647
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
 msgid "Network"
 msgstr "الشبكة"
 
@@ -525,6 +525,10 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
+msgid "_Skip WiFi setup"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
