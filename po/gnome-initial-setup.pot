@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-05 14:30-0700\n"
+"POT-Creation-Date: 2014-08-07 23:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,11 +35,11 @@ msgstr ""
 msgid "_Cancel"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:241
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:245
+#: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
 msgstr ""
 
@@ -244,6 +244,30 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+
+#. Translators note: this is the same label we use in the
+#. * Display page of the system settings
+#.
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
+msgid "Could not get screen information"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Display"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
+msgid ""
+"Endless can be used with computer monitors or television sets. If you have a "
+"television set you may need to adjust it to see the full contents of the "
+"screen."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
+msgid "Are you using Endless with a television set?"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93

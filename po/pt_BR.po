@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-05 14:30-0700\n"
-"PO-Revision-Date: 2014-08-06 05:07+0000\n"
+"POT-Creation-Date: 2014-08-07 23:21+0100\n"
+"PO-Revision-Date: 2014-08-07 23:11+0000\n"
 "Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/gnome-initial-setup/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -41,11 +41,11 @@ msgstr "_Anterior"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:241
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
 msgstr "Forçar modo novo usuário"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:245
+#: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
 msgstr "- Configurações iniciais do GNOME"
 
@@ -252,6 +252,29 @@ msgid ""
 " ➣ any of the characters '.', '-' and '_'"
 msgstr "O nome de usuário deve ser composto apenas por:\n ➣ letras do alfabeto português\n ➣ números\n ➣ qualquer um dos caracteres '.', '-' e '_'"
 
+#. Translators note: this is the same label we use in the
+#. * Display page of the system settings
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
+msgid "Could not get screen information"
+msgstr "Não foi possível obter informação sobre a tela"
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Display"
+msgstr "Tela"
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
+msgid ""
+"Endless can be used with computer monitors or television sets. If you have a"
+" television set you may need to adjust it to see the full contents of the "
+"screen."
+msgstr "Endless pode ser usado com monitores de computador ou televisões. Caso você tenha um televisão, poderá ser necessário ajusta-la para ver todo o conteúdo da tela."
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
+msgid "Are you using Endless with a television set?"
+msgstr "Você esta usando Endless conectado a uma televisão?"
+
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
 msgid ""
 "Endless collects metrics on user behavior and actions.\n"
@@ -381,15 +404,15 @@ msgstr "Outro"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
 msgid "Keyboard Layouts"
-msgstr "Disposições de teclado"
+msgstr "Definições de teclado"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
-msgstr "Selecionar as disposições do teclado"
+msgstr "Selecionar as definições do teclado"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
 msgid "Add a Keyboard Layout"
-msgstr "Adicionar uma disposição de teclado"
+msgstr "Adicionar uma definição de teclado"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
@@ -405,12 +428,12 @@ msgstr "Desligar"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
-msgstr "Pesquisar por local"
+msgstr "Pesquisar uma localização"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:774
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
-msgstr "Local"
+msgstr "Localização"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
@@ -462,11 +485,11 @@ msgstr "Dezembro"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
-msgstr "Selecione seu local"
+msgstr "Selecione sua localização"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
 msgid "_Determine your location automatically"
-msgstr "_Determinar seu local automaticamente"
+msgstr "_Determinar sua localização automaticamente"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
@@ -499,11 +522,11 @@ msgstr "A rede não está disponível."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:360
 msgid "No network devices found."
-msgstr "Nenhum dispositivo de rede localizado."
+msgstr "Nenhum dispositivo de rede foi encontrado."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:410
 msgid "Checking for available wireless networks"
-msgstr "Verificando por redes sem fio disponíveis"
+msgstr "Verificando redes sem fio disponíveis"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:671
 msgid "Network"

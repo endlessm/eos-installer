@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-05 14:30-0700\n"
-"PO-Revision-Date: 2014-08-05 22:46+0000\n"
+"POT-Creation-Date: 2014-08-07 23:21+0100\n"
+"PO-Revision-Date: 2014-08-07 22:35+0000\n"
 "Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -40,11 +40,11 @@ msgstr "_Anterior"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:241
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
 msgstr "Forzar el modo del nuevo usuario"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:245
+#: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
 msgstr "- Configuración inicial de GNOME"
 
@@ -250,6 +250,29 @@ msgid ""
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr "El nombre de usuario debe consistir de:\n ➣ letras del alfabeto inglés\n ➣ dígitos\n ➣ cualquiera de los caracteres «.», «-» y «_»"
+
+#. Translators note: this is the same label we use in the
+#. * Display page of the system settings
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
+msgid "Could not get screen information"
+msgstr "No pudo obtenerse la información de la pantalla"
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Display"
+msgstr "Pantalla"
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
+msgid ""
+"Endless can be used with computer monitors or television sets. If you have a"
+" television set you may need to adjust it to see the full contents of the "
+"screen."
+msgstr "Endless puede ser usada con monitores de computadora o televisiones. Si tú tienes una televisión puede ser que necesites ajustarla para ver el contenido completo de la pantalla."
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
+msgid "Are you using Endless with a television set?"
+msgstr "Estás utilizando Endless con una televisión?"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
 msgid ""
