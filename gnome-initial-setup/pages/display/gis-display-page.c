@@ -100,8 +100,6 @@ read_screen_config (GisDisplayPage *page)
 
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_button),
                                 gnome_rr_output_info_get_underscanning (output));
-
-
 }
 
 static void
@@ -112,6 +110,9 @@ toggle_overscan (GisDisplayPage *page)
   gboolean value = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (check));
   GError *error;
 
+  if (value == gnome_rr_output_info_get_underscanning  (priv->current_output))
+    return;
+
   gnome_rr_output_info_set_underscanning (priv->current_output, value);
 
   gnome_rr_config_sanitize (priv->current_config);
@@ -119,6 +120,8 @@ toggle_overscan (GisDisplayPage *page)
 
   error = NULL;
   gnome_rr_config_apply_persistent (priv->current_config, priv->screen, &error);
+
+  read_screen_config (page);
 
   if (error != NULL)
     {
