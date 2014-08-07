@@ -42,6 +42,7 @@
 
 #include "pages/language/gis-language-page.h"
 #include "pages/keyboard/gis-keyboard-page.h"
+#include "pages/display/gis-display-page.h"
 #include "pages/endless-eula/gis-endless-eula-page.h"
 #include "pages/eulas/gis-eula-pages.h"
 #include "pages/network/gis-network-page.h"
@@ -55,6 +56,7 @@
 static gboolean force_new_user_mode;
 static const gchar *system_setup_pages[] = {
     "account",
+    "display",
     "endless_eula",
     "location"
 };
@@ -71,6 +73,7 @@ typedef struct {
 static PageData page_table[] = {
   PAGE (language),
   PAGE (keyboard),
+  PAGE (display),
   PAGE (eula),
   PAGE (endless_eula),
   PAGE (network),
