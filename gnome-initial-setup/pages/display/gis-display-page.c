@@ -203,6 +203,7 @@ gis_display_page_class_init (GisDisplayPageClass *klass)
 static void
 gis_display_page_init (GisDisplayPage *page)
 {
+  g_resources_register (display_get_resource ());
 }
 
 void
