@@ -147,7 +147,6 @@ gis_display_page_constructed (GObject *object)
 {
   GisDisplayPage *page = GIS_DISPLAY_PAGE (object);
   GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
-  GError *error = NULL;
   GtkWidget *widget;
 
   G_OBJECT_CLASS (gis_display_page_parent_class)->constructed (object);
