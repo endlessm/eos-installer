@@ -163,7 +163,7 @@ get_access_point_security (NMAccessPoint *ap)
 }
 
 static gint
-ap_sort (gconstpointer a, gconstpointer b, gpointer data)
+ap_sort (GtkWidget *a, GtkWidget *b, gpointer data)
 {
         guint sa, sb;
 

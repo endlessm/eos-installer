@@ -466,11 +466,11 @@ local_create_user (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
   const gchar *username;
-  const gchar *old_username;
   const gchar *password;
   const gchar *old_password;
   const gchar *fullname;
   const gchar *language;
+  ActUser *old_user;
   gboolean autologin_active;
   GSettings *lock_settings;
   GError *error = NULL;
@@ -490,7 +490,7 @@ local_create_user (GisAccountPage *page)
     return;
   }
 
-  gis_driver_get_user_permissions (GIS_PAGE (page)->driver, &old_username, &old_password);
+  gis_driver_get_user_permissions (GIS_PAGE (page)->driver, &old_user, &old_password);
   if (!old_password)
     old_password = "gis";
 
