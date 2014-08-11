@@ -39,6 +39,8 @@ typedef struct {
   GnomeRRScreen *screen;
   GnomeRRConfig *current_config;
   GnomeRROutputInfo *current_output;
+
+  guint screen_changed_id;
 } GisDisplayPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisDisplayPage, gis_display_page, GIS_TYPE_PAGE);
@@ -136,6 +138,12 @@ gis_display_page_dispose (GObject *gobject)
   GisDisplayPage *page = GIS_DISPLAY_PAGE (gobject);
   GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
 
+  if (priv->screen_changed_id != 0)
+    {
+      g_signal_handler_disconnect (priv->screen, priv->screen_changed_id);
+      priv->screen_changed_id = 0;
+    }
+
   g_clear_object (&priv->current_config);
   g_clear_object (&priv->screen);
 
@@ -176,6 +184,10 @@ gis_display_page_constructed (GObject *object)
       return;
     }
 
+  priv->screen_changed_id = g_signal_connect_swapped (priv->screen,
+                                                      "changed",
+                                                      G_CALLBACK (read_screen_config),
+                                                      page);
   read_screen_config (page);
 
   widget = WID ("overscan_checkbutton");
