@@ -118,6 +118,23 @@ toggle_overscan (GisDisplayPage *page)
     }
 }
 
+static gboolean
+should_display_overscan (GisDisplayPage *page)
+{
+  GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
+  GnomeRROutputInfo *output = priv->current_output;
+  char *output_name;
+  int width, height;
+
+  output_name = gnome_rr_output_info_get_name (output);
+  gnome_rr_output_info_get_geometry (output, NULL, NULL, &width, &height);
+
+  return strncmp (output_name, "HDMI", 4) == 0 &&
+    ((width == 1920 && height == 1080) ||
+     (width == 1440 && height == 1080) ||
+     (width == 1280 && height == 720));
+}
+
 static void
 gis_display_page_dispose (GObject *gobject)
 {
@@ -165,6 +182,12 @@ gis_display_page_constructed (GObject *object)
   if (!read_screen_config (page))
     {
       g_critical ("Could not get primary output information. Hiding overscan page.");
+      goto out;
+    }
+
+  if (!should_display_overscan (page))
+    {
+      g_debug ("Not using an HD resolution on HDMI. Hiding overscan page.");
       goto out;
     }
 
