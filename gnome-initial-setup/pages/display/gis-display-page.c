@@ -55,7 +55,6 @@ read_screen_config (GisDisplayPage *page)
   GnomeRRConfig *current;
   GnomeRROutputInfo **outputs;
   GnomeRROutputInfo *output;
-  GtkWidget *check_button;
   int i;
 
   gnome_rr_screen_refresh (priv->screen, NULL);
@@ -84,18 +83,14 @@ read_screen_config (GisDisplayPage *page)
   if (priv->current_output == NULL)
     return FALSE;
 
-  check_button = WID ("overscan_checkbutton");
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_button),
-                                gnome_rr_output_info_get_underscanning (output));
   return TRUE;
 }
 
 static void
-toggle_overscan (GisDisplayPage *page)
+toggle_overscan (GisDisplayPage *page,
+                 gboolean value)
 {
   GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
-  GtkWidget *check = WID ("overscan_checkbutton");
-  gboolean value = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (check));
   GError *error;
 
   if (value == gnome_rr_output_info_get_underscanning  (priv->current_output))
@@ -136,6 +131,43 @@ should_display_overscan (GisDisplayPage *page)
 }
 
 static void
+update_overscan (GisDisplayPage *page)
+{
+  GtkWidget *widget;
+  gboolean value;
+
+  widget = WID ("overscan_on");
+  value = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+  toggle_overscan (page, value);
+}
+
+static void
+next_page_cb (GisAssistant *assistant,
+              GisPage *which_page,
+              GisPage *this_page)
+{
+  if (which_page == this_page)
+    update_overscan (GIS_DISPLAY_PAGE (this_page));
+}
+
+static void
+overscan_radio_toggled (GtkWidget *radio,
+                        GisDisplayPage *page)
+{
+  GtkWidget *widget;
+
+  widget = WID ("overscan_default_selection");
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+    {
+      gis_page_set_complete (GIS_PAGE (page), FALSE);
+      return;
+    }
+
+  /* user has made a choice, page is complete */
+  gis_page_set_complete (GIS_PAGE (page), TRUE);
+}
+
+static void
 gis_display_page_dispose (GObject *gobject)
 {
   GisDisplayPage *page = GIS_DISPLAY_PAGE (gobject);
@@ -158,6 +190,7 @@ gis_display_page_constructed (GObject *object)
 {
   GisDisplayPage *page = GIS_DISPLAY_PAGE (object);
   GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
+  GisAssistant *assistant;
   GtkWidget *widget;
   GError *error = NULL;
   gboolean visible = FALSE;
@@ -166,9 +199,6 @@ gis_display_page_constructed (GObject *object)
 
   gtk_container_add (GTK_CONTAINER (page), WID ("display-page"));
   gtk_widget_show (GTK_WIDGET (page));
-
-  /* the page is always complete */
-  gis_page_set_complete (GIS_PAGE (page), TRUE);
 
   priv->screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
   if (priv->screen == NULL)
@@ -197,10 +227,16 @@ gis_display_page_constructed (GObject *object)
                                                       G_CALLBACK (read_screen_config),
                                                       page);
 
-  widget = WID ("overscan_checkbutton");
-  g_signal_connect_swapped (widget, "toggled",
-                            G_CALLBACK (toggle_overscan),
-                            page);
+  assistant = gis_driver_get_assistant (GIS_PAGE (page)->driver);
+  g_signal_connect (assistant, "next-page", G_CALLBACK (next_page_cb), page);
+
+  widget = WID ("overscan_on");
+  g_signal_connect (widget, "toggled",
+                    G_CALLBACK (overscan_radio_toggled), page);
+
+  widget = WID ("overscan_off");
+  g_signal_connect (widget, "toggled",
+                    G_CALLBACK (overscan_radio_toggled), page);
 
  out:
   gtk_widget_set_visible (GTK_WIDGET (page), visible);
