@@ -48,7 +48,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDisplayPage, gis_display_page, GIS_TYPE_PAGE);
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
 
-static void
+static gboolean
 read_screen_config (GisDisplayPage *page)
 {
   GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
@@ -80,28 +80,14 @@ read_screen_config (GisDisplayPage *page)
         }
     }
 
-  check_button = WID ("overscan_checkbutton");
-
   priv->current_output = output;
   if (priv->current_output == NULL)
-    {
-      GtkWidget *label, *widget;
+    return FALSE;
 
-      gtk_widget_hide (check_button);
-
-      /* Translators note: this is the same label we use in the
-       * Display page of the system settings
-       */
-      label = gtk_label_new (_("Could not get screen information"));
-      widget = WID ("box2");
-      gtk_container_add (GTK_CONTAINER (widget), label);
-      gtk_widget_show (label);
-
-      return;
-    }
-
+  check_button = WID ("overscan_checkbutton");
   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_button),
                                 gnome_rr_output_info_get_underscanning (output));
+  return TRUE;
 }
 
 static void
@@ -132,6 +118,23 @@ toggle_overscan (GisDisplayPage *page)
     }
 }
 
+static gboolean
+should_display_overscan (GisDisplayPage *page)
+{
+  GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
+  GnomeRROutputInfo *output = priv->current_output;
+  char *output_name;
+  int width, height;
+
+  output_name = gnome_rr_output_info_get_name (output);
+  gnome_rr_output_info_get_geometry (output, NULL, NULL, &width, &height);
+
+  return strncmp (output_name, "HDMI", 4) == 0 &&
+    ((width == 1920 && height == 1080) ||
+     (width == 1440 && height == 1080) ||
+     (width == 1280 && height == 720));
+}
+
 static void
 gis_display_page_dispose (GObject *gobject)
 {
@@ -156,6 +159,8 @@ gis_display_page_constructed (GObject *object)
   GisDisplayPage *page = GIS_DISPLAY_PAGE (object);
   GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
   GtkWidget *widget;
+  GError *error = NULL;
+  gboolean visible = FALSE;
 
   G_OBJECT_CLASS (gis_display_page_parent_class)->constructed (object);
 
@@ -165,35 +170,40 @@ gis_display_page_constructed (GObject *object)
   /* the page is always complete */
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 
-  priv->screen = gnome_rr_screen_new (gdk_screen_get_default (), NULL);
+  priv->screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
   if (priv->screen == NULL)
     {
-      GtkWidget *label;
-
-      widget = WID ("overscan_checkbutton");
-      gtk_widget_hide (widget);
-
-      /* Translators note: this is the same label we use in the
-       * Display page of the system settings
-       */
-      label = gtk_label_new (_("Could not get screen information"));
-      widget = WID ("box2");
-      gtk_container_add (GTK_CONTAINER (widget), label);
-      gtk_widget_show (label);
-
-      return;
+      g_critical ("Could not get screen information: %s. Hiding overscan page.",
+                  error->message);
+      g_error_free (error);
+      goto out;
     }
 
+  if (!read_screen_config (page))
+    {
+      g_critical ("Could not get primary output information. Hiding overscan page.");
+      goto out;
+    }
+
+  if (!should_display_overscan (page))
+    {
+      g_debug ("Not using an HD resolution on HDMI. Hiding overscan page.");
+      goto out;
+    }
+
+  visible = TRUE;
   priv->screen_changed_id = g_signal_connect_swapped (priv->screen,
                                                       "changed",
                                                       G_CALLBACK (read_screen_config),
                                                       page);
-  read_screen_config (page);
 
   widget = WID ("overscan_checkbutton");
   g_signal_connect_swapped (widget, "toggled",
                             G_CALLBACK (toggle_overscan),
                             page);
+
+ out:
+  gtk_widget_set_visible (GTK_WIDGET (page), visible);
 }
 
 static void
