@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 07:32-0700\n"
+"POT-Creation-Date: 2014-08-07 23:21+0100\n"
 "PO-Revision-Date: 2013-09-14 23:31+0200\n"
 "Last-Translator: Josep Sànchez <papapep@gmx.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -36,11 +36,11 @@ msgstr "A_nterior"
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:241
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
 msgstr "Força el mode d'usuari nou"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:245
+#: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
 msgstr "- Configuració inicial del GNOME"
 
@@ -53,89 +53,109 @@ msgstr "No hi ha contrasenya"
 msgid "Passwords do not match"
 msgstr "Les contrasenyes no coincideixen"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:553
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:554
 msgid "Failed to register account"
 msgstr "S'ha produït un error en registrar el compte"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:761
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:762
 msgid "No supported way to authenticate with this domain"
 msgstr "No hi ha cap manera compatible per autenticar-se amb este domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:801
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:802
 msgid "Failed to join domain"
 msgstr "S'ha produït un error en unir-se al domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:869
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:870
 msgid "Failed to log into domain"
 msgstr "S'ha produït un error en iniciar la sessió al domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1261
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
 msgid "Login"
 msgstr "Entrada"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-msgid "Create a Local Account"
+#, fuzzy
+msgid "Create a Personal Account"
 msgstr "Crea un compte local"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
+msgid ""
+"Create a new account in just a few steps: type in your full name, your "
+"desired username and a password that you'll remember."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+msgid ""
+"You may want to write down your password. Make sure you pay attention to "
+"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
+"appear at the right side of the space in which you're writing. You'll need "
+"to type in this password identically each time you access your account."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_Nom complet"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Username"
 msgstr "Nom d'_usuari"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
-msgid "This will be used to name your home folder and can't be changed."
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#, fuzzy
+msgid ""
+"The username will be used to name your personal folder, and it cannot be "
+"changed."
 msgstr ""
 "Això es farà servir com a nom per la vostra carpeta d'usuari i no es pot "
 "canviar."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
 msgstr "Contrase_nya"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "_Confirm password"
 msgstr "Confirma la c_ontrasenya"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"Try to use at least 8 different characters. Mix upper and lower case and use "
-"a number or two."
+"To make your password more secure, you can use letters and numbers together. "
+"This is optional."
 msgstr ""
-"Intenteu utilitzar com a mínim 8 caràcters diferents. Mescleu majúscules i "
-"minúscules i utilitzeu algun número."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "A_utomatic Login"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
 msgstr "pàgina 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
 msgstr "Creació d'una entrada corporativa"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
 msgstr "_Domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
 msgstr "Domini corporatiu o nom del regne"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
 msgstr "C_ontinua"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "Entrada de l'administrador del domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -147,15 +167,15 @@ msgstr ""
 "introduïsca ací la seua contrasenya i escolliu un nom\n"
 "d'ordinador únic pel vostre ordinador."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
 msgstr "_Ordinador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
 msgstr "_Nom de l'administrador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
 msgstr "Contrasenya de l'administrador"
 
@@ -238,6 +258,30 @@ msgstr ""
 " ➣ lletres de l'alfabet anglés\n"
 " ➣ números\n"
 " ➣ qualsevol dels caràcters «.», «-» i «_»"
+
+#. Translators note: this is the same label we use in the
+#. * Display page of the system settings
+#.
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
+msgid "Could not get screen information"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Display"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
+msgid ""
+"Endless can be used with computer monitors or television sets. If you have a "
+"television set you may need to adjust it to see the full contents of the "
+"screen."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
+msgid "Are you using Endless with a television set?"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
 msgid ""
@@ -481,24 +525,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:305
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Altres…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:343
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
 msgid "Network is not available."
 msgstr "No hi ha cap xarxa disponible."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:345
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
 msgid "No network devices found."
 msgstr "No s'ha trobat cap dispositiu de xarxa."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:395
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
 msgid "Checking for available wireless networks"
 msgstr "S'està comprovant si hi ha xarxes sense fil disponibles"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:647
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
 msgid "Network"
 msgstr "Xarxa"
 
@@ -507,9 +551,27 @@ msgid "Wireless Networks"
 msgstr "Xarxes sense fil"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+msgid ""
+"Do you have wireless internet (WiFi)? If you do, connect your computer to "
+"the internet by clicking on the name of your WiFi network and entering the "
+"network password. This password may be different from your computer password."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
+msgid ""
+"TIP: You can use your computer without internet if you do not have a "
+"connection now. If you get an internet connection in the future, you can set "
+"it up in \"Network Settings.\""
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 #, fuzzy
 msgid "No wireless available"
 msgstr "No hi ha cap xarxa disponible."
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
+msgid "_Skip WiFi setup"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
@@ -532,6 +594,13 @@ msgstr ""
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Comenceu a utilitzar el GNOME 3"
+
+#~ msgid ""
+#~ "Try to use at least 8 different characters. Mix upper and lower case and "
+#~ "use a number or two."
+#~ msgstr ""
+#~ "Intenteu utilitzar com a mínim 8 caràcters diferents. Mescleu majúscules "
+#~ "i minúscules i utilitzeu algun número."
 
 #~ msgid "Strength: %s"
 #~ msgstr "Força: %s"
