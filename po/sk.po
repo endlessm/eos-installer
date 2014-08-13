@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 07:32-0700\n"
+"POT-Creation-Date: 2014-08-07 23:21+0100\n"
 "PO-Revision-Date: 2013-09-03 10:38+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
@@ -41,12 +41,12 @@ msgid "_Cancel"
 msgstr "_Zrušiť"
 
 # cmd desc
-#: ../gnome-initial-setup/gnome-initial-setup.c:241
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
 msgstr "Vynúti režim nového používateľa"
 
 # cmd desc
-#: ../gnome-initial-setup/gnome-initial-setup.c:245
+#: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
 msgstr "- Prvotné nastavenie prostredia GNOME"
 
@@ -59,101 +59,120 @@ msgstr "Bez hesla"
 msgid "Passwords do not match"
 msgstr "Heslá sa nezhodujú"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:553
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:554
 msgid "Failed to register account"
 msgstr "Zlyhala registrácia účtu"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:761
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:762
 msgid "No supported way to authenticate with this domain"
 msgstr "Žiadny spôsob overenia nie je pre túto doménu podporovaný"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:801
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:802
 msgid "Failed to join domain"
 msgstr "Zlyhalo pripojenie k doméne"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:869
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:870
 msgid "Failed to log into domain"
 msgstr "Zlyhalo prihlásenie do domény"
 
 # page title
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1261
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
 msgid "Login"
 msgstr "Prihlásenie"
 
 # GtkLabel label
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-msgid "Create a Local Account"
+#, fuzzy
+msgid "Create a Personal Account"
 msgstr "Vytvorte miestny účet"
 
-# GtkLabel label
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
+msgid ""
+"Create a new account in just a few steps: type in your full name, your "
+"desired username and a password that you'll remember."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+msgid ""
+"You may want to write down your password. Make sure you pay attention to "
+"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
+"appear at the right side of the space in which you're writing. You'll need "
+"to type in this password identically each time you access your account."
+msgstr ""
+
+# GtkLabel label
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_Celé meno"
 
 # GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Username"
 msgstr "_Používateľské meno"
 
 # GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
-msgid "This will be used to name your home folder and can't be changed."
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#, fuzzy
+msgid ""
+"The username will be used to name your personal folder, and it cannot be "
+"changed."
 msgstr ""
 "Toto sa použije ako názov vášho domovského priečinka a nebude možné ho "
 "zmeniť."
 
 # GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
 msgstr "_Heslo"
 
 # GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "_Confirm password"
 msgstr "Po_tvrdenie hesla"
 
-# GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"Try to use at least 8 different characters. Mix upper and lower case and use "
-"a number or two."
+"To make your password more secure, you can use letters and numbers together. "
+"This is optional."
 msgstr ""
-"Skúste použiť aspoň 8 rôznych znakov. Pomiešajte malé a veľké písmená a "
-"použite zopár číslic."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "A_utomatic Login"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr ""
+
 # tab
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
 msgstr "strana 1"
 
 # GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
 msgstr "Vytvorte firemný účet"
 
 # GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
 msgstr "_Doména"
 
 # GtkLabel label
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
 msgstr "Firemná doména alebo názov pôsobiska"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
 msgstr "P_okračovať"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "Prihlásenie správcu domény"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -165,15 +184,15 @@ msgstr ""
 "správcu siete, aby vám poskytol heslo domény a potom\n"
 "zvoľte unikátny názov pre váš počítač."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
 msgstr "_Počítač"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
 msgstr "Me_no správcu"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
 msgstr "Heslo správcu"
 
@@ -256,6 +275,30 @@ msgstr ""
 " ➣ písmen anglickej abecedy\n"
 " ➣ čísel\n"
 " ➣ ktoréhokoľvek zo znakov „.“, „-“ a „_“"
+
+#. Translators note: this is the same label we use in the
+#. * Display page of the system settings
+#.
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
+msgid "Could not get screen information"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Display"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
+msgid ""
+"Endless can be used with computer monitors or television sets. If you have a "
+"television set you may need to adjust it to see the full contents of the "
+"screen."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
+msgid "Are you using Endless with a television set?"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
 msgid ""
@@ -515,25 +558,25 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:305
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Iný…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:343
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
 msgid "Network is not available."
 msgstr "Sieť nie je dostupná."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:345
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
 msgid "No network devices found."
 msgstr "Nenašli sa žiadne sieťové zariadenia."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:395
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
 msgid "Checking for available wireless networks"
 msgstr "Kontrolujú sa dostupné bezdrôtové siete"
 
 # page title
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:647
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
 msgid "Network"
 msgstr "Sieť"
 
@@ -542,9 +585,27 @@ msgid "Wireless Networks"
 msgstr "Bezdrôtové siete"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+msgid ""
+"Do you have wireless internet (WiFi)? If you do, connect your computer to "
+"the internet by clicking on the name of your WiFi network and entering the "
+"network password. This password may be different from your computer password."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
+msgid ""
+"TIP: You can use your computer without internet if you do not have a "
+"connection now. If you get an internet connection in the future, you can set "
+"it up in \"Network Settings.\""
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 #, fuzzy
 msgid "No wireless available"
 msgstr "Sieť nie je dostupná."
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
+msgid "_Skip WiFi setup"
+msgstr ""
 
 # GtkButton label
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
@@ -570,6 +631,14 @@ msgstr "Tieto voľby môžete zmeniť kedykoľvek v Nastaveniach systému."
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Začať používať GNOME 3"
+
+# GtkLabel label
+#~ msgid ""
+#~ "Try to use at least 8 different characters. Mix upper and lower case and "
+#~ "use a number or two."
+#~ msgstr ""
+#~ "Skúste použiť aspoň 8 rôznych znakov. Pomiešajte malé a veľké písmená a "
+#~ "použite zopár číslic."
 
 #~ msgid "Strength: %s"
 #~ msgstr "Sila: %s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-23 07:32-0700\n"
+"POT-Creation-Date: 2014-08-07 23:21+0100\n"
 "PO-Revision-Date: 2012-12-23 05:45+0100\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <gnome-l10n-eo@lists.launchpad.net>\n"
@@ -37,11 +37,11 @@ msgstr ""
 msgid "_Cancel"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:241
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:245
+#: ../gnome-initial-setup/gnome-initial-setup.c:248
 #, fuzzy
 msgid "- GNOME initial setup"
 msgstr "Unua agordo"
@@ -56,88 +56,107 @@ msgstr "_Konfirmi pasvorton"
 msgid "Passwords do not match"
 msgstr "Pasvortoj ne kongruas"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:553
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:554
 msgid "Failed to register account"
 msgstr "Registri konton malsukcesis"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:761
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:762
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:801
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:802
 msgid "Failed to join domain"
 msgstr "Aniĝi al domajno malsukcesis"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:869
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:870
 msgid "Failed to log into domain"
 msgstr "Malsukcesis ensaluti en domajnon"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1261
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
 msgid "Login"
 msgstr "Ensaluti"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 #, fuzzy
-msgid "Create a Local Account"
+msgid "Create a Personal Account"
 msgstr "_Loka konto"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
+msgid ""
+"Create a new account in just a few steps: type in your full name, your "
+"desired username and a password that you'll remember."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+msgid ""
+"You may want to write down your password. Make sure you pay attention to "
+"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
+"appear at the right side of the space in which you're writing. You'll need "
+"to type in this password identically each time you access your account."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_Tuta nomo"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Username"
 msgstr "_Uzantonomo"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
-msgid "This will be used to name your home folder and can't be changed."
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#, fuzzy
+msgid ""
+"The username will be used to name your personal folder, and it cannot be "
+"changed."
 msgstr "Tio estos uzota por via hejmadosiero kaj ne eblos ŝanĝi ĝin."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
 msgstr "_Pasvorto"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "_Confirm password"
 msgstr "_Konfirmi pasvorton"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
-msgid ""
-"Try to use at least 8 different characters. Mix upper and lower case and use "
-"a number or two."
-msgstr ""
-"Provu uzi minimume 8 malsamajn signojn. Miksu grandajn kaj malgrandajn "
-"literojn kaj uzu unu aŭ du numero(j)n."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
-msgid "A_utomatic Login"
-msgstr ""
-
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid "page 1"
+msgid ""
+"To make your password more secure, you can use letters and numbers together. "
+"This is optional."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "Create an Enterprise Account"
+msgid "A_utomatic Login"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-msgid "_Domain"
-msgstr "_Domajno"
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
-msgid "Enterprise domain or realm name"
+msgid "page 1"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
-msgid "C_ontinue"
+msgid "Create an Enterprise Account"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+msgid "_Domain"
+msgstr "_Domajno"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+msgid "Enterprise domain or realm name"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+msgid "C_ontinue"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -145,15 +164,15 @@ msgid ""
 "name for your computer."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:20
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:21
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
 msgstr ""
 
@@ -231,6 +250,30 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
+msgstr ""
+
+#. Translators note: this is the same label we use in the
+#. * Display page of the system settings
+#.
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
+msgid "Could not get screen information"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Display"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
+msgid ""
+"Endless can be used with computer monitors or television sets. If you have a "
+"television set you may need to adjust it to see the full contents of the "
+"screen."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
+msgid "Are you using Endless with a television set?"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
@@ -475,25 +518,25 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:305
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
 #, fuzzy
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Alia..."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:343
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
 msgid "Network is not available."
 msgstr "Reto ne estas disponeble."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:345
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
 msgid "No network devices found."
 msgstr "Ne trovis retan aparaton."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:395
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
 msgid "Checking for available wireless networks"
 msgstr "Serĉado de disponeblaj sendrataj retoj"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:647
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
 msgid "Network"
 msgstr "Reto"
 
@@ -502,9 +545,27 @@ msgid "Wireless Networks"
 msgstr "Sendrataj retoj"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
+msgid ""
+"Do you have wireless internet (WiFi)? If you do, connect your computer to "
+"the internet by clicking on the name of your WiFi network and entering the "
+"network password. This password may be different from your computer password."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
+msgid ""
+"TIP: You can use your computer without internet if you do not have a "
+"connection now. If you get an internet connection in the future, you can set "
+"it up in \"Network Settings.\""
+msgstr ""
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 #, fuzzy
 msgid "No wireless available"
 msgstr "Reto ne estas disponeble."
+
+#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
+msgid "_Skip WiFi setup"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, fuzzy, c-format
@@ -528,6 +589,13 @@ msgstr "Vi povas ŝanĝi tiujn opciojn je ĉiu tempo en la sistemagordoj."
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Komenci uzon de GNOME 3"
+
+#~ msgid ""
+#~ "Try to use at least 8 different characters. Mix upper and lower case and "
+#~ "use a number or two."
+#~ msgstr ""
+#~ "Provu uzi minimume 8 malsamajn signojn. Miksu grandajn kaj malgrandajn "
+#~ "literojn kaj uzu unu aŭ du numero(j)n."
 
 #~ msgid "_Back"
 #~ msgstr "_Reen"

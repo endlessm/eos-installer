@@ -2,6 +2,7 @@
 <gresources>
   <gresource prefix="/org/gnome/initial-setup">
     <file preprocess="xml-stripblanks" alias="gis-display-page.ui">gis-display-page.ui</file>
+    <file>display-overscan.png</file>
   </gresource>
 </gresources>
 
