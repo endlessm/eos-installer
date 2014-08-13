@@ -131,6 +131,9 @@ set_language (GisLanguagePage *page)
   setlocale (LC_MESSAGES, priv->new_locale_id);
   gis_driver_locale_changed (driver);
 
+  /* gis spawns processes that also need to be localised */
+  g_setenv ("LC_MESSAGES", priv->new_locale_id, TRUE);
+
   if (gis_driver_get_mode (driver) == GIS_DRIVER_MODE_NEW_USER) {
       if (g_permission_get_allowed (priv->permission)) {
           set_localed_locale (page);
