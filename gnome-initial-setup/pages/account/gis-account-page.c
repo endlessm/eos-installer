@@ -1114,6 +1114,23 @@ on_entry_changed (GtkEditable *editable,
 }
 
 static void
+password_visibility_toggled (GtkToggleButton *button,
+                             GisAccountPage  *page)
+{
+  GtkWidget *password_entry = WID("account-password-entry");
+  GtkWidget *confirm_entry = WID("account-confirm-entry");
+  gboolean is_active = gtk_toggle_button_get_active (button);
+
+  gtk_entry_set_visibility (GTK_ENTRY (password_entry), !is_active);
+  gtk_entry_set_visibility (GTK_ENTRY (confirm_entry), !is_active);
+
+  if (is_active)
+    gtk_button_set_label (GTK_BUTTON (button), _("Hide password"));
+  else
+    gtk_button_set_label (GTK_BUTTON (button), _("Show password"));
+}
+
+static void
 switch_login_mode (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
@@ -1169,6 +1186,7 @@ gis_account_page_constructed (GObject *object)
   GtkWidget *username_combo;
   GtkWidget *password_entry;
   GtkWidget *confirm_entry;
+  GtkWidget *password_toggle;
 
   G_OBJECT_CLASS (gis_account_page_parent_class)->constructed (object);
 
@@ -1183,6 +1201,7 @@ gis_account_page_constructed (GObject *object)
   username_combo = WID("account-username-combo");
   password_entry = WID("account-password-entry");
   confirm_entry = WID("account-confirm-entry");
+  password_toggle = WID("account-password-visibility-toggle");
 
   g_signal_connect (fullname_entry, "notify::text",
                     G_CALLBACK (fullname_changed), page);
@@ -1196,6 +1215,8 @@ gis_account_page_constructed (GObject *object)
                           G_CALLBACK (password_entry_focus_out), page);
   g_signal_connect_after (confirm_entry, "focus-out-event",
                           G_CALLBACK (confirm_entry_focus_out), page);
+  g_signal_connect (password_toggle, "toggled",
+                    G_CALLBACK (password_visibility_toggled), page);
 
   g_signal_connect (WID("join-dialog"), "response",
                     G_CALLBACK (on_join_response), page);
