@@ -1187,6 +1187,7 @@ gis_account_page_constructed (GObject *object)
   GtkWidget *password_entry;
   GtkWidget *confirm_entry;
   GtkWidget *password_toggle;
+  GtkSettings *settings;
 
   G_OBJECT_CLASS (gis_account_page_parent_class)->constructed (object);
 
@@ -1244,6 +1245,12 @@ gis_account_page_constructed (GObject *object)
   priv->mode = NUM_MODES;
   set_mode (page, UM_LOCAL);
 
+  /* show the last character from the password; 600 is the recommended value
+   * in the gtk-entry-password-hint-timeout documentation
+   */
+  settings = gtk_settings_get_default ();
+  g_object_set (G_OBJECT (settings), "gtk-entry-password-hint-timeout", 600, NULL);
+
   gtk_widget_show (GTK_WIDGET (page));
 }
 
@@ -1252,6 +1259,9 @@ gis_account_page_dispose (GObject *object)
 {
   GisAccountPage *page = GIS_ACCOUNT_PAGE (object);
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
+  GtkSettings *settings = gtk_settings_get_default ();
+
+  g_object_set (G_OBJECT (settings), "gtk-entry-password-hint-timeout", 0, NULL);
 
   if (priv->realmd_watch)
     g_bus_unwatch_name (priv->realmd_watch);
