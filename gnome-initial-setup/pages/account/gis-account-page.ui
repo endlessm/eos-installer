@@ -305,7 +305,7 @@
                 <property name="left_attach">2</property>
                 <property name="top_attach">6</property>
                 <property name="width">1</property>
-                <property name="height">2</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -345,6 +345,18 @@
                 <property name="height">1</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkCheckButton" id="account-password-visibility-toggle">
+                <property name="label" translatable="yes">Show password</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">7</property>
+               </packing>
+             </child>
             <child>
               <placeholder/>
             </child>
