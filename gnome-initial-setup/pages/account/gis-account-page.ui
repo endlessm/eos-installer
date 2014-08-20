@@ -346,7 +346,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToggleButton" id="account-password-visibility-toggle">
+              <object class="GtkCheckButton" id="account-password-visibility-toggle">
                 <property name="label" translatable="yes">Show password</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>

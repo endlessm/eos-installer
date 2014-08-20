@@ -1123,11 +1123,6 @@ password_visibility_toggled (GtkToggleButton *button,
 
   gtk_entry_set_visibility (GTK_ENTRY (password_entry), !is_active);
   gtk_entry_set_visibility (GTK_ENTRY (confirm_entry), !is_active);
-
-  if (is_active)
-    gtk_button_set_label (GTK_BUTTON (button), _("Hide password"));
-  else
-    gtk_button_set_label (GTK_BUTTON (button), _("Show password"));
 }
 
 static void
