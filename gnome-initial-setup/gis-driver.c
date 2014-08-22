@@ -33,7 +33,9 @@
 #define GIS_TYPE_DRIVER_MODE (gis_driver_mode_get_type ())
 
 #define PERSONALITY_FILE_PATH "/etc/EndlessOS/personality.conf"
-#define INITIAL_CONFIG_GROUP "Setup"
+#define PERSONALITY_CONFIG_GROUP "Personality"
+#define SETUP_CONFIG_GROUP "Setup"
+#define PERSONALITY_KEY "PersonalityName"
 #define LANGUAGE_KEY "DefaultLanguage"
 #define TIMEZONE_KEY "DefaultTimezone"
 #define TIMEFORMAT_KEY "DefaultTimeFormat"
@@ -78,6 +80,7 @@ struct _GisDriverPrivate {
   ActUser *user_account;
   const gchar *user_password;
 
+  gchar *personality;
   gchar *lang_id;
   gchar *lang_override;
   gchar *default_timezone;
@@ -95,6 +98,7 @@ gis_driver_finalize (GObject *object)
   GisDriver *driver = GIS_DRIVER (object);
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
 
+  g_free (priv->personality);
   g_free (priv->lang_id);
   g_free (priv->lang_override);
   g_free (priv->default_timezone);
@@ -210,6 +214,13 @@ gis_driver_get_language_override (GisDriver *driver)
 }
 
 const gchar *
+gis_driver_get_personality (GisDriver *driver)
+{
+  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
+  return priv->personality;
+}
+
+const gchar *
 gis_driver_get_default_timezone (GisDriver *driver)
 {
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
@@ -288,19 +299,24 @@ gis_driver_read_personality_file (GisDriver *driver)
 {
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   GKeyFile *keyfile = g_key_file_new ();
+  gchar *personality = NULL;
   gchar *language = NULL;
   gchar *timezone = NULL;
   gchar *time_format = NULL;
 
   if (g_key_file_load_from_file (keyfile, PERSONALITY_FILE_PATH,
                                  G_KEY_FILE_NONE, NULL)) {
-    language = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
+    personality = g_key_file_get_string (keyfile, PERSONALITY_CONFIG_GROUP,
+                                         PERSONALITY_KEY, NULL);
+    language = g_key_file_get_string (keyfile, SETUP_CONFIG_GROUP,
                                       LANGUAGE_KEY, NULL);
-    timezone = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
+    timezone = g_key_file_get_string (keyfile, SETUP_CONFIG_GROUP,
                                       TIMEZONE_KEY, NULL);
-    time_format = g_key_file_get_string (keyfile, INITIAL_CONFIG_GROUP,
+    time_format = g_key_file_get_string (keyfile, SETUP_CONFIG_GROUP,
                                          TIMEFORMAT_KEY, NULL);
   }
+
+  priv->personality = personality;
 
   g_free (priv->lang_override);
   priv->lang_override = language;

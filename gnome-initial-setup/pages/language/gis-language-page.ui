@@ -72,6 +72,22 @@
                 <property name="position">0</property>
               </packing>
             </child>
+	    <child>
+              <object class="GtkLabel" id="personality">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label">personality</property>
+                <attributes>
+                  <attribute name="font-desc" value="&lt;Enter Value&gt; 20"/>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkImage" id="serial-barcode">
                 <property name="visible">True</property>
@@ -82,7 +98,7 @@
                 <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="padding">16</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <child>
@@ -98,14 +114,14 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">2</property>
+                <property name="position">3</property>
               </packing>
             </child>
           </object>
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">4</property>
           </packing>
         </child>
       </object>
