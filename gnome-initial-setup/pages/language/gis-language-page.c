@@ -407,24 +407,31 @@ system_poweroff (gpointer data)
 static void
 show_factory_dialog (GisLanguagePage *page)
 {
+  GisDriver *driver = GIS_PAGE (page)->driver;
+  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
   GtkButton *poweroff_button;
   GtkDialog *factory_dialog;
   GtkImage *serial_image;
+  GtkLabel *personality_label;
   GtkLabel *serial_label;
   GtkLabel *version_label;
+  gboolean have_serial;
   gchar *barcode;
   gchar *barcode_serial, *display_serial;
   gchar *version;
-  gboolean have_serial;
 
   factory_dialog = OBJ (GtkDialog *, "factory-dialog");
   version_label = OBJ (GtkLabel *, "software-version");
+  personality_label = OBJ (GtkLabel *, "personality");
   serial_label = OBJ (GtkLabel *, "serial-text");
   serial_image = OBJ (GtkImage *, "serial-barcode");
   poweroff_button = OBJ (GtkButton *, "poweroff-button");
 
   version = get_software_version ();
   gtk_label_set_text (version_label, version);
+
+  gtk_label_set_text (personality_label,
+                      gis_driver_get_personality (driver));
 
   have_serial = get_serial_version (&display_serial, &barcode_serial);
 

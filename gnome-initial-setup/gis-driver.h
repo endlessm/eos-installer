@@ -78,6 +78,8 @@ const gchar *gis_driver_get_user_language (GisDriver   *driver);
 
 const gchar *gis_driver_get_language_override (GisDriver *driver);
 
+const gchar *gis_driver_get_personality (GisDriver *driver);
+
 const gchar *gis_driver_get_default_timezone (GisDriver *driver);
 
 const gchar *gis_driver_get_default_time_format (GisDriver *driver);
