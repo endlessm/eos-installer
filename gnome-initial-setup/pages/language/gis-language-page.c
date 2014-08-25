@@ -408,7 +408,6 @@ static void
 show_factory_dialog (GisLanguagePage *page)
 {
   GisDriver *driver = GIS_PAGE (page)->driver;
-  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
   GtkButton *poweroff_button;
   GtkDialog *factory_dialog;
   GtkImage *serial_image;
