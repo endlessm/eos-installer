@@ -1121,8 +1121,8 @@ password_visibility_toggled (GtkToggleButton *button,
   GtkWidget *confirm_entry = WID("account-confirm-entry");
   gboolean is_active = gtk_toggle_button_get_active (button);
 
-  gtk_entry_set_visibility (GTK_ENTRY (password_entry), !is_active);
-  gtk_entry_set_visibility (GTK_ENTRY (confirm_entry), !is_active);
+  gtk_entry_set_visibility (GTK_ENTRY (password_entry), is_active);
+  gtk_entry_set_visibility (GTK_ENTRY (confirm_entry), is_active);
 }
 
 static void
