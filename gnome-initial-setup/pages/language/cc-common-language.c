@@ -304,6 +304,7 @@ cc_common_language_get_initial_languages (void)
         insert_language (ht, "es_GT");
         insert_language (ht, "es_MX");
         insert_language (ht, "pt_BR");
+        insert_language (ht, "ar_SY");
 
         insert_user_languages (ht);
 

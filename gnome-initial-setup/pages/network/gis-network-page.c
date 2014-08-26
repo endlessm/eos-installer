@@ -67,6 +67,36 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisNetworkPage, gis_network_page, GIS_TYPE_PAGE);
 #define WID(name) OBJ(GtkWidget*,name)
 
 static void
+get_device_activation_state (NMDevice *device,
+                             gboolean *activated_out,
+                             gboolean *activating_out)
+{
+  gboolean activated = FALSE, activating = FALSE;
+
+  switch (nm_device_get_state (device))
+    {
+    case NM_DEVICE_STATE_PREPARE:
+    case NM_DEVICE_STATE_CONFIG:
+    case NM_DEVICE_STATE_NEED_AUTH:
+    case NM_DEVICE_STATE_IP_CONFIG:
+    case NM_DEVICE_STATE_SECONDARIES:
+      activating = TRUE;
+      break;
+    case NM_DEVICE_STATE_ACTIVATED:
+      activated = TRUE;
+      break;
+    default:
+      break;
+    }
+
+  if (activated_out)
+    *activated_out = activated;
+
+  if (activating_out)
+    *activating_out = activating;
+}
+
+static void
 sync_page_complete (GisNetworkPage *page)
 {
   GisNetworkPagePrivate *priv = gis_network_page_get_instance_private (page);
@@ -75,8 +105,7 @@ sync_page_complete (GisNetworkPage *page)
 
   widget = WID ("skip-network-button");
   skip_network = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-  network_configured = !!(nm_client_get_state (priv->nm_client) ==
-                          NM_STATE_CONNECTED_GLOBAL);
+  get_device_activation_state (priv->nm_device, &network_configured, NULL);
 
   gis_page_set_complete (GIS_PAGE (page), skip_network || network_configured);
 }
@@ -217,25 +246,7 @@ add_access_point (GisNetworkPage *page, NMAccessPoint *ap, NMAccessPoint *active
 
   if (active &&
       nm_utils_same_ssid (ssid, nm_access_point_get_ssid (active), TRUE)) {
-    switch (nm_device_get_state (priv->nm_device))
-      {
-      case NM_DEVICE_STATE_PREPARE:
-      case NM_DEVICE_STATE_CONFIG:
-      case NM_DEVICE_STATE_NEED_AUTH:
-      case NM_DEVICE_STATE_IP_CONFIG:
-      case NM_DEVICE_STATE_SECONDARIES:
-        activated = FALSE;
-        activating = TRUE;
-        break;
-      case NM_DEVICE_STATE_ACTIVATED:
-        activated = TRUE;
-        activating = FALSE;
-        break;
-      default:
-        activated = FALSE;
-        activating = FALSE;
-        break;
-      }
+    get_device_activation_state (priv->nm_device, &activated, &activating);
   } else {
     activated = FALSE;
     activating = FALSE;
@@ -440,6 +451,7 @@ device_state_changed (NMDevice   *device,
 {
   GisNetworkPage *page = GIS_NETWORK_PAGE (user_data);
   refresh_wireless_list (page);
+  sync_page_complete (page);
 }
 
 static void
@@ -588,8 +600,6 @@ gis_network_page_constructed (GObject *object)
 
   g_signal_connect (priv->nm_client, "notify::active-connections",
                     G_CALLBACK (active_connections_changed), page);
-  g_signal_connect_swapped (priv->nm_client, "notify::state",
-                            G_CALLBACK (sync_page_complete), page);
 
   devices = nm_client_get_devices (priv->nm_client);
   if (devices) {

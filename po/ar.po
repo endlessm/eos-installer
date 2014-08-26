@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-12 16:18-0400\n"
-"PO-Revision-Date: 2014-08-12 20:19+0000\n"
+"PO-Revision-Date: 2014-08-15 19:37+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -75,13 +75,13 @@ msgstr "الولوج"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr ""
+msgstr "إنشاء حساب شخصي"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Create a new account in just a few steps: type in your full name, your "
 "desired username and a password that you'll remember."
-msgstr ""
+msgstr "أنشئ حساباً جديداً في بضع خطوات فقط: اكتب اسمك بالكامل واسم المستخدم الذي ترغب فيه وكلمة المرور التي سوف تتذكرها."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid ""
@@ -89,7 +89,7 @@ msgid ""
 "upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
 "appear at the right side of the space in which you're writing. You'll need "
 "to type in this password identically each time you access your account."
-msgstr ""
+msgstr "قد تحتاج إلى تدوين كلمة المرور الخاصة بك. تأكد من الانتباه إلى الأحرف الكبيرة. إذا كان مفتاح caps lock قيد التشغيل، فسيظهر الرمز ⚠ في الجانب الأيمن من المساحة تكتب فيها. سوف يتعين عليك إدخال كلمة المرور هذه بشكل متطابق في كل مرة تدخل فيها إلى حسابك."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
@@ -103,7 +103,7 @@ msgstr "اسم المست_خدم"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
+msgstr "سيتم استخدام اسم المستخدم لتسمية المجلد الشخصي الخاص بك، ولن يمكن تغييره."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
@@ -117,15 +117,15 @@ msgstr "أكّ_د كلمة السّر"
 msgid ""
 "To make your password more secure, you can use letters and numbers together."
 " This is optional."
-msgstr ""
+msgstr "لجعل كلمة المرور الخاصة بك أكثر أمناً، يمكنك استخدام الحروف والأرقام معاً. وهذا أمر اختياري."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "A_utomatic Login"
-msgstr ""
+msgstr "تسجيل الدخول تلقائياً"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr ""
+msgstr "للمتابعة، من فضلك تأكد من استيفاء جميع الفراغات."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -249,66 +249,66 @@ msgstr "يجب أن لا يتعدى اسم المستخدم:\n ◂ الحروف 
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
-msgstr ""
+msgstr "عرض"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr ""
+msgstr "الضبط لشاشة التلفزيون"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr ""
+msgstr "هل ترى هذا في الركن الأيمن السفلي من الشاشة؟"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "radiobutton"
-msgstr ""
+msgstr "زر اختيار"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I see it"
-msgstr ""
+msgstr "أراها"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:5
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr ""
+msgstr "لا أرى ذلك. قلص حجم الشاشة لتناسب التلفزيون."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
 msgid ""
 "Endless collects metrics on user behavior and actions.\n"
 "All data sent is anonymous.\n"
 "We use the data to improve the system."
-msgstr ""
+msgstr "تجمع Endless قياسات عن سلوك المستخدم وإجراءاته.\nجميع البيانات المرسلة مٌجَهلة.\nنستخدم البيانات لتحسين النظام."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
 msgid "Privacy Policy"
-msgstr ""
+msgstr "سياسة الخصوصية"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
 msgid "Privacy and License Agreements"
-msgstr ""
+msgstr "الخصوصية واتفاقيات الترخيص"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Enable metrics collection."
-msgstr ""
+msgstr "تمكين جمع القياسات."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
-msgstr ""
+msgstr "<a href='metrics-privacy-policy'>انقر هنا</a> لعرض سياسة الخصوصية الخاصة بنا"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Third-party Software"
-msgstr ""
+msgstr "برامج تابعة لجهات أخرى"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Endless uses third-party software to display Flash, MP3 and other media. "
 "Some of this software is closed-source. The software is subject to the "
 "license terms included with the software's documentation."
-msgstr ""
+msgstr "تستخدم Endless برامج تابعة لجهات أخرى لعرض ملفات الفلاش و MP3 والوسائط الأخرى. بعض من هذه البرامج مغلقة المصدر. يخضع البرنامج لشروط الترخيص المتضمنة مع وثائق البرنامج."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
 msgid "I agree to the license terms"
-msgstr ""
+msgstr "أوافق على شروط الترخيص"
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -400,7 +400,7 @@ msgstr "أخرى"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
 msgid "Keyboard Layouts"
-msgstr ""
+msgstr "تخطيطات لوحة المفاتيح"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
@@ -408,7 +408,7 @@ msgstr "اختر تخطيطات لوحة المفاتيح"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
 msgid "Add a Keyboard Layout"
-msgstr ""
+msgstr "إضافة تخطيط للوحة المفاتيح"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
@@ -420,7 +420,7 @@ msgstr "مرحبًا"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
-msgstr ""
+msgstr "إيقاف التشغيل"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
@@ -433,51 +433,51 @@ msgstr "المكان"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
-msgstr ""
+msgstr "يناير"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
-msgstr ""
+msgstr "فبراير"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
-msgstr ""
+msgstr "مارس"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
-msgstr ""
+msgstr "إبريل"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
-msgstr ""
+msgstr "مايو"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
-msgstr ""
+msgstr "يونيو"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
-msgstr ""
+msgstr "يوليو"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
-msgstr ""
+msgstr "أغسطس"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
-msgstr ""
+msgstr "سبتمبر"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
-msgstr ""
+msgstr "أكتوبر"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
-msgstr ""
+msgstr "نوفمبر"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
-msgstr ""
+msgstr "ديسمبر"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
@@ -493,19 +493,19 @@ msgstr "المنطقة الزمنية"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
-msgstr ""
+msgstr "وقت الشبكة"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
-msgstr ""
+msgstr "45"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:320
 msgctxt "Wireless access point"
@@ -538,22 +538,22 @@ msgid ""
 "the internet by clicking on the name of your WiFi network and entering the "
 "network password. This password may be different from your computer "
 "password."
-msgstr ""
+msgstr "هل لديك إنترنت لاسلكي (واي فاي)؟ إذا كان لديك، قم بتوصيل جهاز الكمبيوتر الخاص بك بالإنترنت من خلال النقر على اسم الشبكة اللاسلكية الخاصة بك وإدخال كلمة مرور الشبكة. قد تختلف كلمة المرور هذه عن كلمة المرور الخاصة بكمبيوترك."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
 "connection now. If you get an internet connection in the future, you can set"
 " it up in \"Network Settings.\""
-msgstr ""
+msgstr "نصيحة: يمكنك استخدام جهاز الكمبيوتر الخاص بك من دون إنترنت إذا لم يكن لديك اتصال الآن. إذا توفر لديك اتصال بالإنترنت في المستقبل، يمكنك إعداده في \"إعدادات الشبكة.\""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr ""
+msgstr "لا تتوفر شبكات لاسلكية"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
-msgstr ""
+msgstr "_تخطي إعداد شبكة الواي فاي"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
