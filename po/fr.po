@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-12 16:18-0400\n"
-"PO-Revision-Date: 2014-08-21 22:23+0000\n"
+"PO-Revision-Date: 2014-08-23 12:28+0000\n"
 "Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/gnome-initial-setup/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -76,13 +76,13 @@ msgstr "Connexion"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr ""
+msgstr "Créez un compte personnel"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Create a new account in just a few steps: type in your full name, your "
 "desired username and a password that you'll remember."
-msgstr ""
+msgstr "Créer un nouveau compte en seulement quelques étapes : tapez votre nom complet, le nom d'utilisateur désiré et un mot de passe dont vous vous souviendrez."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid ""
@@ -90,7 +90,7 @@ msgid ""
 "upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
 "appear at the right side of the space in which you're writing. You'll need "
 "to type in this password identically each time you access your account."
-msgstr ""
+msgstr "Vous voudrez peut-être écrire votre mot de passe. Assurez-vous de faire attention aux lettres en majuscule. Si vous appuyez sur la touche Majuscule, le symbole ⚠ apparaît à droite de l'espace où vous écrivez. Vous devrez saisir ce mot de passe de manière identique à chaque fois que vous accèderez à votre compte."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
@@ -104,7 +104,7 @@ msgstr "Nom d'_utilisateur"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
+msgstr "Le nom d'utilisateur sera utilisé pour nommer votre dossier personnel et il ne peut pas être modifié."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
@@ -118,15 +118,15 @@ msgstr "_Confirmer le mot de passe"
 msgid ""
 "To make your password more secure, you can use letters and numbers together."
 " This is optional."
-msgstr ""
+msgstr "Pour rendre votre mot de passe plus sûr, vous pouvez utiliser des lettres et des chiffres ensemble. Ceci est facultatif."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "A_utomatic Login"
-msgstr ""
+msgstr "Connexion automatique"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr ""
+msgstr "Pour continuer, assurez-vous de remplir tous les champs."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -250,66 +250,66 @@ msgstr "Le nom d'utilisateur doit être uniquement composé de :\n ➣ lettres 
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
-msgstr ""
+msgstr "Affichage"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr ""
+msgstr "Ajuster pour écran TV"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr ""
+msgstr "Voyez-vous ceci dans le coin inférieur droit de votre écran ?"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "radiobutton"
-msgstr ""
+msgstr "bouton radio"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I see it"
-msgstr ""
+msgstr "Je le vois"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:5
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr ""
+msgstr "Je ne le vois pas. Rapetisser l'écran pour ajuster à la TV."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
 msgid ""
 "Endless collects metrics on user behavior and actions.\n"
 "All data sent is anonymous.\n"
 "We use the data to improve the system."
-msgstr ""
+msgstr "Endless recueille des statistiques sur le comportement et les actions de l'utilisateur.\nToutes les données envoyées sont anonymes.\nNous utilisons les données pour améliorer le système."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Politique de confidentialité"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
 msgid "Privacy and License Agreements"
-msgstr ""
+msgstr "Accords vie privée et licence"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Enable metrics collection."
-msgstr ""
+msgstr "Activer le recueil des mesures."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
-msgstr ""
+msgstr "<a href='metrics-privacy-policy'>Cliquez ici</a> pour voir notre politique de confidentialité"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Third-party Software"
-msgstr ""
+msgstr "Logiciels tiers"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Endless uses third-party software to display Flash, MP3 and other media. "
 "Some of this software is closed-source. The software is subject to the "
 "license terms included with the software's documentation."
-msgstr ""
+msgstr "Endless utilise des logiciels tiers pour afficher des médias Flash, MP3 et autres. Certains de ces logiciels sont propriétaires. Ces logiciels sont soumis à des termes de licence inclus avec la documentation des logiciels."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
 msgid "I agree to the license terms"
-msgstr ""
+msgstr "Je suis d'accord avec les termes de la licence"
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -401,7 +401,7 @@ msgstr "Autre"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
 msgid "Keyboard Layouts"
-msgstr ""
+msgstr "Dispositions clavier"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
@@ -409,7 +409,7 @@ msgstr "Choisir les dispositions du clavier"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
 msgid "Add a Keyboard Layout"
-msgstr ""
+msgstr "Ajouter une disposition clavier"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
@@ -421,7 +421,7 @@ msgstr "Bienvenue"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
-msgstr ""
+msgstr "Eteindre"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
@@ -434,51 +434,51 @@ msgstr "Emplacement"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
-msgstr ""
+msgstr "Janvier"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
-msgstr ""
+msgstr "Février"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
-msgstr ""
+msgstr "Mars"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
-msgstr ""
+msgstr "Juin"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
-msgstr ""
+msgstr "Août"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
-msgstr ""
+msgstr "Septembre"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
-msgstr ""
+msgstr "Octobre"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
-msgstr ""
+msgstr "Novembre"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
-msgstr ""
+msgstr "Décembre"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
@@ -494,19 +494,19 @@ msgstr "Fuseau horaire"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
-msgstr ""
+msgstr "Heure réseau"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
-msgstr ""
+msgstr "45"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:320
 msgctxt "Wireless access point"
@@ -539,22 +539,22 @@ msgid ""
 "the internet by clicking on the name of your WiFi network and entering the "
 "network password. This password may be different from your computer "
 "password."
-msgstr ""
+msgstr "Disposez-vous d'une connexion à Internet sans fil (Wifi) ? Si c'est le cas, connectez votre ordinateur à Internet en cliquant sur le nom de votre réseau et en saisissant son mot de passe. Ce mot de passe peut être différent du mot de passe de votre ordinateur."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
 "connection now. If you get an internet connection in the future, you can set"
 " it up in \"Network Settings.\""
-msgstr ""
+msgstr "Astuce : Vous pouvez utiliser votre ordinateur sans Internet si vous ne disposez pas d'une connexion actuellement. Si vous obtenez une connexion Internet dans le futur, vous pourrez la configurer dans \"Paramètres réseau.\""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr ""
+msgstr "Aucune connexion sans fil disponible"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
-msgstr ""
+msgstr "_Ignorer la configuration Wifi"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
