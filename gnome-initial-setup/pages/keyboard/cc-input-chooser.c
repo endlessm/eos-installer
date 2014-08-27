@@ -1014,7 +1014,7 @@ get_locale_infos (GtkWidget *chooser)
     {
       gchar *lang_code, *country_code;
       gchar *simple_locale;
-      gchar *tmp;
+      gchar *untranslated_locale;
       const gchar *type = NULL;
       const gchar *id = NULL;
 
@@ -1023,20 +1023,19 @@ get_locale_infos (GtkWidget *chooser)
 
       simple_locale = g_strdup_printf ("%s_%s.utf8", lang_code, country_code);
       if (g_hash_table_contains (priv->locales, simple_locale))
-        {
-          g_free (simple_locale);
-          g_free (country_code);
-          g_free (lang_code);
-          continue;
-        }
+        goto free_and_continue;
+
+      /* We are not interested in locales whose name we can't display */
+      untranslated_locale = gnome_get_language_from_locale (simple_locale, "C");
+      if (!untranslated_locale)
+        goto free_and_continue;
 
       info = g_new0 (LocaleInfo, 1);
-      info->id = simple_locale; /* Take ownership */
+      info->id = g_strdup (simple_locale);
       info->name = gnome_get_language_from_locale (simple_locale, NULL);
       info->unaccented_name = cc_util_normalize_casefold_and_unaccent (info->name);
-      tmp = gnome_get_language_from_locale (simple_locale, "C");
-      info->untranslated_name = cc_util_normalize_casefold_and_unaccent (tmp);
-      g_free (tmp);
+      info->untranslated_name = cc_util_normalize_casefold_and_unaccent (untranslated_locale);
+      g_free (untranslated_locale);
 
       g_hash_table_replace (priv->locales, simple_locale, info);
       add_locale_to_table (priv->locales_by_language, lang_code, info);
@@ -1064,8 +1063,10 @@ get_locale_infos (GtkWidget *chooser)
       add_ids_to_set (layouts_with_locale, list);
       g_list_free (list);
 
+    free_and_continue:
       g_free (lang_code);
       g_free (country_code);
+      g_free (simple_locale);
     }
   g_strfreev (locale_ids);
 
