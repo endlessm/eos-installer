@@ -135,13 +135,46 @@
     <property name="margin_right">80</property>
     <property name="orientation">vertical</property>
     <child>
+      <object class="GtkLabel" id="welcome-text">
+	<property name="visible">True</property>
+	<property name="can_focus">False</property>
+	<property name="label" translatable="yes">Welcome to Endless!</property>
+	<property name="margin_bottom">5</property>
+	<attributes>
+	  <attribute name="weight" value="bold"/>
+	  <attribute name="scale" value="1.8"/>
+	</attributes>
+      </object>
+      <packing>
+	<property name="expand">False</property>
+	<property name="fill">True</property>
+	<property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="set-up-text">
+	<property name="visible">True</property>
+	<property name="can_focus">False</property>
+	<property name="label" translatable="yes">Let's set up your computer...</property>
+	<property name="margin_bottom">20</property>
+	<attributes>
+	  <attribute name="scale" value="1.2"/>
+	</attributes>
+      </object>
+      <packing>
+	<property name="expand">False</property>
+	<property name="fill">True</property>
+	<property name="position">1</property>
+      </packing>
+    </child>
+    <child>
       <object class="CcLanguageChooser" id="language-chooser">
         <property name="visible">True</property>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">0</property>
+        <property name="position">2</property>
       </packing>
     </child>
   </object>
