@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 23:21+0100\n"
+"POT-Creation-Date: 2014-08-28 13:10-0700\n"
 "PO-Revision-Date: 2013-09-17 22:23-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -68,7 +68,7 @@ msgstr "ਡੋਮੇਨ ਜੁਆਇੰਨ ਕਰਨ ਲਈ ਫੇਲ੍ਹ ਹ�
 msgid "Failed to log into domain"
 msgstr "ਡੋਮੇਨ ਵਿੱਚ ਲਾਗਇਨ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
 msgstr "ਲਾਗਇਨ"
 
@@ -129,30 +129,35 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#, fuzzy
+msgid "Show password"
+msgstr "ਪਾਸਵਰਡ ਨਹੀਂ"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
 msgstr "ਪੇਜ਼ 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
 msgstr "ਇੰਟਰਪਰਾਈਜ਼ ਅਕਾਊਂਟ ਬਣਾਓ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
 msgstr "ਡੋਮੇਨ(_D)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "Enterprise domain or realm name"
 msgstr "ਇੰਟਰਪਰਾਈਜ਼ ਡੋਮੇਨ ਜਾਂ ਸਨਦ ਨਾਂ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
 msgstr "ਜਾਰੀ ਰੱਖੋ(_o)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
 msgstr "ਡੋਮੇਨ ਪਰਸ਼ਾਸ਼ਕੀ ਲਾਗਇਨ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -164,15 +169,15 @@ msgstr ""
 "ਦਿਉ ਅਤੇ ਆਪਣੇ ਕੰਪਿਊਟਰ ਲਈ ਵਿਲੱਖਣ ਕੰਪਿਊਟਰ ਨਾਂ\n"
 "ਚੁਣੋ।"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
 msgstr "ਕੰਪਿਊਟਰ(_C)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
 msgstr "ਪਰਸ਼ਾਸ਼ਕੀ ਨਾਂ(_N)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
 msgstr "ਪਰਸ਼ਾਸ਼ਕੀ ਪਾਸਵਰਡ"
 
@@ -256,28 +261,24 @@ msgstr ""
 "  ➣ਅੰਕ\n"
 "  ➣ '.', '-' ਅਤੇ '_' ਵਿੱਚੋਂ ਕੋਈ ਵੀ"
 
-#. Translators note: this is the same label we use in the
-#. * Display page of the system settings
-#.
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
-msgid "Could not get screen information"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Adjust for TV screen"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid ""
-"Endless can be used with computer monitors or television sets. If you have a "
-"television set you may need to adjust it to see the full contents of the "
-"screen."
+msgid "Do you see this at the bottom right corner of your screen?"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "Are you using Endless with a television set?"
+msgid "I see it"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
+msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
@@ -406,7 +407,7 @@ msgstr "…ਹੋਰ"
 msgid "No input sources found"
 msgstr "ਕੋਈ ਇੰਪੁੱਟ ਸਰੋਤ ਨਹੀਂ ਲੱਭਾ"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 msgid "Other"
 msgstr "ਹੋਰ"
 
@@ -428,7 +429,7 @@ msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ"
 msgid "No languages found"
 msgstr "ਕੋਈ ਭਾਸ਼ਾ ਨਹੀਂ ਲੱਭੀ।"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
 msgid "Welcome"
 msgstr "ਜੀ ਆਇਆਂ ਨੂੰ"
 
@@ -522,24 +523,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "…ਹੋਰ"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
 msgstr "ਨੈੱਟਵਰਕ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ।"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
 msgstr "ਕੋਈ ਨੈੱਟਵਰਕ ਜੰਤਰ ਨਹੀਂ ਲੱਭਿਆ।"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
 msgstr "ਉਪਲੱਬਧ ਬੇਤਾਰ ਨੈੱਟਵਰਕ ਲਈ ਚੈੱਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
 msgstr "ਨੈੱਟਵਰਕ"
 
