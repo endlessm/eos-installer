@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 13:10-0700\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
 "PO-Revision-Date: 2013-04-26 20:03+0530\n"
 "Last-Translator: Anish A <aneesh.nl@gmail.com>\n"
 "Language-Team: Swatantra Malayalam Computing\n"
@@ -436,6 +436,14 @@ msgstr "സ്വാഗതം"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
