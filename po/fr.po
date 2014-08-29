@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 13:10-0700\n"
-"PO-Revision-Date: 2014-08-28 20:11+0000\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
+"PO-Revision-Date: 2014-08-28 21:17+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/gnome-initial-setup/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -422,6 +422,14 @@ msgstr "Bienvenue"
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
 msgstr "Eteindre"
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 13:10-0700\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
 "PO-Revision-Date: 2014-02-28 22:41+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
@@ -441,6 +441,14 @@ msgstr "Dobrodošli"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642

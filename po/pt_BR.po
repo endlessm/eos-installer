@@ -9,13 +9,14 @@
 # Georges Basile Stavracas Neto <georges.stavracas@gmail.com>, 2013
 # Philip Chimento <philip.chimento@gmail.com>, 2014
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2013
+# Roddy Shuler <roddy@endlessm.com>, 2014
 # Silva <michele@endlessm.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 13:10-0700\n"
-"PO-Revision-Date: 2014-08-28 20:11+0000\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
+"PO-Revision-Date: 2014-08-28 21:17+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/gnome-initial-setup/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -135,7 +136,7 @@ msgstr "Para continuar, por favor, tenha certeza de que todos os espaços em bra
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "Show password"
-msgstr ""
+msgstr "Mostrar senha"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
@@ -427,6 +428,14 @@ msgstr "Bem vindo"
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
 msgstr "Desligar"
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
