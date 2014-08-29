@@ -9,14 +9,15 @@
 # Georges Basile Stavracas Neto <georges.stavracas@gmail.com>, 2013
 # Philip Chimento <philip.chimento@gmail.com>, 2014
 # Rafael Ferreira <rafael.f.f1@gmail.com>, 2013
+# Roddy Shuler <roddy@endlessm.com>, 2014
 # Silva <michele@endlessm.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 16:18-0400\n"
-"PO-Revision-Date: 2014-08-12 21:08+0000\n"
-"Last-Translator: Abner Silva <abner@endlessm.com>\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
+"PO-Revision-Date: 2014-08-28 21:17+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/gnome-initial-setup/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +76,7 @@ msgstr "Ocorreu falha ao ingressar no domínio"
 msgid "Failed to log into domain"
 msgstr "Ocorreu falha ao iniciar sessão no domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
 msgstr "Iniciar sessão"
 
@@ -134,30 +135,34 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr "Para continuar, por favor, tenha certeza de que todos os espaços em branco foram preenchidos. "
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+msgid "Show password"
+msgstr "Mostrar senha"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
 msgstr "página 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
 msgstr "Criar uma conta da empresa"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
 msgstr "_Domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "Enterprise domain or realm name"
 msgstr "Domínio da empresa ou nome de realm"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
 msgstr "Continuar"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
 msgstr "Início de sessão de administrador de domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -165,15 +170,15 @@ msgid ""
 "name for your computer."
 msgstr "Para usar este início de sessão da empresa, este computador\nprecisa estar registrado no domínio. Por favor, solicite que\nseu administrador digite a senha de domínio aqui e escolha um\nnome de computador único para seu computador."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
 msgstr "_Computador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
 msgstr "_Nome do administrador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
 msgstr "Senha do administrador"
 
@@ -266,14 +271,10 @@ msgid "Do you see this at the bottom right corner of your screen?"
 msgstr "Você pode ver isto no canto inferior direito da sua tela?"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "radiobutton"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I see it"
 msgstr "Eu posso ver"
 
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:5
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr "Eu não posso ver. Reduza a tela para caber na televisão."
 
@@ -400,7 +401,7 @@ msgstr "Mais…"
 msgid "No input sources found"
 msgstr "Nenhuma fonte de entrada encontrada"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 msgid "Other"
 msgstr "Outro"
 
@@ -420,13 +421,21 @@ msgstr "Adicionar uma definição de teclado"
 msgid "No languages found"
 msgstr "Nenhum idioma encontrado"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
 msgid "Welcome"
 msgstr "Bem vindo"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
 msgstr "Desligar"
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
@@ -513,24 +522,24 @@ msgstr "45"
 msgid ":"
 msgstr ":"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Outro…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
 msgstr "A rede não está disponível."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
 msgstr "Nenhum dispositivo de rede foi encontrado."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
 msgstr "Verificando redes sem fio disponíveis"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
 msgstr "Rede"
 

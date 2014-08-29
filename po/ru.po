@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 23:21+0100\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
 "PO-Revision-Date: 2013-11-01 23:52+0400\n"
 "Last-Translator: Yuri Myasoedov <ymyasoedov@yandex.ru>\n"
 "Language-Team: Russian <gnome-cyr@gnome.org>\n"
@@ -68,7 +68,7 @@ msgstr "Не удалось присоединиться к домену"
 msgid "Failed to log into domain"
 msgstr "Не удалось войти в домен"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
 msgstr "Вход в систему"
 
@@ -131,30 +131,35 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#, fuzzy
+msgid "Show password"
+msgstr "Пароль не указан"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
 msgstr "страница 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
 msgstr "Создать учётную запись для организации"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
 msgstr "_Домен"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "Enterprise domain or realm name"
 msgstr "Название домена предприятия или области"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
 msgstr "П_родолжить"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
 msgstr "Вход для администратора домена"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -166,15 +171,15 @@ msgstr ""
 "сетевой администратор должен ввести здесь ваш пароль и выбрать\n"
 "уникальное имя для вашей машины."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
 msgstr "_Компьютер"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
 msgstr "Имя _администратора"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
 msgstr "Пароль администратора"
 
@@ -258,28 +263,24 @@ msgstr ""
 " ➣ цифр;\n"
 " ➣ символов «.», «-» и «_»."
 
-#. Translators note: this is the same label we use in the
-#. * Display page of the system settings
-#.
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
-msgid "Could not get screen information"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Adjust for TV screen"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid ""
-"Endless can be used with computer monitors or television sets. If you have a "
-"television set you may need to adjust it to see the full contents of the "
-"screen."
+msgid "Do you see this at the bottom right corner of your screen?"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "Are you using Endless with a television set?"
+msgid "I see it"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
+msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
@@ -408,7 +409,7 @@ msgstr "Ещё…"
 msgid "No input sources found"
 msgstr "Источники ввода не найдены"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 msgid "Other"
 msgstr "Другой"
 
@@ -430,12 +431,20 @@ msgstr "Выбор раскладок клавиатуры"
 msgid "No languages found"
 msgstr "Языки не найдены"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
 msgid "Welcome"
 msgstr "Добро пожаловать"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
@@ -524,24 +533,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Другая…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
 msgstr "Сеть недоступна."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
 msgstr "Не найдено сетевое оборудование."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
 msgstr "Поиск доступных беспроводных сетей"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
 msgstr "Сеть"
 

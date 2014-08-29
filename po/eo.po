@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 23:21+0100\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
 "PO-Revision-Date: 2012-12-23 05:45+0100\n"
 "Last-Translator: Kristjan SCHMIDT <kristjan.schmidt@googlemail.com>\n"
 "Language-Team: Esperanto <gnome-l10n-eo@lists.launchpad.net>\n"
@@ -72,7 +72,7 @@ msgstr "Aniĝi al domajno malsukcesis"
 msgid "Failed to log into domain"
 msgstr "Malsukcesis ensaluti en domajnon"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
 msgstr "Ensaluti"
 
@@ -133,30 +133,35 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#, fuzzy
+msgid "Show password"
+msgstr "_Konfirmi pasvorton"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
 msgstr "_Domajno"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "Enterprise domain or realm name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -164,15 +169,15 @@ msgid ""
 "name for your computer."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
 msgstr ""
 
@@ -252,28 +257,24 @@ msgid ""
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
 
-#. Translators note: this is the same label we use in the
-#. * Display page of the system settings
-#.
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
-msgid "Could not get screen information"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Adjust for TV screen"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid ""
-"Endless can be used with computer monitors or television sets. If you have a "
-"television set you may need to adjust it to see the full contents of the "
-"screen."
+msgid "Do you see this at the bottom right corner of your screen?"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "Are you using Endless with a television set?"
+msgid "I see it"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
+msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
@@ -403,7 +404,7 @@ msgstr ""
 msgid "No input sources found"
 msgstr "Ne trovis retan aparaton."
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 #, fuzzy
 msgid "Other"
 msgstr "Alia..."
@@ -424,12 +425,20 @@ msgstr ""
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
 msgid "Welcome"
 msgstr "Bonvenon"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
@@ -518,25 +527,25 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 #, fuzzy
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Alia..."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
 msgstr "Reto ne estas disponeble."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
 msgstr "Ne trovis retan aparaton."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
 msgstr "Serĉado de disponeblaj sendrataj retoj"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
 msgstr "Reto"
 

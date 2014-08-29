@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 23:21+0100\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
 "PO-Revision-Date: 2013-09-14 23:31+0200\n"
 "Last-Translator: Josep Sànchez <papapep@gmx.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -69,7 +69,7 @@ msgstr "S'ha produït un error en unir-se al domini"
 msgid "Failed to log into domain"
 msgstr "S'ha produït un error en iniciar la sessió al domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
 msgstr "Entrada"
 
@@ -132,30 +132,35 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#, fuzzy
+msgid "Show password"
+msgstr "No hi ha contrasenya"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
 msgstr "pàgina 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
 msgstr "Creació d'una entrada corporativa"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
 msgstr "_Domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "Enterprise domain or realm name"
 msgstr "Domini corporatiu o nom del regne"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
 msgstr "C_ontinua"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
 msgstr "Entrada de l'administrador del domini"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -167,15 +172,15 @@ msgstr ""
 "introduïsca ací la seua contrasenya i escolliu un nom\n"
 "d'ordinador únic pel vostre ordinador."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
 msgstr "_Ordinador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
 msgstr "_Nom de l'administrador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
 msgstr "Contrasenya de l'administrador"
 
@@ -259,28 +264,24 @@ msgstr ""
 " ➣ números\n"
 " ➣ qualsevol dels caràcters «.», «-» i «_»"
 
-#. Translators note: this is the same label we use in the
-#. * Display page of the system settings
-#.
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
-msgid "Could not get screen information"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Adjust for TV screen"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid ""
-"Endless can be used with computer monitors or television sets. If you have a "
-"television set you may need to adjust it to see the full contents of the "
-"screen."
+msgid "Do you see this at the bottom right corner of your screen?"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "Are you using Endless with a television set?"
+msgid "I see it"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
+msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
@@ -409,7 +410,7 @@ msgstr "Més…"
 msgid "No input sources found"
 msgstr "No s'ha trobat cap font d'entrada"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 msgid "Other"
 msgstr "Altres"
 
@@ -431,12 +432,20 @@ msgstr "Seleccioneu la disposició de teclat"
 msgid "No languages found"
 msgstr "No s'ha trobat cap idioma"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
 msgid "Welcome"
 msgstr "Vos donem la benvinguda"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
@@ -525,24 +534,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Altres…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
 msgstr "No hi ha cap xarxa disponible."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
 msgstr "No s'ha trobat cap dispositiu de xarxa."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
 msgstr "S'està comprovant si hi ha xarxes sense fil disponibles"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
 msgstr "Xarxa"
 

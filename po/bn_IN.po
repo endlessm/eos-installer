@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 23:21+0100\n"
+"POT-Creation-Date: 2014-08-28 14:16-0700\n"
 "PO-Revision-Date: 2012-10-29 02:53+0530\n"
 "Last-Translator: Sayak Sarkar <sayak.bugsmith@gmail.com>\n"
 "Language-Team: Bengali (India) <anubad@lists.ankur.org.in>\n"
@@ -71,7 +71,7 @@ msgstr "ডোমেন এ যোগদান করতে ব্যর্থ"
 msgid "Failed to log into domain"
 msgstr "ডোমেনে লগ ইন করতে ব্যর্থ"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1262
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
 msgstr "লগ-ইন"
 
@@ -132,31 +132,36 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#, fuzzy
+msgid "Show password"
+msgstr "পাসওয়ার্ড নিশ্চিত করুন (_C)"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
 msgstr "ডোমেন (_D)"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 #, fuzzy
 msgid "Enterprise domain or realm name"
 msgstr "টিপ: এন্টারপ্রাইজ ডোমেন অথবা রিলম নাম"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -164,15 +169,15 @@ msgid ""
 "name for your computer."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
 msgstr ""
 
@@ -257,28 +262,24 @@ msgstr ""
 "  ➣ সংখ্যা \n"
 " ➣ '.' , '-' অথবা '_'  মধ্যে থেকে কোনো অক্ষর"
 
-#. Translators note: this is the same label we use in the
-#. * Display page of the system settings
-#.
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:93
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:169
-msgid "Could not get screen information"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:188
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
+msgid "Adjust for TV screen"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid ""
-"Endless can be used with computer monitors or television sets. If you have a "
-"television set you may need to adjust it to see the full contents of the "
-"screen."
+msgid "Do you see this at the bottom right corner of your screen?"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "Are you using Endless with a television set?"
+msgid "I see it"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
+msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
@@ -408,7 +409,7 @@ msgstr ""
 msgid "No input sources found"
 msgstr "কোন নেটওয়ার্ক ডিভাইস পাওয়া যায়নি।"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1075
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 #, fuzzy
 msgid "Other"
 msgstr "অন্যান্য..."
@@ -429,12 +430,20 @@ msgstr ""
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:506
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
 msgid "Welcome"
 msgstr "স্বাগত"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+msgid "Welcome to Endless!"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
@@ -523,25 +532,25 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:320
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 #, fuzzy
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "অন্যান্য..."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:358
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
 msgstr "নেটওয়ার্ক উপলভ্য নয়।"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:360
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
 msgstr "কোন নেটওয়ার্ক ডিভাইস পাওয়া যায়নি।"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:410
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
 msgstr "উপলব্ধ বেতার নেটওয়ার্কের জন্য পরীক্ষা করা হচ্ছে"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:671
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
 msgstr "নেটওয়ার্ক"
 
