@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-28 14:16-0700\n"
-"PO-Revision-Date: 2014-08-28 21:17+0000\n"
+"PO-Revision-Date: 2014-08-29 01:56+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgstr "للمتابعة، من فضلك تأكد من استيفاء جميع �
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "Show password"
-msgstr ""
+msgstr "إظهار كلمة السر"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
@@ -424,11 +424,11 @@ msgstr "إيقاف التشغيل"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Welcome to Endless!"
-msgstr ""
+msgstr "مرحباً بك في اللانهاية!"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Let's set up your computer..."
-msgstr ""
+msgstr "فلنقم بإعداد جهازك الكمبيوتر..."
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
