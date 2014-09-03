@@ -46,6 +46,9 @@
 struct _GisLanguagePagePrivate
 {
   GtkWidget *language_chooser;
+  GtkWidget *welcome_text;
+  GtkWidget *set_up_text;
+
   GDBusProxy *localed;
   GPermission *permission;
   const gchar *new_locale_id;
@@ -477,6 +480,9 @@ gis_language_page_constructed (GObject *object)
 
   G_OBJECT_CLASS (gis_language_page_parent_class)->constructed (object);
 
+  priv->welcome_text = WID ("welcome-text");
+  priv->set_up_text = WID ("set-up-text");
+
   gtk_container_add (GTK_CONTAINER (page), WID ("language-page"));
 
   priv->language_chooser = WID ("language-chooser");
@@ -512,7 +518,16 @@ gis_language_page_constructed (GObject *object)
 static void
 gis_language_page_locale_changed (GisPage *page)
 {
+  GisLanguagePage *language_page = GIS_LANGUAGE_PAGE (page);
+  GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (language_page);
+
   gis_page_set_title (GIS_PAGE (page), _("Welcome"));
+
+  /* These strings are found and translated in gis-language-page.ui */
+  if (priv->welcome_text)
+    gtk_label_set_text (GTK_LABEL (priv->welcome_text), _("Welcome to Endless!"));
+  if (priv->set_up_text)
+    gtk_label_set_text (GTK_LABEL (priv->set_up_text), _("Let's set up your computer..."));
 }
 
 static void
