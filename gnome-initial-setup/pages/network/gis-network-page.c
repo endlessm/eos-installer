@@ -399,7 +399,7 @@ refresh_wireless_list (GisNetworkPage *page)
 
     if (active_ap && nm_device_get_state (priv->nm_device) == NM_DEVICE_STATE_ACTIVATED) {
       /* Toggling the 'Skip' button off before disabling it will ensure that the network
-         list widget is enabled, due to the property bindings the button and the list. */
+         list widget is enabled, due to the property binding the button and the list. */
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->skip_button), FALSE);
       gtk_widget_set_sensitive (priv->skip_button, FALSE);
     } else {
