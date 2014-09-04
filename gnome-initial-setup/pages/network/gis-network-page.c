@@ -58,6 +58,7 @@ struct _GisNetworkPagePrivate {
   NMDevice *nm_device;
   gboolean refreshing;
   GtkSizeGroup *icons;
+  GtkWidget *skip_button;
 };
 typedef struct _GisNetworkPagePrivate GisNetworkPagePrivate;
 
@@ -100,11 +101,9 @@ static void
 sync_page_complete (GisNetworkPage *page)
 {
   GisNetworkPagePrivate *priv = gis_network_page_get_instance_private (page);
-  GtkWidget *widget;
   gboolean skip_network, network_configured;
 
-  widget = WID ("skip-network-button");
-  skip_network = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
+  skip_network = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->skip_button));
   get_device_activation_state (priv->nm_device, &network_configured, NULL);
 
   gis_page_set_complete (GIS_PAGE (page), skip_network || network_configured);
@@ -393,10 +392,21 @@ refresh_wireless_list (GisNetworkPage *page)
 
   priv->refreshing = TRUE;
 
+  /* Ensure that the 'skip' button is never disabled by default, to avoid
+     potential issues like the one described in issue eos-shell/3563. */
+  gtk_widget_set_sensitive (priv->skip_button, TRUE);
+
   if (NM_IS_DEVICE_WIFI (priv->nm_device)) {
     state = nm_device_get_state (priv->nm_device);
 
     active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (priv->nm_device));
+
+    if (active_ap && nm_device_get_state (priv->nm_device) == NM_DEVICE_STATE_ACTIVATED) {
+      /* Toggling the 'Skip' button off before disabling it will ensure that the network
+         list widget is enabled, due to the property binding the button and the list. */
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->skip_button), FALSE);
+      gtk_widget_set_sensitive (priv->skip_button, FALSE);
+    }
 
     list = WID ("network-list");
     children = gtk_container_get_children (GTK_CONTAINER (list));
@@ -588,7 +598,7 @@ gis_network_page_constructed (GObject *object)
   DBusGConnection *bus;
   GError *error;
   gboolean visible = TRUE;
-  GtkWidget *box, *skip_button;
+  GtkWidget *box;
 
   G_OBJECT_CLASS (gis_network_page_parent_class)->constructed (object);
 
@@ -646,11 +656,11 @@ gis_network_page_constructed (GObject *object)
   g_signal_connect (box, "child-activated",
                     G_CALLBACK (child_activated), page);
 
-  skip_button = WID ("skip-network-button");
+  priv->skip_button = WID ("skip-network-button");
 
-  g_object_bind_property (skip_button, "active", box, "sensitive",
+  g_object_bind_property (priv->skip_button, "active", box, "sensitive",
                           G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
-  g_signal_connect_swapped (skip_button, "notify::active",
+  g_signal_connect_swapped (priv->skip_button, "notify::active",
                             G_CALLBACK (sync_page_complete), page);
 
   refresh_wireless_list (page);
