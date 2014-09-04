@@ -13,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 14:16-0700\n"
-"PO-Revision-Date: 2014-08-29 01:29+0000\n"
-"Last-Translator: Nuritzi Sanchez <ns@endlessm.com>\n"
+"POT-Creation-Date: 2014-09-03 21:46-0700\n"
+"PO-Revision-Date: 2014-09-04 04:47+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -301,17 +301,34 @@ msgid ""
 msgstr "<a href='metrics-privacy-policy'>Haz clic aquí</a> para ver nuestra política de privacidad"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Terms of Service"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid ""
+"We legally have to include our terms of service. Those are below. But here "
+"are the terms to which we would most like you to agree: May you do good and "
+"not evil. May you find forgiveness for yourself and forgive others. May you "
+"share freely, never taking more than you give. We promise to do our best to "
+"do the same."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "- The Endless Team"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
 msgid "Third-party Software"
 msgstr "Software de terceros"
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
 msgid ""
 "Endless uses third-party software to display Flash, MP3 and other media. "
 "Some of this software is closed-source. The software is subject to the "
 "license terms included with the software's documentation."
 msgstr "Endless utiliza software de terceros para exhibir Flash, MP3 y otra multimedia. Parte de ese software es de código cerrado y está sujeto a los términos de licencia que se incluyen con su documentación. "
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:8
 msgid "I agree to the license terms"
 msgstr "Estoy de acuerdo con los términos de la licencia"
 
@@ -419,21 +436,23 @@ msgstr "Añade otro formato de teclado"
 msgid "No languages found"
 msgstr "No se encontraron idiomas"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
-msgid "Power Off"
-msgstr "Apagar"
-
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Welcome to Endless!"
 msgstr "¡Bienvenido a Endless!"
 
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Let's set up your computer..."
 msgstr "Ahora, vamos a configurar tu computadora... "
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
+msgstr "Apagar"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
