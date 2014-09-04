@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 14:16-0700\n"
+"POT-Creation-Date: 2014-09-03 21:34-0700\n"
 "PO-Revision-Date: 2014-02-28 10:55+0100\n"
 "Last-Translator: Gianvito Cavasoli <gianvito@gmx.it>\n"
 "Language-Team: Italiano <tp@linux.it>\n"
@@ -310,17 +310,30 @@ msgid ""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Third-party Software"
+msgid ""
+"We legally have to include our terms of service. Those are below. But here "
+"are the terms to which we would most like you to agree: May you do good and "
+"not evil. May you find forgiveness for yourself and forgive others. May you "
+"share freely, never taking more than you give. We promise to do our best to "
+"do the same."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+msgid "- The Endless Team"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+msgid "Third-party Software"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
 msgid ""
 "Endless uses third-party software to display Flash, MP3 and other media. "
 "Some of this software is closed-source. The software is subject to the "
 "license terms included with the software's documentation."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
 msgid "I agree to the license terms"
 msgstr ""
 
@@ -434,20 +447,22 @@ msgstr "Seleziona disposizioni tastiere"
 msgid "No languages found"
 msgstr "Nessuna lingua trovata"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:515
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
 msgid "Welcome"
 msgstr "Benvenuti"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
-msgid "Power Off"
-msgstr ""
-
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Welcome to Endless!"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Let's set up your computer..."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Power Off"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642

@@ -66,11 +66,11 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">start</property>
-            <property name="valign">start</property>
-            <property name="label" translatable="yes">Third-party Software</property>
+            <property name="label" translatable="yes">We legally have to include our terms of service. Those are below. But here are the terms to which we would most like you to agree: May you do good and not evil. May you find forgiveness for yourself and forgive others. May you share freely, never taking more than you give. We promise to do our best to do the same.</property>
+            <property name="wrap">True</property>
+            <property name="max_width_chars">48</property>
             <attributes>
-              <attribute name="weight" value="bold"/>
-              <attribute name="scale" value="1.2"/>
+              <attribute name="scale" value="0.82999999999999996"/>
             </attributes>
           </object>
           <packing>
@@ -84,7 +84,8 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">start</property>
-            <property name="label" translatable="yes">Endless uses third-party software to display Flash, MP3 and other media. Some of this software is closed-source. The software is subject to the license terms included with the software's documentation.</property>
+            <property name="margin_bottom">64</property>
+            <property name="label" translatable="yes">- The Endless Team</property>
             <property name="wrap">True</property>
             <property name="max_width_chars">48</property>
             <attributes>
@@ -95,6 +96,42 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="valign">start</property>
+            <property name="label" translatable="yes">Third-party Software</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.2"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">Endless uses third-party software to display Flash, MP3 and other media. Some of this software is closed-source. The software is subject to the license terms included with the software's documentation.</property>
+            <property name="wrap">True</property>
+            <property name="max_width_chars">48</property>
+            <attributes>
+              <attribute name="scale" value="0.82999999999999996"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <child>
@@ -111,7 +148,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">4</property>
           </packing>
         </child>
       </object>
