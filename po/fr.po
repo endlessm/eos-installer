@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-03 21:34-0700\n"
-"PO-Revision-Date: 2014-09-04 04:36+0000\n"
+"POT-Creation-Date: 2014-09-03 21:46-0700\n"
+"PO-Revision-Date: 2014-09-04 04:47+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/gnome-initial-setup/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -297,6 +297,10 @@ msgid ""
 msgstr "<a href='metrics-privacy-policy'>Cliquez ici</a> pour voir notre politique de confidentialité"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
+msgid "Terms of Service"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "We legally have to include our terms of service. Those are below. But here "
 "are the terms to which we would most like you to agree: May you do good and "
@@ -305,22 +309,22 @@ msgid ""
 "do the same."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
 msgid "- The Endless Team"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
 msgid "Third-party Software"
 msgstr "Logiciels tiers"
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
 msgid ""
 "Endless uses third-party software to display Flash, MP3 and other media. "
 "Some of this software is closed-source. The software is subject to the "
 "license terms included with the software's documentation."
 msgstr "Endless utilise des logiciels tiers pour afficher des médias Flash, MP3 et autres. Certains de ces logiciels sont propriétaires. Ces logiciels sont soumis à des termes de licence inclus avec la documentation des logiciels."
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:8
 msgid "I agree to the license terms"
 msgstr "Je suis d'accord avec les termes de la licence"
 
