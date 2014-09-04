@@ -392,6 +392,10 @@ refresh_wireless_list (GisNetworkPage *page)
 
   priv->refreshing = TRUE;
 
+  /* Ensure that the 'skip' button is never disabled by default, to avoid
+     potential issues like the one described in issue eos-shell/3563. */
+  gtk_widget_set_sensitive (priv->skip_button, TRUE);
+
   if (NM_IS_DEVICE_WIFI (priv->nm_device)) {
     state = nm_device_get_state (priv->nm_device);
 
@@ -402,8 +406,6 @@ refresh_wireless_list (GisNetworkPage *page)
          list widget is enabled, due to the property binding the button and the list. */
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->skip_button), FALSE);
       gtk_widget_set_sensitive (priv->skip_button, FALSE);
-    } else {
-      gtk_widget_set_sensitive (priv->skip_button, TRUE);
     }
 
     list = WID ("network-list");
