@@ -123,7 +123,7 @@
             </child>
             <child>
               <object class="GtkLabel" id="account-username-label">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="xalign">1</property>
@@ -140,7 +140,7 @@
             </child>
             <child>
               <object class="GtkComboBoxText" id="account-username-combo">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="has_entry">True</property>
                 <property name="entry_text_column">0</property>
@@ -160,7 +160,7 @@
             </child>
             <child>
               <object class="GtkLabel" id="account-username-explanation">
-                <property name="visible">True</property>
+                <property name="visible">False</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin_bottom">12</property>

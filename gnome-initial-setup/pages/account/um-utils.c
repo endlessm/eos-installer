@@ -33,6 +33,8 @@
 
 #include "um-utils.h"
 
+#define DEFAULT_USERNAME "user"
+
 void
 set_entry_validation_error (GtkEntry    *entry,
                             const gchar *text)
@@ -174,6 +176,7 @@ generate_username_choices (const gchar  *name,
 {
         gboolean in_use, same_as_initial;
         char *lc_name, *ascii_name, *stripped_name;
+        char *default_username;
         char **words1;
         char **words2 = NULL;
         char **w1, **w2;
@@ -183,7 +186,7 @@ generate_username_choices (const gchar  *name,
         GString *item0, *item1, *item2, *item3, *item4;
         int len;
         int nwords1, nwords2, i;
-        GHashTable *items;
+        GHashTable *items = NULL;
         GtkTreeIter iter;
 
         gtk_list_store_clear (store);
@@ -217,7 +220,7 @@ generate_username_choices (const gchar  *name,
                 g_free (ascii_name);
                 g_free (lc_name);
                 g_free (stripped_name);
-                return;
+                goto bailout;
         }
 
         /* we split name on spaces, and then on dashes, so that we can treat
@@ -312,26 +315,44 @@ generate_username_choices (const gchar  *name,
 
         items = g_hash_table_new (g_str_hash, g_str_equal);
 
-        in_use = is_username_used (item0->str);
-        if (!in_use && !g_ascii_isdigit (item0->str[0])) {
+        /* add the first one */
+        in_use = is_username_used (first_word->str);
+        if (*first_word->str && !in_use && !g_ascii_isdigit (first_word->str[0]) &&
+            !g_hash_table_lookup (items, first_word->str)) {
                 gtk_list_store_append (store, &iter);
-                gtk_list_store_set (store, &iter, 0, item0->str, -1);
-                g_hash_table_insert (items, item0->str, item0->str);
+                gtk_list_store_set (store, &iter, 0, first_word->str, -1);
+                g_hash_table_insert (items, first_word->str, first_word->str);
         }
 
-        in_use = is_username_used (item1->str);
-        same_as_initial = (g_strcmp0 (item0->str, item1->str) == 0);
-        if (!same_as_initial && nwords2 > 0 && !in_use && !g_ascii_isdigit (item1->str[0])) {
-                gtk_list_store_append (store, &iter);
-                gtk_list_store_set (store, &iter, 0, item1->str, -1);
-                g_hash_table_insert (items, item1->str, item1->str);
-        }
-
-        /* if there's only one word, would be the same as item1 */
+        /* if there's only one word, would be the same as first word */
         if (nwords2 > 1) {
+                /* add the last word */
+                in_use = is_username_used (last_word->str);
+                if (*last_word->str && !in_use && !g_ascii_isdigit (last_word->str[0]) &&
+                    !g_hash_table_lookup (items, last_word->str)) {
+                        gtk_list_store_append (store, &iter);
+                        gtk_list_store_set (store, &iter, 0, last_word->str, -1);
+                        g_hash_table_insert (items, last_word->str, last_word->str);
+                }
+
                 /* add other items */
+                in_use = is_username_used (item0->str);
+                if (*item0->str && !in_use && !g_ascii_isdigit (item0->str[0])) {
+                        gtk_list_store_append (store, &iter);
+                        gtk_list_store_set (store, &iter, 0, item0->str, -1);
+                        g_hash_table_insert (items, item0->str, item0->str);
+                }
+
+                in_use = is_username_used (item1->str);
+                same_as_initial = (g_strcmp0 (item0->str, item1->str) == 0);
+                if (*item1->str && !same_as_initial && nwords2 > 0 && !in_use && !g_ascii_isdigit (item1->str[0])) {
+                        gtk_list_store_append (store, &iter);
+                        gtk_list_store_set (store, &iter, 0, item1->str, -1);
+                        g_hash_table_insert (items, item1->str, item1->str);
+                }
+
                 in_use = is_username_used (item2->str);
-                if (!in_use && !g_ascii_isdigit (item2->str[0]) &&
+                if (*item2->str && !in_use && !g_ascii_isdigit (item2->str[0]) &&
                     !g_hash_table_lookup (items, item2->str)) {
                         gtk_list_store_append (store, &iter);
                         gtk_list_store_set (store, &iter, 0, item2->str, -1);
@@ -339,7 +360,7 @@ generate_username_choices (const gchar  *name,
                 }
 
                 in_use = is_username_used (item3->str);
-                if (!in_use && !g_ascii_isdigit (item3->str[0]) &&
+                if (*item3->str && !in_use && !g_ascii_isdigit (item3->str[0]) &&
                     !g_hash_table_lookup (items, item3->str)) {
                         gtk_list_store_append (store, &iter);
                         gtk_list_store_set (store, &iter, 0, item3->str, -1);
@@ -347,33 +368,14 @@ generate_username_choices (const gchar  *name,
                 }
 
                 in_use = is_username_used (item4->str);
-                if (!in_use && !g_ascii_isdigit (item4->str[0]) &&
+                if (*item4->str && !in_use && !g_ascii_isdigit (item4->str[0]) &&
                     !g_hash_table_lookup (items, item4->str)) {
                         gtk_list_store_append (store, &iter);
                         gtk_list_store_set (store, &iter, 0, item4->str, -1);
                         g_hash_table_insert (items, item4->str, item4->str);
                 }
-
-                /* add the last word */
-                in_use = is_username_used (last_word->str);
-                if (!in_use && !g_ascii_isdigit (last_word->str[0]) &&
-                    !g_hash_table_lookup (items, last_word->str)) {
-                        gtk_list_store_append (store, &iter);
-                        gtk_list_store_set (store, &iter, 0, last_word->str, -1);
-                        g_hash_table_insert (items, last_word->str, last_word->str);
-                }
-
-                /* ...and the first one */
-                in_use = is_username_used (first_word->str);
-                if (!in_use && !g_ascii_isdigit (first_word->str[0]) &&
-                    !g_hash_table_lookup (items, first_word->str)) {
-                        gtk_list_store_append (store, &iter);
-                        gtk_list_store_set (store, &iter, 0, first_word->str, -1);
-                        g_hash_table_insert (items, first_word->str, first_word->str);
-                }
         }
 
-        g_hash_table_destroy (items);
         g_strfreev (words1);
         g_string_free (first_word, TRUE);
         g_string_free (last_word, TRUE);
@@ -382,4 +384,20 @@ generate_username_choices (const gchar  *name,
         g_string_free (item2, TRUE);
         g_string_free (item3, TRUE);
         g_string_free (item4, TRUE);
+
+ bailout:
+        if (items == NULL || g_hash_table_size (items) == 0) {
+                gtk_list_store_append (store, &iter);
+                default_username = g_strdup (DEFAULT_USERNAME);
+                i = 0;
+                while (is_username_used (default_username)) {
+                        g_free (default_username);
+                        default_username = g_strdup_printf (DEFAULT_USERNAME "%d", ++i);
+                }
+                gtk_list_store_set (store, &iter, 0, default_username, -1);
+                g_free (default_username);
+        }
+        if (items != NULL) {
+                g_hash_table_destroy (items);
+        }
 }

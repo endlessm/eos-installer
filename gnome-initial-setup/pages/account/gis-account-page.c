@@ -142,7 +142,8 @@ clear_account_page (GisAccountPage *page)
   priv->account_type = ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR;
 
   gtk_entry_set_text (GTK_ENTRY (fullname_entry), "");
-  gtk_list_store_clear (GTK_LIST_STORE (gtk_combo_box_get_model (GTK_COMBO_BOX (username_combo))));
+  generate_username_choices ("", GTK_LIST_STORE (gtk_combo_box_get_model (GTK_COMBO_BOX (username_combo))));
+  gtk_combo_box_set_active (GTK_COMBO_BOX (username_combo), 0);
   gtk_entry_set_text (GTK_ENTRY (password_entry), "");
   gtk_entry_set_text (GTK_ENTRY (confirm_entry), "");
 }
@@ -263,16 +264,13 @@ fullname_changed (GtkWidget      *w,
   entry = gtk_bin_get_child (GTK_BIN (combo));
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
-  gtk_list_store_clear (GTK_LIST_STORE (model));
-
   priv->valid_name = is_valid_name (name);
 
   if (!priv->valid_name) {
     gtk_entry_set_text (GTK_ENTRY (entry), "");
-    return;
   }
 
-  generate_username_choices (name, GTK_LIST_STORE (model));
+  generate_username_choices (priv->valid_name ? name : "", GTK_LIST_STORE (model));
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
