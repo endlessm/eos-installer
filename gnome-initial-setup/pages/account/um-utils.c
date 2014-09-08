@@ -33,6 +33,8 @@
 
 #include "um-utils.h"
 
+#define DEFAULT_USERNAME "user"
+
 void
 set_entry_validation_error (GtkEntry    *entry,
                             const gchar *text)
@@ -174,6 +176,7 @@ generate_username_choices (const gchar  *name,
 {
         gboolean in_use, same_as_initial;
         char *lc_name, *ascii_name, *stripped_name;
+        char *default_username;
         char **words1;
         char **words2 = NULL;
         char **w1, **w2;
@@ -183,7 +186,7 @@ generate_username_choices (const gchar  *name,
         GString *item0, *item1, *item2, *item3, *item4;
         int len;
         int nwords1, nwords2, i;
-        GHashTable *items;
+        GHashTable *items = NULL;
         GtkTreeIter iter;
 
         gtk_list_store_clear (store);
@@ -217,7 +220,7 @@ generate_username_choices (const gchar  *name,
                 g_free (ascii_name);
                 g_free (lc_name);
                 g_free (stripped_name);
-                return;
+                goto bailout;
         }
 
         /* we split name on spaces, and then on dashes, so that we can treat
@@ -373,7 +376,6 @@ generate_username_choices (const gchar  *name,
                 }
         }
 
-        g_hash_table_destroy (items);
         g_strfreev (words1);
         g_string_free (first_word, TRUE);
         g_string_free (last_word, TRUE);
@@ -382,4 +384,20 @@ generate_username_choices (const gchar  *name,
         g_string_free (item2, TRUE);
         g_string_free (item3, TRUE);
         g_string_free (item4, TRUE);
+
+ bailout:
+        if (items == NULL || g_hash_table_size (items) == 0) {
+                gtk_list_store_append (store, &iter);
+                default_username = g_strdup (DEFAULT_USERNAME);
+                i = 0;
+                while (is_username_used (default_username)) {
+                        g_free (default_username);
+                        default_username = g_strdup_printf (DEFAULT_USERNAME "%d", ++i);
+                }
+                gtk_list_store_set (store, &iter, 0, default_username, -1);
+                g_free (default_username);
+        }
+        if (items != NULL) {
+                g_hash_table_destroy (items);
+        }
 }
