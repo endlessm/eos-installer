@@ -329,7 +329,6 @@ reason_timeout_cb (gpointer data)
     set_entry_validation_error (GTK_ENTRY (confirm_entry), _("Passwords do not match"));
 
   priv->reason_timeout = 0;
-
   return G_SOURCE_REMOVE;
 }
 
@@ -339,7 +338,10 @@ refresh_reason_timeout (GisAccountPage *page)
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
 
   if (priv->reason_timeout != 0)
-    g_source_remove (priv->reason_timeout);
+    {
+      g_source_remove (priv->reason_timeout);
+      priv->reason_timeout = 0;
+    }
 
   priv->reason_timeout = g_timeout_add (600, reason_timeout_cb, page);
 }
