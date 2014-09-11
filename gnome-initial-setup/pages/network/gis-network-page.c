@@ -383,6 +383,7 @@ refresh_wireless_list (GisNetworkPage *page)
   NMAccessPoint *ap;
   const GPtrArray *aps;
   GPtrArray *unique_aps;
+  gboolean disable_skip = FALSE;
   guint i;
   GtkWidget *label;
   GtkWidget *spinner;
@@ -392,21 +393,13 @@ refresh_wireless_list (GisNetworkPage *page)
 
   priv->refreshing = TRUE;
 
-  /* Ensure that the 'skip' button is never disabled by default, to avoid
-     potential issues like the one described in issue eos-shell/3563. */
-  gtk_widget_set_sensitive (priv->skip_button, TRUE);
-
   if (NM_IS_DEVICE_WIFI (priv->nm_device)) {
     state = nm_device_get_state (priv->nm_device);
 
     active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (priv->nm_device));
 
-    if (active_ap && nm_device_get_state (priv->nm_device) == NM_DEVICE_STATE_ACTIVATED) {
-      /* Toggling the 'Skip' button off before disabling it will ensure that the network
-         list widget is enabled, due to the property binding the button and the list. */
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->skip_button), FALSE);
-      gtk_widget_set_sensitive (priv->skip_button, FALSE);
-    }
+    if (active_ap && nm_device_get_state (priv->nm_device) == NM_DEVICE_STATE_ACTIVATED)
+      disable_skip = TRUE;
 
     list = WID ("network-list");
     children = gtk_container_get_children (GTK_CONTAINER (list));
@@ -416,6 +409,20 @@ refresh_wireless_list (GisNetworkPage *page)
     g_list_free (children);
 
     aps = nm_device_wifi_get_access_points (NM_DEVICE_WIFI (priv->nm_device));
+  }
+
+  /* Added this NULL-check as a 'safety net', even if skip_button should never be NULL. */
+  if (priv->skip_button) {
+    /* Ensure that the 'skip' button is never disabled by default, to avoid
+       potential issues like the one described in issue eos-shell/3563. */
+    gtk_widget_set_sensitive (priv->skip_button, TRUE);
+
+    if (disable_skip) {
+      /* Toggling the 'Skip' button off before disabling it will ensure that the network
+         list widget is enabled, due to the property binding the button and the list. */
+      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->skip_button), FALSE);
+      gtk_widget_set_sensitive (priv->skip_button, FALSE);
+    }
   }
 
   swin = WID("network-scrolledwindow");
@@ -608,9 +615,6 @@ gis_network_page_constructed (GObject *object)
 
   priv->nm_client = nm_client_new ();
 
-  g_signal_connect (priv->nm_client, "notify::active-connections",
-                    G_CALLBACK (active_connections_changed), page);
-
   devices = nm_client_get_devices (priv->nm_client);
   if (devices) {
     for (i = 0; i < devices->len; i++) {
@@ -622,8 +626,6 @@ gis_network_page_constructed (GObject *object)
       if (nm_device_get_device_type (device) == NM_DEVICE_TYPE_WIFI) {
         /* FIXME deal with multiple, dynamic devices */
         priv->nm_device = g_object_ref (device);
-        g_signal_connect (G_OBJECT (device), "notify::state",
-                          G_CALLBACK (device_state_changed), page);
         break;
       }
     }
@@ -645,6 +647,15 @@ gis_network_page_constructed (GObject *object)
     goto out;
   }
   priv->nm_settings = nm_remote_settings_new (bus);
+
+  /* Do not connect to any signal BEFORE the early returns above this point. */
+  g_signal_connect (priv->nm_client, "notify::active-connections",
+                    G_CALLBACK (active_connections_changed), page);
+
+  if (priv->nm_device) {
+    g_signal_connect (G_OBJECT (priv->nm_device), "notify::state",
+                      G_CALLBACK (device_state_changed), page);
+  }
 
   box = WID ("network-list");
 
