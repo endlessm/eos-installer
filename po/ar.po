@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-03 21:46-0700\n"
-"PO-Revision-Date: 2014-09-04 04:47+0000\n"
+"PO-Revision-Date: 2014-09-10 22:20+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -297,7 +297,7 @@ msgstr "<a href='metrics-privacy-policy'>انقر هنا</a> لعرض سياسة
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Terms of Service"
-msgstr ""
+msgstr "شروط الخدمة"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
@@ -306,11 +306,11 @@ msgid ""
 "not evil. May you find forgiveness for yourself and forgive others. May you "
 "share freely, never taking more than you give. We promise to do our best to "
 "do the same."
-msgstr ""
+msgstr "يجب علينا قانونيا أن نضمن شروط الخدمة. تلك هي أدناه. و لكن هذه هي البنود التي نريد منك أن توافق عليها: افعل الخير و ليس الشر. نرجو أن تصفح عن نفسك و تسامح الآخرين. نرجو أن تشارك بحرية و أن لا تأخذ أكثر مما  تعطي. نحن نعد بأن نبذل قصارى جهدنا لفعل الشيء نفسه."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
 msgid "- The Endless Team"
-msgstr ""
+msgstr "- فريق اللا نهاية"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
 msgid "Third-party Software"
