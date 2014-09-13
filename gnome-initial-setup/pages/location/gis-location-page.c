@@ -598,7 +598,9 @@ gis_location_page_constructed (GObject *object)
   GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
   GtkWidget *frame, *map, *entry;
   GWeatherLocation *world;
+  GSettings *clock_settings;
   GError *error;
+  const gchar *clock_format;
   const gchar *timezone;
   DateEndianess endianess;
   GtkWidget *widget;
@@ -744,6 +746,11 @@ gis_location_page_constructed (GObject *object)
                     G_CALLBACK (timezone_changed_cb), page);
 
   update_time (page);
+
+  clock_settings = g_settings_new ("org.gnome.desktop.interface");
+  clock_format = gis_driver_get_default_time_format (GIS_PAGE (page)->driver);
+  g_settings_set_string (clock_settings, "clock-format", clock_format? clock_format: "24h");
+  g_object_unref (clock_settings);
 
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 

@@ -48,6 +48,28 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDisplayPage, gis_display_page, GIS_TYPE_PAGE);
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
 
+static void
+set_toggle_options_from_config (GisDisplayPage *page)
+{
+  GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
+  GtkWidget *default_toggle, *toggle;
+  gboolean is_underscanning;
+
+  /* Do not set the toggle if we're on the default selection */
+  default_toggle = WID ("overscan_default_selection");
+  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (default_toggle)))
+    return;
+
+  is_underscanning = gnome_rr_output_info_get_underscanning  (priv->current_output);
+
+  if (is_underscanning)
+    toggle = WID ("overscan_on");
+  else
+    toggle = WID ("overscan_off");
+
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), TRUE);
+}
+
 static gboolean
 read_screen_config (GisDisplayPage *page)
 {
@@ -82,6 +104,8 @@ read_screen_config (GisDisplayPage *page)
   priv->current_output = output;
   if (priv->current_output == NULL)
     return FALSE;
+
+  set_toggle_options_from_config (page);
 
   return TRUE;
 }

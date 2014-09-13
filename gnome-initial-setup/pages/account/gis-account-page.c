@@ -142,7 +142,8 @@ clear_account_page (GisAccountPage *page)
   priv->account_type = ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR;
 
   gtk_entry_set_text (GTK_ENTRY (fullname_entry), "");
-  gtk_list_store_clear (GTK_LIST_STORE (gtk_combo_box_get_model (GTK_COMBO_BOX (username_combo))));
+  generate_username_choices ("", GTK_LIST_STORE (gtk_combo_box_get_model (GTK_COMBO_BOX (username_combo))));
+  gtk_combo_box_set_active (GTK_COMBO_BOX (username_combo), 0);
   gtk_entry_set_text (GTK_ENTRY (password_entry), "");
   gtk_entry_set_text (GTK_ENTRY (confirm_entry), "");
 }
@@ -263,16 +264,13 @@ fullname_changed (GtkWidget      *w,
   entry = gtk_bin_get_child (GTK_BIN (combo));
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
-  gtk_list_store_clear (GTK_LIST_STORE (model));
-
   priv->valid_name = is_valid_name (name);
 
   if (!priv->valid_name) {
     gtk_entry_set_text (GTK_ENTRY (entry), "");
-    return;
   }
 
-  generate_username_choices (name, GTK_LIST_STORE (model));
+  generate_username_choices (priv->valid_name ? name : "", GTK_LIST_STORE (model));
 
   gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
@@ -331,7 +329,6 @@ reason_timeout_cb (gpointer data)
     set_entry_validation_error (GTK_ENTRY (confirm_entry), _("Passwords do not match"));
 
   priv->reason_timeout = 0;
-
   return G_SOURCE_REMOVE;
 }
 
@@ -341,7 +338,10 @@ refresh_reason_timeout (GisAccountPage *page)
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
 
   if (priv->reason_timeout != 0)
-    g_source_remove (priv->reason_timeout);
+    {
+      g_source_remove (priv->reason_timeout);
+      priv->reason_timeout = 0;
+    }
 
   priv->reason_timeout = g_timeout_add (600, reason_timeout_cb, page);
 }
@@ -1114,15 +1114,23 @@ on_entry_changed (GtkEditable *editable,
 }
 
 static void
-password_visibility_toggled (GtkToggleButton *button,
-                             GisAccountPage  *page)
+update_password_visibility (GisAccountPage *page)
 {
   GtkWidget *password_entry = WID("account-password-entry");
   GtkWidget *confirm_entry = WID("account-confirm-entry");
-  gboolean is_active = gtk_toggle_button_get_active (button);
+  GtkWidget *password_toggle = WID("account-password-visibility-toggle");
+
+  gboolean is_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (password_toggle));
 
   gtk_entry_set_visibility (GTK_ENTRY (password_entry), is_active);
   gtk_entry_set_visibility (GTK_ENTRY (confirm_entry), is_active);
+}
+
+static void
+password_visibility_toggled (GtkToggleButton *button,
+                             GisAccountPage  *page)
+{
+  update_password_visibility (page);
 }
 
 static void
@@ -1213,6 +1221,7 @@ gis_account_page_constructed (GObject *object)
                           G_CALLBACK (confirm_entry_focus_out), page);
   g_signal_connect (password_toggle, "toggled",
                     G_CALLBACK (password_visibility_toggled), page);
+  update_password_visibility (page);
 
   g_signal_connect (WID("join-dialog"), "response",
                     G_CALLBACK (on_join_response), page);
