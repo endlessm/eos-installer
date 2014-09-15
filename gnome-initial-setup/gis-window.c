@@ -35,6 +35,56 @@ typedef struct _GisWindowPrivate GisWindowPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE(GisWindow, gis_window, GTK_TYPE_APPLICATION_WINDOW)
 
+static gboolean
+is_event_on_title (GisWindow *window,
+		   GdkEventButton *event)
+{
+  GisWindowPrivate *priv = gis_window_get_instance_private (window);
+  GtkAllocation allocation;
+  GtkWidget *titlebar, *src;
+  gint x, y;
+
+  titlebar = gis_assistant_get_titlebar (priv->assistant);
+
+  gdk_window_get_user_data (event->window, (gpointer *)&src);
+  if (src && src != GTK_WIDGET (window))
+    {
+      gtk_widget_translate_coordinates (src, GTK_WIDGET (window),
+					event->x, event->y, &x, &y);
+    }
+  else
+    {
+      x = event->x;
+      y = event->y;
+    }
+
+  if (titlebar != NULL &&
+      gtk_widget_get_visible (titlebar) &&
+      gtk_widget_get_child_visible (titlebar))
+    {
+      gtk_widget_get_allocation (titlebar, &allocation);
+      if (allocation.x <= x && allocation.x + allocation.width > x &&
+          allocation.y <= y && allocation.y + allocation.height > y)
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean
+gis_window_button_press_event (GtkWidget      *widget,
+			       GdkEventButton *event)
+{
+  GisWindow *window = GIS_WINDOW (widget);
+
+  /* eat all the right clicks on the titlebar, since we run in a special session */
+  if (is_event_on_title (window, event) &&
+      event->button == GDK_BUTTON_SECONDARY)
+    return TRUE;
+
+  return GTK_WIDGET_CLASS (gis_window_parent_class)->button_press_event (widget, event);
+}
+
 static void
 gis_window_realize (GtkWidget *widget)
 {
@@ -52,6 +102,7 @@ gis_window_class_init (GisWindowClass *klass)
 {
   GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
 
+  wclass->button_press_event = gis_window_button_press_event;
   wclass->realize = gis_window_realize;
 }
 
