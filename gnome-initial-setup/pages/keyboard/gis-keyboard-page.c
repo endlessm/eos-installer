@@ -82,6 +82,8 @@ struct _GisKeyboardPagePrivate {
         GHashTable *ibus_engines;
         GCancellable *ibus_cancellable;
 #endif
+
+        guint next_page_id;
 };
 typedef struct _GisKeyboardPagePrivate GisKeyboardPagePrivate;
 
@@ -91,25 +93,51 @@ typedef struct _GisKeyboardPagePrivate GisKeyboardPagePrivate;
 G_DEFINE_TYPE_WITH_PRIVATE (GisKeyboardPage, gis_keyboard_page, GIS_TYPE_PAGE);
 
 static void
+gis_keyboard_page_dispose (GObject *gobject)
+{
+  GisKeyboardPage *page = GIS_KEYBOARD_PAGE (gobject);
+  GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (page);
+
+  if (priv->cancellable)
+    {
+      g_cancellable_cancel (priv->cancellable);
+      g_clear_object (&priv->cancellable);
+    }
+
+  if (priv->input_settings)
+    {
+      g_signal_handlers_disconnect_by_data (priv->input_settings, page);
+      g_clear_object (&priv->input_settings);
+    }
+
+  if (priv->next_page_id != 0)
+    {
+      g_signal_handler_disconnect (gis_driver_get_assistant (GIS_PAGE (page)->driver),
+                                   priv->next_page_id);
+      priv->next_page_id = 0;
+    }
+
+  g_clear_object (&priv->permission);
+  g_clear_object (&priv->localed);
+  g_clear_object (&priv->xkb_info);
+
+#ifdef HAVE_IBUS
+  g_clear_object (&priv->ibus);
+  if (priv->ibus_cancellable)
+    g_cancellable_cancel (priv->ibus_cancellable);
+  g_clear_object (&priv->ibus_cancellable);
+#endif
+
+  G_OBJECT_CLASS (gis_keyboard_page_parent_class)->dispose (gobject);
+}
+
+static void
 gis_keyboard_page_finalize (GObject *object)
 {
 	GisKeyboardPage *self = GIS_KEYBOARD_PAGE (object);
         GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
 
-        g_cancellable_cancel (priv->cancellable);
-        g_clear_object (&priv->cancellable);
-
-        g_signal_handlers_disconnect_by_data (priv->input_settings, self);
-        g_clear_object (&priv->input_settings);
-
-        g_clear_object (&priv->permission);
-        g_clear_object (&priv->localed);
-        g_clear_object (&priv->xkb_info);
 #ifdef HAVE_IBUS
-        g_clear_object (&priv->ibus);
-        if (priv->ibus_cancellable)
-                g_cancellable_cancel (priv->ibus_cancellable);
-        g_clear_object (&priv->ibus_cancellable);
         g_clear_pointer (&priv->ibus_engines, g_hash_table_destroy);
         g_clear_pointer (&priv->selected_input_sorted, g_list_free);
 #endif
@@ -135,7 +163,6 @@ gis_keyboard_page_constructed (GObject *object)
 {
         GisKeyboardPage *self = GIS_KEYBOARD_PAGE (object);
         GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
-        GisAssistant *assistant = gis_driver_get_assistant (GIS_PAGE (self)->driver);
 
         G_OBJECT_CLASS (gis_keyboard_page_parent_class)->constructed (object);
 
@@ -159,7 +186,10 @@ gis_keyboard_page_constructed (GObject *object)
         if (gis_driver_get_mode (GIS_PAGE (self)->driver) == GIS_DRIVER_MODE_NEW_USER)
                 priv->permission = polkit_permission_new_sync ("org.freedesktop.locale1.set-keyboard", NULL, NULL, NULL);
 
-        g_signal_connect (assistant, "next-page", G_CALLBACK (next_page_cb), self);
+        priv->next_page_id = g_signal_connect (gis_driver_get_assistant (GIS_PAGE (self)->driver),
+                                               "next-page",
+                                               G_CALLBACK (next_page_cb),
+                                               self);
 
         gis_page_set_complete (GIS_PAGE (self), TRUE);
         gtk_widget_show (GTK_WIDGET (self));
@@ -181,7 +211,8 @@ gis_keyboard_page_class_init (GisKeyboardPageClass * klass)
         page_class->locale_changed = gis_keyboard_page_locale_changed;
 
         object_class->constructed = gis_keyboard_page_constructed;
-	object_class->finalize = gis_keyboard_page_finalize;
+        object_class->dispose = gis_keyboard_page_dispose;
+        object_class->finalize = gis_keyboard_page_finalize;
 }
 
 static void

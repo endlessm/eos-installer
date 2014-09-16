@@ -41,6 +41,7 @@ typedef struct {
   GnomeRROutputInfo *current_output;
 
   guint screen_changed_id;
+  guint next_page_id;
 } GisDisplayPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisDisplayPage, gis_display_page, GIS_TYPE_PAGE);
@@ -203,6 +204,13 @@ gis_display_page_dispose (GObject *gobject)
       priv->screen_changed_id = 0;
     }
 
+  if (priv->next_page_id != 0)
+    {
+      g_signal_handler_disconnect (gis_driver_get_assistant (GIS_PAGE (page)->driver),
+                                   priv->next_page_id);
+      priv->next_page_id = 0;
+    }
+
   g_clear_object (&priv->current_config);
   g_clear_object (&priv->screen);
 
@@ -214,7 +222,6 @@ gis_display_page_constructed (GObject *object)
 {
   GisDisplayPage *page = GIS_DISPLAY_PAGE (object);
   GisDisplayPagePrivate *priv = gis_display_page_get_instance_private (page);
-  GisAssistant *assistant;
   GtkWidget *widget;
   GError *error = NULL;
   gboolean visible = FALSE;
@@ -251,8 +258,10 @@ gis_display_page_constructed (GObject *object)
                                                       G_CALLBACK (read_screen_config),
                                                       page);
 
-  assistant = gis_driver_get_assistant (GIS_PAGE (page)->driver);
-  g_signal_connect (assistant, "next-page", G_CALLBACK (next_page_cb), page);
+  priv->next_page_id = g_signal_connect (gis_driver_get_assistant (GIS_PAGE (page)->driver),
+                                         "next-page",
+                                         G_CALLBACK (next_page_cb),
+                                         page);
 
   widget = WID ("overscan_on");
   g_signal_connect (widget, "toggled",
