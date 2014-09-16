@@ -1,82 +1,80 @@
-# Catalan translation for gnome-initial-setup.
-# Copyright (C) 2012 gnome-initial-setup's COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome-initial-setup package.
-# Gil Forcada <gilforcada@guifi.net>, 2012, 2013.
-# Josep Sànchez <papapep@gmx.com>, 2013.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-initial-setup master\n"
+"Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-03 21:46-0700\n"
-"PO-Revision-Date: 2013-09-14 23:31+0200\n"
-"Last-Translator: Josep Sànchez <papapep@gmx.com>\n"
-"Language-Team: Catalan <tradgnome@softcatala.org>\n"
-"Language: ca\n"
+"PO-Revision-Date: 2014-06-16 22:11+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Catalan (http://www.transifex.com/projects/p/gnome-initial-setup/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bits\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
-msgstr "Configuració inicial"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
-msgstr "_Següent"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
-msgstr "A_nterior"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:417
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
-msgstr "_Cancel·la"
+msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
-msgstr "Força el mode d'usuari nou"
+msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
-msgstr "- Configuració inicial del GNOME"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:328
 msgid "No password"
-msgstr "No hi ha contrasenya"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:331
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:429
 msgid "Passwords do not match"
-msgstr "Les contrasenyes no coincideixen"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:554
 msgid "Failed to register account"
-msgstr "S'ha produït un error en registrar el compte"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:762
 msgid "No supported way to authenticate with this domain"
-msgstr "No hi ha cap manera compatible per autenticar-se amb aquest domini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:802
 msgid "Failed to join domain"
-msgstr "S'ha produït un error en unir-se al domini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:870
 msgid "Failed to log into domain"
-msgstr "S'ha produït un error en iniciar la sessió al domini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
-msgstr "Entrada"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-#, fuzzy
 msgid "Create a Personal Account"
-msgstr "Crea un compte local"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
@@ -94,33 +92,30 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
-msgstr "_Nom complet"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Username"
-msgstr "Nom d'_usuari"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-#, fuzzy
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
 msgstr ""
-"Això es farà servir com a nom per la vostra carpeta d'usuari i no es pot "
-"canviar."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
-msgstr "Contrase_nya"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "_Confirm password"
-msgstr "Confirma la c_ontrasenya"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"To make your password more secure, you can use letters and numbers together."
+" This is optional."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
@@ -132,33 +127,32 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
-#, fuzzy
 msgid "Show password"
-msgstr "No hi ha contrasenya"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
-msgstr "pàgina 1"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
-msgstr "Creació d'una entrada corporativa"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
-msgstr "_Domini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "Enterprise domain or realm name"
-msgstr "Domini corporatiu o nom del regne"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
-msgstr "C_ontinua"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
-msgstr "Entrada de l'administrador del domini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
@@ -167,90 +161,86 @@ msgid ""
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
 msgstr ""
-"Per poder utilitzar entrades corporatives, aquest ordinador\n"
-"necessita formar part del domini. Demaneu a l'administrador que\n"
-"introdueixi aquí la seva contrasenya i escolliu un nom\n"
-"d'ordinador únic pel vostre ordinador."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
-msgstr "_Ordinador"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
-msgstr "_Nom de l'administrador"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
-msgstr "Contrasenya de l'administrador"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
 msgid "Too short"
-msgstr "Massa curta"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr "No és prou bona"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
 msgid "Weak"
-msgstr "Dèbil"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:111
 msgctxt "Password strength"
 msgid "Fair"
-msgstr "Prou bona"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:114
 msgctxt "Password strength"
 msgid "Good"
-msgstr "Bona"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:117
 msgctxt "Password strength"
 msgid "Strong"
-msgstr "Forta"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr "No es pot unir automàticament a aquest tipus de domini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
 msgid "No such domain or realm found"
-msgstr "No s'ha trobat el domini o el regne"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr "No s'ha pogut entrar com a %s al domini %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr "La contrasenya no és vàlida, torneu-ho a intentar"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr "No s'ha pogut connectar al domini %s: %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:148
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr "Ja existeix un usuari amb el nom d'usuari «%s»"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:152
 #, c-format
 msgid "The username is too long"
-msgstr "El nom d'usuari és massa curt"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:155
 msgid "The username cannot start with a '-'"
-msgstr "El nom d'usuari no pot començar amb «-»"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:158
 msgid ""
@@ -259,10 +249,6 @@ msgid ""
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
-"El nom d'usuari només pot estar compost per:\n"
-" ➣ lletres de l'alfabet anglès\n"
-" ➣ números\n"
-" ➣ qualsevol dels caràcters «.», «-» i «_»"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
@@ -296,9 +282,8 @@ msgid "Privacy Policy"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
-#, fuzzy
 msgid "Privacy and License Agreements"
-msgstr "Acords de llicència"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Enable metrics collection."
@@ -344,114 +329,110 @@ msgstr ""
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
-msgstr "Acords de llicència"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr "He _acceptat les condicions d'ús de la llicència d'usuari."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
-msgstr "Altres"
+msgstr ""
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
-msgstr "Afegeix un compte"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
-msgstr "Correu"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
-msgstr "Contactes"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
-msgstr "Xat"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
-msgstr "Recursos"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
-msgstr "S'ha produït un error en crear el compte"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
-msgstr "S'ha produït un error en suprimir el compte"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
-msgstr "Segur que voleu suprimir el compte?"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
-msgstr "Amb això suprimireu el compte al servidor."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
-msgstr "_Suprimeix"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
-msgstr "Comptes en línia"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
-msgstr "Connecteu amb les vostres dades existents al núvol"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
 msgstr ""
-"Si afegiu un compte, podreu accedir transparentment a les vostres fotos en "
-"línia, els contactes, els correus i molt més."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
-msgstr "_Afegeix un compte"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
-msgstr "Més…"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
-msgstr "No s'ha trobat cap font d'entrada"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 msgid "Other"
-msgstr "Altres"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
-#, fuzzy
 msgid "Keyboard Layouts"
-msgstr "Seleccioneu la disposició de teclat"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
-msgstr "Seleccioneu la disposició de teclat"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-#, fuzzy
 msgid "Add a Keyboard Layout"
-msgstr "Seleccioneu la disposició de teclat"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
-msgstr "No s'ha trobat cap idioma"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:524
 msgid "Welcome"
-msgstr "Us donem la benvinguda"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:528
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
@@ -469,12 +450,12 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
-msgstr "Cerqueu una ubicació"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:774
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
-msgstr "Ubicació"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
@@ -526,20 +507,19 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
-msgstr "Trieu la vostra ubicació"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
 msgid "_Determine your location automatically"
-msgstr "_Determina la ubicació automàticament"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
-msgstr "Fus horari"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-#, fuzzy
 msgid "Network Time"
-msgstr "Xarxa"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
@@ -556,46 +536,46 @@ msgstr ""
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr "Altres…"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
-msgstr "No hi ha cap xarxa disponible."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
-msgstr "No s'ha trobat cap dispositiu de xarxa."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
-msgstr "S'està comprovant si hi ha xarxes sense fil disponibles"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
-msgstr "Xarxa"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
 msgid "Wireless Networks"
-msgstr "Xarxes sense fil"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer password."
+"network password. This password may be different from your computer "
+"password."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set "
-"it up in \"Network Settings.\""
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-#, fuzzy
 msgid "No wireless available"
-msgstr "No hi ha cap xarxa disponible."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
@@ -604,37 +584,20 @@ msgstr ""
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
 msgid "_Start using %s"
-msgstr "_Comenceu a utilitzar %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
-msgstr "Moltes gràcies"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
 msgid "Your computer is ready to use."
-msgstr "El vostre ordinador ja està llest per utilitzar-se."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
 msgid "You may change these options at any time in Settings."
 msgstr ""
-"Podeu canviar qualsevol d'aquestes opcions quan vulgueu en els paràmetres."
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
-msgstr "_Comenceu a utilitzar el GNOME 3"
-
-#~ msgid ""
-#~ "Try to use at least 8 different characters. Mix upper and lower case and "
-#~ "use a number or two."
-#~ msgstr ""
-#~ "Intenteu utilitzar com a mínim 8 caràcters diferents. Mescleu majúscules "
-#~ "i minúscules i utilitzeu algun número."
-
-#~ msgid "Strength: %s"
-#~ msgstr "Força: %s"
-
-#~ msgid "Input Sources"
-#~ msgstr "Fonts d'entrada"
-
-#~ msgid "Add an Input Source"
-#~ msgstr "Afegiu fonts d'entrada"
+msgstr ""

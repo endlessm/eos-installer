@@ -1,83 +1,80 @@
-# Greek translation for gnome-initial-setup.
-# Copyright (C) 2012 gnome-initial-setup's COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome-initial-setup package.
-# Tom Tryfonidis <tomtryf@gmail.com>, 2012.
-# Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>, 2013, 2014.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-initial-setup master\n"
+"Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-03 21:46-0700\n"
-"PO-Revision-Date: 2014-01-01 09:44+0300\n"
-"Last-Translator: Dimitris Spingos (Δημήτρης Σπίγγος) <dmtrs32@gmail.com>\n"
-"Language-Team: www.gnome.gr\n"
-"Language: el\n"
+"PO-Revision-Date: 2014-06-16 22:11+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Greek (http://www.transifex.com/projects/p/gnome-initial-setup/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Virtaal 0.7.1\n"
-"X-Project-Style: gnome\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
-msgstr "Αρχική ρύθμιση"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:415
 msgid "_Next"
-msgstr "Επόμε_νη"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:416
 msgid "_Previous"
-msgstr "_Προηγούμενη"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:417
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
-msgstr "Ακύ_ρωση"
+msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
-msgstr "Εξαναγκασμός λειτουργίας νέου χρήστη"
+msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
-msgstr "- Αρχική ρύθμιση GNOME"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:328
 msgid "No password"
-msgstr "Χωρίς κωδικό πρόσβασης"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:331
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:429
 msgid "Passwords do not match"
-msgstr "Τα συνθηματικά δεν ταιριάζουν"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:554
 msgid "Failed to register account"
-msgstr "Αποτυχία εγγραφής του λογαριασμού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:762
 msgid "No supported way to authenticate with this domain"
-msgstr "Κανένας υποστηριζόμενος τρόπος πιστοποίησης με αυτόν τον τομέα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:802
 msgid "Failed to join domain"
-msgstr "Αποτυχία ένταξης στον τομέα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:870
 msgid "Failed to log into domain"
-msgstr "Αποτυχία σύνδεσης στον τομέα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
-msgstr "Σύνδεση"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-#, fuzzy
 msgid "Create a Personal Account"
-msgstr "Δημιουργία τοπικού λογαριασμού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
@@ -95,33 +92,30 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
-msgstr "Ονομα_τεπώνυμο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid "_Username"
-msgstr "Όν_ομα χρήστη"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-#, fuzzy
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
 msgstr ""
-"Αυτό θα χρησιμοποιηθεί σαν όνομα για τον προσωπικό σας φάκελο και δεν μπορεί "
-"να αλλαχθεί."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
-msgstr "Σ_υνθηματικό"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "_Confirm password"
-msgstr "_Επιβεβαίωση συνθηματικού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"To make your password more secure, you can use letters and numbers together."
+" This is optional."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
@@ -133,33 +127,32 @@ msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
-#, fuzzy
 msgid "Show password"
-msgstr "Χωρίς κωδικό πρόσβασης"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "page 1"
-msgstr "σελίδα 1"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "Create an Enterprise Account"
-msgstr "Δημιουργία εταιρικού λογαριασμού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "_Domain"
-msgstr "_Τομέας"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "Enterprise domain or realm name"
-msgstr "Εταιρικός τομέας ή όνομα realm"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "C_ontinue"
-msgstr "_Συνέχεια"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid "Domain Administrator Login"
-msgstr "Σύνδεση διαχειριστή τομέα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
 msgid ""
@@ -168,92 +161,86 @@ msgid ""
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
 msgstr ""
-"Για να χρησιμοποιήσετε τις εταιρικές συνδέσεις, αυτός ο υπολογιστής πρέπει "
-"να είναι\n"
-"εγγεγραμμένος στον τομέα. Πείτε στον διαχειριστή του δικτύου σας παρακαλώ\n"
-"να πληκτρολογήσει εδώ τον κωδικό πρόσβασης του τομέα και επιλέξτε έναν "
-"μοναδικό όνομα\n"
-"υπολογιστή για τον υπολογιστή σας."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "_Computer"
-msgstr "_Υπολογιστής"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator _Name"
-msgstr "Ό_νομα διαχειριστή"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
 msgid "Administrator Password"
-msgstr "Κωδικός διαχειριστή"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
 msgid "Too short"
-msgstr "Πολύ μικρό"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr "Δεν είναι αρκετά καλό"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
 msgid "Weak"
-msgstr "Αδύναμο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:111
 msgctxt "Password strength"
 msgid "Fair"
-msgstr "Μέτριο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:114
 msgctxt "Password strength"
 msgid "Good"
-msgstr "Καλό"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:117
 msgctxt "Password strength"
 msgid "Strong"
-msgstr "Δυνατό"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr "Αδυναμία αυτόματης σύνδεσης αυτού του τύπου τομέα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
 msgid "No such domain or realm found"
-msgstr "Δεν βρέθηκε τέτοιος τομέας ή realm"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr "Αδυναμία σύνδεσης ως %s στον τομέα %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr "Λάθος συνθηματικό, παρακαλώ προσπαθήστε ξανά"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr "Αδυναμία σύνδεσης στον τομέα %s: %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:148
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr "Υπάρχει ήδη ένας χρήστης με όνομα '%s'"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:152
 #, c-format
 msgid "The username is too long"
-msgstr "Το όνομα χρήστη είναι πολύ μεγάλο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:155
 msgid "The username cannot start with a '-'"
-msgstr "Το όνομα χρήστη δεν μπορεί να αρχίζει με '-'"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:158
 msgid ""
@@ -262,10 +249,6 @@ msgid ""
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
-"Το όνομα χρήστη πρέπει να αποτελείται μόνο από:\n"
-" ➣ γράμματα του αγγλικού αλφαβήτου\n"
-" ➣ αριθμούς\n"
-" ➣ οποιονδήποτε από τους χαρακτήρες '.', '-' και '_'"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:248
 msgid "Display"
@@ -299,9 +282,8 @@ msgid "Privacy Policy"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
-#, fuzzy
 msgid "Privacy and License Agreements"
-msgstr "Άδεια χρήσης"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Enable metrics collection."
@@ -347,116 +329,110 @@ msgstr ""
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
-msgstr "Άδεια χρήσης"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
 msgstr ""
-"Έχω _συμφωνήσει με τους όρους και τις προϋποθέσεις της άδειας χρήσης του "
-"τελικού χρήστη."
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
-msgstr "Άλλος"
+msgstr ""
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
-msgstr "Προσθήκη λογαριασμού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
-msgstr "Αλληλογραφία"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
-msgstr "Επαφές"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
-msgstr "Συνομιλία"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
-msgstr "Πόροι"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
 msgid "Error creating account"
-msgstr "Σφάλμα δημιουργίας λογαριασμού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
 msgid "Error removing account"
-msgstr "Σφάλμα αφαίρεσης λογαριασμού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "Are you sure you want to remove the account?"
-msgstr "Είστε σίγουροι ότι θέλετε να αφαιρέσετε το λογαριασμό;"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
 msgid "This will not remove the account on the server."
-msgstr "Αυτό δεν θα αφαιρέσει τον λογαριασμό στον εξυπηρετητή."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
 msgid "_Remove"
-msgstr "Αφαί_ρεση"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
 msgid "Online Accounts"
-msgstr "Διαδικτυακοί λογαριασμοί"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
-msgstr "Συνδεθείτε στα υπάρχοντα δεδομένα σας στο σύννεφο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
 msgstr ""
-"Η προσθήκη λογαριασμών θα σας επιτρέψει να συνδεθείτε με τις διαδικτυακές "
-"φωτογραφίες σας, επαφές, αλληλογραφία και πολλά άλλα."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
-msgstr "_Προσθήκη λογαριασμού"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
-msgstr "Περισσότερα…"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
-msgstr "Δεν βρέθηκαν πηγές εισόδου"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
 msgid "Other"
-msgstr "Άλλο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
-#, fuzzy
 msgid "Keyboard Layouts"
-msgstr "Διάταξη πληκτρολογίου"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select keyboard layouts"
-msgstr "Επιλέξτε τις διατάξεις πληκτρολογίου"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-#, fuzzy
 msgid "Add a Keyboard Layout"
-msgstr "Διάταξη πληκτρολογίου"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
-msgstr "Δε βρέθηκαν γλώσσες"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:524
 msgid "Welcome"
-msgstr "Καλώς ήλθατε"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:528
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
@@ -474,12 +450,12 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:642
 msgid "Search for a location"
-msgstr "Αναζήτηση τοποθεσίας"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:774
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
-msgstr "Τοποθεσία"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
@@ -531,20 +507,19 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
-msgstr "Επιλέξτε την τοποθεσία σας"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
 msgid "_Determine your location automatically"
-msgstr "Π_ροσδιορισμός της τοποθεσία σας αυτόματα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
-msgstr "Ζώνη ώρας"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-#, fuzzy
 msgid "Network Time"
-msgstr "Δίκτυο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
@@ -561,46 +536,46 @@ msgstr ""
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:331
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr "Άλλο…"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:369
 msgid "Network is not available."
-msgstr "Δεν είναι διαθέσιμο το δίκτυο."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:371
 msgid "No network devices found."
-msgstr "Δεν βρέθηκαν συσκευές δικτύου."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:421
 msgid "Checking for available wireless networks"
-msgstr "Γίνετε έλεγχος για διαθέσιμα ασύρματα δίκτυα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:681
 msgid "Network"
-msgstr "Δίκτυο"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
 msgid "Wireless Networks"
-msgstr "Ασύρματα δίκτυα"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer password."
+"network password. This password may be different from your computer "
+"password."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set "
-"it up in \"Network Settings.\""
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-#, fuzzy
 msgid "No wireless available"
-msgstr "Δεν είναι διαθέσιμο το δίκτυο."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
@@ -609,148 +584,20 @@ msgstr ""
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
 #, c-format
 msgid "_Start using %s"
-msgstr "Έ_ναρξη χρήσης %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
 msgid "Thank You"
-msgstr "Ευχαριστούμε"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
 msgid "Your computer is ready to use."
-msgstr "Ο υπολογιστής σας είναι έτοιμος για χρήση."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
 msgid "You may change these options at any time in Settings."
 msgstr ""
-"Μπορείτε να αλλάξετε οποιαδήποτε από αυτές τις επιλογές ανά πάσα στιγμή από "
-"τις ρυθμίσεις."
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
-msgstr "Ξεκινή_στε να χρησιμοποιείται το GNOME 3"
-
-#~ msgid ""
-#~ "Try to use at least 8 different characters. Mix upper and lower case and "
-#~ "use a number or two."
-#~ msgstr ""
-#~ "Προσπαθήστε να χρησιμοποιήσετε τουλάχιστον 8 διαφορετικούς χαρακτήρες. "
-#~ "Συνδυάστε μικρά και κεφαλαία γράμμα και χρησιμοποιήστε έναν ή "
-#~ "περισσότερους αριθμούς."
-
-#~ msgid "Strength: %s"
-#~ msgstr "Δύναμη: %s"
-
-#~ msgid "Input Sources"
-#~ msgstr "Πηγές εισόδου"
-
-#~ msgid "Add an Input Source"
-#~ msgstr "Προσθήκη πηγής εισόδου"
-
-#~ msgid "_Back"
-#~ msgstr "Πί_σω"
-
-#~ msgid "Select input sources"
-#~ msgstr "Επιλογή πηγών εισόδου"
-
-#~ msgid "Login settings are used by all users when logging into the system"
-#~ msgstr ""
-#~ "Οι ρυθμίσεις σύνδεσης χρησιμοποιούνται από όλους τους χρήστες κατά τη "
-#~ "σύνδεση στο σύστημα"
-
-#~ msgid "Your session needs to be restarted for changes to take effect"
-#~ msgstr ""
-#~ "Η συνεδρία σας πρέπει να επανεκκινηθεί για να εφαρμοστούν οι αλλαγές"
-
-#~ msgid "Restart Now"
-#~ msgstr "Επανεκκίνηση τώρα"
-
-#~ msgctxt "Language"
-#~ msgid "None"
-#~ msgstr "Καμία"
-
-#~ msgid "Sorry"
-#~ msgstr "Συγνώμη"
-
-#~ msgid "Input methods can't be used on the login screen"
-#~ msgstr ""
-#~ "Οι μέθοδοι εισαγωγής δεν μπορούν να χρησιμοποιηθούν στην οθόνη σύνδεσης"
-
-#~ msgid "No input source selected"
-#~ msgstr "Δεν επιλέχτηκε πηγή εισόδου"
-
-#~ msgid "Select an input source"
-#~ msgstr "Επιλογή πηγής εισόδου"
-
-#~ msgid "Remove Input Source"
-#~ msgstr "Αφαίρεση πηγής εισόδου"
-
-#~ msgid "Move Input Source Up"
-#~ msgstr "Μετακίνηση πηγής εισόδου πάνω"
-
-#~ msgid "Use %s"
-#~ msgstr "Χρησιμοποιήστε %s"
-
-#~ msgid "Unspecified"
-#~ msgstr "Ακαθόριστο"
-
-#~ msgid "Use _Enterprise Login"
-#~ msgstr "Χρήση _εταιρικής σύνδεσης"
-
-#~ msgid "_Use Local Login"
-#~ msgstr "_Χρήση τοπικής σύνδεσης"
-
-#~ msgid "English"
-#~ msgstr "Αγγλικά"
-
-#~ msgid "British English"
-#~ msgstr "Αγγλικά Μ.Βρετανίας"
-
-#~ msgid "German"
-#~ msgstr "Γερμανικά"
-
-#~ msgid "French"
-#~ msgstr "Γαλλικά"
-
-#~ msgid "Spanish"
-#~ msgstr "Ισπανικά"
-
-#~ msgid "Chinese (simplified)"
-#~ msgstr "Κινέζικα (απλοποιημένα)"
-
-#~ msgid "Create Local Account"
-#~ msgstr "Δημιουργία τοπικού λογαριασμού"
-
-#~ msgid "_Done"
-#~ msgstr "Έ_γινε"
-
-#~ msgid "_Require a password to use this account"
-#~ msgstr "_Απαιτείται συνθηματικό για τη χρήση του λογαριασμού"
-
-#~ msgid "_Act as administrator of this computer"
-#~ msgstr "_Ενεργήστε ως διαχειριστής σε αυτόν τον υπολογιστή"
-
-#~ msgid "Choose How to Login"
-#~ msgstr "Επιλέξτε πως θα συνδέεστε"
-
-#~ msgid "Disable image"
-#~ msgstr "Απενεργοποίηση εικόνας"
-
-#~ msgid "Take a photo..."
-#~ msgstr "Λήψη μιας φωτογραφίας…"
-
-#~ msgid "Remove"
-#~ msgstr "Αφαίρεση"
-
-#~ msgid "Show _all"
-#~ msgstr "Εμφάνιση ό_λων"
-
-#~ msgid "Enjoy GNOME!"
-#~ msgstr "Απολαύστε το GNOME!"
-
-#~ msgid "New to GNOME 3 and need help finding your way around?"
-#~ msgstr ""
-#~ "Είστε νέοι στο GNOME 3 και θέλετε βοήθεια για να βρείτε το δρόμο σας "
-#~ "τριγύρω;"
-
-#~ msgid "_Take a Tour"
-#~ msgstr "Κάν_τε ένα ταξίδι"
+msgstr ""
