@@ -29,6 +29,7 @@
 #include <locale.h>
 
 #include "gis-assistant.h"
+#include "gis-window.h"
 
 #define GIS_TYPE_DRIVER_MODE (gis_driver_mode_get_type ())
 
@@ -74,7 +75,7 @@ enum {
 static GParamSpec *obj_props[PROP_LAST];
 
 struct _GisDriverPrivate {
-  GtkWindow *main_window;
+  GtkWidget *main_window;
   GisAssistant *assistant;
 
   ActUser *user_account;
@@ -105,27 +106,6 @@ gis_driver_finalize (GObject *object)
   g_free (priv->default_time_format);
 
   G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
-}
-
-static void
-prepare_main_window (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  GdkGeometry size_hints;
-
-  size_hints.min_width = 747;
-  size_hints.min_height = 539;
-  size_hints.max_width = 747;
-  size_hints.max_height = 539;
-  size_hints.win_gravity = GDK_GRAVITY_CENTER;
-
-  gtk_window_set_geometry_hints (priv->main_window,
-                                 GTK_WIDGET (priv->main_window),
-                                 &size_hints,
-                                 GDK_HINT_MIN_SIZE | GDK_HINT_MAX_SIZE | GDK_HINT_WIN_GRAVITY);
-
-  gtk_window_set_titlebar (priv->main_window,
-                           gis_assistant_get_titlebar (priv->assistant));
 }
 
 static gboolean
@@ -284,17 +264,6 @@ gis_driver_activate (GApplication *app)
 }
 
 static void
-window_realize_cb (GtkWidget *widget, gpointer user_data)
-{
-  GisDriver *driver = GIS_DRIVER (user_data);
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  GdkWindow *window;
-  window = gtk_widget_get_window (GTK_WIDGET (priv->main_window));
-  /* disable WM functions except move */
-  gdk_window_set_functions (window, GDK_FUNC_MOVE);
-}
-
-static void
 gis_driver_read_personality_file (GisDriver *driver)
 {
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
@@ -341,29 +310,11 @@ gis_driver_startup (GApplication *app)
 
   gis_driver_read_personality_file (driver);
 
-  priv->main_window = g_object_new (GTK_TYPE_APPLICATION_WINDOW,
-                                    "application", app,
-                                    "type", GTK_WINDOW_TOPLEVEL,
-                                    "border-width", 12,
-                                    "icon-name", "preferences-system",
-                                    "resizable", TRUE,
-                                    "window-position", GTK_WIN_POS_CENTER_ALWAYS,
-                                    "deletable", FALSE,
-                                    NULL);
-
-  g_signal_connect (priv->main_window,
-                    "realize",
-                    G_CALLBACK (window_realize_cb),
-                    (gpointer)app);
-
-  priv->assistant = g_object_new (GIS_TYPE_ASSISTANT, NULL);
-  gtk_container_add (GTK_CONTAINER (priv->main_window), GTK_WIDGET (priv->assistant));
-
-  gtk_widget_show (GTK_WIDGET (priv->assistant));
+  priv->main_window = gis_window_new (driver);
+  priv->assistant = gis_window_get_assistant (GIS_WINDOW (priv->main_window));
 
   gis_driver_set_user_language (driver, setlocale (LC_MESSAGES, NULL));
 
-  prepare_main_window (driver);
   rebuild_pages (driver);
 }
 
