@@ -79,7 +79,6 @@ static PageData page_table[] = {
   PAGE (network),
   PAGE (account),
   PAGE (location),
-  PAGE (goa),
   PAGE (summary),
   { NULL },
 };
