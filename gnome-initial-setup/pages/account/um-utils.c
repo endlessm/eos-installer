@@ -315,6 +315,30 @@ generate_username_choices (const gchar  *name,
 
         items = g_hash_table_new (g_str_hash, g_str_equal);
 
+        /* shorten names */
+        if (strlen (first_word->str) > MAXNAMELEN) {
+                first_word->str[MAXNAMELEN] = '\0';
+        }
+        if (strlen (last_word->str) > MAXNAMELEN) {
+                last_word->str[MAXNAMELEN] = '\0';
+        }
+
+        if (strlen (item0->str) > MAXNAMELEN) {
+                item0->str[MAXNAMELEN] = '\0';
+        }
+        if (strlen (item1->str) > MAXNAMELEN) {
+                item1->str[MAXNAMELEN] = '\0';
+        }
+        if (strlen (item2->str) > MAXNAMELEN) {
+                item2->str[MAXNAMELEN] = '\0';
+        }
+        if (strlen (item3->str) > MAXNAMELEN) {
+                item3->str[MAXNAMELEN] = '\0';
+        }
+        if (strlen (item4->str) > MAXNAMELEN) {
+                item4->str[MAXNAMELEN] = '\0';
+        }
+
         /* add the first one */
         in_use = is_username_used (first_word->str);
         if (*first_word->str && !in_use && !g_ascii_isdigit (first_word->str[0]) &&
