@@ -93,8 +93,13 @@ gis_window_realize (GtkWidget *widget)
   GTK_WIDGET_CLASS (gis_window_parent_class)->realize (widget);
 
   window = gtk_widget_get_window (widget);
-  /* disable WM functions except move */
-  gdk_window_set_functions (window, GDK_FUNC_MOVE);
+  /* disable all the WM functions */
+  gdk_window_set_functions (window, GDK_FUNC_ALL
+                            | GDK_FUNC_RESIZE
+                            | GDK_FUNC_MOVE
+                            | GDK_FUNC_MINIMIZE
+                            | GDK_FUNC_MAXIMIZE
+                            | GDK_FUNC_CLOSE);
 }
 
 static void
