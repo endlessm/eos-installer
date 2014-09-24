@@ -182,6 +182,7 @@ gis_endless_eula_page_constructed (GObject *object)
 
   sync_metrics_active_state (page);
 
+  gis_page_set_forward_text (GIS_PAGE (page), _("_Accept and Continue"));
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 }
 
