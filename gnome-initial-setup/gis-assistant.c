@@ -279,6 +279,19 @@ update_titlebar (GisAssistant *assistant)
 }
 
 static void
+update_forward_button (GisAssistant *assistant)
+{
+  const char *forward_text = NULL;
+  GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
+
+  if (priv->current_page != NULL) {
+    forward_text = gis_page_get_forward_text (priv->current_page);
+  }
+
+  gtk_button_set_label (GTK_BUTTON (priv->forward), forward_text ? forward_text : _("_Next"));
+}
+
+static void
 page_notify (GisPage      *page,
              GParamSpec   *pspec,
              GisAssistant *assistant)
@@ -387,6 +400,7 @@ update_current_page (GisAssistant *assistant,
   g_object_notify_by_pspec (G_OBJECT (assistant), obj_props[PROP_TITLE]);
 
   update_titlebar (assistant);
+  update_forward_button (assistant);
   update_applying_state (assistant);
   update_navigation_buttons (assistant);
   update_progress_indicator (assistant);
@@ -412,7 +426,7 @@ gis_assistant_locale_changed (GisAssistant *assistant)
   GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
   GList *l;
 
-  gtk_button_set_label (GTK_BUTTON (priv->forward), _("_Next"));
+  update_forward_button (assistant);
   gtk_button_set_label (GTK_BUTTON (priv->back), _("_Previous"));
   gtk_button_set_label (GTK_BUTTON (priv->cancel), _("_Cancel"));
 
