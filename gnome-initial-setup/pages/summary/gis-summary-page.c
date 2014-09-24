@@ -236,13 +236,6 @@ launch_tutorial (GisSummaryPage *summary)
 static void
 done_cb (GtkButton *button, GisSummaryPage *page)
 {
-  gchar *file;
-
-  /* the tour is triggered by $XDG_CONFIG_HOME/run-welcome-tour */
-  file = g_build_filename (g_get_user_config_dir (), "run-welcome-tour", NULL);
-  g_file_set_contents (file, "yes", -1, NULL);
-  g_free (file);
-
   switch (gis_driver_get_mode (GIS_PAGE (page)->driver))
     {
     case GIS_DRIVER_MODE_NEW_USER:

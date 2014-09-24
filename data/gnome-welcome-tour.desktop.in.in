@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Welcome
-Exec=gnome-welcome-tour
-AutostartCondition=if-exists run-welcome-tour
-OnlyShowIn=GNOME;

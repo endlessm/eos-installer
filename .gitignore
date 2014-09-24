@@ -26,7 +26,6 @@ libtool
 ltmain.sh
 missing
 mkinstalldirs
-data/gnome-welcome-tour
 po/*.gmo
 po/*.header
 po/*.sed
@@ -67,7 +66,6 @@ gnome-initial-setup/pages/location/geoclue.[ch]
 gnome-initial-setup-first-login.desktop
 gnome-initial-setup.desktop
 gnome-initial-setup-copy-worker.desktop
-gnome-welcome-tour.desktop
 
 gnome-initial-setup-0.*
 gnome-initial-setup-3.*
