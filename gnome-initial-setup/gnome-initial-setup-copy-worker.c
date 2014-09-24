@@ -109,7 +109,6 @@ main (int    argc,
 #define FILE(path) \
   move_file_from_tmpfs (src, dest, path)
 
-  FILE (".config/run-welcome-tour");
   FILE (".config/dconf/user");
   FILE (".config/goa-1.0/accounts.conf");
   FILE (".config/monitors.xml");

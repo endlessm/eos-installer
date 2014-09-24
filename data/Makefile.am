@@ -11,10 +11,6 @@ edit = $(AM_V_GEN) sed \
 %.desktop.in: %.desktop.in.in Makefile
 	$(edit) $< >$@
 
-gnome-welcome-tour: gnome-welcome-tour.in Makefile
-	$(edit) $< >$@
-	chmod +x $@
-
 @INTLTOOL_DESKTOP_RULE@
 
 rulesdir = $(datadir)/polkit-1/rules.d
@@ -35,12 +31,10 @@ desktop_DATA =						\
 EXTRA_DIST =						\
 	20-gnome-initial-setup.rules			\
 	setup-shell.desktop				\
-	gnome-welcome-tour.desktop.in.in		\
 	gnome-initial-setup-first-login.desktop.in.in	\
 	gnome-initial-setup.desktop.in.in		\
 	gnome-initial-setup-copy-worker.desktop.in.in	\
 	gnome-initial-setup.session			\
-	gnome-welcome-tour.in				\
 	initial-setup.json				\
 	product_serial.conf                             \
 	$(NULL)
@@ -51,14 +45,10 @@ CLEANFILES =						\
 	gnome-initial-setup-copy-worker.desktop.in	\
 	gnome-initial-setup-copy-worker.desktop		\
 	gnome-initial-setup-first-login.desktop		\
-	gnome-welcome-tour.desktop.in			\
-	gnome-welcome-tour.desktop			\
-	gnome-welcome-tour				\
 	$(NULL)
 
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_DATA =					\
-	gnome-welcome-tour.desktop			\
 	gnome-initial-setup-copy-worker.desktop		\
 	gnome-initial-setup-first-login.desktop		\
 	$(NULL)
@@ -66,8 +56,4 @@ autostart_DATA =					\
 tmpfilesdir = $(libdir)/tmpfiles.d
 tmpfiles_DATA =                                         \
 	product_serial.conf                             \
-	$(NULL)
-
-bin_SCRIPTS =						\
-	gnome-welcome-tour				\
 	$(NULL)
