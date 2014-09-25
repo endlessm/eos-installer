@@ -45,18 +45,6 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisEndlessEulaPage, gis_endless_eula_page, GIS_TYPE_
 #define METRICS_PRIVACY_POLICY_URI "metrics-privacy-policy"
 
 static void
-sync_page_complete (GisEndlessEulaPage *page)
-{
-  GtkWidget *widget;
-  gboolean terms_agreed;
-
-  widget = WID ("terms-checkbutton");
-  terms_agreed = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
-
-  gis_page_set_complete (GIS_PAGE (page), terms_agreed);
-}
-
-static void
 sync_metrics_active_state (GisEndlessEulaPage *page)
 {
   GisEndlessEulaPagePrivate *priv = gis_endless_eula_page_get_instance_private (page);
@@ -184,10 +172,6 @@ gis_endless_eula_page_constructed (GObject *object)
   gtk_container_add (GTK_CONTAINER (page), WID ("endless-eula-page"));
   gtk_widget_show (GTK_WIDGET (page));
 
-  widget = WID ("terms-checkbutton");
-  g_signal_connect_swapped (widget, "toggled",
-                            G_CALLBACK (sync_page_complete), page);
-
   widget = WID ("metrics-checkbutton");
   g_signal_connect_swapped (widget, "toggled",
                             G_CALLBACK (sync_metrics_active_state), page);
@@ -197,6 +181,9 @@ gis_endless_eula_page_constructed (GObject *object)
                     G_CALLBACK (metrics_privacy_label_link_cb), page);
 
   sync_metrics_active_state (page);
+
+  gis_page_set_forward_text (GIS_PAGE (page), _("_Accept and Continue"));
+  gis_page_set_complete (GIS_PAGE (page), TRUE);
 }
 
 static void
