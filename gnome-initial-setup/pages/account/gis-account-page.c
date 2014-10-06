@@ -471,7 +471,6 @@ local_create_user (GisAccountPage *page)
   const gchar *fullname;
   const gchar *language;
   ActUser *old_user;
-  gboolean autologin_active;
   GSettings *lock_settings;
   GError *error = NULL;
 
@@ -480,8 +479,6 @@ local_create_user (GisAccountPage *page)
   username = gtk_combo_box_text_get_active_text (OBJ(GtkComboBoxText*, "account-username-combo"));
   fullname = gtk_entry_get_text (OBJ (GtkEntry*, "account-fullname-entry"));
   password = gtk_entry_get_text (OBJ (GtkEntry*, "account-password-entry"));
-  autologin_active = gtk_toggle_button_get_active (OBJ (GtkToggleButton*,
-                                                   "account-autologin-button"));
 
   priv->act_user = act_user_manager_create_user (priv->act_client, username, fullname, priv->account_type, &error);
   if (error != NULL) {
@@ -507,18 +504,12 @@ local_create_user (GisAccountPage *page)
   if (language)
     act_user_set_language (priv->act_user, language);
 
-  act_user_set_automatic_login (priv->act_user, autologin_active);
+  act_user_set_automatic_login (priv->act_user, FALSE);
   gis_driver_set_user_permissions (GIS_PAGE (page)->driver,
                                    priv->act_user,
                                    password);
 
   gis_update_login_keyring_password (old_password, password);
-
-  if (autologin_active) {
-    lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
-    g_settings_set_boolean (lock_settings, "lock-enabled", FALSE);
-    g_object_unref (lock_settings);
-  }
 }
 
 static void
