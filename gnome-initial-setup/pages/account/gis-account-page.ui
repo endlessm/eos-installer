@@ -53,7 +53,7 @@
                 <property name="yalign">0</property>
                 <property name="margin_bottom">0</property>
                 <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Create a new account in just a few steps: type in your full name, your desired username and a password that you'll remember.</property>
+                <property name="label" translatable="yes">Type in your full name and a password that you'll remember.</property>
                 <property name="wrap">True</property>
                 <attributes>
                   <attribute name="scale" value="0.8"/>

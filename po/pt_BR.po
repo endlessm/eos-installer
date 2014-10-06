@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-29 21:40-0700\n"
-"PO-Revision-Date: 2014-09-30 04:45+0000\n"
+"POT-Creation-Date: 2014-10-06 11:28-0700\n"
+"PO-Revision-Date: 2014-10-06 18:38+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/gnome-initial-setup/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -60,23 +60,23 @@ msgstr "Sem senha"
 msgid "Passwords do not match"
 msgstr "As senhas não estão iguais"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:554
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
 msgid "Failed to register account"
 msgstr "Falha ao registrar a conta"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:762
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
 msgid "No supported way to authenticate with this domain"
 msgstr "Nenhuma forma de suporte para autenticar neste domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:802
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
 msgid "Failed to join domain"
 msgstr "Ocorreu falha ao ingressar no domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:870
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
 msgid "Failed to log into domain"
 msgstr "Ocorreu falha ao iniciar sessão no domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1297
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
 msgid "Login"
 msgstr "Iniciar sessão"
 
@@ -85,10 +85,8 @@ msgid "Create a Personal Account"
 msgstr "Criar uma conta "
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid ""
-"Create a new account in just a few steps: type in your full name, your "
-"desired username and a password that you'll remember."
-msgstr "Crie uma conta em poucos passos: digite seu nome completo, escolha um nome de usuário e uma senha que você se lembre."
+msgid "Type in your full name and a password that you'll remember."
+msgstr "Digite seu nome completo e uma senha que você se lembre."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid ""
@@ -127,42 +125,38 @@ msgid ""
 msgstr "Para tornar sua senha mais segura, você pode usar letras e números juntos. Isso é opcional. "
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "A_utomatic Login"
-msgstr "Início automático de sessão"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
 msgstr "Para continuar, por favor, tenha certeza de que todos os espaços em branco foram preenchidos. "
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "Show password"
 msgstr "Mostrar senha"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
 msgstr "página 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
 msgstr "Criar uma conta da empresa"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
 msgstr "_Domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
 msgstr "Domínio da empresa ou nome de realm"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
 msgstr "Continuar"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "Início de sessão de administrador de domínio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -170,15 +164,15 @@ msgid ""
 "name for your computer."
 msgstr "Para usar este início de sessão da empresa, este computador\nprecisa estar registrado no domínio. Por favor, solicite que\nseu administrador digite a senha de domínio aqui e escolha um\nnome de computador único para seu computador."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
 msgstr "_Computador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
 msgstr "_Nome do administrador"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
 msgstr "Senha do administrador"
 
@@ -291,7 +285,7 @@ msgstr "Política de Privacidade"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
 msgid "_Accept and continue"
-msgstr ""
+msgstr "_Aceitar e continuar"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
 msgid "Privacy and License Agreements"
