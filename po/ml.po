@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-03 21:46-0700\n"
+"POT-Creation-Date: 2014-10-06 11:28-0700\n"
 "PO-Revision-Date: 2013-04-26 20:03+0530\n"
 "Last-Translator: Anish A <aneesh.nl@gmail.com>\n"
 "Language-Team: Swatantra Malayalam Computing\n"
@@ -24,49 +24,49 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "ആദ്യ ക്രമീകരണം"
 
-#: ../gnome-initial-setup/gis-assistant.c:415
+#: ../gnome-initial-setup/gis-assistant.c:291
 msgid "_Next"
 msgstr "_അടുത്തത്"
 
-#: ../gnome-initial-setup/gis-assistant.c:416
+#: ../gnome-initial-setup/gis-assistant.c:430
 msgid "_Previous"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:417
+#: ../gnome-initial-setup/gis-assistant.c:431
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_റദ്ദുചെയ്യുക"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:244
+#: ../gnome-initial-setup/gnome-initial-setup.c:243
 msgid "Force new user mode"
 msgstr "പുതിയ യൂസര്‍ രീതി നിര്‍ബന്ധമാക്കുക"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:248
+#: ../gnome-initial-setup/gnome-initial-setup.c:247
 msgid "- GNOME initial setup"
 msgstr "- ഗ്നോം പ്രാരംഭ സജ്ജീകരണം"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:326
 msgid "No password"
 msgstr "പാസ്‌വേര്‍ഡ് ഇല്ല"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:429
 msgid "Passwords do not match"
 msgstr "രഹസ്യവാക്കുകള്‍ ചേരുന്നില്ല"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:554
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
 msgid "Failed to register account"
 msgstr "അക്കൌണ്ട് ചേര്‍ക്കാന്‍ സാധിച്ചില്ല"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:762
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:802
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
 msgid "Failed to join domain"
 msgstr "ഡൊമെയിനില്‍ ചേരാന്‍ സാധിച്ചില്ല "
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:870
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
 msgid "Failed to log into domain"
 msgstr "ഡൊമെയിനില്‍ പ്രവേശിക്കാന്‍ സാധിച്ചില്ല"
 
@@ -80,9 +80,7 @@ msgid "Create a Personal Account"
 msgstr "ലോക്കല്‍ അക്കൌണ്ട്‌ ഉണ്ടാക്കുക"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid ""
-"Create a new account in just a few steps: type in your full name, your "
-"desired username and a password that you'll remember."
+msgid "Type in your full name and a password that you'll remember."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
@@ -123,43 +121,39 @@ msgid ""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "A_utomatic Login"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 #, fuzzy
 msgid "Show password"
 msgstr "പാസ്‌വേര്‍ഡ് ഇല്ല"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
 msgstr "താള്‍ 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
 msgstr "എന്റര്‍പ്രൈസസ്‌ അക്കൌണ്ട് ഉണ്ടാക്കുക"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
 msgstr "_ഡൊമെയിന്‍"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
 msgstr "എന്റര്‍പ്രൈസ് ഡോമെയിന്‍ അഥവ സാമ്രാജ്യത്തിന്റെ പേര്"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -167,15 +161,15 @@ msgid ""
 "name for your computer."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
 msgstr ""
 
@@ -233,21 +227,21 @@ msgstr "അസാധുവായ അടയാളവാക്ക്, വീണ്
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "%s ഡൊമെയിനുമായി ബന്ധപെടാന്‍ സാധിക്കുന്നില്ല : %s"
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:148
+#: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "'%s' എന്ന ഉപയോക്തൃനാമം ഉള്ള ഒരു ഉപയോക്താവ് നിലവില്‍ ഉണ്ട് "
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:152
+#: ../gnome-initial-setup/pages/account/um-utils.c:154
 #, c-format
 msgid "The username is too long"
 msgstr "ഉപയോക്തൃനാമം വളരെ വലുതായിപ്പോയി"
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:155
+#: ../gnome-initial-setup/pages/account/um-utils.c:157
 msgid "The username cannot start with a '-'"
 msgstr "ഉപയോക്തൃനാമം ഒരു '-' കൊണ്ട് തുടങ്ങാന്‍ പാടുള്ളതല്ല"
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:158
+#: ../gnome-initial-setup/pages/account/um-utils.c:160
 #, fuzzy
 msgid ""
 "The username must only consist of:\n"
@@ -260,7 +254,7 @@ msgstr ""
 " ➣ അക്കങ്ങള്‍,\n"
 " ➣ '.', '-', '_' എന്നീ ചിഹ്നങ്ങള്‍"
 
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:248
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
 msgstr ""
 
@@ -280,18 +274,22 @@ msgstr ""
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:81
 msgid ""
 "Endless collects metrics on user behavior and actions.\n"
 "All data sent is anonymous.\n"
 "We use the data to improve the system."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:106
 msgid "Privacy Policy"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
+msgid "_Accept and continue"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
 #, fuzzy
 msgid "Privacy and License Agreements"
 msgstr "ലൈസന്‍സ് കരാര്‍പത്രം"
@@ -331,10 +329,6 @@ msgid ""
 "Endless uses third-party software to display Flash, MP3 and other media. "
 "Some of this software is closed-source. The software is subject to the "
 "license terms included with the software's documentation."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:8
-msgid "I agree to the license terms"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
@@ -428,7 +422,7 @@ msgstr "ഇന്‍പുട്ട് ഉറവിടങ്ങളൊന്ന�
 msgid "Other"
 msgstr "മറ്റുളളവ"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:201
 #, fuzzy
 msgid "Keyboard Layouts"
 msgstr "കീബോര്‍ഡ് വിന്യാസം"
@@ -465,11 +459,11 @@ msgstr ""
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:642
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:644
 msgid "Search for a location"
 msgstr "ഒരു സ്ഥാനം തിരയുക "
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:774
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:781
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "സ്ഥാനം"
@@ -551,24 +545,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "മറ്റുള്ളവ..."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
 msgid "Network is not available."
 msgstr "നെറ്റ്‌വര്‍ക്ക് ലഭ്യമല്ല"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
 msgid "No network devices found."
 msgstr "നെറ്റ്‌വര്‍ക്ക് ഉപകരണങ്ങള്‍ ഒന്നും കണ്ടില്ല."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
 msgid "Checking for available wireless networks"
 msgstr "വയര്‍ലെസ്സ്‌ നെറ്റ്‌വര്‍ക്ക് ലഭ്യമാണോ എന്ന് പരിശോധിക്കുന്നു"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
 msgid "Network"
 msgstr "നെറ്റ്‌വര്‍ക്ക്"
 
@@ -599,12 +593,12 @@ msgstr "നെറ്റ്‌വര്‍ക്ക് ലഭ്യമല്ല"
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:338
 #, fuzzy, c-format
 msgid "_Start using %s"
 msgstr "ഗ്നോം 3 ഉപയോഗിക്കാന്‍ _തുടങ്ങൂ"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:441
 msgid "Thank You"
 msgstr "നന്ദി"
 

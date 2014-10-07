@@ -53,7 +53,7 @@
                 <property name="yalign">0</property>
                 <property name="margin_bottom">0</property>
                 <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Create a new account in just a few steps: type in your full name, your desired username and a password that you'll remember.</property>
+                <property name="label" translatable="yes">Type in your full name and a password that you'll remember.</property>
                 <property name="wrap">True</property>
                 <attributes>
                   <attribute name="scale" value="0.8"/>
@@ -309,20 +309,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkCheckButton" id="account-autologin-button">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="label" translatable="yes">A_utomatic Login</property>
-                <property name="use_underline">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="local-continue">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -340,7 +326,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">10</property>
+                <property name="top_attach">9</property>
                 <property name="width">2</property>
                 <property name="height">1</property>
               </packing>

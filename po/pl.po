@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-03 21:46-0700\n"
+"POT-Creation-Date: 2014-10-06 11:28-0700\n"
 "PO-Revision-Date: 2014-02-26 22:43+0100\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish <gnomepl@aviary.pl>\n"
@@ -28,49 +28,49 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "Początkowe ustawienia"
 
-#: ../gnome-initial-setup/gis-assistant.c:415
+#: ../gnome-initial-setup/gis-assistant.c:291
 msgid "_Next"
 msgstr "_Dalej"
 
-#: ../gnome-initial-setup/gis-assistant.c:416
+#: ../gnome-initial-setup/gis-assistant.c:430
 msgid "_Previous"
 msgstr "_Wstecz"
 
-#: ../gnome-initial-setup/gis-assistant.c:417
+#: ../gnome-initial-setup/gis-assistant.c:431
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:244
+#: ../gnome-initial-setup/gnome-initial-setup.c:243
 msgid "Force new user mode"
 msgstr "Wymusza tryb nowego użytkownika"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:248
+#: ../gnome-initial-setup/gnome-initial-setup.c:247
 msgid "- GNOME initial setup"
 msgstr "- początkowe ustawienia środowiska GNOME"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:326
 msgid "No password"
 msgstr "Brak hasła"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:429
 msgid "Passwords do not match"
 msgstr "Hasła się nie zgadzają"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:554
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
 msgid "Failed to register account"
 msgstr "Zarejestrowanie konta się nie powiodło"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:762
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
 msgid "No supported way to authenticate with this domain"
 msgstr "Brak obsługiwanego sposobu na uwierzytelnienie za pomocą tej domeny"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:802
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
 msgid "Failed to join domain"
 msgstr "Dołączenie do domeny się nie powiodło"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:870
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
 msgid "Failed to log into domain"
 msgstr "Zalogowanie do domeny się nie powiodło"
 
@@ -84,9 +84,7 @@ msgid "Create a Personal Account"
 msgstr "Utworzenie lokalnego konta"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid ""
-"Create a new account in just a few steps: type in your full name, your "
-"desired username and a password that you'll remember."
+msgid "Type in your full name and a password that you'll remember."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
@@ -128,43 +126,39 @@ msgid ""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "A_utomatic Login"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 #, fuzzy
 msgid "Show password"
 msgstr "Brak hasła"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
 msgstr "strona 1"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
 msgstr "Utworzenie konta firmowego"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
 msgstr "_Domena"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
 msgstr "Nazwa domeny lub obszaru firmowego"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
 msgstr "K_ontynuuj"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
 msgstr "Login administratora domeny"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:19
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -175,15 +169,15 @@ msgstr ""
 "do domeny. Należy poprosić administratora sieci, aby wpisał\n"
 "hasło domeny w tym miejscu i wybrać unikalną nazwę komputera."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
 msgstr "_Komputer"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
 msgstr "_Nazwa administratora"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:25
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
 msgstr "Hasło administratora"
 
@@ -241,21 +235,21 @@ msgstr "Nieprawidłowe hasło, proszę spróbować ponownie"
 msgid "Couldn't connect to the %s domain: %s"
 msgstr "Nie można połączyć z domeną %s: %s"
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:148
+#: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
 msgid "A user with the username '%s' already exists"
 msgstr "Użytkownik o nazwie \"%s\" już istnieje"
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:152
+#: ../gnome-initial-setup/pages/account/um-utils.c:154
 #, c-format
 msgid "The username is too long"
 msgstr "Nazwa użytkownika jest za krótka"
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:155
+#: ../gnome-initial-setup/pages/account/um-utils.c:157
 msgid "The username cannot start with a '-'"
 msgstr "Nazwa użytkownika nie może zaczynać się od znaku \"-\""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:158
+#: ../gnome-initial-setup/pages/account/um-utils.c:160
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
@@ -267,7 +261,7 @@ msgstr ""
 " ➣ cyfry\n"
 " ➣ oraz dowolne ze znaków: \".\", \"-\" i \"_\""
 
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:248
+#: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
 msgstr ""
 
@@ -287,18 +281,22 @@ msgstr ""
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:93
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:81
 msgid ""
 "Endless collects metrics on user behavior and actions.\n"
 "All data sent is anonymous.\n"
 "We use the data to improve the system."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:118
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:106
 msgid "Privacy Policy"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:205
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
+msgid "_Accept and continue"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
 #, fuzzy
 msgid "Privacy and License Agreements"
 msgstr "Umowa licencyjna"
@@ -338,10 +336,6 @@ msgid ""
 "Endless uses third-party software to display Flash, MP3 and other media. "
 "Some of this software is closed-source. The software is subject to the "
 "license terms included with the software's documentation."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:8
-msgid "I agree to the license terms"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
@@ -434,7 +428,7 @@ msgstr "Nie odnaleziono źródeł wprowadzania"
 msgid "Other"
 msgstr "Inne"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:171
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:201
 #, fuzzy
 msgid "Keyboard Layouts"
 msgstr "Wybór układów klawiatury"
@@ -470,11 +464,11 @@ msgstr ""
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:642
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:644
 msgid "Search for a location"
 msgstr "Wyszukaj położenie"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:774
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:781
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "Położenie"
@@ -556,24 +550,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:331
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Inna…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:369
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
 msgid "Network is not available."
 msgstr "Sieć jest niedostępna."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:371
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
 msgid "No network devices found."
 msgstr "Nie odnaleziono urządzeń sieciowych."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:421
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
 msgid "Checking for available wireless networks"
 msgstr "Wyszukiwanie dostępnych sieci bezprzewodowych"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:681
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
 msgid "Network"
 msgstr "Sieć"
 
@@ -603,12 +597,12 @@ msgstr "Brak dostępnych sieci bezprzewodowych"
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:331
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:338
 #, c-format
 msgid "_Start using %s"
 msgstr "_Rozpocznij używanie systemu %s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:357
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:441
 msgid "Thank You"
 msgstr "Dziękujemy"
 
