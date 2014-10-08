@@ -399,7 +399,10 @@ password_entry_focus_out (GtkWidget      *widget,
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
 
   if (priv->reason_timeout != 0)
-    g_source_remove (priv->reason_timeout);
+    {
+      g_source_remove (priv->reason_timeout);
+      priv->reason_timeout = 0;
+    }
 
   return FALSE;
 }
