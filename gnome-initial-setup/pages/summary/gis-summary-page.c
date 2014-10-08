@@ -370,12 +370,19 @@ fbe_bus_acquired (GDBusConnection *connection,
                   const gchar *name,
                   gpointer user_data)
 {
+  GError *error = NULL;
   GisSummaryPage *summary = user_data;
   GisSummaryPagePrivate *priv = gis_summary_page_get_instance_private (summary);
   g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (priv->fbe_skeleton),
                                     connection,
                                     "/com/endlessm/FBE",
-                                    NULL);
+                                    &error);
+
+  if (error != NULL)
+    {
+      g_critical ("Cannot export FBE proxy skeleton on session bus: %s\n", error->message);
+      g_error_free (error);
+    }
 }
 
 static void
