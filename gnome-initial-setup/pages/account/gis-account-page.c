@@ -471,7 +471,6 @@ local_create_user (GisAccountPage *page)
   const gchar *fullname;
   const gchar *language;
   ActUser *old_user;
-  GSettings *lock_settings;
   GError *error = NULL;
 
   create_shared_user (page);
