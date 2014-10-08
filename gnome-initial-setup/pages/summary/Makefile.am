@@ -8,12 +8,12 @@ AM_CPPFLAGS = \
 
 BUILT_SOURCES =
 
-fbe-generated.c: fbe-generated.h
-fbe-generated.h: $(srcdir)/com.endlessm.FBE.xml
+fbe-remote-generated.c: fbe-remote-generated.h
+fbe-remote-generated.h: $(srcdir)/com.endlessm.Tutorial.FBERemote.xml
 	$(AM_V_GEN) gdbus-codegen		\
-	--interface-prefix=com.endlessm		\
-	--generate-c-code=fbe-generated $<
-BUILT_SOURCES += fbe-generated.c fbe-generated.h
+	--interface-prefix=com.endlessm.Tutorial \
+	--generate-c-code=fbe-remote-generated $<
+BUILT_SOURCES += fbe-remote-generated.c fbe-remote-generated.h
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/summary.gresource.xml)
 summary-resources.c: summary.gresource.xml $(resource_files)
@@ -31,6 +31,6 @@ libgissummary_la_LIBADD = $(INITIAL_SETUP_LIBS)
 libgissummary_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 EXTRA_DIST =	\
-	com.endlessm.FBE.xml	\
+	com.endlessm.Tutorial.FBERemote.xml \
 	summary.gresource.xml	\
 	$(resource_files)
