@@ -26,9 +26,9 @@
 #define PAGE_ID "summary"
 
 #include "config.h"
+#include "fbe-remote-generated.h"
 #include "summary-resources.h"
 #include "gis-summary-page.h"
-#include "fbe-generated.h"
 
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
@@ -46,9 +46,6 @@
 struct _GisSummaryPagePrivate {
   ActUser *user_account;
   const gchar *user_password;
-
-  FBE *fbe_skeleton;
-  guint fbe_bus_name_id;
 };
 typedef struct _GisSummaryPagePrivate GisSummaryPagePrivate;
 
@@ -225,12 +222,53 @@ log_user_in (GisSummaryPage *page)
 }
 
 static void
+play_tutorial_ready_callback (GObject *fbe_remote,
+                              GAsyncResult *res,
+                              gpointer user_data)
+{
+  GError *error = NULL;
+  GisSummaryPage *summary = user_data;
+
+  fberemote_call_play_tutorial_finish (FBEREMOTE (fbe_remote), res, &error);
+  if (error != NULL)
+    {
+      g_critical ("Can't play tutorial from FBE remote: %s\n", error->message);
+      g_error_free (error);
+    }
+
+  log_user_in (summary);
+}
+
+static void
 launch_tutorial (GisSummaryPage *summary)
 {
-  GAppInfo *app = G_APP_INFO (g_desktop_app_info_new ("com.endlessm.Tutorial.desktop"));
-  GAppLaunchContext *launch_context = G_APP_LAUNCH_CONTEXT (gdk_display_get_app_launch_context (gdk_display_get_default ()));
-  g_app_info_launch (app, NULL, launch_context, NULL);
-  g_object_unref (launch_context);
+  FBERemote *fbe_remote;
+  GError *error = NULL;
+
+  fbe_remote = fberemote_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 "com.endlessm.Tutorial",
+                                                 "/com/endlessm/Tutorial/FBERemote",
+                                                 NULL, &error);
+
+  if (error != NULL)
+    {
+      g_critical ("Could not get DBus proxy for tutorial FBE remote: %s\n", error->message);
+      g_error_free (error);
+
+      log_user_in (summary);
+      return;
+    }
+
+  /* use g_dbus_proxy_call() to specify a custom timeout */
+  g_dbus_proxy_call (G_DBUS_PROXY (fbe_remote),
+                     "PlayTutorial",
+                     g_variant_new ("()"),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     G_MAXINT,
+                     NULL, /* cancellable */
+                     play_tutorial_ready_callback, summary);
+  g_object_unref (fbe_remote);
 }
 
 static void
@@ -342,60 +380,6 @@ update_distro_name (GisSummaryPage *page)
     }
 }
 
-static gboolean
-handle_tutorial_exit (GDBusInterfaceSkeleton *skeleton,
-                      GDBusMethodInvocation  *invocation,
-                      gpointer                user_data)
-{
-  GisSummaryPage *summary = user_data;
-
-  log_user_in (summary);
-
-  fbe_complete_tutorial_exit (FBE (skeleton), invocation);
-  return TRUE;
-}
-
-static void
-fbe_name_lost (GDBusConnection *connection,
-               const gchar *name,
-               gpointer user_data)
-{
-  GisSummaryPage *summary = user_data;
-  GisSummaryPagePrivate *priv = gis_summary_page_get_instance_private (summary);
-  g_dbus_interface_skeleton_unexport (G_DBUS_INTERFACE_SKELETON (priv->fbe_skeleton));
-}
-
-static void
-fbe_bus_acquired (GDBusConnection *connection,
-                  const gchar *name,
-                  gpointer user_data)
-{
-  GisSummaryPage *summary = user_data;
-  GisSummaryPagePrivate *priv = gis_summary_page_get_instance_private (summary);
-  g_dbus_interface_skeleton_export (G_DBUS_INTERFACE_SKELETON (priv->fbe_skeleton),
-                                    connection,
-                                    "/com/endlessm/FBE",
-                                    NULL);
-}
-
-static void
-export_on_dbus (GisSummaryPage *summary)
-{
-  GisSummaryPagePrivate *priv = gis_summary_page_get_instance_private (summary);
-
-  priv->fbe_bus_name_id = g_bus_own_name (G_BUS_TYPE_SESSION,
-                                          "com.endlessm.FBE",
-                                          G_BUS_NAME_OWNER_FLAGS_NONE,
-                                          fbe_bus_acquired,
-                                          NULL, /* name_acquired handler */
-                                          fbe_name_lost,
-                                          summary, NULL);
-
-  priv->fbe_skeleton = fbe_skeleton_new ();
-  g_signal_connect (priv->fbe_skeleton, "handle-tutorial-exit",
-                    G_CALLBACK (handle_tutorial_exit), summary);
-}
-
 static void
 gis_summary_page_constructed (GObject *object)
 {
@@ -405,34 +389,11 @@ gis_summary_page_constructed (GObject *object)
 
   gtk_container_add (GTK_CONTAINER (page), WID ("summary-page"));
   update_distro_name (page);
-  export_on_dbus (page);
   g_signal_connect (WID("summary-start-button"), "clicked", G_CALLBACK (done_cb), page);
 
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 
   gtk_widget_show (GTK_WIDGET (page));
-}
-
-static void
-gis_summary_page_dispose (GObject *object)
-{
-  GisSummaryPage *page = GIS_SUMMARY_PAGE (object);
-  GisSummaryPagePrivate *priv = gis_summary_page_get_instance_private (page);
-
-  G_OBJECT_CLASS (gis_summary_page_parent_class)->dispose (object);
-
-  if (priv->fbe_skeleton)
-    {
-      g_dbus_interface_skeleton_unexport (G_DBUS_INTERFACE_SKELETON (priv->fbe_skeleton));
-      g_object_unref (priv->fbe_skeleton);
-      priv->fbe_skeleton = NULL;
-    }
-
-  if (priv->fbe_bus_name_id != 0)
-    {
-      g_bus_unown_name (priv->fbe_bus_name_id);
-      priv->fbe_bus_name_id = 0;
-    }
 }
 
 static void
@@ -453,7 +414,6 @@ gis_summary_page_class_init (GisSummaryPageClass *klass)
   page_class->locale_changed = gis_summary_page_locale_changed;
   page_class->shown = gis_summary_page_shown;
   object_class->constructed = gis_summary_page_constructed;
-  object_class->dispose = gis_summary_page_dispose;
 }
 
 static void

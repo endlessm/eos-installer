@@ -1026,7 +1026,7 @@ setup_input_section (GisKeyboardPage *self)
                                   G_CALLBACK (current_input_source_changed), self);
 
         add_default_input_source_for_locale (self);
-        update_input (self);
+        set_input_settings (self);
         current_input_source_changed (self);
 }
 
