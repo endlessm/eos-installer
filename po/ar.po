@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-06 11:28-0700\n"
-"PO-Revision-Date: 2014-10-06 18:28+0000\n"
+"PO-Revision-Date: 2014-10-22 10:03+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr "إنشاء حساب شخصي"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid "Type in your full name and a password that you'll remember."
-msgstr ""
+msgstr "اكتب اسمك بالكامل وكلمة مرور تستطيع تذكرها مستقبلاً."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid ""
@@ -278,7 +278,7 @@ msgstr "سياسة الخصوصية"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
 msgid "_Accept and continue"
-msgstr ""
+msgstr "_القبول والاستمرار"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
 msgid "Privacy and License Agreements"
