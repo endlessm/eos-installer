@@ -605,7 +605,6 @@ gis_location_page_constructed (GObject *object)
   DateEndianess endianess;
   GtkWidget *widget;
   gint i;
-  guint num_days;
   GtkAdjustment *adjustment;
   gchar *time_buttons[] = { "hour_up_button", "hour_down_button",
                             "min_up_button", "min_down_button" };
@@ -716,10 +715,8 @@ gis_location_page_constructed (GObject *object)
   g_signal_connect (widget, "changed",
                     G_CALLBACK (month_year_changed), page);
 
-  num_days = g_date_get_days_in_month (g_date_time_get_month (priv->date),
-                                       g_date_time_get_year (priv->date));
   adjustment = (GtkAdjustment *) gtk_adjustment_new (g_date_time_get_day_of_month (priv->date),
-                                                     1, num_days, 1, 10, 1);
+                                                     1, 50, 1, 10, 1);
   widget = WID ("day-spinbutton");
   gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (widget), adjustment);
 
