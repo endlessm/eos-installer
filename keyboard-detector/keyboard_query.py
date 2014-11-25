@@ -1,6 +1,9 @@
 from gi.repository import Gtk, GObject, Gdk
 
-from ubiquity import keyboard_detector
+import keyboard_detector
+
+# FIXME replace with proper gettext translation support
+def _(message): return message
 
 
 class Keyrow(Gtk.Box):
@@ -28,8 +31,7 @@ class KeyboardQuery(Gtk.Window):
     def __init__(self, frontend):
         Gtk.Window.__init__(self)
 
-        self.set_title(
-            frontend.get_string('ubiquity/text/keyboard_query_title'))
+        self.set_title(_("Detect Keyboard Layout..."))
         self.set_keep_above(True)
         self.set_modal(True)
         self.set_border_width(20)
@@ -41,10 +43,8 @@ class KeyboardQuery(Gtk.Window):
         self.vbox = Gtk.Box(spacing=10)
         self.vbox.set_orientation(Gtk.Orientation.VERTICAL)
 
-        self.press_string = \
-            frontend.get_string('ubiquity/text/keyboard_query_press')
-        self.present_string = \
-            frontend.get_string('ubiquity/text/keyboard_query_present')
+        self.press_string = _("Please press one of the following keys:")
+        self.present_string = _("Is the following key present on your keyboard?")
         self.heading = Gtk.Label(label=self.press_string)
         self.heading.set_alignment(0, 0.5)
         self.vbox.pack_start(self.heading, False, True, 0)

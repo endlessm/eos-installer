@@ -3,7 +3,7 @@ class KeyboardDetector:
 
     def __init__(self):
         self.current_step = -1
-        f = '/usr/share/console-setup/pc105.tree'
+        f = 'pc105.tree'
         self.fp = open(f)
 
         # Dictionary of keycode -> step.
