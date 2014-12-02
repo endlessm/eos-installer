@@ -189,7 +189,7 @@ gis_endless_eula_page_constructed (GObject *object)
 static void
 gis_endless_eula_page_locale_changed (GisPage *page)
 {
-  gis_page_set_title (page, _("Privacy and License Agreements"));
+  gis_page_set_title (page, _("Terms of Use"));
 }
 
 static void
