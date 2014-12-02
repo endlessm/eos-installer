@@ -68,6 +68,7 @@ struct _GisKeyboardPagePrivate {
         GtkWidget *remove_input;
         GtkWidget *show_config;
         GtkWidget *show_layout;
+        GtkWidget *auto_detect;
         GtkWidget *input_scrolledwindow;
         GList *selected_input_sorted;
         guint n_input_rows;
@@ -954,6 +955,14 @@ show_selected_layout (GisKeyboardPage *self)
 }
 
 static void
+auto_detect (GisKeyboardPage *self)
+{
+        GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+        /* TODO Incorporate the keyboard detection heuristic */
+        printf("auto_detect\n");
+}
+
+static void
 add_default_input_source_for_locale (GisKeyboardPage *self)
 {
         const gchar *locale;
@@ -997,6 +1006,7 @@ setup_input_section (GisKeyboardPage *self)
         priv->remove_input = WID ("input_source_remove");
         priv->show_config = WID ("input_source_config");
         priv->show_layout = WID ("input_source_layout");
+        priv->auto_detect = WID ("input_auto_detect");
         priv->input_scrolledwindow = WID ("input_scrolledwindow");
 
         g_signal_connect_swapped (priv->add_input, "clicked",
@@ -1007,6 +1017,8 @@ setup_input_section (GisKeyboardPage *self)
                                   G_CALLBACK (show_selected_settings), self);
         g_signal_connect_swapped (priv->show_layout, "clicked",
                                   G_CALLBACK (show_selected_layout), self);
+        g_signal_connect_swapped (priv->auto_detect, "clicked",
+                                  G_CALLBACK (auto_detect), self);
 
         egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->input_list),
                                          GTK_SELECTION_SINGLE);
