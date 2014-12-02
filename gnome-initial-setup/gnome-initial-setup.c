@@ -29,6 +29,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
+#include <evince-document.h>
 
 #ifdef HAVE_CLUTTER
 #include <clutter-gtk/clutter-gtk.h>
@@ -265,6 +266,7 @@ main (int argc, char *argv[])
 #endif
 
   gtk_init (&argc, &argv);
+  ev_init ();
 
 #if HAVE_CLUTTER
   if (gtk_clutter_init (NULL, NULL) != CLUTTER_INIT_SUCCESS) {
@@ -282,6 +284,8 @@ main (int argc, char *argv[])
 
   g_object_unref (driver);
   g_option_context_free (context);
+  ev_shutdown ();
+
   return status;
 }
 

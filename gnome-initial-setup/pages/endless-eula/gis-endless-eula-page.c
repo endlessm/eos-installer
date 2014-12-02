@@ -30,6 +30,8 @@
 
 #include "endless-eula-resources.h"
 
+#include <evince-view.h>
+#include <evince-document.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 
@@ -145,6 +147,123 @@ gis_endless_eula_page_finalize (GObject *object)
   G_OBJECT_CLASS (gis_endless_eula_page_parent_class)->finalize (object);
 }
 
+static GFile *
+get_terms_document (void)
+{
+  const gchar * const * languages;
+  const gchar * const * data_dirs;
+  const gchar *language;
+  gchar *path = NULL;
+  gint i, j;
+  gboolean found = FALSE;
+  GFile *file;
+
+  data_dirs = g_get_system_data_dirs ();
+  languages = g_get_language_names ();
+  path = NULL;
+
+  for (i = 0; languages[i] != NULL; i++)
+    {
+      language = languages[i];
+
+      for (j = 0; data_dirs[j] != NULL; j++)
+        {
+          path = g_build_filename (data_dirs[j],
+                                   "eos-license-service",
+                                   "terms",
+                                   language,
+                                   "Endless-Mobile-Terms-of-Use.pdf",
+                                   NULL);
+
+          if (g_file_test (path, G_FILE_TEST_EXISTS))
+            {
+              found = TRUE;
+              break;
+            }
+
+          g_free (path);
+          path = NULL;
+        }
+
+      if (found)
+        break;
+    }
+
+  if (!found)
+    {
+      g_critical ("Unable to find terms and conditions PDF on the system");
+      return NULL;
+    }
+
+  file = g_file_new_for_path (path);
+  g_free (path);
+
+  return file;
+}
+
+static void
+load_terms_view (GisEndlessEulaPage *page)
+{
+  EvDocument *document;
+  EvDocumentModel *model;
+  GFile *file;
+  GtkWidget *widget, *view;
+  GError *error = NULL;
+
+  file = get_terms_document ();
+  if (file == NULL)
+    return;
+
+  document = ev_document_factory_get_document_for_gfile (file,
+                                                         EV_DOCUMENT_LOAD_FLAG_NONE,
+                                                         NULL,
+                                                         &error);
+  g_object_unref (file);
+
+  if (error != NULL)
+    {
+      g_critical ("Unable to load terms and conditions PDF: %s", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  model = ev_document_model_new_with_document (document);
+  view = ev_view_new ();
+  ev_view_set_model (EV_VIEW (view), model);
+
+  widget = WID ("eula-scrolledwin");
+  gtk_container_add (GTK_CONTAINER (widget), view);
+  gtk_widget_show (view);
+}
+
+static void
+load_css_overrides (GisEndlessEulaPage *page)
+{
+  GtkCssProvider *provider;
+  GFile *file;
+  GError *error = NULL;
+
+  provider = gtk_css_provider_new ();
+  file = g_file_new_for_uri ("resource:///org/gnome/initial-setup/endless-eula-page.css");
+  gtk_css_provider_load_from_file (provider, file, &error);
+  g_object_unref (file);
+
+  if (error != NULL)
+    {
+      g_warning ("Unable to load CSS overrides for the endless-eula page: %s",
+                 error->message);
+      g_error_free (error);
+    }
+  else
+    {
+      gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (GTK_WIDGET (page)),
+                                                 GTK_STYLE_PROVIDER (provider),
+                                                 GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    }
+
+  g_object_unref (provider);
+}
+
 static void
 gis_endless_eula_page_constructed (GObject *object)
 {
@@ -169,6 +288,8 @@ gis_endless_eula_page_constructed (GObject *object)
       g_error_free (error);
     }
 
+  load_css_overrides (page);
+
   gtk_container_add (GTK_CONTAINER (page), WID ("endless-eula-page"));
   gtk_widget_show (GTK_WIDGET (page));
 
@@ -181,6 +302,7 @@ gis_endless_eula_page_constructed (GObject *object)
                     G_CALLBACK (metrics_privacy_label_link_cb), page);
 
   sync_metrics_active_state (page);
+  load_terms_view (page);
 
   gis_page_set_forward_text (GIS_PAGE (page), _("_Accept and continue"));
   gis_page_set_complete (GIS_PAGE (page), TRUE);

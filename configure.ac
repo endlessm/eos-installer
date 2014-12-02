@@ -53,7 +53,9 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   pango >= $PANGO_REQUIRED_VERSION
                   pwquality
                   egg-list-box-uninstalled
-		  libsecret-1)
+                  libsecret-1
+                  evince-view-3.0
+                  evince-document-3.0)
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
 

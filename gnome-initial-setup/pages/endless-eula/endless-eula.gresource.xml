@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
   <gresource prefix="/org/gnome/initial-setup">
+    <file alias="endless-eula-page.css">endless-eula-page.css</file>
     <file preprocess="xml-stripblanks" alias="gis-endless-eula-page.ui">gis-endless-eula-page.ui</file>
   </gresource>
 </gresources>
