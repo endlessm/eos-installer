@@ -34,6 +34,7 @@
 #include <evince-document.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <webkit2/webkit2.h>
 
 typedef struct {
   GDBusProxy *metrics_proxy;
@@ -45,6 +46,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisEndlessEulaPage, gis_endless_eula_page, GIS_TYPE_
 #define WID(name) OBJ(GtkWidget*,name)
 
 #define METRICS_PRIVACY_POLICY_URI "metrics-privacy-policy"
+#define LICENSE_SERVICE_URI "http://localhost:3010"
 
 static void
 sync_metrics_active_state (GisEndlessEulaPage *page)
@@ -147,6 +149,39 @@ gis_endless_eula_page_finalize (GObject *object)
   G_OBJECT_CLASS (gis_endless_eula_page_parent_class)->finalize (object);
 }
 
+static void
+present_view_in_modal (GisEndlessEulaPage *page,
+                       GtkWidget *view,
+                       const gchar *title,
+                       gboolean needs_scrolled_window)
+{
+  GtkWidget *dialog, *content_area, *widget;
+
+  dialog = gtk_dialog_new_with_buttons (title, GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))),
+                                        GTK_DIALOG_MODAL |
+                                        GTK_DIALOG_USE_HEADER_BAR,
+                                        NULL,
+                                        NULL);
+  gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 500);
+
+  if (needs_scrolled_window)
+    {
+      widget = gtk_scrolled_window_new (NULL, NULL);
+      gtk_container_add (GTK_CONTAINER (widget), view);
+    }
+  else
+    {
+      widget = view;
+    }
+
+  content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+  gtk_container_add (GTK_CONTAINER (content_area), widget);
+  gtk_widget_show_all (dialog);
+
+  g_signal_connect (dialog, "response",
+                    G_CALLBACK (gtk_widget_destroy), NULL);
+}
+
 static GFile *
 get_terms_document (void)
 {
@@ -201,39 +236,103 @@ get_terms_document (void)
   return file;
 }
 
-static void
-load_terms_view (GisEndlessEulaPage *page)
+static GtkWidget *
+load_license_service_view (void)
+{
+  GtkWidget *view;
+
+  view = webkit_web_view_new ();
+  webkit_web_view_load_uri (WEBKIT_WEB_VIEW (view), LICENSE_SERVICE_URI);
+  gtk_widget_set_hexpand (view, TRUE);
+  gtk_widget_set_vexpand (view, TRUE);
+
+  return view;
+}
+
+static GtkWidget *
+load_evince_view_for_file (GFile *file)
 {
   EvDocument *document;
   EvDocumentModel *model;
-  GFile *file;
-  GtkWidget *widget, *view;
+  GtkWidget *view;
   GError *error = NULL;
-
-  file = get_terms_document ();
-  if (file == NULL)
-    return;
+  gchar *path;
 
   document = ev_document_factory_get_document_for_gfile (file,
                                                          EV_DOCUMENT_LOAD_FLAG_NONE,
                                                          NULL,
                                                          &error);
-  g_object_unref (file);
 
   if (error != NULL)
     {
-      g_critical ("Unable to load terms and conditions PDF: %s", error->message);
+      path = g_file_get_path (file);
+      g_critical ("Unable to load EvDocument for file %s: %s", path, error->message);
       g_error_free (error);
-      return;
+      g_free (path);
+
+      return NULL;
     }
 
   model = ev_document_model_new_with_document (document);
   view = ev_view_new ();
   ev_view_set_model (EV_VIEW (view), model);
+  g_object_unref (model);
+
+  gtk_widget_set_hexpand (view, TRUE);
+  gtk_widget_set_vexpand (view, TRUE);
+
+  return view;
+}
+
+static void
+eula_view_external_link_cb (EvView *ev_view,
+                            EvLinkAction *action,
+                            GisEndlessEulaPage *page)
+{
+  const gchar *uri;
+  GFile *file;
+  GtkWidget *view;
+
+  uri = ev_link_action_get_uri (action);
+  file = g_file_new_for_uri (uri);
+
+  if (g_file_has_uri_scheme (file, "file"))
+    {
+      view = load_evince_view_for_file (file);
+      if (view != NULL)
+        present_view_in_modal (page, view, _("Terms of Use"), TRUE);
+    }
+  else if (g_str_has_prefix (uri, LICENSE_SERVICE_URI))
+    {
+      view = load_license_service_view ();
+      present_view_in_modal (page, view, _("Third Party Software"), FALSE);
+    }
+
+  g_object_unref (file);
+}
+
+static void
+load_terms_view (GisEndlessEulaPage *page)
+{
+  GFile *file;
+  GtkWidget *widget, *view;
+
+  file = get_terms_document ();
+  if (file == NULL)
+    return;
+
+  view = load_evince_view_for_file (file);
+  g_object_unref (file);
+
+  if (view == NULL)
+    return;
 
   widget = WID ("eula-scrolledwin");
   gtk_container_add (GTK_CONTAINER (widget), view);
   gtk_widget_show (view);
+
+  g_signal_connect (view, "external-link",
+                    G_CALLBACK (eula_view_external_link_cb), page);
 }
 
 static void

@@ -55,7 +55,8 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   egg-list-box-uninstalled
                   libsecret-1
                   evince-view-3.0
-                  evince-document-3.0)
+                  evince-document-3.0
+                  webkit2gtk-3.0)
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
 
