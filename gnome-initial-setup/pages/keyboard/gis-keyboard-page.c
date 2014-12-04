@@ -35,6 +35,7 @@
 #include "gis-keyboard-page.h"
 #include "keyboard-resources.h"
 #include "cc-input-chooser.h"
+#include "cc-keyboard-query.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
@@ -955,11 +956,46 @@ show_selected_layout (GisKeyboardPage *self)
 }
 
 static void
-auto_detect (GisKeyboardPage *self)
+detector_response (GtkDialog *detector, gint response_id, gpointer data)
 {
-        GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
-        /* TODO Incorporate the keyboard detection heuristic */
-        printf("auto_detect\n");
+  GisKeyboardPage *self = data;
+  const char *type;
+  char *id;
+  char *name;
+
+  if (response_id == GTK_RESPONSE_OK)
+    {
+      if (cc_keyboard_query_get_selected (CC_KEYBOARD_QUERY (detector), &id, &name))
+        {
+          if (name == NULL)
+            name = g_strdup (id);
+          if (!input_source_already_added (self, id))
+            {
+              type = INPUT_SOURCE_TYPE_XKB;
+              add_input_row (self, type, id, name, NULL);
+              update_buttons (self);
+              update_input (self);
+            }
+          select_input (self, id);
+
+          g_free (id);
+          g_free (name);
+        }
+    }
+  gtk_widget_destroy (GTK_WIDGET (detector));
+}
+
+static void
+show_keyboard_detector (GisKeyboardPage *self)
+{
+  GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+  GtkWidget *detector;
+  GtkWidget *toplevel;
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  detector = cc_keyboard_query_new (GTK_WINDOW (toplevel), priv->xkb_info);
+  g_signal_connect (detector, "response", G_CALLBACK (detector_response), self);
+  cc_keyboard_query_run (CC_KEYBOARD_QUERY (detector));
 }
 
 static void
@@ -1018,7 +1054,7 @@ setup_input_section (GisKeyboardPage *self)
         g_signal_connect_swapped (priv->show_layout, "clicked",
                                   G_CALLBACK (show_selected_layout), self);
         g_signal_connect_swapped (priv->auto_detect, "clicked",
-                                  G_CALLBACK (auto_detect), self);
+                                  G_CALLBACK (show_keyboard_detector), self);
 
         egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->input_list),
                                          GTK_SELECTION_SINGLE);
