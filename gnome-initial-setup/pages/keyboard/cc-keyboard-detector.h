@@ -45,6 +45,7 @@ typedef struct {
 
   /* Private */
   int current_step;
+  KeyboardDetectorStepType step_type;
   GDataInputStream *fp;
 } KeyboardDetector;
 

@@ -44,6 +44,7 @@ keyboard_detector_new (void)
   det->present = -1;
   det->not_present = -1;
   det->result = NULL;
+  det->step_type = UNKNOWN;
 
   return det;
 }
@@ -56,6 +57,7 @@ keyboard_detector_clear (KeyboardDetector *det)
   g_clear_pointer (&det->symbols, g_list_free);
   det->present = -1;
   det->not_present = -1;
+  det->step_type = UNKNOWN;
   g_clear_pointer (&det->result, g_free);
 }
 
@@ -66,6 +68,142 @@ keyboard_detector_free (KeyboardDetector *det)
   g_object_unref (det->fp);
   g_hash_table_destroy (det->keycodes);
   g_free (det);
+}
+
+/* Return value: TRUE if should read another line */
+static gboolean
+process_line (KeyboardDetector         *det,
+              KeyboardDetectorStepType  step,
+              char                     *line,
+              KeyboardDetectorStepType *result)
+{
+  if (g_str_has_prefix (line, "STEP "))
+    {
+      /* This line starts a new step. */
+      int new_step = atoi (line + 5);
+      if (det->current_step == step)
+        {
+          det->current_step = new_step;
+          *result = det->step_type;
+          return FALSE;
+        }
+      else
+        {
+          det->current_step = new_step;
+        }
+    }
+  else if (det->current_step != step)
+    return TRUE;
+  else if (g_str_has_prefix (line, "PRESS "))
+    {
+      /* Ask the user to press a character on the keyboard. */
+      if (det->step_type == UNKNOWN)
+        det->step_type = PRESS_KEY;
+      if (det->step_type != PRESS_KEY)
+        {
+          *result = ERROR;
+          return FALSE;
+        }
+      char *key_symbol = g_strdup (g_strstrip (line + 6));
+      det->symbols = g_list_append (det->symbols, key_symbol);
+    }
+  else if (g_str_has_prefix (line, "CODE "))
+    {
+      /* Direct the evaluating code to process step ## next if the
+       * user has pressed a key which returned that keycode.
+       */
+      if (det->step_type != PRESS_KEY)
+        {
+          *result = ERROR;
+          return FALSE;
+        }
+      char *keycode = strtok (line + 5, " ");
+      char *s = strtok (NULL, " ");
+      int code = atoi (keycode);
+      int next_step = atoi (s);
+      g_hash_table_insert (det->keycodes, GINT_TO_POINTER (code), GINT_TO_POINTER (next_step));
+    }
+  else if (g_str_has_prefix (line, "FIND "))
+    {
+      /* Ask the user whether that character is present on their
+       * keyboard.
+       */
+      if (det->step_type == UNKNOWN)
+        {
+          det->step_type = KEY_PRESENT;
+        }
+      else
+        {
+          *result = ERROR;
+          return FALSE;
+        }
+      char *key_symbol = g_strdup (g_strstrip (line + 5));
+      det->symbols = g_list_prepend (det->symbols, key_symbol);
+    }
+  else if (g_str_has_prefix (line, "FINDP "))
+    {
+      /* Equivalent to FIND, except that the user is asked to consider
+       * only the primary symbols (i.e. Plain and Shift).
+       */
+      if (det->step_type == UNKNOWN)
+        {
+          det->step_type = KEY_PRESENT_P;
+        }
+      else
+        {
+          *result = ERROR;
+          return FALSE;
+        }
+      char *key_symbol = g_strdup (g_strstrip (line + 6));
+      det->symbols = g_list_prepend (det->symbols, key_symbol);
+    }
+  else if (g_str_has_prefix (line, "YES "))
+    {
+      /* Direct the evaluating code to process step ## next if the
+       * user does have this key.
+       */
+      if (det->step_type != KEY_PRESENT_P &&
+          det->step_type != KEY_PRESENT)
+        {
+          *result = ERROR;
+          return FALSE;
+        }
+      det->present = atoi (g_strstrip (line + 4));
+    }
+  else if (g_str_has_prefix (line, "NO "))
+    {
+      /* Direct the evaluating code to process step ## next if the
+       * user does not have this key.
+       */
+      if (det->step_type != KEY_PRESENT_P &&
+          det->step_type != KEY_PRESENT)
+        {
+          *result = ERROR;
+          return FALSE;
+        }
+      det->not_present = atoi (g_strstrip (line + 3));
+    }
+  else if (g_str_has_prefix (line, "MAP "))
+    {
+      /* This step uniquely identifies a keymap. */
+      if (det->step_type == UNKNOWN)
+        det->step_type = RESULT;
+      det->result = g_strdup (g_strstrip (line + 4));
+      /* The Ubuntu file uses colons to separate country codes from layout
+       * variants, and GnomeXkb requires plus signs.
+       */
+      char *colon_pointer = strchr (det->result, ':');
+      if (colon_pointer != NULL)
+        *colon_pointer = '+';
+      *result = det->step_type;
+      return FALSE;
+    }
+  else
+    {
+      *result = ERROR;
+      return FALSE;
+    }
+  return TRUE;
 }
 
 KeyboardDetectorStepType
@@ -88,141 +226,15 @@ keyboard_detector_read_step (KeyboardDetector *det,
         return ERROR;
     }
 
-  KeyboardDetectorStepType step_type = UNKNOWN;
   keyboard_detector_clear (det);
 
   while ((line = g_data_input_stream_read_line_utf8 (det->fp, &len, NULL, NULL)) != NULL)
     {
-      if (g_str_has_prefix (line, "STEP "))
-        {
-          /* This line starts a new step. */
-          int new_step = atoi (line + 5);
-          g_free (line);
-          if (det->current_step == step)
-            {
-              det->current_step = new_step;
-              return step_type;
-            }
-          else
-            {
-              det->current_step = new_step;
-            }
-        }
-      else if (det->current_step != step)
-        {
-          g_free (line);
-          continue;
-        }
-      else if (g_str_has_prefix (line, "PRESS "))
-        {
-          /* Ask the user to press a character on the keyboard. */
-          if (step_type == UNKNOWN)
-            step_type = PRESS_KEY;
-          if (step_type != PRESS_KEY)
-            {
-              g_free (line);
-              return ERROR;
-            }
-          char *key_symbol = g_strdup (g_strstrip (line + 6));
-          g_free (line);
-          det->symbols = g_list_append (det->symbols, key_symbol);
-        }
-      else if (g_str_has_prefix (line, "CODE "))
-        {
-          /* Direct the evaluating code to process step ## next if the
-           * user has pressed a key which returned that keycode.
-           */
-          if (step_type != PRESS_KEY)
-            {
-              g_free (line);
-              return ERROR;
-            }
-          char *keycode = strtok (line + 5, " ");
-          char *s = strtok (NULL, " ");
-          int code = atoi (keycode);
-          int next_step = atoi (s);
-          g_free (line);
-          g_hash_table_insert (det->keycodes, GINT_TO_POINTER (code), GINT_TO_POINTER (next_step));
-        }
-      else if (g_str_has_prefix (line, "FIND "))
-        {
-          /* Ask the user whether that character is present on their
-           * keyboard.
-           */
-          if (step_type == UNKNOWN)
-            {
-              step_type = KEY_PRESENT;
-            }
-          else
-            {
-              g_free (line);
-              return ERROR;
-            }
-          char *key_symbol = g_strdup (g_strstrip (line + 5));
-          g_free (line);
-          det->symbols = g_list_prepend (det->symbols, key_symbol);
-        }
-      else if (g_str_has_prefix (line, "FINDP "))
-        {
-          /* Equivalent to FIND, except that the user is asked to consider
-           * only the primary symbols (i.e. Plain and Shift).
-           */
-          if (step_type == UNKNOWN)
-            {
-              step_type = KEY_PRESENT_P;
-            }
-          else
-            {
-              g_free (line);
-              return ERROR;
-            }
-          char *key_symbol = g_strdup (g_strstrip (line + 6));
-          g_free (line);
-          det->symbols = g_list_prepend (det->symbols, key_symbol);
-        }
-      else if (g_str_has_prefix (line, "YES "))
-        {
-          /* Direct the evaluating code to process step ## next if the
-           * user does have this key.
-           */
-          int next_step = atoi (g_strstrip (line + 4));
-          g_free (line);
-          if (step_type != KEY_PRESENT_P &&
-              step_type != KEY_PRESENT)
-            return ERROR;
-          det->present = next_step;
-        }
-      else if (g_str_has_prefix (line, "NO "))
-        {
-          /* Direct the evaluating code to process step ## next if the
-           * user does not have this key.
-           */
-          int next_step = atoi (g_strstrip (line + 3));
-          g_free (line);
-          if (step_type != KEY_PRESENT_P &&
-              step_type != KEY_PRESENT)
-            return ERROR;
-          det->not_present = next_step;
-        }
-      else if (g_str_has_prefix (line, "MAP "))
-        {
-          /* This step uniquely identifies a keymap. */
-          if (step_type == UNKNOWN)
-            step_type = RESULT;
-          det->result = g_strdup (g_strstrip (line + 4));
-          g_free (line);
-          /* The Ubuntu file uses colons to separate country codes from layout
-           * variants, and GnomeXkb requires plus signs.
-           */
-          char *colon_pointer = strchr (det->result, ':');
-          if (colon_pointer != NULL)
-            *colon_pointer = '+';
-          return step_type;
-        }
-      else {
-        g_free (line);
-        return ERROR;
-      }
+      KeyboardDetectorStepType retval;
+      gboolean should_continue = process_line (det, step, line, &retval);
+      g_free (line);
+      if (!should_continue)
+        return retval;
     }
 
   /* The requested step was not found. */
