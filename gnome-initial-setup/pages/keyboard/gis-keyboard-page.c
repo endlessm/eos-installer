@@ -35,6 +35,7 @@
 #include "gis-keyboard-page.h"
 #include "keyboard-resources.h"
 #include "cc-input-chooser.h"
+#include "cc-keyboard-query.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-xkb-info.h>
@@ -68,6 +69,7 @@ struct _GisKeyboardPagePrivate {
         GtkWidget *remove_input;
         GtkWidget *show_config;
         GtkWidget *show_layout;
+        GtkWidget *auto_detect;
         GtkWidget *input_scrolledwindow;
         GList *selected_input_sorted;
         guint n_input_rows;
@@ -954,6 +956,49 @@ show_selected_layout (GisKeyboardPage *self)
 }
 
 static void
+detector_response (GtkDialog *detector, gint response_id, gpointer data)
+{
+  GisKeyboardPage *self = data;
+  const char *type;
+  char *id;
+  char *name;
+
+  if (response_id == GTK_RESPONSE_OK)
+    {
+      if (cc_keyboard_query_get_selected (CC_KEYBOARD_QUERY (detector), &id, &name))
+        {
+          if (name == NULL)
+            name = g_strdup (id);
+          if (!input_source_already_added (self, id))
+            {
+              type = INPUT_SOURCE_TYPE_XKB;
+              add_input_row (self, type, id, name, NULL);
+              update_buttons (self);
+              update_input (self);
+            }
+          select_input (self, id);
+
+          g_free (id);
+          g_free (name);
+        }
+    }
+  gtk_widget_destroy (GTK_WIDGET (detector));
+}
+
+static void
+show_keyboard_detector (GisKeyboardPage *self)
+{
+  GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+  GtkWidget *detector;
+  GtkWidget *toplevel;
+
+  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  detector = cc_keyboard_query_new (GTK_WINDOW (toplevel), priv->xkb_info);
+  g_signal_connect (detector, "response", G_CALLBACK (detector_response), self);
+  cc_keyboard_query_run (CC_KEYBOARD_QUERY (detector));
+}
+
+static void
 add_default_input_source_for_locale (GisKeyboardPage *self)
 {
         const gchar *locale;
@@ -997,6 +1042,7 @@ setup_input_section (GisKeyboardPage *self)
         priv->remove_input = WID ("input_source_remove");
         priv->show_config = WID ("input_source_config");
         priv->show_layout = WID ("input_source_layout");
+        priv->auto_detect = WID ("input_auto_detect");
         priv->input_scrolledwindow = WID ("input_scrolledwindow");
 
         g_signal_connect_swapped (priv->add_input, "clicked",
@@ -1007,6 +1053,8 @@ setup_input_section (GisKeyboardPage *self)
                                   G_CALLBACK (show_selected_settings), self);
         g_signal_connect_swapped (priv->show_layout, "clicked",
                                   G_CALLBACK (show_selected_layout), self);
+        g_signal_connect_swapped (priv->auto_detect, "clicked",
+                                  G_CALLBACK (show_keyboard_detector), self);
 
         egg_list_box_set_selection_mode (EGG_LIST_BOX (priv->input_list),
                                          GTK_SELECTION_SINGLE);
