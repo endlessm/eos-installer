@@ -36,7 +36,6 @@ Build-Depends: cdbs (>= 0.4.41),
 	       zint-devel,
 	       libevince-dev,
 	       libwebkit2gtk-3.0-dev
-	       
 Standards-Version: 3.9.4
 Homepage: https://git.gnome.org/browse/gnome-initial-setup/
 
