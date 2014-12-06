@@ -33,7 +33,10 @@ Build-Depends: cdbs (>= 0.4.41),
 	       iso-codes,
 	       libclutter-gst-2.0-dev,
 	       valac,
-	       zint-devel
+	       zint-devel,
+	       libevince-dev,
+	       libwebkit2gtk-3.0-dev
+	       
 Standards-Version: 3.9.4
 Homepage: https://git.gnome.org/browse/gnome-initial-setup/
 
