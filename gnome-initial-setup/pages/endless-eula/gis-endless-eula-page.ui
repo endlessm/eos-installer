@@ -5,23 +5,72 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="halign">center</property>
+    <property name="margin_start">24</property>
+    <property name="margin_end">24</property>
     <property name="vexpand">True</property>
     <property name="orientation">vertical</property>
-    <property name="row_spacing">6</property>
+    <property name="row_spacing">12</property>
+    <child>
+      <object class="GtkLabel" id="label6">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes">A few words about your Rights and our Responsibility</property>
+        <attributes>
+          <attribute name="weight" value="bold"/>
+          <attribute name="scale" value="1.2"/>
+        </attributes>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSeparator" id="separator1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkScrolledWindow" id="eula-scrolledwin">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+        <property name="shadow_type">in</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">3</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="valign">end</property>
-        <property name="margin_left">12</property>
-        <property name="spacing">6</property>
         <child>
           <object class="GtkCheckButton" id="metrics-checkbutton">
-            <property name="label" translatable="yes">Enable metrics collection.</property>
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
+            <property name="can_focus">False</property>
             <property name="receives_default">False</property>
+            <property name="valign">start</property>
+            <property name="use_stock">True</property>
             <property name="xalign">0</property>
+            <property name="yalign">0</property>
             <property name="active">True</property>
             <property name="draw_indicator">True</property>
           </object>
@@ -34,9 +83,13 @@
         <child>
           <object class="GtkLabel" id="metrics-privacy-label">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="label" translatable="yes">&lt;a href='metrics-privacy-policy'&gt;Click here&lt;/a&gt; to see our privacy policy</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="yalign">0</property>
+            <property name="label" translatable="yes">I agree to help make Endless better for everyone by automatically saving statistics about problems and bugs. All data is anonymous. &lt;a href='metrics-privacy-policy'&gt;Learn more&lt;/a&gt;</property>
             <property name="use_markup">True</property>
+            <property name="wrap">True</property>
+            <property name="width_chars">48</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -51,117 +104,6 @@
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
-    </child>
-    <child>
-      <object class="GtkBox" id="box2">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="halign">baseline</property>
-        <property name="valign">start</property>
-        <property name="vexpand">True</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
-        <child>
-          <object class="GtkLabel" id="label1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="valign">start</property>
-            <property name="label" translatable="yes">Terms of Service</property>
-            <attributes>
-              <attribute name="weight" value="bold"/>
-              <attribute name="scale" value="1.2"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label2">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">We legally have to include our terms of service. Those are below. But here are the terms to which we would most like you to agree: May you do good and not evil. May you find forgiveness for yourself and forgive others. May you share freely, never taking more than you give. We promise to do our best to do the same.</property>
-            <property name="wrap">True</property>
-            <property name="max_width_chars">48</property>
-            <attributes>
-              <attribute name="scale" value="0.82999999999999996"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label3">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="margin_bottom">64</property>
-            <property name="label" translatable="yes">- The Endless Team</property>
-            <property name="wrap">True</property>
-            <property name="max_width_chars">48</property>
-            <attributes>
-              <attribute name="scale" value="0.82999999999999996"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label4">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="valign">start</property>
-            <property name="label" translatable="yes">Third-party Software</property>
-            <attributes>
-              <attribute name="weight" value="bold"/>
-              <attribute name="scale" value="1.2"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label5">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">start</property>
-            <property name="label" translatable="yes">Endless uses third-party software to display Flash, MP3 and other media. Some of this software is closed-source. The software is subject to the license terms included with the software's documentation.</property>
-            <property name="wrap">True</property>
-            <property name="max_width_chars">48</property>
-            <attributes>
-              <attribute name="scale" value="0.82999999999999996"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">4</property>
-          </packing>
-        </child>
-      </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <placeholder/>
     </child>
   </object>
 </interface>
