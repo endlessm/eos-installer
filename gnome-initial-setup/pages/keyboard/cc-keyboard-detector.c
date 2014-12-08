@@ -21,6 +21,7 @@
 
 #include <config.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "cc-keyboard-detector.h"
 
@@ -29,13 +30,44 @@ keyboard_detector_new (void)
 {
   GError *error = NULL;
   GInputStream *istream;
-  KeyboardDetector *det = g_new0 (KeyboardDetector, 1);
+  KeyboardDetector *det;
+  const gchar * const *language_names = g_get_language_names ();
+  const gchar *language_name;
+  int idx;
 
-  det->current_step = -1;
-  istream = g_resources_open_stream ("/org/gnome/initial-setup/pc105.tree",
-                                     G_RESOURCE_LOOKUP_FLAGS_NONE, &error);
+  /* Find the detector tree that is the best match for the user's language. */
+  for (idx = 0; (language_name = language_names[idx]) != NULL; idx++)
+    {
+      gchar *path = g_strdup_printf (
+          "/org/gnome/initial-setup/detector-trees/%s/pc105.tree",
+          language_name);
+      g_clear_error (&error);
+      istream = g_resources_open_stream (path,
+                                         G_RESOURCE_LOOKUP_FLAGS_NONE, &error);
+      g_free (path);
+
+      if (istream == NULL)
+        {
+          g_debug ("Unable to load keyboard detector tree for %s: %s",
+                   language_name, error->message);
+          /* Don't clear the error here, as we need the message
+           * for the last error outside the loop.  Instead, we will
+           * clear the error at the start of the next iteration. */
+        }
+      else
+        {
+          g_debug ("Successfully loaded keyboard detector tree for %s",
+                   language_name);
+          break;
+        }
+    }
+
   if (istream == NULL)
     g_error ("Error loading keyboard detector tree: %s", error->message);
+
+  det = g_new0 (KeyboardDetector, 1);
+
+  det->current_step = -1;
   det->fp = g_data_input_stream_new (istream);
   g_object_unref (istream);
 
