@@ -11,11 +11,11 @@
     <property name="orientation">vertical</property>
     <property name="row_spacing">12</property>
     <child>
-      <object class="GtkLabel" id="label6">
+      <object class="GtkLabel" id="terms-label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="halign">start</property>
-        <property name="label" translatable="yes">A few words about your Rights and our Responsibility</property>
+        <property name="label" translatable="yes">Please read the following terms of use carefully</property>
         <attributes>
           <attribute name="weight" value="bold"/>
           <attribute name="scale" value="1.2"/>
@@ -29,9 +29,16 @@
       </packing>
     </child>
     <child>
-      <object class="GtkSeparator" id="separator1">
+      <object class="GtkLabel" id="terms-text">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="label" translatable="yes">By clicking "Accept and continue," you acknowledge that you have read, understood, and agree to be bound by the following terms and conditions.</property>
+	<property name="wrap">True</property>
+        <property name="hexpand">False</property>
+        <property name="halign">start</property>
+        <property name="valign">start</property>
+        <property name="xalign">0</property>
+        <property name="yalign">0</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -53,7 +60,37 @@
       </object>
       <packing>
         <property name="left_attach">0</property>
+        <property name="top_attach">2</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSeparator" id="separator1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
         <property name="top_attach">3</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="metrics-label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes">Help make Endless better for everyone</property>
+        <attributes>
+          <attribute name="weight" value="bold"/>
+          <attribute name="scale" value="1.2"/>
+        </attributes>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">4</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
@@ -86,7 +123,7 @@
             <property name="can_focus">False</property>
             <property name="valign">start</property>
             <property name="yalign">0</property>
-            <property name="label" translatable="yes">I agree to help make Endless better for everyone by automatically saving statistics about problems and bugs. All data is anonymous. &lt;a href='metrics-privacy-policy'&gt;Learn more&lt;/a&gt;</property>
+            <property name="label" translatable="yes">Automatically save and send usage statistics and problem reports to Endless Mobile. All data is anonymous. &lt;a href='metrics-privacy-policy'&gt;Learn more&lt;/a&gt;</property>
             <property name="use_markup">True</property>
             <property name="wrap">True</property>
             <property name="width_chars">48</property>
@@ -100,7 +137,7 @@
       </object>
       <packing>
         <property name="left_attach">0</property>
-        <property name="top_attach">2</property>
+        <property name="top_attach">5</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
