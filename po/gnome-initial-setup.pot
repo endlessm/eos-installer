@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-06 11:28-0700\n"
+"POT-Creation-Date: 2014-12-13 01:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,11 +35,11 @@ msgstr ""
 msgid "_Cancel"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:243
+#: ../gnome-initial-setup/gnome-initial-setup.c:244
 msgid "Force new user mode"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:247
+#: ../gnome-initial-setup/gnome-initial-setup.c:248
 msgid "- GNOME initial setup"
 msgstr ""
 
@@ -48,27 +48,27 @@ msgid "No password"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:329
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:432
 msgid "Passwords do not match"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:547
 msgid "Failed to register account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:755
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:795
 msgid "Failed to join domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:863
 msgid "Failed to log into domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1290
 msgid "Login"
 msgstr ""
 
@@ -264,60 +264,37 @@ msgstr ""
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:81
-msgid ""
-"Endless collects metrics on user behavior and actions.\n"
-"All data sent is anonymous.\n"
-"We use the data to improve the system."
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
+msgid "Terms of Use"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:106
-msgid "Privacy Policy"
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
+msgid "Third Party Software"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
-msgid "Privacy and License Agreements"
-msgstr ""
-
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Enable metrics collection."
+msgid "Please read the following terms of use carefully"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
-"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+"By clicking \"Accept and continue,\" you acknowledge that you have read, "
+"understood, and agree to be bound by the following terms and conditions."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Terms of Service"
+msgid "Help make Endless better for everyone"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"We legally have to include our terms of service. Those are below. But here "
-"are the terms to which we would most like you to agree: May you do good and "
-"not evil. May you find forgiveness for yourself and forgive others. May you "
-"share freely, never taking more than you give. We promise to do our best to "
-"do the same."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
-msgid "- The Endless Team"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
-msgid "Third-party Software"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
-msgid ""
-"Endless uses third-party software to display Flash, MP3 and other media. "
-"Some of this software is closed-source. The software is subject to the "
-"license terms included with the software's documentation."
+"Automatically save and send usage statistics and problem reports to Endless "
+"Mobile. All data is anonymous."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
@@ -408,7 +385,20 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:201
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:244
+msgid "Your keyboard layout seems to be:"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:300
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
+msgid "Please press one of the following keys:"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:301
+msgid "Is the following key present on your keyboard?"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:203
 msgid "Keyboard Layouts"
 msgstr ""
 
@@ -416,8 +406,16 @@ msgstr ""
 msgid "Select keyboard layouts"
 msgstr ""
 
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
+msgid "Help detect my keyboard layout"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
 msgid "Add a Keyboard Layout"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
+msgid "Detect Keyboard Layout..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
@@ -442,11 +440,11 @@ msgstr ""
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:644
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:643
 msgid "Search for a location"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:781
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:778
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr ""
@@ -574,12 +572,12 @@ msgstr ""
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:338
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:376
 #, c-format
 msgid "_Start using %s"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:441
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:402
 msgid "Thank You"
 msgstr ""
 
