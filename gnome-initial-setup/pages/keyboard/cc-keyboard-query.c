@@ -252,6 +252,23 @@ cc_keyboard_query_layout_result (CcKeyboardQuery *self,
 }
 
 static void
+cc_keyboard_query_realize (GtkWidget *widget)
+{
+  GdkWindow *window;
+
+  GTK_WIDGET_CLASS (cc_keyboard_query_parent_class)->realize (widget);
+
+  window = gtk_widget_get_window (widget);
+  /* disable all the WM functions */
+  gdk_window_set_functions (window, GDK_FUNC_ALL
+                            | GDK_FUNC_RESIZE
+                            | GDK_FUNC_MOVE
+                            | GDK_FUNC_MINIMIZE
+                            | GDK_FUNC_MAXIMIZE
+                            | GDK_FUNC_CLOSE);
+}
+
+static void
 cc_keyboard_query_class_init (CcKeyboardQueryClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -286,6 +303,8 @@ cc_keyboard_query_class_init (CcKeyboardQueryClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, have_key);
   gtk_widget_class_bind_template_callback (widget_class, no_have_key);
   gtk_widget_class_bind_template_callback (widget_class, key_press_event);
+
+  widget_class->realize = cc_keyboard_query_realize;
 
   klass->layout_result = cc_keyboard_query_layout_result;
 }
