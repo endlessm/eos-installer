@@ -253,7 +253,7 @@ cc_keyboard_query_layout_result (CcKeyboardQuery *self,
 
 static gboolean
 is_event_on_title (CcKeyboardQuery *self,
-		   GdkEventButton *event)
+                   GdkEventButton *event)
 {
   GtkAllocation allocation;
   GtkWidget *titlebar, *src;
@@ -265,7 +265,7 @@ is_event_on_title (CcKeyboardQuery *self,
   if (src && src != GTK_WIDGET (self))
     {
       gtk_widget_translate_coordinates (src, GTK_WIDGET (self),
-					event->x, event->y, &x, &y);
+                                        event->x, event->y, &x, &y);
     }
   else
     {
