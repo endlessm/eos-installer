@@ -251,6 +251,72 @@ cc_keyboard_query_layout_result (CcKeyboardQuery *self,
   g_free (result_message);
 }
 
+static gboolean
+is_event_on_title (CcKeyboardQuery *self,
+                   GdkEventButton *event)
+{
+  GtkAllocation allocation;
+  GtkWidget *titlebar, *src;
+  gint x, y;
+
+  titlebar = gtk_dialog_get_header_bar (GTK_DIALOG (self));
+
+  gdk_window_get_user_data (event->window, (gpointer *)&src);
+  if (src && src != GTK_WIDGET (self))
+    {
+      gtk_widget_translate_coordinates (src, GTK_WIDGET (self),
+                                        event->x, event->y, &x, &y);
+    }
+  else
+    {
+      x = event->x;
+      y = event->y;
+    }
+
+  if (titlebar != NULL &&
+      gtk_widget_get_visible (titlebar) &&
+      gtk_widget_get_child_visible (titlebar))
+    {
+      gtk_widget_get_allocation (titlebar, &allocation);
+      if (allocation.x <= x && allocation.x + allocation.width > x &&
+          allocation.y <= y && allocation.y + allocation.height > y)
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean
+cc_keyboard_query_button_press_event (GtkWidget      *widget,
+                                      GdkEventButton *event)
+{
+  CcKeyboardQuery *self = CC_KEYBOARD_QUERY (widget);
+
+  /* eat all the right clicks on the titlebar, since we run in a special session */
+  if (is_event_on_title (self, event) &&
+      event->button == GDK_BUTTON_SECONDARY)
+    return TRUE;
+
+  return GTK_WIDGET_CLASS (cc_keyboard_query_parent_class)->button_press_event (widget, event);
+}
+
+static void
+cc_keyboard_query_realize (GtkWidget *widget)
+{
+  GdkWindow *window;
+
+  GTK_WIDGET_CLASS (cc_keyboard_query_parent_class)->realize (widget);
+
+  window = gtk_widget_get_window (widget);
+  /* disable all the WM functions */
+  gdk_window_set_functions (window, GDK_FUNC_ALL
+                            | GDK_FUNC_RESIZE
+                            | GDK_FUNC_MOVE
+                            | GDK_FUNC_MINIMIZE
+                            | GDK_FUNC_MAXIMIZE
+                            | GDK_FUNC_CLOSE);
+}
+
 static void
 cc_keyboard_query_class_init (CcKeyboardQueryClass *klass)
 {
@@ -287,6 +353,9 @@ cc_keyboard_query_class_init (CcKeyboardQueryClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, no_have_key);
   gtk_widget_class_bind_template_callback (widget_class, key_press_event);
 
+  widget_class->realize = cc_keyboard_query_realize;
+  widget_class->button_press_event = cc_keyboard_query_button_press_event;
+
   klass->layout_result = cc_keyboard_query_layout_result;
 }
 
@@ -310,6 +379,7 @@ cc_keyboard_query_new (GtkWindow    *main_window,
   return g_object_new (CC_TYPE_KEYBOARD_QUERY,
                        "transient-for", main_window,
                        "xkb-data", xkb_data,
+                       "use-header-bar", TRUE,
                        NULL);
 }
 
