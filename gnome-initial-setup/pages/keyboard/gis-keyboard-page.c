@@ -986,6 +986,20 @@ detector_response (GtkDialog *detector, gint response_id, gpointer data)
 }
 
 static void
+detector_realize (GtkDialog *detector, gpointer data)
+{
+  GisKeyboardPage *self = data;
+  GdkWindow *window = gtk_widget_get_window (GTK_WIDGET (detector));
+  /* disable all the WM functions */
+  gdk_window_set_functions (window, GDK_FUNC_ALL
+                            | GDK_FUNC_RESIZE
+                            | GDK_FUNC_MOVE
+                            | GDK_FUNC_MINIMIZE
+                            | GDK_FUNC_MAXIMIZE
+                            | GDK_FUNC_CLOSE);
+}
+
+static void
 show_keyboard_detector (GisKeyboardPage *self)
 {
   GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
@@ -995,6 +1009,7 @@ show_keyboard_detector (GisKeyboardPage *self)
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
   detector = cc_keyboard_query_new (GTK_WINDOW (toplevel), priv->xkb_info);
   g_signal_connect (detector, "response", G_CALLBACK (detector_response), self);
+  g_signal_connect (detector, "realize", G_CALLBACK (detector_realize), self);
   cc_keyboard_query_run (CC_KEYBOARD_QUERY (detector));
 }
 
