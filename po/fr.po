@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-13 01:38+0000\n"
-"PO-Revision-Date: 2014-12-13 01:38+0000\n"
+"PO-Revision-Date: 2014-12-17 00:35+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/gnome-initial-setup/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -271,11 +271,11 @@ msgstr "Je ne le vois pas. Rapetisser l'écran pour ajuster à la TV."
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
 msgid "Terms of Use"
-msgstr ""
+msgstr "Conditions d'utilisation"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
 msgid "Third Party Software"
-msgstr ""
+msgstr "Logiciel tiers"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
@@ -283,23 +283,23 @@ msgstr "_Accepter et continuer"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Please read the following terms of use carefully"
-msgstr ""
+msgstr "Veuillez lire les conditions d'utilisation avec attention"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr ""
+msgstr "En cliquant sur « accepter et continuer, » vous reconnaissez avoir lu et compris les présentes conditions d'utilisation et acceptez de vous y soumettre."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
-msgstr ""
+msgstr "Aidez à améliorer Endless pour tous"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless "
 "Mobile. All data is anonymous."
-msgstr ""
+msgstr "Enregistrez automatiquement vos statistiques d'utilisation et vos rapports de problèmes et envoyez-les à Endless Mobile. Toutes les données sont anonymes."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -391,16 +391,16 @@ msgstr "Autre"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:244
 msgid "Your keyboard layout seems to be:"
-msgstr ""
+msgstr "La disposition de votre clavier semble être :"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:300
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
-msgstr ""
+msgstr "Veuillez appuyer sur l'une des touches suivantes :"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:301
 msgid "Is the following key present on your keyboard?"
-msgstr ""
+msgstr "Est-ce que la touche suivante est présente sur votre clavier ?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:203
 msgid "Keyboard Layouts"
@@ -412,7 +412,7 @@ msgstr "Choisir les dispositions du clavier"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr ""
+msgstr "M'aider à détecter la disposition de mon clavier"
 
 #: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
 msgid "Add a Keyboard Layout"
@@ -420,7 +420,7 @@ msgstr "Ajouter une disposition clavier"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr ""
+msgstr "Détection de la disposition du clavier..."
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
