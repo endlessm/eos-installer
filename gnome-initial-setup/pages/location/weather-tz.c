@@ -78,9 +78,14 @@ load_timezones (GList *cities)
 
                 if (!gweather_location_has_coords (l->data) ||
                     !weather_location_has_timezone (l->data)) {
+                        gchar *city_name;
+
+                        city_name = gweather_location_get_city_name (l->data);
                         g_debug ("Incomplete GWeather location entry: (%s) %s",
                                  gweather_location_get_country (l->data),
-                                 gweather_location_get_city_name (l->data));
+                                 city_name);
+                        g_free (city_name);
+
                         continue;
                 }
 
