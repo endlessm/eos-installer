@@ -1235,8 +1235,6 @@ gis_account_page_constructed (GObject *object)
 
   /* Use Ctrl+Alt+e to activate the enterprise login mode */
   gtk_accel_group_connect (priv->accel_group, GDK_KEY_e, GDK_CONTROL_MASK | GDK_MOD1_MASK, 0, closure);
-  g_closure_unref (closure);
- 
 
   /* force a refresh by setting to an invalid value */
   priv->mode = NUM_MODES;
