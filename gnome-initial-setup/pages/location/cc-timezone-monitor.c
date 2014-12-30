@@ -236,7 +236,9 @@ on_location_proxy_ready (GObject      *source_object,
 
         location = geoclue_location_proxy_new_for_bus_finish (res, &error);
         if (error != NULL) {
-                g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
+
                 g_error_free (error);
                 return;
         }
@@ -277,7 +279,9 @@ on_start_ready (GObject      *source_object,
         if (!geoclue_client_call_start_finish (GEOCLUE_CLIENT (source_object),
                                                res,
                                                &error)) {
-                g_critical ("Failed to start GeoClue2 client: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_critical ("Failed to start GeoClue2 client: %s", error->message);
+
                 g_error_free (error);
                 return;
         }
@@ -295,7 +299,9 @@ on_client_proxy_ready (GObject      *source_object,
 
         client = geoclue_client_proxy_new_for_bus_finish (res, &error);
         if (error != NULL) {
-                g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
+
                 g_error_free (error);
                 return;
         }
@@ -331,7 +337,9 @@ on_get_client_ready (GObject      *source_object,
                                                      &client_path,
                                                      res,
                                                      &error)) {
-                g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_critical ("Failed to connect to GeoClue2 service: %s", error->message);
+
                 g_error_free (error);
                 return;
         }
