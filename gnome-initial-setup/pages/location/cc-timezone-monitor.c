@@ -351,6 +351,8 @@ on_get_client_ready (GObject      *source_object,
                                           priv->cancellable,
                                           on_client_proxy_ready,
                                           self);
+
+        g_free (client_path);
 }
 
 static void
