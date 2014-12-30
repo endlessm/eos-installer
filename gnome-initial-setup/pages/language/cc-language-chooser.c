@@ -513,6 +513,8 @@ cc_language_chooser_constructed (GObject *object)
                 priv->language = cc_common_language_get_current_language ();
 
         sync_all_checkmarks (chooser);
+
+        g_object_unref (builder);
 }
 
 static void

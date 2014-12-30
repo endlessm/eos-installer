@@ -282,7 +282,7 @@ username_changed (GtkComboBoxText *combo,
                   GisAccountPage  *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
-  const gchar *username;
+  gchar *username;
   gchar *tip;
   GtkWidget *entry;
 
@@ -305,6 +305,8 @@ username_changed (GtkComboBoxText *combo,
   }
 
   update_account_page_status (page);
+
+  g_free (username);
 }
 
 static gboolean
@@ -351,7 +353,7 @@ update_password_entries (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
   const gchar *password;
-  const gchar *username;
+  gchar *username;
   GtkWidget *password_entry;
   GtkWidget *confirm_entry;
   GtkWidget *username_combo;
@@ -379,6 +381,8 @@ update_password_entries (GisAccountPage *page)
   gtk_widget_set_sensitive (confirm_entry, TRUE);
 
   refresh_reason_timeout (page);
+
+  g_free (username);
 }
 
 static void
@@ -468,7 +472,7 @@ static void
 local_create_user (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
-  const gchar *username;
+  gchar *username;
   const gchar *password;
   const gchar *old_password;
   const gchar *fullname;
@@ -486,6 +490,8 @@ local_create_user (GisAccountPage *page)
   if (error != NULL) {
     g_warning ("Failed to create user: %s", error->message);
     g_error_free (error);
+    g_free (username);
+
     return;
   }
 
@@ -512,6 +518,8 @@ local_create_user (GisAccountPage *page)
                                    password);
 
   gis_update_login_keyring_password (old_password, password);
+
+  g_free (username);
 }
 
 static void
@@ -1235,8 +1243,6 @@ gis_account_page_constructed (GObject *object)
 
   /* Use Ctrl+Alt+e to activate the enterprise login mode */
   gtk_accel_group_connect (priv->accel_group, GDK_KEY_e, GDK_CONTROL_MASK | GDK_MOD1_MASK, 0, closure);
-  g_closure_unref (closure);
- 
 
   /* force a refresh by setting to an invalid value */
   priv->mode = NUM_MODES;
