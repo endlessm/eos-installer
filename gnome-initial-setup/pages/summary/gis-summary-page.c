@@ -277,6 +277,7 @@ done_cb (GtkButton *button, GisSummaryPage *page)
   switch (gis_driver_get_mode (GIS_PAGE (page)->driver))
     {
     case GIS_DRIVER_MODE_NEW_USER:
+      gis_driver_hide_window (GIS_PAGE (page)->driver);
       launch_tutorial (page);
       break;
     case GIS_DRIVER_MODE_EXISTING_USER:
