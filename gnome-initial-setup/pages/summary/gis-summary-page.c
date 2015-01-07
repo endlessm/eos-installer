@@ -236,7 +236,16 @@ play_tutorial_ready_callback (GObject *fbe_remote,
       g_error_free (error);
     }
 
-  log_user_in (summary);
+  /* Either log user in or quit the app depending on if the user is new */
+  switch (gis_driver_get_mode (GIS_PAGE (summary)->driver))
+    {
+    case GIS_DRIVER_MODE_NEW_USER:
+      log_user_in (summary);
+      break;
+    case GIS_DRIVER_MODE_EXISTING_USER:
+      g_application_quit (G_APPLICATION (GIS_PAGE (summary)->driver));
+      break;
+    }
 }
 
 static void
@@ -256,7 +265,11 @@ launch_tutorial (GisSummaryPage *summary)
       g_critical ("Could not get DBus proxy for tutorial FBE remote: %s\n", error->message);
       g_error_free (error);
 
-      log_user_in (summary);
+      if (gis_driver_get_mode (GIS_PAGE (summary)->driver) == GIS_DRIVER_MODE_NEW_USER)
+        {
+          log_user_in (summary);
+        }
+
       return;
     }
 
@@ -277,14 +290,14 @@ done_cb (GtkButton *button, GisSummaryPage *page)
   switch (gis_driver_get_mode (GIS_PAGE (page)->driver))
     {
     case GIS_DRIVER_MODE_NEW_USER:
-      launch_tutorial (page);
+      gis_driver_hide_window (GIS_PAGE (page)->driver);
       break;
     case GIS_DRIVER_MODE_EXISTING_USER:
       gis_add_setup_done_file ();
-      g_application_quit (G_APPLICATION (GIS_PAGE (page)->driver));
-    default:
       break;
     }
+
+    launch_tutorial (page);
 }
 
 static void
