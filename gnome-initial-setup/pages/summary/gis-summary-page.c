@@ -254,6 +254,9 @@ launch_tutorial (GisSummaryPage *summary)
   FBERemote *fbe_remote;
   GError *error = NULL;
 
+  gboolean is_new_user = (gis_driver_get_mode (GIS_PAGE (summary)->driver) ==
+                                               GIS_DRIVER_MODE_NEW_USER);
+
   fbe_remote = fberemote_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
                                                  G_DBUS_PROXY_FLAGS_NONE,
                                                  "com.endlessm.Tutorial",
@@ -265,7 +268,7 @@ launch_tutorial (GisSummaryPage *summary)
       g_critical ("Could not get DBus proxy for tutorial FBE remote: %s\n", error->message);
       g_error_free (error);
 
-      if (gis_driver_get_mode (GIS_PAGE (summary)->driver) == GIS_DRIVER_MODE_NEW_USER)
+      if (is_new_user)
         {
           log_user_in (summary);
         }
@@ -276,7 +279,7 @@ launch_tutorial (GisSummaryPage *summary)
   /* use g_dbus_proxy_call() to specify a custom timeout */
   g_dbus_proxy_call (G_DBUS_PROXY (fbe_remote),
                      "PlayTutorial",
-                     g_variant_new ("(b)", TRUE),
+                     g_variant_new ("(b)", is_new_user),
                      G_DBUS_CALL_FLAGS_NONE,
                      G_MAXINT,
                      NULL, /* cancellable */
