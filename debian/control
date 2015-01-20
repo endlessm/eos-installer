@@ -50,3 +50,15 @@ Description: Initial GNOME system setup
  After acquiring or installing a new system there are a few essential things
  to set up before use. gnome-initial-setup aims to provide a simple, easy,
  and safe way to prepare a new system.
+
+Package: gnome-initial-setup-dbg
+Architecture: any
+Section: debug
+Depends: ${misc:Depends},
+         gnome-initial-setup (= ${binary:Version})
+Description: Initial GNOME system setup debugging symbols
+ After acquiring or installing a new system there are a few essential things
+ to set up before use. gnome-initial-setup aims to provide a simple, easy,
+ and safe way to prepare a new system.
+ .
+ This package contains the debugging symbols for gnome-initial-setup.
