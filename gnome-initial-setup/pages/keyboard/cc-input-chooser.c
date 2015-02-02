@@ -284,6 +284,8 @@ sync_all_checkmarks (CcInputChooser *chooser)
 
         gtk_container_foreach (GTK_CONTAINER (priv->input_list),
                                sync_checkmark, chooser);
+
+        gtk_list_box_invalidate_filter (GTK_LIST_BOX (priv->input_list));
 }
 
 static GtkWidget *
@@ -417,6 +419,8 @@ input_visible (GtkListBoxRow *row,
                 return !priv->showing_extra && g_hash_table_size (priv->inputs) > MIN_ROWS;
 
         widget = get_input_widget (child);
+        if (g_strcmp0 (priv->id, widget->id) == 0)
+                return TRUE;
 
         if (!priv->showing_extra && widget->is_extra)
                 return FALSE;
