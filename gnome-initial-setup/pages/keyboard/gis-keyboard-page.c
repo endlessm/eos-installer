@@ -33,6 +33,7 @@
 #include "gis-keyboard-page.h"
 #include "keyboard-resources.h"
 #include "cc-input-chooser.h"
+#include "cc-keyboard-query.h"
 
 #define GNOME_DESKTOP_INPUT_SOURCES_DIR "org.gnome.desktop.input-sources"
 #define KEY_CURRENT_INPUT_SOURCE "current"
@@ -40,6 +41,7 @@
 
 struct _GisKeyboardPagePrivate {
         GtkWidget *input_chooser;
+        GtkWidget *input_auto_detect;
 
 	GDBusProxy *localed;
 	GCancellable *cancellable;
@@ -178,6 +180,38 @@ input_confirmed (CcInputChooser  *chooser,
 }
 
 static void
+detector_response (GtkDialog *detector,
+                   gint       response_id,
+                   gpointer   data)
+{
+        GisKeyboardPage *self = data;
+        GisKeyboardPagePrivate *priv = gis_keyboard_page_get_instance_private (self);
+        char *id;
+
+        if (response_id == GTK_RESPONSE_OK) {
+                if (cc_keyboard_query_get_selected (CC_KEYBOARD_QUERY (detector), &id, NULL)) {
+                        cc_input_chooser_set_input (CC_INPUT_CHOOSER (priv->input_chooser), id, "xkb");
+                        update_input (self);
+                        g_free (id);
+                }
+        }
+        gtk_widget_destroy (GTK_WIDGET (detector));
+}
+
+static void
+show_keyboard_detector (CcInputChooser  *chooser,
+                        GisKeyboardPage *self)
+{
+        GtkWidget *detector;
+        GtkWidget *toplevel;
+
+        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+        detector = cc_keyboard_query_new (GTK_WINDOW (toplevel));
+        g_signal_connect (detector, "response", G_CALLBACK (detector_response), self);
+        cc_keyboard_query_run (CC_KEYBOARD_QUERY (detector));
+}
+
+static void
 gis_keyboard_page_constructed (GObject *object)
 {
         GisKeyboardPage *self = GIS_KEYBOARD_PAGE (object);
@@ -189,6 +223,9 @@ gis_keyboard_page_constructed (GObject *object)
 
         g_signal_connect (priv->input_chooser, "confirm",
                           G_CALLBACK (input_confirmed), self);
+
+        g_signal_connect (priv->input_auto_detect, "clicked",
+                          G_CALLBACK (show_keyboard_detector), self);
 
 	priv->input_settings = g_settings_new (GNOME_DESKTOP_INPUT_SOURCES_DIR);
 	g_settings_delay (priv->input_settings);
@@ -228,6 +265,7 @@ gis_keyboard_page_class_init (GisKeyboardPageClass * klass)
         gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass), "/org/gnome/initial-setup/gis-keyboard-page.ui");
 
         gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisKeyboardPage, input_chooser);
+        gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisKeyboardPage, input_auto_detect);
 
         page_class->page_id = PAGE_ID;
         page_class->apply = gis_keyboard_page_apply;

@@ -54,6 +54,14 @@
             <property name="valign">start</property>
           </object>
         </child>
+        <child>
+          <object class="GtkButton" id="input_auto_detect">
+            <property name="label" translatable="yes">Help detect my keyboard layout</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+        </child>
       </object>
     </child>
   </template>
