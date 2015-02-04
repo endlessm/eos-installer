@@ -349,6 +349,16 @@ refresh_reason_timeout (GisAccountPage *page)
 }
 
 static void
+clear_password_validation_error (GisAccountPage *page)
+{
+  GtkWidget *password_entry = WID("account-password-entry");
+  GtkWidget *confirm_entry = WID("account-confirm-entry");
+
+  clear_entry_validation_error (GTK_ENTRY (password_entry));
+  clear_entry_validation_error (GTK_ENTRY (confirm_entry));
+}
+
+static void
 update_password_entries (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
@@ -376,7 +386,7 @@ update_password_entries (GisAccountPage *page)
   update_valid_confirm (page);
 
   if (priv->valid_confirm)
-    clear_entry_validation_error (GTK_ENTRY (password_entry));
+    clear_password_validation_error (page);
 
   gtk_widget_set_sensitive (confirm_entry, TRUE);
 
@@ -390,7 +400,6 @@ password_changed (GtkWidget      *w,
                   GParamSpec     *pspec,
                   GisAccountPage *page)
 {
-  clear_entry_validation_error (GTK_ENTRY (w));
   update_password_entries (page);
   update_account_page_status (page);
 }
