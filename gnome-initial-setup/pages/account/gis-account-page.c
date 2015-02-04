@@ -380,13 +380,13 @@ update_password_entries (GisAccountPage *page)
   password = gtk_entry_get_text (GTK_ENTRY (password_entry));
   username = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (username_combo));
 
-  pw_strength (password, NULL, username, &hint, &long_hint, &strength_level);
-  gtk_level_bar_set_value (GTK_LEVEL_BAR (password_strength), strength_level);
-
   update_valid_confirm (page);
 
   if (priv->valid_confirm)
     clear_password_validation_error (page);
+
+  pw_strength (password, NULL, username, &hint, &long_hint, &strength_level);
+  gtk_level_bar_set_value (GTK_LEVEL_BAR (password_strength), strength_level);
 
   gtk_widget_set_sensitive (confirm_entry, TRUE);
 
