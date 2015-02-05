@@ -304,6 +304,7 @@ gis_driver_read_personality_file (GisDriver *driver)
   priv->lang_override = language;
   if (language) {
     setlocale (LC_MESSAGES, language);
+    setlocale (LC_TIME, language);
   }
 
   g_free (priv->default_timezone);
