@@ -82,8 +82,6 @@ const gchar *gis_driver_get_personality (GisDriver *driver);
 
 const gchar *gis_driver_get_default_timezone (GisDriver *driver);
 
-const gchar *gis_driver_get_default_time_format (GisDriver *driver);
-
 GisDriverMode gis_driver_get_mode (GisDriver *driver);
 
 void gis_driver_add_page (GisDriver *driver,
