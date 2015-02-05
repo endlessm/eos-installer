@@ -36,6 +36,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <langinfo.h>
 
 #define GWEATHER_I_KNOW_THIS_IS_UNSTABLE
 #include <libgweather/location-entry.h>
@@ -289,15 +290,33 @@ update_ntp_switch_from_system (GisLocationPage *page)
   g_signal_handlers_unblock_by_func (switch_widget, change_ntp, page);
 }
 
+static const char *
+get_time_format (void)
+{
+  gchar *nl_fmt;
+
+  /* Default to 24 hour if we can't get the format from the locale */
+  nl_fmt = nl_langinfo (T_FMT);
+  if (nl_fmt == NULL || *nl_fmt == '\0')
+    return "24h";
+
+  /* Parse out any formats that use 12h format. See stftime(3). */
+  if (g_str_has_prefix (nl_fmt, "%I") ||
+      g_str_has_prefix (nl_fmt, "%l") ||
+      g_str_has_prefix (nl_fmt, "%r"))
+    return "12h";
+  else
+    return "24h";
+}
+
 static void
 update_time (GisLocationPage *page)
 {
   GisLocationPagePrivate *priv = gis_location_page_get_instance_private (page);
-  GisDriver *driver = GIS_PAGE (page)->driver;
   const gchar *time_format;
   char *label;
 
-  time_format = gis_driver_get_default_time_format (driver);
+  time_format = get_time_format ();
 
   if (!time_format || time_format[0] == '2') {
     /* Update the hours label in 24h format */
@@ -745,7 +764,7 @@ gis_location_page_constructed (GObject *object)
   update_time (page);
 
   clock_settings = g_settings_new ("org.gnome.desktop.interface");
-  clock_format = gis_driver_get_default_time_format (GIS_PAGE (page)->driver);
+  clock_format = get_time_format ();
   g_settings_set_string (clock_settings, "clock-format", clock_format? clock_format: "24h");
   g_object_unref (clock_settings);
 
