@@ -132,6 +132,7 @@ set_language (GisLanguagePage *page)
   driver = GIS_PAGE (page)->driver;
 
   setlocale (LC_MESSAGES, priv->new_locale_id);
+  setlocale (LC_TIME, priv->new_locale_id);
   gis_driver_locale_changed (driver);
 
   /* gis spawns processes that also need to be localised */
