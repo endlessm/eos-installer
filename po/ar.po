@@ -1,22 +1,24 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Khaled Hosny <khaledhosny@eglug.org>, 2012-2013
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-13 01:38+0000\n"
+"POT-Creation-Date: 2015-01-28 12:37+0100\n"
 "PO-Revision-Date: 2014-12-17 00:26+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
-"Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
+"Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-"
+"setup/language/ar/)\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ar\n"
-"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
@@ -44,32 +46,32 @@ msgstr "افرِض وضع المستخدم الجديد"
 msgid "- GNOME initial setup"
 msgstr "- إعداد جنوم الأولي"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:326
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
 msgid "No password"
 msgstr "بلا كلمة السر"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:432
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:436
 msgid "Passwords do not match"
 msgstr "لا تتطابق كلمتا السر"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:547
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:555
 msgid "Failed to register account"
 msgstr "فشل تسجيل الحساب"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:755
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:763
 msgid "No supported way to authenticate with this domain"
 msgstr "لا توجد طريقة مدعومة للاستيثاق مع هذا النطاق"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:795
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:803
 msgid "Failed to join domain"
 msgstr "فشل الانضمام إلى النطاق"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:863
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:871
 msgid "Failed to log into domain"
 msgstr "فشل الولوج إلى النطاق"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1290
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1296
 msgid "Login"
 msgstr "الولوج"
 
@@ -87,7 +89,11 @@ msgid ""
 "upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
 "appear at the right side of the space in which you're writing. You'll need "
 "to type in this password identically each time you access your account."
-msgstr "قد تحتاج إلى تدوين كلمة المرور الخاصة بك. تأكد من الانتباه إلى الأحرف الكبيرة. إذا كان مفتاح caps lock قيد التشغيل، فسيظهر الرمز ⚠ في الجانب الأيمن من المساحة تكتب فيها. سوف يتعين عليك إدخال كلمة المرور هذه بشكل متطابق في كل مرة تدخل فيها إلى حسابك."
+msgstr ""
+"قد تحتاج إلى تدوين كلمة المرور الخاصة بك. تأكد من الانتباه إلى الأحرف "
+"الكبيرة. إذا كان مفتاح caps lock قيد التشغيل، فسيظهر الرمز ⚠ في الجانب "
+"الأيمن من المساحة تكتب فيها. سوف يتعين عليك إدخال كلمة المرور هذه بشكل "
+"متطابق في كل مرة تدخل فيها إلى حسابك."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
@@ -101,7 +107,8 @@ msgstr "اسم المست_خدم"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr "سيتم استخدام اسم المستخدم لتسمية المجلد الشخصي الخاص بك، ولن يمكن تغييره."
+msgstr ""
+"سيتم استخدام اسم المستخدم لتسمية المجلد الشخصي الخاص بك، ولن يمكن تغييره."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
@@ -113,9 +120,11 @@ msgstr "أكّ_د كلمة السّر"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together."
-" This is optional."
-msgstr "لجعل كلمة المرور الخاصة بك أكثر أمناً، يمكنك استخدام الحروف والأرقام معاً. وهذا أمر اختياري."
+"To make your password more secure, you can use letters and numbers together. "
+"This is optional."
+msgstr ""
+"لجعل كلمة المرور الخاصة بك أكثر أمناً، يمكنك استخدام الحروف والأرقام معاً. "
+"وهذا أمر اختياري."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "To continue, please make sure you fill in all the blanks."
@@ -155,7 +164,10 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr "تحتاج أن تكون مسجّلا في النطاق لاستخدام ولوج المؤسسات على هذا الحاسوب.\nمن فضلك اطلب من مدير الشبكة أن يكتب كلمة سر النطاق هنا، و اختر اسمًا\nفريدًا لحاسوبك."
+msgstr ""
+"تحتاج أن تكون مسجّلا في النطاق لاستخدام ولوج المؤسسات على هذا الحاسوب.\n"
+"من فضلك اطلب من مدير الشبكة أن يكتب كلمة سر النطاق هنا، و اختر اسمًا\n"
+"فريدًا لحاسوبك."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
@@ -243,7 +255,11 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr "يجب أن لا يتعدى اسم المستخدم:\n ◂ الحروف الإنجليزية\n ◂ الأرقام\n ◂ أي من الحروف: '.' و '-' و '_'"
+msgstr ""
+"يجب أن لا يتعدى اسم المستخدم:\n"
+" ◂ الحروف الإنجليزية\n"
+" ◂ الأرقام\n"
+" ◂ أي من الحروف: '.' و '-' و '_'"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
@@ -286,7 +302,9 @@ msgstr "الرجاء قراءة شروط الاستخدام التالية بع�
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr "بالنقر على \"قبول ومتابعة\"، فإنك تقرّ بأنك قد قرأت وفهمت الشروط والبنود التالية وتوافق على الالتزام بها."
+msgstr ""
+"بالنقر على \"قبول ومتابعة\"، فإنك تقرّ بأنك قد قرأت وفهمت الشروط والبنود "
+"التالية وتوافق على الالتزام بها."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
@@ -296,7 +314,9 @@ msgstr "المساعدة في تحسين Endless لمصلحة الجميع"
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless "
 "Mobile. All data is anonymous."
-msgstr "تخزين وإرسال تلقائي لإحصائيات الاستخدام وتقارير المشاكل إلى موبايل Endless. يتم التعامل مع كافة البيانات بدون الكشف عن هوية الشخص المرسل."
+msgstr ""
+"تخزين وإرسال تلقائي لإحصائيات الاستخدام وتقارير المشاكل إلى موبايل Endless. "
+"يتم التعامل مع كافة البيانات بدون الكشف عن هوية الشخص المرسل."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -367,53 +387,54 @@ msgstr "اتّصل ببياناتك الموجودة على السحاب"
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr "إضافة الحسابات سيتيح لك الاتصال لصورك و معارفك و بريدك على الشبكة، و غيرها."
+msgstr ""
+"إضافة الحسابات سيتيح لك الاتصال لصورك و معارفك و بريدك على الشبكة، و غيرها."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
 msgstr "أ_ضف حسابًا"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:242
+msgid "Preview"
+msgstr "ﻢﻋﺎﻴﻧﺓ"
+
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:302
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "المزيد…"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
-msgid "No input sources found"
-msgstr "لا يوجد أي مصادر إدخال"
+#. Translators: a search for input methods or keyboard layouts
+#. * did not yield any results
+#.
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:323
+msgid "No inputs found"
+msgstr "ﻻ ﻱﻮﺟﺩ ﺄﻳ ﻢﺻﺍﺩﺭ ﺇﺪﺧﺎﻟ"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
-msgid "Other"
-msgstr "أخرى"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:244
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:198
 msgid "Your keyboard layout seems to be:"
 msgstr "يبدو أن تصميم لوحة المفاتيح الخاصة بك هو:"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:300
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:313
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
 msgstr "الرجاء الضغط على أحد المفاتيح التالية:"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:301
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:314
 msgid "Is the following key present on your keyboard?"
 msgstr "هل المفتاح التالي متوفر على لوحة المفاتيح الخاصة بك؟"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:203
-msgid "Keyboard Layouts"
-msgstr "تخطيطات لوحة المفاتيح"
-
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:255
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select keyboard layouts"
-msgstr "اختر تخطيطات لوحة المفاتيح"
+msgid "Typing"
+msgstr "ﺎﻠﻜﺗﺎﺑﺓ"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
+msgid "Select your keyboard layout or an input method."
+msgstr "ﺎﺨﺗﺭ ﺖﺨﻄﻴﻃ ﻝﻮﺣﺓ ﺎﻠﻤﻓﺎﺘﻴﺣ ﻭ ﻁﺮﻴﻗﺓ ﺍﻹﺪﺧﺎﻟ."
+
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:3
 msgid "Help detect my keyboard layout"
 msgstr "المساعدة في معرفة تصميم لوحة المفاتيح الخاصة بي"
-
-#: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-msgid "Add a Keyboard Layout"
-msgstr "إضافة تخطيط للوحة المفاتيح"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
@@ -555,16 +576,21 @@ msgstr "الشبكات اللاسلكية"
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer "
-"password."
-msgstr "هل لديك إنترنت لاسلكي (واي فاي)؟ إذا كان لديك، قم بتوصيل جهاز الكمبيوتر الخاص بك بالإنترنت من خلال النقر على اسم الشبكة اللاسلكية الخاصة بك وإدخال كلمة مرور الشبكة. قد تختلف كلمة المرور هذه عن كلمة المرور الخاصة بكمبيوترك."
+"network password. This password may be different from your computer password."
+msgstr ""
+"هل لديك إنترنت لاسلكي (واي فاي)؟ إذا كان لديك، قم بتوصيل جهاز الكمبيوتر "
+"الخاص بك بالإنترنت من خلال النقر على اسم الشبكة اللاسلكية الخاصة بك وإدخال "
+"كلمة مرور الشبكة. قد تختلف كلمة المرور هذه عن كلمة المرور الخاصة بكمبيوترك."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set"
-" it up in \"Network Settings.\""
-msgstr "نصيحة: يمكنك استخدام جهاز الكمبيوتر الخاص بك من دون إنترنت إذا لم يكن لديك اتصال الآن. إذا توفر لديك اتصال بالإنترنت في المستقبل، يمكنك إعداده في \"إعدادات الشبكة.\""
+"connection now. If you get an internet connection in the future, you can set "
+"it up in \"Network Settings.\""
+msgstr ""
+"نصيحة: يمكنك استخدام جهاز الكمبيوتر الخاص بك من دون إنترنت إذا لم يكن لديك "
+"اتصال الآن. إذا توفر لديك اتصال بالإنترنت في المستقبل، يمكنك إعداده في "
+"\"إعدادات الشبكة.\""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
@@ -574,12 +600,12 @@ msgstr "لا تتوفر شبكات لاسلكية"
 msgid "_Skip WiFi setup"
 msgstr "_تخطي إعداد شبكة الواي فاي"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:376
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:392
 #, c-format
 msgid "_Start using %s"
 msgstr "اب_دأ باستخدام %s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:402
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:418
 msgid "Thank You"
 msgstr "شكرًا"
 
@@ -594,3 +620,12 @@ msgstr "يمكنك تغيير أي من هذه الخيارات من ”الإع
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "اب_دأ باستخدام جنوم 3"
+
+#~ msgid "Other"
+#~ msgstr "أخرى"
+
+#~ msgid "Keyboard Layouts"
+#~ msgstr "تخطيطات لوحة المفاتيح"
+
+#~ msgid "Add a Keyboard Layout"
+#~ msgstr "إضافة تخطيط للوحة المفاتيح"
