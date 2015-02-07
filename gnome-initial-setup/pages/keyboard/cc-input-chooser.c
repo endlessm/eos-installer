@@ -436,6 +436,8 @@ sort_inputs (GtkListBoxRow *a,
                 gpointer       data)
 {
         InputWidget *la, *lb;
+        CcInputChooser *chooser = data;
+        CcInputChooserPrivate *priv = cc_input_chooser_get_instance_private (chooser);
 
         la = get_input_widget (gtk_bin_get_child (GTK_BIN (a)));
         lb = get_input_widget (gtk_bin_get_child (GTK_BIN (b)));
@@ -445,6 +447,12 @@ sort_inputs (GtkListBoxRow *a,
 
         if (lb == NULL)
                 return -1;
+
+	if (g_strcmp0 (priv->id, la->id) == 0)
+		return -1;
+
+	if (g_strcmp0 (priv->id, lb->id) == 0)
+		return 1;
 
         if (la->is_extra && !lb->is_extra)
                 return 1;
