@@ -54,8 +54,7 @@ struct _CcKeyboardQueryClass
 };
 
 GType      cc_keyboard_query_get_type     (void) G_GNUC_CONST;
-GtkWidget *cc_keyboard_query_new          (GtkWindow       *main_window,
-                                           GnomeXkbInfo    *xkb_info);
+GtkWidget *cc_keyboard_query_new          (GtkWindow       *main_window);
 void       cc_keyboard_query_run          (CcKeyboardQuery *self);
 gboolean   cc_keyboard_query_get_selected (CcKeyboardQuery *self,
                                            char           **id,

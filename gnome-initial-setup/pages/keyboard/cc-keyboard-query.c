@@ -51,14 +51,7 @@ enum {
   N_SIGNALS,
 };
 
-enum {
-  PROP_0,
-  XKB_DATA,
-  N_PROPS,
-};
-
 static guint cc_keyboard_query_signals[N_SIGNALS] = { 0, };
-static GParamSpec *cc_keyboard_query_props[N_PROPS] = { NULL, };
 
 static void
 process (CcKeyboardQuery         *self,
@@ -164,59 +157,12 @@ cc_keyboard_query_constructed (GObject *object)
 }
 
 static void
-cc_keyboard_query_get_property (GObject    *object,
-                                guint       id,
-                                GValue     *value,
-                                GParamSpec *pspec)
-{
-  CcKeyboardQuery *self = CC_KEYBOARD_QUERY (object);
-  CcKeyboardQueryPrivate *priv = cc_keyboard_query_get_instance_private (self);
-
-  switch (id)
-    {
-    case XKB_DATA:
-      g_value_set_object (value, priv->xkb_data);
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, id, pspec);
-    }
-}
-
-static void
-cc_keyboard_query_set_property (GObject      *object,
-                                guint         id,
-                                const GValue *value,
-                                GParamSpec   *pspec)
-{
-  CcKeyboardQuery *self = CC_KEYBOARD_QUERY (object);
-  CcKeyboardQueryPrivate *priv = cc_keyboard_query_get_instance_private (self);
-
-  switch (id)
-    {
-    case XKB_DATA:
-      priv->xkb_data = g_value_dup_object (value);
-      break;
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, id, pspec);
-    }
-}
-
-static void
-cc_keyboard_query_dispose (GObject *object)
+cc_keyboard_query_finalize (GObject *object)
 {
   CcKeyboardQuery *self = CC_KEYBOARD_QUERY (object);
   CcKeyboardQueryPrivate *priv = cc_keyboard_query_get_instance_private (self);
 
   g_clear_object (&priv->xkb_data);
-
-  G_OBJECT_CLASS (cc_keyboard_query_parent_class)->dispose (object);
-}
-
-static void
-cc_keyboard_query_finalize (GObject *object)
-{
-  CcKeyboardQuery *self = CC_KEYBOARD_QUERY (object);
-  CcKeyboardQueryPrivate *priv = cc_keyboard_query_get_instance_private (self);
 
   g_clear_pointer (&priv->det, keyboard_detector_free);
   g_clear_pointer (&priv->detected_id, g_free);
@@ -235,9 +181,9 @@ cc_keyboard_query_layout_result (CcKeyboardQuery *self,
   const char *display_name = NULL;
 
   priv->detected_id = g_strdup (result);
-  if (priv->xkb_data != NULL)
-    gnome_xkb_info_get_layout_info (priv->xkb_data, result, &display_name, NULL,
-                                    NULL, NULL);
+
+  gnome_xkb_info_get_layout_info (priv->xkb_data, result, &display_name, NULL,
+                                  NULL, NULL);
 
   priv->detected_display_name = g_strdup (display_name);
   result_message = g_strdup_printf ("%s\n%s",
@@ -329,19 +275,8 @@ cc_keyboard_query_class_init (CcKeyboardQueryClass *klass)
                   NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
                   1, G_TYPE_STRING);
 
-  cc_keyboard_query_props[XKB_DATA] =
-    g_param_spec_object ("xkb-data", "XKB data",
-                         "X Keyboard info for looking up display names of keyboard layouts",
-                         GNOME_TYPE_XKB_INFO,
-                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
-
   object_class->constructed = cc_keyboard_query_constructed;
-  object_class->get_property = cc_keyboard_query_get_property;
-  object_class->set_property = cc_keyboard_query_set_property;
-  object_class->dispose = cc_keyboard_query_dispose;
   object_class->finalize = cc_keyboard_query_finalize;
-  g_object_class_install_properties (object_class, N_PROPS,
-                                     cc_keyboard_query_props);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/initial-setup/keyboard-detector.ui");
@@ -370,15 +305,14 @@ cc_keyboard_query_init (CcKeyboardQuery *self)
   priv->present_string = _("Is the following key present on your keyboard?");
 
   priv->det = keyboard_detector_new ();
+  priv->xkb_data = gnome_xkb_info_new ();
 }
 
 GtkWidget *
-cc_keyboard_query_new (GtkWindow    *main_window,
-                       GnomeXkbInfo *xkb_data)
+cc_keyboard_query_new (GtkWindow    *main_window)
 {
   return g_object_new (CC_TYPE_KEYBOARD_QUERY,
                        "transient-for", main_window,
-                       "xkb-data", xkb_data,
                        "use-header-bar", TRUE,
                        NULL);
 }
