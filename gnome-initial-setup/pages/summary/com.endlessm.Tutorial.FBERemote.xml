@@ -2,6 +2,8 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
   <interface name="com.endlessm.Tutorial.FBERemote">
-    <method name="PlayTutorial" />
+    <method name="PlayTutorial">
+      <arg type="s" direction="in" name="language"/>
+    </method>
   </interface>
 </node>

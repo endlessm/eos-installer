@@ -263,7 +263,8 @@ launch_tutorial (GisSummaryPage *summary)
   /* use g_dbus_proxy_call() to specify a custom timeout */
   g_dbus_proxy_call (G_DBUS_PROXY (fbe_remote),
                      "PlayTutorial",
-                     g_variant_new ("()"),
+                     g_variant_new ("(s)",
+                                    gis_driver_get_user_language (GIS_PAGE (summary)->driver)),
                      G_DBUS_CALL_FLAGS_NONE,
                      G_MAXINT,
                      NULL, /* cancellable */
