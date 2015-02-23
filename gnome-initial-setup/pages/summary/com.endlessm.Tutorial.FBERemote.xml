@@ -4,6 +4,7 @@
   <interface name="com.endlessm.Tutorial.FBERemote">
     <method name="PlayTutorial">
       <arg type="b" direction="in" name="ignore_exit"/>
+      <arg type="s" direction="in" name="language"/>
     </method>
   </interface>
 </node>
