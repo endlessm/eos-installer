@@ -209,9 +209,15 @@ static gchar *
 create_serial_barcode (const gchar *serial)
 {
   gchar *savefile;
+  const gchar *cache_dir;
   struct zint_symbol *barcode;
 
-  savefile = g_build_filename (g_get_user_cache_dir (), "product_serial.png", NULL);
+  cache_dir = g_get_user_cache_dir ();
+
+  /* Create the directory if it's missing */
+  g_mkdir_with_parents (cache_dir, 0755);
+
+  savefile = g_build_filename (cache_dir, "product_serial.png", NULL);
 
   barcode = ZBarcode_Create();
   strncpy ((char *) barcode->outfile, savefile, 4096);
