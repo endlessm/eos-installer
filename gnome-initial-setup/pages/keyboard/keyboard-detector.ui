@@ -78,11 +78,10 @@
               </object>
             </child>
             <child>
-              <object class="GtkButton" id="add_button">
+              <object class="GtkButton" id="select_button">
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
-                <property name="label">gtk-add</property>
-                <property name="use_stock">True</property>
+                <property name="label">Select</property>
                 <property name="use_underline" >True</property>
               </object>
             </child>
@@ -91,7 +90,7 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-5">add_button</action-widget>
+      <action-widget response="-5">select_button</action-widget>
       <action-widget response="-6">cancel_button</action-widget>
     </action-widgets>
   </template>
