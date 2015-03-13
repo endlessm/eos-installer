@@ -1,8 +1,9 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# c.sanchez <cassandra@endlessm.com>, 2014
 # c.sanchez <cassandra@endlessm.com>, 2014
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2012-2014
 # Eddy Alegria <eddy@endlessm.com>, 2014
@@ -10,20 +11,19 @@
 # Joel Gil Leon <joel@endlessm.com>, 2014
 # Nuritzi Sanchez <ns@endlessm.com>, 2014
 # Philip Chimento <philip.chimento@gmail.com>, 2014
-# Roddy Shuler <roddy@endlessm.com>, 2014
+# Roddy Shuler <roddy@endlessm.com>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-28 12:37+0100\n"
-"PO-Revision-Date: 2014-12-22 19:04+0000\n"
-"Last-Translator: Nuritzi Sanchez <ns@endlessm.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-"
-"setup/language/es/)\n"
-"Language: es\n"
+"POT-Creation-Date: 2015-03-13 16:12-0700\n"
+"PO-Revision-Date: 2015-03-13 23:18+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
@@ -57,27 +57,27 @@ msgid "No password"
 msgstr "Sin contraseña"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:331
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:436
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:445
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:555
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:564
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:763
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:772
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:803
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:812
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:871
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:880
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1296
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1305
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -95,11 +95,7 @@ msgid ""
 "upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
 "appear at the right side of the space in which you're writing. You'll need "
 "to type in this password identically each time you access your account."
-msgstr ""
-"Si quieres, puedes anotar tu contraseña para recordarla. Presta atención a "
-"las mayúsculas: si la tecla que las activa está presionada, aparecerá este "
-"símbolo ⚠ a la derecha del espacio en el que estás escribiendo. Cada vez que "
-"quieras entrar a tu cuenta deberás escribir tu contraseña idénticamente."
+msgstr "Si quieres, puedes anotar tu contraseña para recordarla. Presta atención a las mayúsculas: si la tecla que las activa está presionada, aparecerá este símbolo ⚠ a la derecha del espacio en el que estás escribiendo. Cada vez que quieras entrar a tu cuenta deberás escribir tu contraseña idénticamente."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
@@ -113,9 +109,7 @@ msgstr "Nombre de _usuario"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
-"Tu nombre de usuario será usado para nombrar tu carpeta personal y no se "
-"puede cambiar después."
+msgstr "Tu nombre de usuario será usado para nombrar tu carpeta personal y no se puede cambiar después."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Password"
@@ -127,8 +121,8 @@ msgstr "_Confirmar contraseña"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"To make your password more secure, you can use letters and numbers together."
+" This is optional."
 msgstr "Puedes mezclar letras y números para que tu contraseña sea más segura."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
@@ -169,11 +163,7 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
-"Para empezar a usar cuentas corporativas, esta computadora necesitará estar\n"
-"incluida en el dominio empresarial. El administrador de tu red necesitará\n"
-"entrar su contraseña del dominio aquí y elegir un nombre único\n"
-"para tu computadora."
+msgstr "Para empezar a usar cuentas corporativas, esta computadora necesitará estar\nincluida en el dominio empresarial. El administrador de tu red necesitará\nentrar su contraseña del dominio aquí y elegir un nombre único\npara tu computadora."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
@@ -261,11 +251,7 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr ""
-"El nombre de usuario debe consistir de:\n"
-" ➣ letras del alfabeto inglés\n"
-" ➣ dígitos\n"
-" ➣ cualquiera de los caracteres «.», «-» y «_»"
+msgstr "El nombre de usuario debe consistir de:\n ➣ letras del alfabeto inglés\n ➣ dígitos\n ➣ cualquiera de los caracteres «.», «-» y «_»"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
@@ -308,9 +294,7 @@ msgstr "Por favor lee los siguientes términos de uso cuidadosamente"
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr ""
-"Al hacer clic en \"Aceptar y continuar,\" reconoces que has leído, entendido "
-"y aceptado que quedarás vinculado por los siguientes términos y condiciones."
+msgstr "Al hacer clic en \"Aceptar y continuar,\" reconoces que has leído, entendido y aceptado que quedarás vinculado por los siguientes términos y condiciones."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
@@ -320,9 +304,7 @@ msgstr "Ayuda a hacer Endless mejor para todos"
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless "
 "Mobile. All data is anonymous."
-msgstr ""
-"Automáticamente guarda y envía estadísticas de uso e informes de problemas a "
-"Endless Mobile. Toda la información mandada es anónima."
+msgstr "Automáticamente guarda y envía estadísticas de uso e informes de problemas a Endless Mobile. Toda la información mandada es anónima."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -333,9 +315,7 @@ msgstr "Acuerdo de licencia"
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr ""
-"He leído y _acepto los términos y las condiciones de este contrato de "
-"licencia del usuario final."
+msgstr "He leído y _acepto los términos y las condiciones de este contrato de licencia del usuario final."
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
@@ -395,53 +375,49 @@ msgstr "Conectate a tus datos en la nube"
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr ""
-"Añadiendo las cuentas de tus apps en línea favoritas, podrás acceder "
-"fácilmente a tus fotos, contactos, correo y más."
+msgstr "Añadiendo las cuentas de tus apps en línea favoritas, podrás acceder fácilmente a tus fotos, contactos, correo y más."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
 msgstr "_Añadir cuenta"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:242
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:241
 msgid "Preview"
 msgstr "Vista previa"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:302
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:298
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr "Más…"
 
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
-#.
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:323
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:319
 msgid "No inputs found"
 msgstr "No se han encontrado fuentes de entrada"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:198
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
 msgstr "Tu teclado parece ser de formato:"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:313
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
 msgstr "Por favor pulsa una de las siguientes teclas:"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:314
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
 msgstr "Aparece la siguiente tecla en tu teclado?"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:255
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:256
 msgid "Typing"
 msgstr "Escritura"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-msgid "Select your keyboard layout or an input method."
-msgstr "Seleccione la distribución de su teclado o un método de entrada."
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
+msgid "Select your keyboard layout"
+msgstr "Seleccione la distribución de su teclado"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:3
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
 msgstr "Ayuda a detectar el formato de mi teclado"
 
@@ -453,16 +429,16 @@ msgstr "Detecta el formato de mi teclado..."
 msgid "No languages found"
 msgstr "No se encontraron idiomas"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:531
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:535
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Welcome to Endless!"
 msgstr "¡Bienvenido a Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:537
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Let's set up your computer..."
 msgstr "Ahora, vamos a configurar tu computadora... "
@@ -471,11 +447,11 @@ msgstr "Ahora, vamos a configurar tu computadora... "
 msgid "Power Off"
 msgstr "Apagar"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:643
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
 msgstr "Buscar una ubicación"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:778
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:797
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "Ubicación"
@@ -585,22 +561,16 @@ msgstr "Redes inalámbricas"
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer password."
-msgstr ""
-"¿Tienes internet inalámbrico (WiFi)? Para conectar tu computadora al "
-"internet, haz clic en el nombre de tu red WiFi y después ingresa la "
-"contraseña de la red. Esta contraseña puede ser diferente a la contraseña "
-"que ingresaste para esta computadora."
+"network password. This password may be different from your computer "
+"password."
+msgstr "¿Tienes internet inalámbrico (WiFi)? Para conectar tu computadora al internet, haz clic en el nombre de tu red WiFi y después ingresa la contraseña de la red. Esta contraseña puede ser diferente a la contraseña que ingresaste para esta computadora."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set "
-"it up in \"Network Settings.\""
-msgstr ""
-"Consejo: Puedes usar tu computadora aunque no tengas internet en este "
-"momento. Si algún día tienes acceso a una conexión, podrás agregar la red en "
-"\"Configuración de red.\""
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
+msgstr "Consejo: Puedes usar tu computadora aunque no tengas internet en este momento. Si algún día tienes acceso a una conexión, podrás agregar la red en \"Configuración de red.\""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
@@ -610,12 +580,12 @@ msgstr "La red inalámbrica no está disponible"
 msgid "_Skip WiFi setup"
 msgstr "_Configurar más tarde"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:392
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
 msgstr "_Empezar a usar %s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:418
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
 msgstr "Gracias"
 
@@ -630,12 +600,3 @@ msgstr "Puedes cambiar estas opciones en cualquier momento en Configuración."
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "_Empezar a usar GNOME 3"
-
-#~ msgid "Other"
-#~ msgstr "Otra"
-
-#~ msgid "Keyboard Layouts"
-#~ msgstr "Formatos de teclado"
-
-#~ msgid "Add a Keyboard Layout"
-#~ msgstr "Añade otro formato de teclado"

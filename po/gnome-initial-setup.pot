@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-28 12:37+0100\n"
+"POT-Creation-Date: 2015-03-13 16:12-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,27 +48,27 @@ msgid "No password"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:331
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:436
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:445
 msgid "Passwords do not match"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:555
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:564
 msgid "Failed to register account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:763
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:772
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:803
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:812
 msgid "Failed to join domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:871
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:880
 msgid "Failed to log into domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1296
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1305
 msgid "Login"
 msgstr ""
 
@@ -372,11 +372,11 @@ msgstr ""
 msgid "_Add Account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:242
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:241
 msgid "Preview"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:302
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:298
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
 msgid "More…"
 msgstr ""
@@ -384,33 +384,32 @@ msgstr ""
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
 #.
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:323
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:319
 msgid "No inputs found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:198
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:313
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:314
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:255
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:256
 msgid "Typing"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-msgid "Select your keyboard layout or an input method."
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
+msgid "Select your keyboard layout"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:3
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
 msgstr ""
 
@@ -422,16 +421,16 @@ msgstr ""
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:531
 msgid "Welcome"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:535
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:537
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Let's set up your computer..."
 msgstr ""
@@ -440,11 +439,11 @@ msgstr ""
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:643
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:778
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:797
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr ""
@@ -572,12 +571,12 @@ msgstr ""
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:392
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:418
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
 msgstr ""
 
