@@ -81,7 +81,7 @@
               <object class="GtkButton" id="select_button">
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
-                <property name="label">Select</property>
+                <property name="label" translatable="yes">Select</property>
                 <property name="use_underline" >True</property>
               </object>
             </child>

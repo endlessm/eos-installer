@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-13 16:12-0700\n"
-"PO-Revision-Date: 2015-03-13 23:19+0000\n"
+"POT-Creation-Date: 2015-03-13 16:30-0700\n"
+"PO-Revision-Date: 2015-03-13 23:39+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/gnome-initial-setup/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -419,6 +419,10 @@ msgstr "M'aider à détecter la disposition de mon clavier"
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
 msgstr "Détection de la disposition du clavier..."
+
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
+msgid "Select"
+msgstr "Sélectionner"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"

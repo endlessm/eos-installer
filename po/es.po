@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-13 16:12-0700\n"
-"PO-Revision-Date: 2015-03-13 23:18+0000\n"
+"POT-Creation-Date: 2015-03-13 16:30-0700\n"
+"PO-Revision-Date: 2015-03-13 23:37+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -424,6 +424,10 @@ msgstr "Ayuda a detectar el formato de mi teclado"
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
 msgstr "Detecta el formato de mi teclado..."
+
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
+msgid "Select"
+msgstr "Seleccionar"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
 msgid "No languages found"
