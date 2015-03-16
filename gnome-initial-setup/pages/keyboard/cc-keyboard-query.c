@@ -39,7 +39,7 @@ typedef struct
   GtkWidget *heading;
   GtkWidget *keyrow;
   GtkWidget *buttons;
-  GtkWidget *add_button;
+  GtkWidget *select_button;
 
   GnomeXkbInfo *xkb_data;
 } CcKeyboardQueryPrivate;
@@ -192,7 +192,7 @@ cc_keyboard_query_layout_result (CcKeyboardQuery *self,
   gtk_label_set_label (GTK_LABEL (priv->heading), result_message);
   gtk_widget_hide (priv->buttons);
   gtk_widget_hide (priv->keyrow);
-  gtk_widget_set_sensitive (priv->add_button, TRUE);
+  gtk_widget_set_sensitive (priv->select_button, TRUE);
 
   g_free (result_message);
 }
@@ -283,7 +283,7 @@ cc_keyboard_query_class_init (CcKeyboardQueryClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcKeyboardQuery, vbox);
   gtk_widget_class_bind_template_child_private (widget_class, CcKeyboardQuery, heading);
   gtk_widget_class_bind_template_child_private (widget_class, CcKeyboardQuery, buttons);
-  gtk_widget_class_bind_template_child_private (widget_class, CcKeyboardQuery, add_button);
+  gtk_widget_class_bind_template_child_private (widget_class, CcKeyboardQuery, select_button);
   gtk_widget_class_bind_template_callback (widget_class, have_key);
   gtk_widget_class_bind_template_callback (widget_class, no_have_key);
   gtk_widget_class_bind_template_callback (widget_class, key_press_event);
