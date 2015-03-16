@@ -128,11 +128,13 @@ clear_account_page (GisAccountPage *page)
   GtkWidget *username_combo;
   GtkWidget *password_entry;
   GtkWidget *confirm_entry;
+  GtkWidget *reminder_entry;
 
   fullname_entry = WID("account-fullname-entry");
   username_combo = WID("account-username-combo");
   password_entry = WID("account-password-entry");
   confirm_entry = WID("account-confirm-entry");
+  reminder_entry = WID("account-reminder-entry");
 
   priv->valid_name = FALSE;
   priv->valid_username = FALSE;
@@ -146,16 +148,19 @@ clear_account_page (GisAccountPage *page)
   gtk_combo_box_set_active (GTK_COMBO_BOX (username_combo), 0);
   gtk_entry_set_text (GTK_ENTRY (password_entry), "");
   gtk_entry_set_text (GTK_ENTRY (confirm_entry), "");
+  gtk_entry_set_text (GTK_ENTRY (reminder_entry), "");
 }
 
 static gboolean
 local_validate (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
+  gboolean has_reminder = (gtk_entry_get_text_length (OBJ (GtkEntry*, "account-reminder-entry")) > 0);
 
   return priv->valid_name &&
          priv->valid_username &&
-         priv->valid_confirm;
+         priv->valid_confirm &&
+         has_reminder;
 }
 
 static gboolean
@@ -450,6 +455,14 @@ confirm_entry_focus_out (GtkWidget      *widget,
 }
 
 static void
+reminder_changed (GtkWidget      *w,
+                  GParamSpec     *pspec,
+                  GisAccountPage *page)
+{
+  update_account_page_status (page);
+}
+
+static void
 create_shared_user (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
@@ -482,10 +495,12 @@ local_create_user (GisAccountPage *page)
 {
   GisAccountPagePrivate *priv = gis_account_page_get_instance_private (page);
   gchar *username;
+  gchar *sanitized_reminder;
   const gchar *password;
   const gchar *old_password;
   const gchar *fullname;
   const gchar *language;
+  const gchar *reminder;
   ActUser *old_user;
   GError *error = NULL;
 
@@ -494,6 +509,7 @@ local_create_user (GisAccountPage *page)
   username = gtk_combo_box_text_get_active_text (OBJ(GtkComboBoxText*, "account-username-combo"));
   fullname = gtk_entry_get_text (OBJ (GtkEntry*, "account-fullname-entry"));
   password = gtk_entry_get_text (OBJ (GtkEntry*, "account-password-entry"));
+  reminder = gtk_entry_get_text (OBJ (GtkEntry*, "account-reminder-entry"));
 
   priv->act_user = act_user_manager_create_user (priv->act_client, username, fullname, priv->account_type, &error);
   if (error != NULL) {
@@ -513,7 +529,9 @@ local_create_user (GisAccountPage *page)
   if (strlen (password) == 0) {
     act_user_set_password_mode (priv->act_user, ACT_USER_PASSWORD_MODE_NONE);
   } else {
-    act_user_set_password (priv->act_user, password, "");
+    sanitized_reminder = g_strstrip (g_strdup (reminder));
+    act_user_set_password (priv->act_user, password, sanitized_reminder);
+    g_free (sanitized_reminder);
     save_user_password (password);
   }
 
@@ -1199,6 +1217,7 @@ gis_account_page_constructed (GObject *object)
   GtkWidget *username_combo;
   GtkWidget *password_entry;
   GtkWidget *confirm_entry;
+  GtkWidget *reminder_entry;
   GtkWidget *password_toggle;
   GtkSettings *settings;
 
@@ -1215,6 +1234,7 @@ gis_account_page_constructed (GObject *object)
   username_combo = WID("account-username-combo");
   password_entry = WID("account-password-entry");
   confirm_entry = WID("account-confirm-entry");
+  reminder_entry = WID("account-reminder-entry");
   password_toggle = WID("account-password-visibility-toggle");
 
   g_signal_connect (fullname_entry, "notify::text",
@@ -1225,6 +1245,8 @@ gis_account_page_constructed (GObject *object)
                     G_CALLBACK (password_changed), page);
   g_signal_connect (confirm_entry, "notify::text",
                     G_CALLBACK (password_changed), page);
+  g_signal_connect (reminder_entry, "notify::text",
+                    G_CALLBACK (reminder_changed), page);
   g_signal_connect_after (password_entry, "focus-out-event",
                           G_CALLBACK (password_entry_focus_out), page);
   g_signal_connect_after (confirm_entry, "focus-out-event",
