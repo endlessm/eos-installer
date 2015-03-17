@@ -68,7 +68,7 @@
                 <property name="label" translatable="yes">Type in your full name and a password that you'll remember.</property>
                 <property name="wrap">True</property>
                 <attributes>
-                  <attribute name="scale" value="0.80000000000000004"/>
+                  <attribute name="scale" value="0.8"/>
                 </attributes>
               </object>
               <packing>
@@ -90,7 +90,7 @@
                 <property name="label" translatable="yes">You may want to write down your password. Make sure you pay attention to upper case letters. If the caps lock key is pressed, the symbol ⚠ will appear at the right side of the space in which you're writing. You'll need to type in this password identically each time you access your account.</property>
                 <property name="wrap">True</property>
                 <attributes>
-                  <attribute name="scale" value="0.80000000000000004"/>
+                  <attribute name="scale" value="0.8"/>
                 </attributes>
               </object>
               <packing>
@@ -163,7 +163,7 @@
                 <property name="label" translatable="yes">The username will be used to name your personal folder, and it cannot be changed.</property>
                 <property name="wrap">True</property>
                 <attributes>
-                  <attribute name="scale" value="0.80000000000000004"/>
+                  <attribute name="scale" value="0.8"/>
                 </attributes>
               </object>
               <packing>
@@ -236,7 +236,7 @@
                 <property name="label" translatable="yes">To make your password more secure, you can use letters and numbers together. This is optional.</property>
                 <property name="wrap">True</property>
                 <attributes>
-                  <attribute name="scale" value="0.80000000000000004"/>
+                  <attribute name="scale" value="0.8"/>
                 </attributes>
               </object>
               <packing>
@@ -258,7 +258,7 @@
                     <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <attributes>
-                      <attribute name="scale" value="0.80000000000000004"/>
+                      <attribute name="scale" value="0.8"/>
                     </attributes>
                   </object>
                   <packing>
@@ -300,7 +300,7 @@
                 <property name="label" translatable="yes">To continue, please make sure you fill in all the blanks.</property>
                 <property name="wrap">True</property>
                 <attributes>
-                  <attribute name="scale" value="0.80000000000000004"/>
+                  <attribute name="scale" value="0.8"/>
                 </attributes>
               </object>
               <packing>
@@ -357,7 +357,7 @@
                 <property name="label" translatable="yes">Password reminder will be shown when you don't remember your password.  Just enter an empty space if you don't want one.</property>
                 <property name="wrap">True</property>
                 <attributes>
-                  <attribute name="scale" value="0.80000000000000004"/>
+                  <attribute name="scale" value="0.8"/>
                 </attributes>
               </object>
               <packing>
@@ -542,7 +542,7 @@
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Enterprise domain or realm name</property>
                 <attributes>
-                  <attribute name="scale" value="0.80000000000000004"/>
+                  <attribute name="scale" value="0.8"/>
                 </attributes>
               </object>
               <packing>
