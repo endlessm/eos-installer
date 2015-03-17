@@ -78,28 +78,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="account-password-explanation">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="margin_bottom">12</property>
-                <property name="hexpand">True</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label" translatable="yes">You may want to write down your password. Make sure you pay attention to upper case letters. If the caps lock key is pressed, the symbol ⚠ will appear at the right side of the space in which you're writing. You'll need to type in this password identically each time you access your account.</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="scale" value="0.8"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">7</property>
-                <property name="width">3</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="account-fullname-label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -199,34 +177,6 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="account-confirm-label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">end</property>
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">_Confirm password</property>
-                <property name="use_underline">True</property>
-                <property name="mnemonic_widget">account-confirm-entry</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="account-confirm-entry">
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="visibility">False</property>
-                <property name="invisible_char">●</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkBox" id="box1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -270,24 +220,31 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="local-continue">
+              <object class="GtkLabel" id="account-confirm-label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="hexpand">True</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label" translatable="yes">To continue, please make sure you fill in all the blanks.</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="scale" value="0.8"/>
-                </attributes>
+                <property name="halign">end</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">_Confirm password</property>
+                <property name="use_underline">True</property>
+                <property name="mnemonic_widget">account-confirm-entry</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">11</property>
-                <property name="width">2</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="account-confirm-entry">
+                <property name="visible">True</property>
+                <property name="sensitive">False</property>
+                <property name="can_focus">True</property>
+                <property name="visibility">False</property>
+                <property name="invisible_char">●</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
               </packing>
             </child>
             <child>
@@ -306,14 +263,25 @@
               </packing>
             </child>
             <child>
-              <object class="GtkEntry" id="account-reminder-entry">
+              <object class="GtkLabel" id="account-password-explanation">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="margin_bottom">12</property>
+                <property name="hexpand">True</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label" translatable="yes">You may want to write down your password. Make sure you pay attention to upper case letters. If the caps lock key is pressed, the symbol ⚠ will appear at the right side of the space in which you're writing. You'll need to type in this password identically each time you access your account.</property>
+                <property name="wrap">True</property>
+                <attributes>
+                  <attribute name="scale" value="0.8"/>
+                </attributes>
               </object>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">9</property>
-                <property name="width">2</property>
+                <property name="left_attach">0</property>
+                <property name="top_attach">7</property>
+                <property name="width">3</property>
               </packing>
             </child>
             <child>
@@ -352,6 +320,17 @@
               </packing>
             </child>
             <child>
+              <object class="GtkEntry" id="account-reminder-entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">9</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkLabel" id="account-reminder-explanation">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -371,6 +350,27 @@
                 <property name="left_attach">0</property>
                 <property name="top_attach">10</property>
                 <property name="width">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="local-continue">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">start</property>
+                <property name="hexpand">True</property>
+                <property name="xalign">0</property>
+                <property name="yalign">0</property>
+                <property name="label" translatable="yes">To continue, please make sure you fill in all the blanks.</property>
+                <property name="wrap">True</property>
+                <attributes>
+                  <attribute name="scale" value="0.8"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">11</property>
+                <property name="width">2</property>
               </packing>
             </child>
             <child>
@@ -482,6 +482,18 @@
               </packing>
             </child>
             <child>
+              <object class="GtkEntry" id="enterprise-login">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="invisible_char">●</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkLabel" id="label9">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -494,18 +506,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="enterprise-login">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="invisible_char">●</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">3</property>
               </packing>
             </child>
             <child>
