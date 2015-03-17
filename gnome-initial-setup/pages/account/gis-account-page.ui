@@ -57,7 +57,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="account-password-directions">
+              <object class="GtkLabel" id="account-password-explanation">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
@@ -65,7 +65,7 @@
                 <property name="hexpand">True</property>
                 <property name="xalign">0</property>
                 <property name="yalign">0</property>
-                <property name="label" translatable="yes">Type your full name and a password that you'll remember.</property>
+                <property name="label" translatable="yes">Type your full name and a password that you'll remember. Pay attention to upper case letters.</property>
                 <property name="wrap">True</property>
                 <attributes>
                   <attribute name="scale" value="0.8"/>
@@ -263,16 +263,16 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="account-password-explanation">
+              <object class="GtkLabel" id="account-reminder-explanation">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="halign">start</property>
                 <property name="valign">start</property>
-                <property name="margin_bottom">12</property>
                 <property name="hexpand">True</property>
                 <property name="xalign">0</property>
                 <property name="yalign">0</property>
-                <property name="label" translatable="yes">You may want to write down your password. Make sure you pay attention to upper case letters. If the caps lock key is pressed, the symbol ⚠ will appear at the right side of the space in which you're writing. You'll need to type in this password identically each time you access your account.</property>
+                <property name="margin_top">12</property>
+                <property name="label" translatable="yes">Make sure you write down your password to remember it! You can write yourself a reminder here, but note that this password reminder can be seen by others.</property>
                 <property name="wrap">True</property>
                 <attributes>
                   <attribute name="scale" value="0.8"/>
@@ -281,27 +281,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">3</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="account-reminder-directions">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="hexpand">True</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label" translatable="yes">Type a hint or question that will help you remember your password.</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="scale" value="0.8"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">8</property>
                 <property name="width">3</property>
               </packing>
             </child>
@@ -316,7 +295,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">8</property>
               </packing>
             </child>
             <child>
@@ -326,30 +305,8 @@
               </object>
               <packing>
                 <property name="left_attach">1</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">8</property>
                 <property name="width">2</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="account-reminder-explanation">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="margin_bottom">12</property>
-                <property name="hexpand">True</property>
-                <property name="xalign">0</property>
-                <property name="yalign">0</property>
-                <property name="label" translatable="yes">If you ever forget your password, you can view this reminder. Keep in mind that anyone who has access to your computer can view your reminder.</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="scale" value="0.8"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">10</property>
-                <property name="width">3</property>
               </packing>
             </child>
             <child>
@@ -361,6 +318,7 @@
                 <property name="hexpand">True</property>
                 <property name="xalign">0</property>
                 <property name="yalign">0</property>
+                <property name="margin_top">12</property>
                 <property name="label" translatable="yes">To continue, please make sure you fill in all the blanks.</property>
                 <property name="wrap">True</property>
                 <attributes>
@@ -369,7 +327,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">11</property>
+                <property name="top_attach">9</property>
                 <property name="width">2</property>
               </packing>
             </child>
