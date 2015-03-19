@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-13 16:30-0700\n"
-"PO-Revision-Date: 2015-03-13 23:37+0000\n"
+"POT-Creation-Date: 2015-03-18 22:23-0700\n"
+"PO-Revision-Date: 2015-03-19 05:25+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -52,32 +52,32 @@ msgstr "Forzar el modo del nuevo usuario"
 msgid "- GNOME initial setup"
 msgstr "- Configuración inicial de GNOME"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
 msgstr "Sin contraseña"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:445
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
 msgstr "Las contraseñas no coinciden"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:564
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:772
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:812
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:880
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1305
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
 msgstr "Iniciar sesión"
 
@@ -86,52 +86,51 @@ msgid "Create a Personal Account"
 msgstr "Crea tu cuenta personal"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid "Type in your full name and a password that you'll remember."
-msgstr "Escribe tu nombre completo y una contraseña que puedas recordar."
+msgid ""
+"Type your full name and a password that you'll remember. Pay attention to "
+"upper case letters."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid ""
-"You may want to write down your password. Make sure you pay attention to "
-"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
-"appear at the right side of the space in which you're writing. You'll need "
-"to type in this password identically each time you access your account."
-msgstr "Si quieres, puedes anotar tu contraseña para recordarla. Presta atención a las mayúsculas: si la tecla que las activa está presionada, aparecerá este símbolo ⚠ a la derecha del espacio en el que estás escribiendo. Cada vez que quieras entrar a tu cuenta deberás escribir tu contraseña idénticamente."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_Nombre completo"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
 msgstr "Nombre de _usuario"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
 msgstr "Tu nombre de usuario será usado para nombrar tu carpeta personal y no se puede cambiar después."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
 msgstr "_Contraseña"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
 msgstr "_Confirmar contraseña"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid ""
-"To make your password more secure, you can use letters and numbers together."
-" This is optional."
-msgstr "Puedes mezclar letras y números para que tu contraseña sea más segura."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "To continue, please make sure you fill in all the blanks."
-msgstr "Para poder continuar, debes llenar todos los espacios en blanco."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
 msgstr "Ver contraseña"
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
+msgid ""
+"Make sure you write down your password to remember it! You can write "
+"yourself a reminder here, but note that this password reminder can be seen "
+"by others."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
+msgid "Password _reminder"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr "Para poder continuar, debes llenar todos los espacios en blanco."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"

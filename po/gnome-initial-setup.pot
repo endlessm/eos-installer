@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-13 16:30-0700\n"
+"POT-Creation-Date: 2015-03-19 07:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,32 +43,32 @@ msgstr ""
 msgid "- GNOME initial setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:328
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:331
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:445
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:564
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:772
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:812
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:880
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1305
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
 msgstr ""
 
@@ -77,51 +77,50 @@ msgid "Create a Personal Account"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid "Type in your full name and a password that you'll remember."
+msgid ""
+"Type your full name and a password that you'll remember. Pay attention to "
+"upper case letters."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid ""
-"You may want to write down your password. Make sure you pay attention to "
-"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
-"appear at the right side of the space in which you're writing. You'll need "
-"to type in this password identically each time you access your account."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "Show password"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"Make sure you write down your password to remember it! You can write "
+"yourself a reminder here, but note that this password reminder can be seen "
+"by others."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "To continue, please make sure you fill in all the blanks."
+msgid "Password _reminder"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-msgid "Show password"
+msgid "To continue, please make sure you fill in all the blanks."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
