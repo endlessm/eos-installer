@@ -143,7 +143,7 @@ get_terms_document (void)
                                    "eos-license-service",
                                    "terms",
                                    language,
-                                   "Endless-Mobile-Terms-of-Use.pdf",
+                                   "Endless-Terms-of-Use.pdf",
                                    NULL);
 
           if (g_file_test (path, G_FILE_TEST_EXISTS))

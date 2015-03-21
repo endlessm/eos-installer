@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-19 07:07+0000\n"
+"POT-Creation-Date: 2015-03-20 22:27-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -292,8 +292,8 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"Automatically save and send usage statistics and problem reports to Endless "
-"Mobile. All data is anonymous."
+"Automatically save and send usage statistics and problem reports to Endless. "
+"All data is anonymous."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
