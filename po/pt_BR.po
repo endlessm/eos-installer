@@ -302,9 +302,9 @@ msgstr "Ajude a criar um Endless melhor para todos"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"Automatically save and send usage statistics and problem reports to Endless "
-"Mobile. All data is anonymous."
-msgstr "Automaticamente salve e envie estatísticas de usabilidade e avisos de problemas à Endless Mobile. Toda informação é anônima. "
+"Automatically save and send usage statistics and problem reports to Endless. "
+"All data is anonymous."
+msgstr "Automaticamente salve e envie estatísticas de usabilidade e avisos de problemas à Endless. Toda informação é anônima. "
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
