@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 22:23-0700\n"
-"PO-Revision-Date: 2015-03-19 05:25+0000\n"
+"POT-Creation-Date: 2015-03-20 22:27-0700\n"
+"PO-Revision-Date: 2015-03-21 06:12+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "إنشاء حساب شخصي"
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "اكتب اسمك بالكامل وكلمة مرور يمكنك تذكرها بعد ذلك. انتبه إلى الحروف الكبيرة."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -115,11 +115,11 @@ msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "تأكد من أن تدون كلمة المرور الخاصة بك حتى تتذكرها! يمكنك كتابة رسالة تذكير لنفسك هنا، لكن لاحظ أن رسالة تذكير كلمة المرور هذه يمكن للآخرين رؤيتها"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "تذكير _ كلمة المرور"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
@@ -294,8 +294,8 @@ msgstr "المساعدة في تحسين Endless لمصلحة الجميع"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"Automatically save and send usage statistics and problem reports to Endless. "
-"All data is anonymous."
+"Automatically save and send usage statistics and problem reports to Endless."
+" All data is anonymous."
 msgstr "تخزين وإرسال تلقائي لإحصائيات الاستخدام وتقارير المشاكل إلى Endless. يتم التعامل مع كافة البيانات بدون الكشف عن هوية الشخص المرسل."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324

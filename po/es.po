@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# c.sanchez <cassandra@endlessm.com>, 2014
+# c.sanchez <cassandra@endlessm.com>, 2014-2015
 # c.sanchez <cassandra@endlessm.com>, 2014
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2012-2014
 # Eddy Alegria <eddy@endlessm.com>, 2014
@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 22:23-0700\n"
-"PO-Revision-Date: 2015-03-19 05:25+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2015-03-20 22:27-0700\n"
+"PO-Revision-Date: 2015-03-23 05:33+0000\n"
+"Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,7 +89,7 @@ msgstr "Crea tu cuenta personal"
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "Escribe tu nombre completo y una contraseña que recordarás. Pon atención a las mayúsculas que uses."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -122,11 +122,11 @@ msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "¡Asegúrate de anotar tu contraseña para que la puedas recordar! Aquí puedes escribirte un recordatorio, pero nota que otros también podrán ver el recordatorio."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "Contraseña _recordatorio"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
@@ -301,8 +301,8 @@ msgstr "Ayuda a hacer Endless mejor para todos"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"Automatically save and send usage statistics and problem reports to Endless. "
-"All data is anonymous."
+"Automatically save and send usage statistics and problem reports to Endless."
+" All data is anonymous."
 msgstr "Automáticamente guarda y envía estadísticas de uso e informes de problemas a Endless. Toda la información mandada es anónima."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324

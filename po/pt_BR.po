@@ -12,14 +12,14 @@
 # Richard Vignais, 2014
 # Richard Vignais, 2014
 # Roddy Shuler <roddy@endlessm.com>, 2014-2015
-# Silva <michele@endlessm.com>, 2014
+# Silva <michele@endlessm.com>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-18 22:23-0700\n"
-"PO-Revision-Date: 2015-03-19 05:25+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2015-03-20 22:27-0700\n"
+"PO-Revision-Date: 2015-03-23 19:26+0000\n"
+"Last-Translator: Silva <michele@endlessm.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/gnome-initial-setup/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -90,7 +90,7 @@ msgstr "Criar uma conta "
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "Escreva seu nome completo e uma senha da qual você vá se lembrar. Preste atenção nas letras maiúsculas. "
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -123,11 +123,11 @@ msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "Tenha certeza de que escreveu uma senha da qual se lembrará! Você pode adicionar um lembrete de senha aqui mas saiba que esse lembrete poderá ser visto por outras pessoas. "
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "Lembrete_ de senha"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
@@ -302,9 +302,9 @@ msgstr "Ajude a criar um Endless melhor para todos"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"Automatically save and send usage statistics and problem reports to Endless. "
-"All data is anonymous."
-msgstr "Automaticamente salve e envie estatísticas de usabilidade e avisos de problemas à Endless. Toda informação é anônima. "
+"Automatically save and send usage statistics and problem reports to Endless."
+" All data is anonymous."
+msgstr "Automaticamente salve e envie estatísticas de usabilidade e avisos de problemas à Endless. Toda informação é anônima."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
