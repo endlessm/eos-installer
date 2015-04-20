@@ -255,7 +255,7 @@
                 <property name="receives_default">True</property>
                 <property name="xalign">0.5</property>
                 <property name="active">True</property>
-                <property name="draw_indicator">False</property>
+                <property name="draw_indicator">True</property>
               </object>
               <packing>
                 <property name="left_attach">2</property>
