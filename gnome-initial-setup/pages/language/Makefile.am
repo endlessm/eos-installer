@@ -6,7 +6,8 @@ AM_CPPFLAGS = \
 	-I"$(top_srcdir)/gnome-initial-setup" \
 	-I"$(top_builddir)" \
 	-DDATADIR=\""$(datadir)"\" \
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
+	-DLOCALSTATEDIR=\""$(localstatedir)"\"
 
 BUILT_SOURCES =
 
