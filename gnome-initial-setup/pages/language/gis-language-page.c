@@ -301,6 +301,22 @@ get_serial_version (gchar **display_serial,
   return TRUE;
 }
 
+static gboolean
+get_have_sdcard (void)
+{
+  GDir *dir;
+  gboolean has_bundles;
+
+  dir = g_dir_open (LOCALSTATEDIR "/endless-extra", 0, NULL);
+  if (!dir)
+    return FALSE;
+
+  has_bundles = (g_dir_read_name (dir) != NULL);
+  g_dir_close (dir);
+
+  return has_bundles;
+}
+
 static gchar *
 get_software_version (void)
 {
@@ -422,6 +438,7 @@ show_factory_dialog (GisLanguagePage *page)
   GtkDialog *factory_dialog;
   GtkImage *serial_image;
   GtkLabel *personality_label;
+  GtkLabel *sdcard_label;
   GtkLabel *serial_label;
   GtkLabel *version_label;
   gboolean have_serial;
@@ -432,6 +449,7 @@ show_factory_dialog (GisLanguagePage *page)
   factory_dialog = OBJ (GtkDialog *, "factory-dialog");
   version_label = OBJ (GtkLabel *, "software-version");
   personality_label = OBJ (GtkLabel *, "personality");
+  sdcard_label = OBJ (GtkLabel *, "sd-card");
   serial_label = OBJ (GtkLabel *, "serial-text");
   serial_image = OBJ (GtkImage *, "serial-barcode");
   poweroff_button = OBJ (GtkButton *, "poweroff-button");
@@ -452,6 +470,12 @@ show_factory_dialog (GisLanguagePage *page)
   } else {
     gtk_widget_set_visible (GTK_WIDGET (serial_label), FALSE);
     gtk_widget_set_visible (GTK_WIDGET (serial_image), FALSE);
+  }
+
+  if (get_have_sdcard ()) {
+    gtk_label_set_text (sdcard_label, _("SD Card: Enabled"));
+  } else {
+    gtk_label_set_text (sdcard_label, _("SD Card: Disabled"));
   }
 
   g_signal_connect_swapped (poweroff_button, "clicked",
