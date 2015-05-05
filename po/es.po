@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-21 02:34+0000\n"
-"PO-Revision-Date: 2015-03-23 05:33+0000\n"
-"Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
+"POT-Creation-Date: 2015-04-28 02:29+0000\n"
+"PO-Revision-Date: 2015-04-28 02:30+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -432,16 +432,24 @@ msgstr "Seleccionar"
 msgid "No languages found"
 msgstr "No se encontraron idiomas"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:531
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:476
+msgid "SD Card: Enabled"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:478
+msgid "SD Card: Disabled"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:555
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:535
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:559
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Welcome to Endless!"
 msgstr "¡Bienvenido a Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:537
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:561
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Let's set up your computer..."
 msgstr "Ahora, vamos a configurar tu computadora... "
