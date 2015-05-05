@@ -27,9 +27,11 @@
 /* Language page {{{1 */
 
 #define PAGE_ID "language"
+#define EOS_IMAGE_VERSION_XATTR "user.eos-image-version"
 
 #define OSRELEASE_FILE      "/etc/os-release"
 #define SERIAL_VERSION_FILE "/sys/devices/virtual/dmi/id/product_uuid"
+#define SD_CARD_MOUNT       LOCALSTATEDIR "/endless-extra"
 
 #include "config.h"
 #include "language-resources.h"
@@ -42,6 +44,7 @@
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
 #include <zint.h>
+#include <errno.h>
 
 struct _GisLanguagePagePrivate
 {
@@ -307,7 +310,7 @@ get_have_sdcard (void)
   GDir *dir;
   gboolean has_bundles;
 
-  dir = g_dir_open (LOCALSTATEDIR "/endless-extra", 0, NULL);
+  dir = g_dir_open (SD_CARD_MOUNT, 0, NULL);
   if (!dir)
     return FALSE;
 
@@ -315,6 +318,32 @@ get_have_sdcard (void)
   g_dir_close (dir);
 
   return has_bundles;
+}
+
+static gchar *
+get_sdcard_version (void)
+{
+  ssize_t attrsize;
+  gchar *value;
+
+  attrsize = getxattr (SD_CARD_MOUNT, EOS_IMAGE_VERSION_XATTR, NULL, 0);
+  if (attrsize < 0) {
+    g_warning ("Error examining SD card xattr: %s", g_strerror (errno));
+    return NULL;
+  }
+
+  value = g_malloc (attrsize + 1);
+  value[attrsize] = 0;
+
+  attrsize = getxattr (SD_CARD_MOUNT, EOS_IMAGE_VERSION_XATTR, value,
+                       attrsize);
+  if (attrsize < 0) {
+    g_warning ("Error reading SD card xattr: %s", g_strerror (errno));
+    g_free (value);
+    return NULL;
+  }
+
+  return value;
 }
 
 static gchar *
@@ -445,6 +474,8 @@ show_factory_dialog (GisLanguagePage *page)
   gchar *barcode;
   gchar *barcode_serial, *display_serial;
   gchar *version;
+  gchar *sd_version = NULL;
+  gchar *sd_text;
 
   factory_dialog = OBJ (GtkDialog *, "factory-dialog");
   version_label = OBJ (GtkLabel *, "software-version");
@@ -472,11 +503,16 @@ show_factory_dialog (GisLanguagePage *page)
     gtk_widget_set_visible (GTK_WIDGET (serial_image), FALSE);
   }
 
-  if (get_have_sdcard ()) {
-    gtk_label_set_text (sdcard_label, _("SD Card: Enabled"));
-  } else {
-    gtk_label_set_text (sdcard_label, _("SD Card: Disabled"));
-  }
+  if (get_have_sdcard ())
+    sd_version = get_sdcard_version ();
+
+  if (!sd_version)
+    sd_version = g_strdup (_("Disabled"));
+
+  sd_text = g_strdup_printf (_("SD Card: %s"), sd_version);
+  gtk_label_set_text (sdcard_label, sd_text);
+  g_free (sd_version);
+  g_free (sd_text);
 
   g_signal_connect_swapped (poweroff_button, "clicked",
                             G_CALLBACK (system_poweroff), NULL);
