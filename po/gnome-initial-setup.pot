@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-05 02:32+0000\n"
+"POT-Creation-Date: 2015-05-12 03:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,24 +424,25 @@ msgstr ""
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:476
-msgid "SD Card: Enabled"
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:510
+msgid "Disabled"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:478
-msgid "SD Card: Disabled"
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:512
+#, c-format
+msgid "SD Card: %s"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:555
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:591
 msgid "Welcome"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:559
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:595
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:561
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:597
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Let's set up your computer..."
 msgstr ""
