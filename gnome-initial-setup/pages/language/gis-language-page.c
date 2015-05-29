@@ -42,6 +42,7 @@
 #include <polkit/polkit.h>
 #include <locale.h>
 #include <glib/gstdio.h>
+#include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <zint.h>
 #include <errno.h>
@@ -460,10 +461,55 @@ system_poweroff (gpointer data)
 }
 
 static void
+system_testmode (gpointer data)
+{
+  GtkWindow *factory_dialog = GTK_WINDOW (data);
+  GPermission *permission = NULL;
+  GError *error = NULL;
+  GSubprocess *process = NULL;
+
+  permission = polkit_permission_new_sync ("com.endlessm.TestMode",
+                                           NULL, NULL, &error);
+  if (error) {
+    g_warning ("Failed getting permission to start test mode: %s",
+               error->message);
+    g_error_free (error);
+    goto out;
+  }
+
+  if (!g_permission_get_allowed (permission)) {
+    g_warning ("Not allowed to start test mode");
+    goto out;
+  }
+
+  process = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, &error,
+                              "pxekec", LIBEXECDIR "/eos-test-mode",
+                              NULL);
+  if (!process) {
+    g_warning ("Failed to create new subprocess for test mode: %s",
+               error->message);
+    g_error_free (error);
+    goto out;
+  }
+
+  if (!g_subprocess_wait_check (process, NULL, &error)) {
+    g_warning ("eos-test-mode failed: %s", error->message);
+    g_error_free (error);
+  }
+
+  gtk_window_close (factory_dialog);
+
+ out:
+  g_clear_object (&permission);
+  g_clear_object (&process);
+}
+
+static void
 show_factory_dialog (GisLanguagePage *page)
 {
   GisDriver *driver = GIS_PAGE (page)->driver;
   GtkButton *poweroff_button;
+  GtkButton *testmode_button;
   GtkDialog *factory_dialog;
   GtkImage *serial_image;
   GtkLabel *personality_label;
@@ -484,6 +530,7 @@ show_factory_dialog (GisLanguagePage *page)
   serial_label = OBJ (GtkLabel *, "serial-text");
   serial_image = OBJ (GtkImage *, "serial-barcode");
   poweroff_button = OBJ (GtkButton *, "poweroff-button");
+  testmode_button = OBJ (GtkButton *, "testmode-button");
 
   version = get_software_version ();
   gtk_label_set_text (version_label, version);
@@ -516,6 +563,8 @@ show_factory_dialog (GisLanguagePage *page)
 
   g_signal_connect_swapped (poweroff_button, "clicked",
                             G_CALLBACK (system_poweroff), NULL);
+  g_signal_connect_swapped (testmode_button, "clicked",
+                            G_CALLBACK (system_testmode), NULL);
 
   gtk_window_set_transient_for (GTK_WINDOW (factory_dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
