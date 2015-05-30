@@ -28,7 +28,7 @@
                     <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Power Off</property>
                     <attributes>
-                      <attribute name="font-desc" value="&lt;Enter Value&gt; 16"/>
+                      <attribute name="font-desc" value="default 16"/>
                       <attribute name="weight" value="bold"/>
                     </attributes>
                   </object>
@@ -63,7 +63,7 @@
                 <property name="can_focus">False</property>
                 <property name="label">Endless 1.x.y</property>
                 <attributes>
-                  <attribute name="font-desc" value="&lt;Enter Value&gt; 32"/>
+                  <attribute name="font-desc" value="default 32"/>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>
@@ -79,7 +79,7 @@
                 <property name="can_focus">False</property>
                 <property name="label">personality</property>
                 <attributes>
-                  <attribute name="font-desc" value="&lt;Enter Value&gt; 20"/>
+                  <attribute name="font-desc" value="default 20"/>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>
@@ -95,7 +95,7 @@
                 <property name="can_focus">False</property>
                 <property name="label">sd card</property>
                 <attributes>
-                  <attribute name="font-desc" value="&lt;Enter Value&gt; 16"/>
+                  <attribute name="font-desc" value="default 16"/>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>
@@ -124,7 +124,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="no">label</property>
                 <attributes>
-                  <attribute name="font-desc" value="&lt;Enter Value&gt; 26"/>
+                  <attribute name="font-desc" value="default 26"/>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>
