@@ -66,6 +66,7 @@ gnome-initial-setup/pages/location/geoclue.[ch]
 gnome-initial-setup-first-login.desktop
 gnome-initial-setup.desktop
 gnome-initial-setup-copy-worker.desktop
+com.endlessm.TestMode.policy
 
 gnome-initial-setup-0.*
 gnome-initial-setup-3.*

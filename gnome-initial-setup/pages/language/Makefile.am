@@ -7,7 +7,8 @@ AM_CPPFLAGS = \
 	-I"$(top_builddir)" \
 	-DDATADIR=\""$(datadir)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
-	-DLOCALSTATEDIR=\""$(localstatedir)"\"
+	-DLOCALSTATEDIR=\""$(localstatedir)"\" \
+	-DLIBEXECDIR=\""$(libexecdir)"\"
 
 BUILT_SOURCES =
 
@@ -30,3 +31,5 @@ libgislanguage_la_LIBADD = $(INITIAL_SETUP_LIBS)
 libgislanguage_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 EXTRA_DIST = language.gresource.xml $(resource_files)
+
+dist_libexec_SCRIPTS = eos-test-mode
