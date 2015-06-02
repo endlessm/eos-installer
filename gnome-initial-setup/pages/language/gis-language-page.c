@@ -464,15 +464,23 @@ static void
 system_testmode (GtkButton *button, gpointer data)
 {
   GtkWindow *factory_dialog = GTK_WINDOW (data);
+  GSubprocessLauncher *launcher = NULL;
   GSubprocess *process = NULL;
   GError *error = NULL;
 
   /* Test mode can only be initialized once */
   gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 
-  process = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, &error,
-                              "pkexec", LIBEXECDIR "/eos-test-mode",
-                              NULL);
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
+
+  /* pkexec won't let us run the program if $SHELL isn't in /etc/shells,
+   * so remove it from the environment.
+   */
+  g_subprocess_launcher_unsetenv (launcher, "SHELL");
+  process = g_subprocess_launcher_spawn (launcher, &error,
+                                         "pkexec",
+                                         LIBEXECDIR "/eos-test-mode",
+                                         NULL);
   if (!process) {
     GtkWidget *dialog;
 
@@ -507,6 +515,7 @@ system_testmode (GtkButton *button, gpointer data)
  out:
   gtk_window_close (factory_dialog);
   g_clear_object (&process);
+  g_clear_object (&launcher);
 }
 
 static void
