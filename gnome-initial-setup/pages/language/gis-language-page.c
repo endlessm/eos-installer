@@ -483,7 +483,7 @@ system_testmode (gpointer data)
   }
 
   process = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, &error,
-                              "pxekec", LIBEXECDIR "/eos-test-mode",
+                              "pkexec", LIBEXECDIR "/eos-test-mode",
                               NULL);
   if (!process) {
     g_warning ("Failed to create new subprocess for test mode: %s",
