@@ -471,14 +471,33 @@ system_testmode (gpointer data)
                               "pkexec", LIBEXECDIR "/eos-test-mode",
                               NULL);
   if (!process) {
-    g_warning ("Failed to create new subprocess for test mode: %s",
-               error->message);
+    GtkWidget *dialog;
+
+    g_warning ("Failed to create test mode process: %s", error->message);
+    dialog = gtk_message_dialog_new (factory_dialog,
+                                     GTK_DIALOG_DESTROY_WITH_PARENT,
+                                     GTK_MESSAGE_ERROR,
+                                     GTK_BUTTONS_CLOSE,
+                                     "Failed to create test mode process: %s",
+                                     error->message);
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
     g_error_free (error);
     goto out;
   }
 
   if (!g_subprocess_wait_check (process, NULL, &error)) {
+    GtkWidget *dialog;
+
     g_warning ("eos-test-mode failed: %s", error->message);
+    dialog = gtk_message_dialog_new (factory_dialog,
+                                     GTK_DIALOG_DESTROY_WITH_PARENT,
+                                     GTK_MESSAGE_ERROR,
+                                     GTK_BUTTONS_CLOSE,
+                                     "eos-test-mode failed: %s",
+                                     error->message);
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
     g_error_free (error);
   }
 
