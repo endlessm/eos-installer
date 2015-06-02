@@ -482,9 +482,8 @@ system_testmode (gpointer data)
     g_error_free (error);
   }
 
-  gtk_window_close (factory_dialog);
-
  out:
+  gtk_window_close (factory_dialog);
   g_clear_object (&process);
 }
 
