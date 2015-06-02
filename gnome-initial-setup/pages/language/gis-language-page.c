@@ -461,11 +461,14 @@ system_poweroff (gpointer data)
 }
 
 static void
-system_testmode (gpointer data)
+system_testmode (GtkButton *button, gpointer data)
 {
   GtkWindow *factory_dialog = GTK_WINDOW (data);
   GSubprocess *process = NULL;
   GError *error = NULL;
+
+  /* Test mode can only be initialized once */
+  gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 
   process = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, &error,
                               "pkexec", LIBEXECDIR "/eos-test-mode",
@@ -565,8 +568,8 @@ show_factory_dialog (GisLanguagePage *page)
 
   g_signal_connect_swapped (poweroff_button, "clicked",
                             G_CALLBACK (system_poweroff), NULL);
-  g_signal_connect_swapped (testmode_button, "clicked",
-                            G_CALLBACK (system_testmode), NULL);
+  g_signal_connect (testmode_button, "clicked",
+                    G_CALLBACK (system_testmode), factory_dialog);
 
   gtk_window_set_transient_for (GTK_WINDOW (factory_dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
