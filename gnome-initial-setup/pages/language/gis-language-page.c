@@ -464,23 +464,8 @@ static void
 system_testmode (gpointer data)
 {
   GtkWindow *factory_dialog = GTK_WINDOW (data);
-  GPermission *permission = NULL;
-  GError *error = NULL;
   GSubprocess *process = NULL;
-
-  permission = polkit_permission_new_sync ("com.endlessm.TestMode",
-                                           NULL, NULL, &error);
-  if (error) {
-    g_warning ("Failed getting permission to start test mode: %s",
-               error->message);
-    g_error_free (error);
-    goto out;
-  }
-
-  if (!g_permission_get_allowed (permission)) {
-    g_warning ("Not allowed to start test mode");
-    goto out;
-  }
+  GError *error = NULL;
 
   process = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, &error,
                               "pkexec", LIBEXECDIR "/eos-test-mode",
@@ -500,7 +485,6 @@ system_testmode (gpointer data)
   gtk_window_close (factory_dialog);
 
  out:
-  g_clear_object (&permission);
   g_clear_object (&process);
 }
 
