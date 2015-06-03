@@ -461,47 +461,61 @@ system_poweroff (gpointer data)
 }
 
 static void
-system_testmode (gpointer data)
+system_testmode (GtkButton *button, gpointer data)
 {
   GtkWindow *factory_dialog = GTK_WINDOW (data);
-  GPermission *permission = NULL;
-  GError *error = NULL;
+  GSubprocessLauncher *launcher = NULL;
   GSubprocess *process = NULL;
+  GError *error = NULL;
 
-  permission = polkit_permission_new_sync ("com.endlessm.TestMode",
-                                           NULL, NULL, &error);
-  if (error) {
-    g_warning ("Failed getting permission to start test mode: %s",
-               error->message);
-    g_error_free (error);
-    goto out;
-  }
+  /* Test mode can only be initialized once */
+  gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 
-  if (!g_permission_get_allowed (permission)) {
-    g_warning ("Not allowed to start test mode");
-    goto out;
-  }
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
 
-  process = g_subprocess_new (G_SUBPROCESS_FLAGS_NONE, &error,
-                              "pxekec", LIBEXECDIR "/eos-test-mode",
-                              NULL);
+  /* pkexec won't let us run the program if $SHELL isn't in /etc/shells,
+   * so remove it from the environment.
+   */
+  g_subprocess_launcher_unsetenv (launcher, "SHELL");
+  process = g_subprocess_launcher_spawn (launcher, &error,
+                                         "pkexec",
+                                         LIBEXECDIR "/eos-test-mode",
+                                         NULL);
   if (!process) {
-    g_warning ("Failed to create new subprocess for test mode: %s",
-               error->message);
+    GtkWidget *dialog;
+
+    g_warning ("Failed to create test mode process: %s", error->message);
+    dialog = gtk_message_dialog_new (factory_dialog,
+                                     GTK_DIALOG_DESTROY_WITH_PARENT,
+                                     GTK_MESSAGE_ERROR,
+                                     GTK_BUTTONS_CLOSE,
+                                     "Failed to create test mode process: %s",
+                                     error->message);
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
     g_error_free (error);
     goto out;
   }
 
   if (!g_subprocess_wait_check (process, NULL, &error)) {
+    GtkWidget *dialog;
+
     g_warning ("eos-test-mode failed: %s", error->message);
+    dialog = gtk_message_dialog_new (factory_dialog,
+                                     GTK_DIALOG_DESTROY_WITH_PARENT,
+                                     GTK_MESSAGE_ERROR,
+                                     GTK_BUTTONS_CLOSE,
+                                     "eos-test-mode failed: %s",
+                                     error->message);
+    gtk_dialog_run (GTK_DIALOG (dialog));
+    gtk_widget_destroy (dialog);
     g_error_free (error);
   }
 
-  gtk_window_close (factory_dialog);
-
  out:
-  g_clear_object (&permission);
+  gtk_window_close (factory_dialog);
   g_clear_object (&process);
+  g_clear_object (&launcher);
 }
 
 static void
@@ -563,8 +577,8 @@ show_factory_dialog (GisLanguagePage *page)
 
   g_signal_connect_swapped (poweroff_button, "clicked",
                             G_CALLBACK (system_poweroff), NULL);
-  g_signal_connect_swapped (testmode_button, "clicked",
-                            G_CALLBACK (system_testmode), NULL);
+  g_signal_connect (testmode_button, "clicked",
+                    G_CALLBACK (system_testmode), factory_dialog);
 
   gtk_window_set_transient_for (GTK_WINDOW (factory_dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))));
