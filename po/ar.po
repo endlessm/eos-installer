@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-26 02:36+0000\n"
-"PO-Revision-Date: 2015-05-12 03:19+0000\n"
+"POT-Creation-Date: 2015-06-02 02:36+0000\n"
+"PO-Revision-Date: 2015-06-02 02:36+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -425,30 +425,34 @@ msgstr "اختر"
 msgid "No languages found"
 msgstr "لا يوجد أي لغات"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:510
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:557
 msgid "Disabled"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:512
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:559
 #, c-format
 msgid "SD Card: %s"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:591
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:640
 msgid "Welcome"
 msgstr "مرحبًا"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:595
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:644
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "مرحباً بك في اللانهاية!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:597
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:646
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr "فلنقم بإعداد جهازك الكمبيوتر..."
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Test Mode"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Power Off"
 msgstr "إيقاف التشغيل"
 
