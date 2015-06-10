@@ -18,7 +18,7 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 # Mount overlays over any directory that might be written to
-overlay_dirs="boot etc home ostree root srv var"
+overlay_dirs="bin boot etc home lib opt ostree root sbin srv sysroot var"
 for dir in $overlay_dirs; do
     [ -d /$dir ] || continue
     # If the directory is a symlink, assume it's pointing to a location
