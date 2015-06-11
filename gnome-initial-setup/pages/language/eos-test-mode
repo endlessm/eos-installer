@@ -17,6 +17,21 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
+# The /endless overlay setup needs to be unmounted before adding the
+# overlays below for 2 reasons.
+#  1. The /var overlay will mask the real SD card mount at
+#     /var/endless-extra.
+#  2. The /endless overlay will maintain connections to the real /var
+#     unless it's unmounted first. A mount -o remount does not work.
+extra_unit="var-endless\x2dextra.mount"
+endless_unit=endless.mount
+systemctl -q is-active "$extra_unit" && extra_active=true || extra_active=false
+systemctl -q is-active "$endless_unit" && endless_active=true || endless_active=false
+
+# Unmount the /endless overlay and SD card
+$endless_active && systemctl stop "$endless_unit"
+$extra_active && systemctl stop "$extra_unit"
+
 # Mount overlays over any directory that might be written to
 overlay_dirs="bin boot etc home lib opt ostree root sbin srv sysroot var"
 for dir in $overlay_dirs; do
@@ -28,6 +43,10 @@ for dir in $overlay_dirs; do
     mount -t overlayfs -o rw,upperdir=/run/eos-test/$dir,lowerdir=/$dir \
         eos-test-$dir /$dir
 done
+
+# Remount the SD card and /endless overlay
+$extra_active && systemctl start "$extra_unit"
+$endless_active && systemctl start "$endless_unit"
 
 # Disable the updater for this boot
 systemctl stop eos-updater.timer
