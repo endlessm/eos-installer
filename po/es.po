@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 02:37+0000\n"
+"POT-Creation-Date: 2015-06-16 02:39+0000\n"
 "PO-Revision-Date: 2015-06-12 17:59+0000\n"
 "Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/gnome-initial-setup/language/es/)\n"
@@ -44,11 +44,11 @@ msgstr "_Anterior"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:244
+#: ../gnome-initial-setup/gnome-initial-setup.c:242
 msgid "Force new user mode"
 msgstr "Forzar el modo del nuevo usuario"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:248
+#: ../gnome-initial-setup/gnome-initial-setup.c:246
 msgid "- GNOME initial setup"
 msgstr "- Configuración inicial de GNOME"
 
@@ -342,27 +342,27 @@ msgstr "Chat"
 msgid "Resources"
 msgstr "Recursos"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
 msgstr "Error al crear la cuenta"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
 msgstr "Error al eliminar la cuenta"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
 msgstr "¿Estás seguro de que quieres eliminar esta cuenta?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
 msgstr "Esto no eliminará la cuenta en el servidor."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
 msgstr "_Eliminar"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
 msgstr "Cuentas en línea"
 
@@ -385,7 +385,7 @@ msgid "Preview"
 msgstr "Vista previa"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:298
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
 msgid "More…"
 msgstr "Más…"
 
@@ -428,7 +428,7 @@ msgstr "Detecta el formato de mi teclado..."
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:207
 msgid "No languages found"
 msgstr "No se encontraron idiomas"
 
@@ -548,24 +548,24 @@ msgstr "45"
 msgid ":"
 msgstr ":"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:332
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Otro…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
 msgid "Network is not available."
 msgstr "La red no está disponible."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "No network devices found."
 msgstr "No se encontraron dispositivos de red."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:435
 msgid "Checking for available wireless networks"
 msgstr "Comprobando si hay redes inalámbricas disponibles"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:700
 msgid "Network"
 msgstr "Red"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-09 02:37+0000\n"
+"POT-Creation-Date: 2015-06-16 02:39+0000\n"
 "PO-Revision-Date: 2015-06-02 02:36+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/projects/p/gnome-initial-setup/language/ar/)\n"
@@ -37,11 +37,11 @@ msgstr "ال_سابق"
 msgid "_Cancel"
 msgstr "أ_لغِ"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:244
+#: ../gnome-initial-setup/gnome-initial-setup.c:242
 msgid "Force new user mode"
 msgstr "افرِض وضع المستخدم الجديد"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:248
+#: ../gnome-initial-setup/gnome-initial-setup.c:246
 msgid "- GNOME initial setup"
 msgstr "- إعداد جنوم الأولي"
 
@@ -335,27 +335,27 @@ msgstr "الدردشة"
 msgid "Resources"
 msgstr "الموارد"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
 msgstr "حدث عُطل أثناء إنشاء الحساب"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
 msgstr "حدث عُطل أثناء حذف الحساب"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
 msgstr "أمتأكد أنك تريد حذف الحساب؟"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
 msgstr "هذا لن يحذف الحساب من على الخادوم."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
 msgstr "ا_حذف"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
 msgstr "حسابات الإنترنت"
 
@@ -378,7 +378,7 @@ msgid "Preview"
 msgstr "ﻢﻋﺎﻴﻧﺓ"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:298
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
 msgid "More…"
 msgstr "المزيد…"
 
@@ -421,7 +421,7 @@ msgstr "اكتشاف تصميم لوحة المفاتيح..."
 msgid "Select"
 msgstr "اختر"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:207
 msgid "No languages found"
 msgstr "لا يوجد أي لغات"
 
@@ -541,24 +541,24 @@ msgstr "45"
 msgid ":"
 msgstr ":"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:332
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "أخرى…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
 msgid "Network is not available."
 msgstr "لا تتوفر شبكة."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "No network devices found."
 msgstr "لم يُعثر أجهزة اتصال شبكي."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:435
 msgid "Checking for available wireless networks"
 msgstr "يبحث عن شبكات اللاسلكي المتاحة"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:700
 msgid "Network"
 msgstr "الشبكة"
 
