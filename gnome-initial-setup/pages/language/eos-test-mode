@@ -39,8 +39,9 @@ for dir in $overlay_dirs; do
     # If the directory is a symlink, assume it's pointing to a location
     # covered by another top level overlay
     [ -L /$dir ] && continue
-    mkdir -p /run/eos-test/$dir
-    mount -t overlayfs -o rw,upperdir=/run/eos-test/$dir,lowerdir=/$dir \
+    mkdir -p /run/eos-test/$dir /run/eos-test/$dir-workdir
+    mount -t overlay -o \
+        rw,upperdir=/run/eos-test/$dir,lowerdir=/$dir,workdir=/run/eos-test/$dir-workdir \
         eos-test-$dir /$dir
 done
 
