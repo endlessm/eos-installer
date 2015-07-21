@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 02:49+0000\n"
-"PO-Revision-Date: 2015-06-12 17:59+0000\n"
+"POT-Creation-Date: 2015-07-14 02:36+0000\n"
+"PO-Revision-Date: 2015-07-21 00:35+0000\n"
 "Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/p/gnome-initial-setup/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Configuración inicial"
 
 #: ../gnome-initial-setup/gis-assistant.c:291
 msgid "_Next"
-msgstr "Siguie_nte"
+msgstr "_Siguiente"
 
 #: ../gnome-initial-setup/gis-assistant.c:430
 msgid "_Previous"
@@ -213,7 +213,7 @@ msgstr "No se puede unir automáticamente a este tipo de dominio"
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
 msgid "No such domain or realm found"
-msgstr "No existe el dominio o no se ha encontrado el reino"
+msgstr "No se ha encontrado el dominio o el reino"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
@@ -223,7 +223,7 @@ msgstr "No se puede iniciar sesión como %s en el dominio %s"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr "Contraseña no está válida, inténtelo de nuevo"
+msgstr "Contraseña no es válida, inténtalo de nuevo"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
@@ -233,7 +233,7 @@ msgstr "No se pudo conectar al dominio %s: %s"
 #: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr "Ya existe un nombre de usuario con el nombre «%s»"
+msgstr "Ya existe un usuario con el nombre «%s»"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:154
 #, c-format
@@ -242,7 +242,7 @@ msgstr "El nombre de usuario es demasiado largo"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:157
 msgid "The username cannot start with a '-'"
-msgstr "El nombre de usuario no puede comenzar por «-»"
+msgstr "El nombre de usuario no puede comenzar con «-»"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:160
 msgid ""
@@ -250,7 +250,7 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr "El nombre de usuario debe consistir de:\n ➣ letras del alfabeto inglés\n ➣ dígitos\n ➣ cualquiera de los caracteres «.», «-» y «_»"
+msgstr "El nombre de usuario debe consistir de:\n ➣ letras del alfabeto español\n ➣ dígitos\n ➣ cualquiera de los caracteres «.», «-» y «_»"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
@@ -356,7 +356,7 @@ msgstr "¿Estás seguro de que quieres eliminar esta cuenta?"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
-msgstr "Esto no eliminará la cuenta en el servidor."
+msgstr "Esto no eliminará la cuenta en el servidor."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
@@ -374,7 +374,7 @@ msgstr "Conectate a tus datos en la nube"
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr "Añadiendo las cuentas de tus apps en línea favoritas, podrás acceder fácilmente a tus fotos, contactos, correo y más."
+msgstr "Con añadir tus cuentas en línea, podrás acceder fácilmente a tus fotos, contactos, correo y más."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
@@ -397,7 +397,7 @@ msgstr "No se han encontrado fuentes de entrada"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr "Tu teclado parece ser de formato:"
+msgstr "El formato de tu teclado parece ser:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
@@ -406,7 +406,7 @@ msgstr "Por favor pulsa una de las siguientes teclas:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr "Aparece la siguiente tecla en tu teclado?"
+msgstr "¿Aparece la siguiente tecla en tu teclado?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:256
 msgid "Typing"
@@ -414,7 +414,7 @@ msgstr "Escritura"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr "Seleccione la distribución de su teclado"
+msgstr "Selecciona la distribución de tu teclado"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
