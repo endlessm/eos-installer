@@ -1,10 +1,13 @@
 AC_INIT([gnome-initial-setup],[3.10.1.1])
 AC_CONFIG_MACRO_DIR([m4])
-AC_USE_SYSTEM_EXTENSIONS
+
 AM_INIT_AUTOMAKE([dist-xz no-dist-gzip foreign tar-ustar])
 AM_SILENT_RULES([yes])
-LT_INIT
+
+AC_USE_SYSTEM_EXTENSIONS
 AC_PROG_CC
+
+LT_INIT
 
 IT_PROG_INTLTOOL([0.40])
 
