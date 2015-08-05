@@ -50,6 +50,8 @@ typedef struct
 
         TzDB *tzdb;
         WeatherTzDB *weather_tzdb;
+
+        gulong on_location_updated_id;
 } CcTimezoneMonitorPrivate;
 
 #define GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE((object), CC_TYPE_TIMEZONE_MONITOR, CcTimezoneMonitorPrivate))
@@ -314,8 +316,8 @@ on_client_proxy_ready (GObject      *source_object,
         //geoclue_client_set_requested_accuracy_level (priv->geoclue_client,
         //                                             GCLUE_ACCURACY_LEVEL_CITY);
 
-        g_signal_connect (priv->geoclue_client, "location-updated",
-                          G_CALLBACK (on_location_updated), self);
+        priv->on_location_updated_id = g_signal_connect (priv->geoclue_client, "location-updated",
+                                                         G_CALLBACK (on_location_updated), self);
 
         geoclue_client_call_start (priv->geoclue_client,
                                    priv->cancellable,
@@ -416,6 +418,11 @@ cc_timezone_monitor_finalize (GObject *obj)
                 g_clear_object (&priv->cancellable);
         }
 
+        if (priv->on_location_updated_id) {
+                g_signal_handler_disconnect (priv->geoclue_client, priv->on_location_updated_id);
+                priv->on_location_updated_id = 0;
+        }
+
         g_clear_object (&priv->geoclue_client);
         g_clear_object (&priv->geoclue_manager);
         g_clear_pointer (&priv->tzdb, tz_db_free);
@@ -453,6 +460,8 @@ cc_timezone_monitor_init (CcTimezoneMonitor *self)
 
         priv->tzdb = tz_load_db ();
         priv->weather_tzdb = weather_tz_db_new ();
+
+        priv->on_location_updated_id = 0;
 
         register_geoclue (self);
 }
