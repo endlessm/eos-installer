@@ -352,10 +352,8 @@ refresh_again (gpointer user_data)
   GisNetworkPage *page = GIS_NETWORK_PAGE (user_data);
   GisNetworkPagePrivate *priv = gis_network_page_get_instance_private (page);
 
-  priv->refresh_timeout_id = 0;
-
   refresh_wireless_list (page);
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static void
@@ -396,6 +394,12 @@ refresh_wireless_list (GisNetworkPage *page)
   GtkWidget *list;
 
   priv->refreshing = TRUE;
+
+  if (priv->refresh_timeout_id != 0)
+    {
+      g_source_remove (priv->refresh_timeout_id);
+      priv->refresh_timeout_id = 0;
+    }
 
   if (NM_IS_DEVICE_WIFI (priv->nm_device)) {
     state = nm_device_get_state (priv->nm_device);
