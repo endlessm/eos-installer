@@ -35,9 +35,7 @@
 
 #define PERSONALITY_FILE_PATH "/etc/EndlessOS/personality.conf"
 #define PERSONALITY_CONFIG_GROUP "Personality"
-#define SETUP_CONFIG_GROUP "Setup"
 #define PERSONALITY_KEY "PersonalityName"
-#define TIMEZONE_KEY "DefaultTimezone"
 
 /* Statically include this for now. Maybe later
  * we'll generate this from glib-mkenums. */
@@ -81,7 +79,6 @@ struct _GisDriverPrivate {
 
   gchar *personality;
   gchar *lang_id;
-  gchar *default_timezone;
 
   GisDriverMode mode;
 };
@@ -97,7 +94,6 @@ gis_driver_finalize (GObject *object)
 
   g_free (priv->personality);
   g_free (priv->lang_id);
-  g_free (priv->default_timezone);
 
   G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
 }
@@ -200,13 +196,6 @@ gis_driver_get_personality (GisDriver *driver)
   return priv->personality;
 }
 
-const gchar *
-gis_driver_get_default_timezone (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  return priv->default_timezone;
-}
-
 static void
 gis_driver_get_property (GObject      *object,
                          guint         prop_id,
@@ -262,20 +251,12 @@ gis_driver_read_personality_file (GisDriver *driver)
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   GKeyFile *keyfile = g_key_file_new ();
   gchar *personality = NULL;
-  gchar *timezone = NULL;
 
   if (g_key_file_load_from_file (keyfile, PERSONALITY_FILE_PATH,
-                                 G_KEY_FILE_NONE, NULL)) {
+                                 G_KEY_FILE_NONE, NULL))
     personality = g_key_file_get_string (keyfile, PERSONALITY_CONFIG_GROUP,
                                          PERSONALITY_KEY, NULL);
-    timezone = g_key_file_get_string (keyfile, SETUP_CONFIG_GROUP,
-                                      TIMEZONE_KEY, NULL);
-  }
-
   priv->personality = personality;
-
-  g_free (priv->default_timezone);
-  priv->default_timezone = timezone;
 
   g_key_file_free (keyfile);
 }
