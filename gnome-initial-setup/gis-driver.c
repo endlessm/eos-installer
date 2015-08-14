@@ -37,7 +37,6 @@
 #define PERSONALITY_CONFIG_GROUP "Personality"
 #define SETUP_CONFIG_GROUP "Setup"
 #define PERSONALITY_KEY "PersonalityName"
-#define LANGUAGE_KEY "DefaultLanguage"
 #define TIMEZONE_KEY "DefaultTimezone"
 
 /* Statically include this for now. Maybe later
@@ -82,7 +81,6 @@ struct _GisDriverPrivate {
 
   gchar *personality;
   gchar *lang_id;
-  gchar *lang_override;
   gchar *default_timezone;
 
   GisDriverMode mode;
@@ -99,7 +97,6 @@ gis_driver_finalize (GObject *object)
 
   g_free (priv->personality);
   g_free (priv->lang_id);
-  g_free (priv->lang_override);
   g_free (priv->default_timezone);
 
   G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
@@ -197,13 +194,6 @@ gis_driver_get_mode (GisDriver *driver)
 }
 
 const gchar *
-gis_driver_get_language_override (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  return priv->lang_override;  
-}
-
-const gchar *
 gis_driver_get_personality (GisDriver *driver)
 {
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
@@ -272,27 +262,17 @@ gis_driver_read_personality_file (GisDriver *driver)
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   GKeyFile *keyfile = g_key_file_new ();
   gchar *personality = NULL;
-  gchar *language = NULL;
   gchar *timezone = NULL;
 
   if (g_key_file_load_from_file (keyfile, PERSONALITY_FILE_PATH,
                                  G_KEY_FILE_NONE, NULL)) {
     personality = g_key_file_get_string (keyfile, PERSONALITY_CONFIG_GROUP,
                                          PERSONALITY_KEY, NULL);
-    language = g_key_file_get_string (keyfile, SETUP_CONFIG_GROUP,
-                                      LANGUAGE_KEY, NULL);
     timezone = g_key_file_get_string (keyfile, SETUP_CONFIG_GROUP,
                                       TIMEZONE_KEY, NULL);
   }
 
   priv->personality = personality;
-
-  g_free (priv->lang_override);
-  priv->lang_override = language;
-  if (language) {
-    setlocale (LC_MESSAGES, language);
-    setlocale (LC_TIME, language);
-  }
 
   g_free (priv->default_timezone);
   priv->default_timezone = timezone;
