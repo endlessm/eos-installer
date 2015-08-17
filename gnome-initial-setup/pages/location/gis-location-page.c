@@ -673,16 +673,9 @@ gis_location_page_constructed (GObject *object)
   timezone = timedate1_get_timezone (priv->dtm);
 
   if (!cc_timezone_map_set_timezone (priv->map, timezone)) {
-    GisDriver *driver = GIS_PAGE (page)->driver;
-    const gchar *default_timezone = gis_driver_get_default_timezone (driver);
-
-    if (default_timezone == NULL || default_timezone[0] == '\0') {
-      default_timezone = DEFAULT_TZ;
-    }
-
     g_warning ("Timezone '%s' is unhandled, setting %s as default",
-               timezone, default_timezone);
-    cc_timezone_map_set_timezone (priv->map, default_timezone);
+               timezone, DEFAULT_TZ);
+    cc_timezone_map_set_timezone (priv->map, DEFAULT_TZ);
 
     priv->current_location = cc_timezone_map_get_location (priv->map);
     queue_set_timezone (page);
