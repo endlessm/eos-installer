@@ -33,6 +33,9 @@
 #define SERIAL_VERSION_FILE "/sys/devices/virtual/dmi/id/product_uuid"
 #define SD_CARD_MOUNT       LOCALSTATEDIR "/endless-extra"
 
+#define GNOME_SYSTEM_LOCALE_DIR "org.gnome.system.locale"
+#define REGION_KEY "region"
+
 #include "config.h"
 #include "language-resources.h"
 #include "cc-language-chooser.h"
@@ -604,6 +607,7 @@ gis_language_page_constructed (GObject *object)
   GisLanguagePage *page = GIS_LANGUAGE_PAGE (object);
   GisLanguagePagePrivate *priv = gis_language_page_get_instance_private (page);
   GisDriver *driver = GIS_PAGE (page)->driver;
+  GSettings *region_settings;
   GClosure *closure;
 
   g_type_ensure (CC_TYPE_LANGUAGE_CHOOSER);
@@ -629,6 +633,11 @@ gis_language_page_constructed (GObject *object)
 
   /* Propagate initial language setting to localed/AccountsService */
   set_language (page);
+
+  /* Ensure we won't override the selected language for format strings */
+  region_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
+  g_settings_reset (region_settings, REGION_KEY);
+  g_object_unref (region_settings);
 
   /* Use ctrl+f to show factory dialog */
   priv->accel_group = gtk_accel_group_new ();
