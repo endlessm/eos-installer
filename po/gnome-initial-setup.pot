@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 03:24+0000\n"
+"POT-Creation-Date: 2015-09-22 20:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -371,11 +371,11 @@ msgstr ""
 msgid "_Add Account"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:241
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:298
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
 msgid "More…"
 msgstr ""
@@ -383,7 +383,7 @@ msgstr ""
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
 #.
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:319
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
 msgstr ""
 
@@ -400,7 +400,7 @@ msgstr ""
 msgid "Is the following key present on your keyboard?"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:256
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
 msgstr ""
 
@@ -424,25 +424,25 @@ msgstr ""
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:571
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:575
 msgid "Disabled"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:573
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:577
 #, c-format
 msgid "SD Card: %s"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:654
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:658
 msgid "Welcome"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:658
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:662
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:660
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:664
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr ""
@@ -459,7 +459,7 @@ msgstr ""
 msgid "Search for a location"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:797
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr ""
@@ -540,24 +540,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:332
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:435
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:700
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
 msgstr ""
 
