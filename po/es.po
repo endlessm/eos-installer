@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-21 03:24+0000\n"
+"POT-Creation-Date: 2015-09-22 20:31+0000\n"
 "PO-Revision-Date: 2015-07-21 00:35+0000\n"
 "Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/es/)\n"
@@ -380,18 +380,18 @@ msgstr "Con añadir tus cuentas en línea, podrás acceder fácilmente a tus fot
 msgid "_Add Account"
 msgstr "_Añadir cuenta"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:241
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
 msgstr "Vista previa"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:298
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
 msgid "More…"
 msgstr "Más…"
 
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:319
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
 msgstr "No se han encontrado fuentes de entrada"
 
@@ -408,7 +408,7 @@ msgstr "Por favor pulsa una de las siguientes teclas:"
 msgid "Is the following key present on your keyboard?"
 msgstr "¿Aparece la siguiente tecla en tu teclado?"
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:256
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
 msgstr "Escritura"
 
@@ -432,25 +432,25 @@ msgstr "Seleccionar"
 msgid "No languages found"
 msgstr "No se encontraron idiomas"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:571
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:575
 msgid "Disabled"
 msgstr "Inhabilitado"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:573
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:577
 #, c-format
 msgid "SD Card: %s"
 msgstr "Tarjeta SD: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:654
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:658
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:658
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:662
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "¡Bienvenido a Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:660
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:664
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr "Ahora, vamos a configurar tu computadora... "
@@ -467,7 +467,7 @@ msgstr "Apagar"
 msgid "Search for a location"
 msgstr "Buscar una ubicación"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:797
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "Ubicación"
@@ -548,24 +548,24 @@ msgstr "45"
 msgid ":"
 msgstr ":"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:332
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Otro…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
 msgstr "La red no está disponible."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
 msgstr "No se encontraron dispositivos de red."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:435
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
 msgstr "Comprobando si hay redes inalámbricas disponibles"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:700
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
 msgstr "Red"
 
