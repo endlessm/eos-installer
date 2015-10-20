@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-10-06 03:36+0000\n"
-"PO-Revision-Date: 2015-06-02 02:36+0000\n"
+"POT-Creation-Date: 2015-10-13 02:55+0000\n"
+"PO-Revision-Date: 2015-10-13 20:48+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -427,12 +427,12 @@ msgstr "لا يوجد أي لغات"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:575
 msgid "Disabled"
-msgstr ""
+msgstr "مُعَطَلْ"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:577
 #, c-format
 msgid "SD Card: %s"
-msgstr ""
+msgstr "بطاقة SD: %s"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:658
 msgid "Welcome"
@@ -450,7 +450,7 @@ msgstr "فلنقم بإعداد جهازك الكمبيوتر..."
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
-msgstr ""
+msgstr "وضع الاختبار"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Power Off"
