@@ -37,15 +37,18 @@
 
   <template class="GisAssistant" parent="GtkBox">
     <property name="orientation">vertical</property>
+    <property name="spacing">20</property>
     <child>
       <object class="GtkBox" id="main_layout">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">20</property>
+        <property name="margin_top">20</property>
         <child>
           <object class="GtkStack" id="stack">
             <property name="visible">True</property>
             <property name="transition-type">slide-left-right</property>
+            <property name="hhomogeneous">False</property>
           </object>
         </child>
       </object>
@@ -55,6 +58,7 @@
         <property name="visible">True</property>
         <property name="orientation">horizontal</property>
         <property name="halign">center</property>
+        <property name="margin_bottom">20</property>
       </object>
     </child>
   </template>
