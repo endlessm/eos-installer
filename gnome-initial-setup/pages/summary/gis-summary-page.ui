@@ -28,6 +28,7 @@
         <property name="halign">center</property>
         <property name="valign">start</property>
         <property name="margin_top">16</property>
+        <property name="wrap">True</property>
         <property name="label" translatable="yes">You may change these options at any time in Settings.</property>
       </object>
       <packing>

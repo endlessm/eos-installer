@@ -171,8 +171,9 @@
     <property name="name">language-page</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="margin_left">80</property>
-    <property name="margin_right">80</property>
+    <property name="margin_left">60</property>
+    <property name="margin_right">60</property>
+    <property name="halign">center</property>
     <property name="orientation">vertical</property>
     <child>
       <object class="GtkLabel" id="welcome-text">
