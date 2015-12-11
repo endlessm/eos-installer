@@ -80,6 +80,8 @@ const gchar *gis_driver_get_personality (GisDriver *driver);
 
 GisDriverMode gis_driver_get_mode (GisDriver *driver);
 
+gboolean gis_driver_is_small_screen (void);
+
 void gis_driver_add_page (GisDriver *driver,
                           GisPage   *page);
 
