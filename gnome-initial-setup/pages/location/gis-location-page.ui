@@ -52,6 +52,7 @@
     <property name="halign">center</property>
     <property name="valign">start</property>
     <property name="hexpand">True</property>
+    <property name="margin">24</property>
     <child>
       <object class="GtkLabel" id="location-title">
         <property name="visible">True</property>
