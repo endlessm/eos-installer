@@ -87,6 +87,12 @@ typedef struct _GisDriverPrivate GisDriverPrivate;
 G_DEFINE_TYPE_WITH_PRIVATE(GisDriver, gis_driver, GTK_TYPE_APPLICATION)
 
 static void
+assistant_page_changed (GtkScrolledWindow *sw)
+{
+  gtk_adjustment_set_value (gtk_scrolled_window_get_vadjustment (sw), 0);
+}
+
+static void
 gis_driver_finalize (GObject *object)
 {
   GisDriver *driver = GIS_DRIVER (object);
@@ -116,6 +122,11 @@ prepare_main_window (GisDriver *driver)
       gtk_container_add (GTK_CONTAINER (sw), child);
       g_object_unref (child);
 
+      g_signal_connect_swapped (priv->assistant,
+                                "page-changed",
+                                G_CALLBACK (assistant_page_changed),
+                                sw);
+
       gtk_window_maximize (priv->main_window);
     }
   else
@@ -129,7 +140,7 @@ prepare_main_window (GisDriver *driver)
       gtk_window_set_geometry_hints (priv->main_window,
                                      NULL,
                                      &size_hints,
-                                     GDK_HINT_MIN_SIZE | GDK_HINT_WIN_GRAVITY);
+                                     GDK_HINT_MIN_SIZE | GDK_HINT_MAX_SIZE | GDK_HINT_WIN_GRAVITY);
       gtk_window_set_resizable (priv->main_window, FALSE);
     }
 
