@@ -5,14 +5,17 @@
 # Translators:
 # Aron Xu <aronxu@gnome.org>, 2012
 # Cheng Lu <chenglu1990@gmail.com>, 2012
+# chenzibing <chenzibing_endless@126.com>, 2016
+# liuxuejiao <liuxuejiao_endless@126.com>, 2016
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
+# zhoushumin <zhoushumin_endless@126.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-05 03:45+0000\n"
-"PO-Revision-Date: 2015-12-01 06:26+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2016-01-06 21:33+0000\n"
+"PO-Revision-Date: 2016-01-12 01:11+0000\n"
+"Last-Translator: liuxuejiao <liuxuejiao_endless@126.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,11 +26,11 @@ msgstr ""
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
-msgstr "初始配置"
+msgstr "初始设置"
 
 #: ../gnome-initial-setup/gis-assistant.c:291
 msgid "_Next"
-msgstr "前进(_N)"
+msgstr "下一步"
 
 #: ../gnome-initial-setup/gis-assistant.c:430
 msgid "_Previous"
@@ -44,7 +47,7 @@ msgstr "强制新建用户模式"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:246
 msgid "- GNOME initial setup"
-msgstr "- GNOME 初始配置"
+msgstr "GNOME初始设置"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
@@ -77,13 +80,13 @@ msgstr "登录"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr ""
+msgstr "建立个人账户"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "请输入您的全名与密码并记住它们。注意字母的大小写。"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -97,7 +100,7 @@ msgstr "用户名(_U)"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
+msgstr "该用户名将用于命名您的个人文件夹且无法更改。"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
@@ -109,22 +112,22 @@ msgstr "确认密码(_C)"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
-msgstr ""
+msgstr "显示密码"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "请确保已记录下您的密码以防忘记。您可以在此设定密码提示问题，但注意该密码提示问题对他人可见。"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "密码提示问题"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr ""
+msgstr "请确保填写完所有空格以继续。"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -248,56 +251,56 @@ msgstr "用户名只能包含：\n ➣ 英文字母\n ➣ 数字\n ➣ “.”�
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
-msgstr ""
+msgstr "显示"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr ""
+msgstr "电视屏幕调整"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr ""
+msgstr "您看到屏幕右下角的光标了吗？"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "I see it"
-msgstr ""
+msgstr "我看到了"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr ""
+msgstr "我没看到。缩小屏幕以匹配电视。"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
 msgid "Terms of Use"
-msgstr ""
+msgstr "使用条款"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
 msgid "Third Party Software"
-msgstr ""
+msgstr "第三方软件"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
-msgstr ""
+msgstr "接受并继续"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Please read the following terms of use carefully"
-msgstr ""
+msgstr "请仔细阅读以下使用条款"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr ""
+msgstr "点击“接受并继续”，您即承认您已阅读、理解并同意接受以下条款与条件的约束。"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
-msgstr ""
+msgstr "帮助Endless更好地服务每一位用户。"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless."
 " All data is anonymous."
-msgstr ""
+msgstr "自动保存并将用户数据与问题报告发送给Endless。所有数据为匿名。"
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -346,19 +349,19 @@ msgstr "移除帐号时出错"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
-msgstr "您确定要移除这个帐号吗？"
+msgstr " 您确定要删除这个账户吗？"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
-msgstr "这不会将该帐号从服务器上移除。"
+msgstr "这不会将该帐户从服务器上删除。"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
-msgstr "移除(_R)"
+msgstr "删除"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
-msgstr "在线帐号"
+msgstr "在线帐户"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
@@ -368,15 +371,15 @@ msgstr "连接到您已有的云数据"
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr "添加帐号将允许您无缝连接到在线照片、联系人、邮件等更多服务。"
+msgstr "添加帐号后，您可以连接到在线照片、联系人、邮件等。"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
-msgstr "添加帐号(_A)"
+msgstr "添加帐户"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
@@ -387,53 +390,53 @@ msgstr "更多..."
 #. * did not yield any results
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
-msgstr ""
+msgstr "未检测到输入"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr ""
+msgstr "您的键盘布局似乎："
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
-msgstr ""
+msgstr "请按下列按键之一:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr ""
+msgstr "您的键盘是否包含以下按键?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
-msgstr ""
+msgstr "正在输入"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr ""
+msgstr "选择您的键盘布局"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr ""
+msgstr "帮助检测您的键盘布局"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr ""
+msgstr "检测键盘布局"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
-msgstr ""
+msgstr "选定"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:207
 msgid "No languages found"
-msgstr "未找到其他语言"
+msgstr "未检测到其他语言"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:575
 msgid "Disabled"
-msgstr ""
+msgstr "已禁用"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:577
 #, c-format
 msgid "SD Card: %s"
-msgstr ""
+msgstr "SD卡: %s"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:658
 msgid "Welcome"
@@ -442,20 +445,20 @@ msgstr "欢迎"
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:662
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
-msgstr ""
+msgstr "欢迎进入Endless!"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:664
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
-msgstr ""
+msgstr "请设置您的电脑…"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
-msgstr ""
+msgstr "测试模式"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Power Off"
-msgstr ""
+msgstr "关机"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
