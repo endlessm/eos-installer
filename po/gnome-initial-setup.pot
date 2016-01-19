@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-12 03:52+0000\n"
+"POT-Creation-Date: 2016-01-19 03:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "Initial Setup"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:291
+#: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:430
+#: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:431
+#: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr ""
