@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-12 03:52+0000\n"
+"POT-Creation-Date: 2016-01-19 03:52+0000\n"
 "PO-Revision-Date: 2015-07-21 00:35+0000\n"
 "Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/es/)\n"
@@ -31,15 +31,15 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "Configuración inicial"
 
-#: ../gnome-initial-setup/gis-assistant.c:291
+#: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
 msgstr "_Siguiente"
 
-#: ../gnome-initial-setup/gis-assistant.c:430
+#: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
 msgstr "_Anterior"
 
-#: ../gnome-initial-setup/gis-assistant.c:431
+#: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_Cancelar"
