@@ -52,13 +52,6 @@ enum {
 
 static GParamSpec *obj_props[PROP_LAST];
 
-enum {
-        LANGUAGE_ACTIVATED,
-        LAST_SIGNAL
-};
-
-static guint signals[LAST_SIGNAL] = { 0 };
-
 struct _CcLanguageChooserPrivate
 {
         GtkWidget *no_results;
@@ -401,7 +394,6 @@ row_activated (GtkListBox        *box,
                 if (widget == NULL)
                         return;
                 set_locale_id (chooser, widget->locale_id);
-                g_signal_emit (chooser, signals[LANGUAGE_ACTIVATED], 0, widget->locale_id);
         }
 }
 
@@ -537,15 +529,6 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
         obj_props[PROP_SHOWING_EXTRA] =
                 g_param_spec_string ("showing-extra", "", "", "",
                                      G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
-
-        signals[LANGUAGE_ACTIVATED] =
-                g_signal_new ("language-activated",
-                              CC_TYPE_LANGUAGE_CHOOSER,
-                              G_SIGNAL_RUN_LAST,
-                              0, NULL, NULL,
-                              NULL,
-                              G_TYPE_NONE, 1,
-                              G_TYPE_STRING);
 
         g_object_class_install_properties (object_class, PROP_LAST, obj_props);
 }
