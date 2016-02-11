@@ -170,15 +170,6 @@ set_language (GisLanguagePage *page)
 }
 
 static void
-language_activated (CcLanguageChooser *chooser,
-                    gchar             *language,
-                    GisLanguagePage   *page)
-{
-  set_language (page);
-  gis_driver_locale_changed (GIS_PAGE (page)->driver);
-}
-
-static void
 language_changed (CcLanguageChooser *chooser,
                   GParamSpec        *pspec,
                   GisLanguagePage   *page)
@@ -625,8 +616,6 @@ gis_language_page_constructed (GObject *object)
   /* Now connect to language chooser changes */
   g_signal_connect (priv->language_chooser, "notify::language",
                     G_CALLBACK (language_changed), page);
-  g_signal_connect (priv->language_chooser, "language-activated",
-                    G_CALLBACK (language_activated), page);
 
   /* If we're in new user mode then we're manipulating system settings */
   if (gis_driver_get_mode (driver) == GIS_DRIVER_MODE_NEW_USER)
