@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-09 03:52+0000\n"
+"POT-Creation-Date: 2016-02-16 03:46+0000\n"
 "PO-Revision-Date: 2015-10-13 18:21+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: French (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/fr/)\n"
@@ -380,7 +380,7 @@ msgid "Preview"
 msgstr "Aperçu"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:183
 msgid "More…"
 msgstr "Plus…"
 
@@ -423,29 +423,29 @@ msgstr "Détection de la disposition du clavier..."
 msgid "Select"
 msgstr "Sélectionner"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:207
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:200
 msgid "No languages found"
 msgstr "Aucune langue trouvée"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:575
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:567
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:577
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:569
 #, c-format
 msgid "SD Card: %s"
 msgstr "Carte SD : %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:658
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:648
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:662
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:652
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "Bienvenue sur Endless !"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:664
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:654
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr "Configurons votre ordinateur..."

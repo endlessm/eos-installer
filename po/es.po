@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-09 03:52+0000\n"
+"POT-Creation-Date: 2016-02-16 03:46+0000\n"
 "PO-Revision-Date: 2015-07-21 00:35+0000\n"
 "Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/es/)\n"
@@ -385,7 +385,7 @@ msgid "Preview"
 msgstr "Vista previa"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:183
 msgid "More…"
 msgstr "Más…"
 
@@ -428,29 +428,29 @@ msgstr "Detecta el formato de mi teclado..."
 msgid "Select"
 msgstr "Seleccionar"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:207
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:200
 msgid "No languages found"
 msgstr "No se encontraron idiomas"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:575
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:567
 msgid "Disabled"
 msgstr "Inhabilitado"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:577
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:569
 #, c-format
 msgid "SD Card: %s"
 msgstr "Tarjeta SD: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:658
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:648
 msgid "Welcome"
 msgstr "Bienvenido"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:662
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:652
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "¡Bienvenido a Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:664
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:654
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr "Ahora, vamos a configurar tu computadora... "

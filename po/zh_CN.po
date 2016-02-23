@@ -9,14 +9,15 @@
 # liuxuejiao <liuxuejiao_endless@126.com>, 2016
 # tanyuanxing <tanyuanxingendless@126.com>, 2016
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
+# zhifeng peng <jnufeng@126.com>, 2016
 # zhoushumin <zhoushumin_endless@126.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-09 03:52+0000\n"
-"PO-Revision-Date: 2016-01-14 15:08+0000\n"
-"Last-Translator: tanyuanxing <tanyuanxingendless@126.com>\n"
+"POT-Creation-Date: 2016-02-16 03:46+0000\n"
+"PO-Revision-Date: 2016-02-22 03:55+0000\n"
+"Last-Translator: zhifeng peng <jnufeng@126.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -87,7 +88,7 @@ msgstr "建立个人账户"
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr "请输入您的全名与密码并记住它们。注意字母的大小写。"
+msgstr "请输入您的全名和密码并记住它们。请注意字母的大小写。"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -338,7 +339,7 @@ msgstr "聊天"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
-msgstr "源"
+msgstr "资源"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
@@ -383,9 +384,9 @@ msgid "Preview"
 msgstr "预览"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:190
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:183
 msgid "More…"
-msgstr "更多..."
+msgstr "更多……"
 
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
@@ -420,38 +421,38 @@ msgstr "帮助检测您的键盘布局"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr "检测键盘布局"
+msgstr "检测键盘布局……"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
-msgstr "选定"
+msgstr "选择"
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:207
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:200
 msgid "No languages found"
 msgstr "未检测到其他语言"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:575
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:567
 msgid "Disabled"
 msgstr "已禁用"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:577
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:569
 #, c-format
 msgid "SD Card: %s"
 msgstr "SD卡: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:658
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:648
 msgid "Welcome"
 msgstr "欢迎"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:662
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:652
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "欢迎进入Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:664
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:654
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
-msgstr "请设置您的电脑…"
+msgstr "请设置您的电脑……"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
@@ -549,7 +550,7 @@ msgstr ":"
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr "其他..."
+msgstr "其他……"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
@@ -584,11 +585,11 @@ msgid ""
 "TIP: You can use your computer without internet if you do not have a "
 "connection now. If you get an internet connection in the future, you can set"
 " it up in \"Network Settings.\""
-msgstr "提示：如果您的电脑尚未连接网络，则可在无网络环境下使用。如果今后会连接网络，您可以设置成“网络设置”模式"
+msgstr "提示：如果您的电脑尚未连接网络，则可在无网络环境下使用。如果今后会连接网络，您可以设置成“网络设置”模式。"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr "无线网络不可用"
+msgstr "没有可用的无线网络"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
