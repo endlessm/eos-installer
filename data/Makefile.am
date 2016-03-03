@@ -56,9 +56,9 @@ CLEANFILES =						\
 	$(NULL)
 
 autostartdir = $(sysconfdir)/xdg/autostart
-# Endless does not install gnome-initial-setup-first-login.desktop
 autostart_DATA =					\
 	gnome-initial-setup-copy-worker.desktop		\
+	gnome-initial-setup-first-login.desktop		\
 	$(NULL)
 
 tmpfilesdir = $(libdir)/tmpfiles.d
