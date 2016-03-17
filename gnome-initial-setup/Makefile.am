@@ -22,6 +22,13 @@ gis-assistant-resources.h: gis-assistant.gresource.xml $(resource_files)
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir) --generate-header $<
 BUILT_SOURCES += gis-assistant-resources.c gis-assistant-resources.h
 
+fbe-remote-generated.c: fbe-remote-generated.h
+fbe-remote-generated.h: $(srcdir)/com.endlessm.Tutorial.FBERemote.xml
+	$(AM_V_GEN) gdbus-codegen		\
+	--interface-prefix=com.endlessm.Tutorial \
+	--generate-c-code=fbe-remote-generated $<
+BUILT_SOURCES += fbe-remote-generated.c fbe-remote-generated.h
+
 gnome_initial_setup_SOURCES = \
 	$(BUILT_SOURCES) \
 	gnome-initial-setup.c gnome-initial-setup.h \
@@ -54,4 +61,7 @@ gnome_initial_setup_copy_worker_CFLAGS = \
 gnome_initial_setup_copy_worker_LDADD = \
 	$(COPY_WORKER_LIBS)
 
-EXTRA_DIST = gis-assistant.gresource.xml $(resource_files)
+EXTRA_DIST = \
+	com.endlessm.Tutorial.FBERemote.xml \
+	gis-assistant.gresource.xml \
+	$(resource_files)

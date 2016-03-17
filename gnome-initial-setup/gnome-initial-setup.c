@@ -39,6 +39,8 @@
 #include <cheese-gtk.h>
 #endif
 
+#include "fbe-remote-generated.h"
+#include "pages/language/cc-common-language.h"
 #include "pages/language/gis-language-page.h"
 #include "pages/keyboard/gis-keyboard-page.h"
 #include "pages/display/gis-display-page.h"
@@ -230,6 +232,57 @@ get_mode (void)
     return GIS_DRIVER_MODE_EXISTING_USER;
 }
 
+static gboolean
+launch_tutorial_cb (GMainLoop *main_loop)
+{
+  FBERemote *fbe_remote;
+  char *language;
+  GError *error = NULL;
+
+  fbe_remote = fberemote_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 "com.endlessm.Tutorial",
+                                                 "/com/endlessm/Tutorial/FBERemote",
+                                                 NULL, &error);
+
+  if (error != NULL) {
+    g_critical ("Could not get DBus proxy for tutorial FBE remote: %s", error->message);
+    g_error_free (error);
+    goto out;
+  }
+
+  language = cc_common_language_get_current_language ();
+
+  /* No timeout because the method call does not complete until the user
+     has finished the tutorial. */
+  g_dbus_proxy_set_default_timeout (G_DBUS_PROXY (fbe_remote), G_MAXINT);
+  fberemote_call_play_tutorial_sync (fbe_remote, FALSE, language, NULL, &error);
+
+  if (error != NULL) {
+    g_critical ("Can't play tutorial from FBE remote: %s", error->message);
+    g_error_free (error);
+  }
+
+  g_object_unref (fbe_remote);
+  g_free (language);
+
+out:
+  g_main_loop_quit (main_loop);
+  return G_SOURCE_REMOVE;
+}
+
+static void
+launch_tutorial (void)
+{
+  GMainLoop *main_loop;
+
+  /* GDBus requires a spinning main loop. */
+  main_loop = g_main_loop_new (NULL, FALSE);
+  g_idle_add ((GSourceFunc) launch_tutorial_cb, main_loop);
+  g_main_loop_run (main_loop);
+  g_main_loop_unref (main_loop);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -257,6 +310,14 @@ main (int argc, char *argv[])
   if (is_running_as_user ("shared")) {
       gis_add_setup_done_file ();
       return EXIT_SUCCESS;
+  }
+
+  /* Upstream has "existing user" mode for new user accounts. In Endless, we
+     skip straight to the welcome tutorial instead. */
+  if (get_mode () == GIS_DRIVER_MODE_EXISTING_USER) {
+    launch_tutorial ();
+    gis_add_setup_done_file ();
+    return EXIT_SUCCESS;
   }
 
 #ifdef HAVE_CHEESE
