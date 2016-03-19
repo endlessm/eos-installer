@@ -232,7 +232,7 @@ play_tutorial_ready_callback (GObject *fbe_remote,
   fberemote_call_play_tutorial_finish (FBEREMOTE (fbe_remote), res, &error);
   if (error != NULL)
     {
-      g_critical ("Can't play tutorial from FBE remote: %s\n", error->message);
+      g_critical ("Can't play tutorial from FBE remote: %s", error->message);
       g_error_free (error);
     }
 
@@ -265,7 +265,7 @@ launch_tutorial (GisSummaryPage *summary)
 
   if (error != NULL)
     {
-      g_critical ("Could not get DBus proxy for tutorial FBE remote: %s\n", error->message);
+      g_critical ("Could not get DBus proxy for tutorial FBE remote: %s", error->message);
       g_error_free (error);
 
       if (is_new_user)
