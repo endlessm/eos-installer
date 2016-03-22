@@ -315,6 +315,7 @@ main (int argc, char *argv[])
   /* Upstream has "existing user" mode for new user accounts. In Endless, we
      skip straight to the welcome tutorial instead. */
   if (get_mode () == GIS_DRIVER_MODE_EXISTING_USER) {
+    setlocale (LC_ALL, "");
     launch_tutorial ();
     gis_add_setup_done_file ();
     return EXIT_SUCCESS;
