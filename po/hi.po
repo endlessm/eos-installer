@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-08 04:13+0000\n"
+"POT-Creation-Date: 2016-03-22 02:49+0000\n"
 "PO-Revision-Date: 2015-12-01 06:26+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/hi/)\n"
@@ -37,11 +37,11 @@ msgstr ""
 msgid "_Cancel"
 msgstr "रद्द करें (_C)"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:242
+#: ../gnome-initial-setup/gnome-initial-setup.c:295
 msgid "Force new user mode"
 msgstr "नया उपयोगकर्ता मोड बलपूर्वक डालें"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:246
+#: ../gnome-initial-setup/gnome-initial-setup.c:299
 msgid "- GNOME initial setup"
 msgstr "- गनोम प्रारंभिक सेटअप"
 

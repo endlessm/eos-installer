@@ -8,7 +8,7 @@
 # Daniel Mustieles <daniel.mustieles@gmail.com>, 2012-2014
 # Eddy Alegria <eddy@endlessm.com>, 2014
 # Fernando Farfan <fernando@endlessm.com>, 2014
-# Joel Gil <joel@endlessm.com>, 2014
+# Joel Gil León <joel@endlessm.com>, 2014
 # Nuritzi Sanchez <ns@endlessm.com>, 2014
 # Philip Chimento <philip.chimento@gmail.com>, 2014
 # Roddy Shuler <roddy@endlessm.com>, 2014-2015
@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-08 04:13+0000\n"
+"POT-Creation-Date: 2016-03-22 02:49+0000\n"
 "PO-Revision-Date: 2015-07-21 00:35+0000\n"
 "Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/es/)\n"
@@ -44,11 +44,11 @@ msgstr "_Anterior"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:242
+#: ../gnome-initial-setup/gnome-initial-setup.c:295
 msgid "Force new user mode"
 msgstr "Forzar el modo del nuevo usuario"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:246
+#: ../gnome-initial-setup/gnome-initial-setup.c:299
 msgid "- GNOME initial setup"
 msgstr "- Configuración inicial de GNOME"
 
