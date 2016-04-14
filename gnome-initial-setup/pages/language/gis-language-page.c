@@ -31,6 +31,7 @@
 
 #define OSRELEASE_FILE      "/etc/os-release"
 #define SERIAL_VERSION_FILE "/sys/devices/virtual/dmi/id/product_uuid"
+#define DT_COMPATIBLE_FILE  "/proc/device-tree/compatible"
 #define SD_CARD_MOUNT       LOCALSTATEDIR "/endless-extra"
 
 #define GNOME_SYSTEM_LOCALE_DIR "org.gnome.system.locale"
@@ -416,6 +417,22 @@ get_software_version (void)
   }
 }
 
+static gchar *
+get_product_id (void)
+{
+  GError *error = NULL;
+  gchar *compatible = NULL;
+
+  g_file_get_contents (DT_COMPATIBLE_FILE, &compatible, NULL, &error);
+
+  if (error) {
+    g_error_free (error);
+    return NULL;
+  }
+
+  return compatible;
+}
+
 static void
 system_poweroff (gpointer data)
 {
@@ -525,6 +542,7 @@ show_factory_dialog (GisLanguagePage *page)
   GtkLabel *personality_label;
   GtkLabel *sdcard_label;
   GtkLabel *serial_label;
+  GtkLabel *product_id_label;
   GtkLabel *version_label;
   gboolean have_serial;
   gchar *barcode;
@@ -532,9 +550,11 @@ show_factory_dialog (GisLanguagePage *page)
   gchar *version;
   gchar *sd_version = NULL;
   gchar *sd_text;
+  gchar *product_id_text;
 
   factory_dialog = OBJ (GtkDialog *, "factory-dialog");
   version_label = OBJ (GtkLabel *, "software-version");
+  product_id_label = OBJ (GtkLabel *, "product-id");
   personality_label = OBJ (GtkLabel *, "personality");
   sdcard_label = OBJ (GtkLabel *, "sd-card");
   serial_label = OBJ (GtkLabel *, "serial-text");
@@ -547,6 +567,13 @@ show_factory_dialog (GisLanguagePage *page)
 
   gtk_label_set_text (personality_label,
                       gis_driver_get_personality (driver));
+
+  product_id_text = get_product_id ();
+  if (product_id_text) {
+    gtk_label_set_text (product_id_label, product_id_text);
+    gtk_widget_set_visible (GTK_WIDGET (product_id_label), TRUE);
+    g_free (product_id_text);
+  }
 
   have_serial = get_serial_version (&display_serial, &barcode_serial);
 
