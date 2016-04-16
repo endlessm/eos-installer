@@ -1,143 +1,136 @@
-# Thai translation for gnome-initial-setup.
-# Copyright (C) 2012 gnome-initial-setup's COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome-initial-setup package.
-# Unticha Pramgoed <unticha@gmail.com>, 2012.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Unticha Pramgoed <unticha@gmail.com>, 2012
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-initial-setup master\n"
+"Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-06 11:28-0700\n"
-"PO-Revision-Date: 2012-09-20 11:14+0700\n"
-"Last-Translator: Unticha Pramgoed <unticha@gmail.com>\n"
-"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
-"Language: th\n"
+"POT-Creation-Date: 2016-04-12 02:40+0000\n"
+"PO-Revision-Date: 2016-04-16 05:10+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"Language-Team: Thai (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.3\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
 msgstr "ตั้งค่าเริ่มแรก"
 
-#: ../gnome-initial-setup/gis-assistant.c:291
+#: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
 msgstr "_ต่อไป"
 
-#: ../gnome-initial-setup/gis-assistant.c:430
+#: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:431
+#: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:243
+#: ../gnome-initial-setup/gnome-initial-setup.c:295
 msgid "Force new user mode"
 msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:247
-#, fuzzy
+#: ../gnome-initial-setup/gnome-initial-setup.c:299
 msgid "- GNOME initial setup"
-msgstr "ตั้งค่าเริ่มแรก"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:326
-#, fuzzy
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
-msgstr "_รหัสผ่าน"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
 msgstr "รหัสผ่านไม่ตรงกัน"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
-#, fuzzy
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
-msgstr "เชื่อมโยงบัญชีอื่น"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
 msgstr "เข้าระบบ"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-#, fuzzy
 msgid "Create a Personal Account"
-msgstr "สร้างบัญชีในเครื่อง"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid "Type in your full name and a password that you'll remember."
+msgid ""
+"Type your full name and a password that you'll remember. Pay attention to "
+"upper case letters."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid ""
-"You may want to write down your password. Make sure you pay attention to "
-"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
-"appear at the right side of the space in which you're writing. You'll need "
-"to type in this password identically each time you access your account."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_ชื่อเต็ม"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
 msgstr "_ชื่อผู้ใช้"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
 msgstr "_รหัสผ่าน"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
-#, fuzzy
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
-msgstr "ยื_นยันรหัสผ่าน"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "Show password"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"Make sure you write down your password to remember it! You can write "
+"yourself a reminder here, but note that this password reminder can be seen "
+"by others."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "To continue, please make sure you fill in all the blanks."
+msgid "Password _reminder"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-#, fuzzy
-msgid "Show password"
-msgstr "_รหัสผ่าน"
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
-#, fuzzy
 msgid "Create an Enterprise Account"
-msgstr "ใช้บัญชีเข้าระบบองค์กร"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
@@ -172,9 +165,8 @@ msgid "Administrator _Name"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
-#, fuzzy
 msgid "Administrator Password"
-msgstr "ยื_นยันรหัสผ่าน"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
@@ -245,17 +237,12 @@ msgid "The username cannot start with a '-'"
 msgstr "ชื่อผู้ใช้ไม่สามารถขึ้นต้นด้วย '-'"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:160
-#, fuzzy
 msgid ""
 "The username must only consist of:\n"
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
 msgstr ""
-"ชื่อผู้ใช้ต้องประกอบด้วย:\n"
-" ➣ ตัวอักษรจากอักขระภาษาอังกฤษ\n"
-" ➣ ตัวเลข\n"
-" ➣ อักขระ '.', '-' หรือ '_'"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
@@ -277,61 +264,37 @@ msgstr ""
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:81
-msgid ""
-"Endless collects metrics on user behavior and actions.\n"
-"All data sent is anonymous.\n"
-"We use the data to improve the system."
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
+msgid "Terms of Use"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:106
-msgid "Privacy Policy"
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
+msgid "Third Party Software"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
-#, fuzzy
-msgid "Privacy and License Agreements"
-msgstr "ข้อตกลงสัญญาอนุญาต"
-
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Enable metrics collection."
+msgid "Please read the following terms of use carefully"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
-"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+"By clicking \"Accept and continue,\" you acknowledge that you have read, "
+"understood, and agree to be bound by the following terms and conditions."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Terms of Service"
+msgid "Help make Endless better for everyone"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"We legally have to include our terms of service. Those are below. But here "
-"are the terms to which we would most like you to agree: May you do good and "
-"not evil. May you find forgiveness for yourself and forgive others. May you "
-"share freely, never taking more than you give. We promise to do our best to "
-"do the same."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
-msgid "- The Endless Team"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
-msgid "Third-party Software"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
-msgid ""
-"Endless uses third-party software to display Flash, MP3 and other media. "
-"Some of this software is closed-source. The software is subject to the "
-"license terms included with the software's documentation."
+"Automatically save and send usage statistics and problem reports to Endless."
+" All data is anonymous."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
@@ -346,10 +309,9 @@ msgid ""
 msgstr "ฉัน_เห็นด้วยกับข้อตกลงและเงื่อนไขในข้อตกลงสัญญาอนุญาตสิทธิ์ผู้ใช้นี้"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
-#, fuzzy
 msgctxt "Online Account"
 msgid "Other"
-msgstr "เครือข่ายอื่น..."
+msgstr ""
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
@@ -372,27 +334,27 @@ msgstr ""
 msgid "Resources"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
 msgstr "เกิดข้อผิดพลาดขณะสร้างบัญชี"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
 msgstr "เกิดข้อผิดพลาดขณะลบบัญชี"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
 msgstr "คุณแน่ใจหรือว่าจะลบบัญชีนี้?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
 msgstr "การลบนี้จะไม่เป็นการลบบัญชีที่เซิร์ฟเวอร์"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
 msgstr "_ลบ"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
 msgstr "บัญชีออนไลน์"
 
@@ -407,64 +369,97 @@ msgid ""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
-#, fuzzy
 msgid "_Add Account"
-msgstr "เพิ่มบัญชี"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
+msgid "Preview"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:183
 msgid "More…"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
-#, fuzzy
-msgid "No input sources found"
-msgstr "ไม่พบอุปกรณ์เครือข่าย"
+#. Translators: a search for input methods or keyboard layouts
+#. * did not yield any results
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
+msgid "No inputs found"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
-#, fuzzy
-msgid "Other"
-msgstr "เครือข่ายอื่น..."
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
+msgid "Your keyboard layout seems to be:"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:201
-msgid "Keyboard Layouts"
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
+msgid "Please press one of the following keys:"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
+msgid "Is the following key present on your keyboard?"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
+msgid "Typing"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select keyboard layouts"
+msgid "Select your keyboard layout"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-msgid "Add a Keyboard Layout"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
+msgid "Help detect my keyboard layout"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
+msgid "Detect Keyboard Layout..."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
+msgid "Select"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:200
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:567
+msgid "Disabled"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:569
+#, c-format
+msgid "SD Card: %s"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:648
 msgid "Welcome"
 msgstr "ยินดีต้อนรับ"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:652
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:654
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Test Mode"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:644
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
 msgstr "ค้นหาตำแหน่งที่ตั้ง"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:781
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "ตำแหน่งที่ตั้ง"
@@ -530,9 +525,8 @@ msgid "Time Zone"
 msgstr "เขตเวลา"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-#, fuzzy
 msgid "Network Time"
-msgstr "เครือข่าย"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
@@ -546,25 +540,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
-#, fuzzy
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr "เครือข่ายอื่น..."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
 msgstr "ไม่มีเครือข่าย"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
 msgstr "ไม่พบอุปกรณ์เครือข่าย"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
 msgstr "กำลังตรวจเครือข่ายไร้สายที่มีอยู่"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
 msgstr "เครือข่าย"
 
@@ -576,107 +569,42 @@ msgstr "เครือข่ายไร้สาย"
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer password."
+"network password. This password may be different from your computer "
+"password."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set "
-"it up in \"Network Settings.\""
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-#, fuzzy
 msgid "No wireless available"
-msgstr "ไม่มีเครือข่าย"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:338
-#, fuzzy, c-format
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
+#, c-format
 msgid "_Start using %s"
-msgstr "เ_ริ่มใช้ GNOME 3"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:441
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
 msgstr "ขอขอบคุณ"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
-#, fuzzy
 msgid "Your computer is ready to use."
-msgstr "บัญชีใหม่ของคุณพร้อมใช้งานแล้ว"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
-#, fuzzy
 msgid "You may change these options at any time in Settings."
-msgstr "คุณอาจเปลี่ยนตัวเลือกต่างๆ เหล่านี้เมื่อใดก็ได้ด้วยเมนู \"ตั้งค่าระบบ\""
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
 msgstr "เ_ริ่มใช้ GNOME 3"
-
-#~ msgid "_Back"
-#~ msgstr "_ถอยกลับ"
-
-#~ msgid "Create Local Account"
-#~ msgstr "สร้างบัญชีในเครื่อง"
-
-#~ msgid "_Done"
-#~ msgstr "_เสร็จสิ้น"
-
-#~ msgid "_Require a password to use this account"
-#~ msgstr "_ต้องใช้รหัสผ่านเพื่อใช้บัญชีนี้"
-
-#~ msgid "_Act as administrator of this computer"
-#~ msgstr "_ทำหน้าที่เสมือนผู้ดูแลระบบของเครื่องคอมพิวเตอร์นี้"
-
-#~ msgid "Choose How to Login"
-#~ msgstr "เลือกวิธีเข้าระบบ"
-
-#~ msgid "Disable image"
-#~ msgstr "ปิดใช้รูปภาพ"
-
-#~ msgid "Take a photo..."
-#~ msgstr "ถ่ายรูป..."
-
-#~ msgid "Remove"
-#~ msgstr "ลบ"
-
-#~ msgid "English"
-#~ msgstr "อังกฤษ"
-
-#~ msgid "British English"
-#~ msgstr "อังกฤษบริติช"
-
-#~ msgid "German"
-#~ msgstr "เยอรมัน"
-
-#~ msgid "French"
-#~ msgstr "ฝรั่งเศส"
-
-#~ msgid "Spanish"
-#~ msgstr "สเปน"
-
-#~ msgid "Chinese (simplified)"
-#~ msgstr "จีน (ตัวย่อ)"
-
-#~ msgid "Unspecified"
-#~ msgstr "ไม่ระบุ"
-
-#~ msgid "Use %s"
-#~ msgstr "ใช้ %s"
-
-#~ msgid "Show _all"
-#~ msgstr "แสดง_ทั้งหมด"
-
-#~ msgid "Enjoy GNOME!"
-#~ msgstr "ขอให้สนุกกับ GNOME!"
-
-#~ msgid "New to GNOME 3 and need help finding your way around?"
-#~ msgstr "เป็นผู้ใช้ GNOME 3 ใหม่และต้องการให้ช่วยนำทางไหม?"
-
-#~ msgid "_Take a Tour"
-#~ msgstr "_พาเยี่ยมชม"

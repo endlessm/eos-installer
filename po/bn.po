@@ -3,38 +3,37 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2014-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-initial-setup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-12 02:40+0000\n"
-"PO-Revision-Date: 2016-04-16 05:12+0000\n"
+"PO-Revision-Date: 2016-04-16 05:09+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
-"Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/vi/)\n"
+"Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/gnome-initial-setup/language/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: vi\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: bn\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
-msgstr "Cài đặt lần đầu"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
-msgstr "_Tiếp"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
-msgstr "T_rước"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
-msgstr "T_hôi"
+msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
 msgid "Force new user mode"
@@ -42,7 +41,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
 msgid "- GNOME initial setup"
-msgstr "- Cài đặt GNOME lần đầu"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
@@ -55,19 +54,19 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
-msgstr "Gặp lỗi khi đăng ký tài khoản"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
-msgstr "Không có cách xác thực được hỗ trợ nào với miền này"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
-msgstr "Gặp lỗi khi gia nhập vào miền"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
-msgstr "Gặp lỗi khi đăng nhập vào miền"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
@@ -85,11 +84,11 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
-msgstr "_Họ tên"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
-msgstr "_Tài khoản"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
@@ -99,7 +98,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
-msgstr "Mật _khẩu"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
@@ -134,19 +133,19 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
-msgstr "Tên _miền"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
-msgstr "Tên miền hay tên địa hạt kiểu công ty"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
-msgstr "Tiế_p tục"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
-msgstr "Đăng nhập quản trị miền"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
@@ -158,15 +157,15 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
-msgstr "Má_y tính"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
-msgstr "Tên _quản trị viên"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
-msgstr "Mật khẩu quản trị"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
@@ -200,27 +199,27 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr "Không thể tự động gia nhập kiểu miền này"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
 msgid "No such domain or realm found"
-msgstr "Không tìm thấy miền hay địa hạt"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr "Không thể đăng nhập làm %s vào miền %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr "Mật khẩu không hợp lệ, vui lòng thử lại"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr "Không thể kết nối đến miền %s: %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
@@ -300,13 +299,13 @@ msgstr ""
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
-msgstr "Thỏa thuận giấy phép"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr "Tôi đồ_ng ý với những điều khoản trong thỏa thuận giấy phép người dùng cuối"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
@@ -316,7 +315,7 @@ msgstr ""
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
-msgstr "Thêm tài khoản"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
@@ -356,7 +355,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
-msgstr "Tài khoản trực tuyến"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
@@ -374,18 +373,18 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
-msgstr "Xem trước"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:183
 msgid "More…"
-msgstr "Còn nữa…"
+msgstr ""
 
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
-msgstr "Không tìm đầu vào nào"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
@@ -402,7 +401,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
-msgstr "Nhập liệu"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
@@ -422,7 +421,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:200
 msgid "No languages found"
-msgstr "Không tìm thấy ngôn ngữ"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:567
 msgid "Disabled"
@@ -435,7 +434,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:648
 msgid "Welcome"
-msgstr "Chào mừng bạn"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:652
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
@@ -522,7 +521,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
-msgstr "Múi giờ"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
@@ -543,7 +542,7 @@ msgstr ""
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr "Khác…"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
@@ -555,11 +554,11 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
-msgstr "Đang kiểm xem có mạng không dây nào dùng được không"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
-msgstr "Mạng"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
 msgid "Wireless Networks"
@@ -582,7 +581,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr "Không có mạng không dây dùng được"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
@@ -591,7 +590,7 @@ msgstr ""
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
-msgstr "_Bắt đầu dùng %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
