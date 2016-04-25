@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.0"/>
+  <object class="GtkListStore" id="image_store">
+    <columns>
+      <!-- column-name image_name -->
+      <column type="gchararray"/>
+      <!-- column-name image_size -->
+      <column type="gchararray"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes">EOS 2_7 English Light</col>
+        <col id="1" translatable="yes">2 GB</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkBox" id="diskimage-page">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="margin_left">64</property>
+    <property name="margin_right">64</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkLabel" id="os_title">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="halign">start</property>
+        <property name="label" translatable="yes">Operating system found:</property>
+        <attributes>
+          <attribute name="weight" value="bold"/>
+        </attributes>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkTreeView" id="imageview">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="model">image_store</property>
+        <property name="headers_visible">False</property>
+        <property name="show_expanders">False</property>
+        <child internal-child="selection">
+          <object class="GtkTreeSelection" id="treeview-selection1"/>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="padding">24</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="browse_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_top">16</property>
+        <property name="homogeneous">True</property>
+        <child>
+          <object class="GtkButton" id="browse_button">
+            <property name="label" translatable="yes">Browse Manually</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="download_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">False</property>
+        <property name="position">2</property>
+      </packing>
+    </child>
+  </object>
+</interface>

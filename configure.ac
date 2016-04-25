@@ -139,6 +139,11 @@ gnome-initial-setup/pages/network/Makefile
 gnome-initial-setup/pages/goa/Makefile
 gnome-initial-setup/pages/summary/Makefile
 gnome-initial-setup/pages/keyboard/Makefile
+gnome-image-installer/Makefile
+gnome-image-installer/pages/Makefile
+gnome-image-installer/pages/diskimage/Makefile
+gnome-image-installer/pages/disktarget/Makefile
+gnome-image-installer/pages/finished/Makefile
 po/Makefile.in
 ])
 AC_OUTPUT
