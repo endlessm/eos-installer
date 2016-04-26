@@ -4,8 +4,8 @@
          xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name xml:lang="en">GNOME Initial Setup</name>
-  <shortdesc xml:lang="en">Bootstrapping your OS</shortdesc>
+  <name xml:lang="en">Endless OS Installer</name>
+  <shortdesc xml:lang="en">Installing your OS</shortdesc>
 
   <category rdf:resource="http://api.gnome.org/doap-extensions#desktop" />
 

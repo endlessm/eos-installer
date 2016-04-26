@@ -13,7 +13,7 @@ AM_CPPFLAGS = \
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\" \
 	-DDATADIR=\""$(datadir)"\"
 
-libexec_PROGRAMS = gnome-initial-setup gnome-initial-setup-copy-worker
+noinst_PROGRAMS = gnome-initial-setup gnome-initial-setup-copy-worker
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gis-assistant.gresource.xml)
 gis-assistant-resources.c: gis-assistant.gresource.xml $(resource_files)

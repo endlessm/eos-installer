@@ -1,4 +1,4 @@
-AC_INIT([gnome-initial-setup],[3.10.1.1])
+AC_INIT([eos-installer],[3.10.1.1])
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([dist-xz no-dist-gzip foreign tar-ustar])
@@ -11,7 +11,7 @@ LT_INIT
 
 IT_PROG_INTLTOOL([0.40])
 
-GETTEXT_PACKAGE=gnome-initial-setup
+GETTEXT_PACKAGE=eos-installer
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 
