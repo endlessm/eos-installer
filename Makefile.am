@@ -9,4 +9,4 @@ EXTRA_DIST = \
     COPYING \
     AUTHORS \
     NEWS \
-    gnome-initial-setup.doap
+    eos-installer.doap
