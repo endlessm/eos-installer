@@ -1,7 +1,7 @@
-Source: gnome-initial-setup
+Source: eos-installer
 Section: misc
 Priority: optional
-Maintainer: Javier Martinez Canillas <javier.martinez@collabora.co.uk>
+Maintainer: Robert McQueen <robert@endlessm.com>
 Build-Depends: cdbs (>= 0.4.41),
 	       dh-autoreconf,
 	       debhelper (>= 9),
@@ -37,28 +37,20 @@ Build-Depends: cdbs (>= 0.4.41),
 	       libevince-dev,
 	       libwebkit2gtk-4.0-dev
 Standards-Version: 3.9.4
-Homepage: https://git.gnome.org/browse/gnome-initial-setup/
+Homepage: https://endlessm.com
 
-Package: gnome-initial-setup
+Package: eos-installer
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          gdm3,
 	 policykit-1 (>= 0.106)
-Recommends: gnome-getting-started-docs
-Description: Initial GNOME system setup
- After acquiring or installing a new system there are a few essential things
- to set up before use. gnome-initial-setup aims to provide a simple, easy,
- and safe way to prepare a new system.
+Description: Endless OS installer
 
-Package: gnome-initial-setup-dbg
+Package: eos-installer-dbg
 Architecture: any
 Section: debug
 Depends: ${misc:Depends},
-         gnome-initial-setup (= ${binary:Version})
+         eos-installer (= ${binary:Version})
 Description: Initial GNOME system setup debugging symbols
- After acquiring or installing a new system there are a few essential things
- to set up before use. gnome-initial-setup aims to provide a simple, easy,
- and safe way to prepare a new system.
- .
- This package contains the debugging symbols for gnome-initial-setup.
+ This package contains the debugging symbols for eos-installer.
