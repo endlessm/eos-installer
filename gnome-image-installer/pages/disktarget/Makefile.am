@@ -2,7 +2,7 @@
 noinst_LTLIBRARIES = libgisdisktarget.la
 
 AM_CPPFLAGS = \
-	$(INITIAL_SETUP_CFLAGS) \
+	$(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) \
 	-DLOCALSTATEDIR="\"$(localstatedir)\"" \
 	-DUIDIR="\"$(uidir)\""
 
@@ -19,8 +19,8 @@ libgisdisktarget_la_SOURCES =			\
 	gis-disktarget-page.c gis-disktarget-page.h	\
 	$(BUILT_SOURCES)
 
-libgisdisktarget_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup"
-libgisdisktarget_la_LIBADD = $(INITIAL_SETUP_LIBS)
+libgisdisktarget_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup"
+libgisdisktarget_la_LIBADD = $(INITIAL_SETUP_LIBS) $(IMAGE_INSTALLER_LIBS)
 libgisdisktarget_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 EXTRA_DIST =	\

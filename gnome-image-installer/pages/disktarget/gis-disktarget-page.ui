@@ -9,12 +9,6 @@
       <!-- column-name target_size -->
       <column type="gchararray"/>
     </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">EOS 2_7 English Light</col>
-        <col id="1" translatable="yes">2 GB</col>
-      </row>
-    </data>
   </object>
   <object class="GtkBox" id="disktarget-page">
     <property name="visible">True</property>
@@ -44,9 +38,37 @@
         <property name="can_focus">True</property>
         <property name="model">target_store</property>
         <property name="headers_visible">False</property>
+        <property name="enable_search">False</property>
         <property name="show_expanders">False</property>
         <child internal-child="selection">
-          <object class="GtkTreeSelection" id="treeview-selection1"/>
+          <object class="GtkTreeSelection" id="target_selection"/>
+        </child>
+        <child>
+          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+            <property name="resizable">True</property>
+            <property name="title" translatable="yes">0</property>
+            <property name="expand">True</property>
+            <property name="clickable">True</property>
+            <property name="sort_indicator">True</property>
+            <child>
+              <object class="GtkCellRendererText" id="cellrenderertext1"/>
+              <attributes>
+                <attribute name="text">0</attribute>
+              </attributes>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+            <property name="title" translatable="yes">column</property>
+            <property name="alignment">1</property>
+            <child>
+              <object class="GtkCellRendererText" id="cellrenderertext2"/>
+              <attributes>
+                <attribute name="text">1</attribute>
+              </attributes>
+            </child>
+          </object>
         </child>
       </object>
       <packing>
@@ -62,10 +84,9 @@
         <property name="can_focus">False</property>
         <property name="margin_top">16</property>
         <child>
-          <object class="GtkLabel" id="image_label">
+          <object class="GtkLabel" id="disk_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">EOS 2_7 English Light</property>
             <property name="ellipsize">end</property>
             <property name="xalign">0.05000000074505806</property>
           </object>
@@ -81,7 +102,6 @@
             <property name="can_focus">False</property>
             <property name="halign">end</property>
             <property name="xpad">6</property>
-            <property name="label" translatable="yes">2 GB</property>
           </object>
           <packing>
             <property name="expand">False</property>

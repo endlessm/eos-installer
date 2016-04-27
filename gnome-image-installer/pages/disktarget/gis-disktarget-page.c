@@ -30,6 +30,7 @@
 #include "disktarget-resources.h"
 #include "gis-disktarget-page.h"
 
+#include <udisks/udisks.h>
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -37,6 +38,7 @@
 #include <errno.h>
 
 struct _GisDiskTargetPagePrivate {
+  UDisksClient *client;
 };
 typedef struct _GisDiskTargetPagePrivate GisDiskTargetPagePrivate;
 
@@ -47,29 +49,85 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskTargetPage, gis_disktarget_page, GIS_TYPE_PAG
 
 
 static void
-done_cb (GtkButton *button, GisDiskTargetPage *page)
+gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTargetPage *page)
 {
-  switch (gis_driver_get_mode (GIS_PAGE (page)->driver))
+  GtkTreeIter i;
+  gchar *disk, *size = NULL;
+  GtkTreeModel *model = NULL;
+  GtkLabel *disk_label = OBJ(GtkLabel*, "disk_label");
+  GtkLabel *size_label = OBJ(GtkLabel*, "size_label");
+
+  if (!gtk_tree_selection_get_selected(selection, &model, &i))
     {
-    case GIS_DRIVER_MODE_NEW_USER:
-      gis_driver_hide_window (GIS_PAGE (page)->driver);
-      break;
-    case GIS_DRIVER_MODE_EXISTING_USER:
-      gis_add_setup_done_file ();
-      break;
+      gtk_label_set_text(disk_label, "");
+      gtk_label_set_text(size_label, "");
+      gis_page_set_complete (GIS_PAGE (page), FALSE);
+      return;
     }
 
-    launch_tutorial (page);
+  gtk_tree_model_get(model, &i, 0, &disk, 1, &size, -1);
+
+  if (disk != NULL)
+    gtk_label_set_text(disk_label, disk);
+  else
+    gtk_label_set_text(disk_label, "");
+
+  if (size != NULL)
+    gtk_label_set_text(size_label, size);
+  else
+    gtk_label_set_text(size_label, "");
+
+  gis_page_set_complete (GIS_PAGE (page), TRUE);
+}
+
+static void
+gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
+{
+  GList *l;
+  GDBusObjectManager *manager = udisks_client_get_object_manager(client);
+  GList *objects = g_dbus_object_manager_get_objects(manager);
+  GtkListStore *store = OBJ(GtkListStore*, "target_store");
+
+  gtk_list_store_clear(store);
+  for (l = objects; l != NULL; l = l->next)
+    {
+      GtkTreeIter i;
+      gchar *targetname, *targetsize;
+      UDisksObject *object = UDISKS_OBJECT(l->data);
+      UDisksDrive *drive = udisks_object_peek_drive(object);
+      if (drive == NULL)
+        continue;
+      targetname = g_strdup_printf("%s %s",
+                                   udisks_drive_get_vendor(drive),
+                                   udisks_drive_get_model(drive));
+      targetsize = g_strdup_printf("%.02f GB",
+                                   udisks_drive_get_size(drive)/1024.0/1024.0/1024.0);
+      gtk_list_store_append(store, &i);
+      gtk_list_store_set(store, &i, 0, targetname, 1, targetsize, -1);
+      g_free(targetname);
+      g_free(targetsize);
+    }
 }
 
 static void
 gis_disktarget_page_shown (GisPage *page)
 {
-  GisDiskTargetPage *summary = GIS_DISK_TARGET_PAGE (page);
-  GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (summary);
+  GError *error;
+  GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
+  GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
+  priv->client = udisks_client_new_sync(NULL, &error);
+  if (priv->client == NULL)
+    {
+      g_error("Unable to enumearate disks: %s", error->message);
+      g_error_free(error);
+    }
+  else
+    {
+      gis_disktarget_page_populate_model(page, priv->client);
+    }
 }
 
 static void
@@ -81,9 +139,13 @@ gis_disktarget_page_constructed (GObject *object)
 
   gtk_container_add (GTK_CONTAINER (page), WID ("disktarget-page"));
 
-  gis_page_set_complete (GIS_PAGE (page), TRUE);
+  gis_page_set_complete (GIS_PAGE (page), FALSE);
 
   gtk_widget_show (GTK_WIDGET (page));
+
+  g_signal_connect(OBJ(GObject*, "target_selection"),
+                       "changed", G_CALLBACK(gis_disktarget_page_selection_changed),
+                       page);
 }
 
 static void
