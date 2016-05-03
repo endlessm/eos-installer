@@ -40,6 +40,7 @@ gnome_image_installer_LDADD =	\
 	$(gisdir)/pages/eulas/libgiseulas.la \
 	pages/diskimage/libgisdiskimage.la \
 	pages/disktarget/libgisdisktarget.la \
+	pages/install/libgisinstall.la \
 	pages/finished/libgisfinished.la \
 	$(INITIAL_SETUP_LIBS) \
 	-lm

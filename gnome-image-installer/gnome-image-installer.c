@@ -52,6 +52,7 @@
 #include "pages/diskimage/gis-diskimage-page.h"
 #include "pages/disktarget/gis-disktarget-page.h"
 #include "pages/finished/gis-finished-page.h"
+#include "pages/install/gis-install-page.h"
 
 /* main {{{1 */
 
@@ -76,6 +77,7 @@ static PageData page_table[] = {
   PAGE (language),
   PAGE (diskimage),
   PAGE (disktarget),
+  PAGE (install),
   PAGE (finished),
   { NULL },
 };

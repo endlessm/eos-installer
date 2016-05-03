@@ -146,6 +146,7 @@ gnome-image-installer/pages/Makefile
 gnome-image-installer/pages/diskimage/Makefile
 gnome-image-installer/pages/disktarget/Makefile
 gnome-image-installer/pages/finished/Makefile
+gnome-image-installer/pages/install/Makefile
 po/Makefile.in
 ])
 AC_OUTPUT
