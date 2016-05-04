@@ -128,7 +128,6 @@ AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 Makefile
-data/Makefile
 gnome-initial-setup/Makefile
 gnome-initial-setup/pages/Makefile
 gnome-initial-setup/pages/language/Makefile
