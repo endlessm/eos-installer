@@ -1,1 +1,2 @@
-debian/tmp/*
+debian/tmp/usr/share/locale/*
+debian/tmp/usr/lib/eos-installer/*
