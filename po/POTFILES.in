@@ -34,3 +34,12 @@ gnome-initial-setup/pages/network/gis-network-page.c
 [type: gettext/glade]gnome-initial-setup/pages/network/gis-network-page.ui
 gnome-initial-setup/pages/summary/gis-summary-page.c
 [type: gettext/glade]gnome-initial-setup/pages/summary/gis-summary-page.ui
+gnome-image-installer/gnome-image-installer.c
+gnome-image-installer/pages/diskimage/gis-diskimage-page.c
+[type: gettext/glade]gnome-image-installer/pages/diskimage/gis-diskimage-page.ui
+gnome-image-installer/pages/disktarget/gis-disktarget-page.c
+[type: gettext/glade]gnome-image-installer/pages/disktarget/gis-disktarget-page.ui
+gnome-image-installer/pages/finished/gis-finished-page.c
+[type: gettext/glade]gnome-image-installer/pages/finished/gis-finished-page.ui
+gnome-image-installer/pages/install/gis-install-page.c
+[type: gettext/glade]gnome-image-installer/pages/install/gis-install-page.ui

@@ -4,7 +4,8 @@ BUILT_SOURCES =
 
 # TODO: ugly, but let's see if splitting makes sense
 uidir = $(datadir)/gnome-initial-setup
-gisdir = $(srcdir)/../gnome-initial-setup
+gisdir = ./../gnome-initial-setup
+gissrcdir = $(srcdir)/../gnome-initial-setup
 
 $(info ${uidir})
 
@@ -16,15 +17,15 @@ AM_CPPFLAGS = \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\" \
 	-DDATADIR=\""$(datadir)"\" \
-	-I$(gisdir)
+	-I$(gissrcdir)
 
 libexec_PROGRAMS = gnome-image-installer
 
-resource_files = $(shell glib-compile-resources --sourcedir=$(gisdir) --generate-dependencies $(gisdir)/gis-assistant.gresource.xml)
-gis-assistant-resources.c: $(gisdir)/gis-assistant.gresource.xml $(resource_files)
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(gisdir) --generate-source $<
-gis-assistant-resources.h: $(gisdir)/gis-assistant.gresource.xml $(resource_files)#
-	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(gisdir) --generate-header $<
+resource_files = $(shell glib-compile-resources --sourcedir=$(gissrcdir) --generate-dependencies $(gissrcdir)/gis-assistant.gresource.xml)
+gis-assistant-resources.c: $(gissrcdir)/gis-assistant.gresource.xml $(resource_files)
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(gissrcdir) --generate-source $<
+gis-assistant-resources.h: $(gissrcdir)/gis-assistant.gresource.xml $(resource_files)#
+	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(gissrcdir) --generate-header $<
 BUILT_SOURCES += gis-assistant-resources.c gis-assistant-resources.h
 
 gnome_image_installer_SOURCES = \

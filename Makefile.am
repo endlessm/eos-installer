@@ -2,7 +2,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 AM_CFLAGS = ${WARN_CFLAGS}
 
-SUBDIRS = gnome-initial-setup gnome-image-installer po
+SUBDIRS = gnome-initial-setup gnome-image-installer po data
 
 EXTRA_DIST = \
     autogen.sh \
