@@ -136,19 +136,20 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
       return FALSE;
     }
 
-  fd = g_unix_fd_list_get (fd_list, g_variant_get_handle (fd_index), error);
-  if (error != NULL)
+  fd = g_unix_fd_list_get (fd_list, g_variant_get_handle (fd_index), &e);
+  if (fd < 0)
     {
-      g_prefix_error (error,
+      g_prefix_error (&e,
                       "Error extracing fd with handle %d from D-Bus message: ",
                       g_variant_get_handle (fd_index));
-      return;
+      g_propagate_error (error, e);
+      return FALSE;
     }
+
   if (fd_index != NULL)
     g_variant_unref (fd_index);
-  g_clear_object (&fd_list);
 
-  printf("Got FD: %i\n", fd);
+  g_clear_object (&fd_list);
 
   /* XXX: Debugging */
   priv->drive_fd = open ("/dev/null", O_CREAT | O_WRONLY);
@@ -176,6 +177,11 @@ gis_install_page_teardown (GisPage *page)
     g_object_unref (priv->decompressed);
   priv->decompressed = NULL;
 
+  if (priv->drive_fd)
+    {
+      syncfs(priv->drive_fd);
+      close(priv->drive_fd);
+    }
   priv->drive_fd = -1;
   priv->bytes_written = 0;
 
