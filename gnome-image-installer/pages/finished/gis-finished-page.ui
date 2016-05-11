@@ -14,10 +14,10 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="removelabel">
+          <object class="GtkImage" id="image1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Please remove your USB disk</property>
+            <property name="pixbuf">endless_logo.png</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -26,10 +26,12 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="restart_label">
+          <object class="GtkLabel" id="removelabel">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">System will restart in %d seconds</property>
+            <property name="margin_top">16</property>
+            <property name="label" translatable="yes">&lt;b&gt;Success! Please remove your USB device.&lt;/b&gt;</property>
+            <property name="use_markup">True</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -38,18 +40,37 @@
           </packing>
         </child>
         <child>
+          <object class="GtkLabel" id="restart_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">&lt;small&gt;System will restart in %d seconds&lt;/small&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkButton" id="restart_button">
             <property name="label" translatable="yes">Restart</property>
+            <property name="width_request">128</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="can_default">True</property>
             <property name="receives_default">True</property>
             <property name="halign">center</property>
-            <property name="margin_top">32</property>
+            <property name="margin_top">48</property>
+            <property name="image_position">right</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">2</property>
+            <property name="position">3</property>
           </packing>
         </child>
       </object>
