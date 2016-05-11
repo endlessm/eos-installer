@@ -37,6 +37,7 @@
 #include <errno.h>
 
 struct _GisFinishedPagePrivate {
+  gint dummy;
 };
 typedef struct _GisFinishedPagePrivate GisFinishedPagePrivate;
 

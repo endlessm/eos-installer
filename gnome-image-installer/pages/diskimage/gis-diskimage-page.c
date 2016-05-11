@@ -29,6 +29,7 @@
 #include "config.h"
 #include "diskimage-resources.h"
 #include "gis-diskimage-page.h"
+#include "gis-store.h"
 
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
@@ -37,6 +38,7 @@
 #include <errno.h>
 
 struct _GisDiskImagePagePrivate {
+  gint dummy;
 };
 typedef struct _GisDiskImagePagePrivate GisDiskImagePagePrivate;
 
@@ -52,6 +54,7 @@ gis_diskimage_page_selection_changed(GtkTreeSelection *selection, GisPage *page)
   GtkTreeIter i;
   gchar *image = NULL;
   GtkTreeModel *model = NULL;
+  GFile *file = NULL;
 
   if (!gtk_tree_selection_get_selected(selection, &model, &i))
     {
@@ -61,8 +64,9 @@ gis_diskimage_page_selection_changed(GtkTreeSelection *selection, GisPage *page)
 
   gtk_tree_model_get(model, &i, 2, &image, -1);
 
-  if (image != NULL)
-    printf("%s\n", image);
+  file = g_file_new_for_path (image);
+  gis_store_set_object (GIS_STORE_IMAGE, G_OBJECT (file));
+  g_object_unref(file);
 
   gis_page_set_complete (page, TRUE);
 }
@@ -73,7 +77,7 @@ static gchar *get_display_name(gchar *fullname)
   GMatchInfo *info;
   gchar *name = NULL;
 
-  reg = g_regex_new ("eos-eos(\\d\\.\\d).*\\.(\\w*)\\.img\\.gz", 0, 0, NULL);
+  reg = g_regex_new ("eos-eos(\\d\\.\\d).*\\.(\\w*)\\.img\\.(x|g)z", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
@@ -97,7 +101,7 @@ static void add_image(GtkListStore *store, gchar *image)
                                      &error);
   if (fi != NULL)
     {
-      gchar *size = g_strdup_printf ("%llu GB", g_file_info_get_size (fi)/1024/1024/1024);
+      gchar *size = g_strdup_printf ("%.02f GB", (float)g_file_info_get_size (fi)/1024.0/1024.0/1024.0);
       gchar *displayname = get_display_name(image);
       if (displayname == NULL)
           displayname = g_file_get_basename(f);
@@ -152,6 +156,7 @@ gis_diskimage_page_browse(GtkButton *selection, GisPage *page)
                                         _("Cancel"), GTK_RESPONSE_CANCEL,
                                         _("Open"), GTK_RESPONSE_ACCEPT,
                                         NULL);
+  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), "/eosimages");
   res = gtk_dialog_run (GTK_DIALOG (dialog));
 
   if (res == GTK_RESPONSE_ACCEPT)

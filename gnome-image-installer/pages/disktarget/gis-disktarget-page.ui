@@ -8,6 +8,8 @@
       <column type="gchararray"/>
       <!-- column-name target_size -->
       <column type="gchararray"/>
+      <!-- column-name target_block -->
+      <column type="GObject"/>
     </columns>
   </object>
   <object class="GtkBox" id="disktarget-page">

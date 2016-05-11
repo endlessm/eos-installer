@@ -25,7 +25,7 @@
 #ifndef __GIS_DISK_IMAGE_PAGE_H__
 #define __GIS_DISK_IMAGE_PAGE_H__
 
-#include "gnome-initial-setup.h"
+#include "gnome-image-installer.h"
 
 G_BEGIN_DECLS
 

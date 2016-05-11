@@ -3,6 +3,7 @@ noinst_LTLIBRARIES = libgisinstall.la
 
 AM_CPPFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
+	$(IMAGE_INSTALLER_CFLAGS) \
 	-DLOCALSTATEDIR="\"$(localstatedir)\"" \
 	-DUIDIR="\"$(uidir)\""
 
@@ -19,8 +20,8 @@ libgisinstall_la_SOURCES =			\
 	gis-install-page.c gis-install-page.h	\
 	$(BUILT_SOURCES)
 
-libgisinstall_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup"
-libgisinstall_la_LIBADD = $(INITIAL_SETUP_LIBS)
+libgisinstall_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../.." -I "$(srcdir)/../../util"
+libgisinstall_la_LIBADD = $(INITIAL_SETUP_LIBS) $(IMAGE_INSTALLER_CFLAGS) ./../../util/libgiiutil.la
 libgisinstall_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 EXTRA_DIST =	\

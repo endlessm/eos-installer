@@ -29,6 +29,7 @@
 #include "config.h"
 #include "disktarget-resources.h"
 #include "gis-disktarget-page.h"
+#include "gis-store.h"
 
 #include <udisks/udisks.h>
 #include <glib/gstdio.h>
@@ -53,6 +54,7 @@ gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTarget
 {
   GtkTreeIter i;
   gchar *disk, *size = NULL;
+  GObject *block = NULL;
   GtkTreeModel *model = NULL;
   GtkLabel *disk_label = OBJ(GtkLabel*, "disk_label");
   GtkLabel *size_label = OBJ(GtkLabel*, "size_label");
@@ -65,7 +67,7 @@ gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTarget
       return;
     }
 
-  gtk_tree_model_get(model, &i, 0, &disk, 1, &size, -1);
+  gtk_tree_model_get(model, &i, 0, &disk, 1, &size, 2, &block, -1);
 
   if (disk != NULL)
     gtk_label_set_text(disk_label, disk);
@@ -76,6 +78,9 @@ gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTarget
     gtk_label_set_text(size_label, size);
   else
     gtk_label_set_text(size_label, "");
+
+  gis_store_set_object (GIS_STORE_BLOCK_DEVICE, block);
+  g_object_unref(block);
 
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 }
@@ -95,15 +100,37 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       gchar *targetname, *targetsize;
       UDisksObject *object = UDISKS_OBJECT(l->data);
       UDisksDrive *drive = udisks_object_peek_drive(object);
+      UDisksBlock *block;
+
       if (drive == NULL)
         continue;
+
+      if (udisks_drive_get_optical(drive))
+        continue;
+
+      if (udisks_drive_get_removable(drive))
+        continue;
+
+      if (udisks_drive_get_ejectable(drive))
+        continue;
+
+      block = udisks_client_get_block_for_drive(client, drive, TRUE);
+      if (block == NULL)
+        continue;
+
+      /*
+      printf("%soptical\n", udisks_drive_get_optical(drive) ? "is  ": "not ");
+      printf("%sremovable\n", udisks_drive_get_media_removable(drive) ? "is  ": "not ");
+      printf("%sejectable\n", udisks_drive_get_ejectable(drive) ? "is  ": "not ");
+      */
+
       targetname = g_strdup_printf("%s %s",
                                    udisks_drive_get_vendor(drive),
                                    udisks_drive_get_model(drive));
       targetsize = g_strdup_printf("%.02f GB",
                                    udisks_drive_get_size(drive)/1024.0/1024.0/1024.0);
       gtk_list_store_append(store, &i);
-      gtk_list_store_set(store, &i, 0, targetname, 1, targetsize, -1);
+      gtk_list_store_set(store, &i, 0, targetname, 1, targetsize, 2, G_OBJECT(block), -1);
       g_free(targetname);
       g_free(targetsize);
     }
