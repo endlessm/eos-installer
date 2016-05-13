@@ -1,0 +1,11 @@
+#ifndef _GPT_ERRORS_
+#define _GPT_ERRORS_
+
+#define GPT_SUCCESS 0
+#define GPT_ERROR_NULL_INPUT 1
+#define GPT_ERROR_GZIP_OPEN 2
+#define GPT_ERROR_INVALID_GZIP 3
+#define GPT_ERROR_LZMA_INIT_ERROR 4
+#define GPT_ERROR_INVALID_LZMA 5
+
+#endif // _GPT_ERRORS_

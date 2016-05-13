@@ -47,4 +47,4 @@ gnome_image_installer_LDADD =	\
 	pages/finished/libgisfinished.la \
 	$(INITIAL_SETUP_LIBS) \
 	$(IMAGE_INSTALLER_LIBS) \
-	-lm
+	-lm -lz
