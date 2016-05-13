@@ -69,10 +69,9 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
   gchar *basename = NULL;
   GError *e = NULL;
 
-  /* XXX: testing */
-  priv->decompressed_size = 1 * 1024 * 1024 * 1024;
-  priv->decompressed_size *= 4;
+  priv->decompressed_size = gis_store_get_required_size();
   priv->image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
+  g_object_ref (priv->image);
   basename = g_file_get_basename(priv->image);
   if (basename == NULL)
   /* TODO: populate error */
@@ -277,16 +276,20 @@ gis_install_page_prepare (GisPage *page)
   if (!gis_install_page_prepare_read (page, &error))
     {
       printf ("Error reading image: %s\n", error->message);
+      gtk_label_set_text (OBJ (GtkLabel*, "errorlabel"), error->message);
       g_error_free (error);
       gis_install_page_teardown(page);
+      gis_page_set_complete (GIS_PAGE (page), FALSE);
       return FALSE;
     }
 
   if (!gis_install_page_prepare_write (page, &error))
     {
       printf ("Error writing to device: %s\n", error->message);
+      gtk_label_set_text (OBJ (GtkLabel*, "errorlabel"), error->message);
       g_error_free (error);
       gis_install_page_teardown(page);
+      gis_page_set_complete (GIS_PAGE (page), FALSE);
       return FALSE;
     }
 

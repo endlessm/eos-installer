@@ -54,14 +54,14 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE)
 
 
 static void
-gis_diskimage_page_selection_changed(GtkTreeSelection *selection, GisPage *page)
+gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
   GtkTreeIter i;
   gchar *image = NULL;
-  GtkTreeModel *model = NULL;
+  GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
 
-  if (!gtk_tree_selection_get_selected(selection, &model, &i))
+  if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
       gis_page_set_complete (page, FALSE);
       return;
@@ -177,6 +177,7 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
   gchar *file = NULL;
   GtkListStore *store = OBJ(GtkListStore*, "image_store");
   GDir *dir = g_dir_open (path, 0, &error);
+  GtkTreeIter iter;
 
   if (dir == NULL)
     return;
@@ -188,6 +189,12 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
       gchar *fullpath = g_build_path ("/", path, file, NULL);
       add_image(store, fullpath);
       g_free (fullpath);
+    }
+
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
+    {
+      GtkComboBox *combo = OBJ (GtkComboBox*, "imagecombo");
+      gtk_combo_box_set_active_iter (combo, &iter);
     }
 
   g_dir_close (dir);
@@ -255,12 +262,8 @@ gis_diskimage_page_constructed (GObject *object)
 
   gis_page_set_complete (GIS_PAGE (page), FALSE);
 
-  g_signal_connect(OBJ(GObject*, "image_selection"),
+  g_signal_connect(OBJ(GObject*, "imagecombo"),
                        "changed", G_CALLBACK(gis_diskimage_page_selection_changed),
-                       page);
-
-  g_signal_connect(OBJ(GObject*, "browse_button"),
-                       "clicked", G_CALLBACK(gis_diskimage_page_browse),
                        page);
 
   gtk_widget_show (GTK_WIDGET (page));

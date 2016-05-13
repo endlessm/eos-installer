@@ -48,22 +48,53 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskTargetPage, gis_disktarget_page, GIS_TYPE_PAG
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
 
+static void
+check_can_continue(GisDiskTargetPage *page)
+{
+  GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (page);
+  GtkToggleButton *button = OBJ (GtkToggleButton*, "confirmbutton");
+  UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
+  UDisksDrive *drive = NULL;
+
+  gis_page_set_complete (GIS_PAGE (page), FALSE);
+
+  if (block == NULL)
+    return;
+
+  drive = udisks_client_get_drive_for_block (priv->client, UDISKS_BLOCK(block));
+  if (drive == NULL)
+    return;
+
+  if (udisks_drive_get_size(drive) < gis_store_get_required_size())
+    return;
+
+  if (!gtk_toggle_button_get_active (button))
+    return;
+
+  gis_page_set_complete (GIS_PAGE (page), TRUE);
+}
 
 static void
-gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTargetPage *page)
+gis_disktarget_page_confirm_toggled(GtkToggleButton *button, GisDiskTargetPage *page)
+{
+  check_can_continue(page);
+}
+
+static void
+gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
 {
   GtkTreeIter i;
   GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
   gchar *disk, *size = NULL;
   GObject *block = NULL;
-  GtkTreeModel *model = NULL;
+  GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GtkLabel *disk_label = OBJ(GtkLabel*, "disk_label");
   GtkLabel *size_label = OBJ(GtkLabel*, "size_label");
 
   gis_page_set_complete (GIS_PAGE (page), FALSE);
 
-  if (!gtk_tree_selection_get_selected(selection, &model, &i))
+  if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
       gtk_label_set_text(disk_label, "");
       gtk_label_set_text(size_label, "");
@@ -85,6 +116,8 @@ gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTarget
   if (block != NULL)
     {
       UDisksDrive *drive = udisks_client_get_drive_for_block (priv->client, UDISKS_BLOCK(block));
+      gis_store_set_object (GIS_STORE_BLOCK_DEVICE, block);
+      g_object_unref(block);
       if (udisks_drive_get_size(drive) < gis_store_get_required_size())
         {
           gtk_label_set_text(disk_label, "The selected image is too large for this disk!");
@@ -93,10 +126,7 @@ gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTarget
         }
     }
 
-  gis_store_set_object (GIS_STORE_BLOCK_DEVICE, block);
-  g_object_unref(block);
-
-  gis_page_set_complete (GIS_PAGE (page), TRUE);
+  check_can_continue(page);
 }
 
 static void
@@ -106,11 +136,11 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GtkListStore *store = OBJ(GtkListStore*, "target_store");
+  GtkTreeIter i;
 
   gtk_list_store_clear(store);
   for (l = objects; l != NULL; l = l->next)
     {
-      GtkTreeIter i;
       gchar *targetname, *targetsize;
       UDisksObject *object = UDISKS_OBJECT(l->data);
       UDisksDrive *drive = udisks_object_peek_drive(object);
@@ -148,6 +178,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       g_free(targetname);
       g_free(targetsize);
     }
+
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &i))
+    {
+      GtkComboBox *combo = OBJ (GtkComboBox*, "diskcombo");
+      gtk_combo_box_set_active_iter (combo, &i);
+    }
+
 }
 
 static void
@@ -184,9 +221,14 @@ gis_disktarget_page_constructed (GObject *object)
 
   gtk_widget_show (GTK_WIDGET (page));
 
-  g_signal_connect(OBJ(GObject*, "target_selection"),
+  g_signal_connect(OBJ(GObject*, "diskcombo"),
                        "changed", G_CALLBACK(gis_disktarget_page_selection_changed),
                        page);
+
+  g_signal_connect(OBJ(GObject*, "confirmbutton"),
+                       "toggled", G_CALLBACK(gis_disktarget_page_confirm_toggled),
+                       page);
+
 }
 
 static void
