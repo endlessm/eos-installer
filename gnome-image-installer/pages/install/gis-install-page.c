@@ -150,8 +150,7 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
 
   g_clear_object (&fd_list);
 
-  /* XXX: Debugging */
-  priv->drive_fd = open ("/dev/null", O_CREAT | O_WRONLY);
+  priv->drive_fd = fd;
 
   return TRUE;
 }
