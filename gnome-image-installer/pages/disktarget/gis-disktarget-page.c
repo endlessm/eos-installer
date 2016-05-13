@@ -53,17 +53,20 @@ static void
 gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTargetPage *page)
 {
   GtkTreeIter i;
+  GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
+  GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
   gchar *disk, *size = NULL;
   GObject *block = NULL;
   GtkTreeModel *model = NULL;
   GtkLabel *disk_label = OBJ(GtkLabel*, "disk_label");
   GtkLabel *size_label = OBJ(GtkLabel*, "size_label");
 
+  gis_page_set_complete (GIS_PAGE (page), FALSE);
+
   if (!gtk_tree_selection_get_selected(selection, &model, &i))
     {
       gtk_label_set_text(disk_label, "");
       gtk_label_set_text(size_label, "");
-      gis_page_set_complete (GIS_PAGE (page), FALSE);
       return;
     }
 
@@ -78,6 +81,17 @@ gis_disktarget_page_selection_changed(GtkTreeSelection *selection, GisDiskTarget
     gtk_label_set_text(size_label, size);
   else
     gtk_label_set_text(size_label, "");
+
+  if (block != NULL)
+    {
+      UDisksDrive *drive = udisks_client_get_drive_for_block (priv->client, UDISKS_BLOCK(block));
+      if (udisks_drive_get_size(drive) < gis_store_get_required_size())
+        {
+          gtk_label_set_text(disk_label, "The selected image is too large for this disk!");
+          gtk_label_set_text(size_label, "");
+          return;
+        }
+    }
 
   gis_store_set_object (GIS_STORE_BLOCK_DEVICE, block);
   g_object_unref(block);

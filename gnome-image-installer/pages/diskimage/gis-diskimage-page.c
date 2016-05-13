@@ -30,6 +30,11 @@
 #include "diskimage-resources.h"
 #include "gis-diskimage-page.h"
 #include "gis-store.h"
+#include "gpt_gz.h"
+#include "gpt_lzma.h"
+
+#define GNOME_DESKTOP_USE_UNSTABLE_API
+#include <libgnome-desktop/gnome-languages.h>
 
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
@@ -66,6 +71,16 @@ gis_diskimage_page_selection_changed(GtkTreeSelection *selection, GisPage *page)
 
   file = g_file_new_for_path (image);
   gis_store_set_object (GIS_STORE_IMAGE, G_OBJECT (file));
+  if (g_str_has_suffix (image, ".gz"))
+    {
+      gint64 size = get_gzip_disk_image_size (image);
+      gis_store_set_required_size (size);
+    }
+  else if (g_str_has_suffix (image, ".xz"))
+    {
+      gint64 size = get_xz_disk_image_size (image);
+      gis_store_set_required_size (size);
+    }
   g_object_unref(file);
 
   gis_page_set_complete (page, TRUE);
@@ -77,15 +92,44 @@ static gchar *get_display_name(gchar *fullname)
   GMatchInfo *info;
   gchar *name = NULL;
 
-  reg = g_regex_new ("eos-eos(\\d\\.\\d).*\\.(\\w*)\\.img\\.(x|g)z", 0, 0, NULL);
+  /* TEMP: filter split disks out */
+  if (g_strrstr (fullname, "disk") != NULL)
+    return NULL;
+
+  reg = g_regex_new ("eos-eos(\\d*\\.\\d*).*\\.(\\w*)\\.img\\.(x|g)z", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
-      gchar *version = g_match_info_fetch(info, 1);
-      gchar *flavour = g_match_info_fetch(info, 2);
-      name = g_strdup_printf("EOS %s %s", version, flavour);
-      g_free(version);
-      g_free(flavour);
+      gchar *version = g_match_info_fetch (info, 1);
+      gchar *flavour = g_match_info_fetch (info, 2);
+      gchar *language = NULL;
+
+      if (g_str_equal (flavour, "base"))
+        {
+          g_free (flavour);
+          flavour = g_strdup("Light");
+          language = g_strdup ("English");
+        }
+      else
+        {
+          g_free (language);
+          language = gnome_get_language_from_locale (flavour, "C");
+          /* TODO: what is this stupid grumblegrumble... */
+          if (language != NULL && g_strrstr (language, "[") != NULL)
+            {
+              gchar **split = g_strsplit (language, " [", 0);
+              g_free (language);
+              language = g_strdup (split[0]);
+              g_strfreev (split);
+            }
+          g_free (flavour);
+          flavour = g_strdup ("Full");
+        }
+      if (language != NULL)
+        name = g_strdup_printf ("EOS %s %s %s", version, language, flavour);
+      g_free (version);
+      g_free (flavour);
+      g_free (language);
     }
 
   return name;
@@ -101,22 +145,27 @@ static void add_image(GtkListStore *store, gchar *image)
                                      &error);
   if (fi != NULL)
     {
-      gchar *size = g_strdup_printf ("%.02f GB", (float)g_file_info_get_size (fi)/1024.0/1024.0/1024.0);
+      gchar *size = NULL;
       gchar *displayname = get_display_name(image);
-      if (displayname == NULL)
-          displayname = g_file_get_basename(f);
 
-      gtk_list_store_append (store, &i);
-      gtk_list_store_set (store, &i,
-                          0, displayname,
-                          1, size, 2, image, -1);
-      g_free (size);
-      g_free (displayname);
+      if (displayname != NULL)
+        {
+
+          size = g_strdup_printf ("%.02f GB", (float)g_file_info_get_size (fi)/1024.0/1024.0/1024.0);
+
+          gtk_list_store_append (store, &i);
+          gtk_list_store_set (store, &i,
+                              0, displayname,
+                              1, size, 2, image, -1);
+          g_free (size);
+          g_free (displayname);
+        }
     }
   else
     {
-      g_error ("Could not get file info: %s", error->message);
+      g_warning ("Could not get file info: %s", error->message);
     }
+out:
   g_object_unref(f);
   g_object_unref(fi);
 }
