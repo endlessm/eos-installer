@@ -13,6 +13,9 @@ edit = $(AM_V_GEN) sed \
 
 @INTLTOOL_DESKTOP_RULE@
 
+rulesdir = $(datadir)/polkit-1/rules.d
+rules_DATA = 20-eos-installer.rules
+
 sessiondir = $(datadir)/gnome-session/sessions
 session_DATA = eos-installer.session
 
@@ -20,6 +23,7 @@ desktopdir = $(datadir)/gdm/greeter/applications
 desktop_DATA =	eos-installer.desktop $(NULL)
 
 EXTRA_DIST =						\
+	20-eos-installer.rules  		\
 	eos-installer.desktop.in.in		\
 	eos-installer.session			\
 	$(NULL)
