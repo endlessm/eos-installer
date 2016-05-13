@@ -148,5 +148,6 @@ gnome-image-installer/pages/finished/Makefile
 gnome-image-installer/pages/install/Makefile
 po/Makefile.in
 data/Makefile
+eos-installer-data/Makefile
 ])
 AC_OUTPUT
