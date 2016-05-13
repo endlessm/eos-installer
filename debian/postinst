@@ -10,6 +10,14 @@ if ! getent passwd gnome-initial-setup >/dev/null; then
             gnome-initial-setup
 fi
 
+# force our own session to run at first boot instead of the g-i-s
+if [ ! -e /usr/share/gnome-session/sessions/gnome-initial-setup.session ] || \
+      [ -L /usr/share/gnome-session/sessions/gnome-initial-setup.session ]; then
+        cd /usr/share/gnome-session/sessions/
+        ln -sf eos-installer.session gnome-initial-setup.session
+fi
+
+
 #DEBHELPER#
 
 exit 0

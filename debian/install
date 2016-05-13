@@ -1,2 +1,4 @@
 debian/tmp/usr/share/locale/*
 debian/tmp/usr/lib/eos-installer/*
+debian/tmp/usr/share/gnome-session/sessions/eos-installer.session
+debian/tmp/usr/share/gdm/greeter/applications/eos-installer.desktop
