@@ -39,6 +39,9 @@ GObject *gis_store_get_object(gint key);
 void gis_store_set_object(gint key, GObject *obj);
 void gis_store_clear_object(gint key);
 
+gint64 gis_store_get_required_size();
+void gis_store_set_required_size(gint64 size);
+
 G_END_DECLS
 
 #endif /* __GIS_STORE_H__ */

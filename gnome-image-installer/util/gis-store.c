@@ -27,6 +27,7 @@
 #include "gis-store.h"
 
 static GObject *_objects[GIS_STORE_N_OBJECTS];
+static gint64 _size = 0;
 
 GObject *gis_store_get_object(gint key)
 {
@@ -51,6 +52,16 @@ void gis_store_clear_object(gint key)
 
   g_object_unref(_objects[key]);
   _objects[key] = NULL;
+}
+
+gint64 gis_store_get_required_size()
+{
+  return _size;
+}
+
+void gis_store_set_required_size(gint64 size)
+{
+  _size = size;
 }
 
 /* Epilogue {{{1 */
