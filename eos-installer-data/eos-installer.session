@@ -1,0 +1,3 @@
+[GNOME Session]
+Name=EOS Installer
+RequiredComponents=setup-shell;eos-installer;gnome-settings-daemon;

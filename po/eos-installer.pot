@@ -1,153 +1,153 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
-# Translators:
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: eos-installer\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-17 08:35-0700\n"
-"PO-Revision-Date: 2016-05-17 15:38+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
-"Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/id/)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: id\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
-msgstr "Penyiapan Awal"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
-msgstr "Sela_njutnya"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
-msgstr "Se_belumya"
+msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
-msgstr "_Batal"
+msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
 #: ../gnome-image-installer/gnome-image-installer.c:167
 msgid "Force new user mode"
-msgstr "Paksakan mode pengguna baru"
+msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
 #: ../gnome-image-installer/gnome-image-installer.c:171
 msgid "- GNOME initial setup"
-msgstr "- GNOME Penyiapan Awal"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
-msgstr "Tanpa sandi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:336
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
-msgstr "Sandi tak cocok"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
-msgstr "Gagal mendaftar akun"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
-msgstr "Tak ada cara yang didukung untuk mengotentikasi dengan domain ini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
-msgstr "Gagal bergabung domain"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
-msgstr "Gagal log masuk ke domain"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
-msgstr "Log masuk"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr "Buat Akun Pribadi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr "Ketikkan nama lengkap Anda dan kata sandi yang Anda ingat. Harap perhatikan huruf besar dan huruf kecil."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
-msgstr "Nama _Lengkap"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
-msgstr "Nama Pengg_una"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr "Nama pengguna akan dipakai untuk menamai folder pribadi Anda, dan tak dapat diubah."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
-msgstr "_Sandi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
-msgstr "_Konfirmasi sandi:"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
-msgstr "Perlihatkan kata sandi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr "Pastikan Anda menuliskan kata sandi Anda untuk mengingatnya! Anda bisa menulis pengingat untuk diri Anda di sini, tetapi harap perhatikan bahwa pengingat kata sandi ini dapat dilihat oleh orang lain."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr "Pengingat kata sandi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr "Untuk melanjutkan, pastikan mengisi semua titik-titik kosong."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
-msgstr "halaman 1"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
-msgstr "Buat Akun Enterprise"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
-msgstr "_Domain"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
-msgstr "Nama realm atau domain enterprise"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
-msgstr "L_anjutkan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
-msgstr "Log Masuk Administrator Domain"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
@@ -155,87 +155,87 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr "Untuk memakai log masuk enterprise, komputer ini perlu didaftarkan\nke dalam domain. Mintalah administrator jaringan Anda mengetikkan\nsandi domainnya di sini, dan pilih suatu nama komputer yang unik\nbagi komputer Anda."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
-msgstr "_Komputer"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
-msgstr "_Nama Administrator"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
-msgstr "Sandi Administrator"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
 msgid "Too short"
-msgstr "Terlalu pendek"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr "Tak cukup bagus"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
 msgid "Weak"
-msgstr "Lemah"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:111
 msgctxt "Password strength"
 msgid "Fair"
-msgstr "Sedang"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:114
 msgctxt "Password strength"
 msgid "Good"
-msgstr "Bagus"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:117
 msgctxt "Password strength"
 msgid "Strong"
-msgstr "Kuat"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr "Tak bisa otomatis bergabung dengan domain tipe ini"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
 msgid "No such domain or realm found"
-msgstr "Domain atau realm tak ditemukan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr "Tak bisa log masuk sebagai %s pada domain %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr "Sandi tak valid, harap coba lagi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr "Tak bisa menyambung ke domain %s: %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr "Pengguna dengan nama '%s' telah ada"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:154
 #, c-format
 msgid "The username is too long"
-msgstr "Nama pengguna terlalu panjang"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:157
 msgid "The username cannot start with a '-'"
-msgstr "Nama pengguna tak boleh diawali dengan '-'"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:160
 msgid ""
@@ -243,372 +243,372 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr "Nama pengguna mesti hanya terdiri dari:\n ➣ huruf dari alfabet bahasa Inggris\n ➣ dijit\n ➣ sebarang karakter '.', '-', atau '_'"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
-msgstr "Layar"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr "Sesuaikan untuk layar TV"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr "Apakah Anda melihat ini di bagian sudut kanan bawah layar Anda?"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "I see it"
-msgstr "Saya melihatnya"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr "Saya tidak melihatnya. Kecilkan layar agar sesuai dengan TV."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
 msgid "Terms of Use"
-msgstr "Syarat Penggunaan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
 msgid "Third Party Software"
-msgstr "Perangkat Lunak Pihak Ketiga"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
-msgstr "_Terima dan lanjutkan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Please read the following terms of use carefully"
-msgstr "Mohon baca ketentuan penggunaan berikut ini dengan saksama"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr "Dengan mengklik \"Menerima dan melanjutkan,\" Anda menyatakan bahwa Anda telah membaca, memahami, dan sepakat untuk mematuhi ketentuan dan persyaratan berikut."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
-msgstr "Bantulah membuat Endless lebih baik bagi semua orang"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"Automatically save and send usage statistics and problem reports to Endless."
-" All data is anonymous."
-msgstr "Secara otomatis menyimpan dan mengirimkan statistik penggunaan dan laporan masalah ke Endless. Semua data anonim."
+"Automatically save and send usage statistics and problem reports to Endless. "
+"All data is anonymous."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
-msgstr "Persetujuan Lisensi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr "Saya telah setuj_u dengan syarat dan kondisi dalam perjanjian lisensi pengguna akhir ini."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
-msgstr "Lainnya"
+msgstr ""
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
-msgstr "Tambah Akun"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
-msgstr "Surel"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
-msgstr "Kontak"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
-msgstr "Obrolan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
-msgstr "Sumber Daya"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
-msgstr "Galat saat membuat akun"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
-msgstr "Galat saat menghapus akun"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
-msgstr "Apakah Anda yakin hendak menghapus akun tersebut?"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
-msgstr "Ini tak akan menghapus akun pada server."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
-msgstr "_Buang"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
-msgstr "Akun Daring"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
-msgstr "Menyambung ke data Anda yang telah ada di cloud"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr "Menambah akun akan memungkinkan Anda menyambung secara transparan ke foto, kontak, surel, dan banyak lagi daring."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
-msgstr "Tambah _Akun"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
-msgstr "Pratinjau"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:183
 msgid "More…"
-msgstr "Lebih banyak…"
+msgstr ""
 
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
+#.
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
-msgstr "Input tidak ditemukan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr "Tata letak papan ketik Anda nampaknya:"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
-msgstr "Harap menekan salah satu tombol berikut:"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr "Apakah tombol-tombol berikut ada pada papan ketik Anda?"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
-msgstr "Mengetik"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr "Pilih tata letak keyboard"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr "Deteksi tata letak papan ketik saya"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr "Deteksi Tata Letak Papan Tik..."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
-msgstr "Pilih"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:200
 msgid "No languages found"
-msgstr "Tak ada bahasa yang ditemukan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:594
 msgid "Disabled"
-msgstr "Nonaktif"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:596
 #, c-format
 msgid "SD Card: %s"
-msgstr "Kartu SD: %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:675
 msgid "Welcome"
-msgstr "Selamat Datang"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:679
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
-msgstr "Selamat datang di Tanpa Akhir!"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:681
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
-msgstr "Mari kita siapkan komputer Anda..."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
-msgstr "Modus Uji"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 msgid "Power Off"
-msgstr "Daya Mati"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
-msgstr "Cari lokasi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
-msgstr "Lokasi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
-msgstr "Januari"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
-msgstr "Februari"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
-msgstr "Maret"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
-msgstr "April"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
-msgstr "Mei"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
-msgstr "Juni"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
-msgstr "Juli"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
-msgstr "Agustus"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
-msgstr "September"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
-msgstr "Oktober"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
-msgstr "November"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
-msgstr "Desember"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
-msgstr "Pilih Lokasi Anda"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
 msgid "_Determine your location automatically"
-msgstr "Tentukan lokasi An_da secara otomatis"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
-msgstr "Zona Waktu"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
-msgstr "Waktu Jaringan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
-msgstr "16"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
-msgstr "45"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
 msgid ":"
-msgstr ":"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr "Lainnya…"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
-msgstr "Jaringan tak tersedia."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
-msgstr "Tak ditemukan perangkat jaringan."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
-msgstr "Memeriksa ketersediaan jaringan nirkabel"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
-msgstr "Jaringan"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
 msgid "Wireless Networks"
-msgstr "Jaringan Nirkabel"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer "
-"password."
-msgstr "Anda punya internet nirkabel (Wi-Fi)? Jika ya, hubungkan komputer Anda ke internet dengan mengeklik nama jaringan Wi-Fi lalu masukkan kata sandi jaringannya. Kata sandi ini mungkin berbeda dari sandi pada komputer Anda."
+"network password. This password may be different from your computer password."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set"
-" it up in \"Network Settings.\""
-msgstr "TIPS: Anda bisa menggunakan komputer Anda tanpa internet jika Anda tidak memiliki koneksi saat ini. Jika Anda mendapatkan koneksi internet di waktu mendatang, Anda dapat mengaturnya pada \"Pengaturan Jaringan\"."
+"connection now. If you get an internet connection in the future, you can set "
+"it up in \"Network Settings.\""
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr "Nirkabel tidak tersedia"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
-msgstr "_Lewati pengaturan WiFi"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
-msgstr "_Mulai memakai %s"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
-msgstr "Terima Kasih"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
 msgid "Your computer is ready to use."
-msgstr "Komputer Anda siap dipakai."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
 msgid "You may change these options at any time in Settings."
-msgstr "Anda bisa mengubah manapun dari opsi-opsi ini setiap saat dalam Pengaturan."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
-msgstr "_Mulai memakai GNOME 3"
+msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:212
 msgid "Cancel"

@@ -2,11 +2,11 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 AM_CFLAGS = ${WARN_CFLAGS}
 
-SUBDIRS = data gnome-initial-setup po
+SUBDIRS = gnome-initial-setup gnome-image-installer po data eos-installer-data
 
 EXTRA_DIST = \
     autogen.sh \
     COPYING \
     AUTHORS \
     NEWS \
-    gnome-initial-setup.doap
+    eos-installer.doap

@@ -32,4 +32,4 @@ libgislanguage_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 EXTRA_DIST = language.gresource.xml $(resource_files)
 
-dist_libexec_SCRIPTS = eos-test-mode
+#dist_libexec_SCRIPTS = eos-test-mode

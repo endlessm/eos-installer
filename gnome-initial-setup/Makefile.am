@@ -13,7 +13,7 @@ AM_CPPFLAGS = \
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\" \
 	-DDATADIR=\""$(datadir)"\"
 
-libexec_PROGRAMS = gnome-initial-setup gnome-initial-setup-copy-worker
+noinst_PROGRAMS = gnome-initial-setup gnome-initial-setup-copy-worker
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate-dependencies $(srcdir)/gis-assistant.gresource.xml)
 gis-assistant-resources.c: gis-assistant.gresource.xml $(resource_files)
@@ -29,16 +29,25 @@ fbe-remote-generated.h: $(srcdir)/com.endlessm.Tutorial.FBERemote.xml
 	--generate-c-code=fbe-remote-generated $<
 BUILT_SOURCES += fbe-remote-generated.c fbe-remote-generated.h
 
-gnome_initial_setup_SOURCES = \
+noinst_LTLIBRARIES = libgisutil.la
+
+libgisutil_la_SOURCES = \
 	$(BUILT_SOURCES) \
-	gnome-initial-setup.c gnome-initial-setup.h \
 	gis-assistant.c gis-assistant.h \
 	gis-page.c gis-page.h \
 	gis-driver.c gis-driver.h \
 	gis-keyring.c gis-keyring.h \
 	gis-window.c gis-window.h
 
+libgisutil_la_CFLAGS = $(INITIAL_SETUP_CFLAGS)
+libgisutil_la_LIBADD = $(INITIAL_SETUP_LIBS)
+libgisutil_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
+
+gnome_initial_setup_SOURCES = \
+	gnome-initial-setup.c gnome-initial-setup.h
+
 gnome_initial_setup_LDADD =	\
+	libgisutil.la \
 	pages/language/libgislanguage.la \
 	pages/keyboard/libgiskeyboard.la \
 	pages/display/libgisdisplay.la \

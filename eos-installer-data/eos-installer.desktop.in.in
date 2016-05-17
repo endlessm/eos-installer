@@ -1,0 +1,10 @@
+[Desktop Entry]
+_Name=EOS Installer
+Icon=preferences-system
+Exec=@LIBEXECDIR@/gnome-image-installer
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GNOME;GTK;System;
+OnlyShowIn=GNOME;
+NoDisplay=true

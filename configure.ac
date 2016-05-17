@@ -1,4 +1,4 @@
-AC_INIT([gnome-initial-setup],[3.10.1.1])
+AC_INIT([eos-installer],[3.10.1.1])
 AC_CONFIG_MACRO_DIR([m4])
 
 AM_INIT_AUTOMAKE([dist-xz no-dist-gzip foreign tar-ustar])
@@ -11,7 +11,7 @@ LT_INIT
 
 IT_PROG_INTLTOOL([0.40])
 
-GETTEXT_PACKAGE=gnome-initial-setup
+GETTEXT_PACKAGE=eos-installer
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package])
 
@@ -52,6 +52,8 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   webkit2gtk-4.0)
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
+
+PKG_CHECK_MODULES(IMAGE_INSTALLER, udisks2 liblzma)
 
 GEOCLUE_DBUS_INTERFACE_XML=`pkg-config --variable=dbus_interface geoclue-2.0`
 if test "x$GEOCLUE_DBUS_INTERFACE_XML" = "x"; then
@@ -126,7 +128,6 @@ AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 Makefile
-data/Makefile
 gnome-initial-setup/Makefile
 gnome-initial-setup/pages/Makefile
 gnome-initial-setup/pages/language/Makefile
@@ -139,6 +140,15 @@ gnome-initial-setup/pages/network/Makefile
 gnome-initial-setup/pages/goa/Makefile
 gnome-initial-setup/pages/summary/Makefile
 gnome-initial-setup/pages/keyboard/Makefile
+gnome-image-installer/Makefile
+gnome-image-installer/util/Makefile
+gnome-image-installer/pages/Makefile
+gnome-image-installer/pages/diskimage/Makefile
+gnome-image-installer/pages/disktarget/Makefile
+gnome-image-installer/pages/finished/Makefile
+gnome-image-installer/pages/install/Makefile
 po/Makefile.in
+data/Makefile
+eos-installer-data/Makefile
 ])
 AC_OUTPUT

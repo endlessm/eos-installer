@@ -4,12 +4,12 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="gnome-initial-setup"
+PKG_NAME="eos-installer"
 
 (test -f $srcdir/configure.ac \
-  && test -f $srcdir/gnome-initial-setup.doap) || {
+  && test -f $srcdir/eos-installer.doap) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
-    echo " top-level gnome-initial-setup directory"
+    echo " top-level eos-installer directory"
     exit 1
 }
 
