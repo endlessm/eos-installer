@@ -51,6 +51,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisFinishedPage, gis_finished_page, GIS_TYPE_PAGE);
 static void
 reboot_cb (GtkButton *button, GisFinishedPage *page)
 {
+  g_spawn_command_line_sync ("/usr/bin/systemctl poweroff", NULL, NULL, NULL, NULL);
   g_application_quit(G_APPLICATION (GIS_PAGE (page)->driver));
 }
 
