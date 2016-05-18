@@ -52,12 +52,15 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE)
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
 
+G_DEFINE_QUARK(image-error, gis_image_error);
+#define GIS_IMAGE_ERROR gis_image_error_quark()
+
 
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
   GtkTreeIter i;
-  gchar *image = NULL;
+  gchar *image, *name = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
 
@@ -67,18 +70,31 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       return;
     }
 
-  gtk_tree_model_get(model, &i, 2, &image, -1);
+  gtk_tree_model_get(model, &i, 0, &name, 2, &image, -1);
+
+  gis_store_set_image_name (name);
+  g_free (name);
 
   file = g_file_new_for_path (image);
   gis_store_set_object (GIS_STORE_IMAGE, G_OBJECT (file));
   if (g_str_has_suffix (image, ".gz"))
     {
       gint64 size = get_gzip_disk_image_size (image);
+      if (size <= 0)
+        {
+          size = 1*1024*1024*1024;
+          size *= 8;
+        }
       gis_store_set_required_size (size);
     }
   else if (g_str_has_suffix (image, ".xz"))
     {
       gint64 size = get_xz_disk_image_size (image);
+      if (size <= 0)
+        {
+          size = 1*1024*1024*1024;
+          size *= 8;
+        }
       gis_store_set_required_size (size);
     }
   g_object_unref(file);
@@ -107,13 +123,13 @@ static gchar *get_display_name(gchar *fullname)
       if (g_str_equal (flavour, "base"))
         {
           g_free (flavour);
-          flavour = g_strdup("Light");
-          language = g_strdup ("English");
+          flavour = g_strdup(_("Light"));
+          language = gnome_get_language_from_locale ("en", NULL);
         }
       else
         {
           g_free (language);
-          language = gnome_get_language_from_locale (flavour, "C");
+          language = gnome_get_language_from_locale (flavour, NULL);
           /* TODO: what is this stupid grumblegrumble... */
           if (language != NULL && g_strrstr (language, "[") != NULL)
             {
@@ -123,7 +139,7 @@ static gchar *get_display_name(gchar *fullname)
               g_strfreev (split);
             }
           g_free (flavour);
-          flavour = g_strdup ("Full");
+          flavour = g_strdup (_("Full"));
         }
       if (language != NULL)
         name = g_strdup_printf ("EOS %s %s %s", version, language, flavour);
@@ -150,7 +166,6 @@ static void add_image(GtkListStore *store, gchar *image)
 
       if (displayname != NULL)
         {
-
           size = g_strdup_printf ("%.02f GB", (float)g_file_info_get_size (fi)/1024.0/1024.0/1024.0);
 
           gtk_list_store_append (store, &i);
@@ -165,7 +180,7 @@ static void add_image(GtkListStore *store, gchar *image)
     {
       g_warning ("Could not get file info: %s", error->message);
     }
-out:
+
   g_object_unref(f);
   g_object_unref(fi);
 }
@@ -180,7 +195,12 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
   GtkTreeIter iter;
 
   if (dir == NULL)
-    return;
+    {
+      gis_store_set_error (error);
+      g_clear_error (&error);
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+      return;
+    }
 
   gtk_list_store_clear(store);
 
@@ -196,45 +216,16 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
       GtkComboBox *combo = OBJ (GtkComboBox*, "imagecombo");
       gtk_combo_box_set_active_iter (combo, &iter);
     }
-
-  g_dir_close (dir);
-}
-
-static void
-gis_diskimage_page_browse(GtkButton *selection, GisPage *page)
-{
-  GtkWidget *dialog;
-  gint res;
-
-  dialog = gtk_file_chooser_dialog_new ("Open image",
-                                        GTK_WINDOW (gtk_widget_get_toplevel(GTK_WIDGET(page))),
-                                        GTK_FILE_CHOOSER_ACTION_OPEN,
-                                        _("Cancel"), GTK_RESPONSE_CANCEL,
-                                        _("Open"), GTK_RESPONSE_ACCEPT,
-                                        NULL);
-  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), "/eosimages");
-  res = gtk_dialog_run (GTK_DIALOG (dialog));
-
-  if (res == GTK_RESPONSE_ACCEPT)
+  else
     {
-      GtkFileChooser *chooser = GTK_FILE_CHOOSER (dialog);
-      char *file = gtk_file_chooser_get_filename (chooser);
-      GtkListStore *store = OBJ (GtkListStore*, "image_store");
-      GtkTreeSelection *selection = OBJ(GtkTreeSelection*, "image_selection");
-      GtkTreeIter iter;
-      gint n;
-
-      add_image (store, file);
-      g_free (file);
-
-      n = gtk_tree_model_iter_n_children (GTK_TREE_MODEL (store), NULL);
-      if (gtk_tree_model_iter_nth_child(GTK_TREE_MODEL (store), &iter, NULL, n-1))
-        {
-          gtk_tree_selection_select_iter(selection, &iter);
-        }
+      printf("WTF!\n");
+      error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+      gis_store_set_error (error);
+      g_clear_error (&error);
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
     }
 
-  gtk_widget_destroy (dialog);
+  g_dir_close (dir);
 }
 
 static void
@@ -272,7 +263,7 @@ gis_diskimage_page_constructed (GObject *object)
 static void
 gis_diskimage_page_locale_changed (GisPage *page)
 {
-  gis_page_set_title (page, _("Select File"));
+  gis_page_set_title (page, _("Install Endless OS"));
 }
 
 static void

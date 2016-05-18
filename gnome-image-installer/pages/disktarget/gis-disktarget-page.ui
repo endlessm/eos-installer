@@ -22,7 +22,7 @@
       <object class="GtkLabel" id="overview">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Select the device where you'd like to install Endless OS</property>
+        <property name="label" translatable="yes">Select the location where you'd like to install Endless OS</property>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -47,7 +47,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="halign">start</property>
-        <property name="margin_left">32</property>
+        <property name="margin_left">72</property>
         <property name="label" translatable="yes">Select Disk:</property>
         <attributes>
           <attribute name="weight" value="bold"/>
@@ -60,103 +60,156 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBox" id="diskcombo">
+      <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_left">32</property>
-        <property name="margin_right">32</property>
-        <property name="margin_top">16</property>
-        <property name="model">target_store</property>
+        <property name="margin_left">72</property>
         <child>
-          <object class="GtkCellRendererText" id="cellrenderertext3"/>
-          <attributes>
-            <attribute name="text">0</attribute>
-          </attributes>
-        </child>
-        <child>
-          <object class="GtkCellRendererText" id="cellrenderertext4"/>
-          <attributes>
-            <attribute name="text">1</attribute>
-          </attributes>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">3</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkBox" id="browse_box">
-        <property name="can_focus">False</property>
-        <property name="margin_left">32</property>
-        <property name="margin_right">32</property>
-        <property name="margin_top">16</property>
-        <child>
-          <object class="GtkLabel" id="image_label">
+          <object class="GtkComboBox" id="diskcombo">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">&lt;b&gt;Image to be installed:&lt;/b&gt;</property>
-            <property name="use_markup">True</property>
-            <property name="ellipsize">end</property>
-            <property name="xalign">0.05000000074505806</property>
-          </object>
-          <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="size_title_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="xpad">6</property>
-            <property name="label" translatable="yes">&lt;b&gt;Size:&lt;/b&gt;</property>
-            <property name="use_markup">True</property>
+            <property name="halign">center</property>
+            <property name="margin_top">16</property>
+            <property name="model">target_store</property>
+            <child>
+              <object class="GtkCellRendererText" id="cellrenderertext3"/>
+              <attributes>
+                <attribute name="text">0</attribute>
+              </attributes>
+            </child>
+            <child>
+              <object class="GtkCellRendererText" id="cellrenderertext4">
+                <property name="xpad">24</property>
+              </object>
+              <attributes>
+                <attribute name="text">1</attribute>
+              </attributes>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">1</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">False</property>
-        <property name="position">4</property>
+        <property name="position">3</property>
       </packing>
     </child>
     <child>
-      <object class="GtkBox" id="browse_box1">
+      <object class="GtkBox" id="confirm_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_top">16</property>
+        <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel" id="disk_label">
+          <object class="GtkSeparator" id="separator2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="ellipsize">end</property>
-            <property name="xalign">0.05000000074505806</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
           </object>
           <packing>
-            <property name="expand">True</property>
+            <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">0</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="size_label">
+          <object class="GtkCheckButton" id="confirmbutton">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="xpad">6</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">False</property>
+            <property name="margin_left">52</property>
+            <property name="xalign">0</property>
+            <property name="draw_indicator">True</property>
+            <child>
+              <object class="GtkLabel" id="label1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">I agree to erasing &lt;b&gt;all of my files and apps&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="error_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_top">32</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkBox" id="box2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">46</property>
+            <child>
+              <object class="GtkImage" id="image1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_right">12</property>
+                <property name="stock">gtk-dialog-warning</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="too_small_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">The location you have chosen is too small - you need more space to install %s</property>
+                <property name="wrap">True</property>
+                <property name="wrap_mode">word-char</property>
+                <property name="max_width_chars">50</property>
+                <property name="xalign">0</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="suitable_disks_label">
+            <property name="can_focus">False</property>
+            <property name="margin_left">72</property>
+            <property name="margin_top">16</property>
+            <property name="label" translatable="yes">No suitable disks found.</property>
+            <property name="wrap">True</property>
+            <property name="max_width_chars">50</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -165,44 +218,6 @@
         <property name="expand">False</property>
         <property name="fill">False</property>
         <property name="position">5</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkSeparator" id="separator2">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin_top">16</property>
-        <property name="margin_bottom">32</property>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">6</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkCheckButton" id="confirmbutton">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">False</property>
-        <property name="margin_left">32</property>
-        <property name="margin_right">32</property>
-        <property name="xalign">0.10999999940395355</property>
-        <property name="yalign">0.44999998807907104</property>
-        <property name="draw_indicator">True</property>
-        <child>
-          <object class="GtkLabel" id="label1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">I agree to erase &lt;b&gt;all apps and data&lt;/b&gt; from the selected disk.</property>
-            <property name="use_markup">True</property>
-          </object>
-        </child>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">7</property>
       </packing>
     </child>
   </object>
