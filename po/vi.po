@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-17 08:35-0700\n"
-"PO-Revision-Date: 2016-05-17 15:39+0000\n"
+"POT-Creation-Date: 2016-05-19 15:24-0700\n"
+"PO-Revision-Date: 2016-05-19 22:25+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-installer/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -444,7 +444,6 @@ msgid "Welcome to Endless!"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:681
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr ""
 
@@ -453,7 +452,14 @@ msgid "Test Mode"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
+msgid ""
+"This installer will help guide you through installing Endless OS on your "
+"computer"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
@@ -610,32 +616,49 @@ msgstr ""
 msgid "_Start using GNOME 3"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:212
-msgid "Cancel"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:126
+msgid "Light"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:213
-msgid "Open"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:142
+msgid "Full"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:275
-msgid "Select File"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:222
+#, c-format
+msgid "No suitable images were found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:266
+msgid "Install Endless OS"
 msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
-msgid "Select the Endless OS version you'd like to install"
+msgid ""
+"Is this the Endless OS version you'd like to use? If not, download another."
 msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
-msgid "Operating system found:"
+msgid "Use existing version:"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:237
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:118
+#, c-format
+msgid ""
+"The location you have chosen is too small - you need more space to install "
+"%s (%.02f GB)"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:204
+msgid "Finish"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:265
 msgid "Select Disk"
 msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
-msgid "Select the device where you'd like to install Endless OS"
+msgid "Select the location where you'd like to install Endless OS"
 msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
@@ -643,35 +666,41 @@ msgid "Select Disk:"
 msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
-msgid "<b>Image to be installed:</b>"
-msgstr ""
-
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
-msgid "<b>Size:</b>"
+msgid "I agree to erasing <b>all of my files and apps</b>"
 msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:5
-msgid "I agree to erase <b>all apps and data</b> from the selected disk."
+#, no-c-format
+msgid ""
+"The location you have chosen is too small - you need more space to install "
+"%s"
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:85
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+msgid "No suitable disks found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
 msgid "Installation Finished"
 msgstr ""
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
-msgid "<b>Success! Please remove your USB device.</b>"
+msgid ""
+"Success! Power off your computer and then remove your USB device. When you "
+"restart, Endless OS will be ready for you to set up and enjoy!"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+msgid "Oops, something is wrong with your Endless OS file."
 msgstr ""
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
-#, no-c-format
-msgid "<small>System will restart in %d seconds</small>"
+msgid ""
+"Please contact support@endlessm.com or join our Google Group to "
+"troubleshoot."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
-msgid "Restart"
-msgstr ""
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:330
+#: ../gnome-image-installer/pages/install/gis-install-page.c:326
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Installing"
 msgstr ""
