@@ -28,6 +28,8 @@
 
 static GObject *_objects[GIS_STORE_N_OBJECTS];
 static gint64 _size = 0;
+static gchar *_name = NULL;
+static GError *_error = NULL;
 
 GObject *gis_store_get_object(gint key)
 {
@@ -62,6 +64,39 @@ gint64 gis_store_get_required_size()
 void gis_store_set_required_size(gint64 size)
 {
   _size = size;
+}
+
+gchar *gis_store_get_image_name()
+{
+  return _name;
+}
+
+void gis_store_set_image_name(gchar *name)
+{
+  g_free (_name);
+  _name = g_strdup (name);
+}
+
+void gis_store_clear_image_name()
+{
+  g_free (_name);
+  _name = NULL;
+}
+
+GError *gis_store_get_error()
+{
+  return _error;
+}
+
+void gis_store_set_error(GError *error)
+{
+  g_clear_error (&_error);
+  _error = g_error_copy (error);
+}
+
+void gis_store_clear_error()
+{
+  g_clear_error (&_error);
 }
 
 /* Epilogue {{{1 */

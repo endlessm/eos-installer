@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Roddy Shuler <roddy@endlessm.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-17 08:35-0700\n"
-"PO-Revision-Date: 2016-05-17 15:38+0000\n"
+"POT-Creation-Date: 2016-05-19 15:24-0700\n"
+"PO-Revision-Date: 2016-05-21 03:25+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -444,7 +445,6 @@ msgid "Welcome to Endless!"
 msgstr "Selamat datang di Tanpa Akhir!"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:681
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid "Let's set up your computer..."
 msgstr "Mari kita siapkan komputer Anda..."
 
@@ -453,8 +453,15 @@ msgid "Test Mode"
 msgstr "Modus Uji"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
 msgstr "Daya Mati"
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
+msgid ""
+"This installer will help guide you through installing Endless OS on your "
+"computer"
+msgstr "Penginstal ini akan membantu memandu memasang Endless OS di komputer Anda"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
@@ -610,89 +617,112 @@ msgstr "Anda bisa mengubah manapun dari opsi-opsi ini setiap saat dalam Pengatur
 msgid "_Start using GNOME 3"
 msgstr "_Mulai memakai GNOME 3"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:212
-msgid "Cancel"
-msgstr ""
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:126
+msgid "Light"
+msgstr "Light"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:213
-msgid "Open"
-msgstr ""
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:142
+msgid "Full"
+msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:275
-msgid "Select File"
-msgstr ""
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:222
+#, c-format
+msgid "No suitable images were found."
+msgstr "Gambar yang tepat tidak ditemukan."
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:266
+msgid "Install Endless OS"
+msgstr "Pasang Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
-msgid "Select the Endless OS version you'd like to install"
-msgstr ""
+msgid ""
+"Is this the Endless OS version you'd like to use? If not, download another."
+msgstr "Apakah ini versi Endless OS yang ingin Anda gunakan? Jika tidak, unduh versi yang lain."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
-msgid "Operating system found:"
-msgstr ""
+msgid "Use existing version:"
+msgstr "Gunakan versi yang sudah ada:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:237
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:118
+#, c-format
+msgid ""
+"The location you have chosen is too small - you need more space to install "
+"%s (%.02f GB)"
+msgstr "Lokasi yang Anda pilih terlalu kecil - Anda perlu ruang lebih luas untuk memasang %s (%.02f GB)"
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:204
+msgid "Finish"
+msgstr "Selesai"
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:265
 msgid "Select Disk"
-msgstr ""
+msgstr "Pilih Disk"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
-msgid "Select the device where you'd like to install Endless OS"
-msgstr ""
+msgid "Select the location where you'd like to install Endless OS"
+msgstr "Pilih lokasi tempat Anda ingin memasang Endless OS"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "Pilih Disk:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
-msgid "<b>Image to be installed:</b>"
-msgstr ""
-
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
-msgid "<b>Size:</b>"
-msgstr ""
+msgid "I agree to erasing <b>all of my files and apps</b>"
+msgstr "Saya setuju untuk menghapus  <b>semua file dan aplikasi saya</b>"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:5
-msgid "I agree to erase <b>all apps and data</b> from the selected disk."
-msgstr ""
+#, no-c-format
+msgid ""
+"The location you have chosen is too small - you need more space to install "
+"%s"
+msgstr "Lokasi yang Anda pilih terlalu kecil - Anda perlu ruang lebih luas untuk memasang %s"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:85
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+msgid "No suitable disks found."
+msgstr "Disk yang tepat tidak ditemukan."
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
 msgid "Installation Finished"
-msgstr ""
+msgstr "Pemasangan Selesai"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
-msgid "<b>Success! Please remove your USB device.</b>"
-msgstr ""
+msgid ""
+"Success! Power off your computer and then remove your USB device. When you "
+"restart, Endless OS will be ready for you to set up and enjoy!"
+msgstr "Berhasil! Matikan komputer lalu lepas perangkat USB Anda. Ketika memulai ulang, Endless OS akan siap untuk Anda atur dan nikmati!"
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+msgid "Oops, something is wrong with your Endless OS file."
+msgstr "Ups, ada kesalahan dengan file Endless OS Anda."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
-#, no-c-format
-msgid "<small>System will restart in %d seconds</small>"
-msgstr ""
+msgid ""
+"Please contact support@endlessm.com or join our Google Group to "
+"troubleshoot."
+msgstr "Silakan hubungi support@endlessm.com atau bergabunglah dengan Google Group kami untuk mendapatkan penyelesaian masalah."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
-msgid "Restart"
-msgstr ""
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:330
+#: ../gnome-image-installer/pages/install/gis-install-page.c:326
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Installing"
-msgstr ""
+msgstr "Memasang"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr ""
+msgstr "Data terkompresi tidak valid"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr ""
+msgstr "Memori tidak cukup"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "Kesalahan internal"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
-msgstr ""
+msgstr "Butuh lebih banyak input"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
 msgid "EOS Installer"
-msgstr ""
+msgstr "Pemasang EOS"

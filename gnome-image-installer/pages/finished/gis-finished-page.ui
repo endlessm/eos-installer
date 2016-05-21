@@ -14,10 +14,41 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkImage" id="image1">
+          <object class="GtkBox" id="success_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="pixbuf">endless_logo.png</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkImage" id="image1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="pixbuf">endless_logo.png</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="removelabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">16</property>
+                <property name="label" translatable="yes">Success! Power off your computer and then remove your USB device. When you restart, Endless OS will be ready for you to set up and enjoy!</property>
+                <property name="justify">center</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">50</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -26,35 +57,82 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="removelabel">
-            <property name="visible">True</property>
+          <object class="GtkBox" id="error_box">
             <property name="can_focus">False</property>
-            <property name="margin_top">16</property>
-            <property name="label" translatable="yes">&lt;b&gt;Success! Please remove your USB device.&lt;/b&gt;</property>
-            <property name="use_markup">True</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkImage" id="image2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stock">gtk-dialog-warning</property>
+                <property name="icon_size">6</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="error_heading_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">32</property>
+                <property name="label" translatable="yes">Oops, something is wrong with your Endless OS file.</property>
+                <property name="justify">center</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">24</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="error_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">22</property>
+                <property name="justify">center</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">24</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="support_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">16</property>
+                <property name="label" translatable="yes">Please contact support@endlessm.com or join our Google Group to troubleshoot.</property>
+                <property name="justify">center</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">50</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">False</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
-            <property name="fill">True</property>
+            <property name="fill">False</property>
             <property name="position">1</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="restart_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">&lt;small&gt;System will restart in %d seconds&lt;/small&gt;</property>
-            <property name="use_markup">True</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkButton" id="restart_button">
-            <property name="label" translatable="yes">Restart</property>
+            <property name="label" translatable="yes">Power Off</property>
             <property name="width_request">128</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
@@ -70,7 +148,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">False</property>
-            <property name="position">3</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>

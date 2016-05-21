@@ -26,6 +26,7 @@
 #define __GIS_STORE_H__
 
 #include "gnome-image-installer.h"
+#include <glib.h>
 
 G_BEGIN_DECLS
 
@@ -41,6 +42,14 @@ void gis_store_clear_object(gint key);
 
 gint64 gis_store_get_required_size();
 void gis_store_set_required_size(gint64 size);
+
+gchar *gis_store_get_image_name();
+void gis_store_set_image_name(gchar *name);
+void gis_store_clear_image_name();
+
+GError *gis_store_get_error();
+void gis_store_set_error(GError *error);
+void gis_store_clear_error();
 
 G_END_DECLS
 

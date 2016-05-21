@@ -29,6 +29,7 @@
 #include "config.h"
 #include "finished-resources.h"
 #include "gis-finished-page.h"
+#include "gis-store.h"
 
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
@@ -50,6 +51,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisFinishedPage, gis_finished_page, GIS_TYPE_PAGE);
 static void
 reboot_cb (GtkButton *button, GisFinishedPage *page)
 {
+  g_spawn_command_line_sync ("/usr/bin/systemctl poweroff", NULL, NULL, NULL, NULL);
   g_application_quit(G_APPLICATION (GIS_PAGE (page)->driver));
 }
 
@@ -58,9 +60,18 @@ gis_finished_page_shown (GisPage *page)
 {
   GisFinishedPage *summary = GIS_FINISHED_PAGE (page);
   GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (summary);
+  GError *error = gis_store_get_error();
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
+  if (error != NULL)
+    {
+      GisAssistant *assistant = gis_driver_get_assistant (page->driver);
+      gtk_label_set_text (OBJ (GtkLabel*, "error_label"), error->message);
+      gtk_widget_show (WID ("error_box"));
+      gtk_widget_hide (WID ("success_box"));
+      gis_assistant_locale_changed (assistant);
+    }
 }
 
 static void
@@ -82,7 +93,14 @@ gis_finished_page_constructed (GObject *object)
 static void
 gis_finished_page_locale_changed (GisPage *page)
 {
-  gis_page_set_title (page, _("Installation Finished"));
+  if (gis_store_get_error() == NULL)
+    {
+      gis_page_set_title (page, _("Installation Finished"));
+    }
+  else
+    {
+      gis_page_set_title (page, "");
+    }
 }
 
 static void

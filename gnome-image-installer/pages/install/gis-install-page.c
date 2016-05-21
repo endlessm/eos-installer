@@ -187,8 +187,7 @@ gis_install_page_teardown (GisPage *page)
 
   gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 1.0);
 
-  // XXX: FOR DEBUGGING, hide the buttons in final
-  gis_page_set_complete (GIS_PAGE (page), TRUE);
+  gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 
   return FALSE;
 }
@@ -232,12 +231,9 @@ gis_install_page_copy (GisPage *page)
                                buffer, buffer_size,
                                NULL, &error);
 
-      if (error != NULL)
-        printf ("Error: %s\n", error->message);
-
-      if (r < 0)
+      if (r < 0 || error != NULL)
         {
-          printf ("Error: %s\n", error->message);
+          gis_store_set_error (error);
           g_error_free (error);
         }
 
@@ -274,21 +270,17 @@ gis_install_page_prepare (GisPage *page)
 
   if (!gis_install_page_prepare_read (page, &error))
     {
-      printf ("Error reading image: %s\n", error->message);
-      gtk_label_set_text (OBJ (GtkLabel*, "errorlabel"), error->message);
+      gis_store_set_error (error);
       g_error_free (error);
       gis_install_page_teardown(page);
-      gis_page_set_complete (GIS_PAGE (page), FALSE);
       return FALSE;
     }
 
   if (!gis_install_page_prepare_write (page, &error))
     {
-      printf ("Error writing to device: %s\n", error->message);
-      gtk_label_set_text (OBJ (GtkLabel*, "errorlabel"), error->message);
+      gis_store_set_error (error);
       g_error_free (error);
       gis_install_page_teardown(page);
-      gis_page_set_complete (GIS_PAGE (page), FALSE);
       return FALSE;
     }
 
@@ -306,7 +298,11 @@ gis_install_page_shown (GisPage *page)
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
-  g_idle_add ((GSourceFunc)gis_install_page_prepare, page);
+  if (gis_store_get_error() == NULL)
+    g_idle_add ((GSourceFunc)gis_install_page_prepare, page);
+  else
+    gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+
 }
 
 static void

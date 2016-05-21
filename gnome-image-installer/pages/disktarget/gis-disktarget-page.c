@@ -38,8 +38,12 @@
 #include <stdlib.h>
 #include <errno.h>
 
+G_DEFINE_QUARK(disk-error, gis_disk_error);
+#define GIS_DISK_ERROR gis_disk_error_quark()
+
 struct _GisDiskTargetPagePrivate {
   UDisksClient *client;
+  gboolean has_valid_disks;
 };
 typedef struct _GisDiskTargetPagePrivate GisDiskTargetPagePrivate;
 
@@ -55,6 +59,9 @@ check_can_continue(GisDiskTargetPage *page)
   GtkToggleButton *button = OBJ (GtkToggleButton*, "confirmbutton");
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
   UDisksDrive *drive = NULL;
+
+  if (!priv->has_valid_disks)
+    return;
 
   gis_page_set_complete (GIS_PAGE (page), FALSE);
 
@@ -86,32 +93,19 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
   GtkTreeIter i;
   GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
-  gchar *disk, *size = NULL;
   GObject *block = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-  GtkLabel *disk_label = OBJ(GtkLabel*, "disk_label");
-  GtkLabel *size_label = OBJ(GtkLabel*, "size_label");
 
   gis_page_set_complete (GIS_PAGE (page), FALSE);
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
-      gtk_label_set_text(disk_label, "");
-      gtk_label_set_text(size_label, "");
+      gtk_widget_hide (WID ("confirm_box"));
+      gtk_widget_show (WID ("error_box"));
       return;
     }
 
-  gtk_tree_model_get(model, &i, 0, &disk, 1, &size, 2, &block, -1);
-
-  if (disk != NULL)
-    gtk_label_set_text(disk_label, disk);
-  else
-    gtk_label_set_text(disk_label, "");
-
-  if (size != NULL)
-    gtk_label_set_text(size_label, size);
-  else
-    gtk_label_set_text(size_label, "");
+  gtk_tree_model_get(model, &i, 2, &block, -1);
 
   if (block != NULL)
     {
@@ -120,12 +114,19 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
       g_object_unref(block);
       if (udisks_drive_get_size(drive) < gis_store_get_required_size())
         {
-          gtk_label_set_text(disk_label, "The selected image is too large for this disk!");
-          gtk_label_set_text(size_label, "");
+          gchar *msg = g_strdup_printf (
+            _("The location you have chosen is too small - you need more space to install %s (%.02f GB)"),
+            gis_store_get_image_name(), gis_store_get_required_size()/1024.0/1024.0/1024.0);
+          gtk_label_set_text (OBJ (GtkLabel*, "too_small_label"), msg);
+          g_free (msg);
+          gtk_widget_hide (WID ("confirm_box"));
+          gtk_widget_show (WID ("error_box"));
           return;
         }
     }
 
+  gtk_widget_show (WID ("confirm_box"));
+  gtk_widget_hide (WID ("error_box"));
   check_can_continue(page);
 }
 
@@ -133,11 +134,14 @@ static void
 gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 {
   GList *l;
+  GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
+  GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GtkListStore *store = OBJ(GtkListStore*, "target_store");
   GtkTreeIter i;
 
+  priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
   for (l = objects; l != NULL; l = l->next)
     {
@@ -162,11 +166,10 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       if (block == NULL)
         continue;
 
-      /*
-      printf("%soptical\n", udisks_drive_get_optical(drive) ? "is  ": "not ");
-      printf("%sremovable\n", udisks_drive_get_media_removable(drive) ? "is  ": "not ");
-      printf("%sejectable\n", udisks_drive_get_ejectable(drive) ? "is  ": "not ");
-      */
+      if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
+        {
+          priv->has_valid_disks = TRUE;
+        }
 
       targetname = g_strdup_printf("%s %s",
                                    udisks_drive_get_vendor(drive),
@@ -185,6 +188,25 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       gtk_combo_box_set_active_iter (combo, &i);
     }
 
+  if (priv->has_valid_disks)
+    {
+      gtk_widget_set_visible (WID ("suitable_disks_label"), FALSE);
+    }
+  else
+    {
+      GisAssistant *assistant = gis_driver_get_assistant (page->driver);
+      GList *pages = g_list_last (gis_assistant_get_all_pages (assistant));
+      const gchar *text = gtk_label_get_text (OBJ (GtkLabel*, "suitable_disks_label"));
+      GError *error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
+
+      pages = g_list_remove (pages, pages->prev->data);
+      gtk_widget_set_visible (WID ("suitable_disks_label"), TRUE);
+      gis_page_set_forward_text (page, _("Finish"));
+      gis_assistant_locale_changed (assistant);
+      gis_store_set_error (error);
+      g_clear_error (&error);
+      gis_page_set_complete (GIS_PAGE (page), TRUE);
+    }
 }
 
 static void
@@ -195,6 +217,12 @@ gis_disktarget_page_shown (GisPage *page)
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
+
+  if (gis_store_get_error() != NULL)
+    {
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+      return;
+    }
 
   priv->client = udisks_client_new_sync(NULL, &error);
   if (priv->client == NULL)

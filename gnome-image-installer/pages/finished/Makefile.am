@@ -3,6 +3,7 @@ noinst_LTLIBRARIES = libgisfinished.la
 
 AM_CPPFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
+	$(IMAGE_INSTALLER_CFLAGS) \
 	-DLOCALSTATEDIR="\"$(localstatedir)\"" \
 	-DUIDIR="\"$(uidir)\""
 
@@ -19,8 +20,8 @@ libgisfinished_la_SOURCES =			\
 	gis-finished-page.c gis-finished-page.h	\
 	$(BUILT_SOURCES)
 
-libgisfinished_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup"
-libgisfinished_la_LIBADD = $(INITIAL_SETUP_LIBS)
+libgisfinished_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../../util" -I "$(srcdir)/../.."
+libgisfinished_la_LIBADD = $(INITIAL_SETUP_LIBS) $(IMAGE_INSTALLER_CFLAGS)
 libgisfinished_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
 
 EXTRA_DIST =	\
