@@ -8,6 +8,7 @@
 # chenzibing <chenzibing_endless@126.com>, 2016
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
 # liuxuejiao <liuxuejiao_endless@126.com>, 2016
+# Roddy Shuler <roddy@endlessm.com>, 2016
 # tanyuanxing <tanyuanxingendless@126.com>, 2016
 # zhifeng peng <jnufeng@126.com>, 2016
 # zhoushumin <zhoushumin_endless@126.com>, 2016
@@ -16,7 +17,7 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-19 15:24-0700\n"
-"PO-Revision-Date: 2016-05-19 22:25+0000\n"
+"PO-Revision-Date: 2016-05-21 03:24+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -626,11 +627,11 @@ msgstr "开始使用 GNOME 3(_S)"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:126
 msgid "Light"
-msgstr ""
+msgstr "Light"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:142
 msgid "Full"
-msgstr ""
+msgstr "Full"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:222
 #, c-format

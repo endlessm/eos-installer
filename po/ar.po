@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Roddy Shuler <roddy@endlessm.com>, 2015
+# Roddy Shuler <roddy@endlessm.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-05-19 15:24-0700\n"
-"PO-Revision-Date: 2016-05-20 03:39+0000\n"
+"PO-Revision-Date: 2016-05-21 03:23+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -619,11 +619,11 @@ msgstr "اب_دأ باستخدام جنوم 3"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:126
 msgid "Light"
-msgstr "خفيف"
+msgstr "Light"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:142
 msgid "Full"
-msgstr "نسخة كاملة"
+msgstr "Full"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:222
 #, c-format
