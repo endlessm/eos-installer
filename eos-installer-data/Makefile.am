@@ -20,12 +20,13 @@ sessiondir = $(datadir)/gnome-session/sessions
 session_DATA = eos-installer.session
 
 desktopdir = $(datadir)/gdm/greeter/applications
-desktop_DATA =	eos-installer.desktop $(NULL)
+desktop_DATA =	eos-installer.desktop eos-setup-shell.desktop $(NULL)
 
 EXTRA_DIST =						\
 	20-eos-installer.rules  		\
 	eos-installer.desktop.in.in		\
 	eos-installer.session			\
+	eos-setup-shell.desktop 		\
 	$(NULL)
 
 CLEANFILES =						\
