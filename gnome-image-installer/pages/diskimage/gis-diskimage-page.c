@@ -36,6 +36,7 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
+#include <udisks/udisks.h>
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -218,7 +219,6 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
     }
   else
     {
-      printf("WTF!\n");
       error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
       gis_store_set_error (error);
       g_clear_error (&error);
@@ -229,6 +229,72 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
 }
 
 static void
+gis_diskimage_page_mount_ready (GObject *source, GAsyncResult *res, GisPage *page)
+{
+  UDisksFilesystem *fs = UDISKS_FILESYSTEM (source);
+  GError *error = NULL;
+  gchar *path = NULL;
+
+  if (!udisks_filesystem_call_mount_finish (fs, &path, res, &error))
+    {
+      gis_store_set_error (error);
+      g_error_free (error);
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+      return;
+    }
+
+  gis_disktarget_page_populate_model(page, path);
+}
+
+static void
+gis_diskimage_page_mount (GisPage *page)
+{
+  GError *error = NULL;
+  UDisksClient *client = udisks_client_new_sync(NULL, &error);
+  GDBusObjectManager *manager = udisks_client_get_object_manager(client);
+  GList *objects = g_dbus_object_manager_get_objects(manager);
+  GList *l;
+
+  for (l = objects; l != NULL; l = l->next)
+    {
+      UDisksObject *object = UDISKS_OBJECT (l->data);
+      UDisksBlock *block = udisks_object_peek_block (object);
+      UDisksFilesystem *fs = NULL;
+      gchar **mounts = NULL;
+
+      if (block == NULL)
+        continue;
+
+      if (!g_str_equal ("eosimages", udisks_block_get_id_label (block)))
+        continue;
+
+      fs = udisks_object_peek_filesystem (object);
+
+      if (fs == NULL)
+        {
+          continue;
+        }
+
+      mounts = udisks_filesystem_get_mount_points (fs);
+
+      if (mounts != NULL && mounts[0] != NULL)
+        {
+          gis_disktarget_page_populate_model(page, mounts[0]);
+          return;
+        }
+
+      udisks_filesystem_call_mount (fs, g_variant_new ("a{sv}", NULL), NULL,
+                                    gis_diskimage_page_mount_ready, page);
+
+      return;
+    }
+
+  error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+  gis_store_set_error (error);
+  g_clear_error (&error);
+}
+
+static void
 gis_diskimage_page_shown (GisPage *page)
 {
   GisDiskImagePage *diskimage = GIS_DISK_IMAGE_PAGE (page);
@@ -236,10 +302,7 @@ gis_diskimage_page_shown (GisPage *page)
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
-  /* FIXME: This should be the mount point of the image partition. Make it generic.
-   * TODO : Fall back chain through something to working directory?
-   */
-  gis_disktarget_page_populate_model(page, "/eosimages");
+  gis_diskimage_page_mount (page);
 }
 
 static void
