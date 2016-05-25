@@ -113,7 +113,7 @@ static gchar *get_display_name(gchar *fullname)
   if (g_strrstr (fullname, "disk") != NULL)
     return NULL;
 
-  reg = g_regex_new ("eos-eos(\\d*\\.\\d*).*\\.(\\w*)\\.img\\.(x|g)z", 0, 0, NULL);
+  reg = g_regex_new ("eos-eos(\\d*\\.\\d*).*\\.(\\w*)\\.img\\.(x|g)z$", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
