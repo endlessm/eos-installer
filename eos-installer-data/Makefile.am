@@ -30,6 +30,7 @@ EXTRA_DIST =						\
 	eos-installer.desktop.in.in		\
 	eos-installer.session			\
 	eos-setup-shell.desktop 		\
+	run-mount-eosimages.mount
 	$(NULL)
 
 CLEANFILES =						\
