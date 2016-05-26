@@ -52,13 +52,20 @@ struct _GisInstallPagePrivate {
   gint drive_fd;
   gint64 bytes_written;
   GThread *copythread;
+  GPid gpg;
+  guint pulse_id;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisInstallPage, gis_install_page, GIS_TYPE_PAGE);
 
+G_DEFINE_QUARK(install-error, gis_install_error);
+#define GIS_INSTALL_ERROR gis_install_error_quark()
+
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
+
+#define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
 
 static gboolean
 gis_install_page_prepare_read (GisPage *page, GError **error)
@@ -74,8 +81,10 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
   g_object_ref (priv->image);
   basename = g_file_get_basename(priv->image);
   if (basename == NULL)
-  /* TODO: populate error */
-    return FALSE;
+    {
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
+      return FALSE;
+    }
 
   /* TODO: use more magical means */
   if (g_str_has_suffix (basename, "gz"))
@@ -88,7 +97,7 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     }
   else
     {
-      /* TODO: populate error */
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
       g_free (basename);
       g_object_unref (input);
       return FALSE;
@@ -120,8 +129,10 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
   UDisksBlock *block = UDISKS_BLOCK(gis_store_get_object(GIS_STORE_BLOCK_DEVICE));
 
   if (block == NULL)
-    /* TODO: populate error */
-    return FALSE;
+    {
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
+      return FALSE;
+    }
 
   if (!udisks_block_call_open_for_restore_sync (block,
                                                 g_variant_new ("a{sv}", NULL), /* options */
@@ -265,8 +276,13 @@ gis_install_page_prepare (GisPage *page)
   GError *error = NULL;
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  gchar *msg = g_strdup_printf (_("Step %d of %d"), 2, 2);
+  gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
+  g_free (msg);
 
   g_mutex_init (&priv->copy_mutex);
+
+  g_source_remove (priv->pulse_id);
 
   if (!gis_install_page_prepare_read (page, &error))
     {
@@ -291,15 +307,78 @@ gis_install_page_prepare (GisPage *page)
 }
 
 static void
+gis_install_page_gpg_watch (GPid pid, gint status, GisPage *page)
+{
+  GError *error = NULL;
+
+  if (!g_spawn_check_exit_status (status, NULL))
+  {
+    error = g_error_new(GIS_INSTALL_ERROR, status, _("Image verification error."));
+    gis_store_set_error (error);
+    g_error_free (error);
+    gis_install_page_teardown(page);
+    return;
+  }
+
+  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
+  g_spawn_close_pid (pid);
+  g_idle_add ((GSourceFunc)gis_install_page_prepare, page);
+}
+
+static gboolean
+gis_install_page_pulse (GisPage *page)
+{
+  gtk_progress_bar_pulse (OBJ (GtkProgressBar*, "install_progress"));
+  return TRUE;
+}
+
+static gboolean
+gis_install_page_verify (GisPage *page)
+{
+  GisInstallPage *install = GIS_INSTALL_PAGE (page);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GFile *image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
+  gchar *args[7] = { "gpg", "--keyring", IMAGE_KEYRING, "--verify", "", "", NULL };
+  GError *error = NULL;
+
+  args[5] = g_file_get_path (image);
+  args[4] = g_strjoin(NULL, args[5], ".asc", NULL);
+
+  if (!g_spawn_async (NULL, args, NULL, G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
+                      NULL, NULL, &priv->gpg, NULL))
+    {
+      error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
+      gis_store_set_error (error);
+      g_error_free (error);
+      gis_install_page_teardown(page);
+      g_free (args[5]);
+      g_free (args[4]);
+      return FALSE;
+    }
+
+  gtk_progress_bar_pulse (OBJ (GtkProgressBar*, "install_progress"));
+
+  g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_gpg_watch, page);
+  priv->pulse_id = g_timeout_add (500, (GSourceFunc)gis_install_page_pulse, page);
+
+  g_free (args[5]);
+  g_free (args[4]);
+  return FALSE;
+}
+
+static void
 gis_install_page_shown (GisPage *page)
 {
-  GisInstallPage *summary = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (summary);
+  GisInstallPage *install = GIS_INSTALL_PAGE (page);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  gchar *msg = g_strdup_printf (_("Step %d of %d"), 1, 2);
+  gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
+  g_free (msg);
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
   if (gis_store_get_error() == NULL)
-    g_idle_add ((GSourceFunc)gis_install_page_prepare, page);
+    g_idle_add ((GSourceFunc)gis_install_page_verify, page);
   else
     gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 
@@ -313,6 +392,8 @@ gis_install_page_constructed (GObject *object)
   G_OBJECT_CLASS (gis_install_page_parent_class)->constructed (object);
 
   gtk_container_add (GTK_CONTAINER (page), WID ("install-page"));
+
+  gtk_progress_bar_pulse (OBJ (GtkProgressBar*, "install_progress"));
 
   // XXX: FOR DEBUGGING, hide the buttons in final
   gis_page_set_complete (GIS_PAGE (page), FALSE);

@@ -13,13 +13,18 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">48</property>
+        <property name="spacing">16</property>
         <child>
           <object class="GtkLabel" id="install_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Installing</property>
-            <property name="xalign">0</property>
+            <property name="margin_top">32</property>
+            <property name="label" translatable="yes">Step %d of %d</property>
+            <property name="justify">center</property>
+            <attributes>
+              <attribute name="weight" value="bold"/>
+              <attribute name="scale" value="1.1000000000000001"/>
+            </attributes>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -36,19 +41,6 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="errorlabel">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="wrap">True</property>
-            <property name="ellipsize">middle</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
           </packing>
         </child>
       </object>
