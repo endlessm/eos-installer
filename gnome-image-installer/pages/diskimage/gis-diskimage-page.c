@@ -263,7 +263,7 @@ gis_diskimage_page_mount (GisPage *page)
       UDisksObject *object = UDISKS_OBJECT (l->data);
       UDisksBlock *block = udisks_object_peek_block (object);
       UDisksFilesystem *fs = NULL;
-      gchar **mounts = NULL;
+      const gchar *const*mounts = NULL;
 
       if (block == NULL)
         continue;
@@ -282,12 +282,12 @@ gis_diskimage_page_mount (GisPage *page)
 
       if (mounts != NULL && mounts[0] != NULL)
         {
-          gis_disktarget_page_populate_model(page, mounts[0]);
+          gis_disktarget_page_populate_model(page, (gchar*)mounts[0]);
           return;
         }
 
       udisks_filesystem_call_mount (fs, g_variant_new ("a{sv}", NULL), NULL,
-                                    gis_diskimage_page_mount_ready, page);
+                                    (GAsyncReadyCallback)gis_diskimage_page_mount_ready, page);
 
       return;
     }
