@@ -1,4 +1,14 @@
 #include "gpt.h"
+#include "crc32.h"
+
+static uint8_t GPT_GUID_EFI[] = {0x28, 0x73, 0x2a, 0xc1, 0x1f, 0xf8, 0xd2, 0x11, 0xba, 0x4b, 0x00, 0xa0, 0xc9, 0x3e, 0xc9, 0x3b};
+static uint8_t GPT_GUID_BOOT[] = {0x48, 0x61, 0x68, 0x21, 0x49, 0x64, 0x6f, 0x6e, 0x74, 0x4e, 0x65, 0x65, 0x64, 0x45, 0x46, 0x49};
+static uint8_t GPT_GUID_LINUX_DATA[] = {0xaf, 0x3d, 0xc6, 0x0f, 0x83, 0x84, 0x72, 0x47, 0x8e, 0x79, 0x3d, 0x69, 0xd8, 0x47, 0x7d, 0xe4};
+
+uint8_t is_nth_flag_set(uint64_t flags, uint8_t n)
+{
+    return (uint8_t)((flags >> n) & 1UL);
+}
 
 #ifdef DEBUG_PRINTS
 void attributes_to_ascii(const uint8_t *attr, char *s)
@@ -7,11 +17,6 @@ void attributes_to_ascii(const uint8_t *attr, char *s)
             attr[0], attr[1], attr[2], attr[3],
             attr[4], attr[5], attr[6], attr[7]
             );
-}
-
-uint8_t is_nth_flag_set(uint64_t flags, uint8_t n) 
-{
-    return (uint8_t)((flags >> n) & 1UL);
 }
 
 void guid_to_ascii(const uint8_t *guid, char *s)
@@ -39,6 +44,7 @@ void gpt_header_show(const char *msg, const struct gpt_header *header)
 
     printf("%s:"
            "  size=%lu\n"
+           "  revision=%x\n"
            "  current_lba=%llu\n"
            "  backup_lba=%llu\n"
            "  first_usable_lba=%llu\n"
@@ -49,6 +55,7 @@ void gpt_header_show(const char *msg, const struct gpt_header *header)
            "  ptbl_entry_size=%lu\n",
            msg,
            (unsigned long)header->header_size,
+           header->revision,
            (unsigned long long)header->current_lba,
            (unsigned long long)header->backup_lba,
            (unsigned long long)header->first_usable_lba,
@@ -125,6 +132,8 @@ void print_gpt_data(struct ptable *pt)
     }
     // now let's print the partition data
     print_nth_flag(pt->partitions[2].attributes, 55);
+    // now let's test for validity
+    printf("\nis gpt valid? (%s)\n\n", is_eos_gpt_valid(pt)?"yes":"no");
 }
 #endif
 
@@ -135,4 +144,94 @@ uint64_t get_disk_size(struct ptable *pt)
         SECTOR_SIZE +       // gpt header
         pt->header.ptable_count * pt->header.ptable_partition_size + //size of partition table
         pt->header.last_usable_lba * SECTOR_SIZE; // rest of the usable disk size
+}
+
+/**
+ * Checks the GPT for validity
+ * returns 1 if the GPT is valid, 0 otherwise
+ **/
+int is_eos_gpt_valid(struct ptable *pt)
+{
+    int i = 0;
+
+    if(NULL==pt) return 0;
+
+    if(memcmp(pt->header.signature, "EFI PART", 8)!=0) {
+        //  invalid signature
+        return 0;
+    }
+    if(pt->header.revision != 0x00010000) {
+        //  invalid revision
+        return 0;
+    }
+    if(pt->header.header_size != GPT_HEADER_SIZE) {
+        //  invalid header size
+        return 0;
+    }
+    if(pt->header.reserved != 0) {
+        //  reserved bytes must be 0
+        return 0;
+    }
+    if(pt->header.ptable_starting_lba != 2) {
+        //  should always be 2
+        return 0;
+    }
+    if(pt->header.ptable_partition_size != 128) {
+        //  invalid partition size
+        return 0;
+    }
+    if(pt->header.ptable_count < 3 ) {
+        //  need at least 3 partitions
+        return 0;
+    }
+    for(i=0; i<512-GPT_HEADER_SIZE; i++) {
+        if(pt->header.padding[i] != 0) {
+            //  padding must be 0
+            return 0;
+        }
+    }
+    uint64_t flags = 0;
+    memcpy(&flags, pt->partitions[2].attributes, 8);
+    if(!is_nth_flag_set(flags, 55)) {
+        //  55th flag must be 1 for EOS images
+        return 0;
+    }
+    //  crc32 of header, with 'crc' field zero'ed
+    struct gpt_header testcrc_header;
+    memset(&testcrc_header, 0, GPT_HEADER_SIZE);
+    memcpy(&testcrc_header, &pt->header, GPT_HEADER_SIZE);
+    testcrc_header.crc = 0;
+    if(crc32((uint8_t*)(&testcrc_header), GPT_HEADER_SIZE)!=pt->header.crc) {
+        //  invalid header crc
+        return 0;
+    }
+    //  crc32 of partition table
+    int n = pt->header.ptable_count * pt->header.ptable_partition_size;
+    uint8_t *buffer = (uint8_t*)malloc(n);
+    memset(buffer, 0, n);
+    for(i=0; i<3; i++) { // only first 3 partitions are populated, everything else is zero
+        memcpy(buffer+(i*pt->header.ptable_partition_size), (uint8_t*)(&pt->partitions[i]), pt->header.ptable_partition_size);
+    }
+    if(crc32(buffer, n) != pt->header.ptable_crc) {
+        //  invalid partition table crc
+        free(buffer);
+        return 0;
+    }
+    free(buffer);
+
+    // partition GUIDs
+    if(memcmp(&pt->partitions[0].type_guid, GPT_GUID_EFI, 16)!=0) {
+        // invalid first partition GUID
+        return 0;
+    }
+    if(memcmp(&pt->partitions[1].type_guid, GPT_GUID_BOOT, 16)!=0) {
+        // invalid second partition GUID
+        return 0;
+    }
+    if(memcmp(&pt->partitions[2].type_guid, GPT_GUID_LINUX_DATA, 16)!=0) {
+        // invalid third partition GUID
+        return 0;
+    }
+
+    return 1; // success, GPT is valid
 }
