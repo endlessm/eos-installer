@@ -125,7 +125,7 @@ static gchar *get_display_name(gchar *fullname)
         {
           g_free (flavour);
           flavour = g_strdup(_("Light"));
-          name = g_strdup("Endless OS %s %s", version, flavour)
+          name = g_strdup_printf ("Endless OS %s %s", version, flavour);
         }
       else
         {
