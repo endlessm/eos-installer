@@ -125,7 +125,7 @@ static gchar *get_display_name(gchar *fullname)
         {
           g_free (flavour);
           flavour = g_strdup(_("Light"));
-          language = gnome_get_language_from_locale ("en", NULL);
+          name = g_strdup("Endless OS %s %s", version, flavour)
         }
       else
         {
@@ -139,11 +139,14 @@ static gchar *get_display_name(gchar *fullname)
               language = g_strdup (split[0]);
               g_strfreev (split);
             }
+          
           g_free (flavour);
           flavour = g_strdup (_("Full"));
+          
+          if (language != NULL)
+            name = g_strdup_printf ("Endless OS %s %s %s", version, language, flavour);
         }
-      if (language != NULL)
-        name = g_strdup_printf ("EOS %s %s %s", version, language, flavour);
+        
       g_free (version);
       g_free (flavour);
       g_free (language);
