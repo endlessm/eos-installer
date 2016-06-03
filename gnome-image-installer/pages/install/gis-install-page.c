@@ -53,7 +53,8 @@ struct _GisInstallPagePrivate {
   gint64 bytes_written;
   GThread *copythread;
   GPid gpg;
-  guint pulse_id;
+  GIOChannel *gpgout;
+  guint gpg_watch;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
@@ -66,6 +67,7 @@ G_DEFINE_QUARK(install-error, gis_install_error);
 #define WID(name) OBJ(GtkWidget*,name)
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
+#define TRUSTED_KEYID "9E0C1250587A279C"
 
 static gboolean
 gis_install_page_prepare_read (GisPage *page, GError **error)
@@ -282,7 +284,10 @@ gis_install_page_prepare (GisPage *page)
 
   g_mutex_init (&priv->copy_mutex);
 
-  g_source_remove (priv->pulse_id);
+  g_source_remove (priv->gpg_watch);
+  g_io_channel_shutdown (priv->gpgout, TRUE, NULL);
+  g_io_channel_unref (priv->gpgout);
+  priv->gpgout = NULL;
 
   if (!gis_install_page_prepare_read (page, &error))
     {
@@ -326,9 +331,23 @@ gis_install_page_gpg_watch (GPid pid, gint status, GisPage *page)
 }
 
 static gboolean
-gis_install_page_pulse (GisPage *page)
+gis_install_page_gpg_progress (GIOChannel *source, GIOCondition cond, GisPage *page)
 {
-  gtk_progress_bar_pulse (OBJ (GtkProgressBar*, "install_progress"));
+  gchar *line;
+  if (g_io_channel_read_line (source, &line, NULL, NULL, NULL) == G_IO_STATUS_NORMAL)
+  {
+    if (g_str_has_prefix (line, "[GNUPG:] PROGRESS"))
+      {
+        gdouble curr, full, frac;
+        gchar **arr = g_strsplit (line, " ", -1);
+        curr = g_ascii_strtod (arr[4], NULL);
+        full = g_ascii_strtod (arr[5], NULL);
+        frac = curr/full;
+        gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), frac);
+        g_strfreev (arr);
+      }
+    g_free (line);
+  }
   return TRUE;
 }
 
@@ -338,31 +357,41 @@ gis_install_page_verify (GisPage *page)
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   GFile *image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
-  gchar *args[7] = { "gpg", "--keyring", IMAGE_KEYRING, "--verify", "", "", NULL };
+  gint outfd;
+#define ARGS 12
+  gchar *args[ARGS] = { "gpg",
+                        "--enable-progress-filter", "--status-fd", "1",
+                        "--keyring", IMAGE_KEYRING,
+                        "--trusted-key", TRUSTED_KEYID,
+                        "--verify", "", "", NULL };
   GError *error = NULL;
 
-  args[5] = g_file_get_path (image);
-  args[4] = g_strjoin(NULL, args[5], ".asc", NULL);
+  args[ARGS - 2] = g_file_get_path (image);
+  args[ARGS - 3] = g_strjoin(NULL, args[ARGS - 2], ".asc", NULL);
 
-  if (!g_spawn_async (NULL, args, NULL, G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-                      NULL, NULL, &priv->gpg, NULL))
+  if (!g_spawn_async_with_pipes (NULL, args, NULL,
+                                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
+                                 NULL, NULL, &priv->gpg,
+                                 NULL, &outfd, NULL, NULL))
     {
       error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
       gis_store_set_error (error);
       g_error_free (error);
       gis_install_page_teardown(page);
-      g_free (args[5]);
-      g_free (args[4]);
+      g_free (args[ARGS - 2]);
+      g_free (args[ARGS - 3]);
       return FALSE;
     }
 
-  gtk_progress_bar_pulse (OBJ (GtkProgressBar*, "install_progress"));
+  priv->gpgout = g_io_channel_unix_new (outfd);
+  priv->gpg_watch = g_io_add_watch (priv->gpgout, G_IO_IN, (GIOFunc)gis_install_page_gpg_progress, page);
+
+  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
 
   g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_gpg_watch, page);
-  priv->pulse_id = g_timeout_add (500, (GSourceFunc)gis_install_page_pulse, page);
 
-  g_free (args[5]);
-  g_free (args[4]);
+  g_free (args[ARGS - 2]);
+  g_free (args[ARGS - 3]);
   return FALSE;
 }
 
@@ -393,7 +422,7 @@ gis_install_page_constructed (GObject *object)
 
   gtk_container_add (GTK_CONTAINER (page), WID ("install-page"));
 
-  gtk_progress_bar_pulse (OBJ (GtkProgressBar*, "install_progress"));
+  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
 
   // XXX: FOR DEBUGGING, hide the buttons in final
   gis_page_set_complete (GIS_PAGE (page), FALSE);
