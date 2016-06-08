@@ -295,6 +295,7 @@ gis_diskimage_page_mount (GisPage *page)
   error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
   gis_store_set_error (error);
   g_clear_error (&error);
+  gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 }
 
 static void
