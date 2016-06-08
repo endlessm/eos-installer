@@ -146,6 +146,7 @@ gis_disktarget_page_has_data_partitions(GisPage *page, GList *objects, UDisksBlo
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
   UDisksPartitionTable *table;
   UDisksObject *obj = NULL;
+  gint datapartitions = 0;
   GList *l;
 
   for (l = objects; l != NULL; l = l->next)
@@ -181,15 +182,18 @@ gis_disktarget_page_has_data_partitions(GisPage *page, GList *objects, UDisksBlo
        || TYPE_IS("7ffec5c9-2d00-49b7-8941-3ea10a5586b7") /* Plain dm-crypt partition */
        || TYPE_IS("ca7d7ccb-63ed-4c53-861c-1742536059cc") /* LUKS partition */
        || TYPE_IS("0x07") /* Windows / OSX data partition */
-       || TYPE_IS("0x0B") /* FAT32 (CHS) */
-       || TYPE_IS("0x0C") /* FAT32 (LBA) */
+       || TYPE_IS("0x0b") /* FAT32 (CHS) */
+       || TYPE_IS("0x0c") /* FAT32 (LBA) */
        || TYPE_IS("0x83") /* Linux data */
        || TYPE_IS("0x8e") /* Linux LVM */
          )
         {
-          return TRUE;
+          datapartitions++;
         }
     }
+
+  if (datapartitions > 1)
+    return TRUE;
 
   return FALSE;
 }
