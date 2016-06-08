@@ -15,6 +15,6 @@
 #include <memory.h>
 #endif
 
-uint32_t crc32(const void *buffer, uint32_t len);
+uint32_t calc_crc32(const void *buffer, uint32_t len);
 
 #endif  // _GPT_CRC32_H_

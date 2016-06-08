@@ -98,7 +98,7 @@ static uint32_t crc32_tab[] = {
 };
 
 
-uint32_t crc32(const void *buffer, uint32_t len)
+uint32_t calc_crc32(const void *buffer, uint32_t len)
 {
 	uint8_t *byte = (uint8_t *)buffer;
 	uint32_t i;

@@ -201,7 +201,7 @@ int is_eos_gpt_valid(struct ptable *pt)
     memset(&testcrc_header, 0, GPT_HEADER_SIZE);
     memcpy(&testcrc_header, &pt->header, GPT_HEADER_SIZE);
     testcrc_header.crc = 0;
-    if(crc32((uint8_t*)(&testcrc_header), GPT_HEADER_SIZE)!=pt->header.crc) {
+    if(calc_crc32((uint8_t*)(&testcrc_header), GPT_HEADER_SIZE)!=pt->header.crc) {
         //  invalid header crc
         return 0;
     }
@@ -212,7 +212,7 @@ int is_eos_gpt_valid(struct ptable *pt)
     for(i=0; i<3; i++) { // only first 3 partitions are populated, everything else is zero
         memcpy(buffer+(i*pt->header.ptable_partition_size), (uint8_t*)(&pt->partitions[i]), pt->header.ptable_partition_size);
     }
-    if(crc32(buffer, n) != pt->header.ptable_crc) {
+    if(calc_crc32(buffer, n) != pt->header.ptable_crc) {
         //  invalid partition table crc
         free(buffer);
         return 0;
