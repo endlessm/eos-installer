@@ -57,6 +57,7 @@ check_can_continue(GisDiskTargetPage *page)
 {
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (page);
   GtkToggleButton *button = OBJ (GtkToggleButton*, "confirmbutton");
+  GtkToggleButton *pbutton = OBJ (GtkToggleButton*, "partitionbutton");
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
   UDisksDrive *drive = NULL;
 
@@ -78,6 +79,9 @@ check_can_continue(GisDiskTargetPage *page)
   if (!gtk_toggle_button_get_active (button))
     return;
 
+  if (gtk_widget_get_visible (GTK_WIDGET (pbutton)) && !gtk_toggle_button_get_active (pbutton))
+    return;
+
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 }
 
@@ -95,17 +99,20 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
   GObject *block = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+  gboolean has_data_partitions = FALSE;
 
   gis_page_set_complete (GIS_PAGE (page), FALSE);
+  gtk_widget_hide (WID ("partitionbutton"));
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
       gtk_widget_hide (WID ("confirm_box"));
+      gtk_widget_hide (WID ("partitionbutton"));
       gtk_widget_show (WID ("error_box"));
       return;
     }
 
-  gtk_tree_model_get(model, &i, 2, &block, -1);
+  gtk_tree_model_get(model, &i, 2, &block, 3, &has_data_partitions, -1);
 
   if (block != NULL)
     {
@@ -126,8 +133,65 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
     }
 
   gtk_widget_show (WID ("confirm_box"));
+  if (has_data_partitions)
+      gtk_widget_show (WID ("partitionbutton"));
   gtk_widget_hide (WID ("error_box"));
   check_can_continue(page);
+}
+
+static gboolean
+gis_disktarget_page_has_data_partitions(GisPage *page, GList *objects, UDisksBlock* block)
+{
+  GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
+  GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
+  UDisksPartitionTable *table;
+  UDisksObject *obj = NULL;
+  GList *l;
+
+  for (l = objects; l != NULL; l = l->next)
+    {
+      UDisksBlock *blockiter = udisks_object_peek_block (UDISKS_OBJECT (l->data));
+      if (blockiter == block)
+        {
+          obj = UDISKS_OBJECT (l->data);
+          break;
+        }
+    }
+
+  table = udisks_object_peek_partition_table (obj);
+
+  if (table == NULL)
+    return FALSE;
+
+  l = udisks_client_get_partitions(priv->client, table);
+  if (g_list_length (l) < 2)
+    return FALSE;
+
+  for (; l != NULL; l = l->next)
+    {
+      UDisksPartition *part = UDISKS_PARTITION(l->data);
+      const gchar *type = udisks_partition_get_type_(part);
+
+#define TYPE_IS(t) g_str_equal (type, t)
+      if (TYPE_IS("ebd0a0a2-b9e5-4433-87c0-68b6b72699c7") /* Microsoft basic data partition */
+       || TYPE_IS("af9b60a0-1431-4f62-bc68-3311714a69ad") /* Logical Disk Manager data partition	*/
+       || TYPE_IS("0fc63daf-8483-4772-8e79-3d69d8477de4") /* Linux filesystem */
+       || TYPE_IS("933ac7e1-2eb4-4f13-b844-0e14e2aef915") /* /home partition */
+       || TYPE_IS("3b8f8425-20e0-4f3b-907f-1a25a76f98e8") /* /srv (server data) */
+       || TYPE_IS("7ffec5c9-2d00-49b7-8941-3ea10a5586b7") /* Plain dm-crypt partition */
+       || TYPE_IS("ca7d7ccb-63ed-4c53-861c-1742536059cc") /* LUKS partition */
+       || TYPE_IS("0x07") /* Windows / OSX data partition */
+       || TYPE_IS("0x0B") /* FAT32 (CHS) */
+       || TYPE_IS("0x0C") /* FAT32 (LBA) */
+       || TYPE_IS("0x83") /* Linux data */
+       || TYPE_IS("0x8e") /* Linux LVM */
+         )
+        {
+          return TRUE;
+        }
+    }
+
+  return FALSE;
 }
 
 static void
@@ -149,6 +213,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       UDisksObject *object = UDISKS_OBJECT(l->data);
       UDisksDrive *drive = udisks_object_peek_drive(object);
       UDisksBlock *block;
+      gboolean has_data_partitions;
 
       if (drive == NULL)
         continue;
@@ -171,13 +236,16 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
           priv->has_valid_disks = TRUE;
         }
 
+      has_data_partitions = gis_disktarget_page_has_data_partitions(page, objects, block);
+
       targetname = g_strdup_printf("%s %s",
                                    udisks_drive_get_vendor(drive),
                                    udisks_drive_get_model(drive));
       targetsize = g_strdup_printf("%.02f GB",
                                    udisks_drive_get_size(drive)/1024.0/1024.0/1024.0);
       gtk_list_store_append(store, &i);
-      gtk_list_store_set(store, &i, 0, targetname, 1, targetsize, 2, G_OBJECT(block), -1);
+      gtk_list_store_set(store, &i, 0, targetname, 1, targetsize,
+                                    2, G_OBJECT(block), 3, has_data_partitions, -1);
       g_free(targetname);
       g_free(targetsize);
     }
@@ -254,6 +322,9 @@ gis_disktarget_page_constructed (GObject *object)
                        page);
 
   g_signal_connect(OBJ(GObject*, "confirmbutton"),
+                       "toggled", G_CALLBACK(gis_disktarget_page_confirm_toggled),
+                       page);
+  g_signal_connect(OBJ(GObject*, "partitionbutton"),
                        "toggled", G_CALLBACK(gis_disktarget_page_confirm_toggled),
                        page);
 
