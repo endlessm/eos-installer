@@ -126,3 +126,16 @@ uint64_t get_xz_disk_image_size(const char *filepath)
     // error reading from disk
     return 0;
 }
+
+int get_xz_is_valid_eos_gpt(const char *filepath)
+{
+    if(NULL == filepath) return 0;
+    FILE *in_file = fopen(filepath, "r");
+    if(NULL == in_file) return 0;
+    struct ptable pt;
+    if(read_from_xz(in_file, &pt) == GPT_SUCCESS) {
+        return is_eos_gpt_valid(&pt);
+    }
+    // error reading from disk
+    return 0;
+}
