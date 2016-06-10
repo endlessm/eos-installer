@@ -166,7 +166,13 @@ static void add_image(GtkListStore *store, gchar *image)
   if (fi != NULL)
     {
       gchar *size = NULL;
-      gchar *displayname = get_display_name(image);
+      gchar *displayname = NULL;
+
+      if ((g_str_has_suffix (image, ".gz") && get_gzip_is_valid_eos_gpt (image) == 1)
+       || (g_str_has_suffix (image, ".xz") && get_xz_is_valid_eos_gpt (image) == 1))
+        {
+          displayname = get_display_name (image);
+        }
 
       if (displayname != NULL)
         {
