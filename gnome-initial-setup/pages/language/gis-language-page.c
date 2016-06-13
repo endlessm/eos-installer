@@ -72,6 +72,17 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisLanguagePage, gis_language_page, GIS_TYPE_PAGE);
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE (page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
 
+static gchar *_preselected = NULL;
+
+void
+gis_language_page_preselect_language (gchar *locale_id)
+{
+  if (_preselected != NULL)
+    g_free (_preselected);
+  _preselected = g_strdup (locale_id);
+}
+
+
 static void
 set_localed_locale (GisLanguagePage *self)
 {
@@ -136,7 +147,10 @@ set_language (GisLanguagePage *page)
   ActUser *user;
   GisDriver *driver;
 
-  priv->new_locale_id = cc_language_chooser_get_language (CC_LANGUAGE_CHOOSER (priv->language_chooser));
+  if (priv->new_locale_id == NULL && _preselected != NULL)
+    priv->new_locale_id = _preselected;
+  else
+    priv->new_locale_id = cc_language_chooser_get_language (CC_LANGUAGE_CHOOSER (priv->language_chooser));
   driver = GIS_PAGE (page)->driver;
 
   setlocale (LC_MESSAGES, priv->new_locale_id);
