@@ -30,6 +30,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
+#include <udisks/udisks.h>
 
 #ifdef HAVE_CLUTTER
 #include <clutter-gtk/clutter-gtk.h>
@@ -84,6 +85,9 @@ static PageData page_table[] = {
 
 #undef PAGE
 
+#define EOS_GROUP "EndlessOS"
+#define LOCALE_KEY "locale"
+
 static void
 destroy_pages_after (GisAssistant *assistant,
                      GisPage      *page)
@@ -101,6 +105,71 @@ destroy_pages_after (GisAssistant *assistant,
     next = l->next;
     gtk_widget_destroy (GTK_WIDGET (l->data));
   }
+}
+
+static void
+read_keys (const gchar *path)
+{
+  gchar *ini = g_build_path ("/", path, "install.ini", NULL);
+  GKeyFile *keys = g_key_file_new();
+
+  if (g_key_file_load_from_file (keys, ini, G_KEY_FILE_NONE, NULL))
+    {
+      gchar *locale = g_key_file_get_string (keys, EOS_GROUP, LOCALE_KEY, NULL);
+      if (locale != NULL)
+        {
+          gis_language_page_preselect_language (locale);
+          g_free (locale);
+        }
+    }
+
+  g_key_file_free (keys);
+}
+
+static void
+mount_and_read_keys ()
+{
+  GError *error = NULL;
+  UDisksClient *client = udisks_client_new_sync(NULL, &error);
+  GDBusObjectManager *manager = udisks_client_get_object_manager(client);
+  GList *objects = g_dbus_object_manager_get_objects(manager);
+  GList *l;
+
+  for (l = objects; l != NULL; l = l->next)
+    {
+      UDisksObject *object = UDISKS_OBJECT (l->data);
+      UDisksBlock *block = udisks_object_peek_block (object);
+      UDisksFilesystem *fs = NULL;
+      const gchar *const*mounts = NULL;
+      gchar *path = NULL;
+
+      if (block == NULL)
+        continue;
+
+      if (!g_str_equal ("eosimages", udisks_block_get_id_label (block)))
+        continue;
+
+      fs = udisks_object_peek_filesystem (object);
+
+      if (fs == NULL)
+        {
+          continue;
+        }
+
+      mounts = udisks_filesystem_get_mount_points (fs);
+
+      if (mounts != NULL && mounts[0] != NULL)
+        {
+          read_keys (mounts[0]);
+          return;
+        }
+
+      if (udisks_filesystem_call_mount_sync (fs, g_variant_new ("a{sv}", NULL),
+                                             &path, NULL, NULL))
+        {
+          read_keys (path);
+        }
+    }
 }
 
 static void
@@ -127,6 +196,8 @@ rebuild_pages_cb (GisDriver *driver)
 
   for (; page_data->page_id != NULL; ++page_data)
       page_data->prepare_page_func (driver);
+
+  gis_assistant_locale_changed (assistant);
 }
 
 static gboolean
@@ -192,6 +263,8 @@ gis_page_get_type();
 #endif
 
   gis_ensure_login_keyring ("gis");
+
+  mount_and_read_keys ();
 
   driver = gis_driver_new (get_mode ());
   g_signal_connect (driver, "rebuild-pages", G_CALLBACK (rebuild_pages_cb), NULL);
