@@ -424,6 +424,8 @@ gis_install_page_constructed (GObject *object)
 
   gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
 
+  gtk_overlay_add_overlay (OBJ (GtkOverlay*, "graphics_overlay"), WID ("infolabels"));
+
   // XXX: FOR DEBUGGING, hide the buttons in final
   gis_page_set_complete (GIS_PAGE (page), FALSE);
 
