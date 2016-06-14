@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-24 01:41+0000\n"
+"POT-Creation-Date: 2016-06-14 01:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,12 +36,12 @@ msgid "_Cancel"
 msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:167
+#: ../gnome-image-installer/gnome-image-installer.c:238
 msgid "Force new user mode"
 msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:171
+#: ../gnome-image-installer/gnome-image-installer.c:242
 msgid "- GNOME initial setup"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgid "Preview"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:183
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
 msgid "More…"
 msgstr ""
 
@@ -422,29 +422,29 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:200
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:594
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
 msgid "Disabled"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:596
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
 #, c-format
 msgid "SD Card: %s"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:675
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
 msgid "Welcome"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:679
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:681
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
 msgid "Let's set up your computer..."
 msgstr ""
 
@@ -616,20 +616,21 @@ msgstr ""
 msgid "_Start using GNOME 3"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:126
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:127
 msgid "Light"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:142
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:144
 msgid "Full"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:222
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:231
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:301
 #, c-format
 msgid "No suitable images were found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:266
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:339
 msgid "Install Endless OS"
 msgstr ""
 
@@ -642,18 +643,18 @@ msgstr ""
 msgid "Use existing version:"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:118
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
 #, c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install "
 "%s (%.02f GB)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:204
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:276
 msgid "Finish"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:265
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:340
 msgid "Select Disk"
 msgstr ""
 
@@ -669,13 +670,20 @@ msgstr ""
 msgid "I agree to erasing <b>all of my files and apps</b>"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:5
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
+msgid ""
+"It looks like you have multiple partitions on this disk (for example drive "
+"C: and D:). Installing Endless OS will erase <b>all partitions</b> on the "
+"selected disk. Please click here to confirm."
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install %s"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
 msgstr ""
 
@@ -698,8 +706,23 @@ msgid ""
 "Please contact support@endlessm.com or join our Google Group to troubleshoot."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:326
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+#: ../gnome-image-installer/pages/install/gis-install-page.c:87
+#: ../gnome-image-installer/pages/install/gis-install-page.c:102
+#: ../gnome-image-installer/pages/install/gis-install-page.c:135
+#: ../gnome-image-installer/pages/install/gis-install-page.c:321
+#: ../gnome-image-installer/pages/install/gis-install-page.c:377
+#, c-format
+msgid "Image verification error."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:281
+#: ../gnome-image-installer/pages/install/gis-install-page.c:403
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#, no-c-format
+msgid "Step %d of %d"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:436
 msgid "Installing"
 msgstr ""
 
