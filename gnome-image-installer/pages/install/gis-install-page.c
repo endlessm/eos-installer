@@ -55,6 +55,7 @@ struct _GisInstallPagePrivate {
   GPid gpg;
   GIOChannel *gpgout;
   guint gpg_watch;
+  UDisksClient *client;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
@@ -168,6 +169,31 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
   return TRUE;
 }
 
+static void
+gis_install_page_unmount_image_partition (GisPage *page)
+{
+  GisInstallPage *install = GIS_INSTALL_PAGE (page);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GDBusObjectManager *manager = udisks_client_get_object_manager(priv->client);
+  GList *objects = g_dbus_object_manager_get_objects(manager);
+  GList *l;
+
+  for (l = objects; l != NULL; l = l->next)
+    {
+      UDisksFilesystem *fs;
+      UDisksBlock *block = udisks_object_peek_block (UDISKS_OBJECT (l->data));
+
+      if (block == NULL)
+        continue;
+
+      if (!g_str_equal ("eosimages", udisks_block_get_id_label (block)))
+        continue;
+
+      fs = udisks_object_peek_filesystem (UDISKS_OBJECT (l->data));
+      udisks_filesystem_call_unmount_sync (fs, g_variant_new ("a{sv}", NULL), NULL, NULL);
+    }
+}
+
 static gboolean
 gis_install_page_teardown (GisPage *page)
 {
@@ -190,13 +216,16 @@ gis_install_page_teardown (GisPage *page)
 
   if (priv->drive_fd)
     {
-      syncfs(priv->drive_fd);
-      close(priv->drive_fd);
+      syncfs (priv->drive_fd);
+      close (priv->drive_fd);
+      g_spawn_command_line_sync ("partprobe", NULL, NULL, NULL, NULL);
     }
   priv->drive_fd = -1;
   priv->bytes_written = 0;
 
   g_mutex_unlock (&priv->copy_mutex);
+
+  gis_install_page_unmount_image_partition (page);
 
   gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 1.0);
 
@@ -405,6 +434,8 @@ gis_install_page_shown (GisPage *page)
   g_free (msg);
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
+
+  priv->client = udisks_client_new_sync (NULL, NULL);
 
   if (gis_store_get_error() == NULL)
     g_idle_add ((GSourceFunc)gis_install_page_verify, page);
