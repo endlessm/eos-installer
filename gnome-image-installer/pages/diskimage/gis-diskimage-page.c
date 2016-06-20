@@ -109,28 +109,58 @@ static gchar *get_display_name(gchar *fullname)
   GMatchInfo *info;
   gchar *name = NULL;
 
-  /* TEMP: filter split disks out */
-  if (g_strrstr (fullname, "disk") != NULL)
-    return NULL;
-
-  reg = g_regex_new ("eos-eos(\\d*\\.\\d*).*\\.(\\w*)\\.img\\.(x|g)z$", 0, 0, NULL);
+  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-([^-]+)-([^.]+)\\.([^.]+)\\.([^.]+)\\.(disk\\d|img)\\.([gx]z)$", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
-      gchar *version = g_match_info_fetch (info, 1);
-      gchar *flavour = g_match_info_fetch (info, 2);
+      gchar *product = g_match_info_fetch (info, 1);
+      gchar *version = g_match_info_fetch (info, 2);
+      gchar *personality = g_match_info_fetch (info, 6);
+      gchar *type = g_match_info_fetch (info, 7);
       gchar *language = NULL;
 
-      if (g_str_equal (flavour, "base"))
+      /* Split images not supported yet */
+      if (!g_str_equal (type, "img"))
         {
-          g_free (flavour);
-          flavour = g_strdup(_("Light"));
-          name = g_strdup_printf ("Endless OS %s %s", version, flavour);
+          g_free (version);
+          g_free (personality);
+          g_free (type);
+          return NULL;
+        }
+
+      if (g_str_equal (product, "eos"))
+        {
+          g_free (product);
+          product = g_strdup ("Endless OS");
+        }
+      else if (g_str_equal (product, "eosinstaller"))
+        {
+          g_free (product);
+          product = g_strdup ("Endless OS Installer");
+        }
+      else if (g_str_equal (product, "eosnonfree"))
+        {
+          g_free (product);
+          product = g_strdup ("Endless OS (nonfree)");
+        }
+
+      if (g_str_has_prefix (version, "eos"))
+        {
+          gchar *tmp = g_strdup(version+3);
+          g_free (version);
+          version = tmp;
+        }
+
+      if (g_str_equal (personality, "base"))
+        {
+          g_free (personality);
+          personality = g_strdup(_("Light"));
+          name = g_strdup_printf ("%s %s %s", product, version, personality);
         }
       else
         {
           g_free (language);
-          language = gnome_get_language_from_locale (flavour, NULL);
+          language = gnome_get_language_from_locale (personality, NULL);
           /* TODO: what is this stupid grumblegrumble... */
           if (language != NULL && g_strrstr (language, "[") != NULL)
             {
@@ -140,15 +170,16 @@ static gchar *get_display_name(gchar *fullname)
               g_strfreev (split);
             }
           
-          g_free (flavour);
-          flavour = g_strdup (_("Full"));
+          g_free (personality);
+          personality = g_strdup (_("Full"));
           
           if (language != NULL)
-            name = g_strdup_printf ("Endless OS %s %s %s", version, language, flavour);
+            name = g_strdup_printf ("%s %s %s %s", product, version, language, personality);
         }
         
       g_free (version);
-      g_free (flavour);
+      g_free (personality);
+      g_free (type);
       g_free (language);
     }
 
