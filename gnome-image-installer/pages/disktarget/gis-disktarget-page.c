@@ -92,7 +92,7 @@ gis_disktarget_page_confirm_toggled(GtkToggleButton *button, GisDiskTargetPage *
 }
 
 static void
-gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
+gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
   GtkTreeIter i;
   GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
@@ -101,7 +101,7 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   gboolean has_data_partitions = FALSE;
 
-  gis_page_set_complete (GIS_PAGE (page), FALSE);
+  gis_page_set_complete (GIS_PAGE (disktarget), FALSE);
   gtk_widget_hide (WID ("partitionbutton"));
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
@@ -132,11 +132,25 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisDiskTargetPage *page)
         }
     }
 
-  gtk_widget_show (WID ("confirm_box"));
-  if (has_data_partitions)
-      gtk_widget_show (WID ("partitionbutton"));
-  gtk_widget_hide (WID ("error_box"));
-  check_can_continue(page);
+  if (gis_store_is_unattended())
+    {
+      if (gtk_tree_model_iter_n_children (model, NULL) > 1)
+        {
+          const gchar *text = gtk_label_get_text (OBJ (GtkLabel*, "suitable_disks_label"));
+          GError *error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
+          gis_store_set_error (error);
+          g_clear_error (&error);
+        }
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+    }
+  else
+    {
+      gtk_widget_show (WID ("confirm_box"));
+      if (has_data_partitions)
+        gtk_widget_show (WID ("partitionbutton"));
+      gtk_widget_hide (WID ("error_box"));
+      check_can_continue(disktarget);
+    }
 }
 
 static gboolean
@@ -208,6 +222,16 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GtkListStore *store = OBJ(GtkListStore*, "target_store");
   GtkTreeIter i;
+  gchar *umodel = NULL;
+
+  if (gis_store_is_unattended())
+    {
+      GKeyFile *keys = gis_store_get_key_file();
+      if (keys != NULL)
+        {
+          umodel = g_key_file_get_string (keys, "Unattended", "model", NULL);
+        }
+    }
 
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
@@ -221,6 +245,12 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
       if (drive == NULL)
         continue;
+
+      if (gis_store_is_unattended() && umodel != NULL)
+        {
+          if (!g_str_equal (umodel, udisks_drive_get_model (drive)))
+            continue;
+        }
 
       if (udisks_drive_get_optical(drive))
         continue;
@@ -275,6 +305,9 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       gis_store_set_error (error);
       g_clear_error (&error);
       gis_page_set_complete (GIS_PAGE (page), TRUE);
+
+      if (gis_store_is_unattended())
+        gis_assistant_next_page (gis_driver_get_assistant (page->driver));
     }
 }
 

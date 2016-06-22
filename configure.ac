@@ -53,7 +53,7 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
 
-PKG_CHECK_MODULES(IMAGE_INSTALLER, udisks2 liblzma)
+PKG_CHECK_MODULES(IMAGE_INSTALLER, udisks2 liblzma x11)
 
 GEOCLUE_DBUS_INTERFACE_XML=`pkg-config --variable=dbus_interface geoclue-2.0`
 if test "x$GEOCLUE_DBUS_INTERFACE_XML" = "x"; then

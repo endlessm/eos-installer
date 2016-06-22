@@ -101,6 +101,17 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
   g_object_unref(file);
 
   gis_page_set_complete (page, TRUE);
+
+  if (gis_store_is_unattended())
+    {
+      if (gtk_tree_model_iter_n_children (model, NULL) > 1)
+        {
+          GError *error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+          gis_store_set_error (error);
+          g_clear_error (&error);
+        }
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+    }
 }
 
 static gchar *get_display_name(gchar *fullname)
@@ -141,7 +152,7 @@ static gchar *get_display_name(gchar *fullname)
       else if (g_str_equal (product, "eosnonfree"))
         {
           g_free (product);
-          product = g_strdup ("Endless OS (nonfree)");
+          product = g_strdup ("Endless OS (non-free)");
         }
 
       if (g_str_has_prefix (version, "eos"))
@@ -231,6 +242,7 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
 {
   GError *error = NULL;
   gchar *file = NULL;
+  gchar *ufile = NULL;
   GtkListStore *store = OBJ(GtkListStore*, "image_store");
   GDir *dir = g_dir_open (path, 0, &error);
   GtkTreeIter iter;
@@ -245,10 +257,27 @@ gis_disktarget_page_populate_model(GisPage *page, gchar *path)
 
   gtk_list_store_clear(store);
 
+  if (gis_store_is_unattended())
+    {
+      GKeyFile *keys = gis_store_get_key_file();
+      if (keys != NULL)
+        {
+          ufile = g_key_file_get_string (keys, "Unattended", "image", NULL);
+        }
+    }
+
   for (file = (gchar*)g_dir_read_name (dir); file != NULL; file = (gchar*)g_dir_read_name (dir))
     {
       gchar *fullpath = g_build_path ("/", path, file, NULL);
-      add_image(store, fullpath);
+      if (gis_store_is_unattended() && ufile != NULL)
+        {
+          if (g_str_equal (ufile, file))
+              add_image(store, fullpath);
+        }
+      else
+        {
+          add_image(store, fullpath);
+        }
       g_free (fullpath);
     }
 

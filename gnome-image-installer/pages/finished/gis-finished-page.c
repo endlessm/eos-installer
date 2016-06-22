@@ -31,6 +31,7 @@
 #include "gis-finished-page.h"
 #include "gis-store.h"
 
+#include <gtk/gtkx.h>
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
@@ -38,7 +39,7 @@
 #include <errno.h>
 
 struct _GisFinishedPagePrivate {
-  gint dummy;
+  gint led_state;
 };
 typedef struct _GisFinishedPagePrivate GisFinishedPagePrivate;
 
@@ -53,6 +54,19 @@ reboot_cb (GtkButton *button, GisFinishedPage *page)
 {
   g_spawn_command_line_sync ("/usr/bin/systemctl poweroff", NULL, NULL, NULL, NULL);
   g_application_quit(G_APPLICATION (GIS_PAGE (page)->driver));
+}
+
+static gboolean
+toggle_leds (GisPage *page)
+{
+  XKeyboardControl values;
+  GisFinishedPage *summary = GIS_FINISHED_PAGE (page);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (summary);
+
+  values.led_mode = priv->led_state;
+  XChangeKeyboardControl(GDK_DISPLAY_XDISPLAY(gtk_widget_get_display(GTK_WIDGET(page))), KBLedMode, &values);
+  priv->led_state = priv->led_state == 1 ? 0 : 1;
+  return TRUE;
 }
 
 static void
@@ -71,6 +85,11 @@ gis_finished_page_shown (GisPage *page)
       gtk_widget_show (WID ("error_box"));
       gtk_widget_hide (WID ("success_box"));
       gis_assistant_locale_changed (assistant);
+
+      if (gis_store_is_unattended())
+        {
+          g_timeout_add_seconds (1, (GSourceFunc)toggle_leds, page);
+        }
     }
 }
 

@@ -86,7 +86,10 @@ static PageData page_table[] = {
 #undef PAGE
 
 #define EOS_GROUP "EndlessOS"
+#define UNATTENDED_GROUP "Unattended"
 #define LOCALE_KEY "locale"
+#define VENDOR_KEY "vendor"
+#define PRODUCT_KEY "product"
 
 static void
 destroy_pages_after (GisAssistant *assistant,
@@ -107,6 +110,26 @@ destroy_pages_after (GisAssistant *assistant,
   }
 }
 
+static gchar*
+sanitize_string (gchar *string)
+{
+  gchar *r = string;
+  gchar *w = string;
+
+  if (string == NULL)
+    return NULL;
+
+  for (;*r != '\0'; r++)
+    {
+      if (*r < 32 || *r > 126)
+        continue;
+      *w = *r;
+      w++;
+    }
+  *w = '\0';
+  return g_ascii_strdown(string, -1);
+}
+
 static void
 read_keys (const gchar *path)
 {
@@ -121,9 +144,66 @@ read_keys (const gchar *path)
           gis_language_page_preselect_language (locale);
           g_free (locale);
         }
-    }
 
-  g_key_file_free (keys);
+      gis_store_set_key_file (keys);
+
+      if (g_key_file_has_group (keys, UNATTENDED_GROUP))
+        {
+          gchar *contents = NULL;
+          gchar *vendor = NULL;
+          gchar *product = NULL;
+          GError *error = NULL;
+
+          if (g_file_get_contents ("/sys/class/dmi/id/sys_vendor", &contents, NULL, &error))
+            {
+              vendor = sanitize_string (contents);
+              g_free (contents);
+            }
+          else
+            {
+              g_warning ("%s", error->message);
+              g_error_free (error);
+            }
+
+          if (g_file_get_contents ("/sys/class/dmi/id/product_name", &contents, NULL, &error))
+            {
+              product = sanitize_string (contents);
+              g_free (contents);
+            }
+          else
+            {
+              g_warning ("%s", error->message);
+              g_error_free (error);
+            }
+
+          if (vendor != NULL && product != NULL)
+            {
+              gchar *target_vendor = g_key_file_get_string (keys, UNATTENDED_GROUP, VENDOR_KEY, NULL);
+              gchar *target_product = g_key_file_get_string (keys, UNATTENDED_GROUP, PRODUCT_KEY, NULL);
+              gchar *lowcase_vendor = g_ascii_strdown (target_vendor, -1);
+              gchar *lowcase_product = g_ascii_strdown (target_product, -1);
+
+              if (g_str_equal (vendor, lowcase_vendor)
+               && g_str_equal (product, lowcase_product))
+                {
+                  /* We just set the flag here, rest of the magic happens as we go */
+                  gis_store_enter_unattended();
+                }
+              else
+                {
+                  g_error ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
+                           lowcase_product, lowcase_vendor, product, vendor);
+                }
+              g_free (lowcase_vendor);
+              g_free (lowcase_product);
+              g_free (target_vendor);
+              g_free (target_product);
+            }
+
+            g_free (vendor);
+            g_free (product);
+        }
+    }
 }
 
 static void
@@ -198,6 +278,10 @@ rebuild_pages_cb (GisDriver *driver)
       page_data->prepare_page_func (driver);
 
   gis_assistant_locale_changed (assistant);
+
+  /* Skip welcome page in unattended mode */
+  if (gis_store_is_unattended ())
+    gis_assistant_next_page (assistant);
 }
 
 static gboolean

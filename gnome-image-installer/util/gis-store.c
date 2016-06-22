@@ -30,6 +30,8 @@ static GObject *_objects[GIS_STORE_N_OBJECTS];
 static gint64 _size = 0;
 static gchar *_name = NULL;
 static GError *_error = NULL;
+static gboolean _unattended = FALSE;
+static GKeyFile *_keys = NULL;
 
 GObject *gis_store_get_object(gint key)
 {
@@ -98,6 +100,27 @@ void gis_store_clear_error()
 {
   g_clear_error (&_error);
 }
+
+void gis_store_enter_unattended()
+{
+  _unattended = TRUE;
+}
+
+gboolean gis_store_is_unattended()
+{
+  return _unattended;
+}
+
+void gis_store_set_key_file(GKeyFile *keys)
+{
+  _keys = keys;
+}
+
+GKeyFile *gis_store_get_key_file()
+{
+  return _keys;
+}
+
 
 /* Epilogue {{{1 */
 /* vim: set foldmethod=marker: */

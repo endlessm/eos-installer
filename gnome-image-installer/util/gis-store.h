@@ -51,6 +51,12 @@ GError *gis_store_get_error();
 void gis_store_set_error(GError *error);
 void gis_store_clear_error();
 
+void gis_store_enter_unattended();
+gboolean gis_store_is_unattended();
+
+void gis_store_set_key_file(GKeyFile *keys);
+GKeyFile *gis_store_get_key_file();
+
 G_END_DECLS
 
 #endif /* __GIS_STORE_H__ */
