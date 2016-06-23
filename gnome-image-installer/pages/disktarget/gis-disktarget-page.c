@@ -225,9 +225,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       if (udisks_drive_get_optical(drive))
         continue;
 
-      if (udisks_drive_get_removable(drive))
-        continue;
-
       if (udisks_drive_get_ejectable(drive))
         continue;
 
