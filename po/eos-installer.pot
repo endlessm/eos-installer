@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-21 01:42+0000\n"
+"POT-Creation-Date: 2016-06-28 01:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,12 +36,12 @@ msgid "_Cancel"
 msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:238
+#: ../gnome-image-installer/gnome-image-installer.c:322
 msgid "Force new user mode"
 msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:242
+#: ../gnome-image-installer/gnome-image-installer.c:326
 msgid "- GNOME initial setup"
 msgstr ""
 
@@ -616,21 +616,22 @@ msgstr ""
 msgid "_Start using GNOME 3"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:157
-msgid "Light"
-msgstr ""
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:174
-msgid "Full"
-msgstr ""
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:332
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:291
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:361
 #, c-format
 msgid "No suitable images were found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:370
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:168
+msgid "Light"
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
+msgid "Full"
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:399
 msgid "Install Endless OS"
 msgstr ""
 
@@ -650,11 +651,11 @@ msgid ""
 "%s (%.02f GB)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:276
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:303
 msgid "Finish"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:340
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:370
 msgid "Select Disk"
 msgstr ""
 
@@ -687,7 +688,7 @@ msgstr ""
 msgid "No suitable disks found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
 msgid "Installation Finished"
 msgstr ""
 

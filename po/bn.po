@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Roddy Shuler <roddy@endlessm.com>, 2016
+# Shimon Sharmin <oparthib@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 17:28-0700\n"
-"PO-Revision-Date: 2016-06-11 00:29+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"PO-Revision-Date: 2016-06-26 17:13+0000\n"
+"Last-Translator: Shimon Sharmin <oparthib@gmail.com>\n"
 "Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/eos-installer/language/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,134 +22,134 @@ msgstr ""
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
-msgstr ""
+msgstr "প্রাথমিক সেটআপ"
 
 #: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
-msgstr ""
+msgstr "_পরবর্তী"
 
 #: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
-msgstr ""
+msgstr "_পূর্ববর্তী"
 
 #: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
-msgstr ""
+msgstr "_বাতিল"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
 #: ../gnome-image-installer/gnome-image-installer.c:167
 msgid "Force new user mode"
-msgstr ""
+msgstr "নতুন ব্যবহারকারী রূপে যেতে বাধ্য করুন"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
 #: ../gnome-image-installer/gnome-image-installer.c:171
 msgid "- GNOME initial setup"
-msgstr ""
+msgstr "- GNOME প্রাথমিক সেটআপ"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
-msgstr ""
+msgstr "কোন পাসওয়ার্ড নেই"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:336
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
-msgstr ""
+msgstr "পাসওয়ার্ডে মিল নেই"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
-msgstr ""
+msgstr "একাউন্ট নিবন্ধন করতে ব্যর্থ"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
-msgstr ""
+msgstr "এই ডোমেইন যাচাই করার কোনো সমর্থিত উপায় নেই"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
-msgstr ""
+msgstr "ডোমেইনে প্রবেশ করতে ব্যর্থ"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
-msgstr ""
+msgstr "ডোমেইনে লগইন করতে ব্যর্থ"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
-msgstr ""
+msgstr "লগইন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr ""
+msgstr "একটি ব্যক্তিগত একাউন্ট তৈরি করুন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "আপনার পুরো নাম এবংএকটি পাসওয়ার্ড লিখুন যা আপনি মনে রাখতে পারবেন। বড়-ছোট অক্ষরের দিকে নজর রাখুন।"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
-msgstr ""
+msgstr "_পুরো নাম"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
-msgstr ""
+msgstr "_ব্যবহারকারী নাম"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
+msgstr "ব্যবহারকারীর নামটি আপনার ব্যক্তিগত ফোল্ডারের নাম হিসেবে ব্যবহৃত হবে, এবং আর বদলানো যাবে না।"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
-msgstr ""
+msgstr "_পাসওয়ার্ড"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
-msgstr ""
+msgstr "_পাসওয়ার্ড নিশ্চিত করুন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
-msgstr ""
+msgstr "পাসওয়ার্ড প্রদর্শন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "আপনার পাসওয়ার্ড মনে থাকবে নিশ্চিত করতে কোথাও লিখে রাখুন! আপনি এখানে পাসওয়ার্ড স্মরণকারী কোন চিহ্ন লিখতে পারেন, কিন্তু জেনে রাখা উচিত যে এই পাসওয়ার্ড স্মরণকারী চিহ্নটি অন্যরাও দেখতে পাবে।"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "পাসওয়ার্ড_স্মরণকারী_চিহ্ন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr ""
+msgstr "চালিয়ে যেতে, অনুগ্রহ করে সকল শূন্য ঘর পূরণ করুন।"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
-msgstr ""
+msgstr "পাতা 1"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
-msgstr ""
+msgstr "একটি যৌথ একাউন্ট তৈরি করুন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
-msgstr ""
+msgstr "_ডোমেইন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
 msgid "Enterprise domain or realm name"
-msgstr ""
+msgstr "যৌথ ডোমেইন অথবা সাম্রাজ্যের নাম"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
-msgstr ""
+msgstr "C_ontinue"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
-msgstr ""
+msgstr "ডোমেইন প্রশাসক লগইন"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
@@ -156,87 +157,87 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
+msgstr "যৌথ লগইন ব্যবহার করার জন্য, এই কম্পিউটারকে ডোমেইনে তালিকাভুক্ত করতে হবে। অনুগ্রহ করে আপনার নেটওয়ার্ক প্রশাসককে এখানে তাদের ডোমেইন পাসওয়ার্ড লিখতে বলুন, এবং আপনার কম্পিউটারের জন্য একটি অনন্য কম্পিউটার নাম নির্বাচন করুন।"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
-msgstr ""
+msgstr "_কম্পিউটার"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
-msgstr ""
+msgstr "প্রশাসক_নাম"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
-msgstr ""
+msgstr "প্রশাসক পাসওয়ার্ড"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
 msgid "Too short"
-msgstr ""
+msgstr "বেশি ছোট"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr ""
+msgstr "যথেষ্ট নয়"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
 msgid "Weak"
-msgstr ""
+msgstr "দুর্বল"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:111
 msgctxt "Password strength"
 msgid "Fair"
-msgstr ""
+msgstr "মোটামুটি"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:114
 msgctxt "Password strength"
 msgid "Good"
-msgstr ""
+msgstr "ভাল"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:117
 msgctxt "Password strength"
 msgid "Strong"
-msgstr ""
+msgstr "শক্তিশালী"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr ""
+msgstr "এধরণের ডোমেইনে স্বয়ংক্রিয়ভাবে যোগ দেয়া যাবে না"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
 msgid "No such domain or realm found"
-msgstr ""
+msgstr "এমন কোন ডোমেইন বা সাম্রাজ্য পাওয়া যায়নি"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr ""
+msgstr "%s ডোমেইনে %s হিসেবে লগইন করা যাবে না"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr ""
+msgstr "সঠিক পাসওয়ার্ড নয়, আবার চেষ্টা করুন"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr ""
+msgstr "%s ডোমেইনে লগইন করা যায়নি: %s"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr ""
+msgstr "'%s' নামে একজন ব্যবহারকারী ইতিমধ্যেই আছেন"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:154
 #, c-format
 msgid "The username is too long"
-msgstr ""
+msgstr "ব্যবহারকারী নামটি বেশি লম্বা"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:157
 msgid "The username cannot start with a '-'"
-msgstr ""
+msgstr "'-' দিয়ে কোন ব্যবহারকারী নাম শুরু হতে পারবে না"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:160
 msgid ""
@@ -244,334 +245,334 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr ""
+msgstr "ব্যবহারকারী নামে শুধুমাত্র থাকতে পারবে:\n➣ বর্ণমালার অক্ষরসমূহ\n➣ সংখ্যা\n➣ '.', '-' ও '_' চিহ্নসমূহ"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
-msgstr ""
+msgstr "ডিসপ্লে"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr ""
+msgstr "টিভি পর্দার সাথে মিলিয়ে নিন"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr ""
+msgstr "আপনার পর্দার নিচে ডান কোণে কি আপনি এটি দেখতে পাচ্ছেন?"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "I see it"
-msgstr ""
+msgstr "আমি দেখতে পাচ্ছি"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr ""
+msgstr "আমি এটি দেখতে পাচ্ছি না। টিভির সাথে মানানসই হতে পর্দা ছোট করুন।"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
 msgid "Terms of Use"
-msgstr ""
+msgstr "ব্যবহারের শর্তাবলী"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
 msgid "Third Party Software"
-msgstr ""
+msgstr "তৃতীয় পক্ষ সফটওয়্যার"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
-msgstr ""
+msgstr "_মেনে নিন এবং চালিয়ে যান"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Please read the following terms of use carefully"
-msgstr ""
+msgstr "অনুগ্রহ করে নিম্নোক্ত শর্তাবলী সতর্কতার সাথে পড়ুন"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr ""
+msgstr "\"মেনে নিন এবং চালিয়ে যান\" চাপার মাধ্যমে আপনি স্বীকার করে নিলেন যে আপনি নিম্নোক্ত নিয়ম ও শর্তাবলী পড়েছেন, বুঝেছেন এবং মানতে রাজি হয়েছেন।"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
-msgstr ""
+msgstr "এন্ডলেস-কে সবার জন্য আরো উন্নত করতে সাহায্য করুন"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless."
 " All data is anonymous."
-msgstr ""
+msgstr "স্বয়ংক্রিয়ভাবে রক্ষা করুন এবং ব্যবহারের পরিসংখ্যান ও সমস্যার খতিয়ান এন্ডলেস-কে পাঠিয়ে দিন। সকল তথ্য নামবিহীন থাকবে।"
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
 msgid "License Agreements"
-msgstr ""
+msgstr "লাইসেন্স চুক্তিপত্র"
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr ""
+msgstr "আমি _এই ব্যবহারকারী লাইসেন্স চুক্তিপত্রের সকল নিয়ম ও শর্তাবলী মেনে নিতে রাজি হয়েছি।"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
-msgstr ""
+msgstr "অন্যকিছু"
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
 msgid "Add Account"
-msgstr ""
+msgstr "একাউন্ট সংযৃক্তি"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
-msgstr ""
+msgstr "চিঠি"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
-msgstr ""
+msgstr "পরিচিত ব্যক্তিসমূহ"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
-msgstr ""
+msgstr "আড্ডা"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
-msgstr ""
+msgstr "সংস্থানসমূহ"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
-msgstr ""
+msgstr "একাউন্ট তৈরিতে ভুল হয়েছে"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
-msgstr ""
+msgstr "একাউন্ট মুছতে ভুল হয়েছে"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
-msgstr ""
+msgstr "আপনি নিশ্চিত যে একাউন্টটি মুছে ফেলবেন?"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
-msgstr ""
+msgstr "এতে একাউন্টটি সার্ভার থেকে মুছে যাবে না।"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
-msgstr ""
+msgstr "_মুছুন"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
-msgstr ""
+msgstr "অনলাইন একাউন্টসমূহ"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
-msgstr ""
+msgstr "ক্লাউডে আপনার বিদ্যমান তথ্যের সাথে যোগাযোগ স্থাপন করুন"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr ""
+msgstr "একাউন্ট সংযুক্তির মাধ্যমে আপনি স্বচ্ছভাবে আপনার অনলাইনে থাকা ছবি, পরিচিত ব্যক্তিসমূহ, চিঠি এবং আরো অনেককিছুর সাথে যোগাযোগ করতে পারবেন।"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
-msgstr ""
+msgstr "_একাউন্ট সংযুক্তি"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
-msgstr ""
+msgstr "আবার দেখুন"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
 msgid "More…"
-msgstr ""
+msgstr "আরো..."
 
 #. Translators: a search for input methods or keyboard layouts
 #. * did not yield any results
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
-msgstr ""
+msgstr "কোন তথ্য পাওয়া যায়নি"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr ""
+msgstr "আপনার কিবোর্ডের লেআউট এমন:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
-msgstr ""
+msgstr "অনুগ্রহ করে নিম্নোক্ত একটি বোতাম চাপুন:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr ""
+msgstr "নিম্নোক্ত বোতামটি কি আপনার কিবোর্ডে আছে?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
-msgstr ""
+msgstr "লেখা হচ্ছে"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr ""
+msgstr "আপনার কিবোর্ডের লেআউট নির্বাচন করুন"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr ""
+msgstr "আমার কিবোর্ডের লেআউট সনাক্তে সাহায্য করুন"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr ""
+msgstr "কিবোর্ড লেআউট সনাক্ত করুন..."
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
-msgstr ""
+msgstr "নির্বাচন করুন"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
-msgstr ""
+msgstr "কোনো ভাষা পাওয়া যায়নি"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:594
 msgid "Disabled"
-msgstr ""
+msgstr "অকার্যকর"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:596
 #, c-format
 msgid "SD Card: %s"
-msgstr ""
+msgstr "SD কার্ড: %s"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:675
 msgid "Welcome"
-msgstr ""
+msgstr "স্বাগতম"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:679
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
-msgstr ""
+msgstr "এন্ডলেসে স্বাগতম!"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:681
 msgid "Let's set up your computer..."
-msgstr ""
+msgstr "চলুন আপনার কম্পিউটার সেটআপ করি..."
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
-msgstr ""
+msgstr "পরীক্ষা রূপ"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
-msgstr ""
+msgstr "বন্ধ করুন"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid ""
 "This installer will help guide you through installing Endless OS on your "
 "computer"
-msgstr ""
+msgstr "আপনার কম্পিউটারে এন্ডলেস OS সংস্থাপন করতে পথ দেখানোর কাজ করবে এই সংস্থাপন পরিসেবাটি"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
-msgstr ""
+msgstr "একটি অঞ্চল খোঁজ করুন"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
-msgstr ""
+msgstr "অঞ্চল"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
-msgstr ""
+msgstr "জানুয়ারি"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
-msgstr ""
+msgstr "ফেব্রুয়ারি"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
-msgstr ""
+msgstr "মার্চ"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
-msgstr ""
+msgstr "এপ্রিল"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
-msgstr ""
+msgstr "মে"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
-msgstr ""
+msgstr "জুন"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
-msgstr ""
+msgstr "জুলাই"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
-msgstr ""
+msgstr "অগাষ্ট"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
-msgstr ""
+msgstr "সেপ্টেম্বর"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
-msgstr ""
+msgstr "অক্টোবর"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
-msgstr ""
+msgstr "নভেম্বর"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
-msgstr ""
+msgstr "ডিসেম্বর"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
-msgstr ""
+msgstr "আপনার অঞ্চল নির্বাচন করুন"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
 msgid "_Determine your location automatically"
-msgstr ""
+msgstr "_আপনার অঞ্চল স্বয়ংক্রিয়ভাবে নির্বাচন করুন"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
-msgstr ""
+msgstr "সময় অঞ্চল"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
-msgstr ""
+msgstr "নেটওয়ার্ক সময়"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
-msgstr ""
+msgstr "45"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr ""
+msgstr "অন্যকিছু..."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
-msgstr ""
+msgstr "নেটওয়ার্ক পাওয়া যায়নি।"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
-msgstr ""
+msgstr "কোন নেটওয়ার্ক ডিভাইস পাওয়া যায়নি।"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
-msgstr ""
+msgstr "ওয়্যারলেস নেটওয়ার্ক খোঁজ করা হচ্ছে"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
-msgstr ""
+msgstr "নেটওয়ার্ক"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
 msgid "Wireless Networks"
-msgstr ""
+msgstr "ওয়্যারলেস নেটওয়ার্ক"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
 msgid ""
@@ -579,43 +580,43 @@ msgid ""
 "the internet by clicking on the name of your WiFi network and entering the "
 "network password. This password may be different from your computer "
 "password."
-msgstr ""
+msgstr "আপনার কি ওয়্যারলেস ইন্টারনেট (ওয়াইফাই) আছে? যদি থাকে, আপনার ওয়াইফাই নেটওয়ার্ক বাছাই করুন ও নেটওয়ার্ক পাসওয়ার্ড প্রবেশ করিয়ে ইন্টারনেটের সাথে আপনার কম্পিউটারটি সংযুক্ত করুন। আপনার কম্পিউটারের পাসওয়ার্ড থেকে এই পাসওয়ার্ড ভিন্ন হতে পারে।"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
 "connection now. If you get an internet connection in the future, you can set"
 " it up in \"Network Settings.\""
-msgstr ""
+msgstr "বুদ্ধি: এই মুহূর্তে সংযোগ না থাকলে আপনি ইন্টারনেট ছাড়াও আপনার কম্পিউটার ব্যবহার করতে পারেন। যদি আপনি ভবিষ্যতে ইন্টারনেট সংযোগ পান, তাহলে \"নেটওয়ার্ক সেটিংস\"-এ গিয়ে সেটআপ করে নিতে পারবেন।"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr ""
+msgstr "কোন ওয়্যারলেস পাওয়া যায়নি"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
-msgstr ""
+msgstr "_ওয়াইফাই সেটআপ বাদ দিন"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
-msgstr ""
+msgstr "_%s শুরু করুন"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
-msgstr ""
+msgstr "ধন্যবাদ"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
 msgid "Your computer is ready to use."
-msgstr ""
+msgstr "আপনার কম্পিউটার ব্যবহারের জন্য তৈরি।"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
 msgid "You may change these options at any time in Settings."
-msgstr ""
+msgstr "আপনি সেটিংসে গিয়ে যে কোন সময় এই বিকল্পগুলো বদলে নিতে পারেন।"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
-msgstr ""
+msgstr "_GNOME 3 ব্যবহার শুরু করুন"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:127
 msgid "Light"
@@ -629,85 +630,85 @@ msgstr "Full"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:295
 #, c-format
 msgid "No suitable images were found."
-msgstr ""
+msgstr "কোন যথাযথ ছবি পাওয়া যায়নি।"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:333
 msgid "Install Endless OS"
-msgstr ""
+msgstr "এন্ডলেস OS সংস্থাপন করুন"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr ""
+msgstr "আপনি কি এই এন্ডলেস OS ভার্সনটিই ব্যবহার করতে ইচ্ছুক? যদি না হয়, আরেকটি ডাউনলোড করুন।"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
-msgstr ""
+msgstr "বিদ্যমান ভার্সন ব্যবহার করুন:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
 #, c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install "
 "%s (%.02f GB)"
-msgstr ""
+msgstr "আপনি যে জায়গাটি নির্বাচন করেছেন তা অতিরিক্ত ছোট - %s (%.02f GB) সংস্থাপন করতে আপনার আরো জায়গা লাগবে"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:276
 msgid "Finish"
-msgstr ""
+msgstr "শেষ করুন"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:340
 msgid "Select Disk"
-msgstr ""
+msgstr "ডিস্ক নির্বাচন করুন"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the location where you'd like to install Endless OS"
-msgstr ""
+msgstr "এন্ডলেস OS যেখানে সংস্থাপন করবেন সেই জায়গাটি নির্বাচন করুন"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "ডিস্ক নির্বাচন করুন:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr ""
+msgstr "<b>আমার সকল ফাইল এবং এ্যাপসমূহ</b> মুছে দিতে আমি রাজি হয়েছি"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Installing Endless OS will erase <b>all partitions</b> on the "
 "selected disk. Please click here to confirm."
-msgstr ""
+msgstr "মনে হচ্ছে আপনার এই ডিস্কে একের অধিক পার্টিশন রয়েছে (উদাহরণস্বরূপ ড্রাইভ C: এবং D:) । এন্ডলেস OS সংস্থাপন করলে নির্বাচিত ডিস্কের <b>সকল পার্টিশন</b> মুছে যাবে। আপনি এটা করতে চান নিশ্চিত করার জন্য অনুগ্রহ করে এখানে চাপুন।"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install "
 "%s"
-msgstr ""
+msgstr "আপনি যে জায়গাটি নির্বাচন করেছেন তা অতিরিক্ত ছোট - %s সংস্থাপন করতে আপনার আরো জায়গা লাগবে"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr ""
+msgstr "যথাযথ কোন ডিস্ক পাওয়া যায়নি"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
 msgid "Installation Finished"
-msgstr ""
+msgstr "সংস্থাপন শেষ"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "সফল! আপনার কম্পিউটার বন্ধ করুন এবং তারপর আপনার USB ডিভাইসটি সরিয়ে নিন। যখন পুনরায় চালু করবেন, সেটআপ করে কাজ শুরু করার জন্য এন্ডলেস OS তৈরি থাকবে!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr ""
+msgstr "ওহ, আপনার এন্ডলেস OS ফাইলে কোন সমস্যা হয়েছে।"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid ""
 "Please contact support@endlessm.com or join our Google Group to "
 "troubleshoot."
-msgstr ""
+msgstr "অনুগ্রহ করে এখানে যোগাযোগ করুন support@endlessm.com অথবা আমাদের গুগল গ্রুপে যোগ দিয়ে সমস্যা সমাধান করুন।"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:87
 #: ../gnome-image-installer/pages/install/gis-install-page.c:102
@@ -716,36 +717,36 @@ msgstr ""
 #: ../gnome-image-installer/pages/install/gis-install-page.c:377
 #, c-format
 msgid "Image verification error."
-msgstr ""
+msgstr "ছবি নিশ্চিতকরণে ভুল হয়েছে।"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:281
 #: ../gnome-image-installer/pages/install/gis-install-page.c:403
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
-msgstr ""
+msgstr "ধাপ %d of %d"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:436
 msgid "Installing"
-msgstr ""
+msgstr "সংস্থাপিত হচ্ছে"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr ""
+msgstr "অকার্যকরী সঙ্কুচিত তথ্য"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr ""
+msgstr "পর্যাপ্ত মেমোরি নেই"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "অভ্যন্তরীণ ভুল হয়েছে"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
-msgstr ""
+msgstr "আরো তথ্য দরকার"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
 msgid "EOS Installer"
-msgstr ""
+msgstr "EOS সংস্থাপন"
