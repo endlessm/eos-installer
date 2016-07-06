@@ -253,6 +253,64 @@ mount_and_read_keys ()
 }
 
 static void
+check_for_live_image ()
+{
+  GError *error = NULL;
+  UDisksClient *client = udisks_client_new_sync(NULL, &error);
+  GDBusObjectManager *manager = udisks_client_get_object_manager(client);
+  GList *objects = g_dbus_object_manager_get_objects(manager);
+  GList *l;
+  gboolean image_partition = FALSE;
+  gboolean root_is_ro_loop = FALSE;
+
+  for (l = objects; l != NULL; l = l->next)
+    {
+      UDisksObject *object = UDISKS_OBJECT (l->data);
+      UDisksBlock *block = udisks_object_peek_block (object);
+      UDisksFilesystem *fs = NULL;
+      const gchar *const*mounts = NULL;
+      gchar *path = NULL;
+
+      if (block == NULL)
+        continue;
+
+      fs = udisks_object_peek_filesystem (object);
+
+      if (fs == NULL)
+        continue;
+
+      mounts = udisks_filesystem_get_mount_points (fs);
+
+      if (mounts == NULL)
+        continue;
+
+      if (mounts[0] != NULL && g_str_equal ("/", mounts[0]))
+        {
+          if (udisks_object_peek_loop (object) == NULL)
+            continue;
+
+          /* Since we know this is a loop device, we can trust that the
+             readonly property reflects the mount ro-status. For real devices
+             it reflects a physical switch rather than mounting options */
+          if (udisks_block_get_read_only (block))
+            root_is_ro_loop = TRUE;
+
+          continue;
+        }
+
+      if (g_str_equal ("eoslive", udisks_block_get_id_label (block)))
+        {
+          image_partition = TRUE;
+          continue;
+        }
+    }
+
+  g_object_unref (client);
+  if (image_partition && root_is_ro_loop)
+    gis_store_enter_live_install ();
+}
+
+static void
 rebuild_pages_cb (GisDriver *driver)
 {
   PageData *page_data;
@@ -279,8 +337,8 @@ rebuild_pages_cb (GisDriver *driver)
 
   gis_assistant_locale_changed (assistant);
 
-  /* Skip welcome page in unattended mode */
-  if (gis_store_is_unattended ())
+  /* Skip welcome page in unattended and live install mode */
+  if (gis_store_is_unattended () || gis_store_is_live_install ())
     gis_assistant_next_page (assistant);
 }
 
@@ -348,6 +406,7 @@ gis_page_get_type();
 
   gis_ensure_login_keyring ("gis");
 
+  check_for_live_image ();
   mount_and_read_keys ();
 
   driver = gis_driver_new (get_mode ());
