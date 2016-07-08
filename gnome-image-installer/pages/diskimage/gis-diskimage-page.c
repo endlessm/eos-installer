@@ -120,7 +120,7 @@ static gchar *get_display_name(gchar *fullname)
   GMatchInfo *info;
   gchar *name = NULL;
 
-  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-([^-]+)-([^.]+)\\.([^.]+)\\.([^.]+)\\.(disk\\d|img)\\.([gx]z)$", 0, 0, NULL);
+  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-([^-]+)-([^.]+)\\.([^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img\\.([gx]z)$", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
@@ -131,7 +131,7 @@ static gchar *get_display_name(gchar *fullname)
       gchar *language = NULL;
 
       /* Split images not supported yet */
-      if (!g_str_equal (type, "img"))
+      if (strlen (type) > 0)
         {
           g_free (version);
           g_free (personality);
