@@ -1,3 +1,4 @@
+#include "config.h"
 #include "gpt_gz.h"
 
 int read_from_gzip(FILE *in_file, struct ptable *out_pt)

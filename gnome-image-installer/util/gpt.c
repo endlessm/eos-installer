@@ -1,3 +1,4 @@
+#include "config.h"
 #include "gpt.h"
 #include "crc32.h"
 
