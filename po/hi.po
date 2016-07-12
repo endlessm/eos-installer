@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# e2f_in c7 <e2f_in_c7@outlook.com>, 2016
 # Rajesh Ranjan <rajeshkajha@yahoo.com>, 2013
 # Roddy Shuler <roddy@endlessm.com>, 2016
 msgid ""
@@ -10,8 +11,8 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 17:28-0700\n"
-"PO-Revision-Date: 2016-06-11 00:29+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"PO-Revision-Date: 2016-07-07 08:05+0000\n"
+"Last-Translator: e2f_in c7 <e2f_in_c7@outlook.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,7 +31,7 @@ msgstr "अगला (_N)"
 
 #: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
-msgstr ""
+msgstr "_पिछला"
 
 #: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
@@ -62,7 +63,7 @@ msgstr "खाता पंजीयन में विफल"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
-msgstr ""
+msgstr "इस डोमेन के साथ प्रमाणीकृत करने के लिए कोई समर्थित तरीका नहीं है"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
@@ -78,13 +79,13 @@ msgstr "लॉगइन"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr ""
+msgstr "व्यक्तिगत खाता बनाएं"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "अपना पूरा नाम और पासवर्ड लिखें जिसे आप याद रखेंगे. बड़े अक्षरों पर ध्यान दें."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -98,7 +99,7 @@ msgstr "उपयोक्ता नाम (_U)"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
+msgstr "उपयोगकर्तानाम का उपयोग आपके व्यक्तिगत फोल्डर का नाम देने के लिए किया जाएगा, और इसे बदला नहीं जा सकता है."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
@@ -110,22 +111,22 @@ msgstr "कूटशब्द की पुष्टि करें (_C) "
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
-msgstr ""
+msgstr "पासवर्ड दिखाएं"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "यह सुनिश्चित करें कि अपने पासवर्ड को याद रखने के लिए आपने उसे लिख लिया है! आप यहां स्वयं के लिए एक अनुस्मारक लिख सकते हैं लेकिन नोट करें कि इस पासवर्ड रिमाइंडर को अन्य लोगों द्वारा देखा जा सकता है."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "पासवर्ड _रिमाइंडर"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr ""
+msgstr "जारी रखने के लिए, कृपया यह सुनिश्चित करें कि आपने सभी रिक्त स्थानों की पूर्ति कर ली है."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -145,11 +146,11 @@ msgstr "एंटरप्राइज डोमेन नाम या रि�
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
-msgstr ""
+msgstr "जारी_रखें"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
-msgstr ""
+msgstr "डोमेन व्यवस्थापन लॉगिन"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
@@ -157,19 +158,19 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
+msgstr "एंटरप्राइज़ लॉगिन का उपयोग करने के लिए, इस कंप्यूटर का डोमेन में नामांकित होना आवश्यक है. कृपया अपने नेटवर्क व्यवस्थापक को उनका डोमेन पासवर्ड यहां लिखने दें और आपके कंप्यूटर के लिए एक अद्वितीय कंप्यूटर नाम चुनने दें."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
-msgstr ""
+msgstr "_कंप्यूटर"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
-msgstr ""
+msgstr "व्यवस्थापक _का नाम"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
-msgstr ""
+msgstr "व्यवस्थापक पासवर्ड"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
@@ -203,7 +204,7 @@ msgstr "मजबूत"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr ""
+msgstr "इस प्रकार के डोमेन से स्वचालित रूप से नहीं जुड़ सकता है"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
@@ -245,60 +246,60 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr ""
+msgstr "उपयोगकर्ता में केवल निम्न शामिल होने चाहिए:\n ➣ अंग्रेज़ी वर्णाक्षरों के अक्षर\n ➣ अंक\n ➣ वर्णों '.', '-' और '_' में से कोई वर्ण"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
-msgstr ""
+msgstr "प्रदर्शन"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr ""
+msgstr "TV स्क्रीन के लिए समायोजन करें"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr ""
+msgstr "क्या आपको अपनी स्क्रीन के निचले दाएं कोने पर यह दिखाई देता है?"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "I see it"
-msgstr ""
+msgstr "मुझे यह दिखाई दे रहा है"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr ""
+msgstr "मुझे यह दिखाई नहीं दे रहा है. TV पर फ़िट करने के लिए स्क्रीन को संकुचित करें."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
 msgid "Terms of Use"
-msgstr ""
+msgstr "उपयोग की शर्तें"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
 msgid "Third Party Software"
-msgstr ""
+msgstr "तृतीय पक्ष सॉफ़्टवेयर"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
-msgstr ""
+msgstr "_स्वीकार करें और जारी रखें"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Please read the following terms of use carefully"
-msgstr ""
+msgstr "कृपया उपयोग की निम्न शर्तों को ध्यानपूर्वक पढ़ें"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr ""
+msgstr "\"स्वीकार करें और जारी रखें\" क्लिक करके आप यह स्वीकार करते हैं कि आपने निम्न नियम और शर्तें पढ़ ली हैं, उन्हें समझ लिया है और उनसे बाध्य होने को सहमत हैं."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
-msgstr ""
+msgstr "Endless को प्रत्येक व्यक्ति के लिए बेहतर बनाने में सहायता करें"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless."
 " All data is anonymous."
-msgstr ""
+msgstr "उपयोग के आंकड़े स्वचालित रूप से सहेजने और समस्या की रिपोर्ट Endless को भेजें. सभी डेटा अनाम रहता है."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -314,7 +315,7 @@ msgstr "हम उपयोगकर्ता लाइसेंस अनुब
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
-msgstr ""
+msgstr "अन्य"
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
@@ -323,19 +324,19 @@ msgstr "खाता जोड़ें"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
-msgstr ""
+msgstr "मॉल"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
-msgstr ""
+msgstr "संपर्क"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
-msgstr ""
+msgstr "चैट"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
-msgstr ""
+msgstr "संसाधन"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
@@ -377,7 +378,7 @@ msgstr "खाता जोड़ें (_A)"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
-msgstr ""
+msgstr "पूर्वावलोकन करें"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
@@ -388,40 +389,40 @@ msgstr "अधिक…"
 #. * did not yield any results
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
-msgstr ""
+msgstr "कोई इनपुट नहीं मिले"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr ""
+msgstr "आपका कीबोर्ड लेआउट यह लगता है:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
-msgstr ""
+msgstr "कृपया निम्न में से कोई कुंजी दबाएं:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr ""
+msgstr "क्या निम्न कुंजी आपके कीबोर्ड पर मौजूद है?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
-msgstr ""
+msgstr "लिखना"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr ""
+msgstr "अपना कीबोर्ड लेआउट चुनें"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr ""
+msgstr "मेरे कीबोर्ड लेआउट का पता लगाने में मेरी मदद करें"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr ""
+msgstr "कीबोर्ड लेआउट का पता लगाएं..."
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
-msgstr ""
+msgstr "चयन करें"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
@@ -429,12 +430,12 @@ msgstr "कोई भाषाएँ नहीं मिला"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:594
 msgid "Disabled"
-msgstr ""
+msgstr "अक्षम किया गया"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:596
 #, c-format
 msgid "SD Card: %s"
-msgstr ""
+msgstr "SD कार्ड: %s"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:675
 msgid "Welcome"
@@ -443,26 +444,26 @@ msgstr "सुस्वागतम"
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:679
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
-msgstr ""
+msgstr "Endless में आपका स्वागत है!"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:681
 msgid "Let's set up your computer..."
-msgstr ""
+msgstr "अपना कंप्यूटर सेटअप करें..."
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
-msgstr ""
+msgstr "परीक्षण मोड"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
-msgstr ""
+msgstr "पावर बंद"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid ""
 "This installer will help guide you through installing Endless OS on your "
 "computer"
-msgstr ""
+msgstr "यह इंस्टॉलर आपके कंप्यूटर पर Endless OS इंस्टॉल करने में आपका मार्गदर्शन करेगा"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
@@ -475,51 +476,51 @@ msgstr "स्थान"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
-msgstr ""
+msgstr "जनवरी"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
-msgstr ""
+msgstr "फ़रवरी"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
-msgstr ""
+msgstr "मार्च"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
-msgstr ""
+msgstr "अप्रैल"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
-msgstr ""
+msgstr "मई"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
-msgstr ""
+msgstr "जून"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
-msgstr ""
+msgstr "जुलाई"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
-msgstr ""
+msgstr "अगस्त"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
-msgstr ""
+msgstr "सितंबर"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
-msgstr ""
+msgstr "अक्टूबर"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
-msgstr ""
+msgstr "नवंबर"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
-msgstr ""
+msgstr "दिसंबर"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
@@ -535,19 +536,19 @@ msgstr "समय क्षेत्र"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
-msgstr ""
+msgstr "नेटवर्क समय"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
-msgstr ""
+msgstr "45"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
@@ -580,27 +581,27 @@ msgid ""
 "the internet by clicking on the name of your WiFi network and entering the "
 "network password. This password may be different from your computer "
 "password."
-msgstr ""
+msgstr "क्या आपके पास वायरलेस इंटरनेट (WiFi) है? यदि आपके पास यह है, तो अपने WiFi नेटवर्क के नाम पर क्लिक करके और नेटवर्क पासवर्ड दर्ज करके अपने कंप्यूटर को इंटरनेट से कनेक्ट करें. यह पासवर्ड आपके कंप्यूटर के पासवर्ड से अलग हो सकता है."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
 "connection now. If you get an internet connection in the future, you can set"
 " it up in \"Network Settings.\""
-msgstr ""
+msgstr "युक्ति: यदि आपके पास अभी कोई कनेक्शन नहीं है, तो आप अपने कंप्यूटर का उपयोग इंटरनेट के बिना कर सकते हैं. यदि आप भविष्य में इंटरनेट कनेक्शन प्राप्त करते हैं, तो आप उसे \"नेटवर्क सेटिंग\" में सेट अप कर सकते हैं."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr ""
+msgstr "कोई भी वायरलेस उपलब्ध नहीं है"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
-msgstr ""
+msgstr "_WiFi सेटअप छोड़ें"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
-msgstr ""
+msgstr "_%s का उपयोग करना आरंभ करें"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
@@ -630,85 +631,85 @@ msgstr "Full"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:295
 #, c-format
 msgid "No suitable images were found."
-msgstr ""
+msgstr "कोई भी उपयुक्त छवियां नहीं मिलीं."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:333
 msgid "Install Endless OS"
-msgstr ""
+msgstr "Endless OS इंस्टॉल करें"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr ""
+msgstr "क्या यह वही Endless OS संस्करण है, जिसका आप उपयोग करना चाहते हैं? यदि नहीं, तो दूसरा संस्करण डाउनलोड करें."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
-msgstr ""
+msgstr "मौजूदा संस्करण का उपयोग करें:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
 #, c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install "
 "%s (%.02f GB)"
-msgstr ""
+msgstr "आपके द्वारा चुना गया स्थान बहुत छोटा है - %s (%.02f GB) को इंस्टॉल करने के लिए आपको अधिक स्थान की आवश्यकता है"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:276
 msgid "Finish"
-msgstr ""
+msgstr "समाप्त करें"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:340
 msgid "Select Disk"
-msgstr ""
+msgstr "डिस्क का चयन करें"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the location where you'd like to install Endless OS"
-msgstr ""
+msgstr "उस स्थान का चयन करें जहां आप Endless OS इंस्टॉल करना चाहते हैं"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "डिस्क का चयन करें:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr ""
+msgstr "मैं <b>अपनी सभी फ़ाइलें और ऐप्लिकेशन</b> मिटाने पर सहमत हूं"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Installing Endless OS will erase <b>all partitions</b> on the "
 "selected disk. Please click here to confirm."
-msgstr ""
+msgstr "ऐसा लगता है कि आपके पास डिस्क पर एकाधिक पार्टिशन मौजूद हैं (उदाहरण के लिए डाइव C:  और  D:). Endless OS इंस्टॉल करने पर चयनित डिस्क पर मौजूद <b>सभी पार्टीशन</b> मिटा दिए जाते हैं. पुष्टि करने के लिए कृपया यहां क्लिक करें."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install "
 "%s"
-msgstr ""
+msgstr "आपके द्वारा चुना गया स्थान बहुत छोटा है - %s को इंस्टॉल करने के लिए आपको अधिक स्थान की आवश्यकता होगी"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr ""
+msgstr "कोई उपयुक्त डिस्क नहीं मिली"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
 msgid "Installation Finished"
-msgstr ""
+msgstr "इंस्टॉलेशन समाप्त हुआ"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "सफल! अपने कंप्यूटर को पावर ऑफ़ करें और अपना USB डिवाइस निकालें. जब आप पुनर्प्रारंभ करें, तो Endless OS सेट अप करने और आनंद लेने के लिए आपके लिए तैयार होगा!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr ""
+msgstr "ओह, आपकी Endless OS फ़ाइल के साथ कुछ गलत हुआ."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid ""
 "Please contact support@endlessm.com or join our Google Group to "
 "troubleshoot."
-msgstr ""
+msgstr "कृपया support@endlessm.com से संपर्क करें या समस्या-निवारण के लिए Google Group से जुड़ें."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:87
 #: ../gnome-image-installer/pages/install/gis-install-page.c:102
@@ -717,36 +718,36 @@ msgstr ""
 #: ../gnome-image-installer/pages/install/gis-install-page.c:377
 #, c-format
 msgid "Image verification error."
-msgstr ""
+msgstr "छवि सत्यापन त्रुटि."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:281
 #: ../gnome-image-installer/pages/install/gis-install-page.c:403
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
-msgstr ""
+msgstr "चरण %d में से %d"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:436
 msgid "Installing"
-msgstr ""
+msgstr "इंस्टॉल कर रहा है"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr ""
+msgstr "अमान्य संपीडित डेटा"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr ""
+msgstr "पर्याप्त मेमोरी नहीं"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "आंतरिक त्रुटि"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
-msgstr ""
+msgstr "अधिक इनपुट आवश्यक"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
 msgid "EOS Installer"
-msgstr ""
+msgstr "EOS इंस्टॉलर"
