@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 17:28-0700\n"
-"PO-Revision-Date: 2016-06-11 00:29+0000\n"
+"PO-Revision-Date: 2016-07-03 06:03+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-installer/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgstr "T_hôi"
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
 #: ../gnome-image-installer/gnome-image-installer.c:167
 msgid "Force new user mode"
-msgstr ""
+msgstr "Ép chế độ người dùng mới"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
 #: ../gnome-image-installer/gnome-image-installer.c:171
@@ -48,12 +48,12 @@ msgstr "- Cài đặt GNOME lần đầu"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
-msgstr ""
+msgstr "Không có mật khẩu"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:336
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Mật khẩu không trùng khớp"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
@@ -73,17 +73,17 @@ msgstr "Gặp lỗi khi đăng nhập vào miền"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
-msgstr ""
+msgstr "Đăng nhập"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr ""
+msgstr "Tạo một Tài khoản Cá nhân"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "Nhập tên đầy đủ của bạn và một mật khẩu mà bạn sẽ nhớ. Chú ý đến các chữ viết hoa."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -97,7 +97,7 @@ msgstr "_Tài khoản"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
+msgstr "Tên đang nhập sẽ được sử dụng để đặt tên thư mục cá nhân của bạn, và bạn không thể thay đổi nó."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
@@ -105,34 +105,34 @@ msgstr "Mật _khẩu"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
-msgstr ""
+msgstr "_Xác nhận mật khẩu"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
-msgstr ""
+msgstr "Hiện mật khẩu"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "Đảm bảo bạn viết ra mật khẩu của mình để ghi nhớ nó! Bạn có thể tự viết lời nhắc ở đây, nhưng lưu ý rằng lời nhắc mật khẩu này có thể bị người khác nhìn thấy."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "Lời nhắc _mật khẩu"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr ""
+msgstr "Để tiếp tục, vui lòng đảm bảo là bạn điền vào hết các chỗ trống."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
-msgstr ""
+msgstr "trang 1"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
 msgid "Create an Enterprise Account"
-msgstr ""
+msgstr "Tạo một Tài khoản Doanh nghiệp"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
 msgid "_Domain"
@@ -156,7 +156,7 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
+msgstr "Để dùng đăng nhập doanh nghiệp, máy tính này phải ghi danh vào miền đó. Hãy đề nghị quản trị viên mạng của bạn nhập mật khẩu miền vào đây, và chọn một tên máy tính duy nhất cho\nmáy tính của bạn."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
@@ -173,32 +173,32 @@ msgstr "Mật khẩu quản trị"
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
 msgid "Too short"
-msgstr ""
+msgstr "Quá ngắn"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr ""
+msgstr "Không đủ tốt"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
 msgid "Weak"
-msgstr ""
+msgstr "Yếu"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:111
 msgctxt "Password strength"
 msgid "Fair"
-msgstr ""
+msgstr "Công bằng"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:114
 msgctxt "Password strength"
 msgid "Good"
-msgstr ""
+msgstr "Tốt"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:117
 msgctxt "Password strength"
 msgid "Strong"
-msgstr ""
+msgstr "Mạnh"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
@@ -227,16 +227,16 @@ msgstr "Không thể kết nối đến miền %s: %s"
 #: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr ""
+msgstr "Một người dùng có tên đăng nhập '%s' đã tồn tại"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:154
 #, c-format
 msgid "The username is too long"
-msgstr ""
+msgstr "Tên người dùng quá dài"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:157
 msgid "The username cannot start with a '-'"
-msgstr ""
+msgstr "Tên đăng nhập không thể bắt đầu bằng '-'"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:160
 msgid ""
@@ -244,60 +244,60 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr ""
+msgstr "Tên người dùng chỉ được bao gồm:\n ➣ các chữ cái trong bảng chữ cái tiếng Anh\n ➣ các chữ số\n ➣ bất kỳ ký tự nào trong các ký tự '.', '-' và '_'"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
-msgstr ""
+msgstr "Hiển thị"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr ""
+msgstr "Điều chỉnh theo màn hình TV"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr ""
+msgstr "Bạn có thấy mục này ở góc dưới bên phải của màn hình máy tính không?"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "I see it"
-msgstr ""
+msgstr "Tôi thấy rồi"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr ""
+msgstr "Tôi không thấy nó. Hãy co màn hình để vừa với Tv."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
 msgid "Terms of Use"
-msgstr ""
+msgstr "Điều khoản Sử dụng"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
 msgid "Third Party Software"
-msgstr ""
+msgstr "Phần mềm Bên Thứ Ba"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
-msgstr ""
+msgstr "_Chấp nhận và tiếp tục"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Please read the following terms of use carefully"
-msgstr ""
+msgstr "Vui lòng đọc kỹ các điều khoản sử dụng dưới đây"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr ""
+msgstr "Bằng cách nhấp vào \"Chấp nhận và tiếp tục,\" bạn thừa nhận rằng bạn đã đọc, hiểu và đồng ý chịu ràng buộc bởi các điều khoản và điều kiện sau đây."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
-msgstr ""
+msgstr "Giúp Endless trở nên tốt hơn cho mọi người"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless."
 " All data is anonymous."
-msgstr ""
+msgstr "Tự động lưu và gửi số liệu thống kê sử dụng và báo cáo vấn đề tới Endless. Tất cả dữ liệu đều ẩn danh."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -313,7 +313,7 @@ msgstr "Tôi đồ_ng ý với những điều khoản trong thỏa thuận gi�
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
 msgid "Other"
-msgstr ""
+msgstr "Khác"
 
 #. translators: This is the title of the "Add Account" dialog.
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
@@ -322,39 +322,39 @@ msgstr "Thêm tài khoản"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
-msgstr ""
+msgstr "Thư"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
-msgstr ""
+msgstr "Danh bạ"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
-msgstr ""
+msgstr "Trò chuyện"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
-msgstr ""
+msgstr "Tài nguyên"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
-msgstr ""
+msgstr "Lỗi tạo tài khoản"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
-msgstr ""
+msgstr "Lỗi gỡ bỏ tài khoản"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
-msgstr ""
+msgstr "Bạn có chắc muốn xóa tài khoản không?"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
-msgstr ""
+msgstr "Thao tác này sẽ không xóa tài khoản trên máy chủ."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
-msgstr ""
+msgstr "_Gỡ"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
@@ -362,17 +362,17 @@ msgstr "Tài khoản trực tuyến"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
-msgstr ""
+msgstr "Kết nối với dữ liệu hiện tại của bạn trong đám mây"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr ""
+msgstr "Thêm tài khoản sẽ cho phép bạn kết nối thẳng đến ảnh, danh bạ, thư trực tuyến, và hơn thế nữa."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
-msgstr ""
+msgstr "_Thêm Tài khoản"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
@@ -391,16 +391,16 @@ msgstr "Không tìm đầu vào nào"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr ""
+msgstr "Bố cục bàn phím của bạn có vẻ là:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
-msgstr ""
+msgstr "Vui lòng nhấn một trong các phím sau:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr ""
+msgstr "Phím sau đây có hiện diện trên bàn phím của bạn không?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
@@ -408,19 +408,19 @@ msgstr "Nhập liệu"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr ""
+msgstr "Chọn bố cục bàn phím của bạn"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr ""
+msgstr "Giúp phát hiện bố cục bàn phím của tôi."
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr ""
+msgstr "Phát hiện Bố cục Bàn phím..."
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
-msgstr ""
+msgstr "Chọn"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
@@ -428,12 +428,12 @@ msgstr "Không tìm thấy ngôn ngữ"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:594
 msgid "Disabled"
-msgstr ""
+msgstr "Đã tắt"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:596
 #, c-format
 msgid "SD Card: %s"
-msgstr ""
+msgstr "Thẻ SD: %s"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:675
 msgid "Welcome"
@@ -442,91 +442,91 @@ msgstr "Chào mừng bạn"
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:679
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
-msgstr ""
+msgstr "Chào mừng bạn đến với Endless!"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:681
 msgid "Let's set up your computer..."
-msgstr ""
+msgstr "Hãy cùng thiết lập máy tính của bạn..."
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
-msgstr ""
+msgstr "Chế độ Thử nghiệm"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
-msgstr ""
+msgstr "Tắt Nguồn"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid ""
 "This installer will help guide you through installing Endless OS on your "
 "computer"
-msgstr ""
+msgstr "Trình cài đặt này sẽ giúp hướng dẫn bạn cài đặt Endless OS trên máy tính của mình"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
-msgstr ""
+msgstr "Tìm kiếm một vị trí"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
-msgstr ""
+msgstr "Địa điểm"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
-msgstr ""
+msgstr "Tháng Một"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
-msgstr ""
+msgstr "Tháng 2"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
-msgstr ""
+msgstr "Tháng 3"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
-msgstr ""
+msgstr "Tháng Tư"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
-msgstr ""
+msgstr "Tháng 5"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
-msgstr ""
+msgstr "Tháng Sáu"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
-msgstr ""
+msgstr "Tháng 7"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
-msgstr ""
+msgstr "Tháng Tám"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
-msgstr ""
+msgstr "Tháng Chín"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
-msgstr ""
+msgstr "Tháng 10"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
-msgstr ""
+msgstr "Tháng 11"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
-msgstr ""
+msgstr "Tháng 12"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
-msgstr ""
+msgstr "Chọn Vị trí của Bạn"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
 msgid "_Determine your location automatically"
-msgstr ""
+msgstr "_Tự động xác định vị trí của bạn"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
 msgid "Time Zone"
@@ -534,19 +534,19 @@ msgstr "Múi giờ"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
-msgstr ""
+msgstr "Thời gian Mạng"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
-msgstr ""
+msgstr "45"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
@@ -555,11 +555,11 @@ msgstr "Khác…"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
-msgstr ""
+msgstr "Mạng không khả dụng."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
-msgstr ""
+msgstr "Không tìm thấy thiết bị mạng nào."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
@@ -571,7 +571,7 @@ msgstr "Mạng"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
 msgid "Wireless Networks"
-msgstr ""
+msgstr "Các mạng Không dây"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
 msgid ""
@@ -579,14 +579,14 @@ msgid ""
 "the internet by clicking on the name of your WiFi network and entering the "
 "network password. This password may be different from your computer "
 "password."
-msgstr ""
+msgstr "Bạn có mạng không dây (WiFi) không? Nếu bạn có, hãy kết nối máy tính của bạn với mạng internet bằng cách nhấp vào tên của mạng WIFI của bạn và nhập mật khẩu mạng. Mật khẩu này có thể khác với mật khẩu máy tính của bạn."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
 "connection now. If you get an internet connection in the future, you can set"
 " it up in \"Network Settings.\""
-msgstr ""
+msgstr "LỜI KHUYÊN: Bạn có thể dùng máy tính mà không có mạng internet nếu bây giờ bạn không có kết nối mạng. Nếu sau này có kết nối mạng, bạn có thể thiết lập trong phần \"Cài đặt Mạng\"."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
@@ -594,7 +594,7 @@ msgstr "Không có mạng không dây dùng được"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
-msgstr ""
+msgstr "_Bỏ qua cài đặt WiFi"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
@@ -603,19 +603,19 @@ msgstr "_Bắt đầu dùng %s"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
-msgstr ""
+msgstr "Xin cám ơn"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
 msgid "Your computer is ready to use."
-msgstr ""
+msgstr "Máy tính của bạn đã sẵn sàng để sử dụng."
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
 msgid "You may change these options at any time in Settings."
-msgstr ""
+msgstr "Bạn có thể thay đổi các tùy chọn này bất kỳ lúc nào trong mục Cài đặt"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
 msgid "_Start using GNOME 3"
-msgstr ""
+msgstr "_Bắt đầu sử dụng GNOME 3"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:127
 msgid "Light"
@@ -629,85 +629,85 @@ msgstr "Full"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:295
 #, c-format
 msgid "No suitable images were found."
-msgstr ""
+msgstr "Không tìm thấy hình ảnh thích hợp."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:333
 msgid "Install Endless OS"
-msgstr ""
+msgstr "Cài đặt HĐH Endless"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr ""
+msgstr "Đây có phải là phiên bản Endless OS mà bạn muốn sử dụng không? Nếu không, tải về một phiên bản khác."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
-msgstr ""
+msgstr "Sử dụng phiên bản hiện tại:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
 #, c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install "
 "%s (%.02f GB)"
-msgstr ""
+msgstr "Vị trí bạn chọn quá nhỏ - bạn cần thêm dung lượng để cài đặt %s (%.02f GB)"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:276
 msgid "Finish"
-msgstr ""
+msgstr "Hoàn thành"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:340
 msgid "Select Disk"
-msgstr ""
+msgstr "Chọn Đĩa"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the location where you'd like to install Endless OS"
-msgstr ""
+msgstr "Chọn địa điểm bạn muốn cài đặt HĐH Endless"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "Chọn Ổ Đĩa:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr ""
+msgstr "Tôi đồng ý xóa bỏ <b>tất cả các tệp và ứng dụng của tôi</b>"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Installing Endless OS will erase <b>all partitions</b> on the "
 "selected disk. Please click here to confirm."
-msgstr ""
+msgstr "Dường như bạn có nhiều phân vùng trên đĩa này (ví dụ ổ đĩa C: và D :). Cài đặt Endless OS sẽ xóa <b>tất cả các phân vùng</b> trên đĩa đã chọn. Vui lòng nhấp vào đây để xác nhận."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small - you need more space to install "
 "%s"
-msgstr ""
+msgstr "Vị trí bạn chọn quá nhỏ - bạn cần thêm dung lượng để cài đặt %s"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr ""
+msgstr "Không tìm thấy các ổ đĩa thích hợp."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
 msgid "Installation Finished"
-msgstr ""
+msgstr "Cài đặt đã Hoàn tất"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "Thành công! Tắt máy tính của bạn và sau đó tháo thiết bị USB của bạn ra. Khi bạn khởi động lại, Endless OS sẽ sẵn sàng để bạn cài đặt và tận hưởng!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr ""
+msgstr "Rất tiếc, có gì đó sai với tập tin Endless OS của bạn."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid ""
 "Please contact support@endlessm.com or join our Google Group to "
 "troubleshoot."
-msgstr ""
+msgstr "Vui lòng liên hệ với support@endlessm.com hoặc tham gia Nhóm Google của chúng tôi để  khắc phục vấn đề."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:87
 #: ../gnome-image-installer/pages/install/gis-install-page.c:102
@@ -716,36 +716,36 @@ msgstr ""
 #: ../gnome-image-installer/pages/install/gis-install-page.c:377
 #, c-format
 msgid "Image verification error."
-msgstr ""
+msgstr "Lỗi xác thực hình ảnh."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:281
 #: ../gnome-image-installer/pages/install/gis-install-page.c:403
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
-msgstr ""
+msgstr "Bước %d trong số %d bước"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:436
 msgid "Installing"
-msgstr ""
+msgstr "Đang cài đặt"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr ""
+msgstr "Dữ liệu nén không hợp lệ"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr ""
+msgstr "Không đủ bộ nhớ"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "Lỗi nội tại"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
-msgstr ""
+msgstr "Cần thêm đầu vào"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
 msgid "EOS Installer"
-msgstr ""
+msgstr "Trình cài đặt EOS"
