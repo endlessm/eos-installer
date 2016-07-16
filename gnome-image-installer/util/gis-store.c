@@ -31,6 +31,7 @@ static gint64 _size = 0;
 static gchar *_name = NULL;
 static GError *_error = NULL;
 static gboolean _unattended = FALSE;
+static gboolean _live_install = FALSE;
 static GKeyFile *_keys = NULL;
 
 GObject *gis_store_get_object(gint key)
@@ -109,6 +110,16 @@ void gis_store_enter_unattended()
 gboolean gis_store_is_unattended()
 {
   return _unattended;
+}
+
+void gis_store_enter_live_install()
+{
+  _live_install = TRUE;
+}
+
+gboolean gis_store_is_live_install()
+{
+  return _live_install;
 }
 
 void gis_store_set_key_file(GKeyFile *keys)

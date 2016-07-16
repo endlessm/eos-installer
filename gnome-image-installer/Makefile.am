@@ -20,7 +20,7 @@ AM_CPPFLAGS = \
 	-DDATADIR=\""$(datadir)"\" \
 	-I$(gissrcdir)
 
-libexec_PROGRAMS = gnome-image-installer
+libexec_PROGRAMS = gnome-image-installer liveinstaller-partition-helper
 
 resource_files = $(shell glib-compile-resources --sourcedir=$(gissrcdir) --generate-dependencies $(gissrcdir)/gis-assistant.gresource.xml)
 gis-assistant-resources.c: $(gissrcdir)/gis-assistant.gresource.xml $(resource_files)
@@ -48,3 +48,9 @@ gnome_image_installer_LDADD =	\
 	$(INITIAL_SETUP_LIBS) \
 	$(IMAGE_INSTALLER_LIBS) \
 	-lm -lz
+
+liveinstaller_partition_helper_SOURCES = \
+	liveinstaller-partition-helper.c
+
+liveinstaller_partition_helper_LDADD = \
+	$(IMAGE_INSTALLER_LIBS)
