@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-10 17:28-0700\n"
-"PO-Revision-Date: 2016-07-03 06:04+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2016-07-12 01:38+0000\n"
+"PO-Revision-Date: 2016-07-16 02:06+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Thai (http://www.transifex.com/endless-mobile-inc/eos-installer/language/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,12 +38,12 @@ msgid "_Cancel"
 msgstr "_ยกเลิก"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:167
+#: ../gnome-image-installer/gnome-image-installer.c:380
 msgid "Force new user mode"
 msgstr "โหมดผู้ใช้ใหม่แบบบังคับ"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:171
+#: ../gnome-image-installer/gnome-image-installer.c:384
 msgid "- GNOME initial setup"
 msgstr "- การตั้งค่าเริ่มต้นสำหรับ GNOME "
 
@@ -427,25 +427,25 @@ msgstr "เลือก"
 msgid "No languages found"
 msgstr "ไม่พบภาษา"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:594
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
 msgid "Disabled"
 msgstr "ปิดใช้งาน"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:596
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
 #, c-format
 msgid "SD Card: %s"
 msgstr "SD Card: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:675
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
 msgid "Welcome"
 msgstr "ยินดีต้อนรับ"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:679
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "ยินดีต้อนรับสู่ Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:681
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
 msgid "Let's set up your computer..."
 msgstr "มาตั้งค่าคอมพิวเตอร์ของคุณกัน..."
 
@@ -618,21 +618,22 @@ msgstr "คุณอาจเปลี่ยนแปลงตัวเลือ
 msgid "_Start using GNOME 3"
 msgstr "เ_ริ่มใช้ GNOME 3"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:127
-msgid "Light"
-msgstr "Light"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:144
-msgid "Full"
-msgstr "Full"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:225
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:295
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:291
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:361
 #, c-format
 msgid "No suitable images were found."
 msgstr "ไม่พบภาพที่เหมาะสม"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:333
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:168
+msgid "Light"
+msgstr "Light"
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
+msgid "Full"
+msgstr "Full"
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:399
 msgid "Install Endless OS"
 msgstr "ติดตั้ง Endless OS"
 
@@ -652,11 +653,11 @@ msgid ""
 "%s (%.02f GB)"
 msgstr "สถานที่ตั้งที่คุณเลือกนั้นมีขนาดเล็กเกินไป คุณต้องการพื้นที่ว่างมากกว่านี้ในการติดตั้ง %s (%.02f GB)"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:276
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:303
 msgid "Finish"
 msgstr "เสร็จสิ้น"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:340
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:370
 msgid "Select Disk"
 msgstr "เลือกดิสก์"
 
@@ -690,7 +691,7 @@ msgstr "สถานที่ที่คุณเลือกนั้นมี
 msgid "No suitable disks found."
 msgstr "ไม่พบดิสก์ที่เหมาะสม"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
 msgid "Installation Finished"
 msgstr "การติดตั้งสำเร็จ"
 
@@ -710,25 +711,36 @@ msgid ""
 "troubleshoot."
 msgstr "กรุณาติดต่อ contact support@endlessm.com หรือเข้าร่วม Google Group ของเราเพื่อดูวิธีแก้ไขปัญหา"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:87
-#: ../gnome-image-installer/pages/install/gis-install-page.c:102
-#: ../gnome-image-installer/pages/install/gis-install-page.c:135
-#: ../gnome-image-installer/pages/install/gis-install-page.c:321
-#: ../gnome-image-installer/pages/install/gis-install-page.c:377
+#: ../gnome-image-installer/pages/install/gis-install-page.c:88
+#: ../gnome-image-installer/pages/install/gis-install-page.c:103
+#: ../gnome-image-installer/pages/install/gis-install-page.c:136
+#: ../gnome-image-installer/pages/install/gis-install-page.c:350
+#: ../gnome-image-installer/pages/install/gis-install-page.c:406
 #, c-format
 msgid "Image verification error."
 msgstr "ความผิดพลาดในการยืนยันภาพ"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:281
-#: ../gnome-image-installer/pages/install/gis-install-page.c:403
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#: ../gnome-image-installer/pages/install/gis-install-page.c:310
+#: ../gnome-image-installer/pages/install/gis-install-page.c:432
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "ขั้นตอนที่ %d จาก %d "
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:436
+#: ../gnome-image-installer/pages/install/gis-install-page.c:469
 msgid "Installing"
 msgstr "กำลังติดตั้ง"
+
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+msgid "Endless OS"
+msgstr "Endless OS"
+
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+msgid ""
+"Fast, easy to use and powerful – with or without internet.\n"
+"\n"
+"Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
+msgstr "ใช้ได้อย่างรวดเร็วและง่ายดาย ทั้งยังมีประสิทธภาพไม่ว่าจะมีหรือไม่มีอินเทอร์เน็ต\n\nEndless OS พรีโหลดพร้อมกับแอพมากกว่า 100 แอพ ทำให้มีประโยชน์ตั้งแต่คุณเปิดใช้งาน"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"

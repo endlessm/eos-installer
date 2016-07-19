@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-10 17:28-0700\n"
-"PO-Revision-Date: 2016-06-11 00:29+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2016-07-12 01:38+0000\n"
+"PO-Revision-Date: 2016-07-15 18:12+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,12 +45,12 @@ msgid "_Cancel"
 msgstr "取消(_C)"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:167
+#: ../gnome-image-installer/gnome-image-installer.c:380
 msgid "Force new user mode"
 msgstr "强制新建用户模式"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:171
+#: ../gnome-image-installer/gnome-image-installer.c:384
 msgid "- GNOME initial setup"
 msgstr "GNOME初始设置"
 
@@ -434,25 +434,25 @@ msgstr "选择"
 msgid "No languages found"
 msgstr "未检测到其他语言"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:594
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
 msgid "Disabled"
 msgstr "已禁用"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:596
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
 #, c-format
 msgid "SD Card: %s"
 msgstr "SD卡: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:675
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
 msgid "Welcome"
 msgstr "欢迎"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:679
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "欢迎进入Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:681
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
 msgid "Let's set up your computer..."
 msgstr "请设置您的电脑……"
 
@@ -625,21 +625,22 @@ msgstr "您可以随时在“系统设置”中更改这些选项。"
 msgid "_Start using GNOME 3"
 msgstr "开始使用 GNOME 3(_S)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:127
-msgid "Light"
-msgstr "Light"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:144
-msgid "Full"
-msgstr "Full"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:225
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:295
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:291
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:361
 #, c-format
 msgid "No suitable images were found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:333
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:168
+msgid "Light"
+msgstr "Light"
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
+msgid "Full"
+msgstr "Full"
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:399
 msgid "Install Endless OS"
 msgstr ""
 
@@ -659,11 +660,11 @@ msgid ""
 "%s (%.02f GB)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:276
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:303
 msgid "Finish"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:340
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:370
 msgid "Select Disk"
 msgstr ""
 
@@ -697,7 +698,7 @@ msgstr ""
 msgid "No suitable disks found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:98
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
 msgid "Installation Finished"
 msgstr ""
 
@@ -717,24 +718,35 @@ msgid ""
 "troubleshoot."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:87
-#: ../gnome-image-installer/pages/install/gis-install-page.c:102
-#: ../gnome-image-installer/pages/install/gis-install-page.c:135
-#: ../gnome-image-installer/pages/install/gis-install-page.c:321
-#: ../gnome-image-installer/pages/install/gis-install-page.c:377
+#: ../gnome-image-installer/pages/install/gis-install-page.c:88
+#: ../gnome-image-installer/pages/install/gis-install-page.c:103
+#: ../gnome-image-installer/pages/install/gis-install-page.c:136
+#: ../gnome-image-installer/pages/install/gis-install-page.c:350
+#: ../gnome-image-installer/pages/install/gis-install-page.c:406
 #, c-format
 msgid "Image verification error."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:281
-#: ../gnome-image-installer/pages/install/gis-install-page.c:403
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#: ../gnome-image-installer/pages/install/gis-install-page.c:310
+#: ../gnome-image-installer/pages/install/gis-install-page.c:432
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:436
+#: ../gnome-image-installer/pages/install/gis-install-page.c:469
 msgid "Installing"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+msgid "Endless OS"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+msgid ""
+"Fast, easy to use and powerful – with or without internet.\n"
+"\n"
+"Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr ""
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
