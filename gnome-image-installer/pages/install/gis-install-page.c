@@ -56,7 +56,6 @@ struct _GisInstallPagePrivate {
   GIOChannel *gpgout;
   guint gpg_watch;
   UDisksClient *client;
-  guint pulse_id;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
@@ -122,7 +121,7 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
 }
 
 static gboolean
-gis_install_page_prepare_write (GisPage *page, UDisksBlock *block, GError **error)
+gis_install_page_prepare_write (GisPage *page, GError **error)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
@@ -130,6 +129,7 @@ gis_install_page_prepare_write (GisPage *page, UDisksBlock *block, GError **erro
   GUnixFDList *fd_list = NULL;
   GVariant *fd_index = NULL;
   gint fd = -1;
+  UDisksBlock *block = UDISKS_BLOCK(gis_store_get_object(GIS_STORE_BLOCK_DEVICE));
 
   if (block == NULL)
     {
@@ -326,7 +326,7 @@ gis_install_page_prepare (GisPage *page)
       return FALSE;
     }
 
-  if (!gis_install_page_prepare_write (page, UDISKS_BLOCK(gis_store_get_object(GIS_STORE_BLOCK_DEVICE)), &error))
+  if (!gis_install_page_prepare_write (page, &error))
     {
       gis_store_set_error (error);
       g_error_free (error);
@@ -425,74 +425,6 @@ gis_install_page_verify (GisPage *page)
 }
 
 static void
-gis_install_page_pkexec_watch (GPid pid, gint status, GisPage *page)
-{
-  GError *error = NULL;
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  gchar *msg;
-
-  if (!g_spawn_check_exit_status (status, &error))
-  {
-    gis_store_set_error (error);
-    g_error_free (error);
-    return;
-  }
-  g_spawn_close_pid (pid);
-  g_source_remove (priv->pulse_id);
-
-  msg = g_strdup_printf (_("Step %d of %d"), 2, 2);
-  gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
-  g_free (msg);
-
-  if (!gis_install_page_prepare_write (page, find_efi(page), &error))
-    {
-      gis_store_set_error (error);
-      g_error_free (error);
-      gis_install_page_teardown(page);
-      return FALSE;
-    }
-
-  /* TODO: Write EFI */
-  /* TODO: Write live image */
-}
-
-static void
-gis_install_page_live_install (GisPage *page)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GError *error = NULL;
-  UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
-  gchar *cmd[] = { "pkexec", "/usr/libexec/liveinstaller-partition-helper", "/dev/null", NULL };
-  gint ret = 0;
-
-  if (block == NULL)
-    {
-      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
-      return;
-    }
-
-  cmd[2] = (gchar*)udisks_block_get_device (block);
-
-  priv->pulse_id = g_timeout_add (500, gtk_progress_bar_pulse, OBJ (GtkProgressBar*, "install_progress"));
-
-  if (!g_spawn_async_with_pipes (NULL, cmd, NULL,
-                                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-                                 NULL, NULL, &priv->gpg,
-                                 NULL, NULL, NULL, NULL))
-    {
-      g_warning ("%s", error->message);
-      gis_store_set_error (error);
-      g_error_free (error);
-      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
-      return;
-    }
-
-  g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_pkexec_watch, page);
-}
-
-static void
 gis_install_page_shown (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
@@ -506,12 +438,10 @@ gis_install_page_shown (GisPage *page)
   priv->client = udisks_client_new_sync (NULL, NULL);
 
   if (gis_store_get_error() == NULL)
-    if (gis_store_is_live_install())
-      g_idle_add ((GSourceFunc)gis_install_page_live_install, page);
-    else
-      g_idle_add ((GSourceFunc)gis_install_page_verify, page);
+    g_idle_add ((GSourceFunc)gis_install_page_verify, page);
   else
     gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+
 }
 
 static void

@@ -377,10 +377,7 @@ gis_diskimage_page_shown (GisPage *page)
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
-  if (gis_store_is_live_install())
-    gis_assistant_next_page (gis_driver_get_assistant (page->driver));
-  else
-    gis_diskimage_page_mount (page);
+  gis_diskimage_page_mount (page);
 }
 
 static void
