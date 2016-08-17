@@ -85,7 +85,7 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
   basename = g_file_get_basename(priv->image);
   if (basename == NULL)
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: g_file_get_basename(\"%s\") failed"), priv->image);
       return FALSE;
     }
 
@@ -100,7 +100,7 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     }
   else
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: \"%s\" ends with neither \"gz\" nor \"xz\""), basename);
       g_free (basename);
       g_object_unref (input);
       return FALSE;
@@ -133,7 +133,7 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
 
   if (block == NULL)
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("gis_store_get_object(GIS_STORE_BLOCK_DEVICE) returned NULL"));
       return FALSE;
     }
 
@@ -403,7 +403,9 @@ gis_install_page_verify (GisPage *page)
                                  NULL, NULL, &priv->gpg,
                                  NULL, &outfd, NULL, NULL))
     {
-      error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error."));
+      gchar *args_cat = g_strjoinv (" ", args);
+      error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: couldn't run %s"), args_cat);
+      g_free (args_cat);
       gis_store_set_error (error);
       g_error_free (error);
       gis_install_page_teardown(page);
