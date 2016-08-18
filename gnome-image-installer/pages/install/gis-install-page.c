@@ -409,10 +409,10 @@ gis_install_page_verify (GisPage *page)
   if (!g_spawn_async_with_pipes (NULL, args, NULL,
                                  G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
                                  NULL, NULL, &priv->gpg,
-                                 NULL, &outfd, NULL, NULL))
+                                 NULL, &outfd, NULL, &error))
     {
       gchar *args_cat = g_strjoinv (" ", args);
-      error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: couldn't run %s"), args_cat);
+      g_prefix_error (&error, _("Image verification error: couldn't run \"%s\": "), args_cat);
       g_free (args_cat);
       gis_store_set_error (error);
       gis_install_page_teardown(page);
