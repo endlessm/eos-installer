@@ -68,7 +68,6 @@ G_DEFINE_QUARK(install-error, gis_install_error);
 #define WID(name) OBJ(GtkWidget*,name)
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
-#define TRUSTED_KEYID "9E0C1250587A279C"
 
 static gboolean
 gis_install_page_prepare_read (GisPage *page, GError **error)
@@ -85,8 +84,11 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
   basename = g_file_get_basename(priv->image);
   if (basename == NULL)
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: g_file_get_basename(\"%s\") failed"), priv->image);
-      return FALSE;
+      gchar *parse_name = g_file_get_parse_name(priv->image);
+      g_warning ("g_file_get_basename(\"%s\") returned NULL", parse_name);
+      g_free (parse_name);
+      *error = g_error_new (GIS_INSTALL_ERROR, 0, _("Internal error"));
+      g_return_val_if_reached (FALSE);
     }
 
   /* TODO: use more magical means */
@@ -100,10 +102,10 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     }
   else
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: \"%s\" ends with neither \"gz\" nor \"xz\""), basename);
+      g_warning ("%s ends in neither 'xz' nor 'gz'", basename);
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
       g_free (basename);
-      g_object_unref (input);
-      return FALSE;
+      g_return_val_if_reached (FALSE);
     }
   g_free (basename);
 
@@ -133,8 +135,9 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
 
   if (block == NULL)
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("gis_store_get_object(GIS_STORE_BLOCK_DEVICE) returned NULL"));
-      return FALSE;
+      g_warning ("gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
+      g_return_val_if_reached (FALSE);
     }
 
   if (!udisks_block_call_open_for_restore_sync (block,
@@ -341,18 +344,27 @@ gis_install_page_prepare (GisPage *page)
 }
 
 static void
+gis_install_page_verify_failed (GisPage *page,
+                                GError  *error)
+{
+  if (error == NULL)
+    {
+      error = g_error_new (GIS_INSTALL_ERROR, 0, _("Image verification error."));
+    }
+
+  gis_store_set_error (error);
+  g_error_free (error);
+  gis_install_page_teardown(page);
+}
+
+static void
 gis_install_page_gpg_watch (GPid pid, gint status, GisPage *page)
 {
-  GError *error = NULL;
-
   if (!g_spawn_check_exit_status (status, NULL))
-  {
-    error = g_error_new(GIS_INSTALL_ERROR, status, _("Image verification error."));
-    gis_store_set_error (error);
-    g_error_free (error);
-    gis_install_page_teardown(page);
-    return;
-  }
+    {
+      gis_install_page_verify_failed (page, NULL);
+      return;
+    }
 
   gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
   g_spawn_close_pid (pid);
@@ -386,32 +398,35 @@ gis_install_page_verify (GisPage *page)
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   GFile *image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
+  gchar *image_path = g_file_get_path (image);
+  gchar *signature_path = g_strjoin(NULL, image_path, ".asc", NULL);
+  GFile *signature = g_file_new_for_path (signature_path);
   gint outfd;
-#define ARGS 12
-  gchar *args[ARGS] = { "gpg",
-                        "--enable-progress-filter", "--status-fd", "1",
-                        "--keyring", IMAGE_KEYRING,
-                        "--trusted-key", TRUSTED_KEYID,
-                        "--verify", "", "", NULL };
+  gchar *args[] = { "gpg",
+                    "--enable-progress-filter", "--status-fd", "1",
+                    /* Trust the one key in this keyring, and no others */
+                    "--keyring", IMAGE_KEYRING,
+                    "--no-default-keyring",
+                    "--trust-model", "always",
+                    "--verify", signature_path, image_path, NULL };
   GError *error = NULL;
 
-  args[ARGS - 2] = g_file_get_path (image);
-  args[ARGS - 3] = g_strjoin(NULL, args[ARGS - 2], ".asc", NULL);
+  if (!g_file_query_exists (signature, NULL))
+    {
+      error = g_error_new (GIS_INSTALL_ERROR, 0,
+          _("The Endless OS signature file \"%s\" does not exist."),
+          signature_path);
+      gis_install_page_verify_failed (page, error);
+      goto out;
+    }
 
   if (!g_spawn_async_with_pipes (NULL, args, NULL,
                                  G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
                                  NULL, NULL, &priv->gpg,
-                                 NULL, &outfd, NULL, NULL))
+                                 NULL, &outfd, NULL, &error))
     {
-      gchar *args_cat = g_strjoinv (" ", args);
-      error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: couldn't run %s"), args_cat);
-      g_free (args_cat);
-      gis_store_set_error (error);
-      g_error_free (error);
-      gis_install_page_teardown(page);
-      g_free (args[ARGS - 2]);
-      g_free (args[ARGS - 3]);
-      return FALSE;
+      gis_install_page_verify_failed (page, error);
+      goto out;
     }
 
   priv->gpgout = g_io_channel_unix_new (outfd);
@@ -421,8 +436,10 @@ gis_install_page_verify (GisPage *page)
 
   g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_gpg_watch, page);
 
-  g_free (args[ARGS - 2]);
-  g_free (args[ARGS - 3]);
+out:
+  g_free (image_path);
+  g_free (signature_path);
+  g_object_unref (signature);
   return FALSE;
 }
 
