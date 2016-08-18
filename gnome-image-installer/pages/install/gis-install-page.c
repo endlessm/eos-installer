@@ -84,8 +84,11 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
   basename = g_file_get_basename(priv->image);
   if (basename == NULL)
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: g_file_get_basename(\"%s\") failed"), priv->image);
-      return FALSE;
+      gchar *parse_name = g_file_get_parse_name(priv->image);
+      g_warning ("g_file_get_basename(\"%s\") returned NULL", parse_name);
+      g_free (parse_name);
+      *error = g_error_new (GIS_INSTALL_ERROR, 0, _("Internal error"));
+      g_return_val_if_reached (FALSE);
     }
 
   /* TODO: use more magical means */
@@ -99,10 +102,10 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     }
   else
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: \"%s\" ends with neither \"gz\" nor \"xz\""), basename);
+      g_warning ("%s ends in neither 'xz' nor 'gz'", basename);
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
       g_free (basename);
-      g_object_unref (input);
-      return FALSE;
+      g_return_val_if_reached (FALSE);
     }
   g_free (basename);
 
@@ -132,8 +135,9 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
 
   if (block == NULL)
     {
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("gis_store_get_object(GIS_STORE_BLOCK_DEVICE) returned NULL"));
-      return FALSE;
+      g_warning ("gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");
+      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
+      g_return_val_if_reached (FALSE);
     }
 
   if (!udisks_block_call_open_for_restore_sync (block,
