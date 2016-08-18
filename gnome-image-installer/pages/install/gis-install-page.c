@@ -388,6 +388,7 @@ gis_install_page_verify (GisPage *page)
   GFile *image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
   gchar *image_path = g_file_get_path (image);
   gchar *signature_path = g_strjoin(NULL, image_path, ".asc", NULL);
+  GFile *signature = g_file_new_for_path (signature_path);
   gint outfd;
   gchar *args[] = { "gpg",
                     "--enable-progress-filter", "--status-fd", "1",
@@ -395,6 +396,15 @@ gis_install_page_verify (GisPage *page)
                     "--trusted-key", TRUSTED_KEYID,
                     "--verify", signature_path, image_path, NULL };
   GError *error = NULL;
+
+  if (!g_file_query_exists (signature, NULL))
+    {
+      error = g_error_new (GIS_INSTALL_ERROR, 0,
+          _("Image verification error: \"%s\" does not exist"),
+          signature_path);
+      gis_store_set_error (error);
+      goto out;
+    }
 
   if (!g_spawn_async_with_pipes (NULL, args, NULL,
                                  G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
@@ -405,7 +415,6 @@ gis_install_page_verify (GisPage *page)
       error = g_error_new(GIS_INSTALL_ERROR, 0, _("Image verification error: couldn't run %s"), args_cat);
       g_free (args_cat);
       gis_store_set_error (error);
-      g_error_free (error);
       gis_install_page_teardown(page);
       goto out;
     }
@@ -420,6 +429,8 @@ gis_install_page_verify (GisPage *page)
 out:
   g_free (image_path);
   g_free (signature_path);
+  g_object_unref (signature);
+  g_clear_error (&error);
   return FALSE;
 }
 
