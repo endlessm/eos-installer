@@ -68,7 +68,6 @@ G_DEFINE_QUARK(install-error, gis_install_error);
 #define WID(name) OBJ(GtkWidget*,name)
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
-#define TRUSTED_KEYID "9E0C1250587A279C"
 
 static gboolean
 gis_install_page_prepare_read (GisPage *page, GError **error)
@@ -341,18 +340,27 @@ gis_install_page_prepare (GisPage *page)
 }
 
 static void
+gis_install_page_verify_failed (GisPage *page,
+                                GError  *error)
+{
+  if (error == NULL)
+    {
+      error = g_error_new (GIS_INSTALL_ERROR, 0, _("Image verification error."));
+    }
+
+  gis_store_set_error (error);
+  g_error_free (error);
+  gis_install_page_teardown(page);
+}
+
+static void
 gis_install_page_gpg_watch (GPid pid, gint status, GisPage *page)
 {
-  GError *error = NULL;
-
   if (!g_spawn_check_exit_status (status, NULL))
-  {
-    error = g_error_new(GIS_INSTALL_ERROR, status, _("Image verification error."));
-    gis_store_set_error (error);
-    g_error_free (error);
-    gis_install_page_teardown(page);
-    return;
-  }
+    {
+      gis_install_page_verify_failed (page, NULL);
+      return;
+    }
 
   gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
   g_spawn_close_pid (pid);
@@ -392,17 +400,19 @@ gis_install_page_verify (GisPage *page)
   gint outfd;
   gchar *args[] = { "gpg",
                     "--enable-progress-filter", "--status-fd", "1",
+                    /* Trust the one key in this keyring, and no others */
                     "--keyring", IMAGE_KEYRING,
-                    "--trusted-key", TRUSTED_KEYID,
+                    "--no-default-keyring",
+                    "--trust-model", "always",
                     "--verify", signature_path, image_path, NULL };
   GError *error = NULL;
 
   if (!g_file_query_exists (signature, NULL))
     {
       error = g_error_new (GIS_INSTALL_ERROR, 0,
-          _("Image verification error: \"%s\" does not exist"),
+          _("The Endless OS signature file \"%s\" does not exist."),
           signature_path);
-      gis_store_set_error (error);
+      gis_install_page_verify_failed (page, error);
       goto out;
     }
 
@@ -411,11 +421,7 @@ gis_install_page_verify (GisPage *page)
                                  NULL, NULL, &priv->gpg,
                                  NULL, &outfd, NULL, &error))
     {
-      gchar *args_cat = g_strjoinv (" ", args);
-      g_prefix_error (&error, _("Image verification error: couldn't run \"%s\": "), args_cat);
-      g_free (args_cat);
-      gis_store_set_error (error);
-      gis_install_page_teardown(page);
+      gis_install_page_verify_failed (page, error);
       goto out;
     }
 
@@ -430,7 +436,6 @@ out:
   g_free (image_path);
   g_free (signature_path);
   g_object_unref (signature);
-  g_clear_error (&error);
   return FALSE;
 }
 
