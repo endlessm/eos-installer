@@ -386,17 +386,15 @@ gis_install_page_verify (GisPage *page)
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   GFile *image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
+  gchar *image_path = g_file_get_path (image);
+  gchar *signature_path = g_strjoin(NULL, image_path, ".asc", NULL);
   gint outfd;
-#define ARGS 12
-  gchar *args[ARGS] = { "gpg",
-                        "--enable-progress-filter", "--status-fd", "1",
-                        "--keyring", IMAGE_KEYRING,
-                        "--trusted-key", TRUSTED_KEYID,
-                        "--verify", "", "", NULL };
+  gchar *args[] = { "gpg",
+                    "--enable-progress-filter", "--status-fd", "1",
+                    "--keyring", IMAGE_KEYRING,
+                    "--trusted-key", TRUSTED_KEYID,
+                    "--verify", signature_path, image_path, NULL };
   GError *error = NULL;
-
-  args[ARGS - 2] = g_file_get_path (image);
-  args[ARGS - 3] = g_strjoin(NULL, args[ARGS - 2], ".asc", NULL);
 
   if (!g_spawn_async_with_pipes (NULL, args, NULL,
                                  G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
@@ -409,9 +407,7 @@ gis_install_page_verify (GisPage *page)
       gis_store_set_error (error);
       g_error_free (error);
       gis_install_page_teardown(page);
-      g_free (args[ARGS - 2]);
-      g_free (args[ARGS - 3]);
-      return FALSE;
+      goto out;
     }
 
   priv->gpgout = g_io_channel_unix_new (outfd);
@@ -421,8 +417,9 @@ gis_install_page_verify (GisPage *page)
 
   g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_gpg_watch, page);
 
-  g_free (args[ARGS - 2]);
-  g_free (args[ARGS - 3]);
+out:
+  g_free (image_path);
+  g_free (signature_path);
   return FALSE;
 }
 
