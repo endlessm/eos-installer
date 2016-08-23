@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-16 01:55+0000\n"
-"PO-Revision-Date: 2016-08-16 03:26+0000\n"
-"Last-Translator: zhifeng peng <jnufeng@126.com>\n"
+"POT-Creation-Date: 2016-08-23 01:39+0000\n"
+"PO-Revision-Date: 2016-08-23 01:39+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -718,23 +718,32 @@ msgid ""
 "troubleshoot."
 msgstr "请联系support@endlessm.com或者加入我们的谷歌小组以解决问题。"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:88
-#: ../gnome-image-installer/pages/install/gis-install-page.c:103
-#: ../gnome-image-installer/pages/install/gis-install-page.c:136
-#: ../gnome-image-installer/pages/install/gis-install-page.c:350
-#: ../gnome-image-installer/pages/install/gis-install-page.c:406
+#: ../gnome-image-installer/pages/install/gis-install-page.c:90
+#: ../gnome-image-installer/pages/install/gis-install-page.c:106
+#: ../gnome-image-installer/pages/install/gis-install-page.c:139
+#: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
-msgid "Image verification error."
-msgstr "图像认证出错。"
+msgid "Internal error"
+msgstr "内部错误"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:310
-#: ../gnome-image-installer/pages/install/gis-install-page.c:432
+#: ../gnome-image-installer/pages/install/gis-install-page.c:313
+#: ../gnome-image-installer/pages/install/gis-install-page.c:451
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "第%d步，共%d步"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:469
+#: ../gnome-image-installer/pages/install/gis-install-page.c:352
+#, c-format
+msgid "Image verification error."
+msgstr "图像认证出错。"
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:417
+#, c-format
+msgid "The Endless OS signature file \"%s\" does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
 msgid "Installing"
 msgstr "安装中"
 
@@ -756,11 +765,6 @@ msgstr "无效压缩数据"
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
 msgstr "内存不足"
-
-#: ../gnome-image-installer/util/gduxzdecompressor.c:136
-#, c-format
-msgid "Internal error"
-msgstr "内部错误"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
