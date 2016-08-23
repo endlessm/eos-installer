@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 01:38+0000\n"
+"POT-Creation-Date: 2016-08-16 01:55+0000\n"
 "PO-Revision-Date: 2016-08-02 13:01+0000\n"
 "Last-Translator: Mariana Barbosa <mari@endlessm.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/pt_BR/)\n"
@@ -44,12 +44,12 @@ msgid "_Cancel"
 msgstr "_Cancelar"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:380
+#: ../gnome-image-installer/gnome-image-installer.c:322
 msgid "Force new user mode"
 msgstr "Forçar modo novo usuário"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:384
+#: ../gnome-image-installer/gnome-image-installer.c:326
 msgid "- GNOME initial setup"
 msgstr "- Configurações iniciais do GNOME"
 
@@ -625,21 +625,21 @@ msgid "_Start using GNOME 3"
 msgstr "Começar a usar o _GNOME 3"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:291
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:361
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:366
 #, c-format
 msgid "No suitable images were found."
 msgstr "Não foram encontradas imagens adequadas."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:168
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:173
 msgid "Light"
 msgstr "Light"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:399
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:404
 msgid "Install Endless OS"
 msgstr "Instalar Endless OS"
 

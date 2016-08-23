@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 01:38+0000\n"
+"POT-Creation-Date: 2016-08-16 01:55+0000\n"
 "PO-Revision-Date: 2016-08-07 06:35+0000\n"
 "Last-Translator: Aditi Kabir <aditi.kabir@gmail.com>\n"
 "Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/eos-installer/language/bn/)\n"
@@ -39,12 +39,12 @@ msgid "_Cancel"
 msgstr "_বাতিল"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:380
+#: ../gnome-image-installer/gnome-image-installer.c:322
 msgid "Force new user mode"
 msgstr "নতুন ব্যবহারকারী রূপে যেতে বাধ্য করুন"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:384
+#: ../gnome-image-installer/gnome-image-installer.c:326
 msgid "- GNOME initial setup"
 msgstr "- GNOME প্রাথমিক সেটআপ"
 
@@ -620,21 +620,21 @@ msgid "_Start using GNOME 3"
 msgstr "_GNOME 3 ব্যবহার শুরু করুন"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:291
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:361
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:366
 #, c-format
 msgid "No suitable images were found."
 msgstr "কোন যথাযথ ছবি পাওয়া যায়নি।"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:168
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:173
 msgid "Light"
 msgstr "Light"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:399
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:404
 msgid "Install Endless OS"
 msgstr "এন্ডলেস OS সংস্থাপন করুন"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-12 01:38+0000\n"
+"POT-Creation-Date: 2016-08-23 01:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,12 +36,12 @@ msgid "_Cancel"
 msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:380
+#: ../gnome-image-installer/gnome-image-installer.c:322
 msgid "Force new user mode"
 msgstr ""
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:384
+#: ../gnome-image-installer/gnome-image-installer.c:326
 msgid "- GNOME initial setup"
 msgstr ""
 
@@ -617,21 +617,21 @@ msgid "_Start using GNOME 3"
 msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:291
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:361
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:366
 #, c-format
 msgid "No suitable images were found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:168
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:173
 msgid "Light"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
 msgid "Full"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:399
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:404
 msgid "Install Endless OS"
 msgstr ""
 
@@ -707,23 +707,32 @@ msgid ""
 "Please contact support@endlessm.com or join our Google Group to troubleshoot."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:88
-#: ../gnome-image-installer/pages/install/gis-install-page.c:103
-#: ../gnome-image-installer/pages/install/gis-install-page.c:136
-#: ../gnome-image-installer/pages/install/gis-install-page.c:350
-#: ../gnome-image-installer/pages/install/gis-install-page.c:406
+#: ../gnome-image-installer/pages/install/gis-install-page.c:90
+#: ../gnome-image-installer/pages/install/gis-install-page.c:106
+#: ../gnome-image-installer/pages/install/gis-install-page.c:139
+#: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
-msgid "Image verification error."
+msgid "Internal error"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:310
-#: ../gnome-image-installer/pages/install/gis-install-page.c:432
+#: ../gnome-image-installer/pages/install/gis-install-page.c:313
+#: ../gnome-image-installer/pages/install/gis-install-page.c:451
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:469
+#: ../gnome-image-installer/pages/install/gis-install-page.c:352
+#, c-format
+msgid "Image verification error."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:417
+#, c-format
+msgid "The Endless OS signature file \"%s\" does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
 msgid "Installing"
 msgstr ""
 
@@ -745,11 +754,6 @@ msgstr ""
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr ""
-
-#: ../gnome-image-installer/util/gduxzdecompressor.c:136
-#, c-format
-msgid "Internal error"
 msgstr ""
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
