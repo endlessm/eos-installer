@@ -170,7 +170,7 @@ static gchar *get_display_name(gchar *fullname)
       if (g_str_equal (personality, "base"))
         {
           g_free (personality);
-          personality = g_strdup(_("Light"));
+          personality = g_strdup(_("Basic"));
           name = g_strdup_printf ("%s %s %s", product, version, personality);
         }
       else
