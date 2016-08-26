@@ -142,23 +142,23 @@ static gchar *get_display_name(gchar *fullname)
       if (g_str_equal (product, "eos"))
         {
           g_free (product);
-          product = g_strdup ("Endless OS");
+          product = g_strdup (_("Endless OS"));
         }
       else if (g_str_equal (product, "eosinstaller"))
         {
           g_free (product);
-          product = g_strdup ("Endless OS Installer");
+          product = g_strdup (_("Endless OS Installer"));
         }
       else if (g_str_equal (product, "eosnonfree"))
         {
           g_free (product);
-          product = g_strdup ("Endless OS (non-free)");
+          product = g_strdup (_("Endless OS (non-free)"));
         }
       else if (g_str_equal (product, "eosoem"))
         {
           g_free (product);
-          product = g_strdup ("Endless OS (OEM)");
-        }        
+          product = g_strdup (_("Endless OS (OEM)"));
+        }
 
       if (g_str_has_prefix (version, "eos"))
         {
