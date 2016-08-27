@@ -39,6 +39,16 @@ po/stamp-it
 stamp-h1
 *~
 
+eos-installer-data/eos-installer.desktop
+
+gnome-image-installer/gnome-image-installer
+
+gnome-image-installer/gis-assistant-resources.[ch]
+gnome-image-installer/pages/diskimage/diskimage-resources.[ch]
+gnome-image-installer/pages/disktarget/disktarget-resources.[ch]
+gnome-image-installer/pages/finished/finished-resources.[ch]
+gnome-image-installer/pages/install/install-resources.[ch]
+
 gnome-initial-setup-*.tar.gz
 gnome-initial-setup-*.tar.bz2
 gnome-initial-setup-*.tar.xz
