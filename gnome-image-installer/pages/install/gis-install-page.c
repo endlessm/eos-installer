@@ -195,6 +195,12 @@ gis_install_page_unmount_image_partition (GisPage *page)
   GDBusObjectManager *manager = udisks_client_get_object_manager(priv->client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GList *l;
+  const gchar *label;
+
+  if (gis_store_is_live_install ())
+    label = "eoslive";
+  else
+    label = "eosimages";
 
   for (l = objects; l != NULL; l = l->next)
     {
@@ -204,7 +210,7 @@ gis_install_page_unmount_image_partition (GisPage *page)
       if (block == NULL)
         continue;
 
-      if (!g_str_equal ("eosimages", udisks_block_get_id_label (block)))
+      if (!g_str_equal (label, udisks_block_get_id_label (block)))
         continue;
 
       fs = udisks_object_peek_filesystem (UDISKS_OBJECT (l->data));

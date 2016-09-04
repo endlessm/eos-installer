@@ -266,9 +266,11 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
   gchar *file = NULL;
   gchar *ufile = NULL;
   GtkListStore *store = OBJ(GtkListStore*, "image_store");
-  GDir *dir = g_dir_open (path, 0, &error);
+  GDir *dir;
   GtkTreeIter iter;
+  gboolean is_live = gis_store_is_live_install ();
 
+  dir = g_dir_open (path, 0, &error);
   if (dir == NULL)
     {
       gis_store_set_error (error);
@@ -291,7 +293,9 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
   for (file = (gchar*)g_dir_read_name (dir); file != NULL; file = (gchar*)g_dir_read_name (dir))
     {
       gchar *fullpath = g_build_path ("/", path, file, NULL);
-      if (gis_store_is_unattended() && ufile != NULL)
+
+      /* ufile is only set in the unattended case */
+      if (ufile != NULL)
         {
           if (g_str_equal (ufile, file))
             add_image (store, fullpath, NULL);
@@ -345,6 +349,12 @@ gis_diskimage_page_mount (GisPage *page)
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GList *l;
+  const gchar *label;
+
+  if (gis_store_is_live_install ())
+    label = "eoslive";
+  else
+    label = "eosimages";
 
   for (l = objects; l != NULL; l = l->next)
     {
@@ -356,7 +366,7 @@ gis_diskimage_page_mount (GisPage *page)
       if (block == NULL)
         continue;
 
-      if (!g_str_equal ("eosimages", udisks_block_get_id_label (block)))
+      if (!g_str_equal (label, udisks_block_get_id_label (block)))
         continue;
 
       fs = udisks_object_peek_filesystem (object);
