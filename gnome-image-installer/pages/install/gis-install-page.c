@@ -527,9 +527,9 @@ gis_install_page_verify (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GFile *image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
+  GFile *image = G_FILE(gis_store_get_object (GIS_STORE_IMAGE));
   gchar *image_path = g_file_get_path (image);
-  gchar *signature_path = g_strjoin(NULL, image_path, ".asc", NULL);
+  const gchar *signature_path = gis_store_get_image_signature ();
   GFile *signature = g_file_new_for_path (signature_path);
   gint outfd;
   gchar *args[] = { "gpg",
@@ -538,7 +538,7 @@ gis_install_page_verify (GisPage *page)
                     "--keyring", IMAGE_KEYRING,
                     "--no-default-keyring",
                     "--trust-model", "always",
-                    "--verify", signature_path, image_path, NULL };
+                    "--verify", (gchar *) signature_path, image_path, NULL };
   GError *error = NULL;
 
   if (!g_file_query_exists (signature, NULL))
@@ -568,7 +568,6 @@ gis_install_page_verify (GisPage *page)
 
 out:
   g_free (image_path);
-  g_free (signature_path);
   g_object_unref (signature);
   return FALSE;
 }

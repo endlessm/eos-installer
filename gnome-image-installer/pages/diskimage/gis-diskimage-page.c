@@ -62,7 +62,7 @@ static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
   GtkTreeIter i;
-  gchar *image, *name = NULL;
+  gchar *image, *name, *signature = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
 
@@ -72,7 +72,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       return;
     }
 
-  gtk_tree_model_get(model, &i, 0, &name, 2, &image, -1);
+  gtk_tree_model_get(model, &i, 0, &name, 2, &image, 3, &signature, -1);
 
   gis_store_set_image_name (name);
   g_free (name);
@@ -110,6 +110,12 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       gis_store_set_required_size (size);
     }
   g_object_unref(file);
+
+  if (signature == NULL)
+    signature = g_strjoin (NULL, image, ".asc", NULL);
+
+  gis_store_set_image_signature (signature);
+  g_free (signature);
 
   gis_page_set_complete (page, TRUE);
 
@@ -205,7 +211,7 @@ static gchar *get_display_name(gchar *fullname)
   return name;
 }
 
-static void add_image(GtkListStore *store, gchar *image)
+static void add_image(GtkListStore *store, gchar *image, gchar *signature)
 {
   GtkTreeIter i;
   GError *error = NULL;
@@ -223,6 +229,13 @@ static void add_image(GtkListStore *store, gchar *image)
        || (g_str_has_suffix (image, ".img") && get_is_valid_eos_gpt (image) == 1))
         {
           displayname = get_display_name (image);
+
+          /* if we have a signature file passed in, attempt to get the name
+           * from that too */
+          if (displayname == NULL && signature != NULL)
+            {
+              displayname = get_display_name (signature);
+            }
         }
 
       if (displayname != NULL)
@@ -232,7 +245,7 @@ static void add_image(GtkListStore *store, gchar *image)
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
                               0, displayname,
-                              1, size, 2, image, -1);
+                              1, size, 2, image, 3, signature, -1);
           g_free (size);
           g_free (displayname);
         }
@@ -281,11 +294,11 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
       if (gis_store_is_unattended() && ufile != NULL)
         {
           if (g_str_equal (ufile, file))
-              add_image(store, fullpath);
+            add_image (store, fullpath, NULL);
         }
       else
         {
-          add_image(store, fullpath);
+          add_image (store, fullpath, NULL);
         }
       g_free (fullpath);
     }
