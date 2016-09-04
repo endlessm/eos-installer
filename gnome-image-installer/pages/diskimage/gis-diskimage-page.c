@@ -120,22 +120,19 @@ static gchar *get_display_name(gchar *fullname)
   GMatchInfo *info;
   gchar *name = NULL;
 
-  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-([^-]+)-([^.]+)\\.([^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img\\.([gx]z)$", 0, 0, NULL);
+  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-(?:[^-]+)-(?:[^.]+)\\.(?:[^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img(?:\\.([gx]z|asc))$", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
-      gchar *product = g_match_info_fetch (info, 1);
-      gchar *version = g_match_info_fetch (info, 2);
-      gchar *personality = g_match_info_fetch (info, 6);
-      gchar *type = g_match_info_fetch (info, 7);
-      gchar *language = NULL;
+      g_autofree gchar *product = g_match_info_fetch (info, 1);
+      g_autofree gchar *version = g_match_info_fetch (info, 2);
+      g_autofree gchar *personality = g_match_info_fetch (info, 3);
+      g_autofree gchar *type = g_match_info_fetch (info, 4);
+      g_autofree gchar *language = NULL;
 
       /* Split images not supported yet */
       if (strlen (type) > 0)
         {
-          g_free (version);
-          g_free (personality);
-          g_free (type);
           return NULL;
         }
 
@@ -192,11 +189,6 @@ static gchar *get_display_name(gchar *fullname)
           if (language != NULL)
             name = g_strdup_printf ("%s %s %s %s", product, version, language, personality);
         }
-        
-      g_free (version);
-      g_free (personality);
-      g_free (type);
-      g_free (language);
     }
 
   return name;
