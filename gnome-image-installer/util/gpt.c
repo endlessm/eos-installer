@@ -244,3 +244,33 @@ int is_eos_gpt_valid(struct ptable *pt)
 
     return 1; // success, GPT is valid
 }
+
+uint64_t get_disk_image_size(const char *filepath)
+{
+    if(NULL == filepath) return 0;
+    FILE *in_file = fopen(filepath, "r");
+    if(NULL == in_file) return 0;
+    struct ptable pt;
+    if(fread(&pt, sizeof(pt), 1, in_file) == 1) {
+        fclose(in_file);
+        return get_disk_size(&pt);
+    }
+    // error reading from disk
+    fclose(in_file);
+    return 0;
+}
+
+int get_is_valid_eos_gpt(const char *filepath)
+{
+    if(NULL == filepath) return 0;
+    FILE *in_file = fopen(filepath, "r");
+    if(NULL == in_file) return 0;
+    struct ptable pt;
+    if(fread(&pt, sizeof(pt), 1, in_file) == 1) {
+        fclose(in_file);
+        return is_eos_gpt_valid(&pt);
+    }
+    // error reading from disk
+    fclose(in_file);
+    return 0;
+}

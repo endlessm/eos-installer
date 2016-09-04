@@ -101,9 +101,13 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     {
       priv->decompressor = G_OBJECT (gdu_xz_decompressor_new ());
     }
+  else if (g_str_has_suffix (basename, "img"))
+    {
+      priv->decompressor = NULL;
+    }
   else
     {
-      g_warning ("%s ends in neither 'xz' nor 'gz'", basename);
+      g_warning ("%s ends in neither '.xz', '.gz' nor '.img'", basename);
       *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
       g_free (basename);
       g_return_val_if_reached (FALSE);
@@ -116,9 +120,17 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
       g_propagate_error (error, e);
       return FALSE;
     }
-  priv->decompressed = g_converter_input_stream_new (G_INPUT_STREAM (input),
-                                                     G_CONVERTER (priv->decompressor));
-  g_object_unref (input);
+
+  if (priv->decompressor)
+    {
+      priv->decompressed = g_converter_input_stream_new (G_INPUT_STREAM (input),
+                                                         G_CONVERTER (priv->decompressor));
+      g_object_unref (input);
+    }
+  else
+    {
+      priv->decompressed = input;
+    }
 
   return TRUE;
 }

@@ -30,6 +30,7 @@
 #include "diskimage-resources.h"
 #include "gis-diskimage-page.h"
 #include "gis-store.h"
+#include "gpt.h"
 #include "gpt_gz.h"
 #include "gpt_lzma.h"
 
@@ -91,6 +92,16 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
   else if (g_str_has_suffix (image, ".xz"))
     {
       gint64 size = get_xz_disk_image_size (image);
+      if (size <= 0)
+        {
+          size = 1*1024*1024*1024;
+          size *= 8;
+        }
+      gis_store_set_required_size (size);
+    }
+  else if (g_str_has_suffix (image, ".img"))
+    {
+      gint64 size = get_disk_image_size (image);
       if (size <= 0)
         {
           size = 1*1024*1024*1024;
@@ -207,8 +218,9 @@ static void add_image(GtkListStore *store, gchar *image)
       gchar *size = NULL;
       gchar *displayname = NULL;
 
-      if ((g_str_has_suffix (image, ".gz") && get_gzip_is_valid_eos_gpt (image) == 1)
-       || (g_str_has_suffix (image, ".xz") && get_xz_is_valid_eos_gpt (image) == 1))
+      if ((g_str_has_suffix (image, ".img.gz") && get_gzip_is_valid_eos_gpt (image) == 1)
+       || (g_str_has_suffix (image, ".img.xz") && get_xz_is_valid_eos_gpt (image) == 1)
+       || (g_str_has_suffix (image, ".img") && get_is_valid_eos_gpt (image) == 1))
         {
           displayname = get_display_name (image);
         }
