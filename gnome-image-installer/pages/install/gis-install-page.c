@@ -225,6 +225,7 @@ gis_install_page_teardown (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
 
   g_mutex_lock (&priv->copy_mutex);
 
@@ -244,7 +245,7 @@ gis_install_page_teardown (GisPage *page)
 
   if (priv->pulse_id)
     {
-      g_source_remove (priv->pulse_id);
+      gtk_widget_remove_tick_callback ((GtkWidget *) progress, priv->pulse_id);
       priv->pulse_id = 0;
     }
 
@@ -254,7 +255,7 @@ gis_install_page_teardown (GisPage *page)
 
   gis_install_page_unmount_image_partition (page);
 
-  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 1.0);
+  gtk_progress_bar_set_fraction (progress, 1.0);
 
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 
@@ -278,10 +279,8 @@ gis_install_page_update_progress(GisPage *page)
 }
 
 static gboolean
-gis_install_page_pulse_progress (GisPage *page)
+gis_install_page_pulse_progress (GtkProgressBar *bar)
 {
-  GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
-
   gtk_progress_bar_pulse (bar);
 
   return TRUE;
@@ -348,6 +347,7 @@ gis_install_page_copy (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GtkProgressBar *progress = OBJ (GtkProgressBar *, "install_progress");
   GError *error = NULL;
   gchar *buffer = NULL;
   gssize buffer_size = 1 * 1024 * 1024;
@@ -391,9 +391,11 @@ gis_install_page_copy (GisPage *page)
   /* set up a pulser and start the sync here, as it can be very slow *
    * protect the pulse_id with the lock                              */
   g_mutex_lock (&priv->copy_mutex);
-  priv->pulse_id = g_timeout_add (500,
-                                  (GSourceFunc) gis_install_page_pulse_progress,
-                                  page);
+  gtk_progress_bar_set_pulse_step (progress, 1. / 60.);
+  priv->pulse_id = gtk_widget_add_tick_callback (
+      GTK_WIDGET (progress),
+      (GtkTickCallback) gis_install_page_pulse_progress,
+      NULL, NULL);
   g_mutex_unlock (&priv->copy_mutex);
 
   g_thread_yield();
