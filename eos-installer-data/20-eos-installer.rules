@@ -21,6 +21,11 @@ polkit.addRule(function(action, subject) {
                          action.id.indexOf('org.freedesktop.udisks2.') === 0 ||
                          action.id.indexOf('org.freedesktop.RealtimeKit1.') === 0);
 
+    if (action.id === 'org.freedesktop.policykit.exec' &&
+            action.lookup('program') === '/usr/sbin/eos-repartition-mbr') {
+        actionMatches = true;
+    }
+
     if (actionMatches) {
         if (subject.local)
             return 'yes';

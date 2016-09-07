@@ -56,6 +56,7 @@ struct _GisInstallPagePrivate {
   GIOChannel *gpgout;
   guint gpg_watch;
   UDisksClient *client;
+  guint pulse_id;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
@@ -167,7 +168,9 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
 
   g_clear_object (&fd_list);
 
+  g_mutex_lock (&priv->copy_mutex);
   priv->drive_fd = fd;
+  g_mutex_unlock (&priv->copy_mutex);
 
   return TRUE;
 }
@@ -197,11 +200,32 @@ gis_install_page_unmount_image_partition (GisPage *page)
     }
 }
 
+static void
+gis_install_page_close_drive (GisPage *page)
+{
+  GisInstallPage *install = GIS_INSTALL_PAGE (page);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+
+  g_mutex_lock (&priv->copy_mutex);
+
+  if (priv->drive_fd)
+    {
+      syncfs (priv->drive_fd);
+      close (priv->drive_fd);
+      g_spawn_command_line_sync ("partprobe", NULL, NULL, NULL, NULL);
+    }
+
+  priv->drive_fd = -1;
+
+  g_mutex_unlock (&priv->copy_mutex);
+}
+
 static gboolean
 gis_install_page_teardown (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
 
   g_mutex_lock (&priv->copy_mutex);
 
@@ -217,20 +241,21 @@ gis_install_page_teardown (GisPage *page)
     g_object_unref (priv->decompressed);
   priv->decompressed = NULL;
 
-  if (priv->drive_fd)
-    {
-      syncfs (priv->drive_fd);
-      close (priv->drive_fd);
-      g_spawn_command_line_sync ("partprobe", NULL, NULL, NULL, NULL);
-    }
-  priv->drive_fd = -1;
   priv->bytes_written = 0;
+
+  if (priv->pulse_id)
+    {
+      gtk_widget_remove_tick_callback ((GtkWidget *) progress, priv->pulse_id);
+      priv->pulse_id = 0;
+    }
 
   g_mutex_unlock (&priv->copy_mutex);
 
+  gis_install_page_close_drive (page);
+
   gis_install_page_unmount_image_partition (page);
 
-  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 1.0);
+  gtk_progress_bar_set_fraction (progress, 1.0);
 
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 
@@ -253,11 +278,76 @@ gis_install_page_update_progress(GisPage *page)
   return TRUE;
 }
 
+static gboolean
+gis_install_page_pulse_progress (GtkProgressBar *bar)
+{
+  gtk_progress_bar_pulse (bar);
+
+  return TRUE;
+}
+
+static gboolean
+gis_install_page_is_efi_system (GisPage *page)
+{
+  return g_file_test ("/sys/firmware/efi", G_FILE_TEST_IS_DIR);
+}
+
+static gboolean
+gis_install_page_convert_to_mbr (GisPage *page, GError **error)
+{
+  GisInstallPage *install = GIS_INSTALL_PAGE (page);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
+  gchar *cmd[] = { "pkexec", "/usr/sbin/eos-repartition-mbr", NULL, NULL };
+  gchar *rootdev = NULL;
+  gchar *std_out = NULL, *std_err = NULL;
+  gint ret = 0;
+  GError *err = NULL;
+
+  if (block == NULL)
+    {
+      g_printerr ("reached convert_to_mbr without a block device!\n");
+      g_set_error (error, GIS_INSTALL_ERROR, 0, _("Internal error"));
+      return FALSE;
+    }
+
+  rootdev = g_strdup (udisks_block_get_device (block));
+  cmd[2] = rootdev;
+
+  if (!g_spawn_sync (NULL, cmd, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL,
+                     &std_out, &std_err, &ret, &err))
+    {
+      g_printerr ("failed to launch %s: %s", cmd[1], err->message);
+      g_propagate_error (error, err);
+      g_free (rootdev);
+      return FALSE;
+    }
+
+  g_print ("%s", std_out);
+  g_printerr ("%s", std_err);
+
+  g_free (std_out);
+  g_free (std_err);
+  g_free (rootdev);
+
+  if (ret > 0)
+    {
+      g_printerr ("%s returned %i", cmd[1], ret);
+      g_set_error (error, GIS_INSTALL_ERROR, 0, _("Internal error"));
+      return FALSE;
+    }
+
+  g_print ("%s succeeded", cmd[1]);
+
+  return TRUE;
+}
+
 static gpointer
 gis_install_page_copy (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GtkProgressBar *progress = OBJ (GtkProgressBar *, "install_progress");
   GError *error = NULL;
   gchar *buffer = NULL;
   gssize buffer_size = 1 * 1024 * 1024;
@@ -276,29 +366,55 @@ gis_install_page_copy (GisPage *page)
                                buffer, buffer_size,
                                NULL, &error);
 
-      if (r < 0 || error != NULL)
+      if (r > 0)
+        {
+          /* We lock to protect the bytes_written and access to drive_fd. */
+          g_mutex_lock (&priv->copy_mutex);
+
+          w = write (priv->drive_fd, buffer, r);
+          priv->bytes_written += w;
+
+          g_mutex_unlock (&priv->copy_mutex);
+        }
+    }
+  while (r > 0 && w > 0);
+
+  g_source_remove (timer_id);
+
+  if (r < 0 || error != NULL)
+    {
+      gis_store_set_error (error);
+      g_error_free (error);
+      goto out;
+    }
+
+  /* set up a pulser and start the sync here, as it can be very slow *
+   * protect the pulse_id with the lock                              */
+  g_mutex_lock (&priv->copy_mutex);
+  gtk_progress_bar_set_pulse_step (progress, 1. / 60.);
+  priv->pulse_id = gtk_widget_add_tick_callback (
+      GTK_WIDGET (progress),
+      (GtkTickCallback) gis_install_page_pulse_progress,
+      NULL, NULL);
+  g_mutex_unlock (&priv->copy_mutex);
+
+  g_thread_yield();
+
+  gis_install_page_close_drive (page);
+
+  if (!gis_install_page_is_efi_system (page))
+    {
+      g_print ("BIOS boot detected, converting system from GPT to MBR\n");
+
+      if (!gis_install_page_convert_to_mbr (page, &error))
         {
           gis_store_set_error (error);
           g_error_free (error);
         }
-
-      /* We lock to protect the bytes_written. It's probably dangerous to
-       * assume the lock protects from anything else...
-       */
-      g_mutex_lock (&priv->copy_mutex);
-      if (r > 0)
-        {
-          w = write (priv->drive_fd, buffer, r);
-          priv->bytes_written += w;
-        }
-
-      g_mutex_unlock (&priv->copy_mutex);
     }
-  while (r > 0 && w > 0);
 
+out:
   g_idle_add ((GSourceFunc)gis_install_page_teardown, page);
-
-  g_source_remove (timer_id);
 
   return NULL;
 }
