@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-06 01:42+0000\n"
+"POT-Creation-Date: 2016-09-13 01:41+0000\n"
 "PO-Revision-Date: 2016-08-31 21:39+0000\n"
 "Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/eos-installer/language/bn/)\n"
@@ -729,32 +729,34 @@ msgid ""
 "troubleshoot."
 msgstr "অনুগ্রহ করে এখানে যোগাযোগ করুন support@endlessm.com অথবা আমাদের গুগল গ্রুপে যোগ দিয়ে সমস্যা সমাধান করুন।"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:90
-#: ../gnome-image-installer/pages/install/gis-install-page.c:106
-#: ../gnome-image-installer/pages/install/gis-install-page.c:139
+#: ../gnome-image-installer/pages/install/gis-install-page.c:91
+#: ../gnome-image-installer/pages/install/gis-install-page.c:107
+#: ../gnome-image-installer/pages/install/gis-install-page.c:140
+#: ../gnome-image-installer/pages/install/gis-install-page.c:310
+#: ../gnome-image-installer/pages/install/gis-install-page.c:336
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "অভ্যন্তরীণ ভুল হয়েছে"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:313
-#: ../gnome-image-installer/pages/install/gis-install-page.c:451
+#: ../gnome-image-installer/pages/install/gis-install-page.c:429
+#: ../gnome-image-installer/pages/install/gis-install-page.c:567
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "ধাপ %d of %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:352
+#: ../gnome-image-installer/pages/install/gis-install-page.c:468
 #, c-format
 msgid "Image verification error."
 msgstr "ছবি নিশ্চিতকরণে ভুল হয়েছে।"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:417
+#: ../gnome-image-installer/pages/install/gis-install-page.c:533
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
 msgstr "এন্ডলেস OS স্বাক্ষর ফাইল \"%s\" কোথাও বিদ্যমান নেই।"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:488
+#: ../gnome-image-installer/pages/install/gis-install-page.c:604
 msgid "Installing"
 msgstr "সংস্থাপিত হচ্ছে"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-06 01:42+0000\n"
+"POT-Creation-Date: 2016-09-13 01:41+0000\n"
 "PO-Revision-Date: 2016-08-31 21:39+0000\n"
 "Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-installer/language/vi/)\n"
@@ -727,32 +727,34 @@ msgid ""
 "troubleshoot."
 msgstr "Vui lòng liên hệ với support@endlessm.com hoặc tham gia Nhóm Google của chúng tôi để  khắc phục vấn đề."
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:90
-#: ../gnome-image-installer/pages/install/gis-install-page.c:106
-#: ../gnome-image-installer/pages/install/gis-install-page.c:139
+#: ../gnome-image-installer/pages/install/gis-install-page.c:91
+#: ../gnome-image-installer/pages/install/gis-install-page.c:107
+#: ../gnome-image-installer/pages/install/gis-install-page.c:140
+#: ../gnome-image-installer/pages/install/gis-install-page.c:310
+#: ../gnome-image-installer/pages/install/gis-install-page.c:336
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "Lỗi nội tại"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:313
-#: ../gnome-image-installer/pages/install/gis-install-page.c:451
+#: ../gnome-image-installer/pages/install/gis-install-page.c:429
+#: ../gnome-image-installer/pages/install/gis-install-page.c:567
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "Bước %d trong số %d bước"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:352
+#: ../gnome-image-installer/pages/install/gis-install-page.c:468
 #, c-format
 msgid "Image verification error."
 msgstr "Lỗi xác thực hình ảnh."
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:417
+#: ../gnome-image-installer/pages/install/gis-install-page.c:533
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:488
+#: ../gnome-image-installer/pages/install/gis-install-page.c:604
 msgid "Installing"
 msgstr "Đang cài đặt"
 
