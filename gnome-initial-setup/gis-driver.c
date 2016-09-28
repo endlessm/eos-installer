@@ -417,7 +417,7 @@ GisDriver *
 gis_driver_new (GisDriverMode mode)
 {
   return g_object_new (GIS_TYPE_DRIVER,
-                       "application-id", "org.gnome.InitialSetup",
+                       "application-id", "com.endlessm.Installer",
                        "mode", mode,
                        NULL);
 }
