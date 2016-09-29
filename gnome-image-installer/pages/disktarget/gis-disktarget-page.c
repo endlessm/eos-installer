@@ -329,7 +329,7 @@ gis_disktarget_page_shown (GisPage *page)
   priv->client = udisks_client_new_sync(NULL, &error);
   if (priv->client == NULL)
     {
-      g_error("Unable to enumearate disks: %s", error->message);
+      g_error("Unable to enumerate disks: %s", error->message);
       g_error_free(error);
     }
   else
