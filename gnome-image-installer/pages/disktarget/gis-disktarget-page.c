@@ -191,6 +191,11 @@ gis_disktarget_page_has_data_partitions(GisPage *page, GList *objects, UDisksBlo
       if (TYPE_IS("ebd0a0a2-b9e5-4433-87c0-68b6b72699c7") /* Microsoft basic data partition */
        || TYPE_IS("af9b60a0-1431-4f62-bc68-3311714a69ad") /* Logical Disk Manager data partition	*/
        || TYPE_IS("0fc63daf-8483-4772-8e79-3d69d8477de4") /* Linux filesystem */
+       || TYPE_IS("44479540-f297-41b2-9af7-d131d5f0458a") /* Root partition (x86) */
+       || TYPE_IS("4f68bce3-e8cd-4db1-96e7-fbcaf984b709") /* Root partition (x86-64) */
+       || TYPE_IS("69dad710-2ce4-4e3c-b16c-21a1d49abed3") /* Root partition (32-bit ARM) */
+       || TYPE_IS("b921b045-1df0-41c3-af44-4c6f280d3fae") /* Root partition (64-bit ARM) */
+       || TYPE_IS("e6d6d379-f507-44c2-a23c-238f2a3df928") /* LVM partition */
        || TYPE_IS("933ac7e1-2eb4-4f13-b844-0e14e2aef915") /* /home partition */
        || TYPE_IS("3b8f8425-20e0-4f3b-907f-1a25a76f98e8") /* /srv (server data) */
        || TYPE_IS("7ffec5c9-2d00-49b7-8941-3ea10a5586b7") /* Plain dm-crypt partition */
