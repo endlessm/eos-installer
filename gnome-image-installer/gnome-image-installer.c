@@ -191,8 +191,9 @@ read_keys (const gchar *path)
                 }
               else
                 {
-                  g_error ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
+                  g_warning ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
                            lowcase_product, lowcase_vendor, product, vendor);
+                  /* Continue in attended mode */
                 }
               g_free (lowcase_vendor);
               g_free (lowcase_product);
