@@ -217,6 +217,42 @@ gis_disktarget_page_has_data_partitions(GisPage *page, GList *objects, UDisksBlo
   return FALSE;
 }
 
+static UDisksDrive *
+gis_disktarget_page_get_root_drive (UDisksClient *client)
+{
+  GDBusObjectManager *manager = udisks_client_get_object_manager(client);
+  GList *objects = g_dbus_object_manager_get_objects(manager);
+  GList *l;
+  UDisksDrive *drive = NULL;
+
+  for (l = objects; drive == NULL && l != NULL; l = l->next)
+    {
+      UDisksObject *object = UDISKS_OBJECT (l->data);
+      UDisksFilesystem *fs = udisks_object_peek_filesystem (object);
+      UDisksBlock *block = udisks_object_peek_block (object);
+      const gchar *const* mounts = NULL;
+
+      if (fs == NULL || block == NULL)
+        {
+          continue;
+        }
+
+      mounts = udisks_filesystem_get_mount_points (fs);
+      if (mounts == NULL || !g_strv_contains (mounts, "/"))
+        {
+          continue;
+        }
+
+      g_print ("found root filesystem %s\n",
+               g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+      drive = udisks_client_get_drive_for_block (client, block);
+      if (drive == NULL)
+        g_warning ("Couldn't get UDisksDrive for block");
+    }
+
+  return drive;
+}
+
 static void
 gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 {
@@ -228,6 +264,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GtkListStore *store = OBJ(GtkListStore*, "target_store");
   GtkTreeIter i;
   gchar *umodel = NULL;
+  UDisksDrive *root = NULL;
 
   if (gis_store_is_unattended())
     {
@@ -240,6 +277,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
+  root = gis_disktarget_page_get_root_drive (client);
   for (l = objects; l != NULL; l = l->next)
     {
       gchar *targetname, *targetsize;
@@ -250,6 +288,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
       if (drive == NULL)
         continue;
+
+      if (drive == root)
+        {
+          g_print ("skipping %s: it is the root device\n",
+                   g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+          continue;
+        }
 
       if (gis_store_is_unattended() && umodel != NULL)
         {
@@ -285,6 +330,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       g_free(targetname);
       g_free(targetsize);
     }
+  g_clear_object (&root);
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &i))
     {
