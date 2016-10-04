@@ -298,9 +298,10 @@ gis_install_page_convert_to_mbr (GisPage *page, GError **error)
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
-  gchar *cmd[] = { "pkexec", "/usr/sbin/eos-repartition-mbr", NULL, NULL };
-  gchar *rootdev = NULL;
-  gchar *std_out = NULL, *std_err = NULL;
+  static const char *cmd = "/usr/sbin/eos-repartition-mbr";
+  g_autoptr(GSubprocessLauncher) launcher = NULL;
+  g_autoptr(GSubprocess) process = NULL;
+  g_autofree gchar *rootdev = NULL;
   gint ret = 0;
   GError *err = NULL;
 
@@ -312,32 +313,33 @@ gis_install_page_convert_to_mbr (GisPage *page, GError **error)
     }
 
   rootdev = g_strdup (udisks_block_get_device (block));
-  cmd[2] = rootdev;
+  g_print("launching %s %s via pkexec\n", cmd, rootdev);
 
-  if (!g_spawn_sync (NULL, cmd, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL,
-                     &std_out, &std_err, &ret, &err))
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
+  /* pkexec won't let us run the program if $SHELL isn't in /etc/shells,
+   * so remove it from the environment.
+   */
+  g_subprocess_launcher_unsetenv (launcher, "SHELL");
+  process = g_subprocess_launcher_spawn (launcher, &err,
+                                         "pkexec", cmd, rootdev, NULL);
+  if (process == NULL ||
+      !g_subprocess_wait (process, NULL, &err))
     {
-      g_printerr ("failed to launch %s: %s", cmd[1], err->message);
+      g_printerr ("failed to run %s: %s\n", cmd, err->message);
       g_propagate_error (error, err);
-      g_free (rootdev);
       return FALSE;
     }
 
-  g_print ("%s", std_out);
-  g_printerr ("%s", std_err);
+  ret = g_subprocess_get_exit_status (process);
 
-  g_free (std_out);
-  g_free (std_err);
-  g_free (rootdev);
-
-  if (ret > 0)
+  if (ret != 0)
     {
-      g_printerr ("%s returned %i", cmd[1], ret);
+      g_printerr ("%s returned %i\n", cmd, ret);
       g_set_error (error, GIS_INSTALL_ERROR, 0, _("Internal error"));
       return FALSE;
     }
 
-  g_print ("%s succeeded", cmd[1]);
+  g_print ("%s succeeded\n", cmd);
 
   return TRUE;
 }
