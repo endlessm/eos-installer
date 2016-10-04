@@ -243,7 +243,7 @@ static void add_image(GtkListStore *store, gchar *image)
 }
 
 static void
-gis_disktarget_page_populate_model(GisPage *page, gchar *path)
+gis_diskimage_page_populate_model(GisPage *page, gchar *path)
 {
   GError *error = NULL;
   gchar *file = NULL;
@@ -317,7 +317,7 @@ gis_diskimage_page_mount_ready (GObject *source, GAsyncResult *res, GisPage *pag
       return;
     }
 
-  gis_disktarget_page_populate_model(page, path);
+  gis_diskimage_page_populate_model(page, path);
 }
 
 static void
@@ -353,7 +353,7 @@ gis_diskimage_page_mount (GisPage *page)
 
       if (mounts != NULL && mounts[0] != NULL)
         {
-          gis_disktarget_page_populate_model(page, (gchar*)mounts[0]);
+          gis_diskimage_page_populate_model(page, (gchar*)mounts[0]);
           return;
         }
 
