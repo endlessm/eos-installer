@@ -302,8 +302,6 @@ gis_install_page_convert_to_mbr (GisPage *page, GError **error)
   g_autoptr(GSubprocessLauncher) launcher = NULL;
   g_autoptr(GSubprocess) process = NULL;
   g_autofree gchar *rootdev = NULL;
-  g_autofree gchar *std_out = NULL;
-  g_autofree gchar *std_err = NULL;
   gint ret = 0;
   GError *err = NULL;
 
@@ -317,8 +315,7 @@ gis_install_page_convert_to_mbr (GisPage *page, GError **error)
   rootdev = g_strdup (udisks_block_get_device (block));
   g_print("launching %s %s via pkexec\n", cmd, rootdev);
 
-  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDOUT_PIPE |
-                                        G_SUBPROCESS_FLAGS_STDERR_PIPE);
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
   /* pkexec won't let us run the program if $SHELL isn't in /etc/shells,
    * so remove it from the environment.
    */
@@ -326,16 +323,13 @@ gis_install_page_convert_to_mbr (GisPage *page, GError **error)
   process = g_subprocess_launcher_spawn (launcher, &err,
                                          "pkexec", cmd, rootdev, NULL);
   if (process == NULL ||
-      !g_subprocess_communicate_utf8 (process, NULL, NULL, &std_out, &std_err,
-                                      &err))
+      !g_subprocess_wait (process, NULL, &err))
     {
-      g_printerr ("failed to launch %s: %s\n", cmd, err->message);
+      g_printerr ("failed to run %s: %s\n", cmd, err->message);
       g_propagate_error (error, err);
       return FALSE;
     }
 
-  g_print ("%s\n", std_out);
-  g_printerr ("%s\n", std_err);
   ret = g_subprocess_get_exit_status (process);
 
   if (ret != 0)
