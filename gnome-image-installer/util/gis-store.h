@@ -47,6 +47,9 @@ gchar *gis_store_get_image_name();
 void gis_store_set_image_name(gchar *name);
 void gis_store_clear_image_name();
 
+const gchar *gis_store_get_image_drive();
+void gis_store_set_image_drive(const gchar *drive);
+
 GError *gis_store_get_error();
 void gis_store_set_error(GError *error);
 void gis_store_clear_error();

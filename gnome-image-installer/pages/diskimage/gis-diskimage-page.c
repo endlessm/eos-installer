@@ -354,12 +354,14 @@ gis_diskimage_page_mount (GisPage *page)
       if (mounts != NULL && mounts[0] != NULL)
         {
           gis_diskimage_page_populate_model(page, (gchar*)mounts[0]);
-          return;
+        }
+      else
+        {
+          udisks_filesystem_call_mount (fs, g_variant_new ("a{sv}", NULL), NULL,
+                                        (GAsyncReadyCallback)gis_diskimage_page_mount_ready, page);
         }
 
-      udisks_filesystem_call_mount (fs, g_variant_new ("a{sv}", NULL), NULL,
-                                    (GAsyncReadyCallback)gis_diskimage_page_mount_ready, page);
-
+      gis_store_set_image_drive (udisks_block_get_drive (block));
       return;
     }
 

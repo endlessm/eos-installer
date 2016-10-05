@@ -265,6 +265,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GtkTreeIter i;
   gchar *umodel = NULL;
   UDisksDrive *root = NULL;
+  const gchar *image_drive = NULL;
 
   if (gis_store_is_unattended())
     {
@@ -278,6 +279,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
   root = gis_disktarget_page_get_root_drive (client);
+  image_drive = gis_store_get_image_drive ();
   for (l = objects; l != NULL; l = l->next)
     {
       gchar *targetname, *targetsize;
@@ -311,6 +313,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       block = udisks_client_get_block_for_drive(client, drive, TRUE);
       if (block == NULL)
         continue;
+
+      if (0 == g_strcmp0 (udisks_block_get_drive (block), image_drive))
+        {
+          g_print ("skipping %s: it hosts the image partition\n",
+                   g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+          continue;
+        }
 
       if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
         {
