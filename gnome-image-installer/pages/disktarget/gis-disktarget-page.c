@@ -191,6 +191,11 @@ gis_disktarget_page_has_data_partitions(GisPage *page, GList *objects, UDisksBlo
       if (TYPE_IS("ebd0a0a2-b9e5-4433-87c0-68b6b72699c7") /* Microsoft basic data partition */
        || TYPE_IS("af9b60a0-1431-4f62-bc68-3311714a69ad") /* Logical Disk Manager data partition	*/
        || TYPE_IS("0fc63daf-8483-4772-8e79-3d69d8477de4") /* Linux filesystem */
+       || TYPE_IS("44479540-f297-41b2-9af7-d131d5f0458a") /* Root partition (x86) */
+       || TYPE_IS("4f68bce3-e8cd-4db1-96e7-fbcaf984b709") /* Root partition (x86-64) */
+       || TYPE_IS("69dad710-2ce4-4e3c-b16c-21a1d49abed3") /* Root partition (32-bit ARM) */
+       || TYPE_IS("b921b045-1df0-41c3-af44-4c6f280d3fae") /* Root partition (64-bit ARM) */
+       || TYPE_IS("e6d6d379-f507-44c2-a23c-238f2a3df928") /* LVM partition */
        || TYPE_IS("933ac7e1-2eb4-4f13-b844-0e14e2aef915") /* /home partition */
        || TYPE_IS("3b8f8425-20e0-4f3b-907f-1a25a76f98e8") /* /srv (server data) */
        || TYPE_IS("7ffec5c9-2d00-49b7-8941-3ea10a5586b7") /* Plain dm-crypt partition */
@@ -212,6 +217,42 @@ gis_disktarget_page_has_data_partitions(GisPage *page, GList *objects, UDisksBlo
   return FALSE;
 }
 
+static UDisksDrive *
+gis_disktarget_page_get_root_drive (UDisksClient *client)
+{
+  GDBusObjectManager *manager = udisks_client_get_object_manager(client);
+  GList *objects = g_dbus_object_manager_get_objects(manager);
+  GList *l;
+  UDisksDrive *drive = NULL;
+
+  for (l = objects; drive == NULL && l != NULL; l = l->next)
+    {
+      UDisksObject *object = UDISKS_OBJECT (l->data);
+      UDisksFilesystem *fs = udisks_object_peek_filesystem (object);
+      UDisksBlock *block = udisks_object_peek_block (object);
+      const gchar *const* mounts = NULL;
+
+      if (fs == NULL || block == NULL)
+        {
+          continue;
+        }
+
+      mounts = udisks_filesystem_get_mount_points (fs);
+      if (mounts == NULL || !g_strv_contains (mounts, "/"))
+        {
+          continue;
+        }
+
+      g_print ("found root filesystem %s\n",
+               g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+      drive = udisks_client_get_drive_for_block (client, block);
+      if (drive == NULL)
+        g_warning ("Couldn't get UDisksDrive for block");
+    }
+
+  return drive;
+}
+
 static void
 gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 {
@@ -223,6 +264,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GtkListStore *store = OBJ(GtkListStore*, "target_store");
   GtkTreeIter i;
   gchar *umodel = NULL;
+  UDisksDrive *root = NULL;
+  const gchar *image_drive = NULL;
 
   if (gis_store_is_unattended())
     {
@@ -235,6 +278,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
+  root = gis_disktarget_page_get_root_drive (client);
+  image_drive = gis_store_get_image_drive ();
   for (l = objects; l != NULL; l = l->next)
     {
       gchar *targetname, *targetsize;
@@ -245,6 +290,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
       if (drive == NULL)
         continue;
+
+      if (drive == root)
+        {
+          g_print ("skipping %s: it is the root device\n",
+                   g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+          continue;
+        }
 
       if (gis_store_is_unattended() && umodel != NULL)
         {
@@ -261,6 +313,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       block = udisks_client_get_block_for_drive(client, drive, TRUE);
       if (block == NULL)
         continue;
+
+      if (0 == g_strcmp0 (udisks_block_get_drive (block), image_drive))
+        {
+          g_print ("skipping %s: it hosts the image partition\n",
+                   g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+          continue;
+        }
 
       if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
         {
@@ -280,6 +339,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       g_free(targetname);
       g_free(targetsize);
     }
+  g_clear_object (&root);
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &i))
     {
@@ -329,7 +389,7 @@ gis_disktarget_page_shown (GisPage *page)
   priv->client = udisks_client_new_sync(NULL, &error);
   if (priv->client == NULL)
     {
-      g_error("Unable to enumearate disks: %s", error->message);
+      g_error("Unable to enumerate disks: %s", error->message);
       g_error_free(error);
     }
   else

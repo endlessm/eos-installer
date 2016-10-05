@@ -130,6 +130,26 @@ sanitize_string (gchar *string)
   return g_ascii_strdown(string, -1);
 }
 
+static gchar *
+read_sanitized_string (const gchar *filename,
+                       GError     **error)
+{
+  gchar *contents = NULL;
+  gchar *sanitized = NULL;
+
+  if (g_file_get_contents (filename, &contents, NULL, error))
+    {
+      sanitized = sanitize_string (contents);
+      g_free (contents);
+    }
+  else
+    {
+      g_prefix_error (error, "failed to read %s", filename);
+    }
+
+  return sanitized;
+}
+
 static void
 read_keys (const gchar *path)
 {
@@ -149,53 +169,33 @@ read_keys (const gchar *path)
 
       if (g_key_file_has_group (keys, UNATTENDED_GROUP))
         {
-          gchar *contents = NULL;
           gchar *vendor = NULL;
           gchar *product = NULL;
           GError *error = NULL;
 
-          if (g_file_get_contents ("/sys/class/dmi/id/sys_vendor", &contents, NULL, &error))
-            {
-              vendor = sanitize_string (contents);
-              g_free (contents);
-            }
-          else
+          if (NULL == (vendor = read_sanitized_string ("/sys/class/dmi/id/sys_vendor", &error)) ||
+              NULL == (product = read_sanitized_string ("/sys/class/dmi/id/product_name", &error)))
             {
               g_warning ("%s", error->message);
-              g_error_free (error);
-            }
-
-          if (g_file_get_contents ("/sys/class/dmi/id/product_name", &contents, NULL, &error))
-            {
-              product = sanitize_string (contents);
-              g_free (contents);
+              g_clear_error (&error);
             }
           else
-            {
-              g_warning ("%s", error->message);
-              g_error_free (error);
-            }
-
-          if (vendor != NULL && product != NULL)
             {
               gchar *target_vendor = g_key_file_get_string (keys, UNATTENDED_GROUP, VENDOR_KEY, NULL);
               gchar *target_product = g_key_file_get_string (keys, UNATTENDED_GROUP, PRODUCT_KEY, NULL);
-              gchar *lowcase_vendor = g_ascii_strdown (target_vendor, -1);
-              gchar *lowcase_product = g_ascii_strdown (target_product, -1);
 
-              if (g_str_equal (vendor, lowcase_vendor)
-               && g_str_equal (product, lowcase_product))
+              if (g_ascii_strcasecmp (vendor, target_vendor) == 0
+               && g_ascii_strcasecmp (product, target_product) == 0)
                 {
                   /* We just set the flag here, rest of the magic happens as we go */
                   gis_store_enter_unattended();
                 }
               else
                 {
-                  g_error ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
-                           lowcase_product, lowcase_vendor, product, vendor);
+                  g_warning ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
+                           target_product, target_vendor, product, vendor);
+                  /* Continue in attended mode */
                 }
-              g_free (lowcase_vendor);
-              g_free (lowcase_product);
               g_free (target_vendor);
               g_free (target_product);
             }

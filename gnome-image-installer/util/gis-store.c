@@ -29,6 +29,7 @@
 static GObject *_objects[GIS_STORE_N_OBJECTS];
 static gint64 _size = 0;
 static gchar *_name = NULL;
+static gchar *_drive = NULL;
 static GError *_error = NULL;
 static gboolean _unattended = FALSE;
 static GKeyFile *_keys = NULL;
@@ -83,6 +84,17 @@ void gis_store_clear_image_name()
 {
   g_free (_name);
   _name = NULL;
+}
+
+const gchar *gis_store_get_image_drive()
+{
+  return _drive;
+}
+
+void gis_store_set_image_drive(const gchar *drive)
+{
+  g_free (_drive);
+  _drive = g_strdup (drive);
 }
 
 GError *gis_store_get_error()
