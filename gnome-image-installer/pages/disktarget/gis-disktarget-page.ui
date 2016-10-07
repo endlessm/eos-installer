@@ -24,7 +24,7 @@
       <object class="GtkLabel" id="overview">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Select the location where you'd like to install Endless OS</property>
+        <property name="label" translatable="yes">Select the disk you'd like to reformat with Endless OS</property>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -157,7 +157,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_left">6</property>
-                <property name="label" translatable="yes">It looks like you have multiple partitions on this disk (for example drive C: and D:). Installing Endless OS will erase &lt;b&gt;all partitions&lt;/b&gt; on the selected disk. Please click here to confirm.</property>
+                <property name="label" translatable="yes">It looks like you have multiple partitions on this disk (for example drive C: and D:). Reformatting with Endless OS will erase &lt;b&gt;all partitions&lt;/b&gt; on the selected disk. Please click here to confirm.</property>
                 <property name="use_markup">True</property>
                 <property name="wrap">True</property>
                 <property name="max_width_chars">40</property>
@@ -206,7 +206,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_left">12</property>
-                <property name="label" translatable="yes">The location you have chosen is too small - you need more space to install %s</property>
+                <property name="label" translatable="yes">The location you have chosen is too small - you need more space to reformat with %s (%.02f GB)</property>
                 <property name="wrap">True</property>
                 <property name="wrap_mode">word-char</property>
                 <property name="max_width_chars">50</property>

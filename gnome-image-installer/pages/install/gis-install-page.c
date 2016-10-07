@@ -603,7 +603,7 @@ gis_install_page_constructed (GObject *object)
 static void
 gis_install_page_locale_changed (GisPage *page)
 {
-  gis_page_set_title (page, _("Installing"));
+  gis_page_set_title (page, _("Reformatting"));
 }
 
 static void
