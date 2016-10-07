@@ -54,5 +54,5 @@ Architecture: any
 Section: debug
 Depends: ${misc:Depends},
          eos-installer (= ${binary:Version})
-Description: Initial GNOME system setup debugging symbols
+Description: Endless OS installer debugging symbols
  This package contains the debugging symbols for eos-installer.
