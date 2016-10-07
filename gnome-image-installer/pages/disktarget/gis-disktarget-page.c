@@ -122,7 +122,7 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
       if (udisks_drive_get_size(drive) < gis_store_get_required_size())
         {
           gchar *msg = g_strdup_printf (
-            _("The location you have chosen is too small - you need more space to install %s (%.02f GB)"),
+            _("The location you have chosen is too small - you need more space to reformat with %s (%.02f GB)"),
             gis_store_get_image_name(), gis_store_get_required_size()/1024.0/1024.0/1024.0);
           gtk_label_set_text (OBJ (GtkLabel*, "too_small_label"), msg);
           g_free (msg);

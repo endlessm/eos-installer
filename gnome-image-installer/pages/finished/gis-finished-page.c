@@ -114,7 +114,7 @@ gis_finished_page_locale_changed (GisPage *page)
 {
   if (gis_store_get_error() == NULL)
     {
-      gis_page_set_title (page, _("Installation Finished"));
+      gis_page_set_title (page, _("Reformatting Finished"));
     }
   else
     {
