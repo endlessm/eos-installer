@@ -157,7 +157,7 @@ gis_install_page_prepare_write (GisPage *page, GError **error)
   if (fd < 0)
     {
       g_prefix_error (&e,
-                      "Error extracing fd with handle %d from D-Bus message: ",
+                      "Error extracting fd with handle %d from D-Bus message: ",
                       g_variant_get_handle (fd_index));
       g_propagate_error (error, e);
       return FALSE;
