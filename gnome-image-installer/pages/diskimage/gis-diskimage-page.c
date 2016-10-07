@@ -403,7 +403,7 @@ gis_diskimage_page_constructed (GObject *object)
 static void
 gis_diskimage_page_locale_changed (GisPage *page)
 {
-  gis_page_set_title (page, _("Reformat this computer with Endless OS"));
+  gis_page_set_title (page, _("Reformat with Endless OS"));
 }
 
 static void
