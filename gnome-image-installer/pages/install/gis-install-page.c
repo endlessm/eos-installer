@@ -101,7 +101,7 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     {
       priv->decompressor = G_OBJECT (gdu_xz_decompressor_new ());
     }
-  else if (g_str_has_suffix (basename, "img"))
+  else if (g_str_has_suffix (basename, "img") || g_strcmp0 (basename, "endless-image") == 0)
     {
       priv->decompressor = NULL;
     }

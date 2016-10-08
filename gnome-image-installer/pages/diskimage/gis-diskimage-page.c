@@ -57,6 +57,13 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE)
 G_DEFINE_QUARK(image-error, gis_image_error);
 #define GIS_IMAGE_ERROR gis_image_error_quark()
 
+/* A device-mapped copy of endless.img used in image boots.
+ * We prefer to use this to endless.img from the filesystem for two reasons:
+ * - 'error' is mapped over the sectors of the drive which correspond to the
+ *   image, so we can't read it from the filesystem
+ * - reading from the filesystem (via fuse) comes with a big overhead
+ */
+static const gchar *live_device_path = "/dev/mapper/endless-image";
 
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
@@ -99,7 +106,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
         }
       gis_store_set_required_size (size);
     }
-  else if (g_str_has_suffix (image, ".img"))
+  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
     {
       gint64 size = get_disk_image_size (image);
       if (size <= 0)
@@ -226,7 +233,8 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
 
       if ((g_str_has_suffix (image, ".img.gz") && get_gzip_is_valid_eos_gpt (image) == 1)
        || (g_str_has_suffix (image, ".img.xz") && get_xz_is_valid_eos_gpt (image) == 1)
-       || (g_str_has_suffix (image, ".img") && get_is_valid_eos_gpt (image) == 1))
+       || ((g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
+           && get_is_valid_eos_gpt (image) == 1))
         {
           displayname = get_display_name (image);
 
@@ -257,6 +265,77 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
 
   g_object_unref(f);
   g_object_unref(fi);
+}
+
+static gboolean
+file_exists (
+    const gchar *path,
+    GError     **error)
+{
+  g_autoptr(GFile) file = g_file_new_for_path (path);
+
+  if (g_file_query_exists (file, NULL))
+    return TRUE;
+
+  g_set_error (error, GIS_IMAGE_ERROR, 0, "%s doesn't exist", path);
+  return FALSE;
+}
+
+/* live USB sticks have an unpacked disk image named endless.img, which for
+ * various reasons is invisible in directory listings. We can determine the
+ * name that the image "should" have by reading /endless/live, and find the
+ * corresponding signature file.
+ */
+static gboolean
+gis_diskimage_page_add_live_image (
+    GtkListStore *store,
+    gchar        *path,
+    GError      **error)
+{
+  g_autofree gchar *endless_img_path = g_build_path (
+      "/", path, "endless", "endless.img", NULL);
+  g_autofree gchar *live_flag_path = g_build_path (
+      "/", path, "endless", "live", NULL);
+  g_autofree gchar *live_flag_contents = NULL;
+  g_autofree gchar *live_sig_basename = NULL;
+  g_autofree gchar *live_sig = NULL;
+
+  if (!file_exists (endless_img_path, error))
+    {
+      return FALSE;
+    }
+
+  if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL,
+        error))
+    {
+      g_prefix_error (error, "Couldn't read %s: ", live_flag_path);
+      return FALSE;
+    }
+
+  /* live_flag_contents contains the name that 'endless.img' would have had;
+   * so we should be able to find its signature at ${live_flag_contents}.asc
+   */
+  g_strstrip (live_flag_contents);
+  live_sig_basename = g_strdup_printf ("%s.%s", live_flag_contents, "asc");
+  live_sig = g_build_path ("/", path, "endless", live_sig_basename, NULL);
+
+  if (!file_exists (live_sig, error))
+    {
+      return FALSE;
+    }
+
+  if (file_exists (live_device_path, NULL))
+    {
+      add_image (store, live_device_path, live_sig);
+    }
+  else
+    {
+      g_print ("can't find image device %s; will use %s directly\n",
+               live_device_path, endless_img_path);
+      add_image (store, endless_img_path, live_sig);
+    }
+
+  return TRUE;
 }
 
 static void
@@ -305,6 +384,13 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
           add_image (store, fullpath, NULL);
         }
       g_free (fullpath);
+    }
+
+  if (is_live &&
+      !gis_diskimage_page_add_live_image (store, path, &error))
+    {
+      g_print ("finding live image failed: %s\n", error->message);
+      g_clear_error (&error);
     }
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
