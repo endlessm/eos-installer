@@ -1,4 +1,11 @@
-eos-installer (1.0-1) UNRELEASED; urgency=medium
+eos-installer (1.0-2) eos; urgency=medium
+
+  * Split packaging for eos-installer and the scripts which replace
+    gnome-initial-setup.
+
+ -- Will Thompson <wjt@endlessm.com>  Mon, 10 Oct 2016 15:41:21 +0100
+
+eos-installer (1.0-1) eos; urgency=medium
 
   * Initial packaging for eos-installer.
 

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = remove ] || [ "$1" = deconfigure ]; then
+    # Remove our symlink
+    rm -f /usr/share/gnome-session/sessions/gnome-initial-setup.session
+fi
+
+
+#DEBHELPER#
+exit 0

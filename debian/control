@@ -56,3 +56,12 @@ Depends: ${misc:Depends},
          eos-installer (= ${binary:Version})
 Description: Endless OS installer debugging symbols
  This package contains the debugging symbols for eos-installer.
+
+Package: eos-installer-standalone
+Architecture: all
+Depends: ${misc:Depends},
+         eos-installer (= ${binary:Version})
+Conflicts: gnome-initial-setup
+Description: Endless OS installer (standalone session)
+ This package contains configuration to automatically launch eos-installer
+ in standalone installer images.
