@@ -45,6 +45,7 @@ Package: eos-installer
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
+         eos-image-keyring,
          gdm3,
 	 policykit-1 (>= 0.106)
 Description: Endless OS installer
