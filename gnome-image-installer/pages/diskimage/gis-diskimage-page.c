@@ -131,7 +131,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
     }
 }
 
-static gchar *get_display_name(gchar *fullname)
+static gchar *get_display_name(const gchar *fullname)
 {
   GRegex *reg;
   GMatchInfo *info;
@@ -211,7 +211,7 @@ static gchar *get_display_name(gchar *fullname)
   return name;
 }
 
-static void add_image(GtkListStore *store, gchar *image, gchar *signature)
+static void add_image(GtkListStore *store, const gchar *image, const gchar *signature)
 {
   GtkTreeIter i;
   GError *error = NULL;
