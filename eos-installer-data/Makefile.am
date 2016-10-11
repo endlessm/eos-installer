@@ -22,8 +22,9 @@ session_DATA = eos-installer.session
 desktopdir = $(datadir)/gdm/greeter/applications
 desktop_DATA =	eos-installer.desktop eos-setup-shell.desktop $(NULL)
 
-automountdir = $(sysconfdir)/systemd/system
-automount_DATA = run-mount-eosimages.mount $(NULL)
+systemdsystemunit_DATA = \
+	run-mount-eosimages.mount \
+	$(NULL)
 
 EXTRA_DIST =						\
 	20-eos-installer.rules  		\
