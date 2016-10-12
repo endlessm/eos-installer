@@ -290,6 +290,7 @@ static gboolean
 gis_diskimage_page_add_live_image (
     GtkListStore *store,
     gchar        *path,
+    const gchar  *ufile,
     GError      **error)
 {
   g_autofree gchar *endless_img_path = g_build_path (
@@ -321,6 +322,14 @@ gis_diskimage_page_add_live_image (
 
   if (!file_exists (live_sig, error))
     {
+      return FALSE;
+    }
+
+  if (ufile != NULL && g_strcmp0 (ufile, live_flag_contents) != 0)
+    {
+      g_set_error (error, GIS_IMAGE_ERROR, 0,
+          "live image '%s' doesn't match unattended image '%s'",
+          live_flag_contents, ufile);
       return FALSE;
     }
 
@@ -387,7 +396,7 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
     }
 
   if (is_live &&
-      !gis_diskimage_page_add_live_image (store, path, &error))
+      !gis_diskimage_page_add_live_image (store, path, ufile, &error))
     {
       g_print ("finding live image failed: %s\n", error->message);
       g_clear_error (&error);
