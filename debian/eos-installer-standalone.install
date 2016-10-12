@@ -1,4 +1,4 @@
 debian/tmp/usr/share/gnome-session/sessions/eos-installer.session
 debian/tmp/usr/share/gdm/greeter/applications/eos-setup-shell.desktop
 debian/tmp/usr/share/polkit-1/rules.d/20-eos-installer.rules
-debian/tmp/etc/systemd/system/run-mount-eosimages.mount
+debian/tmp/lib/systemd/system/run-mount-eosimages.mount
