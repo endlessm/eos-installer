@@ -206,10 +206,10 @@ static gchar *get_display_name(const gchar *fullname)
               language = g_strdup (split[0]);
               g_strfreev (split);
             }
-          
+
           g_free (personality);
           personality = g_strdup (_("Full"));
-          
+
           if (language != NULL)
             name = g_strdup_printf ("%s %s %s %s", product, version, language, personality);
         }
