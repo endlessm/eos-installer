@@ -45,6 +45,7 @@ Package: eos-installer
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
+         eos-image-keyring,
          gdm3,
 	 policykit-1 (>= 0.106)
 Description: Endless OS installer
@@ -54,5 +55,14 @@ Architecture: any
 Section: debug
 Depends: ${misc:Depends},
          eos-installer (= ${binary:Version})
-Description: Initial GNOME system setup debugging symbols
+Description: Endless OS installer debugging symbols
  This package contains the debugging symbols for eos-installer.
+
+Package: eos-installer-standalone
+Architecture: all
+Depends: ${misc:Depends},
+         eos-installer (= ${binary:Version})
+Conflicts: gnome-initial-setup
+Description: Endless OS installer (standalone session)
+ This package contains configuration to automatically launch eos-installer
+ in standalone installer images.
