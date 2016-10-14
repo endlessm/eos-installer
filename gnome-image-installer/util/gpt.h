@@ -67,6 +67,10 @@ uint64_t get_disk_size(struct ptable *pt);
 int is_eos_gpt_valid(struct ptable *pt);
 uint8_t is_nth_flag_set(uint64_t flags, uint8_t n);
 
+// helper function
+uint64_t get_disk_image_size(const char *filepath);
+int get_is_valid_eos_gpt(const char *filepath);
+
 #ifdef DEBUG_PRINTS
 void attributes_to_ascii(const uint8_t *attr, char *s);
 void guid_to_ascii(const uint8_t *guid, char *s);

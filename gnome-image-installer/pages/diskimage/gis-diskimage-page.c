@@ -30,6 +30,7 @@
 #include "diskimage-resources.h"
 #include "gis-diskimage-page.h"
 #include "gis-store.h"
+#include "gpt.h"
 #include "gpt_gz.h"
 #include "gpt_lzma.h"
 
@@ -56,12 +57,19 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE)
 G_DEFINE_QUARK(image-error, gis_image_error);
 #define GIS_IMAGE_ERROR gis_image_error_quark()
 
+/* A device-mapped copy of endless.img used in image boots.
+ * We prefer to use this to endless.img from the filesystem for two reasons:
+ * - 'error' is mapped over the sectors of the drive which correspond to the
+ *   image, so we can't read it from the filesystem
+ * - reading from the filesystem (via fuse) comes with a big overhead
+ */
+static const gchar *live_device_path = "/dev/mapper/endless-image";
 
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
   GtkTreeIter i;
-  gchar *image, *name = NULL;
+  gchar *image, *name, *signature = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
 
@@ -71,7 +79,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       return;
     }
 
-  gtk_tree_model_get(model, &i, 0, &name, 2, &image, -1);
+  gtk_tree_model_get(model, &i, 0, &name, 2, &image, 3, &signature, -1);
 
   gis_store_set_image_name (name);
   g_free (name);
@@ -98,7 +106,23 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
         }
       gis_store_set_required_size (size);
     }
+  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
+    {
+      gint64 size = get_disk_image_size (image);
+      if (size <= 0)
+        {
+          size = 1*1024*1024*1024;
+          size *= 8;
+        }
+      gis_store_set_required_size (size);
+    }
   g_object_unref(file);
+
+  if (signature == NULL)
+    signature = g_strjoin (NULL, image, ".asc", NULL);
+
+  gis_store_set_image_signature (signature);
+  g_free (signature);
 
   gis_page_set_complete (page, TRUE);
 
@@ -114,28 +138,25 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
     }
 }
 
-static gchar *get_display_name(gchar *fullname)
+static gchar *get_display_name(const gchar *fullname)
 {
   GRegex *reg;
   GMatchInfo *info;
   gchar *name = NULL;
 
-  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-([^-]+)-([^.]+)\\.([^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img\\.([gx]z)$", 0, 0, NULL);
+  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-(?:[^-]+)-(?:[^.]+)\\.(?:[^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img(?:\\.([gx]z|asc))$", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
-      gchar *product = g_match_info_fetch (info, 1);
-      gchar *version = g_match_info_fetch (info, 2);
-      gchar *personality = g_match_info_fetch (info, 6);
-      gchar *type = g_match_info_fetch (info, 7);
-      gchar *language = NULL;
+      g_autofree gchar *product = g_match_info_fetch (info, 1);
+      g_autofree gchar *version = g_match_info_fetch (info, 2);
+      g_autofree gchar *personality = g_match_info_fetch (info, 3);
+      g_autofree gchar *type = g_match_info_fetch (info, 4);
+      g_autofree gchar *language = NULL;
 
       /* Split images not supported yet */
       if (strlen (type) > 0)
         {
-          g_free (version);
-          g_free (personality);
-          g_free (type);
           return NULL;
         }
 
@@ -185,24 +206,19 @@ static gchar *get_display_name(gchar *fullname)
               language = g_strdup (split[0]);
               g_strfreev (split);
             }
-          
+
           g_free (personality);
           personality = g_strdup (_("Full"));
-          
+
           if (language != NULL)
             name = g_strdup_printf ("%s %s %s %s", product, version, language, personality);
         }
-        
-      g_free (version);
-      g_free (personality);
-      g_free (type);
-      g_free (language);
     }
 
   return name;
 }
 
-static void add_image(GtkListStore *store, gchar *image)
+static void add_image(GtkListStore *store, const gchar *image, const gchar *signature)
 {
   GtkTreeIter i;
   GError *error = NULL;
@@ -215,10 +231,19 @@ static void add_image(GtkListStore *store, gchar *image)
       gchar *size = NULL;
       gchar *displayname = NULL;
 
-      if ((g_str_has_suffix (image, ".gz") && get_gzip_is_valid_eos_gpt (image) == 1)
-       || (g_str_has_suffix (image, ".xz") && get_xz_is_valid_eos_gpt (image) == 1))
+      if ((g_str_has_suffix (image, ".img.gz") && get_gzip_is_valid_eos_gpt (image) == 1)
+       || (g_str_has_suffix (image, ".img.xz") && get_xz_is_valid_eos_gpt (image) == 1)
+       || ((g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
+           && get_is_valid_eos_gpt (image) == 1))
         {
           displayname = get_display_name (image);
+
+          /* if we have a signature file passed in, attempt to get the name
+           * from that too */
+          if (displayname == NULL && signature != NULL)
+            {
+              displayname = get_display_name (signature);
+            }
         }
 
       if (displayname != NULL)
@@ -228,7 +253,7 @@ static void add_image(GtkListStore *store, gchar *image)
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
                               0, displayname,
-                              1, size, 2, image, -1);
+                              1, size, 2, image, 3, signature, -1);
           g_free (size);
           g_free (displayname);
         }
@@ -242,6 +267,86 @@ static void add_image(GtkListStore *store, gchar *image)
   g_object_unref(fi);
 }
 
+static gboolean
+file_exists (
+    const gchar *path,
+    GError     **error)
+{
+  g_autoptr(GFile) file = g_file_new_for_path (path);
+
+  if (g_file_query_exists (file, NULL))
+    return TRUE;
+
+  g_set_error (error, GIS_IMAGE_ERROR, 0, "%s doesn't exist", path);
+  return FALSE;
+}
+
+/* live USB sticks have an unpacked disk image named endless.img, which for
+ * various reasons is invisible in directory listings. We can determine the
+ * name that the image "should" have by reading /endless/live, and find the
+ * corresponding signature file.
+ */
+static gboolean
+gis_diskimage_page_add_live_image (
+    GtkListStore *store,
+    gchar        *path,
+    const gchar  *ufile,
+    GError      **error)
+{
+  g_autofree gchar *endless_img_path = g_build_path (
+      "/", path, "endless", "endless.img", NULL);
+  g_autofree gchar *live_flag_path = g_build_path (
+      "/", path, "endless", "live", NULL);
+  g_autofree gchar *live_flag_contents = NULL;
+  g_autofree gchar *live_sig_basename = NULL;
+  g_autofree gchar *live_sig = NULL;
+
+  if (!file_exists (endless_img_path, error))
+    {
+      return FALSE;
+    }
+
+  if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL,
+        error))
+    {
+      g_prefix_error (error, "Couldn't read %s: ", live_flag_path);
+      return FALSE;
+    }
+
+  /* live_flag_contents contains the name that 'endless.img' would have had;
+   * so we should be able to find its signature at ${live_flag_contents}.asc
+   */
+  g_strstrip (live_flag_contents);
+  live_sig_basename = g_strdup_printf ("%s.%s", live_flag_contents, "asc");
+  live_sig = g_build_path ("/", path, "endless", live_sig_basename, NULL);
+
+  if (!file_exists (live_sig, error))
+    {
+      return FALSE;
+    }
+
+  if (ufile != NULL && g_strcmp0 (ufile, live_flag_contents) != 0)
+    {
+      g_set_error (error, GIS_IMAGE_ERROR, 0,
+          "live image '%s' doesn't match unattended image '%s'",
+          live_flag_contents, ufile);
+      return FALSE;
+    }
+
+  if (file_exists (live_device_path, NULL))
+    {
+      add_image (store, live_device_path, live_sig);
+    }
+  else
+    {
+      g_print ("can't find image device %s; will use %s directly\n",
+               live_device_path, endless_img_path);
+      add_image (store, endless_img_path, live_sig);
+    }
+
+  return TRUE;
+}
+
 static void
 gis_diskimage_page_populate_model(GisPage *page, gchar *path)
 {
@@ -249,9 +354,11 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
   gchar *file = NULL;
   gchar *ufile = NULL;
   GtkListStore *store = OBJ(GtkListStore*, "image_store");
-  GDir *dir = g_dir_open (path, 0, &error);
+  GDir *dir;
   GtkTreeIter iter;
+  gboolean is_live = gis_store_is_live_install ();
 
+  dir = g_dir_open (path, 0, &error);
   if (dir == NULL)
     {
       gis_store_set_error (error);
@@ -274,16 +381,25 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
   for (file = (gchar*)g_dir_read_name (dir); file != NULL; file = (gchar*)g_dir_read_name (dir))
     {
       gchar *fullpath = g_build_path ("/", path, file, NULL);
-      if (gis_store_is_unattended() && ufile != NULL)
+
+      /* ufile is only set in the unattended case */
+      if (ufile != NULL)
         {
           if (g_str_equal (ufile, file))
-              add_image(store, fullpath);
+            add_image (store, fullpath, NULL);
         }
       else
         {
-          add_image(store, fullpath);
+          add_image (store, fullpath, NULL);
         }
       g_free (fullpath);
+    }
+
+  if (is_live &&
+      !gis_diskimage_page_add_live_image (store, path, ufile, &error))
+    {
+      g_print ("finding live image failed: %s\n", error->message);
+      g_clear_error (&error);
     }
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
@@ -328,6 +444,12 @@ gis_diskimage_page_mount (GisPage *page)
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GList *l;
+  const gchar *label;
+
+  if (gis_store_is_live_install ())
+    label = "eoslive";
+  else
+    label = "eosimages";
 
   for (l = objects; l != NULL; l = l->next)
     {
@@ -339,7 +461,7 @@ gis_diskimage_page_mount (GisPage *page)
       if (block == NULL)
         continue;
 
-      if (!g_str_equal ("eosimages", udisks_block_get_id_label (block)))
+      if (!g_str_equal (label, udisks_block_get_id_label (block)))
         continue;
 
       fs = udisks_object_peek_filesystem (object);

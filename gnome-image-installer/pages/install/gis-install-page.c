@@ -101,9 +101,13 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     {
       priv->decompressor = G_OBJECT (gdu_xz_decompressor_new ());
     }
+  else if (g_str_has_suffix (basename, "img") || g_strcmp0 (basename, "endless-image") == 0)
+    {
+      priv->decompressor = NULL;
+    }
   else
     {
-      g_warning ("%s ends in neither 'xz' nor 'gz'", basename);
+      g_warning ("%s ends in neither '.xz', '.gz' nor '.img'", basename);
       *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
       g_free (basename);
       g_return_val_if_reached (FALSE);
@@ -116,9 +120,17 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
       g_propagate_error (error, e);
       return FALSE;
     }
-  priv->decompressed = g_converter_input_stream_new (G_INPUT_STREAM (input),
-                                                     G_CONVERTER (priv->decompressor));
-  g_object_unref (input);
+
+  if (priv->decompressor)
+    {
+      priv->decompressed = g_converter_input_stream_new (G_INPUT_STREAM (input),
+                                                         G_CONVERTER (priv->decompressor));
+      g_object_unref (input);
+    }
+  else
+    {
+      priv->decompressed = input;
+    }
 
   return TRUE;
 }
@@ -183,6 +195,12 @@ gis_install_page_unmount_image_partition (GisPage *page)
   GDBusObjectManager *manager = udisks_client_get_object_manager(priv->client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GList *l;
+  const gchar *label;
+
+  if (gis_store_is_live_install ())
+    label = "eoslive";
+  else
+    label = "eosimages";
 
   for (l = objects; l != NULL; l = l->next)
     {
@@ -192,7 +210,7 @@ gis_install_page_unmount_image_partition (GisPage *page)
       if (block == NULL)
         continue;
 
-      if (!g_str_equal ("eosimages", udisks_block_get_id_label (block)))
+      if (!g_str_equal (label, udisks_block_get_id_label (block)))
         continue;
 
       fs = udisks_object_peek_filesystem (UDISKS_OBJECT (l->data));
@@ -515,9 +533,9 @@ gis_install_page_verify (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GFile *image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
+  GFile *image = G_FILE(gis_store_get_object (GIS_STORE_IMAGE));
   gchar *image_path = g_file_get_path (image);
-  gchar *signature_path = g_strjoin(NULL, image_path, ".asc", NULL);
+  const gchar *signature_path = gis_store_get_image_signature ();
   GFile *signature = g_file_new_for_path (signature_path);
   gint outfd;
   gchar *args[] = { "gpg",
@@ -526,7 +544,7 @@ gis_install_page_verify (GisPage *page)
                     "--keyring", IMAGE_KEYRING,
                     "--no-default-keyring",
                     "--trust-model", "always",
-                    "--verify", signature_path, image_path, NULL };
+                    "--verify", (gchar *) signature_path, image_path, NULL };
   GError *error = NULL;
 
   if (!g_file_query_exists (signature, NULL))
@@ -556,7 +574,6 @@ gis_install_page_verify (GisPage *page)
 
 out:
   g_free (image_path);
-  g_free (signature_path);
   g_object_unref (signature);
   return FALSE;
 }

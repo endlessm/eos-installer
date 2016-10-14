@@ -10,6 +10,8 @@
       <column type="gchararray"/>
       <!-- column-name image_file -->
       <column type="gchararray"/>
+      <!-- column-name image_signature -->
+      <column type="gchararray"/>
       <!-- column-name align -->
       <column type="PangoAlignment"/>
     </columns>
@@ -124,7 +126,7 @@
                         <property name="xpad">24</property>
                       </object>
                       <attributes>
-                        <attribute name="alignment">3</attribute>
+                        <attribute name="alignment">4</attribute>
                         <attribute name="text">1</attribute>
                       </attributes>
                     </child>

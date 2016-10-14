@@ -41,6 +41,10 @@ stamp-h1
 
 eos-installer-data/eos-installer.desktop
 
+eos-installer-*.tar.gz
+eos-installer-*.tar.bz2
+eos-installer-*.tar.xz
+
 gnome-image-installer/gnome-image-installer
 
 gnome-image-installer/gis-assistant-resources.[ch]

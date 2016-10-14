@@ -30,8 +30,10 @@ static GObject *_objects[GIS_STORE_N_OBJECTS];
 static gint64 _size = 0;
 static gchar *_name = NULL;
 static gchar *_drive = NULL;
+static gchar *_signature = NULL;
 static GError *_error = NULL;
 static gboolean _unattended = FALSE;
+static gboolean _live_install = FALSE;
 static GKeyFile *_keys = NULL;
 
 GObject *gis_store_get_object(gint key)
@@ -97,6 +99,17 @@ void gis_store_set_image_drive(const gchar *drive)
   _drive = g_strdup (drive);
 }
 
+const gchar *gis_store_get_image_signature (void)
+{
+  return _signature;
+}
+
+void gis_store_set_image_signature (const gchar *signature)
+{
+  g_free (_signature);
+  _signature = g_strdup (signature);
+}
+
 GError *gis_store_get_error()
 {
   return _error;
@@ -121,6 +134,16 @@ void gis_store_enter_unattended()
 gboolean gis_store_is_unattended()
 {
   return _unattended;
+}
+
+void gis_store_enter_live_install()
+{
+  _live_install = TRUE;
+}
+
+gboolean gis_store_is_live_install()
+{
+  return _live_install;
 }
 
 void gis_store_set_key_file(GKeyFile *keys)

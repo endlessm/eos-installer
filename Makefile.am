@@ -10,3 +10,6 @@ EXTRA_DIST = \
     AUTHORS \
     NEWS \
     eos-installer.doap
+
+DISTCHECK_CONFIGURE_FLAGS = \
+    --with-systemdsystemunitdir=$$dc_install_base/$(systemdsystemunitdir)

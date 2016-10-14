@@ -252,6 +252,34 @@ mount_and_read_keys ()
     }
 }
 
+static gboolean
+check_for_live_boot ()
+{
+  const gchar *force = g_getenv ("EI_FORCE_LIVE_BOOT");
+  GError *error = NULL;
+  g_autofree gchar *cmdline = NULL;
+  gboolean live_boot = FALSE;
+
+  if (force != NULL && *force != '\0')
+    {
+      g_print ("EI_FORCE_LIVE_BOOT='%s', set live_boot to TRUE\n", force);
+      return TRUE;
+    }
+
+  if (!g_file_get_contents ("/proc/cmdline", &cmdline, NULL, &error))
+    {
+      g_printerr ("unable to read /proc/cmdline: %s\n", error->message);
+      g_error_free (error);
+      return;
+    }
+
+  live_boot = g_regex_match_simple ("\\bendless\\.live_boot\\b", cmdline, 0, 0);
+
+  g_print ("set live_boot to %u from /proc/cmdline: %s\n", live_boot, cmdline);
+
+  return live_boot;
+}
+
 static void
 rebuild_pages_cb (GisDriver *driver)
 {
@@ -279,8 +307,8 @@ rebuild_pages_cb (GisDriver *driver)
 
   gis_assistant_locale_changed (assistant);
 
-  /* Skip welcome page in unattended mode */
-  if (gis_store_is_unattended ())
+  /* Skip welcome page in unattended and live install mode */
+  if (gis_store_is_unattended () || gis_store_is_live_install ())
     gis_assistant_next_page (assistant);
 }
 
@@ -347,6 +375,9 @@ gis_page_get_type();
 #endif
 
   gis_ensure_login_keyring ("gis");
+
+  if (check_for_live_boot ())
+    gis_store_enter_live_install ();
 
   mount_and_read_keys ();
 
