@@ -1,3 +1,9 @@
+eos-installer (1.0-3) eos; urgency=medium
+
+  * Ship polkit rule in main eos-installer package.
+
+ -- Will Thompson <will@willthompson.co.uk>  Mon, 17 Oct 2016 11:15:25 +0100
+
 eos-installer (1.0-2) eos; urgency=medium
 
   * Split packaging for eos-installer and the scripts which replace
