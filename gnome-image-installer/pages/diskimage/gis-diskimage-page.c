@@ -65,6 +65,14 @@ G_DEFINE_QUARK(image-error, gis_image_error);
  */
 static const gchar * const live_device_path = "/dev/mapper/endless-image";
 
+enum {
+    IMAGE_NAME = 0,
+    IMAGE_SIZE,
+    IMAGE_FILE,
+    IMAGE_SIGNATURE,
+    ALIGN
+};
+
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
@@ -79,7 +87,11 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       return;
     }
 
-  gtk_tree_model_get(model, &i, 0, &name, 2, &image, 3, &signature, -1);
+  gtk_tree_model_get(model, &i,
+      IMAGE_NAME, &name,
+      IMAGE_FILE, &image,
+      IMAGE_SIGNATURE, &signature,
+      -1);
 
   gis_store_set_image_name (name);
   g_free (name);
@@ -257,10 +269,10 @@ add_image (
 
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
-                              0, displayname,
-                              1, size,
-                              2, image_device != NULL ? image_device : image,
-                              3, signature,
+                              IMAGE_NAME, displayname,
+                              IMAGE_SIZE, size,
+                              IMAGE_FILE, image_device != NULL ? image_device : image,
+                              IMAGE_SIGNATURE, signature,
                               -1);
           g_free (size);
           g_free (displayname);
