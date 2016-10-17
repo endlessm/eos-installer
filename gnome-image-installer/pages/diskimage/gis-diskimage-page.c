@@ -218,7 +218,12 @@ static gchar *get_display_name(const gchar *fullname)
   return name;
 }
 
-static void add_image(GtkListStore *store, const gchar *image, const gchar *signature)
+static void
+add_image (
+    GtkListStore *store,
+    const gchar  *image,
+    const gchar  *image_device,
+    const gchar  *signature)
 {
   GtkTreeIter i;
   GError *error = NULL;
@@ -233,8 +238,8 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
 
       if ((g_str_has_suffix (image, ".img.gz") && get_gzip_is_valid_eos_gpt (image) == 1)
        || (g_str_has_suffix (image, ".img.xz") && get_xz_is_valid_eos_gpt (image) == 1)
-       || ((g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path) == 0)
-           && get_is_valid_eos_gpt (image) == 1))
+       || (g_str_has_suffix (image, ".img") && get_is_valid_eos_gpt (image) == 1)
+       || (image_device != NULL && get_is_valid_eos_gpt (image_device) == 1))
         {
           displayname = get_display_name (image);
 
@@ -253,7 +258,10 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
                               0, displayname,
-                              1, size, 2, image, 3, signature, -1);
+                              1, size,
+                              2, image_device != NULL ? image_device : image,
+                              3, signature,
+                              -1);
           g_free (size);
           g_free (displayname);
         }
@@ -333,13 +341,13 @@ gis_diskimage_page_add_live_image (
 
   if (file_exists (live_device_path, NULL))
     {
-      add_image (store, live_device_path, live_sig);
+      add_image (store, endless_img_path, live_device_path, live_sig);
     }
   else
     {
       g_print ("can't find image device %s; will use %s directly\n",
                live_device_path, endless_img_path);
-      add_image (store, endless_img_path, live_sig);
+      add_image (store, endless_img_path, NULL, live_sig);
     }
 
   return TRUE;
@@ -384,11 +392,11 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
       if (ufile != NULL)
         {
           if (g_str_equal (ufile, file))
-            add_image (store, fullpath, NULL);
+            add_image (store, fullpath, NULL, NULL);
         }
       else
         {
-          add_image (store, fullpath, NULL);
+          add_image (store, fullpath, NULL, NULL);
         }
       g_free (fullpath);
     }
