@@ -457,12 +457,21 @@ gis_diskimage_page_mount (GisPage *page)
       UDisksBlock *block = udisks_object_peek_block (object);
       UDisksFilesystem *fs = NULL;
       const gchar *const*mounts = NULL;
+      const gchar *dev = NULL;
 
       if (block == NULL)
         continue;
 
+      dev = udisks_block_get_preferred_device (block);
+
       if (!g_str_equal (label, udisks_block_get_id_label (block)))
         continue;
+
+      if (udisks_block_get_hint_ignore (block))
+        {
+          g_print ("skipping %s with ignore hint set\n", dev);
+          continue;
+        }
 
       fs = udisks_object_peek_filesystem (object);
 
@@ -470,6 +479,8 @@ gis_diskimage_page_mount (GisPage *page)
         {
           continue;
         }
+
+      g_print ("found %s partition at %s\n", label, dev);
 
       mounts = udisks_filesystem_get_mount_points (fs);
 
