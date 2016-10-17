@@ -222,8 +222,8 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
 {
   GtkTreeIter i;
   GError *error = NULL;
-  GFile *f = g_file_new_for_path (image);
-  GFileInfo *fi = g_file_query_info (f, G_FILE_ATTRIBUTE_STANDARD_SIZE,
+  g_autoptr(GFile) f = g_file_new_for_path (image);
+  g_autoptr(GFileInfo) fi = g_file_query_info (f, G_FILE_ATTRIBUTE_STANDARD_SIZE,
                                      G_FILE_QUERY_INFO_NONE, NULL,
                                      &error);
   if (fi != NULL)
@@ -261,10 +261,8 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
   else
     {
       g_warning ("Could not get file info: %s", error->message);
+      g_clear_error (&error);
     }
-
-  g_object_unref(f);
-  g_object_unref(fi);
 }
 
 static gboolean
