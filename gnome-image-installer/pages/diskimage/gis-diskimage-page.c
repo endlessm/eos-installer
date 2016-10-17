@@ -63,7 +63,16 @@ G_DEFINE_QUARK(image-error, gis_image_error);
  *   image, so we can't read it from the filesystem
  * - reading from the filesystem (via fuse) comes with a big overhead
  */
-static const gchar *live_device_path = "/dev/mapper/endless-image";
+static const gchar * const live_device_path = "/dev/mapper/endless-image";
+
+enum {
+    IMAGE_NAME = 0,
+    IMAGE_SIZE,
+    IMAGE_SIZE_BYTES,
+    IMAGE_FILE,
+    IMAGE_SIGNATURE,
+    ALIGN
+};
 
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
@@ -72,6 +81,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
   gchar *image, *name, *signature = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
+  gint64 size_bytes;
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
@@ -79,9 +89,15 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       return;
     }
 
-  gtk_tree_model_get(model, &i, 0, &name, 2, &image, 3, &signature, -1);
+  gtk_tree_model_get(model, &i,
+      IMAGE_NAME, &name,
+      IMAGE_FILE, &image,
+      IMAGE_SIGNATURE, &signature,
+      IMAGE_SIZE_BYTES, &size_bytes,
+      -1);
 
   gis_store_set_image_name (name);
+  gis_store_set_image_size (size_bytes);
   g_free (name);
 
   file = g_file_new_for_path (image);
@@ -106,7 +122,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
         }
       gis_store_set_required_size (size);
     }
-  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
+  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path) == 0)
     {
       gint64 size = get_disk_image_size (image);
       if (size <= 0)
@@ -218,12 +234,17 @@ static gchar *get_display_name(const gchar *fullname)
   return name;
 }
 
-static void add_image(GtkListStore *store, const gchar *image, const gchar *signature)
+static void
+add_image (
+    GtkListStore *store,
+    const gchar  *image,
+    const gchar  *image_device,
+    const gchar  *signature)
 {
   GtkTreeIter i;
   GError *error = NULL;
-  GFile *f = g_file_new_for_path (image);
-  GFileInfo *fi = g_file_query_info (f, G_FILE_ATTRIBUTE_STANDARD_SIZE,
+  g_autoptr(GFile) f = g_file_new_for_path (image);
+  g_autoptr(GFileInfo) fi = g_file_query_info (f, G_FILE_ATTRIBUTE_STANDARD_SIZE,
                                      G_FILE_QUERY_INFO_NONE, NULL,
                                      &error);
   if (fi != NULL)
@@ -233,8 +254,8 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
 
       if ((g_str_has_suffix (image, ".img.gz") && get_gzip_is_valid_eos_gpt (image) == 1)
        || (g_str_has_suffix (image, ".img.xz") && get_xz_is_valid_eos_gpt (image) == 1)
-       || ((g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
-           && get_is_valid_eos_gpt (image) == 1))
+       || (g_str_has_suffix (image, ".img") && get_is_valid_eos_gpt (image) == 1)
+       || (image_device != NULL && get_is_valid_eos_gpt (image_device) == 1))
         {
           displayname = get_display_name (image);
 
@@ -248,12 +269,17 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
 
       if (displayname != NULL)
         {
-          size = g_strdup_printf ("%.02f GB", (float)g_file_info_get_size (fi)/1024.0/1024.0/1024.0);
+          goffset size_bytes = g_file_info_get_size (fi);
+          size = g_strdup_printf ("%.02f GB", (float)size_bytes/1024.0/1024.0/1024.0);
 
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
-                              0, displayname,
-                              1, size, 2, image, 3, signature, -1);
+                              IMAGE_NAME, displayname,
+                              IMAGE_SIZE, size,
+                              IMAGE_SIZE_BYTES, size_bytes,
+                              IMAGE_FILE, image_device != NULL ? image_device : image,
+                              IMAGE_SIGNATURE, signature,
+                              -1);
           g_free (size);
           g_free (displayname);
         }
@@ -261,10 +287,8 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
   else
     {
       g_warning ("Could not get file info: %s", error->message);
+      g_clear_error (&error);
     }
-
-  g_object_unref(f);
-  g_object_unref(fi);
 }
 
 static gboolean
@@ -335,13 +359,13 @@ gis_diskimage_page_add_live_image (
 
   if (file_exists (live_device_path, NULL))
     {
-      add_image (store, live_device_path, live_sig);
+      add_image (store, endless_img_path, live_device_path, live_sig);
     }
   else
     {
       g_print ("can't find image device %s; will use %s directly\n",
                live_device_path, endless_img_path);
-      add_image (store, endless_img_path, live_sig);
+      add_image (store, endless_img_path, NULL, live_sig);
     }
 
   return TRUE;
@@ -386,11 +410,11 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
       if (ufile != NULL)
         {
           if (g_str_equal (ufile, file))
-            add_image (store, fullpath, NULL);
+            add_image (store, fullpath, NULL, NULL);
         }
       else
         {
-          add_image (store, fullpath, NULL);
+          add_image (store, fullpath, NULL, NULL);
         }
       g_free (fullpath);
     }
@@ -457,12 +481,21 @@ gis_diskimage_page_mount (GisPage *page)
       UDisksBlock *block = udisks_object_peek_block (object);
       UDisksFilesystem *fs = NULL;
       const gchar *const*mounts = NULL;
+      const gchar *dev = NULL;
 
       if (block == NULL)
         continue;
 
+      dev = udisks_block_get_preferred_device (block);
+
       if (!g_str_equal (label, udisks_block_get_id_label (block)))
         continue;
+
+      if (udisks_block_get_hint_ignore (block))
+        {
+          g_print ("skipping %s with ignore hint set\n", dev);
+          continue;
+        }
 
       fs = udisks_object_peek_filesystem (object);
 
@@ -470,6 +503,8 @@ gis_diskimage_page_mount (GisPage *page)
         {
           continue;
         }
+
+      g_print ("found %s partition at %s\n", label, dev);
 
       mounts = udisks_filesystem_get_mount_points (fs);
 

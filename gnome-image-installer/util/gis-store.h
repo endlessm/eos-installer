@@ -43,6 +43,9 @@ void gis_store_clear_object(gint key);
 gint64 gis_store_get_required_size();
 void gis_store_set_required_size(gint64 size);
 
+gint64 gis_store_get_image_size (void);
+void gis_store_set_image_size (gint64 size);
+
 gchar *gis_store_get_image_name();
 void gis_store_set_image_name(gchar *name);
 void gis_store_clear_image_name();

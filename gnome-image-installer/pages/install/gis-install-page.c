@@ -519,6 +519,13 @@ gis_install_page_gpg_progress (GIOChannel *source, GIOCondition cond, GisPage *p
         gchar **arr = g_strsplit (line, " ", -1);
         curr = g_ascii_strtod (arr[4], NULL);
         full = g_ascii_strtod (arr[5], NULL);
+
+        /* when reading from the endless-image device, gpg (like stat)
+         * considers the size to be 0.
+         */
+        if (full == 0)
+          full = gis_store_get_image_size ();
+
         frac = curr/full;
         gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), frac);
         g_strfreev (arr);

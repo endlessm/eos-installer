@@ -109,6 +109,7 @@ prepare_main_window (GisDriver *driver)
 {
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   GdkGeometry size_hints;
+  GtkWidget *titlebar;
 
   if (gis_driver_is_small_screen ())
     {
@@ -144,8 +145,13 @@ prepare_main_window (GisDriver *driver)
       gtk_window_set_resizable (priv->main_window, FALSE);
     }
 
-  gtk_window_set_titlebar (priv->main_window,
-                           gis_assistant_get_titlebar (priv->assistant));
+  titlebar = gis_assistant_get_titlebar (priv->assistant);
+  if (priv->mode == GIS_DRIVER_MODE_EXISTING_USER)
+    {
+      gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (titlebar), TRUE);
+      gtk_window_set_deletable (priv->main_window, TRUE);
+    }
+  gtk_window_set_titlebar (priv->main_window, titlebar);
 }
 
 static gboolean
