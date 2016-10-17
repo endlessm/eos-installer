@@ -106,7 +106,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
         }
       gis_store_set_required_size (size);
     }
-  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
+  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path) == 0)
     {
       gint64 size = get_disk_image_size (image);
       if (size <= 0)
@@ -233,7 +233,7 @@ static void add_image(GtkListStore *store, const gchar *image, const gchar *sign
 
       if ((g_str_has_suffix (image, ".img.gz") && get_gzip_is_valid_eos_gpt (image) == 1)
        || (g_str_has_suffix (image, ".img.xz") && get_xz_is_valid_eos_gpt (image) == 1)
-       || ((g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path))
+       || ((g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path) == 0)
            && get_is_valid_eos_gpt (image) == 1))
         {
           displayname = get_display_name (image);
