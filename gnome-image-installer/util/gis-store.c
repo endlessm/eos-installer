@@ -28,6 +28,7 @@
 
 static GObject *_objects[GIS_STORE_N_OBJECTS];
 static gint64 _size = 0;
+static gint64 _image_size = 0;
 static gchar *_name = NULL;
 static gchar *_drive = NULL;
 static gchar *_signature = NULL;
@@ -69,6 +70,16 @@ gint64 gis_store_get_required_size()
 void gis_store_set_required_size(gint64 size)
 {
   _size = size;
+}
+
+gint64 gis_store_get_image_size (void)
+{
+  return _image_size;
+}
+
+void gis_store_set_image_size (gint64 size)
+{
+  _image_size = size;
 }
 
 gchar *gis_store_get_image_name()

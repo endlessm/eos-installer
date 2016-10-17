@@ -68,6 +68,7 @@ static const gchar * const live_device_path = "/dev/mapper/endless-image";
 enum {
     IMAGE_NAME = 0,
     IMAGE_SIZE,
+    IMAGE_SIZE_BYTES,
     IMAGE_FILE,
     IMAGE_SIGNATURE,
     ALIGN
@@ -80,6 +81,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
   gchar *image, *name, *signature = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
+  gint64 size_bytes;
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
@@ -91,9 +93,11 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       IMAGE_NAME, &name,
       IMAGE_FILE, &image,
       IMAGE_SIGNATURE, &signature,
+      IMAGE_SIZE_BYTES, &size_bytes,
       -1);
 
   gis_store_set_image_name (name);
+  gis_store_set_image_size (size_bytes);
   g_free (name);
 
   file = g_file_new_for_path (image);
@@ -265,12 +269,14 @@ add_image (
 
       if (displayname != NULL)
         {
-          size = g_strdup_printf ("%.02f GB", (float)g_file_info_get_size (fi)/1024.0/1024.0/1024.0);
+          goffset size_bytes = g_file_info_get_size (fi);
+          size = g_strdup_printf ("%.02f GB", (float)size_bytes/1024.0/1024.0/1024.0);
 
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
                               IMAGE_NAME, displayname,
                               IMAGE_SIZE, size,
+                              IMAGE_SIZE_BYTES, size_bytes,
                               IMAGE_FILE, image_device != NULL ? image_device : image,
                               IMAGE_SIGNATURE, signature,
                               -1);
