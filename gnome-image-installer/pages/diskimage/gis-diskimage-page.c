@@ -63,7 +63,7 @@ G_DEFINE_QUARK(image-error, gis_image_error);
  *   image, so we can't read it from the filesystem
  * - reading from the filesystem (via fuse) comes with a big overhead
  */
-static const gchar *live_device_path = "/dev/mapper/endless-image";
+static const gchar * const live_device_path = "/dev/mapper/endless-image";
 
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
