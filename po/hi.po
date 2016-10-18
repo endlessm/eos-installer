@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-04 01:48+0000\n"
-"PO-Revision-Date: 2016-08-31 21:39+0000\n"
-"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
+"POT-Creation-Date: 2016-10-11 01:44+0000\n"
+"PO-Revision-Date: 2016-10-11 01:44+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -621,7 +621,7 @@ msgstr "गनोम का उपयोग करना प्रारंभ �
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:366
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:368
 #, c-format
 msgid "No suitable images were found."
 msgstr "कोई भी उपयुक्त छवियां नहीं मिलीं."
@@ -651,9 +651,9 @@ msgstr ""
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:404
-msgid "Install Endless OS"
-msgstr "Endless OS इंस्टॉल करें"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:406
+msgid "Reformat with Endless OS"
+msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
@@ -665,23 +665,24 @@ msgid "Use existing version:"
 msgstr "मौजूदा संस्करण का उपयोग करें:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
-#, c-format
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+#, no-c-format
 msgid ""
-"The location you have chosen is too small - you need more space to install "
-"%s (%.02f GB)"
-msgstr "आपके द्वारा चुना गया स्थान बहुत छोटा है - %s (%.02f GB) को इंस्टॉल करने के लिए आपको अधिक स्थान की आवश्यकता है"
+"The location you have chosen is too small - you need more space to reformat "
+"with %s (%.02f GB)"
+msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:303
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
 msgid "Finish"
 msgstr "समाप्त करें"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:370
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
 msgid "Select Disk"
 msgstr "डिस्क का चयन करें"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
-msgid "Select the location where you'd like to install Endless OS"
-msgstr "उस स्थान का चयन करें जहां आप Endless OS इंस्टॉल करना चाहते हैं"
+msgid "Select the disk you'd like to reformat with Endless OS"
+msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -694,24 +695,17 @@ msgstr "मैं <b>अपनी सभी फ़ाइलें और ऐप्�
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
-"C: and D:). Installing Endless OS will erase <b>all partitions</b> on the "
-"selected disk. Please click here to confirm."
-msgstr "ऐसा लगता है कि आपके पास डिस्क पर एकाधिक पार्टिशन मौजूद हैं (उदाहरण के लिए डाइव C:  और  D:). Endless OS इंस्टॉल करने पर चयनित डिस्क पर मौजूद <b>सभी पार्टीशन</b> मिटा दिए जाते हैं. पुष्टि करने के लिए कृपया यहां क्लिक करें."
-
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
-#, no-c-format
-msgid ""
-"The location you have chosen is too small - you need more space to install "
-"%s"
-msgstr "आपके द्वारा चुना गया स्थान बहुत छोटा है - %s को इंस्टॉल करने के लिए आपको अधिक स्थान की आवश्यकता होगी"
+"C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
+" the selected disk. Please click here to confirm."
+msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
 msgstr "कोई उपयुक्त डिस्क नहीं मिली"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
-msgid "Installation Finished"
-msgstr "इंस्टॉलेशन समाप्त हुआ"
+msgid "Reformatting Finished"
+msgstr ""
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -732,33 +726,33 @@ msgstr "कृपया support@endlessm.com से संपर्क करे
 #: ../gnome-image-installer/pages/install/gis-install-page.c:91
 #: ../gnome-image-installer/pages/install/gis-install-page.c:107
 #: ../gnome-image-installer/pages/install/gis-install-page.c:140
-#: ../gnome-image-installer/pages/install/gis-install-page.c:310
-#: ../gnome-image-installer/pages/install/gis-install-page.c:336
+#: ../gnome-image-installer/pages/install/gis-install-page.c:311
+#: ../gnome-image-installer/pages/install/gis-install-page.c:338
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "आंतरिक त्रुटि"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:429
-#: ../gnome-image-installer/pages/install/gis-install-page.c:567
+#: ../gnome-image-installer/pages/install/gis-install-page.c:431
+#: ../gnome-image-installer/pages/install/gis-install-page.c:569
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "चरण %d में से %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:468
+#: ../gnome-image-installer/pages/install/gis-install-page.c:470
 #, c-format
 msgid "Image verification error."
 msgstr "छवि सत्यापन त्रुटि."
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:533
+#: ../gnome-image-installer/pages/install/gis-install-page.c:535
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:604
-msgid "Installing"
-msgstr "इंस्टॉल कर रहा है"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:606
+msgid "Reformatting"
+msgstr ""
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 msgid ""

@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-04 01:48+0000\n"
-"PO-Revision-Date: 2016-08-31 21:39+0000\n"
-"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
+"POT-Creation-Date: 2016-10-11 01:44+0000\n"
+"PO-Revision-Date: 2016-10-11 01:44+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -619,7 +619,7 @@ msgstr "اب_دأ باستخدام جنوم 3"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:366
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:368
 #, c-format
 msgid "No suitable images were found."
 msgstr "لم يتم العثور على صور مناسبة للنسخة."
@@ -649,9 +649,9 @@ msgstr ""
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:404
-msgid "Install Endless OS"
-msgstr "قم بتثبيت نظام التشغيل Endless OS"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:406
+msgid "Reformat with Endless OS"
+msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
@@ -663,23 +663,24 @@ msgid "Use existing version:"
 msgstr "استخدم النسخة الحالية:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
-#, c-format
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+#, no-c-format
 msgid ""
-"The location you have chosen is too small - you need more space to install "
-"%s (%.02f GB)"
-msgstr "إنّ مساحة الموقع التي قمت باختيارها صغيرة للغاية - أنت بحاجة إلى مساحة أكبر لتثبيت %s  (%.02f جيجابايت)"
+"The location you have chosen is too small - you need more space to reformat "
+"with %s (%.02f GB)"
+msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:303
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
 msgid "Finish"
 msgstr "انتهاء"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:370
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
 msgid "Select Disk"
 msgstr "حدد القرص"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
-msgid "Select the location where you'd like to install Endless OS"
-msgstr "قم بتحديد الموقع الذي تود تثبيت نظام التشغيل Endless OS فيه"
+msgid "Select the disk you'd like to reformat with Endless OS"
+msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -692,24 +693,17 @@ msgstr "أوافق على محو <b> جميع ملفاتي وتطبيقاتي </
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
-"C: and D:). Installing Endless OS will erase <b>all partitions</b> on the "
-"selected disk. Please click here to confirm."
-msgstr "يبدو أن لديك أقسام متعددة على هذا القرص (على سبيل المثال محرك الأقراص C: وD:). سوف يؤدي تثبيت نظام تشغيل Endless OS إلى مسح <b> جميع الأقسام </b> الموجودة على القرص المحدد. يُرجى النقر هنا للتأكيد."
-
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
-#, no-c-format
-msgid ""
-"The location you have chosen is too small - you need more space to install "
-"%s"
-msgstr "إنّ مساحة الموقع التي قمت باختيارها صغيرة للغاية - أنت بحاجة إلى مساحة أكبر لتثبيت %s"
+"C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
+" the selected disk. Please click here to confirm."
+msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
 msgstr "لم يتم العثور على أقراص مناسبة."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
-msgid "Installation Finished"
-msgstr "تم إنهاء التثبيت"
+msgid "Reformatting Finished"
+msgstr ""
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -730,33 +724,33 @@ msgstr "يُرجى التواصل على support@endlessm.com أو الانضم�
 #: ../gnome-image-installer/pages/install/gis-install-page.c:91
 #: ../gnome-image-installer/pages/install/gis-install-page.c:107
 #: ../gnome-image-installer/pages/install/gis-install-page.c:140
-#: ../gnome-image-installer/pages/install/gis-install-page.c:310
-#: ../gnome-image-installer/pages/install/gis-install-page.c:336
+#: ../gnome-image-installer/pages/install/gis-install-page.c:311
+#: ../gnome-image-installer/pages/install/gis-install-page.c:338
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "خطأ داخلي"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:429
-#: ../gnome-image-installer/pages/install/gis-install-page.c:567
+#: ../gnome-image-installer/pages/install/gis-install-page.c:431
+#: ../gnome-image-installer/pages/install/gis-install-page.c:569
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "الخطوة %d من %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:468
+#: ../gnome-image-installer/pages/install/gis-install-page.c:470
 #, c-format
 msgid "Image verification error."
 msgstr "لقد حدث خطأ أثناء التحقق من الصورة."
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:533
+#: ../gnome-image-installer/pages/install/gis-install-page.c:535
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:604
-msgid "Installing"
-msgstr "جاري التثبيت..."
+#: ../gnome-image-installer/pages/install/gis-install-page.c:606
+msgid "Reformatting"
+msgstr ""
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 msgid ""
