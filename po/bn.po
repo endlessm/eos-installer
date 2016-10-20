@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 01:44+0000\n"
-"PO-Revision-Date: 2016-10-11 01:44+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2016-10-18 01:40+0000\n"
+"PO-Revision-Date: 2016-10-19 13:58+0000\n"
+"Last-Translator: Aditi Kabir <aditi.kabir@gmail.com>\n"
 "Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/eos-installer/language/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,12 +39,12 @@ msgid "_Cancel"
 msgstr "_বাতিল"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:322
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "নতুন ব্যবহারকারী রূপে যেতে বাধ্য করুন"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:326
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
 msgstr "- GNOME প্রাথমিক সেটআপ"
 
@@ -619,41 +619,41 @@ msgstr "আপনি সেটিংসে গিয়ে যে কোন সম�
 msgid "_Start using GNOME 3"
 msgstr "_GNOME 3 ব্যবহার শুরু করুন"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:368
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:149
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:436
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:525
 #, c-format
 msgid "No suitable images were found."
 msgstr "কোন যথাযথ ছবি পাওয়া যায়নি।"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:145
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:182
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Endless OS"
 msgstr "এন্ডলেস OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:150
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:187
 msgid "Endless OS Installer"
 msgstr "এন্ডলেস OS সংস্থাপন"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:155
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:192
 msgid "Endless OS (non-free)"
 msgstr "এন্ডলেস OS (অ-বিনামূল্যে)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:160
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
 msgid "Endless OS (OEM)"
 msgstr "এন্ডলেস OS (OEM)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:173
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:210
 msgid "Basic"
 msgstr "প্রাথমিক জ্ঞান"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:227
 msgid "Full"
 msgstr "সম্পূর্ণ"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:406
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:563
 msgid "Reformat with Endless OS"
-msgstr ""
+msgstr "এন্ডলেস ওএস দিয়ে পুনঃ ফর্ম্যাট করা "
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
@@ -670,7 +670,7 @@ msgstr "বিদ্যমান ভার্সন ব্যবহার কর
 msgid ""
 "The location you have chosen is too small - you need more space to reformat "
 "with %s (%.02f GB)"
-msgstr ""
+msgstr "আপনি যে স্থান বেছেছেন তা অনেক ছোট- পুনঃ ফর্ম্যাট করতে আপনার আরও বেশি স্থান দরকার %s সাথে (%.02f জিবি)"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
 msgid "Finish"
@@ -682,7 +682,7 @@ msgstr "ডিস্ক নির্বাচন করুন"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr ""
+msgstr "এন্ডলেস ওএস দিয়ে যে ডিস্কটি পুনঃ ফর্ম্যাট করবেন তা নির্বাচন করুন "
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -697,7 +697,7 @@ msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr ""
+msgstr "মনে হচ্ছে এই ডিস্কে অনেকগুলো ভাগ আছে (যেমন C: ও D:)। এন্ডলেস OS পুনঃ ফর্ম্যাট করলে নির্বাচিত ডিস্কের <b>সকল ভাগ </b> মুছে যাবে। আপনি এটা করতে চান নিশ্চিত করার জন্য অনুগ্রহ করে এখানে চাপুন।"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
@@ -705,7 +705,7 @@ msgstr "যথাযথ কোন ডিস্ক পাওয়া যায়ন�
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
 msgid "Reformatting Finished"
-msgstr ""
+msgstr "পুনঃ ফর্ম্যাট শেষ "
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -724,35 +724,35 @@ msgid ""
 msgstr "অনুগ্রহ করে এখানে যোগাযোগ করুন support@endlessm.com অথবা আমাদের গুগল গ্রুপে যোগ দিয়ে সমস্যা সমাধান করুন।"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:91
-#: ../gnome-image-installer/pages/install/gis-install-page.c:107
-#: ../gnome-image-installer/pages/install/gis-install-page.c:140
-#: ../gnome-image-installer/pages/install/gis-install-page.c:311
-#: ../gnome-image-installer/pages/install/gis-install-page.c:338
+#: ../gnome-image-installer/pages/install/gis-install-page.c:111
+#: ../gnome-image-installer/pages/install/gis-install-page.c:152
+#: ../gnome-image-installer/pages/install/gis-install-page.c:329
+#: ../gnome-image-installer/pages/install/gis-install-page.c:356
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "অভ্যন্তরীণ ভুল হয়েছে"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:431
-#: ../gnome-image-installer/pages/install/gis-install-page.c:569
+#: ../gnome-image-installer/pages/install/gis-install-page.c:449
+#: ../gnome-image-installer/pages/install/gis-install-page.c:593
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "ধাপ %d of %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:470
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
 #, c-format
 msgid "Image verification error."
 msgstr "ছবি নিশ্চিতকরণে ভুল হয়েছে।"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:535
+#: ../gnome-image-installer/pages/install/gis-install-page.c:560
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
 msgstr "এন্ডলেস OS স্বাক্ষর ফাইল \"%s\" কোথাও বিদ্যমান নেই।"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:606
+#: ../gnome-image-installer/pages/install/gis-install-page.c:630
 msgid "Reformatting"
-msgstr ""
+msgstr "পুনঃ ফর্ম্যাট  হচ্ছে "
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 msgid ""
@@ -774,5 +774,5 @@ msgid "Need more input"
 msgstr "আরো তথ্য দরকার"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
-msgid "EOS Installer"
-msgstr "EOS সংস্থাপন"
+msgid "Reformat"
+msgstr "পুনঃ ফর্ম্যাট "

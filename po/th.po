@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 01:44+0000\n"
-"PO-Revision-Date: 2016-10-11 01:44+0000\n"
+"POT-Creation-Date: 2016-10-18 01:40+0000\n"
+"PO-Revision-Date: 2016-10-19 07:33+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Thai (http://www.transifex.com/endless-mobile-inc/eos-installer/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -38,12 +38,12 @@ msgid "_Cancel"
 msgstr "_ยกเลิก"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:322
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "โหมดผู้ใช้ใหม่แบบบังคับ"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:326
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
 msgstr "- การตั้งค่าเริ่มต้นสำหรับ GNOME "
 
@@ -618,41 +618,41 @@ msgstr "คุณอาจเปลี่ยนแปลงตัวเลือ
 msgid "_Start using GNOME 3"
 msgstr "เ_ริ่มใช้ GNOME 3"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:368
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:149
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:436
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:525
 #, c-format
 msgid "No suitable images were found."
 msgstr "ไม่พบภาพที่เหมาะสม"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:145
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:182
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:150
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:187
 msgid "Endless OS Installer"
-msgstr ""
+msgstr "ตัวติดตั้ง Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:155
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:192
 msgid "Endless OS (non-free)"
-msgstr ""
+msgstr "Endless OS (แบบต้องชำระเงิน)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:160
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
 msgid "Endless OS (OEM)"
-msgstr ""
+msgstr "Endless OS (OEM)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:173
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:210
 msgid "Basic"
-msgstr ""
+msgstr "พื้นฐาน"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:227
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:406
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:563
 msgid "Reformat with Endless OS"
-msgstr ""
+msgstr "ฟอร์แมตใหม่ด้วย Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
@@ -669,7 +669,7 @@ msgstr "ใช้เวอร์ชั่นที่มีอยู่:"
 msgid ""
 "The location you have chosen is too small - you need more space to reformat "
 "with %s (%.02f GB)"
-msgstr ""
+msgstr "ตำแหน่งที่คุณเลือกเล็กเกินไป คุณต้องใช้พื้นที่มากกว่านี้ในการฟอร์แมตใหม่ด้วย %s (%.02f GB)"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
 msgid "Finish"
@@ -681,7 +681,7 @@ msgstr "เลือกดิสก์"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr ""
+msgstr "เลือกดิสก์ที่คุณต้องการฟอร์แมตใหม่ด้วย Endless OS"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -696,7 +696,7 @@ msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr ""
+msgstr "ดูเหมือนว่าคุณจะมีหลายพาร์ติชันในดิสก์นี้ (เช่น ไดรฟ์ C: และ D:) การฟอร์แมตใหม่ด้วย Endless OS จะลบ<b>พาร์ติชันทั้งหมด</b>ในดิสก์ที่เลือก กรุณาคลิกที่นี่เพื่อยืนยัน"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
@@ -704,7 +704,7 @@ msgstr "ไม่พบดิสก์ที่เหมาะสม"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
 msgid "Reformatting Finished"
-msgstr ""
+msgstr "ฟอร์แมตใหม่เสร็จแล้ว"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -723,35 +723,35 @@ msgid ""
 msgstr "กรุณาติดต่อ contact support@endlessm.com หรือเข้าร่วม Google Group ของเราเพื่อดูวิธีแก้ไขปัญหา"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:91
-#: ../gnome-image-installer/pages/install/gis-install-page.c:107
-#: ../gnome-image-installer/pages/install/gis-install-page.c:140
-#: ../gnome-image-installer/pages/install/gis-install-page.c:311
-#: ../gnome-image-installer/pages/install/gis-install-page.c:338
+#: ../gnome-image-installer/pages/install/gis-install-page.c:111
+#: ../gnome-image-installer/pages/install/gis-install-page.c:152
+#: ../gnome-image-installer/pages/install/gis-install-page.c:329
+#: ../gnome-image-installer/pages/install/gis-install-page.c:356
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "ข้อผิดพลาดภายใน"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:431
-#: ../gnome-image-installer/pages/install/gis-install-page.c:569
+#: ../gnome-image-installer/pages/install/gis-install-page.c:449
+#: ../gnome-image-installer/pages/install/gis-install-page.c:593
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "ขั้นตอนที่ %d จาก %d "
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:470
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
 #, c-format
 msgid "Image verification error."
 msgstr "ความผิดพลาดในการยืนยันภาพ"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:535
+#: ../gnome-image-installer/pages/install/gis-install-page.c:560
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
-msgstr ""
+msgstr "ไม่มีไฟล์ลายเซ็น Endless OS \"%s\""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:606
+#: ../gnome-image-installer/pages/install/gis-install-page.c:630
 msgid "Reformatting"
-msgstr ""
+msgstr "กำลังฟอร์แมตใหม่"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 msgid ""
@@ -773,5 +773,5 @@ msgid "Need more input"
 msgstr "ต้องการอินพุตเพิ่ม"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
-msgid "EOS Installer"
-msgstr "ตัวติดตั้ง EOS"
+msgid "Reformat"
+msgstr "ฟอร์แมตใหม่"

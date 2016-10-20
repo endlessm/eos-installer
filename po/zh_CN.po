@@ -6,6 +6,7 @@
 # Aron Xu <aronxu@gnome.org>, 2012
 # Cheng Lu <chenglu1990@gmail.com>, 2012
 # chenzibing <chenzibing_endless@126.com>, 2016
+# CN C2 <e2f48d4sf5ds@outlook.com>, 2016
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
 # liuxuejiao <liuxuejiao_endless@126.com>, 2016
 # Roddy Shuler <roddy@endlessm.com>, 2016
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 01:44+0000\n"
-"PO-Revision-Date: 2016-10-11 01:44+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2016-10-18 01:40+0000\n"
+"PO-Revision-Date: 2016-10-19 12:29+0000\n"
+"Last-Translator: CN C2 <e2f48d4sf5ds@outlook.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,12 +46,12 @@ msgid "_Cancel"
 msgstr "取消(_C)"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:322
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "强制新建用户模式"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:326
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
 msgstr "GNOME初始设置"
 
@@ -625,41 +626,41 @@ msgstr "您可以随时在“系统设置”中更改这些选项。"
 msgid "_Start using GNOME 3"
 msgstr "开始使用 GNOME 3(_S)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:109
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:296
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:368
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:149
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:436
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:525
 #, c-format
 msgid "No suitable images were found."
 msgstr "没找到可用图像。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:145
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:182
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Endless OS"
 msgstr "Endless操作系统"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:150
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:187
 msgid "Endless OS Installer"
-msgstr ""
+msgstr "Endless操作系统安装程序"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:155
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:192
 msgid "Endless OS (non-free)"
-msgstr ""
+msgstr "Endless操作系统(非免费)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:160
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
 msgid "Endless OS (OEM)"
-msgstr ""
+msgstr "Endless操作系统(OEM)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:173
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:210
 msgid "Basic"
-msgstr ""
+msgstr "基础"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:227
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:406
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:563
 msgid "Reformat with Endless OS"
-msgstr ""
+msgstr "使用Endless操作系统重新格式化"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
@@ -676,7 +677,7 @@ msgstr "使用现有版本："
 msgid ""
 "The location you have chosen is too small - you need more space to reformat "
 "with %s (%.02f GB)"
-msgstr ""
+msgstr "您选择的位置空间不足 - 需要更多空间才能使用%s重新格式化(%.02f GB)"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
 msgid "Finish"
@@ -688,7 +689,7 @@ msgstr "选择磁盘"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr ""
+msgstr "选择要使用Endless操作系统重新格式化的磁盘"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -703,7 +704,7 @@ msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr ""
+msgstr "该磁盘上似乎有多个分区(如C:盘和D:盘)。使用Endless操作系统重新格式化会擦除所选磁盘上的<b>所有分区</b>，请单击此处以确认。"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
@@ -711,7 +712,7 @@ msgstr "没找到可用磁盘。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
 msgid "Reformatting Finished"
-msgstr ""
+msgstr "重新格式化完成"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -730,35 +731,35 @@ msgid ""
 msgstr "请联系support@endlessm.com或者加入我们的谷歌小组以解决问题。"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:91
-#: ../gnome-image-installer/pages/install/gis-install-page.c:107
-#: ../gnome-image-installer/pages/install/gis-install-page.c:140
-#: ../gnome-image-installer/pages/install/gis-install-page.c:311
-#: ../gnome-image-installer/pages/install/gis-install-page.c:338
+#: ../gnome-image-installer/pages/install/gis-install-page.c:111
+#: ../gnome-image-installer/pages/install/gis-install-page.c:152
+#: ../gnome-image-installer/pages/install/gis-install-page.c:329
+#: ../gnome-image-installer/pages/install/gis-install-page.c:356
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "内部错误"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:431
-#: ../gnome-image-installer/pages/install/gis-install-page.c:569
+#: ../gnome-image-installer/pages/install/gis-install-page.c:449
+#: ../gnome-image-installer/pages/install/gis-install-page.c:593
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "第%d步，共%d步"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:470
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
 #, c-format
 msgid "Image verification error."
 msgstr "图像认证出错。"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:535
+#: ../gnome-image-installer/pages/install/gis-install-page.c:560
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
-msgstr ""
+msgstr "Endless操作系统签名文件“%s”不存在。"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:606
+#: ../gnome-image-installer/pages/install/gis-install-page.c:630
 msgid "Reformatting"
-msgstr ""
+msgstr "正在重新格式化"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 msgid ""
@@ -780,5 +781,5 @@ msgid "Need more input"
 msgstr "需要更多输入源"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
-msgid "EOS Installer"
-msgstr "EOS安装程序"
+msgid "Reformat"
+msgstr "重新格式化"
