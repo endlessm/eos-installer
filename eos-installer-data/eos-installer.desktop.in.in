@@ -1,6 +1,6 @@
 [Desktop Entry]
 _Name=Reformat
-Icon=preferences-system
+Icon=com.endlessm.Installer
 Exec=@LIBEXECDIR@/gnome-image-installer
 Terminal=false
 Type=Application

@@ -26,11 +26,18 @@ systemdsystemunit_DATA = \
 	run-mount-eosimages.mount \
 	$(NULL)
 
+icon64dir = $(datadir)/icons/hicolor/64x64/apps
+icon64_DATA = \
+	icons/hicolor/64x64/apps/com.endlessm.Installer.png \
+	$(NULL)
+
+
 EXTRA_DIST =						\
 	20-eos-installer.rules  		\
 	eos-installer.desktop.in.in		\
 	eos-installer.session			\
 	eos-setup-shell.desktop 		\
+	icons/hicolor/64x64/apps/com.endlessm.Installer.png \
 	run-mount-eosimages.mount
 	$(NULL)
 
