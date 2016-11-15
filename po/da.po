@@ -1,136 +1,133 @@
-# Danish translation for gnome-initial-setup.
-# Copyright (C) 2012-2013 gnome-initial-setup's COPYRIGHT HOLDER
-# This file is distributed under the same license as the gnome-initial-setup package.
-#
-# Kris Thomsen <mail@kristhomsen.dk>, 2012.
-# Ask Hjorth Larsen <asklarsen@gmail.com>, 2013.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# askhl <asklarsen@gmail.com>, 2013
 # Kenneth Nielsen <k.nielsen81@gmail.com>, 2013
-#
+# Kris Thomsen <mail@kristhomsen.dk>, 2012
+# scootergrisen, 2015-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-initial-setup master\n"
+"Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-06 11:28-0700\n"
-"PO-Revision-Date: 2013-09-16 00:39+0200\n"
-"Last-Translator: Kenneth Nielsen <k.nielsen81@gmail.com>\n"
-"Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
-"Language: da\n"
+"POT-Creation-Date: 2016-11-08 02:44+0000\n"
+"PO-Revision-Date: 2016-11-15 02:28+0000\n"
+"Last-Translator: Vicki Niu <vicki@endlessm.com>\n"
+"Language-Team: Danish (http://www.transifex.com/endless-mobile-inc/eos-installer/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: da\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Gtranslator 2.91.5\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
 msgstr "Førstegangsopsætning"
 
-#: ../gnome-initial-setup/gis-assistant.c:291
+#: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
 msgstr "_Næste"
 
-#: ../gnome-initial-setup/gis-assistant.c:430
+#: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
 msgstr "_Forrige"
 
-#: ../gnome-initial-setup/gis-assistant.c:431
+#: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_Annullér"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:243
+#: ../gnome-initial-setup/gnome-initial-setup.c:295
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "Tving ny bruger-tilstand"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:247
+#: ../gnome-initial-setup/gnome-initial-setup.c:299
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
 msgstr "- Førstegangsopsætning af GNOME"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:326
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
 msgstr "Ingen adgangskode"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
 msgstr "Adgangskoder er ikke ens"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
 msgstr "Kunne ikke registrere konto"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
 msgstr "Ingen understøttet måde at godkende med dette domæne"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
 msgstr "Kunne ikke tilslutte domæne"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
 msgstr "Kunne ikke logge ind i domæne"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
 msgstr "Logind"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-#, fuzzy
 msgid "Create a Personal Account"
-msgstr "Opret en lokal konto"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid "Type in your full name and a password that you'll remember."
+msgid ""
+"Type your full name and a password that you'll remember. Pay attention to "
+"upper case letters."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid ""
-"You may want to write down your password. Make sure you pay attention to "
-"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
-"appear at the right side of the space in which you're writing. You'll need "
-"to type in this password identically each time you access your account."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_Fulde navn"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
 msgstr "_Brugernavn"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-#, fuzzy
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
 msgstr ""
-"Dette vil blive brugt til at navngive din hjemmemappe, og kan ikke ændres."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
 msgstr "_Adgangskode"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
 msgstr "_Bekræft adgangskode"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "Show password"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"Make sure you write down your password to remember it! You can write "
+"yourself a reminder here, but note that this password reminder can be seen "
+"by others."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "To continue, please make sure you fill in all the blanks."
+msgid "Password _reminder"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-#, fuzzy
-msgid "Show password"
-msgstr "Ingen adgangskode"
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -154,7 +151,7 @@ msgstr "F_ortsæt"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
-msgstr "Logind for domæneadministrator"
+msgstr "Login for domæneadministrator"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
@@ -162,11 +159,7 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
-"For at kunne bruge enterprise-logind skal computeren\n"
-"tilknyttes domænet. Bed venligst netværksadministratoren\n"
-"om at skrive sin adgangskode her og vælg et unikt\n"
-"navn til din computer."
+msgstr "For at kunne bruge enterprise-logind skal computeren\ntilknyttes domænet. Bed venligst netværksadministratoren\nom at skrive sin adgangskode her og vælg et unikt\nnavn til din computer."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
@@ -254,11 +247,7 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr ""
-"Brugernavnet må kun bestå af:\n"
-" ➣ bogstaver fra det engelske alfabet\n"
-" ➣ tal\n"
-" ➣ hvilken som helst af tegnene \".\", \"-\" og \"_\""
+msgstr "Brugernavnet må kun bestå af:\n ➣ bogstaver fra det engelske alfabet\n ➣ tal\n ➣ hvilken som helst af tegnene \".\", \"-\" og \"_\""
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
@@ -280,61 +269,37 @@ msgstr ""
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:81
-msgid ""
-"Endless collects metrics on user behavior and actions.\n"
-"All data sent is anonymous.\n"
-"We use the data to improve the system."
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
+msgid "Terms of Use"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:106
-msgid "Privacy Policy"
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
+msgid "Third Party Software"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
-#, fuzzy
-msgid "Privacy and License Agreements"
-msgstr "Licensbetingelser"
-
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Enable metrics collection."
+msgid "Please read the following terms of use carefully"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
-"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+"By clicking \"Accept and continue,\" you acknowledge that you have read, "
+"understood, and agree to be bound by the following terms and conditions."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Terms of Service"
+msgid "Help make Endless better for everyone"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"We legally have to include our terms of service. Those are below. But here "
-"are the terms to which we would most like you to agree: May you do good and "
-"not evil. May you find forgiveness for yourself and forgive others. May you "
-"share freely, never taking more than you give. We promise to do our best to "
-"do the same."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
-msgid "- The Endless Team"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
-msgid "Third-party Software"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
-msgid ""
-"Endless uses third-party software to display Flash, MP3 and other media. "
-"Some of this software is closed-source. The software is subject to the "
-"license terms included with the software's documentation."
+"Automatically save and send usage statistics and problem reports to Endless."
+" All data is anonymous."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
@@ -346,9 +311,7 @@ msgstr "Licensbetingelser"
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr ""
-"Jeg har _accepteret betingelserne og forholdene i denne slutbruger-"
-"licensaftale."
+msgstr "Jeg har _accepteret vilkår og betingelser i denne slutbruger-licensaftale."
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
@@ -376,29 +339,29 @@ msgstr "Chat"
 msgid "Resources"
 msgstr "Ressourcer"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
 msgstr "Fejl under oprettelse af konto"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
 msgstr "Fejl under fjernelse af konto"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
 msgstr "Er du sikker på, at du vil fjerne kontoen?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
 msgstr "Dette vil ikke fjerne kontoen fra serveren."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
 msgstr "_Fjern"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
-msgstr "Online konti"
+msgstr "Onlinekonti"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
@@ -408,70 +371,106 @@ msgstr "Forbind til dine eksisterende data i skyen"
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr ""
-"Tilføjelse af konti vil tillade dig på gennemsigtig vis at forbinde til dine "
-"billeder, kontakter, e-mail med mere på nettet."
+msgstr "Tilføjelse af konti vil tillade dig på gennemsigtig vis at forbinde til dine billeder, kontakter, e-mail med mere på nettet."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
 msgstr "_Tilføj konto"
 
-# Jeg går ud fra at det er sprog der henvises til og har fejlmeldt:
-# https://bugzilla.gnome.org/show_bug.cgi?id=695992
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
+msgid "Preview"
+msgstr "Forhåndsvisning"
+
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
 msgid "More…"
 msgstr "Flere…"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
-msgid "No input sources found"
-msgstr "Ingen inputkilder fundet"
+#. Translators: a search for input methods or keyboard layouts
+#. * did not yield any results
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
+msgid "No inputs found"
+msgstr "Ingen input fundet"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
-msgid "Other"
-msgstr "Anden"
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
+msgid "Your keyboard layout seems to be:"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:201
-#, fuzzy
-msgid "Keyboard Layouts"
-msgstr "Tastaturlayout"
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
+msgid "Please press one of the following keys:"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
+msgid "Is the following key present on your keyboard?"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
+msgid "Typing"
+msgstr "Indtastning"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select keyboard layouts"
-msgstr "Vælg tastaturlayouts"
+msgid "Select your keyboard layout"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-#, fuzzy
-msgid "Add a Keyboard Layout"
-msgstr "Tastaturlayout"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
+msgid "Help detect my keyboard layout"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
+msgid "Detect Keyboard Layout..."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
+msgid "Select"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
 msgstr "Ingen sprog fundet"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+msgid "Disabled"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#, c-format
+msgid "SD Card: %s"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
 msgid "Welcome"
 msgstr "Velkommen"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
 msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Test Mode"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:644
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
+msgid ""
+"This installer will help guide you through installing Endless OS on your "
+"computer"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
 msgstr "Søg efter en placering"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:781
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "Placering"
@@ -537,9 +536,8 @@ msgid "Time Zone"
 msgstr "Tidszone"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-#, fuzzy
 msgid "Network Time"
-msgstr "Netværk"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
@@ -553,24 +551,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Andre…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
 msgstr "Netværk er ikke tilgængeligt."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
 msgstr "Ingen netværksenheder fundet."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
 msgstr "Kontrollerér for tilgængelige trådløse netværk"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
 msgstr "Netværk"
 
@@ -582,31 +580,31 @@ msgstr "Trådløse netværk"
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer password."
+"network password. This password may be different from your computer "
+"password."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set "
-"it up in \"Network Settings.\""
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-#, fuzzy
 msgid "No wireless available"
-msgstr "Netværk er ikke tilgængeligt."
+msgstr "Ingen trådløs tilgængelig"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:338
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
 msgstr "_Kom i gang med at bruge %s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:441
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
 msgstr "Tak"
 
@@ -622,110 +620,160 @@ msgstr "Du kan når som helst ændre disse valg i indstillingerne."
 msgid "_Start using GNOME 3"
 msgstr "_Kom i gang med at bruge GNOME 3"
 
-#~ msgid ""
-#~ "Try to use at least 8 different characters. Mix upper and lower case and "
-#~ "use a number or two."
-#~ msgstr ""
-#~ "Prøv at bruge mindst 8 forskellige tegn. Bland store og små bogstaaver, "
-#~ "og brug et tal eller to."
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:149
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:436
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:525
+#, c-format
+msgid "No suitable images were found."
+msgstr ""
 
-#~ msgid "Strength: %s"
-#~ msgstr "Styrke: %s"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:182
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+msgid "Endless OS"
+msgstr ""
 
-#~ msgid "Input Sources"
-#~ msgstr "Inputkilder"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:187
+msgid "Endless OS Installer"
+msgstr ""
 
-#~ msgid "Add an Input Source"
-#~ msgstr "Tilføj en inputkilde"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:192
+msgid "Endless OS (non-free)"
+msgstr ""
 
-#~ msgid "_Back"
-#~ msgstr "_Tilbage"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
+msgid "Endless OS (OEM)"
+msgstr ""
 
-#~ msgid "Sorry"
-#~ msgstr "Beklager"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:210
+msgid "Basic"
+msgstr ""
 
-#~ msgid "Input methods can't be used on the login screen"
-#~ msgstr "Inputmetoder kan ikke bruges i logindskærmen"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:227
+msgid "Full"
+msgstr ""
 
-#~ msgid "No input source selected"
-#~ msgstr "Ingen inputkilde valgt"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:563
+msgid "Reformat with Endless OS"
+msgstr ""
 
-#~ msgid "Select input sources"
-#~ msgstr "Vælg inputkilder"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
+msgid ""
+"Is this the Endless OS version you'd like to use? If not, download another."
+msgstr ""
 
-#~ msgid "Login settings are used by all users when logging into the system"
-#~ msgstr ""
-#~ "Indstillinger for indlogning gælder for alle brugere, når de logger ind i "
-#~ "systemet"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
+msgid "Use existing version:"
+msgstr ""
 
-#~ msgid "Remove Input Source"
-#~ msgstr "Fjern inputkilde"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+#, no-c-format
+msgid ""
+"The location you have chosen is too small - you need more space to reformat "
+"with %s (%.02f GB)"
+msgstr ""
 
-#~ msgid "Move Input Source Up"
-#~ msgstr "Flyt inputkilde op"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
+msgid "Finish"
+msgstr ""
 
-#~ msgid "Input Source Settings"
-#~ msgstr "Indstillinger for inputkilde"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
+msgid "Select Disk"
+msgstr ""
 
-#~ msgid "Select an input source"
-#~ msgstr "Vælg en inputkilde"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
+msgid "Select the disk you'd like to reformat with Endless OS"
+msgstr ""
 
-#~ msgid "Create Local Account"
-#~ msgstr "Opret lokal konto"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
+msgid "Select Disk:"
+msgstr ""
 
-#~ msgid "_Done"
-#~ msgstr "_Færdig"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
+msgid "I agree to erasing <b>all of my files and apps</b>"
+msgstr ""
 
-#~ msgid "_Require a password to use this account"
-#~ msgstr "_Kræv en adgangskode til brug med denne konto"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
+msgid ""
+"It looks like you have multiple partitions on this disk (for example drive "
+"C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
+" the selected disk. Please click here to confirm."
+msgstr ""
 
-#~ msgid "_Act as administrator of this computer"
-#~ msgstr "_Opfør sig som administrator for denne computer"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
+msgid "No suitable disks found."
+msgstr ""
 
-#~ msgid "Choose How to Login"
-#~ msgstr "Vælg hvordan der skal logges ind"
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
+msgid "Reformatting Finished"
+msgstr ""
 
-#~ msgid "Disable image"
-#~ msgstr "Deaktivér billede"
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
+msgid ""
+"Success! Power off your computer and then remove your USB device. When you "
+"restart, Endless OS will be ready for you to set up and enjoy!"
+msgstr ""
 
-#~ msgid "Take a photo..."
-#~ msgstr "Tag et billede..."
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+msgid "Oops, something is wrong with your Endless OS file."
+msgstr ""
 
-#~ msgid "Remove"
-#~ msgstr "Fjern"
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+msgid ""
+"Please contact support@endlessm.com or join our Google Group to "
+"troubleshoot."
+msgstr ""
 
-#~ msgid "English"
-#~ msgstr "Engelsk"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:91
+#: ../gnome-image-installer/pages/install/gis-install-page.c:111
+#: ../gnome-image-installer/pages/install/gis-install-page.c:152
+#: ../gnome-image-installer/pages/install/gis-install-page.c:329
+#: ../gnome-image-installer/pages/install/gis-install-page.c:356
+#: ../gnome-image-installer/util/gduxzdecompressor.c:136
+#, c-format
+msgid "Internal error"
+msgstr ""
 
-#~ msgid "British English"
-#~ msgstr "Britisk engelsk"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:449
+#: ../gnome-image-installer/pages/install/gis-install-page.c:593
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
+#, no-c-format
+msgid "Step %d of %d"
+msgstr ""
 
-#~ msgid "German"
-#~ msgstr "Tysk"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
+#, c-format
+msgid "Image verification error."
+msgstr ""
 
-#~ msgid "French"
-#~ msgstr "Fransk"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:560
+#, c-format
+msgid "The Endless OS signature file \"%s\" does not exist."
+msgstr ""
 
-#~ msgid "Spanish"
-#~ msgstr "Spansk"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:630
+msgid "Reformatting"
+msgstr ""
 
-#~ msgid "Chinese (simplified)"
-#~ msgstr "Kinesisk (forenklet)"
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+msgid ""
+"Fast, easy to use and powerful – with or without internet.\n"
+"\n"
+"Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
+msgstr ""
 
-#~ msgid "Unspecified"
-#~ msgstr "Ikke angivet"
+#: ../gnome-image-installer/util/gduxzdecompressor.c:122
+msgid "Invalid compressed data"
+msgstr ""
 
-#~ msgid "Use %s"
-#~ msgstr "Brug %s"
+#: ../gnome-image-installer/util/gduxzdecompressor.c:129
+msgid "Not enough memory"
+msgstr ""
 
-#~ msgid "Show _all"
-#~ msgstr "Vis _alle"
+#: ../gnome-image-installer/util/gduxzdecompressor.c:151
+msgid "Need more input"
+msgstr ""
 
-#~ msgid "Enjoy GNOME!"
-#~ msgstr "Nyd GNOME!"
-
-#~ msgid "New to GNOME 3 and need help finding your way around?"
-#~ msgstr "Ny til GNOME 3 og har brug for hjælpe til at finde rundt?"
-
-#~ msgid "_Take a Tour"
-#~ msgstr "_Tag en rundvisning"
+#: ../eos-installer-data/eos-installer.desktop.in.in.h:1
+msgid "Reformat"
+msgstr ""

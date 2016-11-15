@@ -1,134 +1,132 @@
-# Hebrew translations for PACKAGE package.
-# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Yaron Shahrabani <sh.yaron@gmail.com>, 2012.
-# Yosef Or Boczko <yoseforb@gmail.com>, 2013.
-#
+# 
+# Translators:
+# Yaron Shahrabani <sh.yaron@gmail.com>, 2012
+# Yosef Or Boczko <yoseforb@gmail.com>, 2013
+# Yosef Or Boczko <yoseforb@gnome.org>, 2013-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-initial-setup\n"
+"Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-06 11:28-0700\n"
-"PO-Revision-Date: 2013-09-16 22:42+0300\n"
-"Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
-"Language-Team: עברית <>\n"
-"Language: he\n"
+"POT-Creation-Date: 2016-11-08 02:44+0000\n"
+"PO-Revision-Date: 2016-11-15 02:29+0000\n"
+"Last-Translator: Vicki Niu <vicki@endlessm.com>\n"
+"Language-Team: Hebrew (http://www.transifex.com/endless-mobile-inc/eos-installer/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: he\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Gtranslator 2.91.6\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
 msgstr "התקנה ראשונית"
 
-#: ../gnome-initial-setup/gis-assistant.c:291
+#: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
 msgstr "ה_בא"
 
-#: ../gnome-initial-setup/gis-assistant.c:430
+#: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
 msgstr "ה_קודם"
 
-#: ../gnome-initial-setup/gis-assistant.c:431
+#: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_ביטול"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:243
+#: ../gnome-initial-setup/gnome-initial-setup.c:295
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "אילוץ מצב משתמש חדש"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:247
+#: ../gnome-initial-setup/gnome-initial-setup.c:299
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
 msgstr "- הגדרות ראשוניות של GNOME"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:326
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
 msgstr "ללא ססמה"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
 msgstr "הססמאות אינן תואמות"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
 msgstr "רישום החשבון נכשל"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
 msgstr "אין דרך נתמכת לאימות מול מתחם זה"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
 msgstr "ההצטרפות למתחם נכשלה"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
 msgstr "הכניסה למתחם נכשלה"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
 msgstr "כניסה"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-#, fuzzy
 msgid "Create a Personal Account"
-msgstr "יצירת חשבון מקומי"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid "Type in your full name and a password that you'll remember."
+msgid ""
+"Type your full name and a password that you'll remember. Pay attention to "
+"upper case letters."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid ""
-"You may want to write down your password. Make sure you pay attention to "
-"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
-"appear at the right side of the space in which you're writing. You'll need "
-"to type in this password identically each time you access your account."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "שם מ_לא"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
 msgstr "שם מ_שתמש"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-#, fuzzy
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr "מחרוזת זו תשמש בתור שם תיקיית הבית שלך ולא ניתן יהיה לשנות זאת."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
 msgstr "_ססמה"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
 msgstr "_אימות הססמה"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "Show password"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"Make sure you write down your password to remember it! You can write "
+"yourself a reminder here, but note that this password reminder can be seen "
+"by others."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "To continue, please make sure you fill in all the blanks."
+msgid "Password _reminder"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-#, fuzzy
-msgid "Show password"
-msgstr "ללא ססמה"
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -160,10 +158,7 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
-"כדי להשתמש בכניסה ארגונית על מחשב זה להיות רשום\n"
-"במתחם. נא לבקש ממנהל הרשת שלך להזין את ססמת המתחם\n"
-"להלן ולבחור בשם ייחודי למחשב שלך."
+msgstr "כדי להשתמש בכניסה ארגונית על מחשב זה להיות רשום\nבמתחם. נא לבקש ממנהל הרשת שלך להזין את ססמת המתחם\nלהלן ולבחור בשם ייחודי למחשב שלך."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
@@ -251,11 +246,7 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr ""
-"שם המשתמש חייב להיות מורכב מהבאים בלבד:\n"
-" ⇦ אותיות מהאלפבית האנגלי\n"
-" ⇦ ספרות\n"
-" ⇦ כל אחד מהתווים '.', '-' ו־'_'"
+msgstr "שם המשתמש חייב להיות מורכב מהבאים בלבד:\n ⇦ אותיות מהאלפבית האנגלי\n ⇦ ספרות\n ⇦ כל אחד מהתווים '.', '-' ו־'_'"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
@@ -277,61 +268,37 @@ msgstr ""
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:81
-msgid ""
-"Endless collects metrics on user behavior and actions.\n"
-"All data sent is anonymous.\n"
-"We use the data to improve the system."
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
+msgid "Terms of Use"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:106
-msgid "Privacy Policy"
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
+msgid "Third Party Software"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
-#, fuzzy
-msgid "Privacy and License Agreements"
-msgstr "הסכמי רישוי"
-
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Enable metrics collection."
+msgid "Please read the following terms of use carefully"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
-"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+"By clicking \"Accept and continue,\" you acknowledge that you have read, "
+"understood, and agree to be bound by the following terms and conditions."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Terms of Service"
+msgid "Help make Endless better for everyone"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"We legally have to include our terms of service. Those are below. But here "
-"are the terms to which we would most like you to agree: May you do good and "
-"not evil. May you find forgiveness for yourself and forgive others. May you "
-"share freely, never taking more than you give. We promise to do our best to "
-"do the same."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
-msgid "- The Endless Team"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
-msgid "Third-party Software"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
-msgid ""
-"Endless uses third-party software to display Flash, MP3 and other media. "
-"Some of this software is closed-source. The software is subject to the "
-"license terms included with the software's documentation."
+"Automatically save and send usage statistics and problem reports to Endless."
+" All data is anonymous."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
@@ -371,27 +338,27 @@ msgstr "צ׳אט"
 msgid "Resources"
 msgstr "משאבים"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
 msgstr "שגיאה ביצירת חשבון"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
 msgstr "שגיאה בהסרת חשבון"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
 msgstr "האם אכן ברצונך להסיר את החשבון?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
 msgstr "פעולה זו לא תסיר את החשבון מהשרת."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
 msgstr "ה_סרה"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
 msgstr "חשבונות מקוונים"
 
@@ -403,68 +370,106 @@ msgstr "ניתן להתחבר לנתונים הנוכחיים שלך בענן"
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr ""
-"הוספת חשבונות תאפשר לך להתחבר לתמונות, אנשי הקשר, הדוא״ל ושירותים מקוונים "
-"נוספים שלרשותך באופן שקוף."
+msgstr "הוספת חשבונות תאפשר לך להתחבר לתמונות, אנשי הקשר, הדוא״ל ושירותים מקוונים נוספים שלרשותך באופן שקוף."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
 msgstr "הו_ספת חשבון"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
+msgid "Preview"
+msgstr "תצוגה מקדימה"
+
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
 msgid "More…"
 msgstr "עוד…"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
-msgid "No input sources found"
-msgstr "לא נמצאו מקורות קלט"
+#. Translators: a search for input methods or keyboard layouts
+#. * did not yield any results
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
+msgid "No inputs found"
+msgstr "לא נמצא קלט"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
-msgid "Other"
-msgstr "אחר"
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
+msgid "Your keyboard layout seems to be:"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:201
-#, fuzzy
-msgid "Keyboard Layouts"
-msgstr "פריסת מקלדת"
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
+msgid "Please press one of the following keys:"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
+msgid "Is the following key present on your keyboard?"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
+msgid "Typing"
+msgstr "הקלדה"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select keyboard layouts"
-msgstr "בחירת פריסות מקלדת"
+msgid "Select your keyboard layout"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-#, fuzzy
-msgid "Add a Keyboard Layout"
-msgstr "פריסת מקלדת"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
+msgid "Help detect my keyboard layout"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
+msgid "Detect Keyboard Layout..."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
+msgid "Select"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
 msgstr "לא נמצאו שפות"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+msgid "Disabled"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#, c-format
+msgid "SD Card: %s"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
 msgid "Welcome"
 msgstr "ברוך בואך"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
 msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Test Mode"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:644
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
+msgid ""
+"This installer will help guide you through installing Endless OS on your "
+"computer"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
 msgstr "חיפוש אחר מיקום"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:781
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "מיקום"
@@ -530,9 +535,8 @@ msgid "Time Zone"
 msgstr "אזור זמן"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-#, fuzzy
 msgid "Network Time"
-msgstr "רשת"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
@@ -546,24 +550,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "אחר…"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
 msgstr "הרשת אינה זמינה."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
 msgstr "לא נמצא התקן רשת."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
 msgstr "מתבצע חיפוש אחר רשתות אלחוטיות זמינות"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
 msgstr "רשת"
 
@@ -575,31 +579,31 @@ msgstr "רשתות אלחוטיות"
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer password."
+"network password. This password may be different from your computer "
+"password."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set "
-"it up in \"Network Settings.\""
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-#, fuzzy
 msgid "No wireless available"
-msgstr "הרשת אינה זמינה."
+msgstr "אין אלחוט זמין"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:338
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
 msgstr "להת_חיל להשתמש ב־%s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:441
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
 msgstr "תודה רבה לך"
 
@@ -615,108 +619,160 @@ msgstr "ניתן לשנות כל אחת מאפשרויות אלה בכל עת ד
 msgid "_Start using GNOME 3"
 msgstr "להת_חיל להשתמש ב־GNOME 3"
 
-#~ msgid ""
-#~ "Try to use at least 8 different characters. Mix upper and lower case and "
-#~ "use a number or two."
-#~ msgstr ""
-#~ "נא להשתמש ב־8 תווים שונים זה מזה לפחות. ניתן לערבב בין אותיות קטנות "
-#~ "וגדולות ולהשתמש בספרה או שתיים."
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:149
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:436
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:525
+#, c-format
+msgid "No suitable images were found."
+msgstr ""
 
-#~ msgid "Strength: %s"
-#~ msgstr "חוזק: %s"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:182
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+msgid "Endless OS"
+msgstr ""
 
-#~ msgid "Input Sources"
-#~ msgstr "מקורות קלט"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:187
+msgid "Endless OS Installer"
+msgstr ""
 
-#~ msgid "Add an Input Source"
-#~ msgstr "הוספת מקור קלט"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:192
+msgid "Endless OS (non-free)"
+msgstr ""
 
-#~ msgid "Login settings are used by all users when logging into the system"
-#~ msgstr "הגדרות הכניסה משמשות את כל המשתמשים בעת הכניסה למערכת"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
+msgid "Endless OS (OEM)"
+msgstr ""
 
-#~ msgid "Select input sources"
-#~ msgstr "נא לבחור במקורות קלט"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:210
+msgid "Basic"
+msgstr ""
 
-#~ msgid "_Back"
-#~ msgstr "ה_קודם"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:227
+msgid "Full"
+msgstr ""
 
-#~ msgid "Unspecified"
-#~ msgstr "לא צוינה"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:563
+msgid "Reformat with Endless OS"
+msgstr ""
 
-#~ msgid "Use _Enterprise Login"
-#~ msgstr "שימוש בכניסה א_רגונית"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
+msgid ""
+"Is this the Endless OS version you'd like to use? If not, download another."
+msgstr ""
 
-#~ msgid "_Use Local Login"
-#~ msgstr "שימוש בחשבון מ_קומי"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
+msgid "Use existing version:"
+msgstr ""
 
-#~ msgid "Remove Input Source"
-#~ msgstr "הסרת מקור קלט"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+#, no-c-format
+msgid ""
+"The location you have chosen is too small - you need more space to reformat "
+"with %s (%.02f GB)"
+msgstr ""
 
-#~ msgid "Move Input Source Up"
-#~ msgstr "הגבהת מקור הקלט"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
+msgid "Finish"
+msgstr ""
 
-#~ msgid "Input Source Settings"
-#~ msgstr "הגדרות מקור הקלט"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
+msgid "Select Disk"
+msgstr ""
 
-#~ msgid "Select an input source"
-#~ msgstr "נא לבחור במקור קלט"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
+msgid "Select the disk you'd like to reformat with Endless OS"
+msgstr ""
 
-#~ msgid "English"
-#~ msgstr "אנגלית"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
+msgid "Select Disk:"
+msgstr ""
 
-#~ msgid "British English"
-#~ msgstr "אנגלית בריטית"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
+msgid "I agree to erasing <b>all of my files and apps</b>"
+msgstr ""
 
-#~ msgid "German"
-#~ msgstr "גרמנית"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
+msgid ""
+"It looks like you have multiple partitions on this disk (for example drive "
+"C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
+" the selected disk. Please click here to confirm."
+msgstr ""
 
-#~ msgid "French"
-#~ msgstr "צרפתית"
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
+msgid "No suitable disks found."
+msgstr ""
 
-#~ msgid "Spanish"
-#~ msgstr "ספרדית"
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
+msgid "Reformatting Finished"
+msgstr ""
 
-#~ msgid "Chinese (simplified)"
-#~ msgstr "סינית (מפושטת)"
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
+msgid ""
+"Success! Power off your computer and then remove your USB device. When you "
+"restart, Endless OS will be ready for you to set up and enjoy!"
+msgstr ""
 
-#~ msgid "Use %s"
-#~ msgstr "שימוש ב%s"
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+msgid "Oops, something is wrong with your Endless OS file."
+msgstr ""
 
-#~ msgid "_Login Name"
-#~ msgstr "שם ה_כניסה"
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+msgid ""
+"Please contact support@endlessm.com or join our Google Group to "
+"troubleshoot."
+msgstr ""
 
-#~ msgid "Remove"
-#~ msgstr "הסרה"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:91
+#: ../gnome-image-installer/pages/install/gis-install-page.c:111
+#: ../gnome-image-installer/pages/install/gis-install-page.c:152
+#: ../gnome-image-installer/pages/install/gis-install-page.c:329
+#: ../gnome-image-installer/pages/install/gis-install-page.c:356
+#: ../gnome-image-installer/util/gduxzdecompressor.c:136
+#, c-format
+msgid "Internal error"
+msgstr ""
 
-#~ msgid "Link other accounts"
-#~ msgstr "קישור לחשבונות באחרים"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:449
+#: ../gnome-image-installer/pages/install/gis-install-page.c:593
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
+#, no-c-format
+msgid "Step %d of %d"
+msgstr ""
 
-#~ msgid "Enjoy GNOME!"
-#~ msgstr "שיהיה לך בכיף עם GNOME!"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
+#, c-format
+msgid "Image verification error."
+msgstr ""
 
-#~ msgid "New to GNOME 3 and need help finding your way around?"
-#~ msgstr "עדיין לא ערכת היכרות עם GNOME 3 ודרושה לך עזרה כדי להתמצא?"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:560
+#, c-format
+msgid "The Endless OS signature file \"%s\" does not exist."
+msgstr ""
 
-#~ msgid "_Take a Tour"
-#~ msgstr "ל_צאת לסיור"
+#: ../gnome-image-installer/pages/install/gis-install-page.c:630
+msgid "Reformatting"
+msgstr ""
 
-#~ msgid "Choose How to Login"
-#~ msgstr "נא לבחור באופן הכניסה"
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+msgid ""
+"Fast, easy to use and powerful – with or without internet.\n"
+"\n"
+"Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
+msgstr ""
 
-#~ msgid "Show _all"
-#~ msgstr "הצגת ה_כול"
+#: ../gnome-image-installer/util/gduxzdecompressor.c:122
+msgid "Invalid compressed data"
+msgstr ""
 
-#~ msgid "_Done"
-#~ msgstr "_בוצע"
+#: ../gnome-image-installer/util/gduxzdecompressor.c:129
+msgid "Not enough memory"
+msgstr ""
 
-#~ msgid "_Require a password to use this account"
-#~ msgstr "_דרישת ססמה לצורך שימוש בחשבון זה"
+#: ../gnome-image-installer/util/gduxzdecompressor.c:151
+msgid "Need more input"
+msgstr ""
 
-#~ msgid "_Act as administrator of this computer"
-#~ msgstr "הת_נהגות כמנהל המחשב"
-
-#~ msgid "Disable image"
-#~ msgstr "ביטול התמונה"
-
-#~ msgid "Take a photo..."
-#~ msgstr "צילום תמונה..."
+#: ../eos-installer-data/eos-installer.desktop.in.in.h:1
+msgid "Reformat"
+msgstr ""

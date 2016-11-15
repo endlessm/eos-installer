@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Chandan kumar <chandankumar.093047@gmail.com>, 2012-2013
 # e2f_in c7 <e2f_in_c7@outlook.com>, 2016
-# Rajesh Ranjan <rajeshkajha@yahoo.com>, 2013
+# Rajesh Ranjan <rajeshkajha@yahoo.com>, 2013-2014
 # Roddy Shuler <roddy@endlessm.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-18 01:40+0000\n"
-"PO-Revision-Date: 2016-10-19 10:47+0000\n"
-"Last-Translator: e2f_in c7 <e2f_in_c7@outlook.com>\n"
+"POT-Creation-Date: 2016-11-08 02:44+0000\n"
+"PO-Revision-Date: 2016-11-15 02:29+0000\n"
+"Last-Translator: Vicki Niu <vicki@endlessm.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +32,7 @@ msgstr "अगला (_N)"
 
 #: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
-msgstr "_पिछला"
+msgstr "पिछला (_P)"
 
 #: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
@@ -63,7 +64,7 @@ msgstr "खाता पंजीयन में विफल"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
-msgstr "इस डोमेन के साथ प्रमाणीकृत करने के लिए कोई समर्थित तरीका नहीं है"
+msgstr "इस डोमेन के साथ प्रमाणित करने के लिए कोई समर्थित तरीका नहीं"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
@@ -146,11 +147,11 @@ msgstr "एंटरप्राइज डोमेन नाम या रि�
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
 msgid "C_ontinue"
-msgstr "जारी_रखें"
+msgstr "जारी रखें (_o)"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
 msgid "Domain Administrator Login"
-msgstr "डोमेन व्यवस्थापन लॉगिन"
+msgstr "डोमेन प्रशासक लॉगिन"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
 msgid ""
@@ -162,15 +163,15 @@ msgstr "एंटरप्राइज़ लॉगिन का उपयोग �
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
-msgstr "_कंप्यूटर"
+msgstr "कम्प्यूटर (_C)"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
 msgid "Administrator _Name"
-msgstr "व्यवस्थापक _का नाम"
+msgstr "प्रशासक नाम (_N)"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
 msgid "Administrator Password"
-msgstr "व्यवस्थापक पासवर्ड"
+msgstr "प्रशासक कूटशब्द"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:94
 msgctxt "Password strength"
@@ -204,7 +205,7 @@ msgstr "मजबूत"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr "इस प्रकार के डोमेन से स्वचालित रूप से नहीं जुड़ सकता है"
+msgstr "इस प्रकार के डोमेन में स्वचालित शामिल नहीं हो सकते"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
@@ -215,11 +216,11 @@ msgstr "कोई ऐसा डोमेन या रियल्म नही�
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr "बतौर %s %s डोमेन पर लॉगिन नहीं कर सकता है"
+msgstr "%s के रूप में %s डोमेन पर लॉगिन नहीं कर सकता"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
-msgstr "अवैध कूटशब्द, कृपया फिर कोशिश करें"
+msgstr "अमान्य कूटशब्द, पुनः कोशिश करें"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
@@ -310,7 +311,7 @@ msgstr "लाइसेंस अनुबंध"
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr "हम उपयोगकर्ता लाइसेंस अनुबंध के अंतर्गत नियमों एवं शर्तों से सहमत हो गए हैं. (_a)"
+msgstr "हम इस उपयोगकर्ता लाइसेंस अनुबंध के नियमों एवं शर्तों से सहमत हैं. (_a)"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"
@@ -378,7 +379,7 @@ msgstr "खाता जोड़ें (_A)"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
 msgid "Preview"
-msgstr "पूर्वावलोकन करें"
+msgstr "पूर्वावलोकन"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
@@ -389,7 +390,7 @@ msgstr "अधिक…"
 #. * did not yield any results
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
-msgstr "कोई इनपुट नहीं मिले"
+msgstr "कोई इनपुट नहीं मिला"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
@@ -406,7 +407,7 @@ msgstr "क्या निम्न कुंजी आपके कीबो�
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
-msgstr "लिखना"
+msgstr "टाइपिंग"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
@@ -426,7 +427,7 @@ msgstr "चयन करें"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
-msgstr "कोई भाषाएँ नहीं मिला"
+msgstr "कोई भाषा नहीं मिली"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:608
 msgid "Disabled"
@@ -553,7 +554,7 @@ msgstr ":"
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
-msgstr "अन्य..."
+msgstr "अन्य... [वायरलेस ऐक्सेस पॉइंट]"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
@@ -592,7 +593,7 @@ msgstr "युक्ति: यदि आपके पास अभी कोई
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
-msgstr "कोई भी वायरलेस उपलब्ध नहीं है"
+msgstr "कोई बेतार उपलब्ध नहीं है"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
@@ -601,7 +602,7 @@ msgstr "_WiFi सेटअप छोड़ें"
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
-msgstr "_%s का उपयोग करना आरंभ करें"
+msgstr "%s का उपयोग कर प्रारंभ करें (_S)"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"

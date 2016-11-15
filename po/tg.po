@@ -1,132 +1,130 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Victor Ibragimov <victor.ibragimov@gmail.com>, 2013.
-#
+# 
+# Translators:
+# Victor Ibragimov <victor.ibragimov@gmail.com>, 2013-2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Tajik Gnome\n"
+"Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-06 11:28-0700\n"
-"PO-Revision-Date: 2013-09-02 15:28+0500\n"
-"Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
-"Language-Team: \n"
-"Language: Tajik\n"
+"POT-Creation-Date: 2016-11-08 02:44+0000\n"
+"PO-Revision-Date: 2016-11-15 02:31+0000\n"
+"Last-Translator: Vicki Niu <vicki@endlessm.com>\n"
+"Language-Team: Tajik (http://www.transifex.com/endless-mobile-inc/eos-installer/language/tg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"Language: tg\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/gnome-initial-setup.desktop.in.in.h:1
 #: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
 msgid "Initial Setup"
-msgstr "Барпосозии ибтидоӣ"
+msgstr "Танзимоти ибтидоӣ"
 
-#: ../gnome-initial-setup/gis-assistant.c:291
+#: ../gnome-initial-setup/gis-assistant.c:300
 msgid "_Next"
 msgstr "_Навбатӣ"
 
-#: ../gnome-initial-setup/gis-assistant.c:430
+#: ../gnome-initial-setup/gis-assistant.c:439
 msgid "_Previous"
 msgstr "_Қаблӣ"
 
-#: ../gnome-initial-setup/gis-assistant.c:431
+#: ../gnome-initial-setup/gis-assistant.c:440
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "_Бекор кардан"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:243
+#: ../gnome-initial-setup/gnome-initial-setup.c:295
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "Маҷбур кардани ҳолати корбари нав"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:247
+#: ../gnome-initial-setup/gnome-initial-setup.c:299
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
-msgstr "- барпосозии ибтидоии GNOME"
+msgstr "- Танзимоти ибтидоии GNOME"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:326
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
 msgstr "Бе парол"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:329
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:429
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
 msgstr "Паролҳо мувофиқат намекунанд"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:545
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
 msgstr "Ҳангоми қайдкунии ҳисоб хатогӣ ба вуҷуд омад"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:753
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
 msgstr "Ягон тарзи санҷиши ҳаққоният барои ин домен дастгирӣ намешавад"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:793
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
 msgstr "Ҳангоми ҳамроҳ шудан ба домен хатогӣ ба вуҷуд омад"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:861
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
 msgstr "Ҳангоми ворид шудан ба домен хатогӣ ба вуҷуд омад"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1288
+#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
 msgid "Login"
 msgstr "Воридшавӣ"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-#, fuzzy
 msgid "Create a Personal Account"
-msgstr "Эҷод кардани ҳисоби маҳаллӣ"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid "Type in your full name and a password that you'll remember."
+msgid ""
+"Type your full name and a password that you'll remember. Pay attention to "
+"upper case letters."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid ""
-"You may want to write down your password. Make sure you pay attention to "
-"upper case letters. If the caps lock key is pressed, the symbol ⚠ will "
-"appear at the right side of the space in which you're writing. You'll need "
-"to type in this password identically each time you access your account."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Full Name"
 msgstr "_Номи пурра"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
 msgstr "_Номи корбар"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-#, fuzzy
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
 msgstr ""
-"Ин барои номи ҷузвдони асосӣ истифода мешавад ва тағйир дода намешавад."
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
 msgstr "_Парол"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
 msgstr "_Паролро тасдиқ намоед"
 
+#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
+msgid "Show password"
+msgstr ""
+
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
-"To make your password more secure, you can use letters and numbers together. "
-"This is optional."
+"Make sure you write down your password to remember it! You can write "
+"yourself a reminder here, but note that this password reminder can be seen "
+"by others."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "To continue, please make sure you fill in all the blanks."
+msgid "Password _reminder"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-#, fuzzy
-msgid "Show password"
-msgstr "Бе парол"
+msgid "To continue, please make sure you fill in all the blanks."
+msgstr ""
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -158,11 +156,7 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr ""
-"Барои истифодаи бурдани воридшавии корӣ, ин компютер бояд дар\n"
-"сервер қайд карда шавад. Лутфан, маъмури шабакаро пурсед, ки пароли доменро\n"
-"ин ҷо ворид кунад ва номи ягонаи компютерро барои компютери шумо\n"
-"гузарад."
+msgstr "Барои истифодаи бурдани воридшавии корӣ, ин компютер бояд дар\nсервер қайд карда шавад. Лутфан, маъмури шабакаро пурсед, ки пароли доменро\nин ҷо ворид кунад ва номи ягонаи компютерро барои компютери шумо\nгузарад."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
@@ -250,11 +244,7 @@ msgid ""
 " ➣ letters from the English alphabet\n"
 " ➣ digits\n"
 " ➣ any of the characters '.', '-' and '_'"
-msgstr ""
-"Номи корбар бояд аз зерин иборат шавад:\n"
-" ➣ ҳарфҳои алифбои англисӣ\n"
-" ➣ рақамҳо\n"
-" ➣ аломатҳои '.', '-' ва '_'"
+msgstr "Номи корбар бояд аз зерин иборат шавад:\n ➣ ҳарфҳои алифбои англисӣ\n ➣ рақамҳо\n ➣ аломатҳои '.', '-' ва '_'"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
@@ -276,61 +266,37 @@ msgstr ""
 msgid "I do not see it. Shrink screen to fit TV."
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:81
-msgid ""
-"Endless collects metrics on user behavior and actions.\n"
-"All data sent is anonymous.\n"
-"We use the data to improve the system."
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
+msgid "Terms of Use"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:106
-msgid "Privacy Policy"
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
+msgid "Third Party Software"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:185
+#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:192
-#, fuzzy
-msgid "Privacy and License Agreements"
-msgstr "Шартномаи иҷозатнома"
-
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Enable metrics collection."
+msgid "Please read the following terms of use carefully"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
-"<a href='metrics-privacy-policy'>Click here</a> to see our privacy policy"
+"By clicking \"Accept and continue,\" you acknowledge that you have read, "
+"understood, and agree to be bound by the following terms and conditions."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Terms of Service"
+msgid "Help make Endless better for everyone"
 msgstr ""
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
-"We legally have to include our terms of service. Those are below. But here "
-"are the terms to which we would most like you to agree: May you do good and "
-"not evil. May you find forgiveness for yourself and forgive others. May you "
-"share freely, never taking more than you give. We promise to do our best to "
-"do the same."
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:5
-msgid "- The Endless Team"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:6
-msgid "Third-party Software"
-msgstr ""
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:7
-msgid ""
-"Endless uses third-party software to display Flash, MP3 and other media. "
-"Some of this software is closed-source. The software is subject to the "
-"license terms included with the software's documentation."
+"Automatically save and send usage statistics and problem reports to Endless."
+" All data is anonymous."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
@@ -370,27 +336,27 @@ msgstr "Чат"
 msgid "Resources"
 msgstr "Сарчашмаҳо"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:101
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
 msgstr "Ҳангоми эҷодкунии ҳисоб хатогӣ ба вуҷуд омад"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:147
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
 msgstr "Ҳангоми тозакунии ҳисоб хатогӣ ба вуҷуд омад"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
 msgstr "Шумо мутмаин ҳастед, ки мехоҳед ҳисобро тоза кунед?"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:175
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
 msgid "This will not remove the account on the server."
 msgstr "Ин ҳисобро дар сервер нест намекунад."
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:176
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
 msgid "_Remove"
 msgstr "_Тоза кардан"
 
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:438
+#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
 msgstr "Ҳисобҳои онлайн"
 
@@ -402,68 +368,106 @@ msgstr "Пайваст шудан ба иттилооти мавҷудбуда �
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr ""
-"Иловакунии ҳисоб ба шумо имкон медиҳад, ки тавонед ба суратҳои онлайн, "
-"тамосҳо, почта ва хидматҳои дигар дастрасии шаффофӣ пайдо кунед."
+msgstr "Иловакунии ҳисоб ба шумо имкон медиҳад, ки тавонед ба суратҳои онлайн, тамосҳо, почта ва хидматҳои дигар дастрасии шаффофӣ пайдо кунед."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
 msgstr "_Илова кардани ҳисоб"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:172
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:188
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
+msgid "Preview"
+msgstr "Пешнамоиш"
+
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
 msgid "More…"
 msgstr "Бештар..."
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:186
-msgid "No input sources found"
-msgstr "Ягон манбаи вуруд ёфт нашуд"
+#. Translators: a search for input methods or keyboard layouts
+#. * did not yield any results
+#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
+msgid "No inputs found"
+msgstr "Ягон вуруд ёфт нашуд"
 
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:1076
-msgid "Other"
-msgstr "Дигар"
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
+msgid "Your keyboard layout seems to be:"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:201
-#, fuzzy
-msgid "Keyboard Layouts"
-msgstr "Интихоби тарҳбандиҳои клавиатура"
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
+msgid "Please press one of the following keys:"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
+msgid "Is the following key present on your keyboard?"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
+msgid "Typing"
+msgstr "Ҳуруфчинӣ"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select keyboard layouts"
-msgstr "Интихоби тарҳбандиҳои клавиатура"
+msgid "Select your keyboard layout"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/keyboard/input-chooser.ui.h:1
-#, fuzzy
-msgid "Add a Keyboard Layout"
-msgstr "Интихоби тарҳбандиҳои клавиатура"
+#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
+msgid "Help detect my keyboard layout"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:205
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
+msgid "Detect Keyboard Layout..."
+msgstr ""
+
+#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
+msgid "Select"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
 msgstr "Ягон забон ёфт нашуд"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:524
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+msgid "Disabled"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#, c-format
+msgid "SD Card: %s"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
 msgid "Welcome"
 msgstr "Хуш омадед"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:528
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:530
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
 msgid "Let's set up your computer..."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
+msgid "Test Mode"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:644
+#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
+msgid ""
+"This installer will help guide you through installing Endless OS on your "
+"computer"
+msgstr ""
+
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
 msgstr "Ҷустуҷӯи ҷойгиршавӣ"
 
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:781
+#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
 msgid "Location"
 msgstr "Ҷойгиршавӣ"
@@ -529,9 +533,8 @@ msgid "Time Zone"
 msgstr "Минтақаи вақт"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-#, fuzzy
 msgid "Network Time"
-msgstr "Шабака"
+msgstr ""
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
@@ -545,24 +548,24 @@ msgstr ""
 msgid ":"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:330
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
 msgid "Other…"
 msgstr "Дигар..."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:366
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
 msgid "Network is not available."
 msgstr "Шабака дастнорас аст."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:368
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
 msgid "No network devices found."
 msgstr "Ягон дастгоҳи шабакавӣ ёфт нашуд."
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:433
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
 msgid "Checking for available wireless networks"
 msgstr "Ҷустуҷӯи шабакаҳои бесими дастрас"
 
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:695
+#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
 msgid "Network"
 msgstr "Шабака"
 
@@ -574,31 +577,31 @@ msgstr "Шабакаҳои бесим"
 msgid ""
 "Do you have wireless internet (WiFi)? If you do, connect your computer to "
 "the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer password."
+"network password. This password may be different from your computer "
+"password."
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set "
-"it up in \"Network Settings.\""
+"connection now. If you get an internet connection in the future, you can set"
+" it up in \"Network Settings.\""
 msgstr ""
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-#, fuzzy
 msgid "No wireless available"
-msgstr "Шабака дастнорас аст."
+msgstr "Шабакаи бесим дастнорас аст."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:338
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
 msgid "_Start using %s"
 msgstr "_Оғози истифодаи %s"
 
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:441
+#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
 msgid "Thank You"
 msgstr "Ташаккур ба шумо"
 
@@ -614,38 +617,160 @@ msgstr "Шумо метавонед ин имконотро дар Танзим�
 msgid "_Start using GNOME 3"
 msgstr "_Оғози кор бо GNOME 3"
 
-#~ msgid ""
-#~ "Try to use at least 8 different characters. Mix upper and lower case and "
-#~ "use a number or two."
-#~ msgstr ""
-#~ "Ақаллан 8 аломати мухталифро истифода баред. Ҳарфҳои хурду калон бо "
-#~ "рақамҳо аралаш кунед."
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:149
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:436
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:525
+#, c-format
+msgid "No suitable images were found."
+msgstr ""
 
-#~ msgid "Strength: %s"
-#~ msgstr "Тавоноӣ:  %s"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:182
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+msgid "Endless OS"
+msgstr ""
 
-#~ msgid "Input Sources"
-#~ msgstr "Манбаҳои вуруд"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:187
+msgid "Endless OS Installer"
+msgstr ""
 
-#~ msgid "Login settings are used by all users when logging into the system"
-#~ msgstr ""
-#~ "Танзимоти воридшавӣ бо ҳамаи корбарон барои ворид шудан ба система "
-#~ "истифода мешаванд"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:192
+msgid "Endless OS (non-free)"
+msgstr ""
 
-#~ msgid "Add an Input Source"
-#~ msgstr "Илова кардани манбаи вуруд"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
+msgid "Endless OS (OEM)"
+msgstr ""
 
-#~ msgid "Select input sources"
-#~ msgstr "Интихоби манбаҳои вуруд"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:210
+msgid "Basic"
+msgstr ""
 
-#~ msgid "_Back"
-#~ msgstr "_Қаблӣ"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:227
+msgid "Full"
+msgstr ""
 
-#~ msgid "Remove Input Source"
-#~ msgstr "Тоза кардани манбаи вуруд"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:563
+msgid "Reformat with Endless OS"
+msgstr ""
 
-#~ msgid "Move Input Source Up"
-#~ msgstr "Интиқол додани манбаи вуруд ба боло"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
+msgid ""
+"Is this the Endless OS version you'd like to use? If not, download another."
+msgstr ""
 
-#~ msgid "Input Source Settings"
-#~ msgstr "Танзимоти манбаи вуруд"
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
+msgid "Use existing version:"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
+#, no-c-format
+msgid ""
+"The location you have chosen is too small - you need more space to reformat "
+"with %s (%.02f GB)"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
+msgid "Finish"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
+msgid "Select Disk"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
+msgid "Select the disk you'd like to reformat with Endless OS"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
+msgid "Select Disk:"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
+msgid "I agree to erasing <b>all of my files and apps</b>"
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
+msgid ""
+"It looks like you have multiple partitions on this disk (for example drive "
+"C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
+" the selected disk. Please click here to confirm."
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
+msgid "No suitable disks found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
+msgid "Reformatting Finished"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
+msgid ""
+"Success! Power off your computer and then remove your USB device. When you "
+"restart, Endless OS will be ready for you to set up and enjoy!"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+msgid "Oops, something is wrong with your Endless OS file."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+msgid ""
+"Please contact support@endlessm.com or join our Google Group to "
+"troubleshoot."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:91
+#: ../gnome-image-installer/pages/install/gis-install-page.c:111
+#: ../gnome-image-installer/pages/install/gis-install-page.c:152
+#: ../gnome-image-installer/pages/install/gis-install-page.c:329
+#: ../gnome-image-installer/pages/install/gis-install-page.c:356
+#: ../gnome-image-installer/util/gduxzdecompressor.c:136
+#, c-format
+msgid "Internal error"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:449
+#: ../gnome-image-installer/pages/install/gis-install-page.c:593
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
+#, no-c-format
+msgid "Step %d of %d"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:488
+#, c-format
+msgid "Image verification error."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:560
+#, c-format
+msgid "The Endless OS signature file \"%s\" does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:630
+msgid "Reformatting"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+msgid ""
+"Fast, easy to use and powerful – with or without internet.\n"
+"\n"
+"Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
+msgstr ""
+
+#: ../gnome-image-installer/util/gduxzdecompressor.c:122
+msgid "Invalid compressed data"
+msgstr ""
+
+#: ../gnome-image-installer/util/gduxzdecompressor.c:129
+msgid "Not enough memory"
+msgstr ""
+
+#: ../gnome-image-installer/util/gduxzdecompressor.c:151
+msgid "Need more input"
+msgstr ""
+
+#: ../eos-installer-data/eos-installer.desktop.in.in.h:1
+msgid "Reformat"
+msgstr ""

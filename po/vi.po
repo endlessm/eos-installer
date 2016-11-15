@@ -4,11 +4,12 @@
 # 
 # Translators:
 # Roddy Shuler <roddy@endlessm.com>, 2016
+# Trần Ngọc Quân <vnwildman@gmail.com>, 2014-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-18 01:40+0000\n"
+"POT-Creation-Date: 2016-11-08 02:44+0000\n"
 "PO-Revision-Date: 2016-10-19 07:45+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-installer/language/vi/)\n"
