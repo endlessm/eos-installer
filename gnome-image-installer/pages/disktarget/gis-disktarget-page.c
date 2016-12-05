@@ -284,42 +284,41 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
     {
       gchar *targetname, *targetsize;
       UDisksObject *object = UDISKS_OBJECT(l->data);
+      const gchar *object_path;
       UDisksDrive *drive = udisks_object_peek_drive(object);
       UDisksBlock *block;
       gboolean has_data_partitions;
-
       if (drive == NULL)
         continue;
 
-      if (drive == root)
-        {
-          g_print ("skipping %s: it is the root device\n",
-                   g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
-          continue;
+      object_path = g_dbus_object_get_object_path (G_DBUS_OBJECT (object));
+      g_print ("considering drive %s\n", object_path);
+
+#define skip_if(cond, reason, ...) \
+      if (cond) \
+        { \
+          g_print ("skipping %s: " reason "\n", object_path, ##__VA_ARGS__); \
+          continue; \
         }
+
+      skip_if (drive == root, "it is the root device");
 
       if (gis_store_is_unattended() && umodel != NULL)
         {
-          if (!g_str_equal (umodel, udisks_drive_get_model (drive)))
-            continue;
+          const gchar *model = udisks_drive_get_model (drive);
+          skip_if (!g_str_equal (umodel, model),
+                   "its model '%s' does not match '%s'", model, umodel);
         }
 
-      if (udisks_drive_get_optical(drive))
-        continue;
-
-      if (udisks_drive_get_ejectable(drive))
-        continue;
+      skip_if (udisks_drive_get_optical (drive), "optical");
+      skip_if (udisks_drive_get_ejectable (drive), "ejectable");
 
       block = udisks_client_get_block_for_drive(client, drive, TRUE);
-      if (block == NULL)
-        continue;
+      skip_if (block == NULL, "no corresponding block object");
 
-      if (0 == g_strcmp0 (udisks_block_get_drive (block), image_drive))
-        {
-          g_print ("skipping %s: it hosts the image partition\n",
-                   g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
-          continue;
-        }
+      skip_if (0 == g_strcmp0 (udisks_block_get_drive (block), image_drive),
+               "it hosts the image partition");
+#undef skip_if
 
       if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
         {
