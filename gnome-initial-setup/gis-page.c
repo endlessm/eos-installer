@@ -386,3 +386,21 @@ gis_page_shown (GisPage *page)
   if (GIS_PAGE_GET_CLASS (page)->shown)
     return GIS_PAGE_GET_CLASS (page)->shown (page);
 }
+
+gboolean
+gis_page_get_hide_forward_button (GisPage *page)
+{
+  return GIS_PAGE_CLASS (G_OBJECT_GET_CLASS (page))->hide_forward_button;
+}
+
+gboolean
+gis_page_get_hide_backward_button (GisPage *page)
+{
+  return GIS_PAGE_CLASS (G_OBJECT_GET_CLASS (page))->hide_backward_button;
+}
+
+gboolean
+gis_page_get_hide_window_controls (GisPage *page)
+{
+  return GIS_PAGE_CLASS (G_OBJECT_GET_CLASS (page))->hide_window_controls;
+}
