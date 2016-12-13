@@ -57,6 +57,9 @@ struct _GisInstallPagePrivate {
   guint gpg_watch;
   UDisksClient *client;
   guint pulse_id;
+
+  GtkWidget *warning_dialog;
+  gboolean   writing;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
@@ -69,6 +72,58 @@ G_DEFINE_QUARK(install-error, gis_install_error);
 #define WID(name) OBJ(GtkWidget*,name)
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
+
+static gboolean
+delete_event_cb (GtkWidget      *toplevel,
+                 GdkEvent       *event,
+                 GisInstallPage *self)
+{
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (self);
+  GtkWidget *button;
+  gboolean should_propagate;
+  gint response_id;
+
+  /* If we're not writing, it's still safe to quit */
+  if (!priv->writing)
+    return GDK_EVENT_PROPAGATE;
+
+  priv->warning_dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+                                                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_WARNING,
+                                                 GTK_BUTTONS_NONE,
+                                                 _("Stop reformatting the disk?"));
+
+  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (priv->warning_dialog),
+                                            _("The reformatting process has already begun. Cancelling "
+                                              "now will leave this system unbootable."));
+
+  /* Stop Reformatting */
+  button = gtk_button_new_with_label (_("Stop Reformatting"));
+  gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
+  gtk_dialog_add_action_widget (GTK_DIALOG (priv->warning_dialog), button, GTK_RESPONSE_OK);
+
+  gtk_widget_show (button);
+
+  /* Continue Reformatting */
+  button = gtk_button_new_with_label (_("Continue Reformatting"));
+  gtk_dialog_add_action_widget (GTK_DIALOG (priv->warning_dialog), button, GTK_RESPONSE_CANCEL);
+
+  gtk_widget_set_can_default (button, TRUE);
+  gtk_widget_show (button);
+
+  /* Let's avoid accidents */
+  gtk_dialog_set_default_response (GTK_DIALOG (priv->warning_dialog), GTK_RESPONSE_CANCEL);
+  gtk_widget_grab_focus (button);
+
+  /* Run the dialog */
+  response_id = gtk_dialog_run (GTK_DIALOG (priv->warning_dialog));
+  gtk_widget_destroy (priv->warning_dialog);
+  priv->warning_dialog = NULL;
+
+  should_propagate = response_id == GTK_RESPONSE_OK ? GDK_EVENT_PROPAGATE : GDK_EVENT_STOP;
+
+  return should_propagate;
+}
 
 static gboolean
 gis_install_page_prepare_read (GisPage *page, GError **error)
@@ -275,6 +330,21 @@ gis_install_page_teardown (GisPage *page)
 
   gtk_progress_bar_set_fraction (progress, 1.0);
 
+  /*
+   * If there's a message dialog asking whether the user wants to quit, and
+   * we finished writing, hide and ignore that dialog.
+   */
+  if (priv->warning_dialog)
+    {
+      gtk_dialog_response (GTK_DIALOG (priv->warning_dialog), GTK_RESPONSE_CANCEL);
+      gtk_widget_destroy (priv->warning_dialog);
+      priv->warning_dialog = NULL;
+    }
+
+  g_signal_handlers_disconnect_by_func (gtk_widget_get_toplevel (GTK_WIDGET (page)),
+                                        delete_event_cb,
+                                        page);
+
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 
   return FALSE;
@@ -380,6 +450,8 @@ gis_install_page_copy (GisPage *page)
 
   g_thread_yield();
 
+  priv->writing = TRUE;
+
   do
     {
       r = g_input_stream_read (priv->decompressed,
@@ -432,6 +504,8 @@ gis_install_page_copy (GisPage *page)
           g_error_free (error);
         }
     }
+
+  priv->writing = FALSE;
 
 out:
   g_idle_add ((GSourceFunc)gis_install_page_teardown, page);
@@ -598,11 +672,23 @@ gis_install_page_shown (GisPage *page)
 
   priv->client = udisks_client_new_sync (NULL, NULL);
 
-  if (gis_store_get_error() == NULL)
-    g_idle_add ((GSourceFunc)gis_install_page_verify, page);
-  else
-    gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+  if (gis_store_get_error () != NULL)
+    {
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+      return;
+    }
 
+  g_idle_add ((GSourceFunc)gis_install_page_verify, page);
+
+  /*
+   * When the installer is in the middle of the copy operation, we have
+   * to show a dialog asking the user if she ~really~ wants to quit the
+   * application in the middle of a potentially dangerous operation.
+   */
+  g_signal_connect (gtk_widget_get_toplevel (GTK_WIDGET (page)),
+                    "delete-event",
+                    G_CALLBACK (delete_event_cb),
+                    page);
 }
 
 static void
