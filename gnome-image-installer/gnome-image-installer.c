@@ -270,7 +270,7 @@ check_for_live_boot ()
     {
       g_printerr ("unable to read /proc/cmdline: %s\n", error->message);
       g_error_free (error);
-      return;
+      return FALSE;
     }
 
   live_boot = g_regex_match_simple ("\\bendless\\.live_boot\\b", cmdline, 0, 0);
