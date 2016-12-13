@@ -56,6 +56,9 @@ struct _GisPage
 struct _GisPageClass
 {
   GtkBinClass parent_class;
+  gboolean hide_forward_button;
+  gboolean hide_backward_button;
+  gboolean hide_window_controls;
   char *page_id;
 
   GtkBuilder * (*get_builder) (GisPage *page);
@@ -84,6 +87,9 @@ void         gis_page_apply_complete (GisPage *page, gboolean valid);
 gboolean     gis_page_get_applying (GisPage *page);
 void         gis_page_save_data (GisPage *page);
 void         gis_page_shown (GisPage *page);
+gboolean     gis_page_get_hide_forward_button (GisPage *page);
+gboolean     gis_page_get_hide_backward_button (GisPage *page);
+gboolean     gis_page_get_hide_window_controls (GisPage *page);
 
 G_END_DECLS
 

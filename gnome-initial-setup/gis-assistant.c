@@ -236,6 +236,9 @@ update_navigation_buttons (GisAssistant *assistant)
 
   is_last_page = (page_priv->link->next == NULL);
 
+  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->titlebar),
+                                        !gis_page_get_hide_window_controls (page));
+
   if (is_last_page)
     {
       gtk_widget_hide (priv->back);
@@ -245,11 +248,10 @@ update_navigation_buttons (GisAssistant *assistant)
     {
       gboolean can_go_forward, is_first_page;
 
-      gtk_widget_show (priv->back);
-      gtk_widget_show (priv->forward);
-
       is_first_page = (page_priv->link->prev == NULL);
-      gtk_widget_set_visible (priv->back, !is_first_page);
+
+      gtk_widget_set_visible (priv->back, !gis_page_get_hide_backward_button (page) && !is_first_page);
+      gtk_widget_set_visible (priv->forward, !gis_page_get_hide_forward_button (page));
 
       can_go_forward = gis_page_get_complete (page);
       gtk_widget_set_sensitive (priv->forward, can_go_forward);
