@@ -637,6 +637,9 @@ gis_install_page_class_init (GisInstallPageClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   page_class->page_id = PAGE_ID;
+  page_class->hide_forward_button = TRUE;
+  page_class->hide_backward_button = TRUE;
+  page_class->hide_window_controls = TRUE;
   page_class->locale_changed = gis_install_page_locale_changed;
   page_class->shown = gis_install_page_shown;
   object_class->constructed = gis_install_page_constructed;
