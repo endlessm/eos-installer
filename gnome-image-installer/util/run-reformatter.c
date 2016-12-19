@@ -9,8 +9,6 @@ static int retval = 0;
 
 static gboolean _quit (gpointer data)
 {
-  g_warning (__FUNCTION__);
-
   g_main_loop_quit(loop);
 
   return FALSE;
@@ -20,8 +18,6 @@ static gboolean _cancel (gpointer data)
 {
   EosReformatter *reformatter = EOS_REFORMATTER(data);
 
-  g_warning (__FUNCTION__);
-
   eos_reformatter_cancel (reformatter);
 
   return FALSE;
@@ -30,8 +26,6 @@ static gboolean _cancel (gpointer data)
 static void _reformat_finished (GObject *object, gpointer data)
 {
   EosReformatter *reformatter = EOS_REFORMATTER(data);
-
-  g_warning (__FUNCTION__);
 
   if (eos_reformatter_get_error (reformatter) == NULL)
     {
@@ -79,7 +73,6 @@ static gboolean _start_reformat (gpointer data)
 {
   EosReformatter *reformatter = EOS_REFORMATTER(data);
 
-  g_warning (__FUNCTION__);
   start_usec = g_get_real_time ();
   if (!eos_reformatter_reformat (reformatter))
     {
@@ -133,8 +126,6 @@ int main(int argc, char** argv)
 
   g_object_unref (reformatter);
   g_main_loop_unref (loop);
-
-  g_warning ("Exiting");
 
   return retval;
 }

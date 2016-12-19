@@ -600,6 +600,8 @@ eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *inq, GAsyn
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_PARTIAL_INPUT))
     {
       res = G_CONVERTER_CONVERTED;
+      g_error_free (error);
+      error = NULL;
     }
 
   if (error != NULL)
@@ -727,7 +729,7 @@ eos_reformatter_gpg_watch (GPid pid, gint status, gpointer data)
     }
   else
     {
-      g_warning ("Verification ok");
+      g_debug ("Verification ok");
     }
 
   g_spawn_close_pid (reformatter->gpg);
@@ -898,6 +900,7 @@ eos_reformatter_reformat (EosReformatter *reformatter)
   reformatter->read_fd = eos_reformatter_prepare_read (reformatter);
   if (reformatter->read_fd <= 0)
     {
+      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
       return FALSE;
     }
 
@@ -909,6 +912,7 @@ eos_reformatter_reformat (EosReformatter *reformatter)
   reformatter->write_fd = eos_reformatter_prepare_write (reformatter);
   if (reformatter->write_fd <= 0)
     {
+      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
       return FALSE;
     }
 
@@ -917,7 +921,7 @@ eos_reformatter_reformat (EosReformatter *reformatter)
                     G_CALLBACK (eos_reformatter_update_progress),
                     reformatter);
 
-  g_warning ("%s: using %d threads", __FUNCTION__, EOS_THREADS);
+  g_debug ("%s: using %d threads", __FUNCTION__, EOS_THREADS);
 
 #if EOS_THREADS == 1
   reformatter->write_thread = g_thread_new ("read-write", do_reformat, reformatter);
