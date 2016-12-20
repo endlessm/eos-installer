@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-15 02:46+0000\n"
+"POT-Creation-Date: 2016-12-20 02:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,15 +22,15 @@ msgstr ""
 msgid "Initial Setup"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:300
+#: ../gnome-initial-setup/gis-assistant.c:302
 msgid "_Next"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:439
+#: ../gnome-initial-setup/gis-assistant.c:441
 msgid "_Previous"
 msgstr ""
 
-#: ../gnome-initial-setup/gis-assistant.c:440
+#: ../gnome-initial-setup/gis-assistant.c:442
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr ""
@@ -669,11 +669,11 @@ msgid ""
 "with %s (%.02f GB)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:362
 msgid "Finish"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:429
 msgid "Select Disk"
 msgstr ""
 
@@ -719,34 +719,54 @@ msgid ""
 "Please contact support@endlessm.com or join our Google Group to troubleshoot."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:91
-#: ../gnome-image-installer/pages/install/gis-install-page.c:111
-#: ../gnome-image-installer/pages/install/gis-install-page.c:152
-#: ../gnome-image-installer/pages/install/gis-install-page.c:329
-#: ../gnome-image-installer/pages/install/gis-install-page.c:356
+#: ../gnome-image-installer/pages/install/gis-install-page.c:94
+msgid "Stop reformatting the disk?"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:97
+msgid ""
+"The reformatting process has already begun. Cancelling now will leave this "
+"system unbootable."
+msgstr ""
+
+#. Stop Reformatting
+#: ../gnome-image-installer/pages/install/gis-install-page.c:101
+msgid "Stop Reformatting"
+msgstr ""
+
+#. Continue Reformatting
+#: ../gnome-image-installer/pages/install/gis-install-page.c:108
+msgid "Continue Reformatting"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:146
+#: ../gnome-image-installer/pages/install/gis-install-page.c:166
+#: ../gnome-image-installer/pages/install/gis-install-page.c:207
+#: ../gnome-image-installer/pages/install/gis-install-page.c:399
+#: ../gnome-image-installer/pages/install/gis-install-page.c:426
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:449
-#: ../gnome-image-installer/pages/install/gis-install-page.c:593
+#: ../gnome-image-installer/pages/install/gis-install-page.c:523
+#: ../gnome-image-installer/pages/install/gis-install-page.c:667
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:488
+#: ../gnome-image-installer/pages/install/gis-install-page.c:562
 #, c-format
 msgid "Image verification error."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:560
+#: ../gnome-image-installer/pages/install/gis-install-page.c:634
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:630
+#: ../gnome-image-installer/pages/install/gis-install-page.c:716
 msgid "Reformatting"
 msgstr ""
 

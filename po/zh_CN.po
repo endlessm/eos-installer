@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 02:44+0000\n"
+"POT-Creation-Date: 2016-12-13 02:50+0000\n"
 "PO-Revision-Date: 2016-10-19 12:29+0000\n"
 "Last-Translator: CN C2 <e2f48d4sf5ds@outlook.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
@@ -679,11 +679,11 @@ msgid ""
 "with %s (%.02f GB)"
 msgstr "您选择的位置空间不足 - 需要更多空间才能使用%s重新格式化(%.02f GB)"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:362
 msgid "Finish"
 msgstr "完成"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:429
 msgid "Select Disk"
 msgstr "选择磁盘"
 

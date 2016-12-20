@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-08 02:44+0000\n"
+"POT-Creation-Date: 2016-12-13 02:50+0000\n"
 "PO-Revision-Date: 2016-11-15 02:29+0000\n"
 "Last-Translator: Vicki Niu <vicki@endlessm.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-installer/language/hi/)\n"
@@ -673,11 +673,11 @@ msgid ""
 "with %s (%.02f GB)"
 msgstr "आपके द्वारा चुना गया स्थान बहुत छोटा है - आपको %s (%.02f GB) से पुनः फ़ॉर्मेट करने के लिए अधिक स्थान की आवश्यकता है"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:363
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:362
 msgid "Finish"
 msgstr "समाप्त करें"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:430
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:429
 msgid "Select Disk"
 msgstr "डिस्क का चयन करें"
 
