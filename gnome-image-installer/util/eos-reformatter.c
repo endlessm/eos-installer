@@ -166,16 +166,6 @@ eos_reformatter_dispose (GObject *object)
   while (buf != NULL);
   g_async_queue_unref (reformatter->write_queue);
 
-  if (reformatter->pool != NULL)
-    g_free (reformatter->pool);
-
-  if (reformatter->image != NULL)
-    g_free (reformatter->image);
-  if (reformatter->signature != NULL)
-    g_free (reformatter->signature);
-  if (reformatter->device != NULL)
-    g_free (reformatter->device);
-
   if (reformatter->decompressor != NULL)
     g_object_unref (reformatter->decompressor);
 
@@ -188,6 +178,18 @@ eos_reformatter_dispose (GObject *object)
 static void
 eos_reformatter_finalize (GObject *object)
 {
+  EosReformatter *reformatter = EOS_REFORMATTER (object);
+
+  if (reformatter->pool != NULL)
+    g_free (reformatter->pool);
+
+  if (reformatter->image != NULL)
+    g_free (reformatter->image);
+  if (reformatter->signature != NULL)
+    g_free (reformatter->signature);
+  if (reformatter->device != NULL)
+    g_free (reformatter->device);
+
   G_OBJECT_CLASS (eos_reformatter_parent_class)->finalize (object);
 }
 
