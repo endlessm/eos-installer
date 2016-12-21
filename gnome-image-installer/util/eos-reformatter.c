@@ -42,6 +42,7 @@ struct _EosReformatter
   guint64 read_offset;
   guint64 write_completed_bytes;
   guint64 write_total_bytes;
+  guint64 write_unsynced_bytes;
 
   GThread *read_thread;
   GThread *decomp_thread;
@@ -98,6 +99,7 @@ G_DEFINE_QUARK(install-error, eos_reformatter_error);
 
 #define EOS_BUFFERS 16
 #define EOS_BUFFER_SIZE (1 * 1024 * 1024)
+#define EOS_SYNC_THRESHOLD (50 * EOS_BUFFER_SIZE)
 
 static void
 eos_reformatter_init (EosReformatter *reformatter)
@@ -725,6 +727,7 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQu
     {
       g_mutex_lock (&reformatter->thread_mutex);
       reformatter->write_completed_bytes += wb;
+      reformatter->write_unsynced_bytes += wb;
 
       /* Overwriting the estimate is an error */
       if (reformatter->write_completed_bytes > reformatter->write_total_bytes)
@@ -735,10 +738,17 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQu
           ret = FALSE;
         }
 
-      if (reformatter->sample_update == 0)
-        reformatter->sample_update = g_idle_add (eos_reformatter_add_sample, reformatter);
+      if (reformatter->sample_update == 0 && reformatter->write_unsynced_bytes > EOS_SYNC_THRESHOLD)
+          reformatter->sample_update = g_idle_add (eos_reformatter_add_sample, reformatter);
 
       g_mutex_unlock (&reformatter->thread_mutex);
+
+      if (reformatter->write_unsynced_bytes > EOS_SYNC_THRESHOLD)
+        {
+          syncfs (reformatter->write_fd);
+          reformatter->write_unsynced_bytes = 0;
+        }
+
     }
 
   g_async_queue_push (freeq, buf);
