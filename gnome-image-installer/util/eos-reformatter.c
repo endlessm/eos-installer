@@ -27,6 +27,7 @@ struct _EosReformatter
 
   gdouble progress;
   gboolean finished;
+  guint sample_update;
 
   guchar *pool;
   int total_buffers;
@@ -49,7 +50,9 @@ struct _EosReformatter
   GduEstimator *estimator;
   GConverter *decompressor;
 
+  GMutex thread_mutex;
   GError *error;
+  GCancellable *cancellable;
 };
 
 typedef struct _EosReformatterClass EosReformatterClass;
@@ -92,7 +95,6 @@ G_DEFINE_TYPE (EosReformatter, eos_reformatter, G_TYPE_OBJECT)
 G_DEFINE_QUARK(install-error, eos_reformatter_error);
 #define EOS_REFORMATTER_ERROR eos_reformatter_error_quark()
 
-#define EOS_THREADS 2
 #define EOS_BUFFERS 16
 #define EOS_BUFFER_SIZE (1 * 1024 * 1024)
 
@@ -114,6 +116,11 @@ eos_reformatter_dispose (GObject *object)
   EosReformatter *reformatter = EOS_REFORMATTER (object);
   EosAlignedBuffer *buf = NULL;
 
+  /* Note: never treat cancelling as an error in the threads,
+   * just as an trigger to exit
+   */
+  g_cancellable_cancel (reformatter->cancellable);
+
   if (reformatter->gpg > 0)
     {
       close (reformatter->gpg_in);
@@ -125,11 +132,31 @@ eos_reformatter_dispose (GObject *object)
       g_thread_join (reformatter->read_thread);
       reformatter->read_thread = NULL;
     }
+
+  if (g_async_queue_length (reformatter->decomp_queue) < 0)
+    {
+      buf = g_async_queue_try_pop (reformatter->free_queue);
+      if (buf != NULL)
+        {
+          g_async_queue_push (reformatter->decomp_queue, buf);
+        }
+    }
+
   if (reformatter->decomp_thread != NULL)
     {
       g_thread_join (reformatter->decomp_thread);
       reformatter->decomp_thread = NULL;
     }
+
+  if (g_async_queue_length (reformatter->write_queue) < 0)
+    {
+      buf = g_async_queue_try_pop (reformatter->free_queue);
+      if (buf != NULL)
+        {
+          g_async_queue_push (reformatter->write_queue, buf);
+        }
+    }
+
   if (reformatter->write_thread != NULL)
     {
       g_thread_join (reformatter->write_thread);
@@ -138,6 +165,12 @@ eos_reformatter_dispose (GObject *object)
 
   close (reformatter->read_fd);
   close (reformatter->write_fd);
+
+  if (reformatter->sample_update != 0)
+    {
+      g_source_remove (reformatter->sample_update);
+      reformatter->sample_update = 0;
+    }
 
   do
     {
@@ -171,6 +204,9 @@ eos_reformatter_dispose (GObject *object)
 
   if (reformatter->error != NULL)
       g_error_free (reformatter->error);
+
+  if (reformatter->cancellable != NULL)
+      g_object_unref (reformatter->cancellable);
 
   G_OBJECT_CLASS (eos_reformatter_parent_class)->dispose (object);
 }
@@ -344,30 +380,26 @@ eos_reformatter_maybe_finish (EosReformatter *reformatter)
   if (reformatter->finished)
     return;
 
-  if (reformatter->error == NULL && reformatter->gpg > 0)
-    return;
-
-  if (reformatter->error == NULL && reformatter->progress < 1.0)
+  /* If we are not cancelled and GPG or write is still unfinished, don't quit yet */
+  if (!g_cancellable_is_cancelled (reformatter->cancellable)
+   && (reformatter->gpg > 0 || reformatter->progress < 1.0))
     return;
 
   reformatter->finished = TRUE;
+
+  if (reformatter->sample_update != 0)
+    {
+      g_source_remove (reformatter->sample_update);
+      reformatter->sample_update = 0;
+    }
 
   g_signal_emit (reformatter, _signals[SIG_FINISHED], 0);
 }
 
 static EosAlignedBuffer *
-eos_reformatter_get_free_buffer (EosReformatter *reformatter, gboolean exhaust)
+eos_reformatter_get_free_buffer (EosReformatter *reformatter, GAsyncQueue *freeq)
 {
-  /* If the exhaust flag is not set, we only allow half of the buffers to be
-   * reserved. This is mainly to avoid reading queue to hog free buffers.
-   */
-  int half_buffers = reformatter->total_buffers / 2;
-  EosAlignedBuffer *buf = NULL;
-
-  if (exhaust || g_async_queue_length (reformatter->free_queue) < half_buffers)
-    {
-      buf = g_async_queue_try_pop (reformatter->free_queue);
-    }
+  EosAlignedBuffer *buf = g_async_queue_try_pop (freeq);
 
   /* A free buffer was available, return it */
   if (buf != NULL)
@@ -382,7 +414,6 @@ eos_reformatter_get_free_buffer (EosReformatter *reformatter, gboolean exhaust)
       reformatter->pool = g_new0(guchar, reformatter->total_buffers * (reformatter->buffer_size + reformatter->page_size));
     }
 
-  /* A bit awkwardly, exhaust doesn't apply when we create new buffers */
   if (reformatter->used_buffers < reformatter->total_buffers)
     {
       /* No free buffers, but we can create one */
@@ -400,17 +431,13 @@ eos_reformatter_get_free_buffer (EosReformatter *reformatter, gboolean exhaust)
       /* If we can't create a new buffer, we need to wait for one */
       EosAlignedBuffer *buf;
 
-      while (!exhaust && g_async_queue_length (reformatter->free_queue) < half_buffers);
-        {
-          g_thread_yield();
-        }
-
       do
         {
           g_thread_yield();
           buf = g_async_queue_try_pop (reformatter->free_queue);
         }
-      while (buf == NULL && reformatter->error == NULL);
+      while (buf == NULL && !g_cancellable_is_cancelled (reformatter->cancellable));
+
       buf->len = 0;
       return buf;
     }
@@ -421,10 +448,11 @@ eos_reformatter_get_free_buffer (EosReformatter *reformatter, gboolean exhaust)
 static gint
 eos_reformatter_prepare_read (EosReformatter *reformatter)
 {
-  GFileInfo *info;
-  GFile *file = g_file_new_for_path (reformatter->image);
+  g_autoptr(GFileInfo) info = NULL;
+  g_autoptr(GFile) file = NULL;
   GError *error = NULL;
 
+  file = g_file_new_for_path (reformatter->image);
   info = g_file_query_info (file,
                             G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
                             G_FILE_ATTRIBUTE_STANDARD_SIZE,
@@ -434,19 +462,12 @@ eos_reformatter_prepare_read (EosReformatter *reformatter)
 
   if (info == NULL)
     {
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      g_propagate_error(&reformatter->error, error);
       g_error_free (error);
     }
   else
     {
       const gchar *type = NULL;
-
-      /* If we weren't seeded with the target size, use the file size.
-       * This is of course wrong for compressed files */
-      if (reformatter->write_total_bytes == 0)
-        {
-          reformatter->write_total_bytes = g_file_info_get_size (info);
-        }
 
       type = g_file_info_get_content_type (info);
       if (g_str_has_suffix(type, "-xz-compressed"))
@@ -457,37 +478,33 @@ eos_reformatter_prepare_read (EosReformatter *reformatter)
         {
           reformatter->decompressor = G_CONVERTER (g_zlib_decompressor_new (G_ZLIB_COMPRESSOR_FORMAT_GZIP));
         }
+      else if (reformatter->write_total_bytes == 0)
+        {
+          reformatter->write_total_bytes = g_file_info_get_size (info);
+        }
+      if (reformatter->write_total_bytes == 0)
+        {
+          reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+          return -1;
+        }
   }
-
-  g_object_unref (file);
-
-  if (info != NULL)
-    g_object_unref (info);
 
   return open(reformatter->image, O_RDONLY);
 }
 
 static gboolean
-eos_reformatter_read (EosReformatter *reformatter, GAsyncQueue *outq)
+eos_reformatter_read (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQueue *outq)
 {
   gboolean ret = TRUE;
   guint64 len = 0;
-  EosAlignedBuffer *buf = eos_reformatter_get_free_buffer (reformatter, FALSE);
+  EosAlignedBuffer *buf = NULL;
 
-  if (reformatter->error != NULL)
+  if (g_cancellable_is_cancelled (reformatter->cancellable))
     {
-      /* Error is set so send EOS and abort */
-      if (buf != NULL)
-        {
-          g_async_queue_push (outq, buf);
-        }
-      else
-        {
-          buf = g_new0(EosAlignedBuffer, 1);
-          g_async_queue_push (outq, buf);
-        }
       return FALSE;
     }
+
+  buf = eos_reformatter_get_free_buffer (reformatter, freeq);
 
   if (reformatter->gpg_in > 0)
     {
@@ -518,7 +535,10 @@ eos_reformatter_read (EosReformatter *reformatter, GAsyncQueue *outq)
 
   if (len < 0 || buf->len < 0)
     {
+      g_mutex_lock (&reformatter->thread_mutex);
       reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      g_mutex_unlock (&reformatter->thread_mutex);
+      g_cancellable_cancel (reformatter->cancellable);
       ret = FALSE;
       buf->len = 0;
       g_async_queue_push (outq, buf);
@@ -543,7 +563,7 @@ eos_reformatter_read (EosReformatter *reformatter, GAsyncQueue *outq)
 }
 
 static gboolean
-eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *inq, GAsyncQueue *outq)
+eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQueue *inq, GAsyncQueue *outq)
 {
   GConverterResult res;
   GConverterFlags flags = G_CONVERTER_NO_FLAGS;
@@ -552,16 +572,13 @@ eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *inq, GAsyn
   EosAlignedBuffer *buf;
   EosAlignedBuffer *outbuf;
 
-  if (reformatter->error != NULL)
+  if (g_cancellable_is_cancelled (reformatter->cancellable))
     {
-      /* Error is set so send EOS and abort */
-      buf = g_new0(EosAlignedBuffer, 1);
-      g_async_queue_push (outq, buf);
       return FALSE;
     }
 
   buf = g_async_queue_pop (inq);
-  outbuf = eos_reformatter_get_free_buffer (reformatter, TRUE);
+  outbuf = eos_reformatter_get_free_buffer (reformatter, freeq);
 
   if (buf->len == 0)
     flags |= G_CONVERTER_INPUT_AT_END;
@@ -583,8 +600,8 @@ eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *inq, GAsyn
         {
           g_async_queue_push (outq, outbuf);
           /* Note that this competes with read buffers if in different threads */
-          outbuf = eos_reformatter_get_free_buffer (reformatter, TRUE);
-          if (reformatter->error != NULL)
+          outbuf = eos_reformatter_get_free_buffer (reformatter, freeq);
+          if (g_cancellable_is_cancelled (reformatter->cancellable))
             {
               res = G_CONVERTER_ERROR;
             }
@@ -595,7 +612,7 @@ eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *inq, GAsyn
   /* Return the outbuf to free queue if we didn't use it */
   if (outbuf->len == 0)
     {
-      g_async_queue_push (reformatter->free_queue, outbuf);
+      g_async_queue_push (freeq, outbuf);
     }
 
   /* This is fine, we just need to cycle to get more input buffers */
@@ -605,11 +622,12 @@ eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *inq, GAsyn
       g_error_free (error);
       error = NULL;
     }
-
-  if (error != NULL)
+  else if (error != NULL)
     {
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
-      g_error_free (error);
+      g_mutex_lock (&reformatter->thread_mutex);
+      reformatter->error = error;
+      g_mutex_unlock (&reformatter->thread_mutex);
+      g_cancellable_cancel (reformatter->cancellable);
     }
 
   if (res == G_CONVERTER_FINISHED)
@@ -620,7 +638,7 @@ eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *inq, GAsyn
     }
   else
     {
-      g_async_queue_push (reformatter->free_queue, buf);
+      g_async_queue_push (freeq, buf);
     }
 
   return (res == G_CONVERTER_CONVERTED);
@@ -638,20 +656,22 @@ eos_reformatter_add_sample (gpointer data)
   EosReformatter *reformatter = EOS_REFORMATTER(data);
 
   gdu_estimator_add_sample (reformatter->estimator, reformatter->write_completed_bytes);
+  g_mutex_lock (&reformatter->thread_mutex);
+  reformatter->sample_update = 0;
+  g_mutex_unlock (&reformatter->thread_mutex);
 
   return FALSE;
 }
 
 static gboolean
-eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *inq)
+eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQueue *inq)
 {
   gboolean ret = TRUE;
   EosAlignedBuffer *buf;
   gsize wb = 0;
 
-  if (reformatter->error != NULL)
+  if (g_cancellable_is_cancelled (reformatter->cancellable))
     {
-      /* Error is set so abort */
       return FALSE;
     }
 
@@ -661,10 +681,13 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *inq)
   if (buf->len == 0)
     {
       syncfs (reformatter->write_fd);
-      g_async_queue_push (reformatter->free_queue, buf);
+      g_async_queue_push (freeq, buf);
 
-      /* Always add sample in the end so no risk of missing an update */
-      g_idle_add (eos_reformatter_add_sample, reformatter);
+      /* Always add sample in the end so no risk of missing the update */
+      g_mutex_lock (&reformatter->thread_mutex);
+      if (reformatter->sample_update == 0)
+        reformatter->sample_update = g_idle_add (eos_reformatter_add_sample, reformatter);
+      g_mutex_unlock (&reformatter->thread_mutex);
 
       return FALSE;
     }
@@ -673,30 +696,32 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *inq)
 
   if (wb < 0)
     {
+      g_mutex_lock (&reformatter->thread_mutex);
       reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      g_mutex_unlock (&reformatter->thread_mutex);
       ret = FALSE;
     }
   else
     {
-      /* We don't lock here to not create a dependency between writing and
-       * main thread. This is the only place we change write_completed_bytes
-       * and since it's not critical if we miss updates, it should be fine
-       * to avoid the lock.
-       */
+      g_mutex_lock (&reformatter->thread_mutex);
       reformatter->write_completed_bytes += wb;
 
       /* Overwriting the estimate is an error */
       if (reformatter->write_completed_bytes > reformatter->write_total_bytes)
         {
           reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
-          ret = FALSE;
           reformatter->write_completed_bytes = reformatter->write_total_bytes;
+          g_cancellable_cancel (reformatter->cancellable);
+          ret = FALSE;
         }
 
-      g_idle_add (eos_reformatter_add_sample, reformatter);
+      if (reformatter->sample_update == 0)
+        reformatter->sample_update = g_idle_add (eos_reformatter_add_sample, reformatter);
+
+      g_mutex_unlock (&reformatter->thread_mutex);
     }
 
-  g_async_queue_push (reformatter->free_queue, buf);
+  g_async_queue_push (freeq, buf);
   return ret;
 }
 
@@ -706,7 +731,10 @@ eos_reformatter_update_progress (GObject *object, GParamSpec *pspec, gpointer da
   EosReformatter *reformatter = EOS_REFORMATTER(data);
   guint64 completed = gdu_estimator_get_completed_bytes (reformatter->estimator);
   guint64 target = gdu_estimator_get_target_bytes (reformatter->estimator);
-  gdouble progress = (gdouble)completed / (gdouble)target;
+  gdouble progress = 0.0;
+
+  if (target > 0.0)
+    progress = (gdouble)completed / (gdouble)target;
 
   if (progress > 1.0)
     progress = 1.0;
@@ -726,7 +754,10 @@ eos_reformatter_gpg_watch (GPid pid, gint status, gpointer data)
 
   if (!g_spawn_check_exit_status (status, NULL))
     {
+      g_mutex_lock (&reformatter->thread_mutex);
       reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Image verification error."));
+      g_mutex_unlock (&reformatter->thread_mutex);
+      g_cancellable_cancel (reformatter->cancellable);
       g_warning ("Verification failed!");
     }
   else
@@ -757,7 +788,10 @@ eos_reformatter_prepare_gpg_verify (EosReformatter *reformatter)
                                  NULL, NULL, &reformatter->gpg,
                                  &reformatter->gpg_in, NULL, NULL, &error))
     {
+      g_mutex_lock (&reformatter->thread_mutex);
       reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Image verification error."));
+      g_mutex_unlock (&reformatter->thread_mutex);
+      g_cancellable_cancel (reformatter->cancellable);
       return FALSE;
     }
   else
@@ -768,27 +802,15 @@ eos_reformatter_prepare_gpg_verify (EosReformatter *reformatter)
   return TRUE;
 }
 
-/* Thread runners */
-
-static gpointer do_reformat (gpointer data)
+void
+eos_reformatter_cancelled (GCancellable *cancellable, gpointer data)
 {
   EosReformatter *reformatter = EOS_REFORMATTER (data);
-  gboolean read_ok = TRUE;
-  gboolean decomp_ok = TRUE;
-  gboolean write_ok = TRUE;
 
-  do
-    {
-      if (read_ok)
-        read_ok = eos_reformatter_read (reformatter, reformatter->write_queue);
-      if (reformatter->decompressor != NULL && decomp_ok)
-        decomp_ok = eos_reformatter_decompress (reformatter, reformatter->decomp_queue, reformatter->write_queue);
-      write_ok = eos_reformatter_write (reformatter, reformatter->write_queue);
-    }
-  while (read_ok || write_ok || decomp_ok);
-
-  return NULL;
+  eos_reformatter_maybe_finish (reformatter);
 }
+
+/* Thread runners */
 
 static gpointer do_read (gpointer data)
 {
@@ -799,26 +821,12 @@ static gpointer do_read (gpointer data)
     {
       if (reformatter->decomp_thread == NULL)
         {
-          ok = eos_reformatter_read (reformatter, reformatter->write_queue);
+          ok = eos_reformatter_read (reformatter, reformatter->free_queue, reformatter->write_queue);
         }
       else
         {
-          ok = eos_reformatter_read (reformatter, reformatter->decomp_queue);
+          ok = eos_reformatter_read (reformatter, reformatter->free_queue, reformatter->decomp_queue);
         }
-    }
-  while (ok);
-
-  return NULL;
-}
-
-static gpointer do_decompress (gpointer data)
-{
-  EosReformatter *reformatter = EOS_REFORMATTER (data);
-  gboolean ok = TRUE;
-
-  do
-    {
-      ok = eos_reformatter_decompress (reformatter, reformatter->decomp_queue, reformatter->write_queue);
     }
   while (ok);
 
@@ -833,10 +841,8 @@ static gpointer do_read_and_decompress (gpointer data)
 
   do
     {
-      if (read_ok)
-        read_ok = eos_reformatter_read (reformatter, reformatter->decomp_queue);
-
-      decomp_ok = eos_reformatter_decompress (reformatter, reformatter->decomp_queue, reformatter->write_queue);
+      read_ok = eos_reformatter_read (reformatter, reformatter->free_queue, reformatter->decomp_queue);
+      decomp_ok = eos_reformatter_decompress (reformatter, reformatter->free_queue, reformatter->decomp_queue, reformatter->write_queue);
     } while (read_ok || decomp_ok);
 
   return NULL;
@@ -849,7 +855,7 @@ static gpointer do_write (gpointer data)
 
   do
     {
-      ok = eos_reformatter_write (reformatter, reformatter->write_queue);
+      ok = eos_reformatter_write (reformatter, reformatter->free_queue, reformatter->write_queue);
     } while (ok);
 
   return NULL;
@@ -891,7 +897,7 @@ eos_reformatter_get_bytes_per_sec (EosReformatter *reformatter)
 }
 
 gboolean
-eos_reformatter_reformat (EosReformatter *reformatter)
+eos_reformatter_reformat (EosReformatter *reformatter, GCancellable *cancellable)
 {
   g_return_val_if_fail (reformatter != NULL, FALSE);
   g_return_val_if_fail (reformatter->image != NULL, FALSE);
@@ -903,11 +909,13 @@ eos_reformatter_reformat (EosReformatter *reformatter)
   if (reformatter->read_fd <= 0)
     {
       reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      g_cancellable_cancel(cancellable);
       return FALSE;
     }
 
   if (reformatter->signature != NULL && !eos_reformatter_prepare_gpg_verify (reformatter))
     {
+      g_cancellable_cancel(cancellable);
       return FALSE;
     }
 
@@ -915,6 +923,7 @@ eos_reformatter_reformat (EosReformatter *reformatter)
   if (reformatter->write_fd <= 0)
     {
       reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      g_cancellable_cancel(cancellable);
       return FALSE;
     }
 
@@ -923,12 +932,23 @@ eos_reformatter_reformat (EosReformatter *reformatter)
                     G_CALLBACK (eos_reformatter_update_progress),
                     reformatter);
 
-  g_debug ("%s: using %d threads", __FUNCTION__, EOS_THREADS);
+  /* If the user provides a GCancellable, use that with a ref. Otherwise our own */
+  if (cancellable == NULL)
+    {
+      reformatter->cancellable = g_cancellable_new ();
+    }
+  else
+    {
+      reformatter->cancellable = cancellable;
+      g_object_ref (reformatter->cancellable);
+    }
 
-#if EOS_THREADS == 1
-  reformatter->write_thread = g_thread_new ("read-write", do_reformat, reformatter);
-#elif EOS_THREADS == 2
+    g_cancellable_connect (reformatter->cancellable,
+                           G_CALLBACK (eos_reformatter_cancelled),
+                           reformatter, NULL);
+
   reformatter->write_thread = g_thread_new ("write", do_write, reformatter);
+
   if (reformatter->decompressor == NULL)
     {
       reformatter->read_thread = g_thread_new ("read", do_read, reformatter);
@@ -937,13 +957,6 @@ eos_reformatter_reformat (EosReformatter *reformatter)
     {
       reformatter->read_thread = g_thread_new ("read-compress", do_read_and_decompress, reformatter);
     }
-#elif EOS_THREADS == 3
-  reformatter->write_thread = g_thread_new ("write", do_write, reformatter);
-  reformatter->decomp_thread = g_thread_new ("decompress", do_decompress, reformatter);
-  reformatter->read_thread = g_thread_new ("read", do_read, reformatter);
-#else
-#error "Don't be silly about threads."
-#endif
 
   return TRUE;
 }
@@ -951,8 +964,12 @@ eos_reformatter_reformat (EosReformatter *reformatter)
 void
 eos_reformatter_cancel (EosReformatter *reformatter)
 {
-  reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Cancel"));
-  eos_reformatter_maybe_finish (reformatter);
+  g_return_if_fail (reformatter != NULL);
+
+  if (reformatter->cancellable == NULL)
+    return;
+
+  g_cancellable_cancel (reformatter->cancellable);
 }
 
 /* DEBUG */

@@ -2,6 +2,7 @@
 #define __EOS_REFORMATTER_H__
 
 #include <glib-object.h>
+#include <gio/gio.h>
 
 G_BEGIN_DECLS
 
@@ -15,7 +16,7 @@ typedef struct _EosReformatter EosReformatter;
 GType            eos_reformatter_get_type (void) G_GNUC_CONST;
 EosReformatter  *eos_reformatter_new (const gchar *image, const gchar *signature, const gchar *device);
 
-gboolean eos_reformatter_reformat (EosReformatter *reformatter);
+gboolean eos_reformatter_reformat (EosReformatter *reformatter, GCancellable *cancellable);
 void eos_reformatter_cancel (EosReformatter *reformatter);
 
 gdouble eos_reformatter_get_progress (EosReformatter *reformatter);

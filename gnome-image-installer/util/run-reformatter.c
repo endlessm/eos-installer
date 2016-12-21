@@ -6,6 +6,7 @@ static GMainLoop *loop = NULL;
 static guint64 initial_estimate = 0;
 static gint64 start_usec = 0;
 static int retval = 0;
+static GCancellable *cancellable = NULL;
 
 static gboolean _quit (gpointer data)
 {
@@ -18,7 +19,9 @@ static gboolean _cancel (gpointer data)
 {
   EosReformatter *reformatter = EOS_REFORMATTER(data);
 
-  eos_reformatter_cancel (reformatter);
+  g_warning ("cancelling");
+
+  g_cancellable_cancel (cancellable);
 
   return FALSE;
 }
@@ -74,9 +77,9 @@ static gboolean _start_reformat (gpointer data)
   EosReformatter *reformatter = EOS_REFORMATTER(data);
 
   start_usec = g_get_real_time ();
-  if (!eos_reformatter_reformat (reformatter))
+  cancellable = g_cancellable_new ();
+  if (!eos_reformatter_reformat (reformatter, cancellable))
     {
-      g_object_unref (reformatter);
       g_timeout_add_seconds(1, _quit, NULL);
     }
 
@@ -95,7 +98,7 @@ int main(int argc, char** argv)
       return 1;
     }
 
-  if (argc == 4)
+  if (argc >= 4)
     {
       write_size = g_ascii_strtoull (argv[3], NULL, 0);
     }
@@ -119,7 +122,7 @@ int main(int argc, char** argv)
                     reformatter);
 
   g_idle_add(_start_reformat, reformatter);
-  g_timeout_add_seconds(4, _cancel, reformatter);
+//  g_timeout_add_seconds(10, _cancel, reformatter);
 
   loop = g_main_loop_new (NULL, FALSE);
   g_main_loop_run (loop);
