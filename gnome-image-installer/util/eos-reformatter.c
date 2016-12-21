@@ -75,6 +75,7 @@ enum
   PROP_WRITE_SIZE,
   PROP_SIGNATURE,
   PROP_DEVICE,
+  PROP_DEVICE_FD,
   PROP_PROGRESS,
   N_PROPERTIES
 };
@@ -251,6 +252,9 @@ eos_reformatter_get_property (GObject    *object,
     case PROP_DEVICE:
       g_value_set_string (value, reformatter->device);
       break;
+    case PROP_DEVICE_FD:
+      g_value_set_int (value, reformatter->write_fd);
+      break;
     case PROP_PROGRESS:
       g_value_set_double (value, reformatter->progress);
       break;
@@ -284,6 +288,9 @@ eos_reformatter_set_property (GObject      *object,
     case PROP_DEVICE:
       g_free (reformatter->device);
       reformatter->device = g_value_dup_string (value);
+      break;
+    case PROP_DEVICE_FD:
+      reformatter->write_fd = g_value_get_int (value);
       break;
     case PROP_PROGRESS:
       reformatter->progress = g_value_get_double (value);
@@ -335,6 +342,16 @@ eos_reformatter_class_init (EosReformatterClass *klass)
                          "Disk device to write the image to",
                          NULL  /* default value */,
                          G_PARAM_CONSTRUCT_ONLY | G_PARAM_READWRITE);
+
+  _props[PROP_DEVICE_FD] =
+    g_param_spec_int ("device-fd",
+                      "Device file descriptor",
+                      "The file descriptor to write the image to, can be set "
+                      "before starting reformat to use open file descriptor",
+                      G_MININT  /* minimum value */,
+                      G_MAXINT  /* maximum value */,
+                      0  /* default value */,
+                      G_PARAM_READWRITE);
 
   _props[PROP_PROGRESS] =
     g_param_spec_double ("progress",
@@ -647,6 +664,9 @@ eos_reformatter_decompress (EosReformatter *reformatter, GAsyncQueue *freeq, GAs
 static gint
 eos_reformatter_prepare_write (EosReformatter *reformatter)
 {
+  if (reformatter->write_fd > 0)
+    return reformatter->write_fd;
+
   return open(reformatter->device, O_WRONLY | O_SYNC | O_CREAT);
 }
 
