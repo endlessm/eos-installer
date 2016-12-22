@@ -12,6 +12,9 @@
 #include "gduestimator.h"
 #include "eos-reformatter.h"
 
+typedef struct _EosReformatterClass EosReformatterClass;
+typedef struct _EosAlignedBuffer EosAlignedBuffer;
+
 struct _EosReformatter
 {
   GObject parent;
@@ -34,6 +37,7 @@ struct _EosReformatter
   int used_buffers;
   int buffer_size;
   long page_size;
+  EosAlignedBuffer *boot;
 
   GAsyncQueue *free_queue;
   GAsyncQueue *decomp_queue;
@@ -56,13 +60,11 @@ struct _EosReformatter
   GCancellable *cancellable;
 };
 
-typedef struct _EosReformatterClass EosReformatterClass;
 struct _EosReformatterClass
 {
   GObjectClass parent_class;
 };
 
-typedef struct _EosAlignedBuffer EosAlignedBuffer;
 struct _EosAlignedBuffer
 {
   guchar *ptr;
@@ -702,6 +704,26 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQu
   /* EOS */
   if (buf->len == 0)
     {
+
+      /* Write the first buffer last */
+      if (reformatter->boot != NULL)
+        {
+          wb = lseek (reformatter->write_fd, 0, SEEK_SET);
+
+          if (wb == 0)
+            wb = write (reformatter->write_fd, reformatter->boot->ptr, reformatter->boot->len);
+
+          if (wb <= 0)
+            {
+              g_mutex_lock (&reformatter->thread_mutex);
+              reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+              g_mutex_unlock (&reformatter->thread_mutex);
+            }
+
+          g_async_queue_push (freeq, reformatter->boot);
+          reformatter->boot = NULL;
+        }
+
       syncfs (reformatter->write_fd);
       g_async_queue_push (freeq, buf);
 
@@ -712,6 +734,17 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQu
       g_mutex_unlock (&reformatter->thread_mutex);
 
       return FALSE;
+    }
+
+  /* Grab the first buffer and write zeroes instead so the result does not
+   * look like a bootable system if we abort in the middle
+   */
+  if (reformatter->boot == NULL)
+    {
+      reformatter->boot = buf;
+      buf = eos_reformatter_get_free_buffer (reformatter, freeq);
+      memset (buf->ptr, 0, reformatter->boot->len);
+      buf->len = reformatter->boot->len;
     }
 
   wb = write (reformatter->write_fd, buf->ptr, buf->len);
