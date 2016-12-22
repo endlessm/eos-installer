@@ -367,16 +367,17 @@ eos_reformatter_class_init (EosReformatterClass *klass)
                          G_PARAM_READWRITE);
 
   _signals[SIG_FINISHED] =
-    g_signal_newv ("finished",
+    g_signal_new ("finished",
                    G_TYPE_FROM_CLASS (gobject_class),
                    G_SIGNAL_RUN_LAST | G_SIGNAL_NO_RECURSE | G_SIGNAL_NO_HOOKS,
-                   NULL /* closure */,
+                   0 /* closure */,
                    NULL /* accumulator */,
                    NULL /* accumulator data */,
-                   NULL /* C marshaller */,
+                   g_cclosure_marshal_VOID__BOOLEAN /* C marshaller */,
                    G_TYPE_NONE /* return_type */,
-                   0     /* n_params */,
-                   NULL  /* param_types */);
+                   1     /* n_params */,
+                   G_TYPE_BOOLEAN  /* param_types */,
+                   NULL);
 
   g_object_class_install_properties (gobject_class,
                                      N_PROPERTIES,
@@ -414,7 +415,7 @@ eos_reformatter_maybe_finish (EosReformatter *reformatter)
       reformatter->sample_update = 0;
     }
 
-  g_signal_emit (reformatter, _signals[SIG_FINISHED], 0);
+  g_signal_emit (reformatter, _signals[SIG_FINISHED], 0, (reformatter->error == NULL));
 }
 
 static EosAlignedBuffer *
@@ -935,10 +936,10 @@ eos_reformatter_get_progress (EosReformatter *reformatter)
   return progress;
 }
 
-GError *
+const GError *
 eos_reformatter_get_error (EosReformatter *reformatter)
 {
-  return reformatter->error;
+  return (const GError *)reformatter->error;
 }
 
 guint64

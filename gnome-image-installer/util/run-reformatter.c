@@ -26,11 +26,11 @@ static gboolean _cancel (gpointer data)
   return FALSE;
 }
 
-static void _reformat_finished (GObject *object, gpointer data)
+static void _reformat_finished (GObject *object, gboolean success, gpointer data)
 {
   EosReformatter *reformatter = EOS_REFORMATTER(data);
 
-  if (eos_reformatter_get_error (reformatter) == NULL)
+  if (success)
     {
       printf ("\n\nReformat finished in %.02f seconds, buffers: %d / %d / %d / %d\n",
         (g_get_real_time () - start_usec) / 1000.0 / 1000.0,

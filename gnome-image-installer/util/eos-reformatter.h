@@ -20,7 +20,7 @@ gboolean eos_reformatter_reformat (EosReformatter *reformatter, GCancellable *ca
 void eos_reformatter_cancel (EosReformatter *reformatter);
 
 gdouble eos_reformatter_get_progress (EosReformatter *reformatter);
-GError *eos_reformatter_get_error (EosReformatter *reformatter);
+const GError *eos_reformatter_get_error (EosReformatter *reformatter);
 guint64 eos_reformatter_get_usec_remaining (EosReformatter *reformatter);
 guint64 eos_reformatter_get_bytes_per_sec (EosReformatter *reformatter);
 
