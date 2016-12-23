@@ -95,9 +95,7 @@ enum
 static guint _signals[N_SIGNALS] = { 0, };
 
 G_DEFINE_TYPE (EosReformatter, eos_reformatter, G_TYPE_OBJECT)
-
-G_DEFINE_QUARK(install-error, eos_reformatter_error);
-#define EOS_REFORMATTER_ERROR eos_reformatter_error_quark()
+G_DEFINE_QUARK(reformatter-error, eos_reformatter_error);
 
 #define EOS_BUFFERS 16
 #define EOS_BUFFER_SIZE (1 * 1024 * 1024)
@@ -506,7 +504,9 @@ eos_reformatter_prepare_read (EosReformatter *reformatter)
         }
       if (reformatter->write_total_bytes == 0)
         {
-          reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+          reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                            EOS_REFORMATTER_ERROR_UNKNOWN_SIZE,
+                                            _("Target write size is unknown or unobtainable"));
           return -1;
         }
   }
@@ -558,7 +558,10 @@ eos_reformatter_read (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQue
   if (len < 0 || buf->len < 0)
     {
       g_mutex_lock (&reformatter->thread_mutex);
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                        EOS_REFORMATTER_ERROR_READ_FAILED,
+                                        _("Reading the image failed: %s"),
+                                        g_strerror (errno));
       g_mutex_unlock (&reformatter->thread_mutex);
       g_cancellable_cancel (reformatter->cancellable);
       ret = FALSE;
@@ -717,7 +720,10 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQu
           if (wb <= 0)
             {
               g_mutex_lock (&reformatter->thread_mutex);
-              reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+              reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                                EOS_REFORMATTER_ERROR_WRITE_FAILED,
+                                                _("Writing the image failed: %s"),
+                                                g_strerror (errno));
               g_mutex_unlock (&reformatter->thread_mutex);
             }
 
@@ -753,7 +759,10 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQu
   if (wb < 0)
     {
       g_mutex_lock (&reformatter->thread_mutex);
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                        EOS_REFORMATTER_ERROR_WRITE_FAILED,
+                                        _("Writing the image failed: %s"),
+                                        g_strerror (errno));
       g_mutex_unlock (&reformatter->thread_mutex);
       ret = FALSE;
     }
@@ -766,7 +775,12 @@ eos_reformatter_write (EosReformatter *reformatter, GAsyncQueue *freeq, GAsyncQu
       /* Overwriting the estimate is an error */
       if (reformatter->write_completed_bytes > reformatter->write_total_bytes)
         {
-          reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+          reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                            EOS_REFORMATTER_ERROR_WRITE_FAILED,
+                                            _("Tried to write more than the target size "
+                                              "(%lu bytes > %lu bytes)"),
+                                            reformatter->write_completed_bytes,
+                                            reformatter->write_total_bytes);
           reformatter->write_completed_bytes = reformatter->write_total_bytes;
           g_cancellable_cancel (reformatter->cancellable);
           ret = FALSE;
@@ -819,7 +833,9 @@ eos_reformatter_gpg_watch (GPid pid, gint status, gpointer data)
   if (!g_spawn_check_exit_status (status, NULL))
     {
       g_mutex_lock (&reformatter->thread_mutex);
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Image verification error."));
+      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                        EOS_REFORMATTER_ERROR_VERIFICATION_FAILED,
+                                        _("Image verification error."));
       g_mutex_unlock (&reformatter->thread_mutex);
       g_cancellable_cancel (reformatter->cancellable);
       g_warning ("Verification failed!");
@@ -853,7 +869,9 @@ eos_reformatter_prepare_gpg_verify (EosReformatter *reformatter)
                                  &reformatter->gpg_in, NULL, NULL, &error))
     {
       g_mutex_lock (&reformatter->thread_mutex);
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Image verification error."));
+      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                        EOS_REFORMATTER_ERROR_VERIFICATION_FAILED,
+                                        _("Image verification error."));
       g_mutex_unlock (&reformatter->thread_mutex);
       g_cancellable_cancel (reformatter->cancellable);
       return FALSE;
@@ -972,7 +990,19 @@ eos_reformatter_reformat (EosReformatter *reformatter, GCancellable *cancellable
   reformatter->read_fd = eos_reformatter_prepare_read (reformatter);
   if (reformatter->read_fd <= 0)
     {
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      if (errno == 0 && reformatter->error == NULL)
+        {
+          reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                            EOS_REFORMATTER_ERROR_READ_FAILED,
+                                            _("Reading the image failed"));
+        }
+      else if (reformatter->error == NULL)
+        {
+          reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                            EOS_REFORMATTER_ERROR_READ_FAILED,
+                                            _("Reading the image failed: %s"),
+                                            g_strerror (errno));
+        }
       g_cancellable_cancel(cancellable);
       return FALSE;
     }
@@ -986,7 +1016,10 @@ eos_reformatter_reformat (EosReformatter *reformatter, GCancellable *cancellable
   reformatter->write_fd = eos_reformatter_prepare_write (reformatter);
   if (reformatter->write_fd <= 0)
     {
-      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR, 0, _("Internal error"));
+      reformatter->error = g_error_new (EOS_REFORMATTER_ERROR,
+                                        EOS_REFORMATTER_ERROR_WRITE_FAILED,
+                                        _("Writing the image failed: %s"),
+                                        g_strerror (errno));
       g_cancellable_cancel(cancellable);
       return FALSE;
     }

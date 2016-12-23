@@ -12,9 +12,19 @@ typedef struct _EosReformatter EosReformatter;
 #define EOS_TYPE_REFORMATTER   eos_reformatter_get_type()
 #define EOS_REFORMATTER(o)     (G_TYPE_CHECK_INSTANCE_CAST ((o), EOS_TYPE_REFORMATTER, EosReformatter))
 #define EOS_IS_REFORMATTER(o)  (G_TYPE_CHECK_INSTANCE_TYPE ((o), EOS_TYPE_REFORMATTER))
+#define EOS_REFORMATTER_ERROR  eos_reformatter_error_quark()
 
 GType            eos_reformatter_get_type (void) G_GNUC_CONST;
 EosReformatter  *eos_reformatter_new (const gchar *image, const gchar *signature, const gchar *device);
+
+typedef enum
+{
+  EOS_REFORMATTER_ERROR_FAILED,
+  EOS_REFORMATTER_ERROR_UNKNOWN_SIZE,
+  EOS_REFORMATTER_ERROR_READ_FAILED,
+  EOS_REFORMATTER_ERROR_WRITE_FAILED,
+  EOS_REFORMATTER_ERROR_VERIFICATION_FAILED,
+} EosReformatterErrorEnum;
 
 gboolean eos_reformatter_reformat (EosReformatter *reformatter, GCancellable *cancellable);
 void eos_reformatter_cancel (EosReformatter *reformatter);

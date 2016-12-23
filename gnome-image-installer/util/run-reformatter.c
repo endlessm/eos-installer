@@ -41,7 +41,7 @@ static void _reformat_finished (GObject *object, gboolean success, gpointer data
     }
   else
     {
-      GError *error = eos_reformatter_get_error (reformatter);
+      const GError *error = eos_reformatter_get_error (reformatter);
       printf ("\n\nFinished with error: %s\n", error->message);
       retval = 1;
     }
@@ -80,6 +80,9 @@ static gboolean _start_reformat (gpointer data)
   cancellable = g_cancellable_new ();
   if (!eos_reformatter_reformat (reformatter, cancellable))
     {
+      const GError *error = eos_reformatter_get_error (reformatter);
+      printf ("\n\nFinished with error: %s\n", error->message);
+      retval = 1;
       g_timeout_add_seconds(1, _quit, NULL);
     }
 
