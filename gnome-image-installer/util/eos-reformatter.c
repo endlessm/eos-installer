@@ -178,8 +178,7 @@ eos_reformatter_dispose (GObject *object)
   do
     {
       buf = g_async_queue_try_pop (reformatter->free_queue);
-      if (buf != NULL)
-        g_free(buf);
+      g_free(buf);
     }
   while (buf != NULL);
   g_async_queue_unref (reformatter->free_queue);
@@ -187,8 +186,7 @@ eos_reformatter_dispose (GObject *object)
   do
     {
       buf = g_async_queue_try_pop (reformatter->decomp_queue);
-      if (buf != NULL)
-        g_free(buf);
+      g_free(buf);
     }
   while (buf != NULL);
   g_async_queue_unref (reformatter->decomp_queue);
@@ -196,8 +194,7 @@ eos_reformatter_dispose (GObject *object)
   do
     {
       buf = g_async_queue_try_pop (reformatter->write_queue);
-      if (buf != NULL)
-        g_free(buf);
+      g_free(buf);
     }
   while (buf != NULL);
   g_async_queue_unref (reformatter->write_queue);
@@ -219,15 +216,11 @@ eos_reformatter_finalize (GObject *object)
 {
   EosReformatter *reformatter = EOS_REFORMATTER (object);
 
-  if (reformatter->pool != NULL)
-    g_free (reformatter->pool);
+  g_free (reformatter->pool);
 
-  if (reformatter->image != NULL)
-    g_free (reformatter->image);
-  if (reformatter->signature != NULL)
-    g_free (reformatter->signature);
-  if (reformatter->device != NULL)
-    g_free (reformatter->device);
+  g_free (reformatter->image);
+  g_free (reformatter->signature);
+  g_free (reformatter->device);
 
   G_OBJECT_CLASS (eos_reformatter_parent_class)->finalize (object);
 }
