@@ -30,6 +30,7 @@ struct _EosReformatter
 
   gdouble progress;
   gboolean finished;
+  gboolean write_fd_is_external;
   guint sample_update;
 
   guchar *pool;
@@ -167,7 +168,8 @@ eos_reformatter_dispose (GObject *object)
     }
 
   close (reformatter->read_fd);
-  close (reformatter->write_fd);
+  if (!reformatter->write_fd_is_external)
+    close (reformatter->write_fd);
 
   if (reformatter->sample_update != 0)
     {
@@ -248,6 +250,7 @@ eos_reformatter_get_property (GObject    *object,
       g_value_set_string (value, reformatter->device);
       break;
     case PROP_DEVICE_FD:
+      reformatter->write_fd_is_external = TRUE;
       g_value_set_int (value, reformatter->write_fd);
       break;
     case PROP_PROGRESS:
