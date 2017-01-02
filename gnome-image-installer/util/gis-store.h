@@ -33,8 +33,25 @@ G_BEGIN_DECLS
 typedef enum {
   GIS_STORE_IMAGE = 0,
   GIS_STORE_BLOCK_DEVICE,
+  GIS_STORE_SECONDARY_IMAGE,
+  GIS_STORE_SECONDARY_BLOCK_DEVICE,
   GIS_STORE_N_OBJECTS
-} GISStoreObjectKey;
+} GisStoreObjectKey;
+
+typedef enum {
+  GIS_STORE_TARGET_EMPTY = 0,
+  GIS_STORE_TARGET_PRIMARY,
+  GIS_STORE_TARGET_SECONDARY,
+  GIS_STORE_N_TARGETS
+} GisStoreTargetName;
+
+typedef struct _GisStoreTarget {
+  GisStoreTargetName target;
+  gchar *image;
+  gchar *signature;
+  gchar *device;
+  gint64 write_size;
+} GisStoreTarget;
 
 GObject *gis_store_get_object(gint key);
 void gis_store_set_object(gint key, GObject *obj);
@@ -46,7 +63,7 @@ void gis_store_set_required_size(gint64 size);
 gint64 gis_store_get_image_size (void);
 void gis_store_set_image_size (gint64 size);
 
-gchar *gis_store_get_image_name();
+const gchar *gis_store_get_image_name();
 void gis_store_set_image_name(gchar *name);
 void gis_store_clear_image_name();
 
@@ -55,6 +72,10 @@ void gis_store_set_image_drive(const gchar *drive);
 
 const gchar *gis_store_get_image_signature(void);
 void gis_store_set_image_signature(const gchar *signature);
+
+const GisStoreTarget *gis_store_get_target(GisStoreTargetName target);
+void gis_store_set_target(GisStoreTargetName target, const gchar *image, const gchar *signature, const gchar *device);
+void gis_store_set_target_write_size(GisStoreTargetName target, gint64 write_size);
 
 GError *gis_store_get_error();
 void gis_store_set_error(GError *error);

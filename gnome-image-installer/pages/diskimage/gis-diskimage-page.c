@@ -74,6 +74,64 @@ enum {
     ALIGN
 };
 
+static guint64
+get_image_write_size(GFile *image)
+{
+  g_autoptr(GFileInfo) info = NULL;
+  g_autofree gchar *path = NULL;
+  const gchar *type = NULL;
+  guint64 size = 0;
+
+  info = g_file_query_info (image,
+                            G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE ","
+                            G_FILE_ATTRIBUTE_STANDARD_SIZE,
+                            G_FILE_QUERY_INFO_NONE,
+                            NULL,
+                            NULL);
+
+  if (info == NULL)
+    return size;
+
+  type = g_file_info_get_content_type (info);
+  path = g_file_get_path (image);
+
+  if (g_str_has_suffix(type, "-xz-compressed"))
+    {
+      size = get_xz_disk_image_size (path);
+    }
+  else if (g_str_equal(type, "application/gzip"))
+    {
+      size = get_gzip_disk_image_size (path);
+    }
+  else
+    {
+      size = get_disk_image_size (path);
+    }
+
+  return size;
+}
+
+static gboolean
+prepare_target_image(const GisStoreTarget *target)
+{
+  g_autoptr(GFile) file = NULL;
+
+  if (target == NULL)
+    return FALSE;
+
+  if (target->target == GIS_STORE_TARGET_EMPTY)
+    return FALSE;
+
+  /* We already know the path exists so no need to check that */
+  file = g_file_new_for_path (target->image);
+  gis_store_set_target_write_size (target->target, get_image_write_size (file));
+
+  if (target->write_size == 0)
+    return FALSE;
+
+  return TRUE;
+}
+
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
@@ -102,36 +160,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 
   file = g_file_new_for_path (image);
   gis_store_set_object (GIS_STORE_IMAGE, G_OBJECT (file));
-  if (g_str_has_suffix (image, ".gz"))
-    {
-      gint64 size = get_gzip_disk_image_size (image);
-      if (size <= 0)
-        {
-          size = 1*1024*1024*1024;
-          size *= 8;
-        }
-      gis_store_set_required_size (size);
-    }
-  else if (g_str_has_suffix (image, ".xz"))
-    {
-      gint64 size = get_xz_disk_image_size (image);
-      if (size <= 0)
-        {
-          size = 1*1024*1024*1024;
-          size *= 8;
-        }
-      gis_store_set_required_size (size);
-    }
-  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path) == 0)
-    {
-      gint64 size = get_disk_image_size (image);
-      if (size <= 0)
-        {
-          size = 1*1024*1024*1024;
-          size *= 8;
-        }
-      gis_store_set_required_size (size);
-    }
+  gis_store_set_required_size (get_image_write_size (file));
   g_object_unref(file);
 
   if (signature == NULL)
@@ -141,17 +170,6 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
   g_free (signature);
 
   gis_page_set_complete (page, TRUE);
-
-  if (gis_store_is_unattended())
-    {
-      if (gtk_tree_model_iter_n_children (model, NULL) > 1)
-        {
-          GError *error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
-          gis_store_set_error (error);
-          g_clear_error (&error);
-        }
-      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
-    }
 }
 
 static gchar *get_display_name(const gchar *fullname)
@@ -382,6 +400,31 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
   GtkTreeIter iter;
   gboolean is_live = gis_store_is_live_install ();
 
+  /* Don't bother populating if unattended, just check the targets and move on */
+  if (gis_store_is_unattended())
+    {
+      const GisStoreTarget *target = gis_store_get_target(GIS_STORE_TARGET_PRIMARY);
+
+      if (!prepare_target_image (target))
+        {
+          GError *error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+          gis_store_set_error (error);
+          g_clear_error (&error);
+        }
+
+      target = gis_store_get_target(GIS_STORE_TARGET_SECONDARY);
+      if (target->target != GIS_STORE_TARGET_EMPTY && !prepare_target_image (target))
+        {
+          GError *error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+          gis_store_set_error (error);
+          g_clear_error (&error);
+          g_warning ("SECONDARY FAIL");
+        }
+
+      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+      return;
+    }
+
   dir = g_dir_open (path, 0, &error);
   if (dir == NULL)
     {
@@ -392,15 +435,6 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
     }
 
   gtk_list_store_clear(store);
-
-  if (gis_store_is_unattended())
-    {
-      GKeyFile *keys = gis_store_get_key_file();
-      if (keys != NULL)
-        {
-          ufile = g_key_file_get_string (keys, "Unattended", "image", NULL);
-        }
-    }
 
   for (file = (gchar*)g_dir_read_name (dir); file != NULL; file = (gchar*)g_dir_read_name (dir))
     {
