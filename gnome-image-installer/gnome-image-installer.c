@@ -240,7 +240,7 @@ read_keys (const gchar *path)
         {
           if (target_computer (keys, vendor, product))
             {
-              gis_store_enter_unattended();
+              gis_store_enter_unattended(vendor, product);
             }
         }
 

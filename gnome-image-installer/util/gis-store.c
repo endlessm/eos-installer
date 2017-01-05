@@ -35,6 +35,8 @@ static gchar *_signature = NULL;
 static gchar *_target_drive = NULL;
 static GError *_error = NULL;
 static gboolean _unattended = FALSE;
+static gchar *_vendor = NULL;
+static gchar *_product = NULL;
 static gboolean _live_install = FALSE;
 static GKeyFile *_keys = NULL;
 static GisStoreTarget _targets[GIS_STORE_N_TARGETS] = { { 0, }, };
@@ -164,14 +166,26 @@ void gis_store_clear_error()
   g_clear_error (&_error);
 }
 
-void gis_store_enter_unattended()
+void gis_store_enter_unattended(const gchar *vendor, const gchar *product)
 {
   _unattended = TRUE;
+  _vendor = g_strdup (vendor);
+  _product = g_strdup (product);
 }
 
 gboolean gis_store_is_unattended()
 {
   return _unattended;
+}
+
+const gchar *gis_store_get_vendor (void)
+{
+  return _vendor;
+}
+
+const gchar *gis_store_get_product (void)
+{
+  return _product;
 }
 
 void gis_store_enter_live_install()

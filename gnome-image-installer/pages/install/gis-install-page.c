@@ -438,6 +438,63 @@ gis_install_page_prepare_reformatter (GisPage *page, GisStoreTargetName target, 
                     page);
 }
 
+static void
+gis_install_page_compile_target_description (GisPage *page, GtkWidget *dialog)
+{
+  GisInstallPage *install = GIS_INSTALL_PAGE (page);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  UDisksBlock *block = NULL;
+  UDisksDrive *drive = NULL;
+  const GisStoreTarget *target = gis_store_get_target (GIS_STORE_TARGET_PRIMARY);
+  g_autofree gchar *image = NULL;
+  g_autofree gchar *primary = NULL;
+  g_autofree gchar *secondary = NULL;
+
+  /* This should definitely not happen, but just in case */
+  if (target->target == GIS_STORE_TARGET_EMPTY)
+    {
+      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                                _("Internal error"));
+      return;
+    }
+
+#define IMAGE_STR "Image: %s\nTo be flashed to %s %s (%s, %luGB capacity)\n"
+  block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
+  drive = udisks_client_get_drive_for_block (priv->client, block);
+  image = g_path_get_basename (target->image);
+  primary = g_strdup_printf (IMAGE_STR,
+                             image,
+                             udisks_drive_get_vendor (drive),
+                             udisks_drive_get_model (drive),
+                             udisks_block_get_device (block),
+                             udisks_drive_get_size (drive) / 1024 / 1024 / 1024);
+
+  target = gis_store_get_target (GIS_STORE_TARGET_SECONDARY);
+  if (target->target != GIS_STORE_TARGET_EMPTY)
+    {
+      block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_SECONDARY_BLOCK_DEVICE));
+      drive = udisks_client_get_drive_for_block (priv->client, block);
+      image = g_path_get_basename (target->image);
+      secondary = g_strdup_printf (IMAGE_STR,
+                                   image,
+                                   udisks_drive_get_vendor (drive),
+                                   udisks_drive_get_model (drive),
+                                   udisks_block_get_device (block),
+                                   udisks_drive_get_size (drive) / 1024 / 1024 / 1024);
+    }
+#undef IMAGE_STR
+  gtk_message_dialog_format_secondary_text (
+    GTK_MESSAGE_DIALOG (dialog),
+    _("\nWARNING: All data on these target disks will be destroyed. "
+      "You will lose all your files and documents.\n"
+      "\n"
+      "Computer:\n  Vendor: %s\n  Product: %s\n"
+      "\n%s\n%s\n"),
+      gis_store_get_vendor (),
+      gis_store_get_product (),
+      primary, secondary == NULL ? "" : secondary);
+}
+
 static gboolean
 gis_install_page_prepare (GisPage *page)
 {
@@ -459,6 +516,43 @@ gis_install_page_prepare (GisPage *page)
       g_io_channel_shutdown (priv->gpgout, TRUE, NULL);
       g_io_channel_unref (priv->gpgout);
       priv->gpgout = NULL;
+    }
+
+  if (gis_store_is_unattended ())
+    {
+      gint resp = GTK_RESPONSE_CANCEL;
+      GtkWidget *button = NULL;
+      GtkWidget *dialog =
+        gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel(GTK_WIDGET(page))),
+                                GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+                                GTK_MESSAGE_WARNING,
+                                GTK_BUTTONS_NONE,
+                                _("Endless OS unattended installation"));
+
+      gis_install_page_compile_target_description (page, dialog);
+
+      button = gtk_button_new_with_label (_("Continue and destroy data"));
+      gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
+      gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_OK);
+      gtk_widget_show (button);
+
+      button = gtk_button_new_with_label (_("Cancel"));
+      gtk_dialog_add_action_widget (GTK_DIALOG (dialog), button, GTK_RESPONSE_CANCEL);
+      gtk_widget_set_can_default (button, TRUE);
+      gtk_widget_show (button);
+      gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_CANCEL);
+      gtk_widget_grab_focus (button);
+
+      resp = gtk_dialog_run (GTK_DIALOG (dialog));
+      gtk_widget_destroy (dialog);
+
+      if (resp != GTK_RESPONSE_OK)
+        {
+          error = g_error_new(GIS_INSTALL_ERROR, 0, _("Cancel"));
+          gis_store_set_error (error);
+          gis_install_page_teardown(page);
+          return FALSE;
+        }
     }
 
   target = gis_store_get_target (GIS_STORE_TARGET_PRIMARY);

@@ -81,8 +81,11 @@ GError *gis_store_get_error();
 void gis_store_set_error(GError *error);
 void gis_store_clear_error();
 
-void gis_store_enter_unattended();
+void gis_store_enter_unattended(const gchar *vendor, const gchar *product);
 gboolean gis_store_is_unattended();
+
+const gchar *gis_store_get_vendor (void);
+const gchar *gis_store_get_product (void);
 
 void gis_store_enter_live_install();
 gboolean gis_store_is_live_install();
