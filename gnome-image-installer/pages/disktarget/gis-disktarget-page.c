@@ -354,10 +354,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
           skip_if (gis_disktarget_page_check_target (page, target, block),
                    "found secondary target");
 
+          skip_if (gis_store_get_object (GIS_STORE_BLOCK_DEVICE) != NULL,
+                   "primary target already found");
+
           target = gis_store_get_target (GIS_STORE_TARGET_PRIMARY);
           skip_if (!gis_disktarget_page_check_target (page, target, block),
                    "not the primary target (or no primary target set)");
-          g_warning ("Found primary");
+
           priv->has_valid_disks = TRUE;
         }
 
