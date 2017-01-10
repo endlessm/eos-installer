@@ -4,16 +4,16 @@
 # 
 # Translators:
 # Chandan kumar <chandankumar.093047@gmail.com>, 2012-2013
-# e2f_in c7 <e2f_in_c7@outlook.com>, 2016
+# e2f_in c7 <e2f_in_c7@outlook.com>, 2016-2017
 # Rajesh Ranjan <rajeshkajha@yahoo.com>, 2013-2014
 # Roddy Shuler <roddy@endlessm.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 02:51+0000\n"
-"PO-Revision-Date: 2016-12-20 02:52+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2017-01-03 03:02+0000\n"
+"PO-Revision-Date: 2017-01-09 10:58+0000\n"
+"Last-Translator: e2f_in c7 <e2f_in_c7@outlook.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -726,23 +726,23 @@ msgstr "कृपया support@endlessm.com से संपर्क करे
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "डिस्क को पुनः स्वरूपित करना बंद करें"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "पुनः स्वरूपण प्रक्रिया पहले ही शुरू हो चुकी है. अब इसे रद्द करने से यह सिस्टम बूट न करने योग्य रह जाएगा."
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "पुनः स्वरूपित करना बंद करें"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "पुनः स्वरूपित करना जारी रखें"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166

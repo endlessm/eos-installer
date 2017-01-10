@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 02:51+0000\n"
-"PO-Revision-Date: 2016-12-20 02:52+0000\n"
+"POT-Creation-Date: 2017-01-03 03:02+0000\n"
+"PO-Revision-Date: 2017-01-07 12:12+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -724,23 +724,23 @@ msgstr "يُرجى التواصل على support@endlessm.com أو الانضم�
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "هل تريد إيقاف إعادة تشكيل القرص؟"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "لقد بدأت عملية إعادة التنسيق بالفعل. إلغاء هذه العملية الآن سيجعل النظام غير قابل لبدء التشغيل."
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "إيقاف إعادة التنسيق"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "استمر في إعادة التشكيل "
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166

@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 02:51+0000\n"
-"PO-Revision-Date: 2016-12-20 02:52+0000\n"
+"POT-Creation-Date: 2017-01-03 03:02+0000\n"
+"PO-Revision-Date: 2017-01-07 11:38+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: French (http://www.transifex.com/endless-mobile-inc/eos-installer/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -731,23 +731,23 @@ msgstr "Veuillez contacter support@endlessm.com ou rejoignez notre groupe Google
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "Arrêtez de reformater le disque ?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "Le processus de reformatage a déjà commencé. S'il est annulé maintenant, ce système ne pourra pas démarrer."
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "Arrêter de reformater"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "Continuer à reformater"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166

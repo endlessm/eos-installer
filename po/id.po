@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 02:51+0000\n"
-"PO-Revision-Date: 2016-12-20 02:52+0000\n"
+"POT-Creation-Date: 2017-01-03 03:02+0000\n"
+"PO-Revision-Date: 2017-01-09 06:05+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -725,23 +725,23 @@ msgstr "Silakan hubungi support@endlessm.com atau bergabunglah dengan Google Gro
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "Stop memformat disk?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "Proses format ulang telah dimulai. Membatalkan sekarang akan menyebabkan sistem tidak dapat di-boot."
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "Stop Memformat Ulang"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "Lanjutkan Format Ulang"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166

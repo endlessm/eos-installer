@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 02:51+0000\n"
-"PO-Revision-Date: 2016-12-20 02:52+0000\n"
+"POT-Creation-Date: 2017-01-03 03:02+0000\n"
+"PO-Revision-Date: 2017-01-07 10:06+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Thai (http://www.transifex.com/endless-mobile-inc/eos-installer/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -724,23 +724,23 @@ msgstr "กรุณาติดต่อ contact support@endlessm.com หรื
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "หยุดการรีฟอร์แมตดิสก์นี้"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "ขั้นตอนการรีฟอร์แมตเริ่มไปแล้ว การยกเลิกตอนนี้จะทำให้ไม่สามารถบูตระบบได้"
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "หยุดการรีฟอร์แมต"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "ดำเนินการฟอร์แมตซ้ำต่อไป"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166

@@ -8,6 +8,7 @@
 # chenzibing <chenzibing_endless@126.com>, 2016
 # CN C2 <e2f48d4sf5ds@outlook.com>, 2016
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
+# e2f_cn c5 <e2f_cn_c3@outlook.com>, 2017
 # liuxuejiao <liuxuejiao_endless@126.com>, 2016
 # Roddy Shuler <roddy@endlessm.com>, 2016
 # tanyuanxing <tanyuanxingendless@126.com>, 2016
@@ -17,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 02:51+0000\n"
-"PO-Revision-Date: 2016-12-20 02:52+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2017-01-03 03:02+0000\n"
+"PO-Revision-Date: 2017-01-10 02:05+0000\n"
+"Last-Translator: e2f_cn c5 <e2f_cn_c3@outlook.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -732,23 +733,23 @@ msgstr "请联系support@endlessm.com或者加入我们的谷歌小组以解决�
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "是否停止重新格式化磁盘?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "重新格式化进程已开始。现在取消将使系统无法启动。"
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "停止重新格式化"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "继续重新格式化"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166

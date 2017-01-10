@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# naveenkumar p <naveenmtp@gmail.com>, 2012
+# naveenkumar palaniswamy <naveenmtp@gmail.com>, 2012
 # shkumar <shkumar@redhat.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-20 02:51+0000\n"
+"POT-Creation-Date: 2017-01-03 03:02+0000\n"
 "PO-Revision-Date: 2016-12-20 02:52+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Tamil (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ta/)\n"
