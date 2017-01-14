@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-03 03:02+0000\n"
-"PO-Revision-Date: 2017-01-09 10:58+0000\n"
+"POT-Creation-Date: 2017-01-10 02:49+0000\n"
+"PO-Revision-Date: 2017-01-10 04:54+0000\n"
 "Last-Translator: e2f_in c7 <e2f_in_c7@outlook.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
@@ -726,7 +726,7 @@ msgstr "कृपया support@endlessm.com से संपर्क करे
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr "डिस्क को पुनः स्वरूपित करना बंद करें"
+msgstr "डिस्क को पुनः स्वरूपित करना बंद करें?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
