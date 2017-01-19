@@ -195,7 +195,7 @@ read_keys (const gchar *path)
 }
 
 static void
-mount_and_read_keys ()
+mount_and_read_keys (void)
 {
   GError *error = NULL;
   UDisksClient *client = udisks_client_new_sync(NULL, &error);
@@ -241,7 +241,7 @@ mount_and_read_keys ()
 }
 
 static gboolean
-check_for_live_boot ()
+check_for_live_boot (void)
 {
   const gchar *force = g_getenv ("EI_FORCE_LIVE_BOOT");
   GError *error = NULL;
