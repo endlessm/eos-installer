@@ -1,7 +1,7 @@
 #include "gpt_lzma.h"
 
 // taken from the lzma documentation
-int init_decoder(lzma_stream *strm)
+static int init_decoder(lzma_stream *strm)
 {
 	// Initialize a .xz decoder. The decoder supports a memory usage limit
 	// and a set of flags.
