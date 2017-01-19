@@ -525,9 +525,6 @@ gis_diskimage_page_mount (GisPage *page)
 static void
 gis_diskimage_page_shown (GisPage *page)
 {
-  GisDiskImagePage *diskimage = GIS_DISK_IMAGE_PAGE (page);
-  GisDiskImagePagePrivate *priv = gis_diskimage_page_get_instance_private (diskimage);
-
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
   gis_diskimage_page_mount (page);

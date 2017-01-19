@@ -383,8 +383,6 @@ gis_install_page_is_efi_system (GisPage *page)
 static gboolean
 gis_install_page_convert_to_mbr (GisPage *page, GError **error)
 {
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
   static const char *cmd = "/usr/sbin/eos-repartition-mbr";
   g_autoptr(GSubprocessLauncher) launcher = NULL;

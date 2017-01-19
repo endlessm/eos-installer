@@ -72,8 +72,6 @@ toggle_leds (GisPage *page)
 static void
 gis_finished_page_shown (GisPage *page)
 {
-  GisFinishedPage *summary = GIS_FINISHED_PAGE (page);
-  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (summary);
   GError *error = gis_store_get_error();
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
