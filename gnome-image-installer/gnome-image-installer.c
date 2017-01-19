@@ -47,6 +47,8 @@
 #include "pages/finished/gis-finished-page.h"
 #include "pages/install/gis-install-page.h"
 
+#include "util/gis-store.h"
+
 /* main {{{1 */
 
 static gboolean force_new_user_mode;

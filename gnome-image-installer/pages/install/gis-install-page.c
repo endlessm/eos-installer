@@ -35,6 +35,7 @@
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <gio/gunixfdlist.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/types.h>
