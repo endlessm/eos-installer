@@ -59,7 +59,7 @@ struct _GisPageClass
   gboolean hide_forward_button;
   gboolean hide_backward_button;
   gboolean hide_window_controls;
-  char *page_id;
+  const char *page_id;
 
   GtkBuilder * (*get_builder) (GisPage *page);
   void         (*locale_changed) (GisPage *page);
