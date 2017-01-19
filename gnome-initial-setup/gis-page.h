@@ -73,7 +73,7 @@ struct _GisPageClass
 GType gis_page_get_type (void);
 
 char *       gis_page_get_title (GisPage *page);
-void         gis_page_set_title (GisPage *page, char *title);
+void         gis_page_set_title (GisPage *page, const char *title);
 const char *       gis_page_get_forward_text (GisPage *page);
 void         gis_page_set_forward_text (GisPage *page, const char *text);
 gboolean     gis_page_get_complete (GisPage *page);

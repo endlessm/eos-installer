@@ -248,7 +248,7 @@ gis_page_get_title (GisPage *page)
 }
 
 void
-gis_page_set_title (GisPage *page, char *title)
+gis_page_set_title (GisPage *page, const char *title)
 {
   GisPagePrivate *priv = gis_page_get_instance_private (page);
   g_clear_pointer (&priv->title, g_free);
