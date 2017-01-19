@@ -53,6 +53,9 @@ GType gis_diskimage_page_get_type (void);
 
 void gis_prepare_diskimage_page (GisDriver *driver);
 
+GQuark gis_image_error_quark (void);
+#define GIS_IMAGE_ERROR gis_image_error_quark()
+
 G_END_DECLS
 
 #endif /* __GIS_DISK_IMAGE_PAGE_H__ */

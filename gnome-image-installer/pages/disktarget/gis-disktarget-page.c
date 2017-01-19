@@ -39,7 +39,6 @@
 #include <errno.h>
 
 G_DEFINE_QUARK(disk-error, gis_disk_error);
-#define GIS_DISK_ERROR gis_disk_error_quark()
 
 struct _GisDiskTargetPagePrivate {
   UDisksClient *client;

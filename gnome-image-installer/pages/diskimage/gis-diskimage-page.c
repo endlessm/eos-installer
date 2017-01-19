@@ -55,7 +55,6 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE)
 #define WID(name) OBJ(GtkWidget*,name)
 
 G_DEFINE_QUARK(image-error, gis_image_error);
-#define GIS_IMAGE_ERROR gis_image_error_quark()
 
 /* A device-mapped copy of endless.img used in image boots.
  * We prefer to use this to endless.img from the filesystem for two reasons:

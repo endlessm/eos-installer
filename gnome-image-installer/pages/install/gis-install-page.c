@@ -67,7 +67,6 @@ typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 G_DEFINE_TYPE_WITH_PRIVATE (GisInstallPage, gis_install_page, GIS_TYPE_PAGE);
 
 G_DEFINE_QUARK(install-error, gis_install_error);
-#define GIS_INSTALL_ERROR gis_install_error_quark()
 
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
