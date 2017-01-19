@@ -19,9 +19,9 @@ libgisdisktarget_la_SOURCES =			\
 	gis-disktarget-page.c gis-disktarget-page.h	\
 	$(BUILT_SOURCES)
 
-libgisdisktarget_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../.." -I "$(srcdir)/../../util"
+libgisdisktarget_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../.." -I "$(srcdir)/../../util" $(WARN_CFLAGS)
 libgisdisktarget_la_LIBADD = $(INITIAL_SETUP_LIBS) $(IMAGE_INSTALLER_LIBS)
-libgisdisktarget_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
+libgisdisktarget_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined $(WARN_LDFLAGS)
 
 EXTRA_DIST =	\
 	disktarget.gresource.xml	\

@@ -20,9 +20,9 @@ libgisinstall_la_SOURCES =			\
 	gis-install-page.c gis-install-page.h	\
 	$(BUILT_SOURCES)
 
-libgisinstall_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../.." -I "$(srcdir)/../../util"
+libgisinstall_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../.." -I "$(srcdir)/../../util" $(WARN_CFLAGS)
 libgisinstall_la_LIBADD = $(INITIAL_SETUP_LIBS) $(IMAGE_INSTALLER_CFLAGS) ./../../util/libgiiutil.la
-libgisinstall_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
+libgisinstall_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined $(WARN_LDFLAGS)
 
 EXTRA_DIST =	\
 	install.gresource.xml	\
