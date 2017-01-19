@@ -70,7 +70,8 @@ enum {
     IMAGE_SIZE_BYTES,
     IMAGE_FILE,
     IMAGE_SIGNATURE,
-    ALIGN
+    ALIGN,
+    IMAGE_REQUIRED_SIZE
 };
 
 static void
@@ -81,6 +82,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
   gint64 size_bytes;
+  guint64 required_size;
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
@@ -93,44 +95,16 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       IMAGE_FILE, &image,
       IMAGE_SIGNATURE, &signature,
       IMAGE_SIZE_BYTES, &size_bytes,
+      IMAGE_REQUIRED_SIZE, &required_size,
       -1);
 
   gis_store_set_image_name (name);
   gis_store_set_image_size (size_bytes);
+  gis_store_set_required_size (required_size);
   g_free (name);
 
   file = g_file_new_for_path (image);
   gis_store_set_object (GIS_STORE_IMAGE, G_OBJECT (file));
-  if (g_str_has_suffix (image, ".gz"))
-    {
-      gint64 size = get_gzip_disk_image_size (image);
-      if (size <= 0)
-        {
-          size = 1*1024*1024*1024;
-          size *= 8;
-        }
-      gis_store_set_required_size (size);
-    }
-  else if (g_str_has_suffix (image, ".xz"))
-    {
-      gint64 size = get_xz_disk_image_size (image);
-      if (size <= 0)
-        {
-          size = 1*1024*1024*1024;
-          size *= 8;
-        }
-      gis_store_set_required_size (size);
-    }
-  else if (g_str_has_suffix (image, ".img") || g_strcmp0 (image, live_device_path) == 0)
-    {
-      gint64 size = get_disk_image_size (image);
-      if (size <= 0)
-        {
-          size = 1*1024*1024*1024;
-          size *= 8;
-        }
-      gis_store_set_required_size (size);
-    }
   g_object_unref(file);
 
   if (signature == NULL)
@@ -250,11 +224,31 @@ add_image (
     {
       gchar *size = NULL;
       gchar *displayname = NULL;
+      guint64 required_size = 0;
 
-      if ((g_str_has_suffix (image, ".img.gz") && get_gzip_is_valid_eos_gpt (image) == 1)
-       || (g_str_has_suffix (image, ".img.xz") && get_xz_is_valid_eos_gpt (image) == 1)
-       || (g_str_has_suffix (image, ".img") && get_is_valid_eos_gpt (image) == 1)
-       || (image_device != NULL && get_is_valid_eos_gpt (image_device) == 1))
+      /* TODO: make image size an out parameter of get_*_is_valid_eos_gpt */
+      if (g_str_has_suffix (image, ".img.gz") &&
+          get_gzip_is_valid_eos_gpt (image))
+        {
+          required_size = get_gzip_disk_image_size (image);
+        }
+      else if (g_str_has_suffix (image, ".img.xz") &&
+          get_xz_is_valid_eos_gpt (image))
+        {
+          required_size = get_xz_disk_image_size (image);
+        }
+      else if (image_device != NULL &&
+          get_is_valid_eos_gpt (image_device))
+        {
+          required_size = get_disk_image_size (image_device);
+        }
+      else if (g_str_has_suffix (image, ".img") &&
+          get_is_valid_eos_gpt (image))
+        {
+          required_size = get_disk_image_size (image);
+        }
+
+      if (required_size != 0)
         {
           displayname = get_display_name (image);
 
@@ -278,6 +272,7 @@ add_image (
                               IMAGE_SIZE_BYTES, size_bytes,
                               IMAGE_FILE, image_device != NULL ? image_device : image,
                               IMAGE_SIGNATURE, signature,
+                              IMAGE_REQUIRED_SIZE, required_size,
                               -1);
           g_free (size);
           g_free (displayname);

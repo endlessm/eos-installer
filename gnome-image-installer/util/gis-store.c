@@ -27,7 +27,7 @@
 #include "gis-store.h"
 
 static GObject *_objects[GIS_STORE_N_OBJECTS];
-static gint64 _size = 0;
+static guint64 _size = 0;
 static gint64 _image_size = 0;
 static gchar *_name = NULL;
 static gchar *_drive = NULL;
@@ -67,7 +67,7 @@ guint64 gis_store_get_required_size(void)
   return _size;
 }
 
-void gis_store_set_required_size(gint64 size)
+void gis_store_set_required_size(guint64 size)
 {
   _size = size;
 }
