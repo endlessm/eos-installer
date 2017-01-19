@@ -160,6 +160,16 @@ lookup_personality (const gchar *personality)
   if (g_str_equal (personality, "base"))
     return _("Basic");
 
+  if (g_str_equal (personality, "fnde_aluno"))
+    /* Translators: this is the name of a version of Educa Endless, which you
+       should leave untranslated. */
+    return _("Aluno");
+
+  if (g_str_equal (personality, "fnde_escola"))
+    /* Translators: this is the name of a version of Educa Endless, which you
+       should leave untranslated. */
+    return _("Escola");
+
   return NULL;
 }
 
@@ -205,6 +215,13 @@ static gchar *get_display_name(const gchar *fullname)
         {
           g_free (product);
           product = g_strdup (_("Endless OS (OEM)"));
+        }
+      else if (g_str_equal (product, "fnde"))
+        {
+          g_free (product);
+          /* Translators: this is a brand name, which you should leave
+             untranslated. */
+          product = g_strdup (_("Educa Endless"));
         }
 
       if (g_str_has_prefix (version, "eos"))
