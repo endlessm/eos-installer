@@ -154,6 +154,15 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
     }
 }
 
+static const gchar *
+lookup_personality (const gchar *personality)
+{
+  if (g_str_equal (personality, "base"))
+    return _("Basic");
+
+  return NULL;
+}
+
 static gchar *get_display_name(const gchar *fullname)
 {
   GRegex *reg;
@@ -169,6 +178,7 @@ static gchar *get_display_name(const gchar *fullname)
       g_autofree gchar *personality = g_match_info_fetch (info, 3);
       g_autofree gchar *type = g_match_info_fetch (info, 4);
       g_autofree gchar *language = NULL;
+      const gchar *known_personality = NULL;
 
       /* Split images not supported yet */
       if (strlen (type) > 0)
@@ -204,18 +214,29 @@ static gchar *get_display_name(const gchar *fullname)
           version = tmp;
         }
 
-      if (g_str_equal (personality, "base"))
+      /* Use a special-cased name if available; the language name if the
+       * personality is a valid locale; or the raw personality otherwise.
+       */
+      known_personality = lookup_personality (personality);
+      if (known_personality == NULL)
         {
-          g_free (personality);
-          personality = g_strdup(_("Basic"));
-          name = g_strdup_printf ("%s %s %s", product, version, personality);
+          /* This calls gnome_parse_locale(), which warns on malformed locales.
+           */
+          language = gnome_get_language_from_locale (personality, NULL);
+          if (language == NULL)
+            {
+              known_personality = personality;
+            }
+        }
+
+      if (known_personality != NULL)
+        {
+          name = g_strdup_printf ("%s %s %s", product, version, known_personality);
         }
       else
         {
-          g_free (language);
-          language = gnome_get_language_from_locale (personality, NULL);
           /* TODO: what is this stupid grumblegrumble... */
-          if (language != NULL && g_strrstr (language, "[") != NULL)
+          if (g_strrstr (language, "[") != NULL)
             {
               gchar **split = g_strsplit (language, " [", 0);
               g_free (language);
@@ -226,8 +247,7 @@ static gchar *get_display_name(const gchar *fullname)
           g_free (personality);
           personality = g_strdup (_("Full"));
 
-          if (language != NULL)
-            name = g_strdup_printf ("%s %s %s %s", product, version, language, personality);
+          name = g_strdup_printf ("%s %s %s %s", product, version, language, personality);
         }
     }
 
