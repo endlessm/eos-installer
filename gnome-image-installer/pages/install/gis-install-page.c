@@ -617,13 +617,13 @@ gis_install_page_verify (GisPage *page)
   const gchar *signature_path = gis_store_get_image_signature ();
   GFile *signature = g_file_new_for_path (signature_path);
   gint outfd;
-  gchar *args[] = { "gpg",
+  const gchar * const args[] = { "gpg",
                     "--enable-progress-filter", "--status-fd", "1",
                     /* Trust the one key in this keyring, and no others */
                     "--keyring", IMAGE_KEYRING,
                     "--no-default-keyring",
                     "--trust-model", "always",
-                    "--verify", (gchar *) signature_path, image_path, NULL };
+                    "--verify", signature_path, image_path, NULL };
   GError *error = NULL;
 
   if (!g_file_query_exists (signature, NULL))
@@ -635,7 +635,7 @@ gis_install_page_verify (GisPage *page)
       goto out;
     }
 
-  if (!g_spawn_async_with_pipes (NULL, args, NULL,
+  if (!g_spawn_async_with_pipes (NULL, (gchar **) args, NULL,
                                  G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
                                  NULL, NULL, &priv->gpg,
                                  NULL, &outfd, NULL, &error))
