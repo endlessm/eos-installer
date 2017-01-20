@@ -27,7 +27,7 @@
 #include "gis-store.h"
 
 static GObject *_objects[GIS_STORE_N_OBJECTS];
-static gint64 _size = 0;
+static guint64 _size = 0;
 static gint64 _image_size = 0;
 static gchar *_name = NULL;
 static gchar *_drive = NULL;
@@ -62,12 +62,12 @@ void gis_store_clear_object(gint key)
   _objects[key] = NULL;
 }
 
-gint64 gis_store_get_required_size()
+guint64 gis_store_get_required_size(void)
 {
   return _size;
 }
 
-void gis_store_set_required_size(gint64 size)
+void gis_store_set_required_size(guint64 size)
 {
   _size = size;
 }
@@ -82,7 +82,7 @@ void gis_store_set_image_size (gint64 size)
   _image_size = size;
 }
 
-gchar *gis_store_get_image_name()
+gchar *gis_store_get_image_name(void)
 {
   return _name;
 }
@@ -93,13 +93,13 @@ void gis_store_set_image_name(gchar *name)
   _name = g_strdup (name);
 }
 
-void gis_store_clear_image_name()
+void gis_store_clear_image_name(void)
 {
   g_free (_name);
   _name = NULL;
 }
 
-const gchar *gis_store_get_image_drive()
+const gchar *gis_store_get_image_drive(void)
 {
   return _drive;
 }
@@ -121,7 +121,7 @@ void gis_store_set_image_signature (const gchar *signature)
   _signature = g_strdup (signature);
 }
 
-GError *gis_store_get_error()
+GError *gis_store_get_error(void)
 {
   return _error;
 }
@@ -132,27 +132,27 @@ void gis_store_set_error(GError *error)
   _error = g_error_copy (error);
 }
 
-void gis_store_clear_error()
+void gis_store_clear_error(void)
 {
   g_clear_error (&_error);
 }
 
-void gis_store_enter_unattended()
+void gis_store_enter_unattended(void)
 {
   _unattended = TRUE;
 }
 
-gboolean gis_store_is_unattended()
+gboolean gis_store_is_unattended(void)
 {
   return _unattended;
 }
 
-void gis_store_enter_live_install()
+void gis_store_enter_live_install(void)
 {
   _live_install = TRUE;
 }
 
-gboolean gis_store_is_live_install()
+gboolean gis_store_is_live_install(void)
 {
   return _live_install;
 }
@@ -162,7 +162,7 @@ void gis_store_set_key_file(GKeyFile *keys)
   _keys = keys;
 }
 
-GKeyFile *gis_store_get_key_file()
+GKeyFile *gis_store_get_key_file(void)
 {
   return _keys;
 }

@@ -20,9 +20,9 @@ libgisfinished_la_SOURCES =			\
 	gis-finished-page.c gis-finished-page.h	\
 	$(BUILT_SOURCES)
 
-libgisfinished_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../../util" -I "$(srcdir)/../.."
+libgisfinished_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../../util" -I "$(srcdir)/../.." $(WARN_CFLAGS)
 libgisfinished_la_LIBADD = $(INITIAL_SETUP_LIBS) $(IMAGE_INSTALLER_CFLAGS)
-libgisfinished_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined
+libgisfinished_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined $(WARN_LDFLAGS)
 
 EXTRA_DIST =	\
 	finished.gresource.xml	\

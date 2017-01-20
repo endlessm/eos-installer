@@ -16,6 +16,8 @@
       <column type="gchararray"/>
       <!-- column-name align -->
       <column type="PangoAlignment"/>
+      <!-- column-name required_size -->
+      <column type="guint64"/>
     </columns>
   </object>
   <object class="GtkBox" id="diskimage-page">

@@ -35,6 +35,7 @@
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <gio/gunixfdlist.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -66,7 +67,6 @@ typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 G_DEFINE_TYPE_WITH_PRIVATE (GisInstallPage, gis_install_page, GIS_TYPE_PAGE);
 
 G_DEFINE_QUARK(install-error, gis_install_error);
-#define GIS_INSTALL_ERROR gis_install_error_quark()
 
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
@@ -383,8 +383,6 @@ gis_install_page_is_efi_system (GisPage *page)
 static gboolean
 gis_install_page_convert_to_mbr (GisPage *page, GError **error)
 {
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
   static const char *cmd = "/usr/sbin/eos-repartition-mbr";
   g_autoptr(GSubprocessLauncher) launcher = NULL;
@@ -619,13 +617,13 @@ gis_install_page_verify (GisPage *page)
   const gchar *signature_path = gis_store_get_image_signature ();
   GFile *signature = g_file_new_for_path (signature_path);
   gint outfd;
-  gchar *args[] = { "gpg",
+  const gchar * const args[] = { "gpg",
                     "--enable-progress-filter", "--status-fd", "1",
                     /* Trust the one key in this keyring, and no others */
                     "--keyring", IMAGE_KEYRING,
                     "--no-default-keyring",
                     "--trust-model", "always",
-                    "--verify", (gchar *) signature_path, image_path, NULL };
+                    "--verify", signature_path, image_path, NULL };
   GError *error = NULL;
 
   if (!g_file_query_exists (signature, NULL))
@@ -637,7 +635,7 @@ gis_install_page_verify (GisPage *page)
       goto out;
     }
 
-  if (!g_spawn_async_with_pipes (NULL, args, NULL,
+  if (!g_spawn_async_with_pipes (NULL, (gchar **) args, NULL,
                                  G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
                                  NULL, NULL, &priv->gpg,
                                  NULL, &outfd, NULL, &error))

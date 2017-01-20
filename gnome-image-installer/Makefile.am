@@ -29,6 +29,8 @@ gis-assistant-resources.h: $(gissrcdir)/gis-assistant.gresource.xml $(resource_f
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(gissrcdir) --generate-header $<
 BUILT_SOURCES += gis-assistant-resources.c gis-assistant-resources.h
 
+gnome_image_installer_CFLAGS = \
+	$(WARN_CFLAGS)
 gnome_image_installer_SOURCES = \
 	$(BUILT_SOURCES) \
 	gnome-image-installer.c gnome-image-installer.h
@@ -47,4 +49,5 @@ gnome_image_installer_LDADD =	\
 	pages/finished/libgisfinished.la \
 	$(INITIAL_SETUP_LIBS) \
 	$(IMAGE_INSTALLER_LIBS) \
-	-lm -lz
+	-lm -lz \
+	$(WARN_LDFLAGS)

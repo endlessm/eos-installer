@@ -40,34 +40,34 @@ GObject *gis_store_get_object(gint key);
 void gis_store_set_object(gint key, GObject *obj);
 void gis_store_clear_object(gint key);
 
-gint64 gis_store_get_required_size();
-void gis_store_set_required_size(gint64 size);
+guint64 gis_store_get_required_size(void);
+void gis_store_set_required_size(guint64 size);
 
 gint64 gis_store_get_image_size (void);
 void gis_store_set_image_size (gint64 size);
 
-gchar *gis_store_get_image_name();
+gchar *gis_store_get_image_name(void);
 void gis_store_set_image_name(gchar *name);
-void gis_store_clear_image_name();
+void gis_store_clear_image_name(void);
 
-const gchar *gis_store_get_image_drive();
+const gchar *gis_store_get_image_drive(void);
 void gis_store_set_image_drive(const gchar *drive);
 
 const gchar *gis_store_get_image_signature(void);
 void gis_store_set_image_signature(const gchar *signature);
 
-GError *gis_store_get_error();
+GError *gis_store_get_error(void);
 void gis_store_set_error(GError *error);
-void gis_store_clear_error();
+void gis_store_clear_error(void);
 
-void gis_store_enter_unattended();
-gboolean gis_store_is_unattended();
+void gis_store_enter_unattended(void);
+gboolean gis_store_is_unattended(void);
 
-void gis_store_enter_live_install();
-gboolean gis_store_is_live_install();
+void gis_store_enter_live_install(void);
+gboolean gis_store_is_live_install(void);
 
 void gis_store_set_key_file(GKeyFile *keys);
-GKeyFile *gis_store_get_key_file();
+GKeyFile *gis_store_get_key_file(void);
 
 G_END_DECLS
 

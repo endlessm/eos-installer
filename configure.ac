@@ -132,7 +132,15 @@ fi
 AC_SUBST(INITIAL_SETUP_CFLAGS)
 AC_SUBST(INITIAL_SETUP_LIBS)
 
-GNOME_COMPILE_WARNINGS([error])
+# -Wno-declaration-after-statement:
+#   Mixed decls are used a lot and are harmless.
+# -Wno-packed:
+#   gpt.h structs are naturally packed, so the compiler warns that the
+#   attribute is unnecessary. I am not quite comfortable removing it even
+#   though I believe the compiler's argument: it has value as documentation.
+AX_COMPILER_FLAGS([WARN_CFLAGS], [WARN_LDFLAGS], [], [],
+                  [-Wno-declaration-after-statement -Wno-packed])
+
 GNOME_MAINTAINER_MODE_DEFINES
 
 AC_SUBST(CFLAGS)

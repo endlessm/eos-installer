@@ -32,14 +32,6 @@
 #include <glib/gi18n.h>
 #include <udisks/udisks.h>
 
-#ifdef HAVE_CLUTTER
-#include <clutter-gtk/clutter-gtk.h>
-#endif
-
-#ifdef HAVE_CHEESE
-#include <cheese-gtk.h>
-#endif
-
 #include "pages/language/cc-common-language.h"
 #include "pages/language/gis-language-page.h"
 #include "pages/keyboard/gis-keyboard-page.h"
@@ -55,15 +47,11 @@
 #include "pages/finished/gis-finished-page.h"
 #include "pages/install/gis-install-page.h"
 
+#include "util/gis-store.h"
+
 /* main {{{1 */
 
 static gboolean force_new_user_mode;
-static const gchar *system_setup_pages[] = {
-    "account",
-    "display",
-    "endless_eula",
-    "location"
-};
 
 typedef void (*PreparePage) (GisDriver *driver);
 
@@ -207,7 +195,7 @@ read_keys (const gchar *path)
 }
 
 static void
-mount_and_read_keys ()
+mount_and_read_keys (void)
 {
   GError *error = NULL;
   UDisksClient *client = udisks_client_new_sync(NULL, &error);
@@ -253,7 +241,7 @@ mount_and_read_keys ()
 }
 
 static gboolean
-check_for_live_boot ()
+check_for_live_boot (void)
 {
   const gchar *force = g_getenv ("EI_FORCE_LIVE_BOOT");
   GError *error = NULL;
@@ -360,19 +348,7 @@ gis_page_get_type();
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
 
-#ifdef HAVE_CHEESE
-  cheese_gtk_init (NULL, NULL);
-#endif
-
   gtk_init (&argc, &argv);
-  ev_init ();
-
-#if HAVE_CLUTTER
-  if (gtk_clutter_init (NULL, NULL) != CLUTTER_INIT_SUCCESS) {
-    g_critical ("Clutter-GTK init failed");
-    exit (1);
-  }
-#endif
 
   gis_ensure_login_keyring ("gis");
 
@@ -387,7 +363,6 @@ gis_page_get_type();
 
   g_object_unref (driver);
   g_option_context_free (context);
-  ev_shutdown ();
 
   return status;
 }
