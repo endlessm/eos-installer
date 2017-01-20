@@ -32,10 +32,14 @@ static gint64 _image_size = 0;
 static gchar *_name = NULL;
 static gchar *_drive = NULL;
 static gchar *_signature = NULL;
+static gchar *_target_drive = NULL;
 static GError *_error = NULL;
 static gboolean _unattended = FALSE;
+static gchar *_vendor = NULL;
+static gchar *_product = NULL;
 static gboolean _live_install = FALSE;
 static GKeyFile *_keys = NULL;
+static GisStoreTarget _targets[GIS_STORE_N_TARGETS] = { { 0, }, };
 
 GObject *gis_store_get_object(gint key)
 {
@@ -82,7 +86,7 @@ void gis_store_set_image_size (gint64 size)
   _image_size = size;
 }
 
-gchar *gis_store_get_image_name()
+const gchar *gis_store_get_image_name()
 {
   return _name;
 }
@@ -121,6 +125,31 @@ void gis_store_set_image_signature (const gchar *signature)
   _signature = g_strdup (signature);
 }
 
+const GisStoreTarget *gis_store_get_target(GisStoreTargetName target)
+{
+    g_assert (GIS_STORE_N_TARGETS > target);
+    return (const GisStoreTarget *) &_targets[target];
+}
+
+void gis_store_set_target(GisStoreTargetName target, const gchar *image, const gchar *signature, const gchar *device)
+{
+    g_assert (GIS_STORE_N_TARGETS > target);
+    g_free (_targets[target].image);
+    g_free (_targets[target].signature);
+    g_free (_targets[target].device);
+    _targets[target].target = target;
+    _targets[target].image = g_strdup (image);
+    _targets[target].signature = g_strdup (signature);
+    _targets[target].device = g_strdup (device);
+    _targets[target].write_size = 0;
+}
+
+void gis_store_set_target_write_size(GisStoreTargetName target, gint64 write_size)
+{
+    g_assert (GIS_STORE_N_TARGETS > target);
+    _targets[target].write_size = write_size;
+}
+
 GError *gis_store_get_error()
 {
   return _error;
@@ -137,14 +166,26 @@ void gis_store_clear_error()
   g_clear_error (&_error);
 }
 
-void gis_store_enter_unattended()
+void gis_store_enter_unattended(const gchar *vendor, const gchar *product)
 {
   _unattended = TRUE;
+  _vendor = g_strdup (vendor);
+  _product = g_strdup (product);
 }
 
 gboolean gis_store_is_unattended()
 {
   return _unattended;
+}
+
+const gchar *gis_store_get_vendor (void)
+{
+  return _vendor;
+}
+
+const gchar *gis_store_get_product (void)
+{
+  return _product;
 }
 
 void gis_store_enter_live_install()

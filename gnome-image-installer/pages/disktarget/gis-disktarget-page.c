@@ -134,13 +134,7 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
 
   if (gis_store_is_unattended())
     {
-      if (gtk_tree_model_iter_n_children (model, NULL) > 1)
-        {
-          const gchar *text = gtk_label_get_text (OBJ (GtkLabel*, "suitable_disks_label"));
-          GError *error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
-          gis_store_set_error (error);
-          g_clear_error (&error);
-        }
+      /* Targets have already been set or errored out, nothing to do here */
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
     }
   else
@@ -253,6 +247,49 @@ gis_disktarget_page_get_root_drive (UDisksClient *client)
   return drive;
 }
 
+static gboolean
+gis_disktarget_page_check_target(GisPage *page, const GisStoreTarget *target, UDisksBlock *block)
+{
+  gboolean match = FALSE;
+
+  if (target == NULL)
+    return FALSE;
+
+  if (target->image == NULL)
+    return FALSE;
+
+  if (target->device == NULL)
+    return FALSE;
+
+  if (g_str_has_prefix (target->device, "/dev/"))
+    {
+      match = g_str_has_prefix (udisks_block_get_device (block), target->device);
+    }
+  else
+    {
+      g_autofree gchar *path = g_build_path ("/", "/dev", target->device, NULL);
+      match = g_str_has_prefix (udisks_block_get_device (block), path);
+    }
+
+  if (match)
+    {
+      GFile *file = g_file_new_for_path (target->image);
+
+      if (target->target == GIS_STORE_TARGET_PRIMARY)
+        {
+          gis_store_set_object (GIS_STORE_IMAGE, G_OBJECT (file));
+          gis_store_set_object (GIS_STORE_BLOCK_DEVICE, G_OBJECT (block));
+        }
+      else
+        {
+          gis_store_set_object (GIS_STORE_SECONDARY_IMAGE, G_OBJECT (file));
+          gis_store_set_object (GIS_STORE_SECONDARY_BLOCK_DEVICE, G_OBJECT (block));
+        }
+    }
+
+  return match;
+}
+
 static void
 gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 {
@@ -263,18 +300,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GtkListStore *store = OBJ(GtkListStore*, "target_store");
   GtkTreeIter i;
-  gchar *umodel = NULL;
   UDisksDrive *root = NULL;
   const gchar *image_drive = NULL;
-
-  if (gis_store_is_unattended())
-    {
-      GKeyFile *keys = gis_store_get_key_file();
-      if (keys != NULL)
-        {
-          umodel = g_key_file_get_string (keys, "Unattended", "model", NULL);
-        }
-    }
 
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
@@ -303,21 +330,40 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
       skip_if (drive == root, "it is the root device");
 
-      if (gis_store_is_unattended() && umodel != NULL)
-        {
-          const gchar *model = udisks_drive_get_model (drive);
-          skip_if (!g_str_equal (umodel, model),
-                   "its model '%s' does not match '%s'", model, umodel);
-        }
-
       skip_if (udisks_drive_get_optical (drive), "optical");
-      skip_if (udisks_drive_get_ejectable (drive), "ejectable");
+
+      if (gis_store_is_unattended() && udisks_drive_get_ejectable (drive))
+        {
+          skip_if (!udisks_drive_get_media_available (drive), "no media in ejectable drive");
+        }
+      else
+        {
+          skip_if (udisks_drive_get_ejectable (drive), "ejectable");
+        }
 
       block = udisks_client_get_block_for_drive(client, drive, TRUE);
       skip_if (block == NULL, "no corresponding block object");
 
       skip_if (0 == g_strcmp0 (udisks_block_get_drive (block), image_drive),
                "it hosts the image partition");
+
+      if (gis_store_is_unattended())
+        {
+          const GisStoreTarget *target = gis_store_get_target (GIS_STORE_TARGET_SECONDARY);
+
+          skip_if (gis_disktarget_page_check_target (page, target, block),
+                   "found secondary target");
+
+          skip_if (gis_store_get_object (GIS_STORE_BLOCK_DEVICE) != NULL,
+                   "primary target already found");
+
+          target = gis_store_get_target (GIS_STORE_TARGET_PRIMARY);
+          skip_if (!gis_disktarget_page_check_target (page, target, block),
+                   "not the primary target (or no primary target set)");
+
+          priv->has_valid_disks = TRUE;
+        }
+
 #undef skip_if
 
       if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
@@ -381,6 +427,7 @@ gis_disktarget_page_shown (GisPage *page)
 
   if (gis_store_get_error() != NULL)
     {
+      g_warning("ERROR ERROR");
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
       return;
     }

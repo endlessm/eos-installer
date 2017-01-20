@@ -55,6 +55,8 @@
 #include "pages/finished/gis-finished-page.h"
 #include "pages/install/gis-install-page.h"
 
+#include "util/gis-store.h"
+
 /* main {{{1 */
 
 static gboolean force_new_user_mode;
@@ -90,6 +92,8 @@ static PageData page_table[] = {
 #define LOCALE_KEY "locale"
 #define VENDOR_KEY "vendor"
 #define PRODUCT_KEY "product"
+#define IMAGE_KEY "filename"
+#define DRIVE_KEY "blockdevice"
 
 static void
 destroy_pages_after (GisAssistant *assistant,
@@ -150,59 +154,97 @@ read_sanitized_string (const gchar *filename,
   return sanitized;
 }
 
+static gboolean
+target_computer (GKeyFile *keys, gchar *vendor, gchar *product)
+{
+  gboolean found = FALSE;
+  gsize i = 0;
+  gchar **groups = g_key_file_get_groups (keys, NULL);
+
+  while (groups[i] != NULL && found == FALSE)
+    {
+      if (g_str_has_prefix (groups[i], "Computer"))
+        {
+          g_autofree gchar *target_vendor = g_key_file_get_string (keys, groups[i], VENDOR_KEY, NULL);
+          g_autofree gchar *target_product = g_key_file_get_string (keys, groups[i], PRODUCT_KEY, NULL);
+
+          found = (g_ascii_strcasecmp (vendor, target_vendor) == 0
+                && g_ascii_strcasecmp (product, target_product) == 0);
+        }
+      i++;
+    }
+
+  g_strfreev (groups);
+  return found;
+}
+
+static void
+collect_images (GKeyFile *keys, const gchar *path)
+{
+  GisStoreTargetName target = GIS_STORE_TARGET_PRIMARY;
+  gsize i = 0;
+  gchar **groups = g_key_file_get_groups (keys, NULL);
+
+  while (groups[i] != NULL && target < GIS_STORE_N_TARGETS)
+    {
+      if (g_str_has_prefix (groups[i], "Image"))
+        {
+          g_autofree gchar *image = g_key_file_get_string (keys, groups[i], IMAGE_KEY, NULL);
+          g_autofree gchar *drive = g_key_file_get_string (keys, groups[i], DRIVE_KEY, NULL);
+
+          if (image != NULL)
+            {
+              g_autofree gchar *img = g_build_path ("/", path, image, NULL);
+              g_autofree gchar *signature = g_strjoin (NULL, img, ".asc", NULL);
+              if (g_file_test(img, G_FILE_TEST_EXISTS)
+               && g_file_test(signature, G_FILE_TEST_EXISTS))
+                {
+                  gis_store_set_target (target, img, signature, drive);
+                }
+              target++;
+            }
+        }
+      i++;
+    }
+
+  g_strfreev (groups);
+}
+
 static void
 read_keys (const gchar *path)
 {
-  gchar *ini = g_build_path ("/", path, "install.ini", NULL);
+  gchar *ini = g_build_path ("/", path, "unattended.ini", NULL);
   GKeyFile *keys = g_key_file_new();
 
   if (g_key_file_load_from_file (keys, ini, G_KEY_FILE_NONE, NULL))
     {
-      gchar *locale = g_key_file_get_string (keys, EOS_GROUP, LOCALE_KEY, NULL);
+      g_autofree gchar *vendor = NULL;
+      g_autofree gchar *product = NULL;
+      GError *error = NULL;
+      g_autofree gchar *locale = g_key_file_get_string (keys, EOS_GROUP, LOCALE_KEY, NULL);
+
       if (locale != NULL)
         {
           gis_language_page_preselect_language (locale);
-          g_free (locale);
         }
 
       gis_store_set_key_file (keys);
 
-      if (g_key_file_has_group (keys, UNATTENDED_GROUP))
+      if (NULL == (vendor = read_sanitized_string ("/sys/class/dmi/id/sys_vendor", &error)) ||
+          NULL == (product = read_sanitized_string ("/sys/class/dmi/id/product_name", &error)))
         {
-          gchar *vendor = NULL;
-          gchar *product = NULL;
-          GError *error = NULL;
-
-          if (NULL == (vendor = read_sanitized_string ("/sys/class/dmi/id/sys_vendor", &error)) ||
-              NULL == (product = read_sanitized_string ("/sys/class/dmi/id/product_name", &error)))
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-            }
-          else
-            {
-              gchar *target_vendor = g_key_file_get_string (keys, UNATTENDED_GROUP, VENDOR_KEY, NULL);
-              gchar *target_product = g_key_file_get_string (keys, UNATTENDED_GROUP, PRODUCT_KEY, NULL);
-
-              if (g_ascii_strcasecmp (vendor, target_vendor) == 0
-               && g_ascii_strcasecmp (product, target_product) == 0)
-                {
-                  /* We just set the flag here, rest of the magic happens as we go */
-                  gis_store_enter_unattended();
-                }
-              else
-                {
-                  g_warning ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
-                           target_product, target_vendor, product, vendor);
-                  /* Continue in attended mode */
-                }
-              g_free (target_vendor);
-              g_free (target_product);
-            }
-
-            g_free (vendor);
-            g_free (product);
+          g_warning ("%s", error->message);
+          g_clear_error (&error);
         }
+      else
+        {
+          if (target_computer (keys, vendor, product))
+            {
+              gis_store_enter_unattended(vendor, product);
+            }
+        }
+
+      collect_images (keys, path);
     }
 }
 
