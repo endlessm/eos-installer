@@ -1,6 +1,8 @@
 AC_INIT([eos-installer],[3.10.1.1])
 AC_CONFIG_MACRO_DIR([m4])
 
+AX_IS_RELEASE([git-directory])
+
 AM_INIT_AUTOMAKE([dist-xz no-dist-gzip foreign tar-ustar])
 AM_SILENT_RULES([yes])
 
