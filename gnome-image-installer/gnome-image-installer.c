@@ -253,16 +253,19 @@ mount_and_read_keys ()
 }
 
 static gboolean
-check_for_live_boot ()
+check_for_live_boot (gchar **uuid)
 {
-  const gchar *force = g_getenv ("EI_FORCE_LIVE_BOOT");
+  const gchar *force = g_getenv ("EI_FORCE_LIVE_BOOT_UUID");
   GError *error = NULL;
   g_autofree gchar *cmdline = NULL;
   gboolean live_boot = FALSE;
+  g_autoptr(GRegex) reg = NULL;
+  g_autoptr(GMatchInfo) info = NULL;
 
   if (force != NULL && *force != '\0')
     {
-      g_print ("EI_FORCE_LIVE_BOOT='%s', set live_boot to TRUE\n", force);
+      g_print ("EI_FORCE_LIVE_BOOT_UUID set to %s\n", force);
+      *uuid = g_strdup (force);
       return TRUE;
     }
 
@@ -276,6 +279,14 @@ check_for_live_boot ()
   live_boot = g_regex_match_simple ("\\bendless\\.live_boot\\b", cmdline, 0, 0);
 
   g_print ("set live_boot to %u from /proc/cmdline: %s\n", live_boot, cmdline);
+
+  reg = g_regex_new ("UUID=([^\\s]*)", 0, 0, NULL);
+  g_regex_match (reg, cmdline, 0, &info);
+  if (g_match_info_matches (info))
+    {
+      *uuid = g_match_info_fetch (info, 1);
+      g_print ("set UUID to %s\n", *uuid);
+    }
 
   return live_boot;
 }
@@ -342,6 +353,7 @@ main (int argc, char *argv[])
   GisDriver *driver;
   int status;
   GOptionContext *context;
+  gchar *uuid = NULL;
 
 gis_page_get_type();
 
@@ -376,8 +388,11 @@ gis_page_get_type();
 
   gis_ensure_login_keyring ("gis");
 
-  if (check_for_live_boot ())
-    gis_store_enter_live_install ();
+  if (check_for_live_boot (&uuid))
+    {
+      gis_store_enter_live_install ();
+      gis_store_set_image_uuid (uuid);
+    }
 
   mount_and_read_keys ();
 

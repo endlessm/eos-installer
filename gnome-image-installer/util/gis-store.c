@@ -36,6 +36,7 @@ static GError *_error = NULL;
 static gboolean _unattended = FALSE;
 static gboolean _live_install = FALSE;
 static GKeyFile *_keys = NULL;
+static gchar *_uuid = NULL;
 
 GObject *gis_store_get_object(gint key)
 {
@@ -121,7 +122,18 @@ void gis_store_set_image_signature (const gchar *signature)
   _signature = g_strdup (signature);
 }
 
-GError *gis_store_get_error()
+const gchar *gis_store_get_image_uuid (void)
+{
+  return _uuid;
+}
+
+void gis_store_set_image_uuid (const gchar *uuid)
+{
+  g_free (_uuid);
+  _uuid = g_strdup (uuid);
+}
+
+GError *gis_store_get_error(void)
 {
   return _error;
 }

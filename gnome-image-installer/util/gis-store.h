@@ -53,6 +53,9 @@ void gis_store_clear_image_name();
 const gchar *gis_store_get_image_drive();
 void gis_store_set_image_drive(const gchar *drive);
 
+const gchar *gis_store_get_image_uuid(void);
+void gis_store_set_image_uuid(const gchar *uuid);
+
 const gchar *gis_store_get_image_signature(void);
 void gis_store_set_image_signature(const gchar *signature);
 
