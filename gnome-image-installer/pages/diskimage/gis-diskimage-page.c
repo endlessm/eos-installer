@@ -340,6 +340,7 @@ file_exists (
  * various reasons is invisible in directory listings. We can determine the
  * name that the image "should" have by reading /endless/live, and find the
  * corresponding signature file.
+ * For ISOs the disk image is called endless.squash.
  */
 static gboolean
 gis_diskimage_page_add_live_image (
@@ -350,16 +351,21 @@ gis_diskimage_page_add_live_image (
 {
   g_autofree gchar *endless_img_path = g_build_path (
       "/", path, "endless", "endless.img", NULL);
+  g_autofree gchar *endless_squash_path = g_build_path (
+      "/", path, "endless", "endless.squash", NULL);
   g_autofree gchar *live_flag_path = g_build_path (
       "/", path, "endless", "live", NULL);
   g_autofree gchar *live_flag_contents = NULL;
   g_autofree gchar *live_sig_basename = NULL;
   g_autofree gchar *live_sig = NULL;
+  gchar *endless_path = NULL;
 
-  if (!file_exists (endless_img_path, error))
-    {
-      return FALSE;
-    }
+  if (file_exists (endless_img_path, error))
+    endless_path = endless_img_path;
+  else if (file_exists (endless_squash_path, error))
+    endless_path = endless_squash_path;
+  else
+    return FALSE;
 
   if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL,
         error))
@@ -390,13 +396,19 @@ gis_diskimage_page_add_live_image (
 
   if (file_exists (live_device_path, NULL))
     {
-      add_image (store, endless_img_path, live_device_path, live_sig);
+      add_image (store, endless_path, live_device_path, live_sig);
     }
-  else
+  else if (file_exists (endless_img_path, error))
     {
       g_print ("can't find image device %s; will use %s directly\n",
                live_device_path, endless_img_path);
       add_image (store, endless_img_path, NULL, live_sig);
+    }
+  else
+    {
+      g_print ("cannot find neither %s nor %s\n",
+               live_device_path, endless_path);
+      return FALSE;
     }
 
   return TRUE;
@@ -511,15 +523,18 @@ gis_diskimage_page_mount (GisPage *page)
       UDisksObject *object = UDISKS_OBJECT (l->data);
       UDisksBlock *block = udisks_object_peek_block (object);
       UDisksFilesystem *fs = NULL;
+      gboolean is_live = gis_store_is_live_install ();
       const gchar *const*mounts = NULL;
       const gchar *dev = NULL;
+      const gchar *uuid = gis_store_get_image_uuid ();
 
       if (block == NULL)
         continue;
 
       dev = udisks_block_get_preferred_device (block);
 
-      if (!g_str_equal (label, udisks_block_get_id_label (block)))
+      if (!((is_live && g_str_equal (uuid, udisks_block_get_id_uuid (block))) ||
+          g_str_equal (label, udisks_block_get_id_label (block))))
         continue;
 
       if (udisks_block_get_hint_ignore (block))
@@ -535,7 +550,7 @@ gis_diskimage_page_mount (GisPage *page)
           continue;
         }
 
-      g_print ("found %s partition at %s\n", label, dev);
+      g_print ("found label or UUID partition at %s\n", dev);
 
       mounts = udisks_filesystem_get_mount_points (fs);
 
