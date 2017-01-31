@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-17 02:50+0000\n"
-"PO-Revision-Date: 2016-12-20 02:52+0000\n"
+"POT-Creation-Date: 2017-01-24 03:12+0000\n"
+"PO-Revision-Date: 2017-01-24 03:13+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Telugu (http://www.transifex.com/endless-mobile-inc/eos-installer/language/te/)\n"
 "MIME-Version: 1.0\n"
@@ -38,12 +38,12 @@ msgid "_Cancel"
 msgstr "రద్దుచేయి (_C)"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:350
+#: ../gnome-image-installer/gnome-image-installer.c:338
 msgid "Force new user mode"
 msgstr "కొత్త వాడుకరి రీతికి వత్తిడిచేయి"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:354
+#: ../gnome-image-installer/gnome-image-installer.c:342
 msgid "- GNOME initial setup"
 msgstr "- గ్నోమ్ ఆరంభ అమరిక"
 
@@ -618,39 +618,57 @@ msgstr "మీరు ఈ ఐచ్ఛికాలను ఏ క్షణాన�
 msgid "_Start using GNOME 3"
 msgstr "గ్నోమ్ ౩ ని వాడటం మొదలుపెట్టండి (_S)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:149
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:436
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:525
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:122
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:467
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:556
 #, c-format
 msgid "No suitable images were found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:182
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:134
+msgid "Basic"
+msgstr ""
+
+#. Translators: this is the name of a version of Educa Endless, which you
+#. should leave untranslated.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:139
+msgid "Aluno"
+msgstr ""
+
+#. Translators: this is the name of a version of Educa Endless, which you
+#. should leave untranslated.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:144
+msgid "Escola"
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:175
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Endless OS"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:187
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:180
 msgid "Endless OS Installer"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:192
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
 msgid "Endless OS (non-free)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
 msgid "Endless OS (OEM)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:210
-msgid "Basic"
+#. Translators: this is a brand name, which you should leave
+#. untranslated.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
+msgid "Educa Endless"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:227
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Full"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:563
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:591
 msgid "Reformat with Endless OS"
 msgstr ""
 
@@ -663,7 +681,7 @@ msgstr ""
 msgid "Use existing version:"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:125
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:124
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
@@ -671,11 +689,11 @@ msgid ""
 "with %s (%.02f GB)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:362
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:361
 msgid "Finish"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:429
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:428
 msgid "Select Disk"
 msgstr ""
 
@@ -702,7 +720,7 @@ msgstr ""
 msgid "No suitable disks found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:117
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:115
 msgid "Reformatting Finished"
 msgstr ""
 
@@ -745,31 +763,31 @@ msgstr ""
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166
 #: ../gnome-image-installer/pages/install/gis-install-page.c:207
-#: ../gnome-image-installer/pages/install/gis-install-page.c:399
-#: ../gnome-image-installer/pages/install/gis-install-page.c:426
+#: ../gnome-image-installer/pages/install/gis-install-page.c:397
+#: ../gnome-image-installer/pages/install/gis-install-page.c:424
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:523
-#: ../gnome-image-installer/pages/install/gis-install-page.c:667
+#: ../gnome-image-installer/pages/install/gis-install-page.c:521
+#: ../gnome-image-installer/pages/install/gis-install-page.c:665
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:562
+#: ../gnome-image-installer/pages/install/gis-install-page.c:560
 #, c-format
 msgid "Image verification error."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:634
+#: ../gnome-image-installer/pages/install/gis-install-page.c:632
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:716
+#: ../gnome-image-installer/pages/install/gis-install-page.c:714
 msgid "Reformatting"
 msgstr ""
 
