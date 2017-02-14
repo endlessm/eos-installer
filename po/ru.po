@@ -6,14 +6,14 @@
 # Alexsey Nadtochey <irbis4lan@yandex.com>, 2012
 # Julia <juliette.tux@gmail.com>, 2013
 # Stas Solovey <whats_up@tut.by>, 2015-2016
-# valera5505 <valera5505@gmail.com>, 2014
+# Valery Kirichenko <valera5505@gmail.com>, 2014
 # Yuri Myasoedov <omerta13@yandex.ru>, 2012-2013
 # Yuri Myasoedov <ymyasoedov@yandex.ru>, 2012-2013,2015
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-24 03:12+0000\n"
+"POT-Creation-Date: 2017-02-07 02:49+0000\n"
 "PO-Revision-Date: 2017-01-24 03:13+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Russian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ru/)\n"
@@ -42,12 +42,12 @@ msgid "_Cancel"
 msgstr "_Отмена"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:338
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "Принудительно использовать режим нового пользователя"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:342
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
 msgstr "— Первоначальная настройка GNOME"
 
@@ -623,8 +623,8 @@ msgid "_Start using GNOME 3"
 msgstr "_Начать работу с GNOME 3"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:122
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:467
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:556
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:479
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:571
 #, c-format
 msgid "No suitable images were found."
 msgstr ""
@@ -672,7 +672,7 @@ msgstr ""
 msgid "Full"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:591
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:606
 msgid "Reformat with Endless OS"
 msgstr ""
 
