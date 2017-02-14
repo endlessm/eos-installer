@@ -8,7 +8,7 @@
 # chenzibing <chenzibing_endless@126.com>, 2016
 # CN C2 <e2f48d4sf5ds@outlook.com>, 2016
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
-# e2f_cn c5 <e2f_cn_c3@outlook.com>, 2017
+# e2f_cn c5 <jarvisn@ecinnovations.com>, 2017
 # liuxuejiao <liuxuejiao_endless@126.com>, 2016
 # Roddy Shuler <roddy@endlessm.com>, 2016
 # tanyuanxing <tanyuanxingendless@126.com>, 2016
@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-24 03:12+0000\n"
+"POT-Creation-Date: 2017-02-07 02:49+0000\n"
 "PO-Revision-Date: 2017-01-24 03:13+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
@@ -47,12 +47,12 @@ msgid "_Cancel"
 msgstr "取消(_C)"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:338
+#: ../gnome-image-installer/gnome-image-installer.c:350
 msgid "Force new user mode"
 msgstr "强制新建用户模式"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:342
+#: ../gnome-image-installer/gnome-image-installer.c:354
 msgid "- GNOME initial setup"
 msgstr "GNOME初始设置"
 
@@ -628,8 +628,8 @@ msgid "_Start using GNOME 3"
 msgstr "开始使用 GNOME 3(_S)"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:122
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:467
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:556
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:479
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:571
 #, c-format
 msgid "No suitable images were found."
 msgstr "没找到可用图像。"
@@ -677,7 +677,7 @@ msgstr ""
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:591
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:606
 msgid "Reformat with Endless OS"
 msgstr "使用Endless操作系统重新格式化"
 
