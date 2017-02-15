@@ -64,6 +64,15 @@ G_DEFINE_QUARK(image-error, gis_image_error);
  */
 static const gchar * const live_device_path = "/dev/mapper/endless-image";
 
+/* Deliberately out-of-order so that sorting is exercised in English */
+static const gchar * const sea_locales[] = {
+  "th",
+  "id",
+  "vi",
+  NULL
+};
+static const gsize num_sea_locales = sizeof (sea_locales) / sizeof (sea_locales[0]);
+
 enum {
     IMAGE_NAME = 0,
     IMAGE_SIZE,
@@ -149,6 +158,15 @@ get_locale_name (const gchar *locale)
   return language;
 }
 
+static gint
+compare_localized_name (gconstpointer a_ptr, gconstpointer b_ptr)
+{
+  const gchar *a = *(const gchar * const *) a_ptr;
+  const gchar *b = *(const gchar * const *) b_ptr;
+
+  return g_utf8_collate (a, b);
+}
+
 static const gchar *
 lookup_personality (const gchar *personality)
 {
@@ -164,6 +182,29 @@ lookup_personality (const gchar *personality)
     /* Translators: this is the name of a version of Educa Endless, which you
        should leave untranslated. */
     return _("Escola");
+
+  /* Southeast Asia */
+  if (g_str_equal (personality, "sea"))
+    {
+      g_autoptr(GPtrArray) localized_names = g_ptr_array_new_full (
+          num_sea_locales, g_free);
+      const gchar * const *l;
+
+      for (l = sea_locales; *l != NULL; l++)
+        {
+          gchar *localized_name = get_locale_name (*l);
+
+          if (localized_name != NULL)
+            g_ptr_array_add (localized_names, localized_name);
+        }
+
+      if (G_UNLIKELY (localized_names->len == 0))
+        return NULL;
+
+      g_ptr_array_sort (localized_names, compare_localized_name);
+      g_ptr_array_add (localized_names, NULL);
+      return g_strjoinv (", ", (gchar **) localized_names->pdata);
+    }
 
   return NULL;
 }
