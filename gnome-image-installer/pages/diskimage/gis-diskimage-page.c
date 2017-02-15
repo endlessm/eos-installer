@@ -154,6 +154,28 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
     }
 }
 
+static gchar *
+get_locale_name (const gchar *locale)
+{
+  /* This calls gnome_parse_locale(), which warns on malformed locales.
+  */
+  gchar *language = gnome_get_language_from_locale (locale, NULL);
+
+  if (language != NULL)
+    {
+      /* TODO: what is this stupid grumblegrumble... */
+      if (g_strrstr (language, "[") != NULL)
+        {
+          gchar **split = g_strsplit (language, " [", 0);
+          g_free (language);
+          language = g_strdup (split[0]);
+          g_strfreev (split);
+        }
+    }
+
+  return language;
+}
+
 static const gchar *
 lookup_personality (const gchar *personality)
 {
@@ -237,9 +259,7 @@ static gchar *get_display_name(const gchar *fullname)
       known_personality = lookup_personality (personality);
       if (known_personality == NULL)
         {
-          /* This calls gnome_parse_locale(), which warns on malformed locales.
-           */
-          language = gnome_get_language_from_locale (personality, NULL);
+          language = get_locale_name (personality);
           if (language == NULL)
             {
               known_personality = personality;
@@ -252,15 +272,6 @@ static gchar *get_display_name(const gchar *fullname)
         }
       else
         {
-          /* TODO: what is this stupid grumblegrumble... */
-          if (g_strrstr (language, "[") != NULL)
-            {
-              gchar **split = g_strsplit (language, " [", 0);
-              g_free (language);
-              language = g_strdup (split[0]);
-              g_strfreev (split);
-            }
-
           g_free (personality);
           personality = g_strdup (_("Full"));
 
