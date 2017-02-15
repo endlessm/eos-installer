@@ -342,6 +342,32 @@ file_exists (
   return FALSE;
 }
 
+/**
+ * Returns: the first of @a or @b which exists; or %NULL with a combined error
+ * if neither does.
+ */
+static gchar *
+first_existing (
+    gchar *a,
+    gchar *b,
+    GError **error)
+{
+  GError *error2 = NULL;
+
+  if (file_exists (a, &error2))
+    return a;
+
+  if (file_exists (b, error))
+    {
+      g_clear_error (&error2);
+      return b;
+    }
+
+  g_prefix_error (error, "%s; ", error2->message);
+  g_clear_error (&error2);
+  return NULL;
+}
+
 /* live USB sticks have an unpacked disk image named endless.img, which for
  * various reasons is invisible in directory listings. We can determine the
  * name that the image "should" have by reading /endless/live, and find the
@@ -364,17 +390,13 @@ gis_diskimage_page_add_live_image (
   g_autofree gchar *live_flag_contents = NULL;
   g_autofree gchar *live_sig_basename = NULL;
   g_autofree gchar *live_sig = NULL;
-  gchar *endless_path = NULL;
+  gchar *endless_path; /* either endless_img_path or endless_squash_path */
 
-  if (file_exists (endless_img_path, error))
-    endless_path = endless_img_path;
-  else if (file_exists (endless_squash_path, error))
-    endless_path = endless_squash_path;
-  else
+  endless_path = first_existing (endless_img_path, endless_squash_path, error);
+  if (endless_path == NULL)
     return FALSE;
 
-  if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL,
-        error))
+  if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL, error))
     {
       g_prefix_error (error, "Couldn't read %s: ", live_flag_path);
       return FALSE;
@@ -404,7 +426,7 @@ gis_diskimage_page_add_live_image (
     {
       add_image (store, endless_path, live_device_path, live_sig);
     }
-  else if (file_exists (endless_img_path, error))
+  else if (endless_path == endless_img_path)
     {
       g_print ("can't find image device %s; will use %s directly\n",
                live_device_path, endless_img_path);
@@ -412,8 +434,10 @@ gis_diskimage_page_add_live_image (
     }
   else
     {
-      g_print ("cannot find neither %s nor %s\n",
-               live_device_path, endless_path);
+      // TODO: mount the squashfs image and read endless.img from within it?
+      g_set_error (error, GIS_IMAGE_ERROR, 0,
+          "can't find image device %s; and can't use %s directly\n",
+          live_device_path, endless_path);
       return FALSE;
     }
 
