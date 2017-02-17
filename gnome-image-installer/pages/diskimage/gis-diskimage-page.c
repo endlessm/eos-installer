@@ -64,6 +64,15 @@ G_DEFINE_QUARK(image-error, gis_image_error);
  */
 static const gchar * const live_device_path = "/dev/mapper/endless-image";
 
+/* Deliberately out-of-order so that sorting is exercised in English */
+static const gchar * const sea_locales[] = {
+  "th",
+  "id",
+  "vi",
+  NULL
+};
+static const gsize num_sea_locales = sizeof (sea_locales) / sizeof (sea_locales[0]);
+
 enum {
     IMAGE_NAME = 0,
     IMAGE_SIZE,
@@ -127,6 +136,37 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
     }
 }
 
+static gchar *
+get_locale_name (const gchar *locale)
+{
+  /* This calls gnome_parse_locale(), which warns on malformed locales.
+  */
+  gchar *language = gnome_get_language_from_locale (locale, NULL);
+
+  if (language != NULL)
+    {
+      /* TODO: what is this stupid grumblegrumble... */
+      if (g_strrstr (language, "[") != NULL)
+        {
+          gchar **split = g_strsplit (language, " [", 0);
+          g_free (language);
+          language = g_strdup (split[0]);
+          g_strfreev (split);
+        }
+    }
+
+  return language;
+}
+
+static gint
+compare_localized_name (gconstpointer a_ptr, gconstpointer b_ptr)
+{
+  const gchar *a = *(const gchar * const *) a_ptr;
+  const gchar *b = *(const gchar * const *) b_ptr;
+
+  return g_utf8_collate (a, b);
+}
+
 static const gchar *
 lookup_personality (const gchar *personality)
 {
@@ -142,6 +182,29 @@ lookup_personality (const gchar *personality)
     /* Translators: this is the name of a version of Educa Endless, which you
        should leave untranslated. */
     return _("Escola");
+
+  /* Southeast Asia */
+  if (g_str_equal (personality, "sea"))
+    {
+      g_autoptr(GPtrArray) localized_names = g_ptr_array_new_full (
+          num_sea_locales, g_free);
+      const gchar * const *l;
+
+      for (l = sea_locales; *l != NULL; l++)
+        {
+          gchar *localized_name = get_locale_name (*l);
+
+          if (localized_name != NULL)
+            g_ptr_array_add (localized_names, localized_name);
+        }
+
+      if (G_UNLIKELY (localized_names->len == 0))
+        return NULL;
+
+      g_ptr_array_sort (localized_names, compare_localized_name);
+      g_ptr_array_add (localized_names, NULL);
+      return g_strjoinv (", ", (gchar **) localized_names->pdata);
+    }
 
   return NULL;
 }
@@ -210,9 +273,7 @@ static gchar *get_display_name(const gchar *fullname)
       known_personality = lookup_personality (personality);
       if (known_personality == NULL)
         {
-          /* This calls gnome_parse_locale(), which warns on malformed locales.
-           */
-          language = gnome_get_language_from_locale (personality, NULL);
+          language = get_locale_name (personality);
           if (language == NULL)
             {
               known_personality = personality;
@@ -225,15 +286,6 @@ static gchar *get_display_name(const gchar *fullname)
         }
       else
         {
-          /* TODO: what is this stupid grumblegrumble... */
-          if (g_strrstr (language, "[") != NULL)
-            {
-              gchar **split = g_strsplit (language, " [", 0);
-              g_free (language);
-              language = g_strdup (split[0]);
-              g_strfreev (split);
-            }
-
           g_free (personality);
           personality = g_strdup (_("Full"));
 
@@ -336,6 +388,32 @@ file_exists (
   return FALSE;
 }
 
+/**
+ * Returns: the first of @a or @b which exists; or %NULL with a combined error
+ * if neither does.
+ */
+static gchar *
+first_existing (
+    gchar *a,
+    gchar *b,
+    GError **error)
+{
+  GError *error2 = NULL;
+
+  if (file_exists (a, &error2))
+    return a;
+
+  if (file_exists (b, error))
+    {
+      g_clear_error (&error2);
+      return b;
+    }
+
+  g_prefix_error (error, "%s; ", error2->message);
+  g_clear_error (&error2);
+  return NULL;
+}
+
 /* live USB sticks have an unpacked disk image named endless.img, which for
  * various reasons is invisible in directory listings. We can determine the
  * name that the image "should" have by reading /endless/live, and find the
@@ -358,17 +436,13 @@ gis_diskimage_page_add_live_image (
   g_autofree gchar *live_flag_contents = NULL;
   g_autofree gchar *live_sig_basename = NULL;
   g_autofree gchar *live_sig = NULL;
-  gchar *endless_path = NULL;
+  gchar *endless_path; /* either endless_img_path or endless_squash_path */
 
-  if (file_exists (endless_img_path, error))
-    endless_path = endless_img_path;
-  else if (file_exists (endless_squash_path, error))
-    endless_path = endless_squash_path;
-  else
+  endless_path = first_existing (endless_img_path, endless_squash_path, error);
+  if (endless_path == NULL)
     return FALSE;
 
-  if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL,
-        error))
+  if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL, error))
     {
       g_prefix_error (error, "Couldn't read %s: ", live_flag_path);
       return FALSE;
@@ -398,7 +472,7 @@ gis_diskimage_page_add_live_image (
     {
       add_image (store, endless_path, live_device_path, live_sig);
     }
-  else if (file_exists (endless_img_path, error))
+  else if (endless_path == endless_img_path)
     {
       g_print ("can't find image device %s; will use %s directly\n",
                live_device_path, endless_img_path);
@@ -406,8 +480,10 @@ gis_diskimage_page_add_live_image (
     }
   else
     {
-      g_print ("cannot find neither %s nor %s\n",
-               live_device_path, endless_path);
+      // TODO: mount the squashfs image and read endless.img from within it?
+      g_set_error (error, GIS_IMAGE_ERROR, 0,
+          "can't find image device %s; and can't use %s directly\n",
+          live_device_path, endless_path);
       return FALSE;
     }
 
