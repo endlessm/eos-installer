@@ -598,7 +598,7 @@ gis_install_page_gpg_progress (GIOChannel *source, GIOCondition cond, GisPage *p
          * considers the size to be 0.
          */
         if (full == 0)
-          full = gis_store_get_image_size ();
+          full = gis_store_get_required_size ();
 
         frac = curr/full;
         gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), frac);
