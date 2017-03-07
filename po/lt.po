@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-07 02:49+0000\n"
+"POT-Creation-Date: 2017-02-28 02:49+0000\n"
 "PO-Revision-Date: 2017-01-24 03:13+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/lt/)\n"
@@ -617,57 +617,57 @@ msgstr "Galite bet kada pakeisti šiuos nustatymus sistemos nustatymuose."
 msgid "_Start using GNOME 3"
 msgstr "_Pradėti naudoti GNOME 3"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:122
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:479
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:571
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:131
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:647
 #, c-format
 msgid "No suitable images were found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:134
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:174
 msgid "Basic"
 msgstr ""
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:139
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Aluno"
 msgstr ""
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:144
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:184
 msgid "Escola"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:175
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Endless OS"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:180
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS Installer"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:185
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:248
 msgid "Endless OS (non-free)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:190
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
 msgstr ""
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:197
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:260
 msgid "Educa Endless"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:290
 msgid "Full"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:606
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:682
 msgid "Reformat with Endless OS"
 msgstr ""
 
