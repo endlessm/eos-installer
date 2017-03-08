@@ -48,5 +48,4 @@ if $extra_active; then
 fi
 
 # Disable the updater for this boot
-systemctl stop eos-updater.timer
-systemctl mask --runtime eos-updater.timer
+systemctl mask --runtime --now eos-autoupdater.timer eos-autoupdater.service
