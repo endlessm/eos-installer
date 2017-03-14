@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-28 02:49+0000\n"
-"PO-Revision-Date: 2017-01-26 07:42+0000\n"
+"POT-Creation-Date: 2017-03-07 02:48+0000\n"
+"PO-Revision-Date: 2017-03-12 15:31+0000\n"
 "Last-Translator: georgian balan <braila222@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -634,13 +634,13 @@ msgstr "De baza"
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Aluno"
-msgstr ""
+msgstr "Aluno"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:184
 msgid "Escola"
-msgstr ""
+msgstr "Escola"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
@@ -663,7 +663,7 @@ msgstr "Endless OS (OEM)"
 #. untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:260
 msgid "Educa Endless"
-msgstr ""
+msgstr "Educatie Endless"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:290
 msgid "Full"
