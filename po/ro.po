@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# bogdomania <mintoi.bogdan@gmail.com>, 2014
+# Bogdan Mințoi <mintoi.bogdan@gmail.com>, 2014
 # Daniel Șerbănescu <daniel [at] serbanescu [dot] dk>, 2015
 # georgian balan <braila222@gmail.com>, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 02:48+0000\n"
-"PO-Revision-Date: 2017-03-12 15:31+0000\n"
+"POT-Creation-Date: 2017-04-04 01:49+0000\n"
+"PO-Revision-Date: 2017-04-06 16:14+0000\n"
 "Last-Translator: georgian balan <braila222@gmail.com>\n"
 "Language-Team: Romanian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -797,7 +797,7 @@ msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
-msgstr "Rapid,rapid de folosit si puternic-cu sau fara internet\n\nEndless OS are incorporate peste 100 de aplicatii,care il face folositor din momentul in care il pornesti."
+msgstr "Rapid,usor de folosit si puternic - cu sau fara internet\n\nEndless OS are incorporate peste 100 de aplicatii,care il face folositor din momentul in care il pornesti."
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
