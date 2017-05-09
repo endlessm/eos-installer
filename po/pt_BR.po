@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 01:54+0000\n"
-"PO-Revision-Date: 2017-03-06 14:04+0000\n"
+"POT-Creation-Date: 2017-05-02 01:53+0000\n"
+"PO-Revision-Date: 2017-05-05 17:38+0000\n"
 "Last-Translator: Mariana Barbosa <mariana@endlessm.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -677,7 +677,7 @@ msgstr "Full"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:682
 msgid "Reformat with Endless OS"
-msgstr "Reformatar com o Endless OS"
+msgstr "Formatar com o Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
@@ -694,7 +694,7 @@ msgstr "Utilize versões existentes:"
 msgid ""
 "The location you have chosen is too small - you need more space to reformat "
 "with %s (%.02f GB)"
-msgstr "A capacidade do local selecionado é muito pequena - você precisa de mais espaço para reformatar %s (%.02f GB)"
+msgstr "A capacidade do local selecionado é muito pequena - você precisa de mais espaço para formatar %s (%.02f GB)"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:361
 msgid "Finish"
@@ -706,7 +706,7 @@ msgstr "Selecione o disco"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr "Selecione a unidade de disco que você deseja reformatar com o Endless OS"
+msgstr "Selecione a unidade de disco que você deseja formatar com o Endless OS"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -721,7 +721,7 @@ msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr "Você parece possuir múltiplas partições no disco (por exemplo, unidades C: e D:). Ao reformatar com o Endless OS você apagará <b>todas as partições</b> no disco selecionado. Clique aqui para confirmar."
+msgstr "Você parece possuir múltiplas partições no disco (por exemplo, unidades C: e D:). Ao formatar com o Endless OS você apagará <b>todas as partições</b> no disco selecionado. Clique aqui para confirmar."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
@@ -729,7 +729,7 @@ msgstr "Nenhum disco adequado encontrado."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:115
 msgid "Reformatting Finished"
-msgstr "Reformatação concluída"
+msgstr "Formatação concluída"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -749,7 +749,7 @@ msgstr "Favor contatar support@endlessm.com ou entre no nosso Google Group para 
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr "Parar a reformatação do disco?"
+msgstr "Parar a formatação do disco?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
@@ -760,12 +760,12 @@ msgstr "O processo de formatação já começou. Cancelar agora vai deixar esse 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr "Parar a reformatação"
+msgstr "Parar a formatação"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr "Continuar a reformatação"
+msgstr "Continuar a formatação"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166
@@ -796,7 +796,7 @@ msgstr "O arquivo de assinatura %s do Endless OS não existe."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:714
 msgid "Reformatting"
-msgstr "Reformatando"
+msgstr "Formatando"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 msgid ""
@@ -819,4 +819,4 @@ msgstr "Requer mais dados"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
 msgid "Reformat"
-msgstr "Reformatar"
+msgstr "Formatar"
