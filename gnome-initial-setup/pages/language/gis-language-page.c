@@ -553,7 +553,6 @@ show_factory_dialog (GisLanguagePage *page)
   GtkButton *testmode_button;
   GtkDialog *factory_dialog;
   GtkImage *serial_image;
-  GtkLabel *personality_label;
   GtkLabel *sdcard_label;
   GtkLabel *serial_label;
   GtkLabel *product_id_label;
@@ -569,7 +568,6 @@ show_factory_dialog (GisLanguagePage *page)
   factory_dialog = OBJ (GtkDialog *, "factory-dialog");
   version_label = OBJ (GtkLabel *, "software-version");
   product_id_label = OBJ (GtkLabel *, "product-id");
-  personality_label = OBJ (GtkLabel *, "personality");
   sdcard_label = OBJ (GtkLabel *, "sd-card");
   serial_label = OBJ (GtkLabel *, "serial-text");
   serial_image = OBJ (GtkImage *, "serial-barcode");
@@ -578,9 +576,6 @@ show_factory_dialog (GisLanguagePage *page)
 
   version = get_software_version ();
   gtk_label_set_text (version_label, version);
-
-  gtk_label_set_text (personality_label,
-                      gis_driver_get_personality (driver));
 
   product_id_text = get_product_id ();
   if (product_id_text) {

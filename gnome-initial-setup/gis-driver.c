@@ -33,10 +33,6 @@
 
 #define GIS_TYPE_DRIVER_MODE (gis_driver_mode_get_type ())
 
-#define PERSONALITY_FILE_PATH "/etc/EndlessOS/personality.conf"
-#define PERSONALITY_CONFIG_GROUP "Personality"
-#define PERSONALITY_KEY "PersonalityName"
-
 /* Statically include this for now. Maybe later
  * we'll generate this from glib-mkenums. */
 GType
@@ -77,7 +73,6 @@ struct _GisDriverPrivate {
   ActUser *user_account;
   const gchar *user_password;
 
-  gchar *personality;
   gchar *lang_id;
 
   GisDriverMode mode;
@@ -98,7 +93,6 @@ gis_driver_finalize (GObject *object)
   GisDriver *driver = GIS_DRIVER (object);
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
 
-  g_free (priv->personality);
   g_free (priv->lang_id);
 
   G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
@@ -245,13 +239,6 @@ gis_driver_get_mode (GisDriver *driver)
   return priv->mode;
 }
 
-const gchar *
-gis_driver_get_personality (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  return priv->personality;
-}
-
 gboolean
 gis_driver_is_small_screen (void)
 {
@@ -329,30 +316,12 @@ window_realize_cb (GtkWidget *widget,
 }
 
 static void
-gis_driver_read_personality_file (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  GKeyFile *keyfile = g_key_file_new ();
-  gchar *personality = NULL;
-
-  if (g_key_file_load_from_file (keyfile, PERSONALITY_FILE_PATH,
-                                 G_KEY_FILE_NONE, NULL))
-    personality = g_key_file_get_string (keyfile, PERSONALITY_CONFIG_GROUP,
-                                         PERSONALITY_KEY, NULL);
-  priv->personality = personality;
-
-  g_key_file_free (keyfile);
-}
-
-static void
 gis_driver_startup (GApplication *app)
 {
   GisDriver *driver = GIS_DRIVER (app);
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
 
   G_APPLICATION_CLASS (gis_driver_parent_class)->startup (app);
-
-  gis_driver_read_personality_file (driver);
 
   priv->main_window = GTK_WINDOW (gis_window_new (driver));
 
