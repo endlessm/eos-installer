@@ -120,11 +120,14 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
       g_object_unref(block);
       if (udisks_drive_get_size(drive) < gis_store_get_required_size())
         {
-          gchar *msg = g_strdup_printf (
-            _("The location you have chosen is too small - you need more space to reformat with %s (%.02f GB)"),
-            gis_store_get_image_name(), gis_store_get_required_size()/1024.0/1024.0/1024.0);
+          g_autofree gchar *size = g_format_size_full (
+              gis_store_get_required_size (),
+              G_FORMAT_SIZE_LONG_FORMAT);
+          g_autofree gchar *msg = g_strdup_printf (
+              _("The location you have chosen is too small: you need %s to reformat with %s."),
+              size,
+              gis_store_get_image_name());
           gtk_label_set_text (OBJ (GtkLabel*, "too_small_label"), msg);
-          g_free (msg);
           gtk_widget_hide (WID ("confirm_box"));
           gtk_widget_show (WID ("error_box"));
           return;
@@ -329,8 +332,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       targetname = g_strdup_printf("%s %s",
                                    udisks_drive_get_vendor(drive),
                                    udisks_drive_get_model(drive));
-      targetsize = g_strdup_printf("%.02f GB",
-                                   udisks_drive_get_size(drive)/1024.0/1024.0/1024.0);
+      targetsize = g_format_size_full (udisks_drive_get_size(drive),
+                                       G_FORMAT_SIZE_DEFAULT);
       gtk_list_store_append(store, &i);
       gtk_list_store_set(store, &i, 0, targetname, 1, targetsize,
                                     2, G_OBJECT(block), 3, has_data_partitions, -1);

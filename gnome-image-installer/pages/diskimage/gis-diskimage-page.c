@@ -352,7 +352,7 @@ add_image (
       if (displayname != NULL)
         {
           goffset size_bytes = g_file_info_get_size (fi);
-          size = g_strdup_printf ("%.02f GB", (float)size_bytes/1024.0/1024.0/1024.0);
+          size = g_format_size_full (size_bytes, G_FORMAT_SIZE_DEFAULT);
 
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
