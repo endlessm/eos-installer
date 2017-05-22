@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-02 01:53+0000\n"
-"PO-Revision-Date: 2017-04-06 14:33+0000\n"
+"POT-Creation-Date: 2017-05-16 01:54+0000\n"
+"PO-Revision-Date: 2017-05-16 14:13+0000\n"
 "Last-Translator: Septira Taruna <septira@endlessm.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -51,12 +51,12 @@ msgstr "- GNOME Penyiapan Awal"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:333
 msgid "No password"
-msgstr "Tanpa sandi"
+msgstr "Tanpa kata sandi"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:336
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:450
 msgid "Passwords do not match"
-msgstr "Sandi tak cocok"
+msgstr "Kata sandi tidak cocok"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:582
 msgid "Failed to register account"
@@ -68,7 +68,7 @@ msgstr "Tak ada cara yang didukung untuk mengotentikasi dengan domain ini"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
-msgstr "Gagal bergabung domain"
+msgstr "Gagal bergabung dengan domain"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:898
 msgid "Failed to log into domain"
@@ -744,7 +744,7 @@ msgstr "Silakan hubungi support@endlessm.com atau bergabunglah dengan Google Gro
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr "Stop memformat disk?"
+msgstr "Berhenti memformat disk?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
@@ -755,7 +755,7 @@ msgstr "Proses format ulang telah dimulai. Membatalkan sekarang akan menyebabkan
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr "Stop Memformat Ulang"
+msgstr "Berhenti Memformat Ulang"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
@@ -798,7 +798,7 @@ msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
-msgstr "Cepat, mudah dipakai dan sangat berdaya guna – dengan ataupun tanpa internet.\n\nEndless OS dilengkapi dengan lebih dari 100 aplikasi, sehingga langsung dapat bermanfaat begitu mulai Anda nyalakan."
+msgstr "Cepat, mudah, dan hebat – dengan ataupun tanpa internet.\n\nEndless OS dilengkapi dengan lebih dari 100 aplikasi, langsung bermanfaat begitu mulai Anda nyalakan."
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
