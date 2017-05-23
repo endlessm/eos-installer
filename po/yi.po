@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 01:54+0000\n"
-"PO-Revision-Date: 2017-04-16 02:24+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2017-05-22 16:30+0000\n"
+"PO-Revision-Date: 2017-05-22 16:31+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Yiddish (http://www.transifex.com/endless-mobile-inc/eos-installer/language/yi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -425,25 +425,25 @@ msgstr ""
 msgid "No languages found"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
 msgid "Disabled"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
 #, c-format
 msgid "SD Card: %s"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
 msgid "Welcome"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr ""
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
 msgid "Let's set up your computer..."
 msgstr ""
 
@@ -679,19 +679,18 @@ msgstr ""
 msgid "Use existing version:"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:124
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
-"The location you have chosen is too small - you need more space to reformat "
-"with %s (%.02f GB)"
+"The location you have chosen is too small: you need %s to reformat with %s."
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:361
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
 msgid "Finish"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:428
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
 msgid "Select Disk"
 msgstr ""
 

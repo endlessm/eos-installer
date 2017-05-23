@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 01:54+0000\n"
-"PO-Revision-Date: 2017-03-03 22:07+0000\n"
+"POT-Creation-Date: 2017-05-22 16:30+0000\n"
+"PO-Revision-Date: 2017-05-22 16:31+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: French (http://www.transifex.com/endless-mobile-inc/eos-installer/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -434,25 +434,25 @@ msgstr "Sélectionner"
 msgid "No languages found"
 msgstr "Aucune langue trouvée"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
 msgid "Disabled"
 msgstr "Désactivé"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
 #, c-format
 msgid "SD Card: %s"
 msgstr "Carte SD : %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "Bienvenue sur Endless !"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
 msgid "Let's set up your computer..."
 msgstr "Configurons votre ordinateur..."
 
@@ -688,19 +688,18 @@ msgstr "Est-ce la version d'Endless OS que vous souhaitez utiliser ? Si ce n'e
 msgid "Use existing version:"
 msgstr "Utiliser la version existante :"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:124
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
-"The location you have chosen is too small - you need more space to reformat "
-"with %s (%.02f GB)"
-msgstr "L'emplacement que vous avez choisi est trop petit - vous avez besoin d'espace supplémentaire pour reformater avec %s (%.02f Go)"
+"The location you have chosen is too small: you need %s to reformat with %s."
+msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:361
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
 msgid "Finish"
 msgstr "Terminer"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:428
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
 msgid "Select Disk"
 msgstr "Sélectionnez un disque"
 

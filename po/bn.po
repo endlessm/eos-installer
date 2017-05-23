@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 01:54+0000\n"
-"PO-Revision-Date: 2017-01-24 03:13+0000\n"
+"POT-Creation-Date: 2017-05-22 16:30+0000\n"
+"PO-Revision-Date: 2017-05-22 16:31+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/eos-installer/language/bn/)\n"
 "MIME-Version: 1.0\n"
@@ -428,25 +428,25 @@ msgstr "নির্বাচন করুন"
 msgid "No languages found"
 msgstr "কোনো ভাষা পাওয়া যায়নি"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
 msgid "Disabled"
 msgstr "অকার্যকর"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
 #, c-format
 msgid "SD Card: %s"
 msgstr "SD কার্ড: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
 msgid "Welcome"
 msgstr "স্বাগতম"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "এন্ডলেসে স্বাগতম!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
 msgid "Let's set up your computer..."
 msgstr "চলুন আপনার কম্পিউটার সেটআপ করি..."
 
@@ -682,19 +682,18 @@ msgstr "আপনি কি এই এন্ডলেস OS ভার্সন�
 msgid "Use existing version:"
 msgstr "বিদ্যমান ভার্সন ব্যবহার করুন:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:124
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
-"The location you have chosen is too small - you need more space to reformat "
-"with %s (%.02f GB)"
-msgstr "আপনি যে স্থান বেছেছেন তা অনেক ছোট- পুনঃ ফর্ম্যাট করতে আপনার আরও বেশি স্থান দরকার %s সাথে (%.02f জিবি)"
+"The location you have chosen is too small: you need %s to reformat with %s."
+msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:361
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
 msgid "Finish"
 msgstr "শেষ করুন"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:428
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
 msgid "Select Disk"
 msgstr "ডিস্ক নির্বাচন করুন"
 

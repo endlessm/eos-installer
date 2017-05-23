@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 01:54+0000\n"
-"PO-Revision-Date: 2017-03-04 13:46+0000\n"
+"POT-Creation-Date: 2017-05-22 16:30+0000\n"
+"PO-Revision-Date: 2017-05-22 16:31+0000\n"
 "Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Thai (http://www.transifex.com/endless-mobile-inc/eos-installer/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -427,25 +427,25 @@ msgstr "เลือก"
 msgid "No languages found"
 msgstr "ไม่พบภาษา"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
 msgid "Disabled"
 msgstr "ปิดใช้งาน"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
 #, c-format
 msgid "SD Card: %s"
 msgstr "SD Card: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
 msgid "Welcome"
 msgstr "ยินดีต้อนรับ"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "ยินดีต้อนรับสู่ Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
 msgid "Let's set up your computer..."
 msgstr "มาตั้งค่าคอมพิวเตอร์ของคุณกัน..."
 
@@ -681,19 +681,18 @@ msgstr "คุณต้องการใช้ Endless เวอร์ชั่
 msgid "Use existing version:"
 msgstr "ใช้เวอร์ชั่นที่มีอยู่:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:124
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
-"The location you have chosen is too small - you need more space to reformat "
-"with %s (%.02f GB)"
-msgstr "ตำแหน่งที่คุณเลือกเล็กเกินไป คุณต้องใช้พื้นที่มากกว่านี้ในการฟอร์แมตใหม่ด้วย %s (%.02f GB)"
+"The location you have chosen is too small: you need %s to reformat with %s."
+msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:361
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
 msgid "Finish"
 msgstr "เสร็จสิ้น"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:428
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
 msgid "Select Disk"
 msgstr "เลือกดิสก์"
 

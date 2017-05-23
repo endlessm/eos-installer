@@ -18,9 +18,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 01:54+0000\n"
-"PO-Revision-Date: 2017-03-06 03:23+0000\n"
-"Last-Translator: CN C2 <e2f48d4sf5ds@outlook.com>\n"
+"POT-Creation-Date: 2017-05-22 16:30+0000\n"
+"PO-Revision-Date: 2017-05-22 16:31+0000\n"
+"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -436,25 +436,25 @@ msgstr "选择"
 msgid "No languages found"
 msgstr "未检测到其他语言"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:608
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
 msgid "Disabled"
 msgstr "已禁用"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:610
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
 #, c-format
 msgid "SD Card: %s"
 msgstr "SD卡: %s"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:689
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
 msgid "Welcome"
 msgstr "欢迎"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:693
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
 msgstr "欢迎进入Endless!"
 
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:695
+#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
 msgid "Let's set up your computer..."
 msgstr "请设置您的电脑……"
 
@@ -690,19 +690,18 @@ msgstr "您是否想使用该版本的Endless操作系统？如果不是，请�
 msgid "Use existing version:"
 msgstr "使用现有版本："
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:124
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
-"The location you have chosen is too small - you need more space to reformat "
-"with %s (%.02f GB)"
-msgstr "您选择的位置空间不足 - 需要更多空间才能使用%s重新格式化(%.02f GB)"
+"The location you have chosen is too small: you need %s to reformat with %s."
+msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:361
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
 msgid "Finish"
 msgstr "完成"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:428
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
 msgid "Select Disk"
 msgstr "选择磁盘"
 
