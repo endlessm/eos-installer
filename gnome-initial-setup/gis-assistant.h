@@ -70,6 +70,7 @@ GtkWidget *gis_assistant_get_titlebar     (GisAssistant *assistant);
 
 void      gis_assistant_locale_changed    (GisAssistant *assistant);
 void      gis_assistant_save_data         (GisAssistant *assistant);
+void      gis_assistant_enable_controls   (GisAssistant *assistant);
 
 G_END_DECLS
 

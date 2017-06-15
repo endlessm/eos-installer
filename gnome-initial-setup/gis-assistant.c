@@ -59,6 +59,8 @@ struct _GisAssistantPrivate
 
   GList *pages;
   GisPage *current_page;
+
+  gboolean enable_controls;
 };
 typedef struct _GisAssistantPrivate GisAssistantPrivate;
 
@@ -237,6 +239,7 @@ update_navigation_buttons (GisAssistant *assistant)
   is_last_page = (page_priv->link->next == NULL);
 
   gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->titlebar),
+                                        priv->enable_controls &&
                                         !gis_page_get_hide_window_controls (page));
 
   if (is_last_page)
@@ -455,6 +458,13 @@ gis_assistant_save_data (GisAssistant *assistant)
 
   for (l = priv->pages; l != NULL; l = l->next)
     gis_page_save_data (l->data);
+}
+
+void
+gis_assistant_enable_controls (GisAssistant *assistant)
+{
+  GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
+  priv->enable_controls = TRUE;
 }
 
 static void
