@@ -1,3 +1,4 @@
-debian/tmp/usr/share/gnome-session/sessions/eos-installer.session
-debian/tmp/usr/share/gdm/greeter/applications/eos-setup-shell.desktop
 debian/tmp/lib/systemd/system/run-mount-eosimages.mount
+debian/tmp/usr/share/gdm/greeter/applications/eos-setup-shell.desktop
+debian/tmp/usr/share/gnome-session/sessions/eos-installer.session
+debian/tmp/usr/share/gnome-shell/modes/initial-setup.json
