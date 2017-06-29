@@ -289,7 +289,11 @@ rebuild_pages_cb (GisDriver *driver)
   assistant = gis_driver_get_assistant (driver);
   current_page = gis_assistant_get_current_page (assistant);
 
-  page_data = page_table;
+  /* Omit welcome page entirely in live mode */
+  if (gis_store_is_live_install ())
+    page_data = page_table + 1;
+  else
+    page_data = page_table;
 
   if (current_page != NULL) {
     destroy_pages_after (assistant, current_page);
@@ -306,8 +310,8 @@ rebuild_pages_cb (GisDriver *driver)
 
   gis_assistant_locale_changed (assistant);
 
-  /* Skip welcome page in unattended and live install mode */
-  if (gis_store_is_unattended () || gis_store_is_live_install ())
+  /* Skip welcome page in unattended mode */
+  if (gis_store_is_unattended () && !gis_store_is_live_install ())
     gis_assistant_next_page (assistant);
 }
 
