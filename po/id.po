@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 01:58+0000\n"
-"PO-Revision-Date: 2017-05-24 14:14+0000\n"
+"POT-Creation-Date: 2017-05-30 01:52+0000\n"
+"PO-Revision-Date: 2017-06-18 09:45+0000\n"
 "Last-Translator: Septira Taruna <septira@endlessm.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -64,7 +64,7 @@ msgstr "Gagal mendaftar akun"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
-msgstr "Tidak ada cara untuk mengotentikasi domain ini"
+msgstr "Tidak ada cara yang didukung untuk mengotentikasi domain ini"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
@@ -94,13 +94,13 @@ msgstr "Nama _Lengkap"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
 msgid "_Username"
-msgstr "Nama Pengg_una"
+msgstr "Nama Ak_un Pengguna"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr "Nama pengguna akan dipakai untuk menamai folder pribadi Anda, dan tak dapat diubah."
+msgstr "Nama akun pengguna akan dipakai untuk menamai folder pribadi Anda, dan tak dapat diubah."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
@@ -108,7 +108,7 @@ msgstr "Kata _Sandi"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
 msgid "_Confirm password"
-msgstr "_Konfirmasi Kata Sandi:"
+msgstr "_Konfirmasi kata sandi:"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
@@ -159,7 +159,7 @@ msgid ""
 "enrolled in the domain. Please have your network administrator\n"
 "type their domain password here, and choose a unique computer\n"
 "name for your computer."
-msgstr "Untuk memakai log masuk enterprise, komputer ini perlu didaftarkan\nke dalam domain. Mintalah administrator jaringan Anda mengetikkan\nsandi domainnya di sini, dan pilih suatu nama komputer yang unik\nbagi komputer Anda."
+msgstr "Untuk memakai log masuk enterprise, komputer ini perlu didaftarkan\nke dalam domain. Mintalah administrator jaringan Anda mengetikkan\nkata sandi domainnya di sini, dan pilih sebuah nama komputer yang unik\nbagi komputer Anda."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
 msgid "_Computer"
@@ -181,7 +181,7 @@ msgstr "Terlalu pendek"
 #: ../gnome-initial-setup/pages/account/pw-utils.c:99
 msgctxt "Password strength"
 msgid "Not good enough"
-msgstr "Tak cukup bagus"
+msgstr "Tidak cukup bagus"
 
 #: ../gnome-initial-setup/pages/account/pw-utils.c:108
 msgctxt "Password strength"
@@ -205,7 +205,7 @@ msgstr "Kuat"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
 msgid "Cannot automatically join this type of domain"
-msgstr "Tak bisa otomatis bergabung dengan domain tipe ini"
+msgstr "Tidak bisa otomatis bergabung dengan domain tipe ini"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
 #, c-format
@@ -216,7 +216,7 @@ msgstr "Domain atau realm tak ditemukan"
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr "Tak bisa log masuk sebagai %s pada domain %s"
+msgstr "Tidak bisa masuk sebagai %s pada domain %s"
 
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
 msgid "Invalid password, please try again"
@@ -225,21 +225,21 @@ msgstr "Kata sandi salah, mohon coba lagi"
 #: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
 #, c-format
 msgid "Couldn't connect to the %s domain: %s"
-msgstr "Tak bisa menyambung ke domain %s: %s"
+msgstr "Tidak bisa menyambung ke domain %s: %s"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:150
 #, c-format
 msgid "A user with the username '%s' already exists"
-msgstr "Pengguna dengan nama '%s' telah ada"
+msgstr "Pengguna dengan nama akun '%s' telah ada"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:154
 #, c-format
 msgid "The username is too long"
-msgstr "Nama pengguna terlalu panjang"
+msgstr "Nama akun pengguna terlalu panjang"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:157
 msgid "The username cannot start with a '-'"
-msgstr "Nama pengguna tidak boleh diawali dengan '-'"
+msgstr "Nama akun pengguna tidak boleh diawali dengan '-'"
 
 #: ../gnome-initial-setup/pages/account/um-utils.c:160
 msgid ""
@@ -311,7 +311,7 @@ msgstr "Persetujuan Lisensi"
 msgid ""
 "I have _agreed to the terms and conditions in this end user license "
 "agreement."
-msgstr "Saya telah setuj_u dengan syarat dan kondisi dalam perjanjian lisensi pengguna akhir ini."
+msgstr "Saya telah setuj_u dengan syarat dan ketentuan dalam perjanjian lisensi pengguna akhir ini."
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
 msgctxt "Online Account"

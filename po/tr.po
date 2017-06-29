@@ -4,15 +4,16 @@
 # 
 # Translators:
 # Emin Tufan <etcetin@gmail.com>, 2013
+# Koray KIRCAOĞLU <koraym@gmail.com>, 2017
 # Muhammet Kara <muhammetk@gmail.com>, 2012-2016
 # Necdet Yücel <necdetyucel@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 01:58+0000\n"
-"PO-Revision-Date: 2017-05-22 16:31+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2017-05-30 01:52+0000\n"
+"PO-Revision-Date: 2017-06-10 13:36+0000\n"
+"Last-Translator: Koray KIRCAOĞLU <koraym@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/endless-mobile-inc/eos-installer/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -79,13 +80,13 @@ msgstr "Giriş"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
 msgid "Create a Personal Account"
-msgstr ""
+msgstr "Kişisel Bir Hesap  Oluşturun"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
 msgid ""
 "Type your full name and a password that you'll remember. Pay attention to "
 "upper case letters."
-msgstr ""
+msgstr "Tam adınızı ve hatırlayabileceğiniz bir şifre yazın. Büyük/küçük harflere dikkat edin."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
 msgid "_Full Name"
@@ -99,7 +100,7 @@ msgstr "_Kullanıcı adı"
 msgid ""
 "The username will be used to name your personal folder, and it cannot be "
 "changed."
-msgstr ""
+msgstr "Kullanıcı adınız kişisel dosyalarınızın klasörüne verilecektir ve değiştirilemez."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
 msgid "_Password"
@@ -111,22 +112,22 @@ msgstr "Parolayı _onayla"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
 msgid "Show password"
-msgstr ""
+msgstr "Şifreyi göster"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
 msgid ""
 "Make sure you write down your password to remember it! You can write "
 "yourself a reminder here, but note that this password reminder can be seen "
 "by others."
-msgstr ""
+msgstr "Şifrenizi hatırlayabilmek için bir yere yazdığınıza emin olun. Buraya kendiniz için bir hatırlatıcı yazabilirsiniz. Unutmayın ki bu hatırlatıcı başkaları tarafından da görülebilir."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
 msgid "Password _reminder"
-msgstr ""
+msgstr "Şifre _hatırlatıcı"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
 msgid "To continue, please make sure you fill in all the blanks."
-msgstr ""
+msgstr "Devam etmek için tüm boşlukları doldurduğunuza emin olun."
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
 msgid "page 1"
@@ -250,56 +251,56 @@ msgstr "Kullanıcı adı sadece şunlardan oluşmalıdır:\n ➣ İngiliz alfabe
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.c:281
 msgid "Display"
-msgstr ""
+msgstr "Ekran"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
 msgid "Adjust for TV screen"
-msgstr ""
+msgstr "TV ekranı için ayarla"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
 msgid "Do you see this at the bottom right corner of your screen?"
-msgstr ""
+msgstr "Bunu ekranınızın sağ alt köşesinde görüyor musunuz?"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
 msgid "I see it"
-msgstr ""
+msgstr "Görüyorum"
 
 #: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
 msgid "I do not see it. Shrink screen to fit TV."
-msgstr ""
+msgstr "Göremiyorum. Ekranı TV'ye sığacak şekilde küçült."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
 msgid "Terms of Use"
-msgstr ""
+msgstr "Kullanım Koşulları"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
 msgid "Third Party Software"
-msgstr ""
+msgstr "Üçüncü Parti Yazılım"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
 msgid "_Accept and continue"
-msgstr ""
+msgstr "_Kabul ve devam et"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
 msgid "Please read the following terms of use carefully"
-msgstr ""
+msgstr "Lütfen kullanım koşulları'nı dikkatle okuyunuz"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
 msgid ""
 "By clicking \"Accept and continue,\" you acknowledge that you have read, "
 "understood, and agree to be bound by the following terms and conditions."
-msgstr ""
+msgstr "\"Kabul ve devam et\" butonuna tıklayarak okuduğunuzu, anladığınızı ve kabul ettiğinizi kabul etmiş olursunuz ve koşullar sizin için bağlayıcı olur."
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
 msgid "Help make Endless better for everyone"
-msgstr ""
+msgstr "Endless'i herkes için daha iyi yapmaya yardım et"
 
 #: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
 msgid ""
 "Automatically save and send usage statistics and problem reports to Endless."
 " All data is anonymous."
-msgstr ""
+msgstr "Otomatik olarak kullanım istatistiklerini ve hata raporlarını kaydet ve Endless'a gönder. Bilgiler anonimdir."
 
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
 #: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
@@ -393,16 +394,16 @@ msgstr "Hiçbir girdi bulunamadı"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr ""
+msgstr "Klavye düzeniniz şöyle gözüküyor:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
 msgid "Please press one of the following keys:"
-msgstr ""
+msgstr "Lütfen belirtilen tuşlara basınız:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr ""
+msgstr "Belirtilen tuş klavyenizde var mı?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
@@ -410,19 +411,19 @@ msgstr "Yazım"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr ""
+msgstr "Klavye düzeni'nizi seçin"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr ""
+msgstr "Klavye düzenimi algılamaya yardım et"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr ""
+msgstr "Klavye düzenimi algıla"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
-msgstr ""
+msgstr "Seç"
 
 #: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
 msgid "No languages found"
@@ -430,12 +431,12 @@ msgstr "Hiçbir dil bulunamadı"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:603
 msgid "Disabled"
-msgstr ""
+msgstr "Devre dışı"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:605
 #, c-format
 msgid "SD Card: %s"
-msgstr ""
+msgstr "SD Kart: %s"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:684
 msgid "Welcome"
@@ -444,26 +445,26 @@ msgstr "Hoş Geldiniz"
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:688
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
 msgid "Welcome to Endless!"
-msgstr ""
+msgstr "Endless'a Hoşgeldiniz"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.c:690
 msgid "Let's set up your computer..."
-msgstr ""
+msgstr "Bilgisayarınızı hazırlayalım..."
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
 msgid "Test Mode"
-msgstr ""
+msgstr "Test Modu"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
-msgstr ""
+msgstr "Kapat"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
 msgid ""
 "This installer will help guide you through installing Endless OS on your "
 "computer"
-msgstr ""
+msgstr "Bu kurulum Endless İşletim Sistemi kurulumu sırasında size yardımcı olacaktır"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
@@ -476,51 +477,51 @@ msgstr "Konum"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
 msgid "January"
-msgstr ""
+msgstr "Ocak"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
 msgid "February"
-msgstr ""
+msgstr "Şubat"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
 msgid "March"
-msgstr ""
+msgstr "Mart"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
 msgid "April"
-msgstr ""
+msgstr "Nisan"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
 msgid "May"
-msgstr ""
+msgstr "Mayıs"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
 msgid "June"
-msgstr ""
+msgstr "Haziran"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
 msgid "July"
-msgstr ""
+msgstr "Temmuz"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
 msgid "August"
-msgstr ""
+msgstr "Ağustos"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
 msgid "September"
-msgstr ""
+msgstr "Eylül"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
 msgid "October"
-msgstr ""
+msgstr "Ekim"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
 msgid "November"
-msgstr ""
+msgstr "Kasım"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
 msgid "December"
-msgstr ""
+msgstr "Aralık"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
 msgid "Choose Your Location"
@@ -536,19 +537,19 @@ msgstr "Saat Dilimi"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
 msgid "Network Time"
-msgstr ""
+msgstr "Ağ Saati"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
 msgid "16"
-msgstr ""
+msgstr "16"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
 msgid "45"
-msgstr ""
+msgstr "45"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.c:334
 msgctxt "Wireless access point"
@@ -581,14 +582,14 @@ msgid ""
 "the internet by clicking on the name of your WiFi network and entering the "
 "network password. This password may be different from your computer "
 "password."
-msgstr ""
+msgstr "Kablosuz (WiFi) internetiniz var mı? Eğer varsa bilgisayarınızı bağlamak için WiFi Ağı isminize tıklayarak şifresini giriniz. Bu şifre bilgisayar şifrenizden farklı olabilir."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
 msgid ""
 "TIP: You can use your computer without internet if you do not have a "
 "connection now. If you get an internet connection in the future, you can set"
 " it up in \"Network Settings.\""
-msgstr ""
+msgstr "İpucu: Eğer bir internet bağlantınız bilsayarınızı yine de kullanabilirsiniz. Bağlantınız olduğunda \"ağ ayarları\" bölümünden ayarlayabilirsiniz."
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
 msgid "No wireless available"
@@ -596,7 +597,7 @@ msgstr "Kullanılabilir kablosuz ağ yok"
 
 #: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
 msgid "_Skip WiFi setup"
-msgstr ""
+msgstr "WiFi kurulumunu _atla"
 
 #: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
 #, c-format
@@ -624,141 +625,141 @@ msgstr "GNOME 3'ü kullanmaya _başla"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:647
 #, c-format
 msgid "No suitable images were found."
-msgstr ""
+msgstr "Uygun bir görsel bulunamadı."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:174
 msgid "Basic"
-msgstr ""
+msgstr "Basit"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Aluno"
-msgstr ""
+msgstr "Öğrenci"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:184
 msgid "Escola"
-msgstr ""
+msgstr "Okul"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
 msgid "Endless OS"
-msgstr ""
+msgstr "Endless İşletim Sistemi"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS Installer"
-msgstr ""
+msgstr "Endless İşletim Sistemi Kurulumu"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:248
 msgid "Endless OS (non-free)"
-msgstr ""
+msgstr "Endless İşletim Sistemi (ücretli)"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
-msgstr ""
+msgstr "Endless İşletim Sistemi (OEM)"
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:260
 msgid "Educa Endless"
-msgstr ""
+msgstr "Educa Endless"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:290
 msgid "Full"
-msgstr ""
+msgstr "Tam"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:682
 msgid "Reformat with Endless OS"
-msgstr ""
+msgstr "Endless İşletim Sistemi ile yeniden biçimlendir"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr ""
+msgstr "İstediğiniz Endless İşletim Sistemi sürümü bu mu? Değilse, bir diğerini indirin."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
-msgstr ""
+msgstr "Geçerli sürümü kullan:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
-msgstr ""
+msgstr "Seçtiğiniz konum yetersiz, ihtiyacınız olan %s"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
 msgid "Finish"
-msgstr ""
+msgstr "Tamamla"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
 msgid "Select Disk"
-msgstr ""
+msgstr "Disk Seç"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr ""
+msgstr "Endless İşletim Sistemi ile tekrar biçimlendirmek istediğiniz sürücüyü seçin"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "Disk Seç:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr ""
+msgstr "Tüm <b>dosyalarımın ve uygulamalarımın</b> silinmesini kabul ediyorum"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr ""
+msgstr "Görünen o ki sürücünüzde birden fazla bölüm bulunuyor. (Örneğin C: ve D:) Tekrar biçimlendirme diskinizdeki <b>tüm bölümleri</b> silecektir. Burayaka tıklayarak onaylayabilirsiniz."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr ""
+msgstr "Uygun sürücü bulunamadı."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:115
 msgid "Reformatting Finished"
-msgstr ""
+msgstr "Tekrar Biçimlendirme Tamamlandı"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "Tebrikler! Şimdi bilgisayarınızı kapatıp USB sürücünüzü çıkartın. Yeniden başlattığınızda Endless İşletim Sistemi sizin için hazır olacak."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr ""
+msgstr "Ups, Endless İşletim Sistemi dosyanızda bir problem var."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid ""
 "Please contact support@endlessm.com or join our Google Group to "
 "troubleshoot."
-msgstr ""
+msgstr "Lütfen hata giderme için support@endlessm.com ile iletişime geçin veya Google Grubumuza katılın."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "Tekrar biçimlendirme durdurulsun mu?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "Tekrar biçimlendirme işlemi başlamış durumda. İptal etmek sistemi çalıştırılamaz hale getirecektir."
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:101
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "Tekrar Biçimlendirmeyi Durdur"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:108
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "Tekrar Biçimlendirmeyi Sürdür"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:146
 #: ../gnome-image-installer/pages/install/gis-install-page.c:166
@@ -768,48 +769,48 @@ msgstr ""
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "Dahili hata"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:521
 #: ../gnome-image-installer/pages/install/gis-install-page.c:665
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
 #, no-c-format
 msgid "Step %d of %d"
-msgstr ""
+msgstr "Adımlardan %d. %d adım daha var."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:560
 #, c-format
 msgid "Image verification error."
-msgstr ""
+msgstr "Görsel doğrulaması hatası"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:632
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
-msgstr ""
+msgstr "Endless İşletim Sistemi imza dosyasu \"%s\" bulunamadı."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:714
 msgid "Reformatting"
-msgstr ""
+msgstr "Tekrar Biçimlendiriliyor"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
-msgstr ""
+msgstr "Hızlı, kullanımı kolay ve güçlü -- internet ile veya olmadan\n\nEndless İşletim Sistemi 100'den fazla uygulaması onu çalıştığı andan itibaren çok kullanışlı kılıyor."
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr ""
+msgstr "Hatalı sıkıştırılmış dosya"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr ""
+msgstr "Yetersiz bellek"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
-msgstr ""
+msgstr "Daha fazla bilgi gerekli"
 
 #: ../eos-installer-data/eos-installer.desktop.in.in.h:1
 msgid "Reformat"
-msgstr ""
+msgstr "Tekrar Biçimlendir"

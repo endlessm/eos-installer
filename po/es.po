@@ -8,16 +8,16 @@
 # Eddy Alegria <eddy@endlessm.com>, 2014
 # Fernando Farfan <fernando@endlessm.com>, 2014
 # Joel Gil León <joel@endlessm.com>, 2014
-# Nuritzi Sanchez <ns@endlessm.com>, 2014,2016
+# Nuritzi Sanchez <ns@endlessm.com>, 2014,2016-2017
 # Philip Chimento <philip.chimento@gmail.com>, 2014
 # Roddy Shuler <roddy@endlessm.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-23 01:58+0000\n"
-"PO-Revision-Date: 2017-05-22 16:31+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2017-05-30 01:52+0000\n"
+"PO-Revision-Date: 2017-06-06 00:28+0000\n"
+"Last-Translator: Nuritzi Sanchez <ns@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-mobile-inc/eos-installer/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -639,13 +639,13 @@ msgstr "Básico"
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Aluno"
-msgstr ""
+msgstr "Aluno"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:184
 msgid "Escola"
-msgstr ""
+msgstr "Escola"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
@@ -668,7 +668,7 @@ msgstr "Endless OS (OEM)"
 #. untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:260
 msgid "Educa Endless"
-msgstr ""
+msgstr "Educa Endless"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:290
 msgid "Full"
@@ -692,7 +692,7 @@ msgstr "Usar versión existente:"
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
-msgstr ""
+msgstr "No hay espacio suficiente en la ubicación que has elegido: necesitas %s para reformatear con %s."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
 msgid "Finish"
