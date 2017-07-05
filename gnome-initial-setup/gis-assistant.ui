@@ -50,6 +50,8 @@
             <property name="transition-type">slide-left-right</property>
             <property name="hhomogeneous">False</property>
             <property name="vhomogeneous">False</property>
+            <property name="vexpand">True</property>
+            <property name="vexpand-set">True</property>
             <signal name="notify::visible-child" handler="visible_child_changed" object="GisAssistant" swapped="yes"/>
           </object>
         </child>
