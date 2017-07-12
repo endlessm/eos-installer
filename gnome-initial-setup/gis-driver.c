@@ -325,6 +325,11 @@ gis_driver_startup (GApplication *app)
 
   priv->main_window = GTK_WINDOW (gis_window_new (driver));
 
+  gtk_application_inhibit (GTK_APPLICATION (app), priv->main_window,
+                           GTK_APPLICATION_INHIBIT_IDLE |
+                           GTK_APPLICATION_INHIBIT_SUSPEND,
+                           "Should not idle or suspend while reformatting.");
+
   g_signal_connect (priv->main_window,
                     "realize",
                     G_CALLBACK (window_realize_cb),
