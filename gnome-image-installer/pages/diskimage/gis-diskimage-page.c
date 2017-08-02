@@ -250,7 +250,21 @@ static gchar *get_display_name(const gchar *fullname)
       else if (g_str_equal (product, "eosoem"))
         {
           g_free (product);
+          /* Translators: this is the edition of Endless OS pre-installed by
+           * Original Equipment Manufacturers. If there is not a
+           * widely-understood short translation of "OEM" in your language,
+           * please do not translate this.
+           */
           product = g_strdup (_("Endless OS (OEM)"));
+        }
+      else if (g_str_equal (product, "eosdvd"))
+        {
+          g_free (product);
+          /* Translators: this is the DVD-sized edition of Endless OS. Please
+           * only translate this if "DVD" is not widely understood in your
+           * language.
+           */
+          product = g_strdup (_("Endless OS (DVD)"));
         }
       else if (g_str_equal (product, "fnde"))
         {
