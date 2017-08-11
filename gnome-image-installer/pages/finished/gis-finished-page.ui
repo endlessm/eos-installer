@@ -31,11 +31,30 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="removelabel">
+              <object class="GtkLabel" id="removelabel_usb">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_top">16</property>
                 <property name="label" translatable="yes">Success! Power off your computer and then remove your USB device. When you restart, Endless OS will be ready for you to set up and enjoy!</property>
+                <property name="justify">center</property>
+                <property name="wrap">True</property>
+                <property name="max_width_chars">50</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="removelabel_dvd">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">16</property>
+                <property name="label" translatable="yes">Success! Power off your computer and remove the DVD. When you restart, Endless OS will be ready for you to set up and enjoy!</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
                 <property name="max_width_chars">50</property>
