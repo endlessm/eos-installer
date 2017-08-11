@@ -597,6 +597,8 @@ static void
 gis_diskimage_page_mount (GisPage *page)
 {
   GError *error = NULL;
+  gboolean is_live = gis_store_is_live_install ();
+  const gchar *uuid = gis_store_get_image_uuid ();
   UDisksClient *client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
@@ -613,10 +615,8 @@ gis_diskimage_page_mount (GisPage *page)
       UDisksObject *object = UDISKS_OBJECT (l->data);
       UDisksBlock *block = udisks_object_peek_block (object);
       UDisksFilesystem *fs = NULL;
-      gboolean is_live = gis_store_is_live_install ();
       const gchar *const*mounts = NULL;
       const gchar *dev = NULL;
-      const gchar *uuid = gis_store_get_image_uuid ();
 
       if (block == NULL)
         continue;
