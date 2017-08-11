@@ -617,6 +617,7 @@ gis_diskimage_page_mount (GisPage *page)
       UDisksFilesystem *fs = NULL;
       const gchar *const*mounts = NULL;
       const gchar *dev = NULL;
+      UDisksDrive *drive = NULL;
 
       if (block == NULL)
         continue;
@@ -654,7 +655,9 @@ gis_diskimage_page_mount (GisPage *page)
                                         (GAsyncReadyCallback)gis_diskimage_page_mount_ready, page);
         }
 
-      gis_store_set_image_drive (udisks_block_get_drive (block));
+      drive = udisks_client_get_drive_for_block (client, block);
+      gis_store_set_object (GIS_STORE_IMAGE_DRIVE, G_OBJECT (drive));
+      g_clear_object (&drive);
       return;
     }
 
