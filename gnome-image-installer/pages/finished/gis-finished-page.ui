@@ -112,10 +112,12 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_top">16</property>
-                <property name="label" translatable="yes">Please contact support@endlessm.com or join our Google Group to troubleshoot.</property>
+                <property name="label" translatable="yes">Please contact &lt;a href="mailto:support@endlessm.com"&gt;support@endlessm.com&lt;/a&gt; or join the &lt;a href="https://community.endlessos.com/"&gt;Endless Community&lt;/a&gt; to troubleshoot.</property>
+                <property name="use_markup">True</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
                 <property name="max_width_chars">50</property>
+                <property name="track_visited_links">False</property>
               </object>
               <packing>
                 <property name="expand">False</property>
