@@ -197,8 +197,7 @@ read_keys (const gchar *path)
 static void
 mount_and_read_keys (void)
 {
-  GError *error = NULL;
-  UDisksClient *client = udisks_client_new_sync(NULL, &error);
+  UDisksClient *client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GList *l;
@@ -346,6 +345,8 @@ main (int argc, char *argv[])
   int status;
   GOptionContext *context;
   gchar *uuid = NULL;
+  UDisksClient *udisks_client = NULL;
+  GError *error = NULL;
 
 gis_page_get_type();
 
@@ -374,6 +375,11 @@ gis_page_get_type();
       gis_store_set_image_uuid (uuid);
     }
 
+  udisks_client = udisks_client_new_sync (NULL, &error);
+  if (udisks_client == NULL)
+    g_error ("Failed to connect to UDisks: %s", error->message);
+  gis_store_set_object (GIS_STORE_UDISKS_CLIENT, G_OBJECT (udisks_client));
+  g_object_unref (udisks_client);
   mount_and_read_keys ();
 
   driver = gis_driver_new (get_mode ());

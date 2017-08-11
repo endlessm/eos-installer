@@ -597,7 +597,7 @@ static void
 gis_diskimage_page_mount (GisPage *page)
 {
   GError *error = NULL;
-  UDisksClient *client = udisks_client_new_sync(NULL, &error);
+  UDisksClient *client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GList *l;

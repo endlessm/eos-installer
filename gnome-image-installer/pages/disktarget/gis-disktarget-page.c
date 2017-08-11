@@ -375,7 +375,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 static void
 gis_disktarget_page_shown (GisPage *page)
 {
-  GError *error;
   GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
 
@@ -387,16 +386,9 @@ gis_disktarget_page_shown (GisPage *page)
       return;
     }
 
-  priv->client = udisks_client_new_sync(NULL, &error);
-  if (priv->client == NULL)
-    {
-      g_error("Unable to enumerate disks: %s", error->message);
-      g_error_free(error);
-    }
-  else
-    {
-      gis_disktarget_page_populate_model(page, priv->client);
-    }
+  priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
+  g_assert (priv->client != NULL);
+  gis_disktarget_page_populate_model(page, priv->client);
 }
 
 static void
