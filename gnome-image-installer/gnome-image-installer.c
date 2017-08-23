@@ -239,16 +239,20 @@ mount_and_read_keys (void)
     }
 }
 
+/* Should be kept in sync with gnome-initial-setup gis-driver.c */
 static gboolean
 check_for_live_boot (gchar **uuid)
 {
-  const gchar *force = g_getenv ("EI_FORCE_LIVE_BOOT_UUID");
+  const gchar *force = NULL;
   GError *error = NULL;
   g_autofree gchar *cmdline = NULL;
   gboolean live_boot = FALSE;
   g_autoptr(GRegex) reg = NULL;
   g_autoptr(GMatchInfo) info = NULL;
 
+  g_return_val_if_fail (uuid != NULL, FALSE);
+
+  force = g_getenv ("EI_FORCE_LIVE_BOOT_UUID");
   if (force != NULL && *force != '\0')
     {
       g_print ("EI_FORCE_LIVE_BOOT_UUID set to %s\n", force);
@@ -267,7 +271,7 @@ check_for_live_boot (gchar **uuid)
 
   g_print ("set live_boot to %u from /proc/cmdline: %s\n", live_boot, cmdline);
 
-  reg = g_regex_new ("UUID=([^\\s]*)", 0, 0, NULL);
+  reg = g_regex_new ("\\bendless\\.image\\.device=UUID=([^\\s]*)", 0, 0, NULL);
   g_regex_match (reg, cmdline, 0, &info);
   if (g_match_info_matches (info))
     {
