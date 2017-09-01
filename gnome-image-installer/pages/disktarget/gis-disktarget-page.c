@@ -267,7 +267,11 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GtkTreeIter i;
   gchar *umodel = NULL;
   UDisksDrive *root = NULL;
-  const gchar *image_drive = NULL;
+  UDisksDrive *image_drive = UDISKS_DRIVE (gis_store_get_object (GIS_STORE_IMAGE_DRIVE));
+  const gchar *image_drive_path = NULL;
+
+  if (image_drive != NULL)
+    image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (image_drive));
 
   if (gis_store_is_unattended())
     {
@@ -281,7 +285,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
   root = gis_disktarget_page_get_root_drive (client);
-  image_drive = gis_store_get_image_drive ();
   for (l = objects; l != NULL; l = l->next)
     {
       gchar *targetname, *targetsize;
@@ -318,7 +321,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       block = udisks_client_get_block_for_drive(client, drive, TRUE);
       skip_if (block == NULL, "no corresponding block object");
 
-      skip_if (0 == g_strcmp0 (udisks_block_get_drive (block), image_drive),
+      skip_if (0 == g_strcmp0 (object_path, image_drive_path),
                "it hosts the image partition");
 #undef skip_if
 
@@ -375,7 +378,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 static void
 gis_disktarget_page_shown (GisPage *page)
 {
-  GError *error;
   GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
 
@@ -387,16 +389,9 @@ gis_disktarget_page_shown (GisPage *page)
       return;
     }
 
-  priv->client = udisks_client_new_sync(NULL, &error);
-  if (priv->client == NULL)
-    {
-      g_error("Unable to enumerate disks: %s", error->message);
-      g_error_free(error);
-    }
-  else
-    {
-      gis_disktarget_page_populate_model(page, priv->client);
-    }
+  priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
+  g_assert (priv->client != NULL);
+  gis_disktarget_page_populate_model(page, priv->client);
 }
 
 static void

@@ -668,7 +668,7 @@ gis_install_page_shown (GisPage *page)
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
 
-  priv->client = udisks_client_new_sync (NULL, NULL);
+  priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
 
   if (gis_store_get_error () != NULL)
     {

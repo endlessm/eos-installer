@@ -30,7 +30,6 @@ static GObject *_objects[GIS_STORE_N_OBJECTS];
 static guint64 _size = 0;
 static gint64 _image_size = 0;
 static gchar *_name = NULL;
-static gchar *_drive = NULL;
 static gchar *_signature = NULL;
 static GError *_error = NULL;
 static gboolean _unattended = FALSE;
@@ -98,17 +97,6 @@ void gis_store_clear_image_name(void)
 {
   g_free (_name);
   _name = NULL;
-}
-
-const gchar *gis_store_get_image_drive(void)
-{
-  return _drive;
-}
-
-void gis_store_set_image_drive(const gchar *drive)
-{
-  g_free (_drive);
-  _drive = g_strdup (drive);
 }
 
 const gchar *gis_store_get_image_signature (void)

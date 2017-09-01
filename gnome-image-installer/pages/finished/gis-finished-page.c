@@ -38,6 +38,8 @@
 #include <stdlib.h>
 #include <errno.h>
 
+#include <udisks/udisks.h>
+
 struct _GisFinishedPagePrivate {
   gint led_state;
 };
@@ -88,6 +90,14 @@ gis_finished_page_shown (GisPage *page)
         {
           g_timeout_add_seconds (1, (GSourceFunc)toggle_leds, page);
         }
+    }
+  else
+    {
+      UDisksDrive *drive = UDISKS_DRIVE (gis_store_get_object (GIS_STORE_IMAGE_DRIVE));
+      gboolean optical = udisks_drive_get_optical (drive);
+
+      gtk_widget_set_visible (WID ("removelabel_usb"), !optical);
+      gtk_widget_set_visible (WID ("removelabel_dvd"),  optical);
     }
 }
 

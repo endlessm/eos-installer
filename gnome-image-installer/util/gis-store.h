@@ -31,8 +31,18 @@
 G_BEGIN_DECLS
 
 typedef enum {
+  /* GFile: selected image path */
   GIS_STORE_IMAGE = 0,
+
+  /* UDisksBlock: block device to reformat */
   GIS_STORE_BLOCK_DEVICE,
+
+  /* UDisksClient: global shared UDisks client proxy */
+  GIS_STORE_UDISKS_CLIENT,
+
+  /* UDisksDrive: drive hosting partition hosting GIS_STORE_IMAGE */
+  GIS_STORE_IMAGE_DRIVE,
+
   GIS_STORE_N_OBJECTS
 } GISStoreObjectKey;
 
@@ -49,9 +59,6 @@ void gis_store_set_image_size (gint64 size);
 gchar *gis_store_get_image_name(void);
 void gis_store_set_image_name(gchar *name);
 void gis_store_clear_image_name(void);
-
-const gchar *gis_store_get_image_drive(void);
-void gis_store_set_image_drive(const gchar *drive);
 
 const gchar *gis_store_get_image_uuid(void);
 void gis_store_set_image_uuid(const gchar *uuid);

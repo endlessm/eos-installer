@@ -197,8 +197,7 @@ read_keys (const gchar *path)
 static void
 mount_and_read_keys (void)
 {
-  GError *error = NULL;
-  UDisksClient *client = udisks_client_new_sync(NULL, &error);
+  UDisksClient *client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GList *l;
@@ -240,16 +239,20 @@ mount_and_read_keys (void)
     }
 }
 
+/* Should be kept in sync with gnome-initial-setup gis-driver.c */
 static gboolean
 check_for_live_boot (gchar **uuid)
 {
-  const gchar *force = g_getenv ("EI_FORCE_LIVE_BOOT_UUID");
+  const gchar *force = NULL;
   GError *error = NULL;
   g_autofree gchar *cmdline = NULL;
   gboolean live_boot = FALSE;
   g_autoptr(GRegex) reg = NULL;
   g_autoptr(GMatchInfo) info = NULL;
 
+  g_return_val_if_fail (uuid != NULL, FALSE);
+
+  force = g_getenv ("EI_FORCE_LIVE_BOOT_UUID");
   if (force != NULL && *force != '\0')
     {
       g_print ("EI_FORCE_LIVE_BOOT_UUID set to %s\n", force);
@@ -268,7 +271,7 @@ check_for_live_boot (gchar **uuid)
 
   g_print ("set live_boot to %u from /proc/cmdline: %s\n", live_boot, cmdline);
 
-  reg = g_regex_new ("UUID=([^\\s]*)", 0, 0, NULL);
+  reg = g_regex_new ("\\bendless\\.image\\.device=UUID=([^\\s]*)", 0, 0, NULL);
   g_regex_match (reg, cmdline, 0, &info);
   if (g_match_info_matches (info))
     {
@@ -346,6 +349,8 @@ main (int argc, char *argv[])
   int status;
   GOptionContext *context;
   gchar *uuid = NULL;
+  UDisksClient *udisks_client = NULL;
+  GError *error = NULL;
 
 gis_page_get_type();
 
@@ -374,6 +379,11 @@ gis_page_get_type();
       gis_store_set_image_uuid (uuid);
     }
 
+  udisks_client = udisks_client_new_sync (NULL, &error);
+  if (udisks_client == NULL)
+    g_error ("Failed to connect to UDisks: %s", error->message);
+  gis_store_set_object (GIS_STORE_UDISKS_CLIENT, G_OBJECT (udisks_client));
+  g_object_unref (udisks_client);
   mount_and_read_keys ();
 
   driver = gis_driver_new (get_mode ());
