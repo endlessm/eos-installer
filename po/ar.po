@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 01:52+0000\n"
-"PO-Revision-Date: 2017-06-28 17:28+0000\n"
+"POT-Creation-Date: 2017-09-02 10:52-0700\n"
+"PO-Revision-Date: 2017-09-02 17:53+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/endless-mobile-inc/eos-installer/language/ar/)\n"
 "MIME-Version: 1.0\n"
@@ -24,26 +24,26 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "الإعداد الأولي"
 
-#: ../gnome-initial-setup/gis-assistant.c:302
+#: ../gnome-initial-setup/gis-assistant.c:305
 msgid "_Next"
 msgstr "ال_تالي"
 
-#: ../gnome-initial-setup/gis-assistant.c:441
+#: ../gnome-initial-setup/gis-assistant.c:444
 msgid "_Previous"
 msgstr "ال_سابق"
 
-#: ../gnome-initial-setup/gis-assistant.c:442
+#: ../gnome-initial-setup/gis-assistant.c:445
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "أ_لغِ"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:350
+#: ../gnome-image-installer/gnome-image-installer.c:359
 msgid "Force new user mode"
 msgstr "افرِض وضع المستخدم الجديد"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:354
+#: ../gnome-image-installer/gnome-image-installer.c:363
 msgid "- GNOME initial setup"
 msgstr "- إعداد جنوم الأولي"
 
@@ -454,7 +454,7 @@ msgid "Test Mode"
 msgstr "وضع الاختبار"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:5
 msgid "Power Off"
 msgstr "إيقاف التشغيل"
 
@@ -619,8 +619,8 @@ msgid "_Start using GNOME 3"
 msgstr "اب_دأ باستخدام جنوم 3"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:131
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:647
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:569
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:664
 #, c-format
 msgid "No suitable images were found."
 msgstr "لم يتم العثور على صور مناسبة للنسخة."
@@ -654,21 +654,32 @@ msgstr "مثبت Endless OS"
 msgid "Endless OS (non-free)"
 msgstr "Endless OS (ليس مجاني)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
+#. Translators: this is the edition of Endless OS pre-installed by
+#. * Original Equipment Manufacturers. If there is not a
+#. * widely-understood short translation of "OEM" in your language,
+#. * please do not translate this.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:258
 msgid "Endless OS (OEM)"
 msgstr "Endless OS (OEM)"
 
+#. Translators: this is the DVD-sized edition of Endless OS. Please
+#. * only translate this if "DVD" is not widely understood in your
+#. * language.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:267
+msgid "Endless OS (DVD)"
+msgstr ""
+
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:260
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:274
 msgid "Educa Endless"
 msgstr "Educa Endless"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:290
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:304
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:682
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:699
 msgid "Reformat with Endless OS"
 msgstr "أعادة التهيئة بنظام Endless OS"
 
@@ -688,11 +699,11 @@ msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
 msgstr "إنّ الموقع الذي اخترته صغيرٌ جداً: تحتاج %s لإعادة الصيغة بواسطة %s."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:367
 msgid "Finish"
 msgstr "انتهاء"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:426
 msgid "Select Disk"
 msgstr "حدد القرص"
 
@@ -719,7 +730,7 @@ msgstr "يبدو أنك لديك أقسام متعددة على هذا القر�
 msgid "No suitable disks found."
 msgstr "لم يتم العثور على أقراص مناسبة."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:115
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:125
 msgid "Reformatting Finished"
 msgstr "اكتملت عملية إعادة التهيئة"
 
@@ -730,14 +741,22 @@ msgid ""
 msgstr "تمت العملية بنجاح! قم بإيقاف تشغيل جهاز الحاسوب الخاص بك ثم قم بإزالة جهاز USB. عند إعادة التشغيل سوف يكون نظام التشغيل Endless OS جاهزاً لتقوم بإعداده والتمتع به!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+msgid ""
+"Success! Power off your computer and remove the DVD. When you restart, "
+"Endless OS will be ready for you to set up and enjoy!"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something is wrong with your Endless OS file."
 msgstr "عذراً، هناك خطأ ما في ملف نظام التشغيل Endless OS الخاص بك."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid ""
-"Please contact support@endlessm.com or join our Google Group to "
+"Please contact <a "
+"href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
+" href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr "يُرجى التواصل على support@endlessm.com أو الانضمام إلى مجموعة Google الخاصة بنا لاستكشاف الأخطاء وإصلاحها."
+msgstr ""
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"

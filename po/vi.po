@@ -9,9 +9,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-30 01:52+0000\n"
-"PO-Revision-Date: 2017-06-24 15:59+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2017-09-02 10:52-0700\n"
+"PO-Revision-Date: 2017-09-02 17:53+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-installer/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,26 +24,26 @@ msgstr ""
 msgid "Initial Setup"
 msgstr "Cài đặt lần đầu"
 
-#: ../gnome-initial-setup/gis-assistant.c:302
+#: ../gnome-initial-setup/gis-assistant.c:305
 msgid "_Next"
 msgstr "_Tiếp"
 
-#: ../gnome-initial-setup/gis-assistant.c:441
+#: ../gnome-initial-setup/gis-assistant.c:444
 msgid "_Previous"
 msgstr "T_rước"
 
-#: ../gnome-initial-setup/gis-assistant.c:442
+#: ../gnome-initial-setup/gis-assistant.c:445
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
 msgid "_Cancel"
 msgstr "T_hôi"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:350
+#: ../gnome-image-installer/gnome-image-installer.c:359
 msgid "Force new user mode"
 msgstr "Ép chế độ người dùng mới"
 
 #: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:354
+#: ../gnome-image-installer/gnome-image-installer.c:363
 msgid "- GNOME initial setup"
 msgstr "- Cài đặt GNOME lần đầu"
 
@@ -454,7 +454,7 @@ msgid "Test Mode"
 msgstr "Chế độ Thử nghiệm"
 
 #: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:5
 msgid "Power Off"
 msgstr "Tắt Nguồn"
 
@@ -619,8 +619,8 @@ msgid "_Start using GNOME 3"
 msgstr "_Bắt đầu sử dụng GNOME 3"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:131
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:647
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:569
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:664
 #, c-format
 msgid "No suitable images were found."
 msgstr "Không tìm thấy hình ảnh thích hợp."
@@ -654,21 +654,32 @@ msgstr "Trình Cài đặt HĐH Endless"
 msgid "Endless OS (non-free)"
 msgstr "HĐH Endless (không miễn phí)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
+#. Translators: this is the edition of Endless OS pre-installed by
+#. * Original Equipment Manufacturers. If there is not a
+#. * widely-understood short translation of "OEM" in your language,
+#. * please do not translate this.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:258
 msgid "Endless OS (OEM)"
 msgstr "HĐH Endless (OEM - Nhà sản xuất thiết bị gốc)"
 
+#. Translators: this is the DVD-sized edition of Endless OS. Please
+#. * only translate this if "DVD" is not widely understood in your
+#. * language.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:267
+msgid "Endless OS (DVD)"
+msgstr ""
+
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:260
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:274
 msgid "Educa Endless"
 msgstr "Educa Endless"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:290
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:304
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:682
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:699
 msgid "Reformat with Endless OS"
 msgstr "Định dạng lại với HĐH Endless"
 
@@ -688,11 +699,11 @@ msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
 msgstr "Vị trí bạn chọn quá nhỏ. Bạn cần %s để định dạng lại với %s."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:364
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:367
 msgid "Finish"
 msgstr "Hoàn thành"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:431
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:426
 msgid "Select Disk"
 msgstr "Chọn Đĩa"
 
@@ -719,7 +730,7 @@ msgstr "Có vẻ như bạn có nhiều phân vùng trên ổ đĩa này (chẳn
 msgid "No suitable disks found."
 msgstr "Không tìm thấy các ổ đĩa thích hợp."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:115
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:125
 msgid "Reformatting Finished"
 msgstr "Hoàn tất Định dạng lại"
 
@@ -730,14 +741,22 @@ msgid ""
 msgstr "Thành công! Tắt máy tính của bạn và sau đó tháo thiết bị USB của bạn ra. Khi bạn khởi động lại, Endless OS sẽ sẵn sàng để bạn cài đặt và tận hưởng!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+msgid ""
+"Success! Power off your computer and remove the DVD. When you restart, "
+"Endless OS will be ready for you to set up and enjoy!"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something is wrong with your Endless OS file."
 msgstr "Rất tiếc, có gì đó sai với tập tin Endless OS của bạn."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid ""
-"Please contact support@endlessm.com or join our Google Group to "
+"Please contact <a "
+"href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
+" href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr "Vui lòng liên hệ với support@endlessm.com hoặc tham gia Nhóm Google của chúng tôi để  khắc phục vấn đề."
+msgstr ""
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
