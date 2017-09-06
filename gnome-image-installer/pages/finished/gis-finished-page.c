@@ -93,8 +93,12 @@ gis_finished_page_shown (GisPage *page)
     }
   else
     {
-      UDisksDrive *drive = UDISKS_DRIVE (gis_store_get_object (GIS_STORE_IMAGE_DRIVE));
-      gboolean optical = udisks_drive_get_optical (drive);
+      /* When the image is on an exFAT partition, GIS_STORE_IMAGE_DRIVE will be
+       * NULL. In this case, we can safely assume it's not optical!
+       */
+      GObject *drive = gis_store_get_object (GIS_STORE_IMAGE_DRIVE);
+      gboolean optical = drive != NULL &&
+        udisks_drive_get_optical (UDISKS_DRIVE (drive));
 
       gtk_widget_set_visible (WID ("removelabel_usb"), !optical);
       gtk_widget_set_visible (WID ("removelabel_dvd"),  optical);
