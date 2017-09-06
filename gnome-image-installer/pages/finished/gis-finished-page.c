@@ -37,6 +37,7 @@
 #include <gio/gio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <attr/xattr.h>
 
 #include <udisks/udisks.h>
 
@@ -71,6 +72,52 @@ toggle_leds (GisPage *page)
   return TRUE;
 }
 
+#define EOS_IMAGE_VERSION_XATTR "user.eos-image-version"
+#define EOS_IMAGE_VERSION_PATH "/sysroot"
+#define EOS_IMAGE_VERSION_ALT_PATH "/"
+
+static gchar *
+get_image_version (const gchar *path)
+{
+  ssize_t attrsize;
+  gchar *value;
+
+  g_return_val_if_fail (path != NULL, NULL);
+
+  attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, NULL, 0);
+  if (attrsize < 0) {
+    g_message ("Error examining " EOS_IMAGE_VERSION_XATTR " on %s: %s",
+               path, g_strerror (errno));
+    return NULL;
+  }
+
+  value = g_malloc (attrsize + 1);
+  value[attrsize] = 0;
+
+  attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, value,
+                       attrsize);
+  if (attrsize < 0) {
+    g_warning ("Error reading " EOS_IMAGE_VERSION_XATTR " on %s: %s",
+               path, g_strerror (errno));
+    g_free (value);
+    return NULL;
+  }
+
+  return value;
+}
+
+static gboolean
+is_eosdvd (void)
+{
+  g_autofree gchar *image_version = get_image_version (EOS_IMAGE_VERSION_PATH);
+
+  if (image_version == NULL)
+    image_version = get_image_version (EOS_IMAGE_VERSION_ALT_PATH);
+
+  return image_version != NULL &&
+    g_str_has_prefix (image_version, "eosdvd-");
+}
+
 static void
 gis_finished_page_shown (GisPage *page)
 {
@@ -93,12 +140,7 @@ gis_finished_page_shown (GisPage *page)
     }
   else
     {
-      /* When the image is on an exFAT partition, GIS_STORE_IMAGE_DRIVE will be
-       * NULL. In this case, we can safely assume it's not optical!
-       */
-      GObject *drive = gis_store_get_object (GIS_STORE_IMAGE_DRIVE);
-      gboolean optical = drive != NULL &&
-        udisks_drive_get_optical (UDISKS_DRIVE (drive));
+      gboolean optical = is_eosdvd ();
 
       gtk_widget_set_visible (WID ("removelabel_usb"), !optical);
       gtk_widget_set_visible (WID ("removelabel_dvd"),  optical);
