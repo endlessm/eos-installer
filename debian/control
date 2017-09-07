@@ -37,7 +37,8 @@ Build-Depends: cdbs (>= 0.4.41),
 	       libevince-dev,
 	       libwebkit2gtk-4.0-dev,
 	       libudisks2-dev,
-	       liblzma-dev
+	       liblzma-dev,
+	       libattr1-dev
 Standards-Version: 3.9.4
 Homepage: https://endlessm.com
 
