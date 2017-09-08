@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-02 10:52-0700\n"
-"PO-Revision-Date: 2017-09-02 17:53+0000\n"
+"PO-Revision-Date: 2017-09-02 22:48+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-installer/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -667,7 +667,7 @@ msgstr "HĐH Endless (OEM - Nhà sản xuất thiết bị gốc)"
 #. * language.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:267
 msgid "Endless OS (DVD)"
-msgstr ""
+msgstr "HĐH Endless (DVD)"
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
@@ -744,7 +744,7 @@ msgstr "Thành công! Tắt máy tính của bạn và sau đó tháo thiết b�
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "Thành công! Hãy tắt nguồn máy tính của bạn và gỡ đĩa DVD. Khi bạn khởi động lại, HĐH Endless sẽ sẵn sàng cho bạn thiết lập và tận hưởng!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something is wrong with your Endless OS file."
@@ -756,7 +756,7 @@ msgid ""
 "href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
 " href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr ""
+msgstr "Vui lòng liên hệ <a href=\"mailto:support@endlessm.com\">support@endlessm.com</a> hoặc tham gia <a href=\"https://community.endlessos.com/\">Cộng đồng Endless</a> để khắc phục sự cố."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-02 10:52-0700\n"
-"PO-Revision-Date: 2017-09-02 17:53+0000\n"
+"PO-Revision-Date: 2017-09-03 01:33+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Thai (http://www.transifex.com/endless-mobile-inc/eos-installer/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -667,7 +667,7 @@ msgstr "Endless OS (OEM)"
 #. * language.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:267
 msgid "Endless OS (DVD)"
-msgstr ""
+msgstr "Endless OS (DVD)"
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
@@ -744,7 +744,7 @@ msgstr "สำเร็จ! ปิดเครื่องคอมพิวเ�
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "สำเร็จ! ปิดเครื่องคอมพิวเตอร์ของคุณและนำ DVD ออก เมื่อคุณรีสตาร์ต Endless OS จะพร้อมให้คุณติดตั้งและสนุกกับการใช้งาน!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something is wrong with your Endless OS file."
@@ -756,7 +756,7 @@ msgid ""
 "href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
 " href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr ""
+msgstr "โปรดติดต่อ <a href=\"mailto:support@endlessm.com\">support@endlessm.com</a> หรือเข้าร่วม<a href=\"https://community.endlessos.com/\">ชุมชน Endless</a> เพื่อแก้ไขปัญหา"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
