@@ -678,8 +678,6 @@ gis_install_page_shown (GisPage *page)
   gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
   g_free (msg);
 
-  gis_driver_save_data (GIS_PAGE (page)->driver);
-
   priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
 
   if (gis_store_get_error () != NULL)

@@ -381,8 +381,6 @@ gis_disktarget_page_shown (GisPage *page)
   GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
 
-  gis_driver_save_data (GIS_PAGE (page)->driver);
-
   if (gis_store_get_error() != NULL)
     {
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));

@@ -679,8 +679,6 @@ gis_diskimage_page_mount (GisPage *page)
 static void
 gis_diskimage_page_shown (GisPage *page)
 {
-  gis_driver_save_data (GIS_PAGE (page)->driver);
-
   gis_diskimage_page_mount (page);
 }
 
