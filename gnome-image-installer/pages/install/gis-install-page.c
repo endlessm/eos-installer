@@ -582,28 +582,37 @@ gis_install_page_gpg_watch (GPid pid, gint status, GisPage *page)
 static gboolean
 gis_install_page_gpg_progress (GIOChannel *source, GIOCondition cond, GisPage *page)
 {
-  gchar *line;
+  g_autofree gchar *line = NULL;
+
   if (g_io_channel_read_line (source, &line, NULL, NULL, NULL) == G_IO_STATUS_NORMAL)
   {
     if (g_str_has_prefix (line, "[GNUPG:] PROGRESS"))
       {
-        gdouble curr, full, frac;
-        gchar **arr = g_strsplit (line, " ", -1);
-        curr = g_ascii_strtod (arr[4], NULL);
-        full = g_ascii_strtod (arr[5], NULL);
-
-        /* when reading from the endless-image device, gpg (like stat)
-         * considers the size to be 0.
+        /* https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=blob;f=doc/DETAILS;h=0be55f4d;hb=refs/heads/master#l1043
+         * [GNUPG:] PROGRESS <what> <char> <cur> <total> [<units>]
+         * For example:
+         * [GNUPG:] PROGRESS /dev/mapper/endless- ? 676 4442 MiB
          */
-        if (full == 0)
-          full = gis_store_get_required_size ();
+        GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
+        g_auto(GStrv) arr = g_strsplit (line, " ", -1);
+        gdouble curr = g_ascii_strtod (arr[4], NULL);
+        gdouble full = g_ascii_strtod (arr[5], NULL);
 
-        frac = curr/full;
-        gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), frac);
-        g_strfreev (arr);
+        if (full == 0)
+          {
+            /* gpg can't determine the file size. Should not happen, since we
+             * gave it a hint.
+             */
+            gtk_progress_bar_pulse (bar);
+          }
+        else
+          {
+            gdouble frac = curr/full;
+            gtk_progress_bar_set_fraction (bar, frac);
+          }
       }
-    g_free (line);
   }
+
   return TRUE;
 }
 
@@ -617,12 +626,15 @@ gis_install_page_verify (GisPage *page)
   const gchar *signature_path = gis_store_get_image_signature ();
   GFile *signature = g_file_new_for_path (signature_path);
   gint outfd;
+  guint64 size = gis_store_get_required_size ();
+  g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT, size);
   const gchar * const args[] = { "gpg",
                     "--enable-progress-filter", "--status-fd", "1",
                     /* Trust the one key in this keyring, and no others */
                     "--keyring", IMAGE_KEYRING,
                     "--no-default-keyring",
                     "--trust-model", "always",
+                    "--input-size-hint", size_str,
                     "--verify", signature_path, image_path, NULL };
   GError *error = NULL;
 
