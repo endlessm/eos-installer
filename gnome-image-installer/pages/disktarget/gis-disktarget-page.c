@@ -100,7 +100,6 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   gboolean has_data_partitions = FALSE;
 
-  gis_page_set_complete (GIS_PAGE (disktarget), FALSE);
   gtk_widget_hide (WID ("partitionbutton"));
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
@@ -130,6 +129,7 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
           gtk_label_set_text (OBJ (GtkLabel*, "too_small_label"), msg);
           gtk_widget_hide (WID ("confirm_box"));
           gtk_widget_show (WID ("error_box"));
+          check_can_continue (disktarget);
           return;
         }
     }
