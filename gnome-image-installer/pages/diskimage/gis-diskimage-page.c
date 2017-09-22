@@ -676,10 +676,28 @@ gis_diskimage_page_mount (GisPage *page)
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 }
 
+static gboolean
+gis_diskimage_page_shown_idle_cb (gpointer user_data)
+{
+  GisPage *page = GIS_PAGE (user_data);
+
+  gis_diskimage_page_mount (page);
+
+  return G_SOURCE_REMOVE;
+}
+
 static void
 gis_diskimage_page_shown (GisPage *page)
 {
-  gis_diskimage_page_mount (page);
+  /* In most cases, this page is the first page shown.
+   * gis_diskimage_page_mount() can, in several situations, call
+   * gis_assistant_next_page() synchronously. But when the page is first shown,
+   * the list of pages is not fully initialized in the driver.
+   *
+   * So, defer initializing the page.
+   */
+  g_idle_add_full (G_PRIORITY_DEFAULT, gis_diskimage_page_shown_idle_cb,
+                   g_object_ref (page), g_object_unref);
 }
 
 static void
