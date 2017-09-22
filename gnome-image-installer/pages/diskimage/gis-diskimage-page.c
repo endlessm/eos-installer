@@ -556,7 +556,6 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
       !gis_diskimage_page_add_live_image (store, path, ufile, &error))
     {
       g_print ("finding live image failed: %s\n", error->message);
-      g_clear_error (&error);
     }
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
@@ -566,7 +565,8 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
     }
   else
     {
-      error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+      if (error == NULL)
+        error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
       gis_store_set_error (error);
       g_clear_error (&error);
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
