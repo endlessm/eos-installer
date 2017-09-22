@@ -350,6 +350,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       GtkComboBox *combo = OBJ (GtkComboBox*, "diskcombo");
       gtk_combo_box_set_active_iter (combo, &i);
     }
+  else
+    {
+      gtk_widget_hide (WID ("confirm_box"));
+      gtk_widget_hide (WID ("partitionbutton"));
+      gtk_widget_hide (WID ("too_small_box"));
+      gtk_widget_show (WID ("error_box"));
+    }
 
   gtk_widget_set_visible (WID ("suitable_disks_box"), !priv->has_valid_disks);
   if (!priv->has_valid_disks)

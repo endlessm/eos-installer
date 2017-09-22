@@ -185,7 +185,7 @@
         <property name="spacing">32</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox" id="box2">
+          <object class="GtkBox" id="too_small_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">46</property>
