@@ -100,7 +100,6 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   gboolean has_data_partitions = FALSE;
 
-  gis_page_set_complete (GIS_PAGE (disktarget), FALSE);
   gtk_widget_hide (WID ("partitionbutton"));
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
@@ -130,6 +129,7 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
           gtk_label_set_text (OBJ (GtkLabel*, "too_small_label"), msg);
           gtk_widget_hide (WID ("confirm_box"));
           gtk_widget_show (WID ("error_box"));
+          check_can_continue (disktarget);
           return;
         }
     }
@@ -350,12 +350,16 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       GtkComboBox *combo = OBJ (GtkComboBox*, "diskcombo");
       gtk_combo_box_set_active_iter (combo, &i);
     }
-
-  if (priv->has_valid_disks)
-    {
-      gtk_widget_set_visible (WID ("suitable_disks_label"), FALSE);
-    }
   else
+    {
+      gtk_widget_hide (WID ("confirm_box"));
+      gtk_widget_hide (WID ("partitionbutton"));
+      gtk_widget_hide (WID ("too_small_box"));
+      gtk_widget_show (WID ("error_box"));
+    }
+
+  gtk_widget_set_visible (WID ("suitable_disks_box"), !priv->has_valid_disks);
+  if (!priv->has_valid_disks)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
       GList *pages = g_list_last (gis_assistant_get_all_pages (assistant));
@@ -363,7 +367,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       GError *error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
 
       pages = g_list_remove (pages, pages->prev->data);
-      gtk_widget_set_visible (WID ("suitable_disks_label"), TRUE);
       gis_page_set_forward_text (page, _("Finish"));
       gis_assistant_locale_changed (assistant);
       gis_store_set_error (error);
@@ -380,8 +383,6 @@ gis_disktarget_page_shown (GisPage *page)
 {
   GisDiskTargetPage *disktarget = GIS_DISK_TARGET_PAGE (page);
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
-
-  gis_driver_save_data (GIS_PAGE (page)->driver);
 
   if (gis_store_get_error() != NULL)
     {

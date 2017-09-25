@@ -102,23 +102,23 @@
       </packing>
     </child>
     <child>
+      <object class="GtkSeparator" id="separator2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_top">32</property>
+        <property name="margin_bottom">32</property>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">4</property>
+      </packing>
+    </child>
+    <child>
       <object class="GtkBox" id="confirm_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkSeparator" id="separator2">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkCheckButton" id="confirmbutton">
             <property name="visible">True</property>
@@ -140,7 +140,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">0</property>
           </packing>
         </child>
         <child>
@@ -167,24 +167,24 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">1</property>
           </packing>
         </child>
       </object>
       <packing>
         <property name="expand">False</property>
         <property name="fill">True</property>
-        <property name="position">4</property>
+        <property name="position">5</property>
       </packing>
     </child>
     <child>
       <object class="GtkBox" id="error_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="margin_top">32</property>
+        <property name="spacing">32</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkBox" id="box2">
+          <object class="GtkBox" id="too_small_box">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="margin_left">46</property>
@@ -229,14 +229,43 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="suitable_disks_label">
+          <object class="GtkBox" id="suitable_disks_box">
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">72</property>
-            <property name="margin_top">16</property>
-            <property name="label" translatable="yes">No suitable disks found.</property>
-            <property name="wrap">True</property>
-            <property name="max_width_chars">50</property>
-            <property name="xalign">0</property>
+            <property name="margin_left">46</property>
+            <child>
+              <object class="GtkImage" id="image2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_right">12</property>
+                <property name="stock">gtk-dialog-error</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="suitable_disks_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">12</property>
+                <property name="label" translatable="yes">No suitable disks found.</property>
+                <property name="wrap">True</property>
+                <property name="wrap_mode">word-char</property>
+                <property name="max_width_chars">50</property>
+                <property name="xalign">0</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -248,7 +277,7 @@
       <packing>
         <property name="expand">False</property>
         <property name="fill">False</property>
-        <property name="position">5</property>
+        <property name="position">6</property>
       </packing>
     </child>
   </object>
