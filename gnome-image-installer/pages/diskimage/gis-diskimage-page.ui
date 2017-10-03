@@ -8,16 +8,10 @@
       <column type="gchararray"/>
       <!-- column-name image_size -->
       <column type="gchararray"/>
-      <!-- column-name image_size_bytes -->
-      <column type="gint64"/>
-      <!-- column-name image_file -->
-      <column type="gchararray"/>
-      <!-- column-name image_signature -->
-      <column type="gchararray"/>
       <!-- column-name align -->
       <column type="PangoAlignment"/>
-      <!-- column-name required_size -->
-      <column type="guint64"/>
+      <!-- column-name image -->
+      <column type="GisImage"/>
     </columns>
   </object>
   <object class="GtkBox" id="diskimage-page">
@@ -130,7 +124,7 @@
                         <property name="xpad">24</property>
                       </object>
                       <attributes>
-                        <attribute name="alignment">5</attribute>
+                        <attribute name="alignment">2</attribute>
                         <attribute name="text">1</attribute>
                       </attributes>
                     </child>

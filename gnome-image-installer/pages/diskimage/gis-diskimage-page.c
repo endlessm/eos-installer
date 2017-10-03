@@ -74,24 +74,21 @@ static const gchar * const sea_locales[] = {
 static const gsize num_sea_locales = sizeof (sea_locales) / sizeof (sea_locales[0]);
 
 enum {
+    /* Human-readable image name */
     IMAGE_NAME = 0,
+    /* Human-readable image size */
     IMAGE_SIZE,
-    IMAGE_SIZE_BYTES,
-    IMAGE_FILE,
-    IMAGE_SIGNATURE,
     ALIGN,
-    IMAGE_REQUIRED_SIZE
+    /* GisImage struct with all the gory details */
+    IMAGE
 };
 
 static void
 gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
   GtkTreeIter i;
-  gchar *image, *name, *signature = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-  GFile *file = NULL;
-  gint64 size_bytes;
-  guint64 required_size;
+  g_autoptr(GisImage) image = NULL;
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
@@ -99,29 +96,11 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       return;
     }
 
-  gtk_tree_model_get(model, &i,
-      IMAGE_NAME, &name,
-      IMAGE_FILE, &image,
-      IMAGE_SIGNATURE, &signature,
-      IMAGE_SIZE_BYTES, &size_bytes,
-      IMAGE_REQUIRED_SIZE, &required_size,
+  gtk_tree_model_get (model, &i,
+      IMAGE, &image,
       -1);
 
-  gis_store_set_image_name (name);
-  gis_store_set_image_size (size_bytes);
-  gis_store_set_required_size (required_size);
-  g_free (name);
-
-  file = g_file_new_for_path (image);
-  gis_store_set_object (GIS_STORE_IMAGE, G_OBJECT (file));
-  g_object_unref(file);
-
-  if (signature == NULL)
-    signature = g_strjoin (NULL, image, ".asc", NULL);
-
-  gis_store_set_image_signature (signature);
-  g_free (signature);
-
+  gis_store_set_selected_image (image);
   gis_page_set_complete (page, TRUE);
 
   if (gis_store_is_unattended())
@@ -317,7 +296,6 @@ add_image (
     const gchar  *image_device,
     const gchar  *signature)
 {
-  GtkTreeIter i;
   GError *error = NULL;
   g_autoptr(GFile) f = g_file_new_for_path (image);
   g_autoptr(GFileInfo) fi = g_file_query_info (f, G_FILE_ATTRIBUTE_STANDARD_SIZE,
@@ -325,8 +303,7 @@ add_image (
                                      &error);
   if (fi != NULL)
     {
-      gchar *size = NULL;
-      gchar *displayname = NULL;
+      g_autofree gchar *displayname = NULL;
       guint64 required_size = 0;
 
       /* TODO: make image size an out parameter of get_*_is_valid_eos_gpt */
@@ -355,30 +332,35 @@ add_image (
         {
           displayname = get_display_name (image);
 
-          /* if we have a signature file passed in, attempt to get the name
+          /* this will fail if image is (eg) "endless.img"; try the signature instead.
            * from that too */
-          if (displayname == NULL && signature != NULL)
-            {
-              displayname = get_display_name (signature);
-            }
+          if (displayname == NULL)
+            displayname = get_display_name (signature);
         }
 
       if (displayname != NULL)
         {
           goffset size_bytes = g_file_info_get_size (fi);
+          g_autofree gchar *size = NULL;
+          g_autoptr(GFile) image_file = NULL;
+          g_autoptr(GFile) signature_file = NULL;
+          g_autoptr(GisImage) gis_image = NULL;
+
           size = g_format_size_full (size_bytes, G_FORMAT_SIZE_DEFAULT);
 
-          gtk_list_store_append (store, &i);
-          gtk_list_store_set (store, &i,
-                              IMAGE_NAME, displayname,
-                              IMAGE_SIZE, size,
-                              IMAGE_SIZE_BYTES, size_bytes,
-                              IMAGE_FILE, image_device != NULL ? image_device : image,
-                              IMAGE_SIGNATURE, signature,
-                              IMAGE_REQUIRED_SIZE, required_size,
-                              -1);
-          g_free (size);
-          g_free (displayname);
+          if (image_device != NULL)
+            image_file = g_file_new_for_path (image_device);
+          else
+            image_file = g_object_ref (f);
+
+          signature_file = g_file_new_for_path (signature);
+          gis_image = gis_image_new (displayname, image_file, signature_file,
+              size_bytes, required_size);
+          gtk_list_store_insert_with_values (store, NULL, -1,
+                                             IMAGE_NAME, displayname,
+                                             IMAGE_SIZE, size,
+                                             IMAGE, gis_image,
+                                             -1);
         }
     }
   else
@@ -537,19 +519,14 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
 
   for (file = (gchar*)g_dir_read_name (dir); file != NULL; file = (gchar*)g_dir_read_name (dir))
     {
-      gchar *fullpath = g_build_path ("/", path, file, NULL);
+      g_autofree gchar *fullpath = g_build_path ("/", path, file, NULL);
+      g_autofree gchar *signature = g_strdup_printf ("%s.asc", fullpath);
 
       /* ufile is only set in the unattended case */
-      if (ufile != NULL)
+      if (ufile == NULL || g_str_equal (ufile, file))
         {
-          if (g_str_equal (ufile, file))
-            add_image (store, fullpath, NULL, NULL);
+          add_image (store, fullpath, NULL, signature);
         }
-      else
-        {
-          add_image (store, fullpath, NULL, NULL);
-        }
-      g_free (fullpath);
     }
 
   if (is_live &&
@@ -729,6 +706,9 @@ gis_diskimage_page_class_init (GisDiskImagePageClass *klass)
 {
   GisPageClass *page_class = GIS_PAGE_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  /* GisImage is referenced by name in gis-diskimage-page.ui */
+  g_type_ensure (gis_image_get_type ());
 
   page_class->page_id = PAGE_ID;
   page_class->locale_changed = gis_diskimage_page_locale_changed;

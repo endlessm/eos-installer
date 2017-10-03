@@ -57,6 +57,7 @@ check_can_continue(GisDiskTargetPage *page)
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (page);
   GtkToggleButton *button = OBJ (GtkToggleButton*, "confirmbutton");
   GtkToggleButton *pbutton = OBJ (GtkToggleButton*, "partitionbutton");
+  GisImage *image = gis_store_get_selected_image ();
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
   UDisksDrive *drive = NULL;
 
@@ -72,7 +73,7 @@ check_can_continue(GisDiskTargetPage *page)
   if (drive == NULL)
     return;
 
-  if (udisks_drive_get_size(drive) < gis_store_get_required_size())
+  if (udisks_drive_get_size (drive) < image->uncompressed_size)
     return;
 
   if (!gtk_toggle_button_get_active (button))
@@ -114,18 +115,21 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
 
   if (block != NULL)
     {
+      GisImage *image = gis_store_get_selected_image ();
       UDisksDrive *drive = udisks_client_get_drive_for_block (priv->client, UDISKS_BLOCK(block));
       gis_store_set_object (GIS_STORE_BLOCK_DEVICE, block);
       g_object_unref(block);
-      if (udisks_drive_get_size(drive) < gis_store_get_required_size())
+
+      if (udisks_drive_get_size (drive) < image->uncompressed_size)
         {
           g_autofree gchar *size = g_format_size_full (
-              gis_store_get_required_size (),
+              image->uncompressed_size,
               G_FORMAT_SIZE_LONG_FORMAT);
           g_autofree gchar *msg = g_strdup_printf (
               _("The location you have chosen is too small: you need %s to reformat with %s."),
               size,
-              gis_store_get_image_name());
+              image->name);
+
           gtk_label_set_text (OBJ (GtkLabel*, "too_small_label"), msg);
           gtk_widget_hide (WID ("confirm_box"));
           gtk_widget_show (WID ("error_box"));
@@ -269,6 +273,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   UDisksDrive *root = NULL;
   UDisksDrive *image_drive = UDISKS_DRIVE (gis_store_get_object (GIS_STORE_IMAGE_DRIVE));
   const gchar *image_drive_path = NULL;
+  GisImage *image = gis_store_get_selected_image ();
 
   if (image_drive != NULL)
     image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (image_drive));
@@ -325,7 +330,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
                "it hosts the image partition");
 #undef skip_if
 
-      if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
+      if (udisks_drive_get_size(drive) >= image->uncompressed_size)
         {
           priv->has_valid_disks = TRUE;
         }
