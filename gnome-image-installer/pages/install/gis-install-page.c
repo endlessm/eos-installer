@@ -617,7 +617,7 @@ gis_install_page_verify (GisPage *page)
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
 
-  g_autofree gchar *image_path = g_file_get_path (priv->image->file);
+  g_autofree gchar *image_path = g_file_get_path (priv->image->verify_file);
 
   GFile *signature = priv->image->signature;
   g_autofree gchar *signature_path = g_file_get_path (signature);
@@ -625,10 +625,14 @@ gis_install_page_verify (GisPage *page)
   gint outfd;
 
   /* This size is a hint to GPG when it can't determine the size of image_path
-   * using stat(). This only occurs in the case where image_path is
-   * /dev/mapper/endless-image, ie the uncompressed image.
+   * using stat(). This occurs only when we are reading from /dev/mapper/x
+   * rather than a real file. There are two possibilities:
+   * - verify_file is a squashfs, mapped from an exFAT partition. In this case,
+   *   the size we are interested in is the compressed size
+   * - verify_file is an uncompressed image, mapped from an exFAT partition. In
+   *   this case, compressed_size == uncompressed_size.
    */
-  guint64 size = priv->image->uncompressed_size;
+  guint64 size = priv->image->compressed_size;
   g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT, size);
 
   const gchar * const args[] = { "gpg",

@@ -56,13 +56,25 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE)
 
 G_DEFINE_QUARK(image-error, gis_image_error);
 
-/* A device-mapped copy of endless.img used in image boots.
+/* A device-mapped copy of endless.img used in image boots from exFAT.
  * We prefer to use this to endless.img from the filesystem for two reasons:
- * - 'error' is mapped over the sectors of the drive which correspond to the
+ * - zeros are mapped over the sectors of the drive which correspond to the
  *   image, so we can't read it from the filesystem
  * - reading from the filesystem (via fuse) comes with a big overhead
+ * Even if we are booted from ISO (using a regular loop device), and/or
+ * from endless.squash (so the endless.img within can be mapped to a regular
+ * loop device), the boot scripts always arrange for this device to exist, and
+ * there should be no overhead in unnecessarily using it.
  */
 static const gchar * const live_device_path = "/dev/mapper/endless-image";
+
+/* A device-mapped copy of endless.squash used in image boots from exFAT.
+ * Although in this case we will read from live_device_path when writing to
+ * disk, we prefer to read the compressed file while verifying to avoid
+ * incurring the decompression overhead twice, in addition to the two reasons
+ * above.
+ */
+static const gchar * const squashfs_device_path = "/dev/mapper/endless-image-squashfs";
 
 /* Deliberately out-of-order so that sorting is exercised in English */
 static const gchar * const sea_locales[] = {
@@ -194,7 +206,7 @@ static gchar *get_display_name(const gchar *fullname)
   GMatchInfo *info;
   gchar *name = NULL;
 
-  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-(?:[^-]+)-(?:[^.]+)\\.(?:[^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img(?:\\.([gx]z|asc))$", 0, 0, NULL);
+  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-(?:[^-]+)-(?:[^.]+)\\.(?:[^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.(?:img|squash)(?:\\.([gx]z|asc))$", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
@@ -294,6 +306,7 @@ add_image (
     GtkListStore *store,
     const gchar  *image,
     const gchar  *image_device,
+    const gchar  *verify_path,
     const gchar  *signature)
 {
   GError *error = NULL;
@@ -344,18 +357,27 @@ add_image (
           g_autofree gchar *size = NULL;
           g_autoptr(GFile) image_file = NULL;
           g_autoptr(GFile) signature_file = NULL;
+          g_autoptr(GFile) verify_file = NULL;
           g_autoptr(GisImage) gis_image = NULL;
 
           size = g_format_size_full (size_bytes, G_FORMAT_SIZE_DEFAULT);
+
+          g_print ("Found image: %s (%s, image_device=%s, verify_path=%s, signature=%s)\n",
+              image, size, image_device, verify_path, signature);
 
           if (image_device != NULL)
             image_file = g_file_new_for_path (image_device);
           else
             image_file = g_object_ref (f);
 
+          if (verify_path != NULL)
+            verify_file = g_file_new_for_path (verify_path);
+          else
+            verify_file = g_object_ref (image_file);
+
           signature_file = g_file_new_for_path (signature);
-          gis_image = gis_image_new (displayname, image_file, signature_file,
-              size_bytes, required_size);
+          gis_image = gis_image_new (displayname, image_file, verify_file,
+              signature_file, size_bytes, required_size);
           gtk_list_store_insert_with_values (store, NULL, -1,
                                              IMAGE_NAME, displayname,
                                              IMAGE_SIZE, size,
@@ -384,37 +406,12 @@ file_exists (
   return FALSE;
 }
 
-/**
- * Returns: the first of @a or @b which exists; or %NULL with a combined error
- * if neither does.
- */
-static gchar *
-first_existing (
-    gchar *a,
-    gchar *b,
-    GError **error)
-{
-  GError *error2 = NULL;
-
-  if (file_exists (a, &error2))
-    return a;
-
-  if (file_exists (b, error))
-    {
-      g_clear_error (&error2);
-      return b;
-    }
-
-  g_prefix_error (error, "%s; ", error2->message);
-  g_clear_error (&error2);
-  return NULL;
-}
-
-/* live USB sticks have an unpacked disk image named endless.img, which for
- * various reasons is invisible in directory listings. We can determine the
- * name that the image "should" have by reading /endless/live, and find the
- * corresponding signature file.
- * For ISOs the disk image is called endless.squash.
+/* ISOs have a squashfs image named /endless/endless.squash, and live USB
+ * sticks have either this or an unpacked image named /endless/endless.img. For
+ * various reasons, these are sometimes invisible in exFAT directory listings.
+ *
+ * We can get the name that the image "should" have by reading /endless/live,
+ * and use this to find the image and corresponding signature file.
  */
 static gboolean
 gis_diskimage_page_add_live_image (
@@ -423,38 +420,54 @@ gis_diskimage_page_add_live_image (
     const gchar  *ufile,
     GError      **error)
 {
-  g_autofree gchar *endless_img_path = g_build_path (
-      "/", path, "endless", "endless.img", NULL);
-  g_autofree gchar *endless_squash_path = g_build_path (
-      "/", path, "endless", "endless.squash", NULL);
-  g_autofree gchar *live_flag_path = g_build_path (
-      "/", path, "endless", "live", NULL);
+  g_autofree gchar *live_flag_path = NULL;
   g_autofree gchar *live_flag_contents = NULL;
   g_autofree gchar *live_sig_basename = NULL;
   g_autofree gchar *live_sig = NULL;
-  gchar *endless_path; /* either endless_img_path or endless_squash_path */
+  const gchar *endless_basename = NULL;
+  g_autofree gchar *endless_path = NULL;
+  gboolean is_squashfs = FALSE;
+  const gchar *verify_path = NULL;
 
-  endless_path = first_existing (endless_img_path, endless_squash_path, error);
-  if (endless_path == NULL)
-    return FALSE;
-
+  live_flag_path = g_build_path ("/", path, "endless", "live", NULL);
   if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL, error))
     {
       g_prefix_error (error, "Couldn't read %s: ", live_flag_path);
       return FALSE;
     }
 
-  /* live_flag_contents contains the name that 'endless.img' would have had;
-   * so we should be able to find its signature at ${live_flag_contents}.asc
+  /* live_flag_contents contains the name that endless.img/endless.squash would have had;
+   * so we should be able to find the image at endless.<ext> and its signature
+   * at ${live_flag_contents}.asc
    */
   g_strstrip (live_flag_contents);
+
+  if (g_str_has_suffix (live_flag_contents, ".img"))
+    {
+      endless_basename = "endless.img";
+      is_squashfs = FALSE;
+    }
+  else if (g_str_has_suffix (live_flag_contents, ".squash"))
+    {
+      endless_basename = "endless.squash";
+      is_squashfs = TRUE;
+    }
+  else
+    {
+      g_set_error (error, GIS_IMAGE_ERROR, 0, "Unknown live image format '%s'",
+          live_flag_contents);
+      return FALSE;
+    }
+
+  endless_path = g_build_path ("/", path, "endless", endless_basename, NULL);
+  if (!file_exists (endless_path, error))
+    return FALSE;
+
   live_sig_basename = g_strdup_printf ("%s.%s", live_flag_contents, "asc");
   live_sig = g_build_path ("/", path, "endless", live_sig_basename, NULL);
 
   if (!file_exists (live_sig, error))
-    {
-      return FALSE;
-    }
+    return FALSE;
 
   if (ufile != NULL && g_strcmp0 (ufile, live_flag_contents) != 0)
     {
@@ -464,15 +477,21 @@ gis_diskimage_page_add_live_image (
       return FALSE;
     }
 
+  if (is_squashfs)
+    {
+      if (file_exists (squashfs_device_path, NULL))
+        verify_path = squashfs_device_path;
+      else
+        verify_path = endless_path;
+    }
+
   if (file_exists (live_device_path, NULL))
     {
-      add_image (store, endless_path, live_device_path, live_sig);
+      add_image (store, endless_path, live_device_path, verify_path, live_sig);
     }
-  else if (endless_path == endless_img_path)
+  else if (!is_squashfs)
     {
-      g_print ("can't find image device %s; will use %s directly\n",
-               live_device_path, endless_img_path);
-      add_image (store, endless_img_path, NULL, live_sig);
+      add_image (store, endless_path, NULL, NULL, live_sig);
     }
   else
     {
@@ -525,7 +544,7 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
       /* ufile is only set in the unattended case */
       if (ufile == NULL || g_str_equal (ufile, file))
         {
-          add_image (store, fullpath, NULL, signature);
+          add_image (store, fullpath, NULL, NULL, signature);
         }
     }
 

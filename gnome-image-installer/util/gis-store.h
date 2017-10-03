@@ -34,14 +34,28 @@ typedef struct _GisImage {
   /* Human-readable name */
   gchar *name;
 
-  /* Image file. This may be a device (eg /dev/mapper/endless-image) or a
-   * regular file (eg /path/to/eos-...img.gz) */
+  /* Image file to write to disk. This may be a device (eg
+   * /dev/mapper/endless-image) or a regular file (eg /path/to/eos-...img.gz)
+   */
   GFile *file;
+
+  /* Image file to verify. This may be a device (eg
+   * /dev/mapper/endless-image-squashfs) or a regular file (eg
+   * /path/to/eos-...img.gz, /path/to/endless.squash).
+   *
+   * When installing a SquashFS-compressed image file, we rely on the
+   * uncompressed file within being mapped to a loopback device (and then to
+   * /dev/mapper/endless-image). But we still want to *verify* the compressed
+   * SquashFS image.
+   *
+   * When not installing from SquashFS, this will be the same as 'file'.
+   */
+  GFile *verify_file;
 
   /* GPG signature for 'file' */
   GFile *signature;
 
-  /* Size of 'file' */
+  /* Size of 'verify_file' */
   guint64 compressed_size;
 
   /* Size of image when uncompressed and written to disk. */
@@ -51,6 +65,7 @@ typedef struct _GisImage {
 GType gis_image_get_type (void);
 GisImage *gis_image_new (const gchar *name,
                          GFile       *file,
+                         GFile       *verify_file,
                          GFile       *signature,
                          guint64      compressed_size,
                          guint64      uncompressed_size);

@@ -39,6 +39,7 @@ G_DEFINE_BOXED_TYPE(GisImage, gis_image, gis_image_copy, gis_image_free);
 GisImage *
 gis_image_new (const gchar *name,
                GFile       *file,
+               GFile       *verify_file,
                GFile       *signature,
                guint64      compressed_size,
                guint64      uncompressed_size)
@@ -56,6 +57,7 @@ gis_image_new (const gchar *name,
   image = g_slice_new0 (GisImage);
   image->name = g_strdup (name);
   image->file = g_object_ref (file);
+  image->verify_file = g_object_ref (verify_file);
   image->signature = g_object_ref (signature);
   image->compressed_size = compressed_size;
   image->uncompressed_size = uncompressed_size;
@@ -65,8 +67,8 @@ gis_image_new (const gchar *name,
 GisImage *
 gis_image_copy (const GisImage *image)
 {
-  return gis_image_new (image->name, image->file, image->signature,
-      image->compressed_size, image->uncompressed_size);
+  return gis_image_new (image->name, image->file, image->verify_file,
+      image->signature, image->compressed_size, image->uncompressed_size);
 }
 
 void
@@ -74,6 +76,7 @@ gis_image_free (GisImage *image)
 {
   g_clear_pointer (&image->name, g_free);
   g_clear_object (&image->file);
+  g_clear_object (&image->verify_file);
   g_clear_object (&image->signature);
 
   g_slice_free (GisImage, image);
