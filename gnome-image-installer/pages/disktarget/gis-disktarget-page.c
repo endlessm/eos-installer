@@ -292,7 +292,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   root = gis_disktarget_page_get_root_drive (client);
   for (l = objects; l != NULL; l = l->next)
     {
-      gchar *targetname, *targetsize;
+      g_autofree gchar *targetname = NULL;
+      g_autofree gchar *targetsize = NULL;
       UDisksObject *object = UDISKS_OBJECT(l->data);
       const gchar *object_path;
       UDisksDrive *drive = udisks_object_peek_drive(object);
@@ -342,11 +343,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
                                    udisks_drive_get_model(drive));
       targetsize = g_format_size_full (udisks_drive_get_size(drive),
                                        G_FORMAT_SIZE_DEFAULT);
-      gtk_list_store_append(store, &i);
-      gtk_list_store_set(store, &i, 0, targetname, 1, targetsize,
-                                    2, G_OBJECT(block), 3, has_data_partitions, -1);
-      g_free(targetname);
-      g_free(targetsize);
+
+      gtk_list_store_insert_with_values (store, NULL, -1,
+                                         0, targetname,
+                                         1, targetsize,
+                                         2, G_OBJECT (block),
+                                         3, has_data_partitions,
+                                         -1);
     }
   g_clear_object (&root);
 
