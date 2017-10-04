@@ -46,10 +46,9 @@
 
 struct _GisInstallPagePrivate {
   GMutex copy_mutex;
-  GFile *image;
+  GisImage *image;
   GObject *decompressor;
   GInputStream *decompressed;
-  gint64 decompressed_size;
   gint drive_fd;
   gint64 bytes_written;
   GThread *copythread;
@@ -134,13 +133,11 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
   gchar *basename = NULL;
   GError *e = NULL;
 
-  priv->decompressed_size = gis_store_get_required_size();
-  priv->image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
-  g_object_ref (priv->image);
-  basename = g_file_get_basename(priv->image);
+  priv->image = gis_store_get_selected_image ();
+  basename = g_file_get_basename (priv->image->file);
   if (basename == NULL)
     {
-      gchar *parse_name = g_file_get_parse_name(priv->image);
+      gchar *parse_name = g_file_get_parse_name (priv->image->file);
       g_warning ("g_file_get_basename(\"%s\") returned NULL", parse_name);
       g_free (parse_name);
       *error = g_error_new (GIS_INSTALL_ERROR, 0, _("Internal error"));
@@ -169,7 +166,7 @@ gis_install_page_prepare_read (GisPage *page, GError **error)
     }
   g_free (basename);
 
-  input = (GInputStream *) g_file_read (priv->image, NULL, &e);
+  input = (GInputStream *) g_file_read (priv->image->file, NULL, &e);
   if (e != NULL)
     {
       g_propagate_error (error, e);
@@ -302,9 +299,7 @@ gis_install_page_teardown (GisPage *page)
 
   g_mutex_lock (&priv->copy_mutex);
 
-  if (priv->image != NULL)
-    g_object_unref (priv->image);
-  priv->image = NULL;
+  g_clear_pointer (&priv->image, gis_image_free);
 
   if (priv->decompressor != NULL)
     g_object_unref (priv->decompressor);
@@ -359,7 +354,7 @@ gis_install_page_update_progress(GisPage *page)
 
   g_mutex_lock (&priv->copy_mutex);
 
-  gtk_progress_bar_set_fraction (bar, (gdouble)priv->bytes_written/(gdouble)priv->decompressed_size);
+  gtk_progress_bar_set_fraction (bar, (gdouble)priv->bytes_written/(gdouble)priv->image->uncompressed_size);
 
   g_mutex_unlock (&priv->copy_mutex);
 
@@ -621,13 +616,25 @@ gis_install_page_verify (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GFile *image = G_FILE(gis_store_get_object (GIS_STORE_IMAGE));
-  gchar *image_path = g_file_get_path (image);
-  const gchar *signature_path = gis_store_get_image_signature ();
-  GFile *signature = g_file_new_for_path (signature_path);
+
+  g_autofree gchar *image_path = g_file_get_path (priv->image->verify_file);
+
+  GFile *signature = priv->image->signature;
+  g_autofree gchar *signature_path = g_file_get_path (signature);
+
   gint outfd;
-  guint64 size = gis_store_get_required_size ();
+
+  /* This size is a hint to GPG when it can't determine the size of image_path
+   * using stat(). This occurs only when we are reading from /dev/mapper/x
+   * rather than a real file. There are two possibilities:
+   * - verify_file is a squashfs, mapped from an exFAT partition. In this case,
+   *   the size we are interested in is the compressed size
+   * - verify_file is an uncompressed image, mapped from an exFAT partition. In
+   *   this case, compressed_size == uncompressed_size.
+   */
+  guint64 size = priv->image->compressed_size;
   g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT, size);
+
   const gchar * const args[] = { "gpg",
                     "--enable-progress-filter", "--status-fd", "1",
                     /* Trust the one key in this keyring, and no others */
@@ -664,9 +671,7 @@ gis_install_page_verify (GisPage *page)
   g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_gpg_watch, page);
 
 out:
-  g_free (image_path);
-  g_object_unref (signature);
-  return FALSE;
+  return G_SOURCE_REMOVE;
 }
 
 static void
@@ -679,6 +684,7 @@ gis_install_page_shown (GisPage *page)
   g_free (msg);
 
   priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
+  priv->image = gis_store_get_selected_image ();
 
   if (gis_store_get_error () != NULL)
     {

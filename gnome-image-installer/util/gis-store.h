@@ -30,17 +30,57 @@
 
 G_BEGIN_DECLS
 
-typedef enum {
-  /* GFile: selected image path */
-  GIS_STORE_IMAGE = 0,
+typedef struct _GisImage {
+  /* Human-readable name */
+  gchar *name;
 
+  /* Image file to write to disk. This may be a device (eg
+   * /dev/mapper/endless-image) or a regular file (eg /path/to/eos-...img.gz)
+   */
+  GFile *file;
+
+  /* Image file to verify. This may be a device (eg
+   * /dev/mapper/endless-image-squashfs) or a regular file (eg
+   * /path/to/eos-...img.gz, /path/to/endless.squash).
+   *
+   * When installing a SquashFS-compressed image file, we rely on the
+   * uncompressed file within being mapped to a loopback device (and then to
+   * /dev/mapper/endless-image). But we still want to *verify* the compressed
+   * SquashFS image.
+   *
+   * When not installing from SquashFS, this will be the same as 'file'.
+   */
+  GFile *verify_file;
+
+  /* GPG signature for 'file' */
+  GFile *signature;
+
+  /* Size of 'verify_file' */
+  guint64 compressed_size;
+
+  /* Size of image when uncompressed and written to disk. */
+  guint64 uncompressed_size;
+} GisImage;
+
+GType gis_image_get_type (void);
+GisImage *gis_image_new (const gchar *name,
+                         GFile       *file,
+                         GFile       *verify_file,
+                         GFile       *signature,
+                         guint64      compressed_size,
+                         guint64      uncompressed_size);
+GisImage *gis_image_copy (const GisImage *image);
+void gis_image_free (GisImage *image);
+G_DEFINE_AUTOPTR_CLEANUP_FUNC(GisImage, gis_image_free);
+
+typedef enum {
   /* UDisksBlock: block device to reformat */
-  GIS_STORE_BLOCK_DEVICE,
+  GIS_STORE_BLOCK_DEVICE = 0,
 
   /* UDisksClient: global shared UDisks client proxy */
   GIS_STORE_UDISKS_CLIENT,
 
-  /* UDisksDrive: drive hosting partition hosting GIS_STORE_IMAGE */
+  /* UDisksDrive: drive hosting partition hosting the selected image */
   GIS_STORE_IMAGE_DRIVE,
 
   GIS_STORE_N_OBJECTS
@@ -50,21 +90,11 @@ GObject *gis_store_get_object(gint key);
 void gis_store_set_object(gint key, GObject *obj);
 void gis_store_clear_object(gint key);
 
-guint64 gis_store_get_required_size(void);
-void gis_store_set_required_size(guint64 size);
-
-gint64 gis_store_get_image_size (void);
-void gis_store_set_image_size (gint64 size);
-
-gchar *gis_store_get_image_name(void);
-void gis_store_set_image_name(gchar *name);
-void gis_store_clear_image_name(void);
+void gis_store_set_selected_image (const GisImage *image);
+GisImage *gis_store_get_selected_image (void);
 
 const gchar *gis_store_get_image_uuid(void);
 void gis_store_set_image_uuid(const gchar *uuid);
-
-const gchar *gis_store_get_image_signature(void);
-void gis_store_set_image_signature(const gchar *signature);
 
 GError *gis_store_get_error(void);
 void gis_store_set_error(GError *error);

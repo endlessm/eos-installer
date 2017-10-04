@@ -27,15 +27,60 @@
 #include "gis-store.h"
 
 static GObject *_objects[GIS_STORE_N_OBJECTS];
-static guint64 _size = 0;
-static gint64 _image_size = 0;
-static gchar *_name = NULL;
-static gchar *_signature = NULL;
+static GisImage *_selected_image = NULL;
 static GError *_error = NULL;
 static gboolean _unattended = FALSE;
 static gboolean _live_install = FALSE;
 static GKeyFile *_keys = NULL;
 static gchar *_uuid = NULL;
+
+G_DEFINE_BOXED_TYPE(GisImage, gis_image, gis_image_copy, gis_image_free);
+
+GisImage *
+gis_image_new (const gchar *name,
+               GFile       *file,
+               GFile       *verify_file,
+               GFile       *signature,
+               guint64      compressed_size,
+               guint64      uncompressed_size)
+{
+  GisImage *image;
+
+  g_return_val_if_fail (name != NULL, NULL);
+
+  g_return_val_if_fail (file != NULL, NULL);
+  g_return_val_if_fail (G_IS_FILE (file), NULL);
+
+  g_return_val_if_fail (signature != NULL, NULL);
+  g_return_val_if_fail (G_IS_FILE (signature), NULL);
+
+  image = g_slice_new0 (GisImage);
+  image->name = g_strdup (name);
+  image->file = g_object_ref (file);
+  image->verify_file = g_object_ref (verify_file);
+  image->signature = g_object_ref (signature);
+  image->compressed_size = compressed_size;
+  image->uncompressed_size = uncompressed_size;
+  return image;
+}
+
+GisImage *
+gis_image_copy (const GisImage *image)
+{
+  return gis_image_new (image->name, image->file, image->verify_file,
+      image->signature, image->compressed_size, image->uncompressed_size);
+}
+
+void
+gis_image_free (GisImage *image)
+{
+  g_clear_pointer (&image->name, g_free);
+  g_clear_object (&image->file);
+  g_clear_object (&image->verify_file);
+  g_clear_object (&image->signature);
+
+  g_slice_free (GisImage, image);
+}
 
 GObject *gis_store_get_object(gint key)
 {
@@ -62,52 +107,19 @@ void gis_store_clear_object(gint key)
   _objects[key] = NULL;
 }
 
-guint64 gis_store_get_required_size(void)
+GisImage *
+gis_store_get_selected_image (void)
 {
-  return _size;
+  return _selected_image;
 }
 
-void gis_store_set_required_size(guint64 size)
+void
+gis_store_set_selected_image (const GisImage *image)
 {
-  _size = size;
-}
+  g_clear_pointer (&_selected_image, gis_image_free);
 
-gint64 gis_store_get_image_size (void)
-{
-  return _image_size;
-}
-
-void gis_store_set_image_size (gint64 size)
-{
-  _image_size = size;
-}
-
-gchar *gis_store_get_image_name(void)
-{
-  return _name;
-}
-
-void gis_store_set_image_name(gchar *name)
-{
-  g_free (_name);
-  _name = g_strdup (name);
-}
-
-void gis_store_clear_image_name(void)
-{
-  g_free (_name);
-  _name = NULL;
-}
-
-const gchar *gis_store_get_image_signature (void)
-{
-  return _signature;
-}
-
-void gis_store_set_image_signature (const gchar *signature)
-{
-  g_free (_signature);
-  _signature = g_strdup (signature);
+  if (image != NULL)
+    _selected_image = gis_image_copy (image);
 }
 
 const gchar *gis_store_get_image_uuid (void)
