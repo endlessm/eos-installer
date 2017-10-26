@@ -29,6 +29,7 @@
 #include "config.h"
 #include "install-resources.h"
 #include "gis-install-page.h"
+#include "gis-scribe.h"
 #include "gis-store.h"
 
 #include <udisks/udisks.h>
@@ -53,9 +54,6 @@ struct _GisInstallPagePrivate {
   gint drive_fd;
   gint64 bytes_written;
   GThread *copythread;
-  GPid gpg;
-  GIOChannel *gpgout;
-  guint gpg_watch;
   UDisksClient *client;
   guint pulse_id;
 
@@ -66,12 +64,8 @@ typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisInstallPage, gis_install_page, GIS_TYPE_PAGE);
 
-G_DEFINE_QUARK(install-error, gis_install_error);
-
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
-
-#define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
 
 static gboolean
 delete_event_cb (GtkWidget      *toplevel,
@@ -543,12 +537,9 @@ gis_install_page_prepare (GisPage *page)
   gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
   g_free (msg);
 
-  g_mutex_init (&priv->copy_mutex);
+  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
 
-  g_source_remove (priv->gpg_watch);
-  g_io_channel_shutdown (priv->gpgout, TRUE, NULL);
-  g_io_channel_unref (priv->gpgout);
-  priv->gpgout = NULL;
+  g_mutex_init (&priv->copy_mutex);
 
   if (!gis_install_page_prepare_read (page, &error))
     {
@@ -573,121 +564,39 @@ gis_install_page_prepare (GisPage *page)
 }
 
 static void
-gis_install_page_verify_failed (GisPage *page,
-                                GError  *error)
+gis_install_page_progress_cb (GObject    *object,
+                              GParamSpec *pspec,
+                              gpointer    data)
 {
-  if (error == NULL)
-    {
-      error = g_error_new (GIS_INSTALL_ERROR, 0, _("Image verification error."));
-    }
+  GisPage *page = GIS_PAGE (data);
+  GisScribe *scribe = GIS_SCRIBE (object);
+  gdouble progress = gis_scribe_get_progress (scribe);
+  GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
 
-  gis_store_set_error (error);
-  g_error_free (error);
-  gis_install_page_teardown(page);
+  if (progress < 0)
+    gis_install_page_ensure_pulsing (GIS_INSTALL_PAGE (page), bar);
+  else
+    gtk_progress_bar_set_fraction (bar, progress);
 }
 
 static void
-gis_install_page_gpg_watch (GPid pid, gint status, GisPage *page)
+gis_install_page_write_cb (GObject      *source,
+                           GAsyncResult *result,
+                           gpointer      data)
 {
-  if (!g_spawn_check_exit_status (status, NULL))
+  GisPage *page = GIS_PAGE (data);
+  GisScribe *scribe = GIS_SCRIBE (source);
+  g_autoptr(GError) error = NULL;
+
+  if (gis_scribe_write_finish (scribe, result, &error))
     {
-      gis_install_page_verify_failed (page, NULL);
-      return;
+      gis_install_page_prepare (page);
     }
-
-  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
-  g_spawn_close_pid (pid);
-  g_idle_add ((GSourceFunc)gis_install_page_prepare, page);
-}
-
-static gboolean
-gis_install_page_gpg_progress (GIOChannel *source, GIOCondition cond, GisPage *page)
-{
-  g_autofree gchar *line = NULL;
-
-  if (g_io_channel_read_line (source, &line, NULL, NULL, NULL) == G_IO_STATUS_NORMAL)
-  {
-    if (g_str_has_prefix (line, "[GNUPG:] PROGRESS"))
-      {
-        /* https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=blob;f=doc/DETAILS;h=0be55f4d;hb=refs/heads/master#l1043
-         * [GNUPG:] PROGRESS <what> <char> <cur> <total> [<units>]
-         * For example:
-         * [GNUPG:] PROGRESS /dev/mapper/endless- ? 676 4442 MiB
-         */
-        GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
-        g_auto(GStrv) arr = g_strsplit (line, " ", -1);
-        gdouble curr = g_ascii_strtod (arr[4], NULL);
-        gdouble full = g_ascii_strtod (arr[5], NULL);
-
-        if (full == 0)
-          {
-            /* gpg can't determine the file size. Should not happen, since we
-             * gave it a hint.
-             */
-            gis_install_page_ensure_pulsing (GIS_INSTALL_PAGE (page), bar);
-          }
-        else
-          {
-            gdouble frac = curr/full;
-            gtk_progress_bar_set_fraction (bar, frac);
-          }
-      }
-  }
-
-  return TRUE;
-}
-
-static gboolean
-gis_install_page_verify (GisPage *page)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GFile *image = G_FILE(gis_store_get_object (GIS_STORE_IMAGE));
-  gchar *image_path = g_file_get_path (image);
-  const gchar *signature_path = gis_store_get_image_signature ();
-  GFile *signature = g_file_new_for_path (signature_path);
-  gint outfd;
-  guint64 size = gis_store_get_required_size ();
-  g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT, size);
-  const gchar * const args[] = { "gpg",
-                    "--enable-progress-filter", "--status-fd", "1",
-                    /* Trust the one key in this keyring, and no others */
-                    "--keyring", IMAGE_KEYRING,
-                    "--no-default-keyring",
-                    "--trust-model", "always",
-                    "--input-size-hint", size_str,
-                    "--verify", signature_path, image_path, NULL };
-  GError *error = NULL;
-
-  if (!g_file_query_exists (signature, NULL))
+  else
     {
-      error = g_error_new (GIS_INSTALL_ERROR, 0,
-          _("The Endless OS signature file \"%s\" does not exist."),
-          signature_path);
-      gis_install_page_verify_failed (page, error);
-      goto out;
+      gis_store_set_error (error);
+      gis_install_page_teardown (page);
     }
-
-  if (!g_spawn_async_with_pipes (NULL, (gchar **) args, NULL,
-                                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-                                 NULL, NULL, &priv->gpg,
-                                 NULL, &outfd, NULL, &error))
-    {
-      gis_install_page_verify_failed (page, error);
-      goto out;
-    }
-
-  priv->gpgout = g_io_channel_unix_new (outfd);
-  priv->gpg_watch = g_io_add_watch (priv->gpgout, G_IO_IN, (GIOFunc)gis_install_page_gpg_progress, page);
-
-  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
-
-  g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_gpg_watch, page);
-
-out:
-  g_free (image_path);
-  g_object_unref (signature);
-  return FALSE;
 }
 
 static void
@@ -695,9 +604,12 @@ gis_install_page_shown (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  gchar *msg = g_strdup_printf (_("Step %d of %d"), 1, 2);
+  g_autofree gchar *msg = g_strdup_printf (_("Step %d of %d"), 1, 2);
+  g_autoptr(GFile) image = NULL;
+  g_autoptr(GFile) signature = NULL;
+  g_autoptr(GisScribe) scribe = NULL;
+
   gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
-  g_free (msg);
 
   priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
 
@@ -707,7 +619,17 @@ gis_install_page_shown (GisPage *page)
       return;
     }
 
-  g_idle_add ((GSourceFunc)gis_install_page_verify, page);
+  image = g_object_ref (gis_store_get_object (GIS_STORE_IMAGE));
+  signature = g_file_new_for_path (gis_store_get_image_signature ());
+  scribe = gis_scribe_new (image,
+                           gis_store_get_required_size (),
+                           signature);
+  g_signal_connect (scribe, "notify::progress",
+                    (GCallback) gis_install_page_progress_cb, page);
+  gis_scribe_write_async (scribe,
+                          NULL,
+                          gis_install_page_write_cb,
+                          page);
 
   /*
    * When the installer is in the middle of the copy operation, we have

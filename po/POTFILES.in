@@ -43,5 +43,6 @@ gnome-image-installer/pages/finished/gis-finished-page.c
 [type: gettext/glade]gnome-image-installer/pages/finished/gis-finished-page.ui
 gnome-image-installer/pages/install/gis-install-page.c
 [type: gettext/glade]gnome-image-installer/pages/install/gis-install-page.ui
+gnome-image-installer/pages/install/gis-scribe.c
 gnome-image-installer/util/gduxzdecompressor.c
 eos-installer-data/eos-installer.desktop.in.in

@@ -53,9 +53,6 @@ GType gis_install_page_get_type (void);
 
 void gis_prepare_install_page (GisDriver *driver);
 
-GQuark gis_install_error_quark (void);
-#define GIS_INSTALL_ERROR gis_install_error_quark()
-
 G_END_DECLS
 
 #endif /* __GIS_INSTALL_PAGE_H__ */

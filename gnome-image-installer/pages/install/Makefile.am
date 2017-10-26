@@ -18,6 +18,7 @@ BUILT_SOURCES += install-resources.c install-resources.h
 
 libgisinstall_la_SOURCES =			\
 	gis-install-page.c gis-install-page.h	\
+	gis-scribe.c gis-scribe.h \
 	$(BUILT_SOURCES)
 
 libgisinstall_la_CFLAGS = $(INITIAL_SETUP_CFLAGS) $(IMAGE_INSTALLER_CFLAGS) -I "$(srcdir)/../../../gnome-initial-setup" -I "$(srcdir)/../.." -I "$(srcdir)/../../util" $(WARN_CFLAGS)
