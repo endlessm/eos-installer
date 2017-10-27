@@ -1,7 +1,10 @@
 AC_INIT([eos-installer],[3.10.1.1])
-AC_CONFIG_MACRO_DIR([m4])
+
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIRS([m4 buildutil])
 
 AX_IS_RELEASE([git-directory])
+AC_REQUIRE_AUX_FILE([tap-driver.sh])
 
 AM_INIT_AUTOMAKE([dist-xz no-dist-gzip foreign tar-ustar])
 AM_SILENT_RULES([yes])
@@ -131,6 +134,8 @@ if test "x$with_systemdsystemunitdir" != "xno"; then
     AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
 fi
 
+GLIB_TESTS
+
 AC_SUBST(INITIAL_SETUP_CFLAGS)
 AC_SUBST(INITIAL_SETUP_LIBS)
 
@@ -173,5 +178,6 @@ gnome-image-installer/pages/install/Makefile
 po/Makefile.in
 data/Makefile
 eos-installer-data/Makefile
+tests/Makefile
 ])
 AC_OUTPUT

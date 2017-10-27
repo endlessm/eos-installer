@@ -10,6 +10,8 @@ Makefile
 Makefile.in
 aclocal.m4
 autom4te.cache
+/build-aux
+compile
 config.h
 config.h.in
 config.log
@@ -37,6 +39,12 @@ po/POTFILES
 po/Rules-quot
 po/stamp-it
 stamp-h1
+test-driver
+test-*.log
+test-*.trs
+tests/test-scribe
+tests/w.img*
+tests/w.truncated*
 *~
 
 eos-installer-data/eos-installer.desktop
