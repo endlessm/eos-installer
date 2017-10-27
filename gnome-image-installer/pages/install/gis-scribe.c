@@ -30,6 +30,7 @@ typedef struct _GisScribe {
   GFile *image;
   guint64 image_size;
   GFile *signature;
+  gchar *keyring_path;
 
   gboolean started;
   gdouble progress;
@@ -47,6 +48,7 @@ typedef enum {
   PROP_IMAGE = 1,
   PROP_IMAGE_SIZE,
   PROP_SIGNATURE,
+  PROP_KEYRING_PATH,
   PROP_PROGRESS,
   N_PROPERTIES
 } GisScribePropertyId;
@@ -75,6 +77,11 @@ gis_scribe_set_property (GObject      *object,
     case PROP_SIGNATURE:
       g_clear_object (&self->signature);
       self->signature = G_FILE (g_value_dup_object (value));
+      break;
+
+    case PROP_KEYRING_PATH:
+      g_free (self->keyring_path);
+      self->keyring_path = g_value_dup_string (value);
       break;
 
     case PROP_PROGRESS:
@@ -107,6 +114,10 @@ gis_scribe_get_property (GObject      *object,
       g_value_set_object (value, self->signature);
       break;
 
+    case PROP_KEYRING_PATH:
+      g_value_set_string (value, self->keyring_path);
+      break;
+
     case PROP_PROGRESS:
       g_value_set_double (value, self->progress);
       break;
@@ -127,6 +138,7 @@ gis_scribe_constructed (GObject *object)
 
   g_return_if_fail (self->image != NULL);
   g_return_if_fail (self->signature != NULL);
+  g_return_if_fail (self->keyring_path != NULL);
 }
 
 static void
@@ -141,6 +153,16 @@ gis_scribe_dispose (GObject *object)
 }
 
 static void
+gis_scribe_finalize (GObject *object)
+{
+  GisScribe *self = GIS_SCRIBE (object);
+
+  g_clear_pointer (&self->keyring_path, g_free);
+
+  G_OBJECT_CLASS (gis_scribe_parent_class)->finalize (object);
+}
+
+static void
 gis_scribe_class_init (GisScribeClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -149,6 +171,7 @@ gis_scribe_class_init (GisScribeClass *klass)
   object_class->set_property = gis_scribe_set_property;
   object_class->get_property = gis_scribe_get_property;
   object_class->dispose = gis_scribe_dispose;
+  object_class->finalize = gis_scribe_finalize;
 
   props[PROP_IMAGE] = g_param_spec_object (
       "image",
@@ -169,6 +192,13 @@ gis_scribe_class_init (GisScribeClass *klass)
       "Signature",
       "Detached GPG signature for :image.",
       G_TYPE_FILE,
+      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_KEYRING_PATH] = g_param_spec_string (
+      "keyring-path",
+      "Keyring path",
+      "Path to GPG keyring holding image signing public keys",
+      IMAGE_KEYRING,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_PROGRESS] = g_param_spec_double (
@@ -286,7 +316,7 @@ gis_scribe_begin_verify (GisScribe *self,
       "gpg",
       "--enable-progress-filter", "--status-fd", "1",
       /* Trust the one key in this keyring, and no others */
-      "--keyring", IMAGE_KEYRING,
+      "--keyring", self->keyring_path,
       "--no-default-keyring",
       "--trust-model", "always",
       "--input-size-hint", size_str,
