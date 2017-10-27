@@ -76,11 +76,7 @@ test_scribe_notify_progress_cb (GObject    *object,
 
   g_assert_cmpfloat (0, <=, progress);
   g_assert_cmpfloat (progress, <=, 1);
-
-  /* TODO this assertion looks reasonable but fails because GPG first reports
-   * progress reading the signature file!
-   */
-  /* g_assert_cmpfloat (fixture->progress, <=, progress); */
+  g_assert_cmpfloat (fixture->progress, <=, progress);
 
   fixture->progress = progress;
 }

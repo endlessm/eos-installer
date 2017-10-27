@@ -244,6 +244,7 @@ gis_scribe_gpg_progress (GIOChannel  *source,
   g_autofree gchar *line = NULL;
   g_auto(GStrv) arr = NULL;
   gdouble curr, full;
+  gchar *units = NULL;
 
   if (g_io_channel_read_line (source, &line, NULL, NULL, NULL) != G_IO_STATUS_NORMAL
       || line == NULL)
@@ -257,9 +258,18 @@ gis_scribe_gpg_progress (GIOChannel  *source,
    * For example:
    * [GNUPG:] PROGRESS /dev/mapper/endless- ? 676 4442 MiB
    */
-  arr = g_strsplit (line, " ", -1);
+  arr = g_strsplit (g_strchomp (line), " ", -1);
   curr = g_ascii_strtod (arr[4], NULL);
   full = g_ascii_strtod (arr[5], NULL);
+  units = arr[6];
+
+  if (full < 1024 && g_strcmp0 (units, "B") == 0)
+    {
+      /* GPG reports progress reading the signature, not just the image. Assume
+       * any file less than 1 KiB is the signature and ignore it.
+       */
+      return G_SOURCE_CONTINUE;
+    }
 
   if (full == 0)
     {
