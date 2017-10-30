@@ -293,6 +293,19 @@ gis_install_page_close_drive (GisPage *page)
   g_mutex_unlock (&priv->copy_mutex);
 }
 
+static void
+gis_install_page_stop_pulsing (GisInstallPage *page)
+{
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
+  GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
+
+  if (priv->pulse_id)
+    {
+      gtk_widget_remove_tick_callback ((GtkWidget *) progress, priv->pulse_id);
+      priv->pulse_id = 0;
+    }
+}
+
 static gboolean
 gis_install_page_teardown (GisPage *page)
 {
@@ -316,11 +329,7 @@ gis_install_page_teardown (GisPage *page)
 
   priv->bytes_written = 0;
 
-  if (priv->pulse_id)
-    {
-      gtk_widget_remove_tick_callback ((GtkWidget *) progress, priv->pulse_id);
-      priv->pulse_id = 0;
-    }
+  gis_install_page_stop_pulsing (install);
 
   g_mutex_unlock (&priv->copy_mutex);
 
@@ -372,6 +381,22 @@ gis_install_page_pulse_progress (GtkProgressBar *bar)
   gtk_progress_bar_pulse (bar);
 
   return TRUE;
+}
+
+static void
+gis_install_page_ensure_pulsing (GisInstallPage *page,
+                                 GtkProgressBar *progress)
+{
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
+
+  if (priv->pulse_id == 0)
+    {
+      gtk_progress_bar_set_pulse_step (progress, 1. / 60.);
+      priv->pulse_id = gtk_widget_add_tick_callback (
+          GTK_WIDGET (progress),
+          (GtkTickCallback) gis_install_page_pulse_progress,
+          NULL, NULL);
+    }
 }
 
 static gboolean
@@ -481,11 +506,7 @@ gis_install_page_copy (GisPage *page)
   /* set up a pulser and start the sync here, as it can be very slow *
    * protect the pulse_id with the lock                              */
   g_mutex_lock (&priv->copy_mutex);
-  gtk_progress_bar_set_pulse_step (progress, 1. / 60.);
-  priv->pulse_id = gtk_widget_add_tick_callback (
-      GTK_WIDGET (progress),
-      (GtkTickCallback) gis_install_page_pulse_progress,
-      NULL, NULL);
+  gis_install_page_ensure_pulsing (install, progress);
   g_mutex_unlock (&priv->copy_mutex);
 
   g_thread_yield();
@@ -603,7 +624,7 @@ gis_install_page_gpg_progress (GIOChannel *source, GIOCondition cond, GisPage *p
             /* gpg can't determine the file size. Should not happen, since we
              * gave it a hint.
              */
-            gtk_progress_bar_pulse (bar);
+            gis_install_page_ensure_pulsing (GIS_INSTALL_PAGE (page), bar);
           }
         else
           {
