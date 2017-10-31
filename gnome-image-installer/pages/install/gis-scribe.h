@@ -32,9 +32,12 @@ GQuark gis_install_error_quark (void);
 G_DECLARE_FINAL_TYPE (GisScribe, gis_scribe, GIS, SCRIBE, GObject)
 
 GisScribe *
-gis_scribe_new (GFile  *image,
-                guint64 image_size,
-                GFile  *signature);
+gis_scribe_new (GFile       *image,
+                guint64      image_size,
+                GFile       *signature,
+                const gchar *drive_path,
+                gint         drive_fd,
+                gboolean     convert_to_mbr);
 
 void
 gis_scribe_write_async (GisScribe          *self,
@@ -46,6 +49,9 @@ gboolean
 gis_scribe_write_finish (GisScribe    *self,
                          GAsyncResult *result,
                          GError      **error);
+
+guint
+gis_scribe_get_step (GisScribe *self);
 
 gdouble
 gis_scribe_get_progress (GisScribe *self);
