@@ -24,6 +24,10 @@
 #include <glib/gi18n.h>
 #include <gio/gunixoutputstream.h>
 
+#include <sys/ioctl.h>
+/* for BLKGETSIZE64, BLKDISCARD */
+#include <linux/fs.h>
+
 #include "gduxzdecompressor.h"
 #include "glnx-errors.h"
 
@@ -365,6 +369,27 @@ gis_scribe_update_progress (gpointer data)
   return G_SOURCE_CONTINUE;
 }
 
+/* Run BLKDISCARD on the whole device. This tells flash-based disks that all
+ * data is now unused, which frees up wear levelling algorithms and boosts
+ * performance for next time each eraseblock is written.
+ */
+static gboolean
+gis_scribe_blkdiscard (gint     fd,
+                       GError **error)
+{
+  guint64 range[2];
+
+  range[0] = 0;
+
+  if (ioctl (fd, BLKGETSIZE64, &range[1]))
+    return glnx_throw_errno_prefix (error, "can't get size for blkdiscard");
+
+  if (ioctl (fd, BLKDISCARD, &range))
+    return glnx_throw_errno_prefix (error, "blkdiscard failed");
+
+  return TRUE;
+}
+
 static gboolean
 gis_scribe_write_thread_copy (GisScribe     *self,
                               gint           fd,
@@ -505,6 +530,13 @@ gis_scribe_write_thread (GTask        *task,
   timer_id = g_timeout_add_seconds (1, gis_scribe_update_progress, self);
 
   g_thread_yield ();
+
+  if (!gis_scribe_blkdiscard (fd, &error))
+    {
+      /* Not fatal: the target device may not support this. */
+      g_message ("%s", error->message);
+      g_clear_error (&error);
+    }
 
   ret = gis_scribe_write_thread_copy (self, fd, output, cancellable, &error);
 
