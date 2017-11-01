@@ -18,6 +18,16 @@ test_data = \
 	w.img.gz.asc \
 	w.img.xz \
 	w.img.xz.asc \
+	w.truncated.gz \
+	w.truncated.gz.asc \
+	w.truncated.xz \
+	w.truncated.xz.asc \
+	w-8193.img \
+	w-8193.img.asc \
+	w-8193.img.gz \
+	w-8193.img.gz.asc \
+	w-8193.img.xz \
+	w-8193.img.xz.asc \
 	$(NULL)
 
 CLEANFILES += $(test_data)
@@ -25,6 +35,17 @@ CLEANFILES += $(test_data)
 # "OS image" consisting of the same byte repeated to 4 MiB
 w.img:
 	$(AM_V_GEN) python3 -c 'print("w" * (2 ** 22), end="")' > $@
+
+# The same byte repeated to 4 MiB + 512 bytes (8193 sectors). All Endless OS
+# images are a multiple of 512 bytes, but not necessarily (in practice, almost
+# never) a multiple of 1 MiB.
+w-8193.img:
+	$(AM_V_GEN) python3 -c 'print("w" * (8193 * 512), end="")' > $@
+
+# Truncated compressed files, with valid signatures, to test handling of
+# decompression errors.
+w.truncated.%z: w.img.%z
+	head --bytes $$(( $$(stat --format='%s' $<) / 2 )) $< >$@
 
 %.img.xz: %.img
 	$(AM_V_GEN) rm -f $@ && xz -0 --keep $<

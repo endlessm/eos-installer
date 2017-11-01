@@ -43,6 +43,7 @@ test-driver
 test-*.log
 test-*.trs
 tests/test-scribe
+tests/w-8193.img*
 tests/w.img*
 tests/w.truncated*
 *~

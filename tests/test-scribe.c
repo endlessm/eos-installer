@@ -42,6 +42,12 @@ static gchar *keyring_path = NULL;
 typedef struct {
   const gchar *image_path;
   const gchar *signature_path;
+  /* Defaults to IMAGE_SIZE_BYTES */
+  gsize uncompressed_size;
+
+  /* Domain and code for the expected error, if any. */
+  GQuark error_domain;
+  gint error_code;
 } TestData;
 
 typedef struct {
@@ -54,10 +60,13 @@ typedef struct {
   GFile *signature;
   gchar *target_path;
   GFile *target;
+  /* Equal to data->uncompressed_size if that is non-0; IMAGE_SIZE_BYTES
+   * otherwise.
+   */
+  gsize uncompressed_size;
 
   GisScribe *scribe;
   GCancellable *cancellable;
-  GMainLoop *loop;
 
   guint step;
   gdouble progress;
@@ -114,10 +123,11 @@ fixture_set_up (Fixture *fixture,
                 gconstpointer user_data)
 {
   const TestData *data = user_data;
-  g_autofree gchar *target_contents = g_malloc (IMAGE_SIZE_BYTES);
+  g_autofree gchar *target_contents = NULL;
   GError *error = NULL;
   int fd;
 
+  fixture->uncompressed_size = data->uncompressed_size ?: IMAGE_SIZE_BYTES;
   fixture->data = data;
   fixture->main_thread = g_thread_ref (g_thread_self ());
 
@@ -131,16 +141,17 @@ fixture_set_up (Fixture *fixture,
   fixture->target_path = g_build_filename (fixture->tmpdir, "target.img", NULL);
   fixture->target = g_file_new_for_path (fixture->target_path);
 
-  memset (target_contents, 'D', IMAGE_SIZE_BYTES);
-  g_file_set_contents (fixture->target_path, target_contents, IMAGE_SIZE_BYTES,
-                       &error);
+  target_contents = g_malloc (fixture->uncompressed_size);
+  memset (target_contents, 'D', fixture->uncompressed_size);
+  g_file_set_contents (fixture->target_path, target_contents,
+                       fixture->uncompressed_size, &error);
   g_assert_no_error (error);
 
   fd = open (fixture->target_path, O_WRONLY | O_SYNC | O_CLOEXEC | O_EXCL);
   g_assert (fd >= 0);
   fixture->scribe = g_object_new (GIS_TYPE_SCRIBE,
                                   "image", fixture->image,
-                                  "image-size", IMAGE_SIZE_BYTES,
+                                  "image-size", fixture->uncompressed_size,
                                   "signature", fixture->signature,
                                   "keyring-path", keyring_path,
                                   "drive-path", fixture->target_path,
@@ -152,7 +163,6 @@ fixture_set_up (Fixture *fixture,
                     (GCallback) test_scribe_notify_progress_cb, fixture);
 
   fixture->cancellable = g_cancellable_new ();
-  fixture->loop = g_main_loop_new (NULL, FALSE);
 }
 
 static void
@@ -203,7 +213,6 @@ fixture_tear_down (Fixture *fixture,
   g_clear_object (&fixture->signature);
   g_clear_pointer (&fixture->target_path, g_free);
   g_clear_object (&fixture->target);
-  g_clear_pointer (&fixture->loop, g_main_loop_unref);
   g_clear_pointer (&fixture->main_thread, g_thread_unref);
 
   rm_r (fixture->tmpdir);
@@ -221,54 +230,50 @@ test_scribe_write_cb (GObject      *source,
                       GAsyncResult *result,
                       gpointer      data)
 {
-  GisScribe *scribe = GIS_SCRIBE (source);
-  Fixture *fixture = data;
-  gboolean ret;
+  GAsyncResult **result_out = data;
 
-  g_assert_false (fixture->finished);
-  g_assert_no_error (fixture->error);
-
-  fixture->finished = TRUE;
-
-  ret = gis_scribe_write_finish (scribe, result, &fixture->error);
-  if (ret)
-    g_assert_no_error (fixture->error);
-  else
-    g_assert (fixture->error != NULL);
-
-  g_main_loop_quit (fixture->loop);
+  *result_out = g_object_ref (result);
 }
 
 static void
-test_bad_signature (Fixture       *fixture,
-                    gconstpointer  user_data)
+test_error (Fixture       *fixture,
+            gconstpointer  user_data)
 {
-  gis_scribe_write_async (fixture->scribe, fixture->cancellable,
-                          test_scribe_write_cb, fixture);
-  g_main_loop_run (fixture->loop);
+  g_autoptr(GAsyncResult) result = NULL;
+  gboolean ret;
+  g_autoptr(GError) error = NULL;
 
-  g_assert (fixture->finished);
-  g_assert_error (fixture->error,
-                  GIS_INSTALL_ERROR,
-                  0); // TODO
+  gis_scribe_write_async (fixture->scribe, fixture->cancellable,
+                          test_scribe_write_cb, &result);
+  while (result == NULL)
+    g_main_context_iteration (NULL, TRUE);
+
+  ret = gis_scribe_write_finish (fixture->scribe, result, &error);
+  g_assert_false (ret);
+  g_assert_error (error,
+                  fixture->data->error_domain,
+                  fixture->data->error_code);
 }
 
 static void
 test_write_success (Fixture       *fixture,
                     gconstpointer  user_data)
 {
+  g_autoptr(GAsyncResult) result = NULL;
   gboolean ret;
   g_autofree gchar *target_contents = NULL;
   gsize target_length = 0;
-  g_autofree gchar *expected_contents = g_malloc (IMAGE_SIZE_BYTES);
+  g_autofree gchar *expected_contents = g_malloc (fixture->uncompressed_size);
   GError *error = NULL;
 
   gis_scribe_write_async (fixture->scribe, fixture->cancellable,
-                          test_scribe_write_cb, fixture);
-  g_main_loop_run (fixture->loop);
+                          test_scribe_write_cb, &result);
+  while (result == NULL)
+    g_main_context_iteration (NULL, TRUE);
 
-  g_assert (fixture->finished);
-  g_assert_no_error (fixture->error);
+  ret = gis_scribe_write_finish (fixture->scribe, result, &error);
+  g_assert_no_error (error);
+  g_assert_true (ret);
 
   ret = g_file_get_contents (fixture->target_path,
                              &target_contents, &target_length,
@@ -276,8 +281,8 @@ test_write_success (Fixture       *fixture,
   g_assert_no_error (error);
   g_assert (ret);
 
-  memset (expected_contents, IMAGE_BYTE, IMAGE_SIZE_BYTES);
-  g_assert_cmpmem (expected_contents, IMAGE_SIZE_BYTES,
+  memset (expected_contents, IMAGE_BYTE, fixture->uncompressed_size);
+  g_assert_cmpmem (expected_contents, fixture->uncompressed_size,
                    target_contents, target_length);
 }
 
@@ -296,28 +301,29 @@ test_build_filename (GTestFileType file_type,
 int
 main (int argc, char *argv[])
 {
-  g_autofree gchar *image_path = NULL;
-  g_autofree gchar *image_sig_path = NULL;
-  g_autofree gchar *image_gz_path = NULL;
-  g_autofree gchar *image_gz_sig_path = NULL;
-  g_autofree gchar *image_xz_path = NULL;
-  g_autofree gchar *image_xz_sig_path = NULL;
-  g_autofree gchar *wjt_sig_path = NULL;
-  int ret;
-
   setlocale (LC_ALL, "");
 
   g_test_init (&argc, &argv, NULL);
   g_test_bug_base ("https://phabricator.endlessm.com/");
 
   /* Autofreed locals */
-  image_path        = test_build_filename (G_TEST_BUILT, IMAGE);
-  image_sig_path    = test_build_filename (G_TEST_BUILT, IMAGE ".asc");
-  image_gz_path     = test_build_filename (G_TEST_BUILT, IMAGE ".gz");
-  image_gz_sig_path = test_build_filename (G_TEST_BUILT, IMAGE ".gz.asc");
-  image_xz_path     = test_build_filename (G_TEST_BUILT, IMAGE ".xz");
-  image_xz_sig_path = test_build_filename (G_TEST_BUILT, IMAGE ".xz.asc");
-  wjt_sig_path      = test_build_filename (G_TEST_DIST, "wjt.asc");
+  g_autofree gchar *image_path        = test_build_filename (G_TEST_BUILT, IMAGE);
+  g_autofree gchar *image_sig_path    = test_build_filename (G_TEST_BUILT, IMAGE ".asc");
+  g_autofree gchar *image_gz_path     = test_build_filename (G_TEST_BUILT, IMAGE ".gz");
+  g_autofree gchar *image_gz_sig_path = test_build_filename (G_TEST_BUILT, IMAGE ".gz.asc");
+  g_autofree gchar *image_xz_path     = test_build_filename (G_TEST_BUILT, IMAGE ".xz");
+  g_autofree gchar *image_xz_sig_path = test_build_filename (G_TEST_BUILT, IMAGE ".xz.asc");
+  g_autofree gchar *trunc_gz_path     = test_build_filename (G_TEST_BUILT, "w.truncated.gz");
+  g_autofree gchar *trunc_gz_sig_path = test_build_filename (G_TEST_BUILT, "w.truncated.gz.asc");
+  g_autofree gchar *trunc_xz_path     = test_build_filename (G_TEST_BUILT, "w.truncated.gz");
+  g_autofree gchar *trunc_xz_sig_path = test_build_filename (G_TEST_BUILT, "w.truncated.gz.asc");
+  g_autofree gchar *s8193_path        = test_build_filename (G_TEST_BUILT, "w-8193.img");
+  g_autofree gchar *s8193_sig_path    = test_build_filename (G_TEST_BUILT, "w-8193.img.asc");
+  g_autofree gchar *s8193_gz_path     = test_build_filename (G_TEST_BUILT, "w-8193.img.gz");
+  g_autofree gchar *s8193_gz_sig_path = test_build_filename (G_TEST_BUILT, "w-8193.img.gz.asc");
+  g_autofree gchar *s8193_xz_path     = test_build_filename (G_TEST_BUILT, "w-8193.img.xz");
+  g_autofree gchar *s8193_xz_sig_path = test_build_filename (G_TEST_BUILT, "w-8193.img.xz.asc");
+  g_autofree gchar *wjt_sig_path      = test_build_filename (G_TEST_DIST, "wjt.asc");
 
   /* Globals */
   keyring_path = test_build_filename (G_TEST_DIST, "public.asc");
@@ -340,11 +346,13 @@ main (int argc, char *argv[])
   TestData bad_signature = {
       .image_path = image_path,
       .signature_path = image_gz_sig_path,
+      .error_domain = GIS_INSTALL_ERROR,
+      /* TODO: .error_code */
   };
   g_test_add ("/scribe/bad-signature",
               Fixture, &bad_signature,
               fixture_set_up,
-              test_bad_signature,
+              test_error,
               fixture_tear_down);
 
   /* wjt_sig_path is a valid signature made by a key that's not in the keyring.
@@ -352,11 +360,13 @@ main (int argc, char *argv[])
   TestData untrusted_signature = {
       .image_path = image_path,
       .signature_path = wjt_sig_path,
+      .error_domain = GIS_INSTALL_ERROR,
+      /* TODO: .error_code */
   };
   g_test_add ("/scribe/untrusted-signature",
               Fixture, &untrusted_signature,
               fixture_set_up,
-              test_bad_signature,
+              test_error,
               fixture_tear_down);
 
   /* Valid signature for an uncompressed image */
@@ -369,7 +379,96 @@ main (int argc, char *argv[])
               test_write_success,
               fixture_tear_down);
 
-  ret = g_test_run ();
+  /* Valid signature for a gzipped image */
+  TestData good_signature_gz = {
+      .image_path = image_gz_path,
+      .signature_path = image_gz_sig_path,
+  };
+  g_test_add ("/scribe/good-signature-gz", Fixture, &good_signature_gz,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  /* Valid signature for a xzipped image */
+  TestData good_signature_xz = {
+      .image_path = image_xz_path,
+      .signature_path = image_xz_sig_path,
+  };
+  g_test_add ("/scribe/good-signature-xz", Fixture, &good_signature_xz,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  /* Valid signature for a corrupt (specifically, truncated) gzipped image. By
+   * having a valid signature we can be sure we're exercising the
+   * "decompression error" path rather than the "signature invalid" path.
+   */
+  TestData good_signature_truncated_gz = {
+      .image_path = trunc_gz_path,
+      .signature_path = trunc_gz_sig_path,
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_PARTIAL_INPUT,
+  };
+  g_test_add ("/scribe/good-signature-truncated-gz", Fixture,
+              &good_signature_truncated_gz,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* As above, but an xzipped image.
+   */
+  TestData good_signature_truncated_xz = {
+      .image_path = trunc_xz_path,
+      .signature_path = trunc_xz_sig_path,
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_PARTIAL_INPUT,
+  };
+  g_test_add ("/scribe/good-signature-truncated-xz", Fixture,
+              &good_signature_truncated_xz,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Valid signature for an image that happens to not be a multiple of 1 MiB.
+   */
+  TestData s8193 = {
+      .image_path = s8193_path,
+      .signature_path = s8193_sig_path,
+      .uncompressed_size = 8193 * 512,
+  };
+  g_test_add ("/scribe/8193-sector", Fixture,
+              &s8193,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  /* As above, but gzipped.
+   */
+  TestData s8193_gz = {
+      .image_path = s8193_gz_path,
+      .signature_path = s8193_gz_sig_path,
+      .uncompressed_size = 8193 * 512,
+  };
+  g_test_add ("/scribe/8193-sector-gz", Fixture,
+              &s8193_gz,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  /* As above, but xzipped.
+   */
+  TestData s8193_xz = {
+      .image_path = s8193_xz_path,
+      .signature_path = s8193_xz_sig_path,
+      .uncompressed_size = 8193 * 512,
+  };
+  g_test_add ("/scribe/8193-sector-xz", Fixture,
+              &s8193_xz,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  int ret = g_test_run ();
 
   g_free (keyring_path);
 
