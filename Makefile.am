@@ -3,6 +3,7 @@ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 AM_CFLAGS = ${WARN_CFLAGS}
 
 SUBDIRS = \
+    ext \
     gnome-initial-setup \
     gnome-image-installer \
     po \
