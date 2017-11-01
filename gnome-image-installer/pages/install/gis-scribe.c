@@ -20,9 +20,12 @@
 #include "config.h"
 #include "gis-scribe.h"
 
+#include <errno.h>
 #include <glib/gi18n.h>
+#include <gio/gunixoutputstream.h>
 
 #include "gduxzdecompressor.h"
+#include "glnx-errors.h"
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
 #define BUFFER_SIZE (1 * 1024 * 1024)
@@ -363,6 +366,38 @@ gis_scribe_update_progress (gpointer data)
 }
 
 static gboolean
+gis_scribe_write_thread_copy (GisScribe     *self,
+                              GOutputStream *output,
+                              GCancellable  *cancellable,
+                              GError       **error)
+{
+  g_autofree gchar *buffer = g_malloc0 (BUFFER_SIZE);
+  gssize r = -1;
+  gsize w = 0;
+
+  do
+    {
+      r = g_input_stream_read (self->decompressed, buffer, BUFFER_SIZE,
+                               cancellable, error);
+
+      if (r < 0)
+        return FALSE;
+
+      if (!g_output_stream_write_all (output, buffer, r,
+                                      &w, cancellable, error))
+        return FALSE;
+
+      /* We lock to protect bytes_written */
+      g_mutex_lock (&self->mutex);
+      self->bytes_written += w;
+      g_mutex_unlock (&self->mutex);
+    }
+  while (r > 0);
+
+  return TRUE;
+}
+
+static gboolean
 gis_scribe_set_indeterminate_progress (gpointer data)
 {
   GisScribe *self = GIS_SCRIBE (data);
@@ -410,37 +445,36 @@ gis_scribe_write_thread (GTask        *task,
                          GCancellable *cancellable)
 {
   GisScribe *self = GIS_SCRIBE (source_object);
-  g_autofree gchar *buffer = (gchar*) g_malloc0 (BUFFER_SIZE);
+  gint fd = -1;
+  g_autoptr(GOutputStream) output = NULL;
+  gboolean ret;
   GError *error = NULL;
-  gssize r = -1, w = -1;
   guint timer_id;
+
+  /* Transfer ownership of drive_fd; the GOutputStream will close it. */
+  g_mutex_lock (&self->mutex);
+  fd = self->drive_fd;
+  self->drive_fd = -1;
+  g_mutex_unlock (&self->mutex);
+  output = g_unix_output_stream_new (fd, TRUE);
 
   timer_id = g_timeout_add_seconds (1, gis_scribe_update_progress, self);
 
   g_thread_yield ();
 
-  do
-    {
-      r = g_input_stream_read (self->decompressed, buffer, BUFFER_SIZE,
-                               cancellable, &error);
-
-      if (r > 0)
-        {
-          /* We lock to protect the bytes_written and access to drive_fd. */
-          g_mutex_lock (&self->mutex);
-
-          w = write (self->drive_fd, buffer, r);
-          self->bytes_written += w;
-
-          g_mutex_unlock (&self->mutex);
-        }
-    }
-  while (r > 0 && w > 0);
+  ret = gis_scribe_write_thread_copy (self, output, cancellable, &error);
 
   g_source_remove (timer_id);
 
-  if (r < 0 || error != NULL)
+  if (!ret)
     {
+      if (error == NULL)
+        {
+          g_warning ("gis_scribe_write_thread_copy failed with no error");
+          g_set_error (&error, G_IO_ERROR, G_IO_ERROR_FAILED,
+                       _("Internal error"));
+        }
+
       g_task_return_error (task, error);
       return;
     }
@@ -457,9 +491,18 @@ gis_scribe_write_thread (GTask        *task,
 
   g_thread_yield ();
 
-  syncfs (self->drive_fd);
-  close (self->drive_fd);
-  self->drive_fd = -1;
+  if (syncfs (fd) < 0)
+    {
+      glnx_throw_errno_prefix (&error, "syncfs failed");
+      g_task_return_error (task, error);
+      return;
+    }
+
+  if (!g_output_stream_close (output, cancellable, &error))
+    {
+      g_task_return_error (task, error);
+      return;
+    }
 
   g_spawn_command_line_sync ("partprobe", NULL, NULL, NULL, NULL);
   if (self->convert_to_mbr)

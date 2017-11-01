@@ -62,12 +62,14 @@ test_scribe_SOURCES = test-scribe.c
 test_scribe_CFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \
+	-I $(top_srcdir)/ext/libglnx \
 	-I $(top_srcdir)/gnome-image-installer/pages/install \
 	$(WARN_CFLAGS) \
 	$(NULL)
 test_scribe_LDADD = \
 	$(INITIAL_SETUP_LIBS) \
 	$(IMAGE_INSTALLER_LIBS) \
+	$(top_builddir)/ext/libglnx.la \
 	$(top_builddir)/gnome-image-installer/pages/install/libgisinstall.la \
 	-llzma \
 	$(NULL)

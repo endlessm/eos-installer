@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
  */
+#include "config.h"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -25,11 +26,13 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <stdio.h>
 
 #include <glib.h>
 #include <gio/gunixoutputstream.h>
 
 #include "gis-scribe.h"
+#include "glnx-missing.h"
 
 /* A 4 MiB file of "w"s (0x77) */
 #define IMAGE "w.img"
@@ -48,6 +51,9 @@ typedef struct {
   /* Domain and code for the expected error, if any. */
   GQuark error_domain;
   gint error_code;
+
+  gboolean create_memfd;
+  off_t memfd_size;
 } TestData;
 
 typedef struct {
@@ -118,12 +124,55 @@ test_scribe_notify_progress_cb (GObject    *object,
   fixture->progress = progress;
 }
 
+/* Returns a writable fd with size fixture.data.memfd_size; writes past this point
+ * will fail.
+ */
+static int
+fixture_create_memfd (Fixture *fixture)
+{
+  gsize size = fixture->data->memfd_size;
+  g_autofree gchar *contents = g_malloc (size);
+  g_autoptr(GOutputStream) output = NULL;
+  int fd;
+  gboolean ret;
+  GError *error = NULL;
+
+  fd = memfd_create ("target", MFD_CLOEXEC | MFD_ALLOW_SEALING);
+  if (fd < 0)
+    {
+      perror ("memfd_create failed");
+      g_assert_not_reached ();
+    }
+
+  /* Fill to the desired size with easily-recognised data */
+  memset (contents, 'D', size);
+  output = g_unix_output_stream_new (fd, /* close_fd */ FALSE);
+  ret = g_output_stream_write_all (output, contents, size, &size, NULL, &error);
+  g_assert_no_error (error);
+  g_assert_true (ret);
+  g_assert_cmpuint (size, ==, fixture->data->memfd_size);
+
+  if (0 != lseek (fd, 0, SEEK_SET))
+    {
+      perror ("lseek");
+      g_assert_not_reached ();
+    }
+
+  /* Forbid extending the file */
+  if (0 != fcntl (fd, F_ADD_SEALS, F_SEAL_GROW))
+    {
+      perror ("fcntl");
+      g_assert_not_reached ();
+    }
+
+  return fd;
+}
+
 static void
 fixture_set_up (Fixture *fixture,
                 gconstpointer user_data)
 {
   const TestData *data = user_data;
-  g_autofree gchar *target_contents = NULL;
   GError *error = NULL;
   int fd;
 
@@ -141,13 +190,22 @@ fixture_set_up (Fixture *fixture,
   fixture->target_path = g_build_filename (fixture->tmpdir, "target.img", NULL);
   fixture->target = g_file_new_for_path (fixture->target_path);
 
-  target_contents = g_malloc (fixture->uncompressed_size);
-  memset (target_contents, 'D', fixture->uncompressed_size);
-  g_file_set_contents (fixture->target_path, target_contents,
-                       fixture->uncompressed_size, &error);
-  g_assert_no_error (error);
+  if (data->create_memfd)
+    {
+      fd = fixture_create_memfd (fixture);
+    }
+  else
+    {
+      g_autofree gchar *target_contents = g_malloc (fixture->uncompressed_size);
 
-  fd = open (fixture->target_path, O_WRONLY | O_SYNC | O_CLOEXEC | O_EXCL);
+      memset (target_contents, 'D', fixture->uncompressed_size);
+      g_file_set_contents (fixture->target_path, target_contents,
+                           fixture->uncompressed_size, &error);
+      g_assert_no_error (error);
+
+      fd = open (fixture->target_path, O_WRONLY | O_SYNC | O_CLOEXEC | O_EXCL);
+    }
+
   g_assert (fd >= 0);
   fixture->scribe = g_object_new (GIS_TYPE_SCRIBE,
                                   "image", fixture->image,
@@ -466,6 +524,41 @@ main (int argc, char *argv[])
               &s8193_xz,
               fixture_set_up,
               test_write_success,
+              fixture_tear_down);
+
+  /* IMAGE_SIZE_BYTES / 2 is a multiple of the 1 MiB block size used by
+   * GisScribe so it is likely that it will not hit a short write, but two full
+   * writes followed by an error.
+   *
+   * In these tests, fixture->target is a dummy file. The fd passed to
+   * GisScribe is created by test_write_error_create_memfd(): writes past
+   * memfd_size will fail, which should signal an error.
+   */
+  TestData write_error_halfway = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_PERMISSION_DENIED,
+      .create_memfd = TRUE,
+      .memfd_size = IMAGE_SIZE_BYTES / 2,
+  };
+  g_test_add ("/scribe/write-error-halfway", Fixture, &write_error_halfway,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* This is almost certain to hit a short write */
+  TestData write_error_last_byte = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_PERMISSION_DENIED,
+      .create_memfd = TRUE,
+      .memfd_size = IMAGE_SIZE_BYTES - 1,
+  };
+  g_test_add ("/scribe/write-error-last-byte", Fixture, &write_error_last_byte,
+              fixture_set_up,
+              test_error,
               fixture_tear_down);
 
   int ret = g_test_run ();
