@@ -367,13 +367,25 @@ gis_scribe_update_progress (gpointer data)
 
 static gboolean
 gis_scribe_write_thread_copy (GisScribe     *self,
+                              gint           fd,
                               GOutputStream *output,
                               GCancellable  *cancellable,
                               GError       **error)
 {
   g_autofree gchar *buffer = g_malloc0 (BUFFER_SIZE);
+  g_autofree gchar *first_mib = g_malloc0 (BUFFER_SIZE);
+  gsize first_mib_bytes_read = 0;
   gssize r = -1;
   gsize w = 0;
+
+  /* Read the first 1 MiB; write zeros to the target drive. This ensures the
+   * system won't boot until the image is fully written.
+   */
+  if (!g_output_stream_write_all (output, first_mib, BUFFER_SIZE,
+                                  &w, cancellable, error)
+      || !g_input_stream_read_all (self->decompressed, first_mib, BUFFER_SIZE,
+                                   &first_mib_bytes_read, cancellable, error))
+    return FALSE;
 
   do
     {
@@ -393,6 +405,20 @@ gis_scribe_write_thread_copy (GisScribe     *self,
       g_mutex_unlock (&self->mutex);
     }
   while (r > 0);
+
+  /* Now write the first 1 MiB to disk. Unfortunately GUnixOutputStream does
+   * not implement GSeekable.
+   */
+  if (lseek (fd, 0, SEEK_SET) < 0)
+    return glnx_throw_errno_prefix (error, "can't seek to start of disk");
+
+  if (!g_output_stream_write_all (output, first_mib, first_mib_bytes_read,
+                                  &w, cancellable, error))
+    return FALSE;
+
+  g_mutex_lock (&self->mutex);
+  self->bytes_written += w;
+  g_mutex_unlock (&self->mutex);
 
   return TRUE;
 }
@@ -462,7 +488,7 @@ gis_scribe_write_thread (GTask        *task,
 
   g_thread_yield ();
 
-  ret = gis_scribe_write_thread_copy (self, output, cancellable, &error);
+  ret = gis_scribe_write_thread_copy (self, fd, output, cancellable, &error);
 
   g_source_remove (timer_id);
 
