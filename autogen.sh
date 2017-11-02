@@ -4,8 +4,6 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="eos-installer"
-
 (test -f $srcdir/configure.ac \
   && test -f $srcdir/eos-installer.doap) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
