@@ -21,8 +21,10 @@
 #include "gis-scribe.h"
 
 #include <errno.h>
-#include <glib/gi18n.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixoutputstream.h>
+#include <glib-unix.h>
+#include <glib/gi18n.h>
 
 #include <sys/ioctl.h>
 /* for BLKGETSIZE64, BLKDISCARD */
@@ -33,6 +35,28 @@
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
 #define BUFFER_SIZE (1 * 1024 * 1024)
+
+typedef enum {
+  GIS_SCRIBE_TASK_TEE        = 1 << 0,
+  GIS_SCRIBE_TASK_VERIFY     = 1 << 1,
+  GIS_SCRIBE_TASK_WRITE      = 1 << 3,
+} GisScribeTask;
+
+static const gchar *
+gis_scribe_task_get_label (GisScribeTask flag)
+{
+  switch (flag)
+    {
+    case GIS_SCRIBE_TASK_TEE:
+      return "tee";
+    case GIS_SCRIBE_TASK_VERIFY:
+      return "verify";
+    case GIS_SCRIBE_TASK_WRITE:
+      return "write";
+    default:
+      return "invalid task flag";
+    }
+}
 
 typedef struct _GisScribe {
   GObject parent;
@@ -46,28 +70,71 @@ typedef struct _GisScribe {
 
   gboolean started;
   guint step;
-  gdouble progress;
+  gdouble gpg_progress;
 
-  GSubprocess *gpg_subprocess;
-  GSource *gpg_stdout_source;
-  /* Wraps gpg_subprocess's stdout pipe. When gpg_stdout_source triggers
-   * then reading a line is expected to succeed (or fail) without blocking.
-   */
-  GDataInputStream *gpg_stdout;
+  /* MIN(gpg_progress, bytes_written / image_size) */
+  gdouble overall_progress;
 
   GInputStream *decompressed;
 
   GMutex mutex;
+  GCond cond;
 
-  /* The fields below are shared with and modified by the worker thread, so all
+  /* The fields below are shared with and modified by the worker threads, so all
    * access must be guarded by .mutex. All other fields of this struct are
-   * either immutable, not touched by the worker thread, or not touched from
-   * the main thread while the worker thread is running.
+   * either immutable, not touched by the worker threads, or not touched from
+   * the main thread while the worker threads are running.
    */
+
+  /* Bitwise-or of GisScribeTask for tasks that have not yet completed. */
+  gint outstanding_tasks;
+
+  /* The first error reported by a subtask, or NULL if all (so far) have
+   * completed successfully. In particular, this is non-NULL if
+   * (outstanding_tasks & GIS_SCRIBE_TASK_VERIFY) == 0 (ie the GPG step has
+   * completed) and GPG returned an error. The write sub-task uses this as a
+   * signal to abort the write process.
+   */
+  GError *error;
+
   gint drive_fd;
   guint64 bytes_written;
   guint set_indeterminate_progress_id;
 } GisScribe;
+
+/* Data for the subtask which reads the file from disk and feeds it to the
+ * (concurrent) verification and writer subtasks.
+ */
+typedef struct {
+  GInputStream *image_input;
+
+  GOutputStream *gpg_stdin;
+  GOutputStream *write_pipe;
+} GisScribeTeeData;
+
+typedef struct {
+  GSubprocess *subprocess;
+  GSource *stdout_source;
+  /* Wraps gpg_subprocess's stdout pipe. When gpg_stdout_source triggers
+   * then reading a line is expected to succeed (or fail) without blocking.
+   */
+  GDataInputStream *stdout_;
+} GisScribeGpgData;
+
+static void
+gis_scribe_gpg_data_free (GisScribeGpgData *data)
+{
+  /* Cleaned up when GPG subprocess dies. Since g_task_attach_source() takes a
+   * reference to the task, once the source is created the task should remain
+   * alive until the source is destroyed, and hence so should this data.
+   */
+  g_assert (data->stdout_source == NULL);
+
+  g_clear_object (&data->stdout_);
+  g_clear_object (&data->subprocess);
+
+  g_slice_free (GisScribeGpgData, data);
+}
 
 G_DEFINE_QUARK (install-error, gis_install_error)
 
@@ -184,7 +251,7 @@ gis_scribe_get_property (GObject      *object,
       break;
 
     case PROP_PROGRESS:
-      g_value_set_double (value, self->progress);
+      g_value_set_double (value, self->overall_progress);
       break;
 
     case N_PROPERTIES:
@@ -217,11 +284,6 @@ gis_scribe_dispose (GObject *object)
   g_clear_object (&self->signature);
   g_clear_object (&self->decompressed);
 
-  /* Should be cleaned up when GPG subprocess dies, but just in case: */
-  g_clear_pointer (&self->gpg_stdout_source, g_source_destroy);
-  g_clear_object (&self->gpg_stdout);
-  g_clear_object (&self->gpg_subprocess);
-
   G_OBJECT_CLASS (gis_scribe_parent_class)->dispose (object);
 }
 
@@ -230,9 +292,13 @@ gis_scribe_finalize (GObject *object)
 {
   GisScribe *self = GIS_SCRIBE (object);
 
+  g_assert_cmpint (self->outstanding_tasks, ==, 0);
+
   g_clear_pointer (&self->keyring_path, g_free);
   g_clear_pointer (&self->drive_path, g_free);
+  g_clear_error (&self->error);
   g_mutex_clear (&self->mutex);
+  g_cond_clear (&self->cond);
 
   if (self->drive_fd != -1)
     close (self->drive_fd);
@@ -332,6 +398,8 @@ static void
 gis_scribe_init (GisScribe *self)
 {
   g_mutex_init (&self->mutex);
+  g_cond_init (&self->cond);
+
   self->drive_fd = -1;
   self->step = 1;
 }
@@ -361,18 +429,35 @@ gis_scribe_new (GFile       *image,
       NULL);
 }
 
+/* Called once per second while the main write operation is in progress.
+ */
 static gboolean
 gis_scribe_update_progress (gpointer data)
 {
   GisScribe *self = GIS_SCRIBE (data);
   guint64 bytes_written;
+  gdouble write_progress;
+  gdouble progress;
 
   g_mutex_lock (&self->mutex);
   bytes_written = self->bytes_written;
   g_mutex_unlock (&self->mutex);
 
-  self->progress = ((gdouble) bytes_written) / ((gdouble) self->image_size);
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_PROGRESS]);
+  write_progress = ((gdouble) bytes_written) / ((gdouble) self->image_size);
+  /* You'd expect these to be identical ± 1 MiB in the uncompressed case, and
+   * pretty close in the compressed case assuming the compression ratio is
+   * roughly constant throughout the file.
+   */
+  progress = MIN (self->gpg_progress, write_progress);
+
+  g_debug ("%s: GPG progress %3.0f%%, write progress %3.0f%%",
+           G_STRFUNC, self->gpg_progress * 100, write_progress * 100);
+
+  if (progress != self->overall_progress)
+    {
+      self->overall_progress = progress;
+      g_object_notify_by_pspec (G_OBJECT (self), props[PROP_PROGRESS]);
+    }
 
   return G_SOURCE_CONTINUE;
 }
@@ -396,6 +481,34 @@ gis_scribe_blkdiscard (gint     fd,
     return glnx_throw_errno_prefix (error, "blkdiscard failed");
 
   return TRUE;
+}
+
+static gboolean
+gis_scribe_write_thread_await_gpg (GisScribe *self,
+                                   GError   **error)
+{
+  GError *local_error = NULL;
+
+  g_mutex_lock (&self->mutex);
+  /* Wait until all other tasks have ended */
+  while ((self->outstanding_tasks & ~GIS_SCRIBE_TASK_WRITE) != 0)
+    g_cond_wait (&self->cond, &self->mutex);
+
+  /* This task itself should still be outstanding */
+  g_assert_cmpint (self->outstanding_tasks, ==, GIS_SCRIBE_TASK_WRITE);
+
+  if (self->error != NULL)
+    local_error = g_error_copy (self->error);
+  g_mutex_unlock (&self->mutex);
+
+  if (local_error == NULL)
+    return TRUE;
+
+  /* This error will already have been reported by whichever task failed, but
+   * we have to throw *some* error from this task.
+   */
+  g_propagate_error (error, local_error);
+  return FALSE;
 }
 
 static gboolean
@@ -438,6 +551,13 @@ gis_scribe_write_thread_copy (GisScribe     *self,
       g_mutex_unlock (&self->mutex);
     }
   while (r > 0);
+
+  if (!g_input_stream_close (self->decompressed, cancellable, error))
+    return FALSE;
+
+  /* Wait for GPG verification to complete */
+  if (!gis_scribe_write_thread_await_gpg (self, error))
+    return FALSE;
 
   /* Check that we've written the same amount of data as we expected from the
    * GPT header. This would only fail if there's something seriously wrong with
@@ -483,7 +603,9 @@ gis_scribe_set_indeterminate_progress (gpointer data)
   self->set_indeterminate_progress_id = 0;
   g_mutex_unlock (&self->mutex);
 
-  self->progress = -1;
+  self->step = 2;
+  self->overall_progress = -1;
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_STEP]);
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_PROGRESS]);
 
   return G_SOURCE_REMOVE;
@@ -552,6 +674,8 @@ gis_scribe_write_thread (GTask        *task,
 
   if (!ret)
     {
+      g_autoptr(GError) close_error = NULL;
+
       if (error == NULL)
         {
           g_warning ("gis_scribe_write_thread_copy failed with no error");
@@ -560,6 +684,17 @@ gis_scribe_write_thread (GTask        *task,
         }
 
       g_task_return_error (task, error);
+
+      /* On the happy path, gis_scribe_write_thread_copy() closes the
+       * decompressed stream when it reaches EOF. If we hit a write error
+       * before EOF, we need to close the decompressed stream to ensure the
+       * threads upstream of us terminate.
+       */
+      if (!g_input_stream_close (self->decompressed, cancellable, &close_error))
+        {
+          g_prefix_error (&close_error, "couldn't close decompressed stream: ");
+          g_warning ("%s", close_error->message);
+        }
       return;
     }
 
@@ -608,13 +743,15 @@ gis_scribe_write_thread (GTask        *task,
 }
 
 static void
-gis_scribe_begin_write (GisScribe *self,
-                        GTask     *task)
+gis_scribe_begin_write (GisScribe          *self,
+                        GInputStream       *input,
+                        GCancellable       *cancellable,
+                        GAsyncReadyCallback callback,
+                        gpointer            data)
 {
+  g_autoptr(GTask) task = g_task_new (self, cancellable, callback, data);
   g_autofree gchar *basename = NULL;
   g_autoptr(GConverter) decompressor = NULL;
-  GInputStream *input = NULL;
-  GError *error = NULL;
 
   basename = g_file_get_basename (self->image);
   if (basename == NULL)
@@ -649,30 +786,16 @@ gis_scribe_begin_write (GisScribe *self,
       return;
     }
 
-  input = G_INPUT_STREAM (g_file_read (self->image,
-                                       g_task_get_cancellable (task),
-                                       &error));
-  if (input == NULL)
-    {
-      g_task_return_error (task, error);
-      return;
-    }
-
   if (decompressor)
     {
       self->decompressed = g_converter_input_stream_new (input, decompressor);
-      g_object_unref (input);
     }
   else
     {
-      self->decompressed = input;
+      self->decompressed = g_object_ref (input);
     }
 
-  self->step = 2;
-  self->progress = 0;
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_STEP]);
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_PROGRESS]);
-
+  g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_WRITE));
   g_task_run_in_thread (task, gis_scribe_write_thread);
 }
 
@@ -681,16 +804,14 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
                          gpointer data)
 {
   GTask *task = G_TASK (data);
+  GisScribeGpgData *task_data = g_task_get_task_data (task);
   GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
   g_autofree gchar *line = NULL;
   g_auto(GStrv) arr = NULL;
   gdouble curr, full;
   gchar *units = NULL;
 
-  if (self->step > 1)
-    return G_SOURCE_CONTINUE;
-
-  line = g_data_input_stream_read_line_utf8 (self->gpg_stdout, NULL,
+  line = g_data_input_stream_read_line_utf8 (task_data->stdout_, NULL,
                                              g_task_get_cancellable (task),
                                              NULL);
   if (line == NULL)
@@ -736,14 +857,13 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
       /* gpg can't determine the file size. Should not happen, since we
        * gave it a hint.
        */
-      self->progress = -1;
+      self->gpg_progress = -1;
     }
   else
     {
-      self->progress = CLAMP (curr / full, 0, 1);
+      self->gpg_progress = CLAMP (curr / full, 0, 1);
     }
 
-  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_PROGRESS]);
   return G_SOURCE_CONTINUE;
 }
 
@@ -754,16 +874,16 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
 {
   GSubprocess *gpg_subprocess = G_SUBPROCESS (source);
   g_autoptr(GTask) task = G_TASK (data);
-  GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
+  GisScribeGpgData *task_data = g_task_get_task_data (task);
+  gboolean ok;
   g_autoptr(GError) error = NULL;
 
-  g_clear_pointer (&self->gpg_stdout_source, g_source_destroy);
-  g_clear_object (&self->gpg_stdout);
-  g_clear_object (&self->gpg_subprocess);
+  g_clear_pointer (&task_data->stdout_source, g_source_destroy);
 
-  if (g_subprocess_wait_check_finish (gpg_subprocess, result, &error))
+  ok = g_subprocess_wait_check_finish (gpg_subprocess, result, &error);
+  if (ok)
     {
-      gis_scribe_begin_write (self, task);
+      g_task_return_boolean (task, TRUE);
     }
   else
     {
@@ -774,11 +894,22 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
     }
 }
 
-static void
+/*
+ * If the GPG subprocess cannot be started, this function will return %NULL,
+ * and @callback will fire later with the error. Otherwise, it will return
+ * a #GOutputStream for the GPG subprocess' stdin, and @callback will be called
+ * later with the result of verifying the image.
+ *
+ * Returns: (transfer full): the GPG subprocess' stdin, or %NULL on error.
+ */
+static GOutputStream *
 gis_scribe_begin_verify (GisScribe *self,
-                         GTask     *task)
+                         GCancellable *cancellable,
+                         GAsyncReadyCallback callback,
+                         gpointer data)
 {
-  g_autofree gchar *image_path = g_file_get_path (self->image);
+  g_autoptr(GTask) task = g_task_new (self, cancellable, callback, data);
+  GisScribeGpgData *task_data = g_slice_new0 (GisScribeGpgData);
   g_autofree gchar *signature_path = g_file_get_path (self->signature);
   g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT, self->image_size);
   const gchar * const args[] = {
@@ -789,13 +920,16 @@ gis_scribe_begin_verify (GisScribe *self,
       "--no-default-keyring",
       "--trust-model", "always",
       "--input-size-hint", size_str,
-      "--verify", signature_path, image_path, NULL
+      "--verify", signature_path, "-", NULL
   };
   g_autoptr(GSubprocessLauncher) launcher = NULL;
-  g_autoptr(GSubprocess) subprocess = NULL;
   GInputStream *gpg_stdout = NULL;
-  GCancellable *cancellable = g_task_get_cancellable (task);
-  GError *error = NULL;
+  GOutputStream *gpg_stdin = NULL;
+  g_autoptr(GError) error = NULL;
+
+  g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_VERIFY));
+  g_task_set_task_data (task, task_data,
+                        (GDestroyNotify) gis_scribe_gpg_data_free);
 
   if (!g_file_query_exists (self->signature, NULL))
     {
@@ -803,32 +937,209 @@ gis_scribe_begin_verify (GisScribe *self,
           task, GIS_INSTALL_ERROR, 0,
           _("The Endless OS signature file \"%s\" does not exist."),
           signature_path);
-      g_object_unref (task);
-      return;
+      return NULL;
     }
 
-  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDOUT_PIPE);
-  subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
-  if (subprocess == NULL)
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDIN_PIPE |
+                                        G_SUBPROCESS_FLAGS_STDOUT_PIPE);
+  task_data->subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
+  if (task_data->subprocess == NULL)
     {
       g_task_return_error (task, g_steal_pointer (&error));
-      g_object_unref (task);
-      return;
+      return NULL;
     }
 
-  gpg_stdout = g_subprocess_get_stdout_pipe (subprocess);
+  gpg_stdin = g_subprocess_get_stdin_pipe (task_data->subprocess);
+
+  gpg_stdout = g_subprocess_get_stdout_pipe (task_data->subprocess);
   g_assert (G_IS_POLLABLE_INPUT_STREAM (gpg_stdout));
-  self->gpg_stdout = g_data_input_stream_new (gpg_stdout);
-  self->gpg_stdout_source =
+  task_data->stdout_ = g_data_input_stream_new (gpg_stdout);
+  task_data->stdout_source =
     g_pollable_input_stream_create_source (G_POLLABLE_INPUT_STREAM (gpg_stdout),
                                            cancellable);
-  g_task_attach_source (task, self->gpg_stdout_source,
-                         (GSourceFunc) gis_scribe_gpg_progress);
+  g_task_attach_source (task, task_data->stdout_source,
+                        (GSourceFunc) gis_scribe_gpg_progress);
 
-  g_subprocess_wait_check_async (subprocess, cancellable,
+  g_subprocess_wait_check_async (task_data->subprocess, cancellable,
                                  gis_scribe_gpg_wait_check_cb,
                                  g_steal_pointer (&task));
-  self->gpg_subprocess = g_steal_pointer (&subprocess);
+
+  return g_object_ref (gpg_stdin);
+}
+
+static void
+gis_scribe_tee_close (GisScribeTeeData *data,
+                      GCancellable     *cancellable)
+{
+  GError *error = NULL;
+
+  if (data->image_input != NULL
+      && !g_input_stream_close (data->image_input, cancellable, &error))
+    {
+      g_warning ("%s: error closing input stream: %s", G_STRFUNC, error->message);
+      g_clear_error (&error);
+    }
+
+  /* Closing its stdin will ultimately cause the GPG subprocess to exit. */
+  if (!g_output_stream_close (data->gpg_stdin, cancellable, &error))
+    {
+      g_warning ("%s: error closing GPG stdin: %s", G_STRFUNC, error->message);
+      g_clear_error (&error);
+    }
+
+  /* Similarly, closing the pipe will cause the write thread to terminate. */
+  if (!g_output_stream_close (data->write_pipe, cancellable, &error))
+    {
+      g_warning ("%s: error closing write pipe: %s", G_STRFUNC, error->message);
+      g_clear_error (&error);
+    }
+}
+
+static void
+gis_scribe_tee_data_free (GisScribeTeeData *data)
+{
+  gis_scribe_tee_close (data, NULL);
+
+  g_clear_object (&data->image_input);
+  g_clear_object (&data->gpg_stdin);
+  g_clear_object (&data->write_pipe);
+
+  g_slice_free (GisScribeTeeData, data);
+}
+
+/* Reads the image from disk and writes it to both the GPG subprocess and the
+ * writer thread.
+ */
+static void
+gis_scribe_tee_thread (GTask            *task,
+                       gpointer          source_object,
+                       GisScribeTeeData *task_data,
+                       GCancellable     *cancellable)
+{
+  g_autofree gchar *buffer = g_malloc0 (BUFFER_SIZE);
+  GError *error = NULL;
+  gssize r = -1;
+
+  do
+    {
+      r = g_input_stream_read (task_data->image_input, buffer, BUFFER_SIZE,
+                               cancellable, &error);
+
+      if (r < 0)
+        {
+          g_prefix_error (&error, "error reading image: ");
+          break;
+        }
+
+      if (!g_output_stream_write_all (task_data->gpg_stdin, buffer, r,
+                                      NULL, cancellable, &error))
+        {
+          g_prefix_error (&error, "error writing image to GPG: ");
+          break;
+        }
+
+      if (!g_output_stream_write_all (task_data->write_pipe, buffer, r,
+                                      NULL, cancellable, &error))
+        {
+          g_prefix_error (&error, "error writing image to self: ");
+          break;
+        }
+    }
+  while (r > 0);
+
+  if (error == NULL)
+    g_task_return_boolean (task, TRUE);
+  else
+    g_task_return_error (task, g_steal_pointer (&error));
+
+  gis_scribe_tee_close (task_data, cancellable);
+}
+
+static void
+gis_scribe_begin_tee (GisScribe          *self,
+                      GOutputStream      *gpg_stdin,
+                      GOutputStream      *write_pipe,
+                      GCancellable       *cancellable,
+                      GAsyncReadyCallback callback,
+                      gpointer            user_data)
+{
+  g_autoptr(GTask) task = g_task_new (self, cancellable, callback, user_data);
+  GisScribeTeeData *task_data = g_slice_new0 (GisScribeTeeData);
+  g_autoptr(GError) error = NULL;
+
+  task_data->gpg_stdin = g_object_ref (gpg_stdin);
+  task_data->write_pipe = g_object_ref (write_pipe);
+
+  g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_TEE));
+  g_task_set_task_data (task, task_data,
+                        (GDestroyNotify) gis_scribe_tee_data_free);
+
+  task_data->image_input =
+    G_INPUT_STREAM (g_file_read (self->image, cancellable, &error));
+
+  if (task_data->image_input == NULL)
+    {
+      g_task_return_error (task, g_steal_pointer (&error));
+      gis_scribe_tee_close (task_data, cancellable);
+    }
+  else
+    {
+      g_task_run_in_thread (task, (GTaskThreadFunc) gis_scribe_tee_thread);
+    }
+}
+
+static void
+gis_scribe_subtask_cb (GObject      *source,
+                       GAsyncResult *result,
+                       gpointer      user_data)
+{
+  GisScribe *self = GIS_SCRIBE (source);
+  g_autoptr(GTask) outer_task = G_TASK (user_data);
+  GTask *inner_task = G_TASK (result);
+  GisScribeTask task_flag = GPOINTER_TO_INT (g_task_get_source_tag (inner_task));
+  const gchar *inner_task_name = gis_scribe_task_get_label (task_flag);
+  g_autoptr(GError) error = NULL;
+
+  /* Guard access to self->outstanding_tasks and self->error. */
+  g_mutex_lock (&self->mutex);
+
+  if (g_task_propagate_boolean (inner_task, &error))
+    {
+      g_debug ("%s: %s completed successfully", G_STRFUNC, inner_task_name);
+    }
+  else if (self->error == NULL)
+    {
+      g_debug ("%s: saving error from %s to report later: %s", G_STRFUNC,
+               inner_task_name, error->message);
+      g_propagate_error (&self->error, g_steal_pointer (&error));
+    }
+  else
+    {
+      g_debug ("%s: discarding subsequent error from %s: %s", G_STRFUNC,
+               inner_task_name, error->message);
+      g_clear_error (&error);
+    }
+
+  /* This task should be outstanding */
+  g_assert_cmpint (self->outstanding_tasks & task_flag, ==, task_flag);
+  self->outstanding_tasks &= ~task_flag;
+
+  if (self->outstanding_tasks == 0)
+    {
+      if (self->error == NULL)
+        g_task_return_boolean (outer_task, TRUE);
+      else
+        /* could steal self->error since all subtasks are now dead but it's
+         * useful to know that once set, it remains set until destruction.
+         */
+        g_task_return_error (outer_task, g_error_copy (self->error));
+    }
+
+  /* Alert the write thread, if it's already waiting, that
+   * self->outstanding_tasks and self->error have been updated.
+   */
+  g_cond_signal (&self->cond);
+  g_mutex_unlock (&self->mutex);
 }
 
 void
@@ -838,16 +1149,52 @@ gis_scribe_write_async (GisScribe          *self,
                         gpointer            user_data)
 {
   g_autoptr(GTask) task = g_task_new (self, cancellable, callback, user_data);
+  gint pipefd[2];
+  g_autoptr(GInputStream) input = NULL;
+  g_autoptr(GOutputStream) write_pipe = NULL;
+  g_autoptr(GOutputStream) gpg_stdin = NULL;
+  GError *error = NULL;
 
   if (self->started)
     {
       g_task_return_new_error (task, GIS_INSTALL_ERROR, 0, "already started");
+      return;
     }
-  else
+
+  if (!g_unix_open_pipe (pipefd, FD_CLOEXEC, &error))
     {
-      self->started = TRUE;
-      gis_scribe_begin_verify (self, g_steal_pointer (&task));
+      g_task_return_error (task, error);
+      return;
     }
+
+  self->started = TRUE;
+  input = g_unix_input_stream_new (pipefd[0], /* close_fd */ TRUE);
+  write_pipe = g_unix_output_stream_new (pipefd[1], /* close_fd */ TRUE);
+
+  /* Guard access to self->outstanding_tasks */
+  g_mutex_lock (&self->mutex);
+
+  /* Attempt to spawn GPG subprocess */
+  self->outstanding_tasks |= GIS_SCRIBE_TASK_VERIFY;
+  gpg_stdin = gis_scribe_begin_verify (self, cancellable, gis_scribe_subtask_cb,
+                                       g_object_ref (task));
+  if (gpg_stdin == NULL)
+    {
+      goto out;
+    }
+
+  /* Start feeding the image to GPG and to one end of a pipe-to-self */
+  self->outstanding_tasks |= GIS_SCRIBE_TASK_TEE;
+  gis_scribe_begin_tee (self, gpg_stdin, write_pipe, cancellable,
+                        gis_scribe_subtask_cb, g_object_ref (task));
+
+  /* Start reading from the other end of the pipe and writing to disk */
+  self->outstanding_tasks |= GIS_SCRIBE_TASK_WRITE;
+  gis_scribe_begin_write (self, input, cancellable, gis_scribe_subtask_cb,
+                          g_object_ref (task));
+
+out:
+  g_mutex_unlock (&self->mutex);
 }
 
 gboolean
@@ -873,5 +1220,5 @@ gis_scribe_get_progress (GisScribe *self)
 {
   g_return_val_if_fail (GIS_IS_SCRIBE (self), -1);
 
-  return self->progress;
+  return self->overall_progress;
 }

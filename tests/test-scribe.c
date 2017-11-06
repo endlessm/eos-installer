@@ -39,7 +39,8 @@
 #define IMAGE "w.img"
 #define IMAGE_BYTE 'w'
 
-#define IMAGE_SIZE_BYTES 4 * 1024 * 1024
+#define ONE_MIB (1024 * 1024)
+#define IMAGE_SIZE_BYTES 4 * ONE_MIB
 
 static gchar *keyring_path = NULL;
 
@@ -116,7 +117,7 @@ test_scribe_notify_progress_cb (GObject    *object,
 
   g_assert (fixture->main_thread == g_thread_self ());
 
-  if (fixture->step != 2 || progress != -1)
+  if (fixture->step != 2)
     {
       g_assert_cmpfloat (0, <=, progress);
       g_assert_cmpfloat (progress, <=, 1);
@@ -309,6 +310,43 @@ test_scribe_write_cb (GObject      *source,
 }
 
 static void
+assert_first_mib_zeroed (Fixture *fixture)
+{
+  gboolean ret;
+  g_autofree gchar *target_contents = NULL;
+  gsize target_length = 0;
+  g_autofree gchar *expected_contents = g_malloc0 (ONE_MIB);
+  g_autoptr(GError) error = NULL;
+
+  if (fixture->data->create_memfd)
+    {
+      g_autoptr(GInputStream) input = NULL;
+
+      target_contents = g_malloc (ONE_MIB);
+
+      seek_to_start (fixture->memfd);
+      input = g_unix_input_stream_new (fixture->memfd, /* close_fd */ FALSE);
+      ret = g_input_stream_read_all (input, target_contents, ONE_MIB,
+                                     &target_length, NULL, &error);
+      g_assert_no_error (error);
+      g_assert (ret);
+      g_assert_cmpuint (target_length, ==, ONE_MIB);
+    }
+  else
+    {
+      ret = g_file_get_contents (fixture->target_path,
+                                 &target_contents, &target_length,
+                                 &error);
+      g_assert_no_error (error);
+      g_assert (ret);
+      g_assert_cmpuint (target_length, >=, ONE_MIB);
+    }
+
+  g_assert_cmpmem (expected_contents, ONE_MIB,
+                   target_contents, ONE_MIB);
+}
+
+static void
 test_error (Fixture       *fixture,
             gconstpointer  user_data)
 {
@@ -327,29 +365,7 @@ test_error (Fixture       *fixture,
                   fixture->data->error_domain,
                   fixture->data->error_code);
 
-  if (fixture->data->create_memfd)
-    {
-      g_autoptr(GInputStream) input = NULL;
-      gsize size = 1024 * 1024;
-      gsize read_size;
-      g_autofree gchar *first_mib = g_malloc (size);
-      g_autofree gchar *expected_first_mib = g_malloc (size);
-      gboolean ret;
-      GError *error = NULL;
-
-      memset (expected_first_mib, '\0', size);
-
-      seek_to_start (fixture->memfd);
-      input = g_unix_input_stream_new (fixture->memfd, /* close_fd */ FALSE);
-      ret = g_input_stream_read_all (input, first_mib, size,
-                                     &read_size, NULL, &error);
-      g_assert_no_error (error);
-      g_assert_true (ret);
-
-      g_assert_cmpmem (first_mib, read_size,
-                       expected_first_mib, size);
-    }
-  /* else: TODO: check first mib of file on disk */
+  assert_first_mib_zeroed (fixture);
 }
 
 static void
