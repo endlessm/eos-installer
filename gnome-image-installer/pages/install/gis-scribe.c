@@ -696,8 +696,15 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
   if (line == NULL)
     return G_SOURCE_CONTINUE;
 
+  g_debug ("%s: %s", G_STRFUNC, line);
+
   if (!g_str_has_prefix (line, "[GNUPG:] PROGRESS"))
-    return G_SOURCE_CONTINUE;
+    {
+      /* TODO: handle GOODSIG/EXPSIG/BADSIG/etc. to surface the exact
+       * verification error. Or use GPGME?
+       */
+      return G_SOURCE_CONTINUE;
+    }
 
   /* https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=blob;f=doc/DETAILS;h=0be55f4d;hb=refs/heads/master#l1043
    * [GNUPG:] PROGRESS <what> <char> <cur> <total> [<units>]
@@ -705,6 +712,13 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
    * [GNUPG:] PROGRESS /dev/mapper/endless- ? 676 4442 MiB
    */
   arr = g_strsplit (g_strchomp (line), " ", -1);
+  if (g_strv_length (arr) < 6)
+    {
+      g_warning ("%s: GPG progress message has too few fields: %s",
+                 G_STRFUNC, line);
+      return G_SOURCE_CONTINUE;
+    }
+
   curr = g_ascii_strtod (arr[4], NULL);
   full = g_ascii_strtod (arr[5], NULL);
   units = arr[6];
