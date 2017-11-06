@@ -68,6 +68,11 @@ typedef struct _GisScribe {
 
   GFile *image;
   guint64 image_size;
+  /* Compressed size of 'image'. We need to provide this to GPG so it can
+   * indicate its progress, since it reads the image data from a pipe. Equal to
+   * 'image_size' if 'image' is uncompressed.
+   */
+  guint64 compressed_size;
   GFile *signature;
   gchar *keyring_path;
   gchar *drive_path;
@@ -146,6 +151,7 @@ G_DEFINE_TYPE (GisScribe, gis_scribe, G_TYPE_OBJECT)
 typedef enum {
   PROP_IMAGE = 1,
   PROP_IMAGE_SIZE,
+  PROP_COMPRESSED_SIZE,
   PROP_SIGNATURE,
   PROP_KEYRING_PATH,
   PROP_DRIVE_PATH,
@@ -175,6 +181,10 @@ gis_scribe_set_property (GObject      *object,
 
     case PROP_IMAGE_SIZE:
       self->image_size = g_value_get_uint64 (value);
+      break;
+
+    case PROP_COMPRESSED_SIZE:
+      self->compressed_size = g_value_get_uint64 (value);
       break;
 
     case PROP_SIGNATURE:
@@ -227,6 +237,10 @@ gis_scribe_get_property (GObject      *object,
 
     case PROP_IMAGE_SIZE:
       g_value_set_uint64 (value, self->image_size);
+      break;
+
+    case PROP_COMPRESSED_SIZE:
+      g_value_set_uint64 (value, self->compressed_size);
       break;
 
     case PROP_SIGNATURE:
@@ -334,6 +348,13 @@ gis_scribe_class_init (GisScribeClass *klass)
       0, G_MAXUINT64, 0,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+  props[PROP_COMPRESSED_SIZE] = g_param_spec_uint64 (
+      "compressed-size",
+      "Compressed Size",
+      "Compressed size of :image, in bytes.",
+      0, G_MAXUINT64, 0,
+      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
   props[PROP_SIGNATURE] = g_param_spec_object (
       "signature",
       "Signature",
@@ -409,6 +430,7 @@ gis_scribe_init (GisScribe *self)
 GisScribe *
 gis_scribe_new (GFile       *image,
                 guint64      image_size,
+                guint64      compressed_size,
                 GFile       *signature,
                 const gchar *drive_path,
                 gint         drive_fd,
@@ -416,6 +438,7 @@ gis_scribe_new (GFile       *image,
 {
   g_return_val_if_fail (G_IS_FILE (image), NULL);
   g_return_val_if_fail (image_size > 0, NULL);
+  g_return_val_if_fail (compressed_size > 0, NULL);
   g_return_val_if_fail (G_IS_FILE (signature), NULL);
   g_return_val_if_fail (drive_path != NULL, NULL);
   g_return_val_if_fail (drive_fd >= 0, NULL);
@@ -424,6 +447,7 @@ gis_scribe_new (GFile       *image,
       GIS_TYPE_SCRIBE,
       "image", image,
       "image-size", image_size,
+      "compressed-size", compressed_size,
       "signature", signature,
       "drive-path", drive_path,
       "drive-fd", drive_fd,
@@ -908,7 +932,8 @@ gis_scribe_begin_verify (GisScribe *self,
   g_autoptr(GTask) task = g_task_new (self, cancellable, callback, data);
   GisScribeGpgData *task_data = g_slice_new0 (GisScribeGpgData);
   g_autofree gchar *signature_path = g_file_get_path (self->signature);
-  g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT, self->image_size);
+  g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT,
+                                                self->compressed_size);
   const gchar * const args[] = {
       "gpg",
       "--enable-progress-filter", "--status-fd", "1",

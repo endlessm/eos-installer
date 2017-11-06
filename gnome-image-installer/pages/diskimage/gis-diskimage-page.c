@@ -90,7 +90,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
   gchar *image, *name, *signature = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
-  gint64 size_bytes;
+  guint64 size_bytes;
   guint64 required_size;
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
@@ -366,13 +366,14 @@ add_image (
       if (displayname != NULL)
         {
           goffset size_bytes = g_file_info_get_size (fi);
+          g_warn_if_fail (size_bytes >= 0);
           size = g_format_size_full (size_bytes, G_FORMAT_SIZE_DEFAULT);
 
           gtk_list_store_append (store, &i);
           gtk_list_store_set (store, &i,
                               IMAGE_NAME, displayname,
                               IMAGE_SIZE, size,
-                              IMAGE_SIZE_BYTES, size_bytes,
+                              IMAGE_SIZE_BYTES, (guint64) size_bytes,
                               IMAGE_FILE, image_device != NULL ? image_device : image,
                               IMAGE_SIGNATURE, signature,
                               IMAGE_REQUIRED_SIZE, required_size,

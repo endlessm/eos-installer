@@ -287,8 +287,11 @@ gis_install_page_open_for_restore_cb (GObject      *source,
   gint fd = -1;
   g_autoptr(GError) error = NULL;
   g_autoptr(GFile) image = NULL;
+  const gchar *signature_path = NULL;
   g_autoptr(GFile) signature = NULL;
   g_autoptr(GisScribe) scribe = NULL;
+  guint64 uncompressed_size = gis_store_get_required_size ();
+  guint64 compressed_size = gis_store_get_image_size ();
 
   if (!udisks_block_call_open_for_restore_finish (block, &fd_index, &fd_list,
                                                   result, &error))
@@ -306,9 +309,21 @@ gis_install_page_open_for_restore_cb (GObject      *source,
     }
 
   image = g_object_ref (gis_store_get_object (GIS_STORE_IMAGE));
-  signature = g_file_new_for_path (gis_store_get_image_signature ());
+  signature_path = gis_store_get_image_signature ();
+  signature = g_file_new_for_path (signature_path);
+
+  /* For squashfs images, gis_store_get_image_size() is the size of the
+   * squashfs image, but the file we read is the mapped uncompressed image from
+   * within it. So for the purposes of the scribe, the "compressed size" is the
+   * uncompressed size. It's a bit clumsy to put this special-case here, but
+   * anywhere else seemed equally clumsy.
+   */
+  if (g_str_has_suffix (signature_path, ".img.asc"))
+    compressed_size = uncompressed_size;
+
   scribe = gis_scribe_new (image,
-                           gis_store_get_required_size (),
+                           uncompressed_size,
+                           compressed_size,
                            signature,
                            udisks_block_get_device (block),
                            fd,

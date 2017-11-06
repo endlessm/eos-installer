@@ -185,6 +185,8 @@ fixture_set_up (Fixture *fixture,
                 gconstpointer user_data)
 {
   const TestData *data = user_data;
+  g_autoptr(GFileInfo) info = NULL;
+  goffset compressed_size;
   GError *error = NULL;
   int fd;
 
@@ -198,6 +200,22 @@ fixture_set_up (Fixture *fixture,
 
   fixture->image = g_file_new_for_path (data->image_path);
   fixture->signature = g_file_new_for_path (data->signature_path);
+
+  /* In the app itself, we have already determined the compressed size of the
+   * image (including special-cases when stat() doesn't work), so it's
+   * convenient to make this a parameter to GisScribe. The cost is a little
+   * extra work in the test suite.
+   */
+  info = g_file_query_info (fixture->image, G_FILE_ATTRIBUTE_STANDARD_SIZE,
+                            G_FILE_QUERY_INFO_NONE, NULL, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (info);
+
+  /* g_file_info_get_size() returns a signed type. Smells like nonsense to me!
+   * If it's non-negative, it will fit into a guint64.
+   */
+  compressed_size = g_file_info_get_size (info);
+  g_assert_cmpint (compressed_size, >, 0);
 
   fixture->target_path = g_build_filename (fixture->tmpdir, "target.img", NULL);
   fixture->target = g_file_new_for_path (fixture->target_path);
@@ -223,6 +241,7 @@ fixture_set_up (Fixture *fixture,
   fixture->scribe = g_object_new (GIS_TYPE_SCRIBE,
                                   "image", fixture->image,
                                   "image-size", fixture->uncompressed_size,
+                                  "compressed-size", (guint64) compressed_size,
                                   "signature", fixture->signature,
                                   "keyring-path", keyring_path,
                                   "drive-path", fixture->target_path,
