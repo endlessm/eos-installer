@@ -48,9 +48,12 @@ typedef struct _GisScribe {
   guint step;
   gdouble progress;
 
-  GPid gpg_pid;
-  GIOChannel *gpg_stdout;
-  guint gpg_watch;
+  GSubprocess *gpg_subprocess;
+  GSource *gpg_stdout_source;
+  /* Wraps gpg_subprocess's stdout pipe. When gpg_stdout_source triggers
+   * then reading a line is expected to succeed (or fail) without blocking.
+   */
+  GDataInputStream *gpg_stdout;
 
   GInputStream *decompressed;
 
@@ -213,6 +216,11 @@ gis_scribe_dispose (GObject *object)
   g_clear_object (&self->image);
   g_clear_object (&self->signature);
   g_clear_object (&self->decompressed);
+
+  /* Should be cleaned up when GPG subprocess dies, but just in case: */
+  g_clear_pointer (&self->gpg_stdout_source, g_source_destroy);
+  g_clear_object (&self->gpg_stdout);
+  g_clear_object (&self->gpg_subprocess);
 
   G_OBJECT_CLASS (gis_scribe_parent_class)->dispose (object);
 }
@@ -669,9 +677,8 @@ gis_scribe_begin_write (GisScribe *self,
 }
 
 static gboolean
-gis_scribe_gpg_progress (GIOChannel  *source,
-                         GIOCondition cond,
-                         gpointer     data)
+gis_scribe_gpg_progress (GObject *pollable_stream,
+                         gpointer data)
 {
   GTask *task = G_TASK (data);
   GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
@@ -683,8 +690,10 @@ gis_scribe_gpg_progress (GIOChannel  *source,
   if (self->step > 1)
     return G_SOURCE_CONTINUE;
 
-  if (g_io_channel_read_line (source, &line, NULL, NULL, NULL) != G_IO_STATUS_NORMAL
-      || line == NULL)
+  line = g_data_input_stream_read_line_utf8 (self->gpg_stdout, NULL,
+                                             g_task_get_cancellable (task),
+                                             NULL);
+  if (line == NULL)
     return G_SOURCE_CONTINUE;
 
   if (!g_str_has_prefix (line, "[GNUPG:] PROGRESS"))
@@ -725,27 +734,27 @@ gis_scribe_gpg_progress (GIOChannel  *source,
 }
 
 static void
-gis_scribe_gpg_watch (GPid     pid,
-                      gint     status,
-                      gpointer data)
+gis_scribe_gpg_wait_check_cb (GObject      *source,
+                              GAsyncResult *result,
+                              gpointer      data)
 {
+  GSubprocess *gpg_subprocess = G_SUBPROCESS (source);
   g_autoptr(GTask) task = G_TASK (data);
   GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
+  g_autoptr(GError) error = NULL;
 
-  g_spawn_close_pid (pid);
+  g_clear_pointer (&self->gpg_stdout_source, g_source_destroy);
+  g_clear_object (&self->gpg_stdout);
+  g_clear_object (&self->gpg_subprocess);
 
-  g_source_remove (self->gpg_watch);
-  self->gpg_watch = 0;
-
-  g_io_channel_shutdown (self->gpg_stdout, TRUE, NULL);
-  g_clear_pointer (&self->gpg_stdout, g_io_channel_unref);
-
-  if (g_spawn_check_exit_status (status, NULL))
+  if (g_subprocess_wait_check_finish (gpg_subprocess, result, &error))
     {
       gis_scribe_begin_write (self, task);
     }
   else
     {
+      /* TODO: surface more details about the error */
+      g_message ("GPG subprocess failed: %s", error->message);
       g_task_return_new_error (task, GIS_INSTALL_ERROR, 0,
                                _("Image verification error."));
     }
@@ -768,7 +777,10 @@ gis_scribe_begin_verify (GisScribe *self,
       "--input-size-hint", size_str,
       "--verify", signature_path, image_path, NULL
   };
-  gint outfd;
+  g_autoptr(GSubprocessLauncher) launcher = NULL;
+  g_autoptr(GSubprocess) subprocess = NULL;
+  GInputStream *gpg_stdout = NULL;
+  GCancellable *cancellable = g_task_get_cancellable (task);
   GError *error = NULL;
 
   if (!g_file_query_exists (self->signature, NULL))
@@ -781,23 +793,28 @@ gis_scribe_begin_verify (GisScribe *self,
       return;
     }
 
-  if (!g_spawn_async_with_pipes (NULL, (gchar **) args, NULL,
-                                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-                                 NULL, NULL, &self->gpg_pid,
-                                 NULL, &outfd, NULL, &error))
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDOUT_PIPE);
+  subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
+  if (subprocess == NULL)
     {
       g_task_return_error (task, g_steal_pointer (&error));
       g_object_unref (task);
       return;
     }
 
-  self->gpg_stdout = g_io_channel_unix_new (outfd);
-  self->gpg_watch = g_io_add_watch (self->gpg_stdout,
-                                    G_IO_IN,
-                                    gis_scribe_gpg_progress,
-                                    task);
+  gpg_stdout = g_subprocess_get_stdout_pipe (subprocess);
+  g_assert (G_IS_POLLABLE_INPUT_STREAM (gpg_stdout));
+  self->gpg_stdout = g_data_input_stream_new (gpg_stdout);
+  self->gpg_stdout_source =
+    g_pollable_input_stream_create_source (G_POLLABLE_INPUT_STREAM (gpg_stdout),
+                                           cancellable);
+  g_task_attach_source (task, self->gpg_stdout_source,
+                         (GSourceFunc) gis_scribe_gpg_progress);
 
-  g_child_watch_add (self->gpg_pid, gis_scribe_gpg_watch, task);
+  g_subprocess_wait_check_async (subprocess, cancellable,
+                                 gis_scribe_gpg_wait_check_cb,
+                                 g_steal_pointer (&task));
+  self->gpg_subprocess = g_steal_pointer (&subprocess);
 }
 
 void
