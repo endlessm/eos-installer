@@ -544,8 +544,9 @@ main (int argc, char *argv[])
   TestData good_signature_truncated_gz = {
       .image_path = trunc_gz_path,
       .signature_path = trunc_gz_sig_path,
-      .error_domain = G_IO_ERROR,
-      .error_code = G_IO_ERROR_PARTIAL_INPUT,
+      /* TODO: report a kinder error than "child process exited with code 1" */
+      .error_domain = G_SPAWN_EXIT_ERROR,
+      .error_code = 1,
   };
   g_test_add ("/scribe/good-signature-truncated-gz", Fixture,
               &good_signature_truncated_gz,
@@ -558,8 +559,9 @@ main (int argc, char *argv[])
   TestData good_signature_truncated_xz = {
       .image_path = trunc_xz_path,
       .signature_path = trunc_xz_sig_path,
-      .error_domain = G_IO_ERROR,
-      .error_code = G_IO_ERROR_PARTIAL_INPUT,
+      /* TODO: report a kinder error than "child process exited with code 1" */
+      .error_domain = G_SPAWN_EXIT_ERROR,
+      .error_code = 1,
   };
   g_test_add ("/scribe/good-signature-truncated-xz", Fixture,
               &good_signature_truncated_xz,

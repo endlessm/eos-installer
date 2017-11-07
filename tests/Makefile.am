@@ -71,7 +71,6 @@ test_scribe_LDADD = \
 	$(IMAGE_INSTALLER_LIBS) \
 	$(top_builddir)/ext/libglnx.la \
 	$(top_builddir)/gnome-image-installer/pages/install/libgisinstall.la \
-	-llzma \
 	$(NULL)
 test_scribe_LDFLAGS = \
 	$(WARN_LDFLAGS) \

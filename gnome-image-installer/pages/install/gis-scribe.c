@@ -21,6 +21,7 @@
 #include "gis-scribe.h"
 
 #include <errno.h>
+#include <gio/gfiledescriptorbased.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixoutputstream.h>
 #include <glib-unix.h>
@@ -32,7 +33,6 @@
 /* for sysconf() */
 #include <unistd.h>
 
-#include "gduxzdecompressor.h"
 #include "glnx-errors.h"
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
@@ -41,6 +41,7 @@
 typedef enum {
   GIS_SCRIBE_TASK_TEE        = 1 << 0,
   GIS_SCRIBE_TASK_VERIFY     = 1 << 1,
+  GIS_SCRIBE_TASK_DECOMPRESS = 1 << 2,
   GIS_SCRIBE_TASK_WRITE      = 1 << 3,
 } GisScribeTask;
 
@@ -53,6 +54,8 @@ gis_scribe_task_get_label (GisScribeTask flag)
       return "tee";
     case GIS_SCRIBE_TASK_VERIFY:
       return "verify";
+    case GIS_SCRIBE_TASK_DECOMPRESS:
+      return "decompress";
     case GIS_SCRIBE_TASK_WRITE:
       return "write";
     default:
@@ -76,8 +79,6 @@ typedef struct _GisScribe {
 
   /* MIN(gpg_progress, bytes_written / image_size) */
   gdouble overall_progress;
-
-  GInputStream *decompressed;
 
   GMutex mutex;
   GCond cond;
@@ -284,7 +285,6 @@ gis_scribe_dispose (GObject *object)
 
   g_clear_object (&self->image);
   g_clear_object (&self->signature);
-  g_clear_object (&self->decompressed);
 
   G_OBJECT_CLASS (gis_scribe_parent_class)->dispose (object);
 }
@@ -431,6 +431,28 @@ gis_scribe_new (GFile       *image,
       NULL);
 }
 
+static void
+gis_scribe_close_input_stream_or_warn (GInputStream *stream,
+                                       GCancellable *cancellable,
+                                       const gchar  *label)
+{
+  g_autoptr(GError) error = NULL;
+
+  if (!g_input_stream_close (stream, cancellable, &error))
+    g_warning ("error closing %s: %s", label, error->message);
+}
+
+static void
+gis_scribe_close_output_stream_or_warn (GOutputStream *stream,
+                                        GCancellable  *cancellable,
+                                        const gchar   *label)
+{
+  g_autoptr(GError) error = NULL;
+
+  if (!g_output_stream_close (stream, cancellable, &error))
+    g_warning ("error closing %s: %s", label, error->message);
+}
+
 /* Called once per second while the main write operation is in progress.
  */
 static gboolean
@@ -532,6 +554,7 @@ gis_scribe_malloc_aligned (size_t size)
 
 static gboolean
 gis_scribe_write_thread_copy (GisScribe     *self,
+                              GInputStream  *decompressed,
                               gint           fd,
                               GOutputStream *output,
                               GCancellable  *cancellable,
@@ -549,13 +572,13 @@ gis_scribe_write_thread_copy (GisScribe     *self,
   memset (first_mib, 0, BUFFER_SIZE);
   if (!g_output_stream_write_all (output, first_mib, BUFFER_SIZE,
                                   &w, cancellable, error)
-      || !g_input_stream_read_all (self->decompressed, first_mib, BUFFER_SIZE,
+      || !g_input_stream_read_all (decompressed, first_mib, BUFFER_SIZE,
                                    &first_mib_bytes_read, cancellable, error))
     return FALSE;
 
   do
     {
-      if (!g_input_stream_read_all (self->decompressed, buffer, BUFFER_SIZE,
+      if (!g_input_stream_read_all (decompressed, buffer, BUFFER_SIZE,
                                     &r, cancellable, error))
         return FALSE;
 
@@ -570,7 +593,7 @@ gis_scribe_write_thread_copy (GisScribe     *self,
     }
   while (r > 0);
 
-  if (!g_input_stream_close (self->decompressed, cancellable, error))
+  if (!g_input_stream_close (decompressed, cancellable, error))
     return FALSE;
 
   /* Wait for GPG verification to complete */
@@ -662,6 +685,7 @@ gis_scribe_write_thread (GTask        *task,
                          GCancellable *cancellable)
 {
   GisScribe *self = GIS_SCRIBE (source_object);
+  GInputStream *decompressed = G_INPUT_STREAM (task_data);
   gint fd = -1;
   g_autoptr(GOutputStream) output = NULL;
   gboolean ret;
@@ -686,7 +710,8 @@ gis_scribe_write_thread (GTask        *task,
       g_clear_error (&error);
     }
 
-  ret = gis_scribe_write_thread_copy (self, fd, output, cancellable, &error);
+  ret = gis_scribe_write_thread_copy (self, decompressed, fd, output,
+                                      cancellable, &error);
 
   g_source_remove (timer_id);
 
@@ -708,11 +733,8 @@ gis_scribe_write_thread (GTask        *task,
        * before EOF, we need to close the decompressed stream to ensure the
        * threads upstream of us terminate.
        */
-      if (!g_input_stream_close (self->decompressed, cancellable, &close_error))
-        {
-          g_prefix_error (&close_error, "couldn't close decompressed stream: ");
-          g_warning ("%s", close_error->message);
-        }
+      gis_scribe_close_input_stream_or_warn (decompressed, cancellable,
+                                             "decompressed stream");
       return;
     }
 
@@ -762,58 +784,15 @@ gis_scribe_write_thread (GTask        *task,
 
 static void
 gis_scribe_begin_write (GisScribe          *self,
-                        GInputStream       *input,
+                        GInputStream       *decompressed,
                         GCancellable       *cancellable,
                         GAsyncReadyCallback callback,
                         gpointer            data)
 {
   g_autoptr(GTask) task = g_task_new (self, cancellable, callback, data);
-  g_autofree gchar *basename = NULL;
-  g_autoptr(GConverter) decompressor = NULL;
-
-  basename = g_file_get_basename (self->image);
-  if (basename == NULL)
-    {
-      g_autofree gchar *parse_name = g_file_get_parse_name (self->image);
-      g_task_return_new_error (task,
-                               GIS_INSTALL_ERROR, 0,
-                               "g_file_get_basename(\"%s\") returned NULL",
-                               parse_name);
-      return;
-    }
-
-  /* TODO: use more magical means */
-  if (g_str_has_suffix (basename, "gz"))
-    {
-      GZlibCompressorFormat cf = G_ZLIB_COMPRESSOR_FORMAT_GZIP;
-      decompressor = G_CONVERTER (g_zlib_decompressor_new (cf));
-    }
-  else if (g_str_has_suffix (basename, "xz"))
-    {
-      decompressor = G_CONVERTER (gdu_xz_decompressor_new ());
-    }
-  else if (g_str_has_suffix (basename, "img") || g_strcmp0 (basename, "endless-image") == 0)
-    {
-      decompressor = NULL;
-    }
-  else
-    {
-      g_task_return_new_error (task, GIS_INSTALL_ERROR, 0,
-                               "%s ends in neither '.xz', '.gz' nor '.img'",
-                               basename);
-      return;
-    }
-
-  if (decompressor)
-    {
-      self->decompressed = g_converter_input_stream_new (input, decompressor);
-    }
-  else
-    {
-      self->decompressed = g_object_ref (input);
-    }
 
   g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_WRITE));
+  g_task_set_task_data (task, g_object_ref (decompressed), g_object_unref);
   g_task_run_in_thread (task, gis_scribe_write_thread);
 }
 
@@ -989,28 +968,17 @@ static void
 gis_scribe_tee_close (GisScribeTeeData *data,
                       GCancellable     *cancellable)
 {
-  GError *error = NULL;
-
-  if (data->image_input != NULL
-      && !g_input_stream_close (data->image_input, cancellable, &error))
-    {
-      g_warning ("%s: error closing input stream: %s", G_STRFUNC, error->message);
-      g_clear_error (&error);
-    }
+  if (data->image_input != NULL)
+    gis_scribe_close_input_stream_or_warn (data->image_input, cancellable,
+                                           "file input stream");
 
   /* Closing its stdin will ultimately cause the GPG subprocess to exit. */
-  if (!g_output_stream_close (data->gpg_stdin, cancellable, &error))
-    {
-      g_warning ("%s: error closing GPG stdin: %s", G_STRFUNC, error->message);
-      g_clear_error (&error);
-    }
+  gis_scribe_close_output_stream_or_warn (data->gpg_stdin, cancellable,
+                                          "GPG stdin");
 
   /* Similarly, closing the pipe will cause the write thread to terminate. */
-  if (!g_output_stream_close (data->write_pipe, cancellable, &error))
-    {
-      g_warning ("%s: error closing write pipe: %s", G_STRFUNC, error->message);
-      g_clear_error (&error);
-    }
+  gis_scribe_close_output_stream_or_warn (data->write_pipe, cancellable,
+                                          "write pipe");
 }
 
 static void
@@ -1107,6 +1075,120 @@ gis_scribe_begin_tee (GisScribe          *self,
 }
 
 static void
+gis_scribe_decompress_wait_check_cb (GObject      *source,
+                                     GAsyncResult *result,
+                                     gpointer      data)
+{
+  g_autoptr(GSubprocess) subprocess = G_SUBPROCESS (source);
+  g_autoptr(GTask) task = G_TASK (data);
+  g_autoptr(GError) error = NULL;
+
+  if (g_subprocess_wait_check_finish (subprocess, result, &error))
+    {
+      g_task_return_boolean (task, TRUE);
+    }
+  else
+    {
+      g_prefix_error (&error, "decompressor subprocess failed: ");
+      g_task_return_error (task, g_steal_pointer (&error));
+    }
+}
+
+
+/* Spawns a subprocess to decompress the image. This function returns %TRUE
+ * with @compressed and @decompressed set if spawning the subprocess succeeds;
+ * and %FALSE with both unset if not. In either case, callback will fire when
+ * the subprocess terminates (which may be immediately).
+ *
+ * The appropriate decompressor is determined from the image file name. If it's
+ * uncompressed, @compressed and @decompressed will be the two ends of a
+ * pipe-to-self and no subprocess will be launched. (@callback will fire with
+ * success.) If the decompressor can't be determined, returns %FALSE and fires
+ * @callback with error.
+ *
+ * @compressed: (out): socket to write compressed image data to
+ * @decompressed: (out): socket to read decompressed image data from
+ */
+static gboolean
+gis_scribe_begin_decompress (GisScribe          *self,
+                             GOutputStream     **compressed,
+                             GInputStream      **decompressed,
+                             GCancellable       *cancellable,
+                             GAsyncReadyCallback callback,
+                             gpointer            user_data)
+{
+  g_autoptr(GTask) task = g_task_new (self, cancellable, callback, user_data);
+  g_autofree gchar *basename = NULL;
+  const gchar *args[] = { NULL, "-cd", NULL };
+  g_autoptr(GSubprocessLauncher) launcher = NULL;
+  GSubprocess *subprocess = NULL;
+  GError *error = NULL;
+
+  g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_DECOMPRESS));
+
+  basename = g_file_get_basename (self->image);
+  if (basename == NULL)
+    {
+      g_critical ("g_file_get_basename returned NULL");
+      g_task_return_new_error (task,
+                               GIS_INSTALL_ERROR, 0,
+                               _("Internal error"));
+      return FALSE;
+    }
+
+  /* TODO: use more magical means */
+  if (g_str_has_suffix (basename, "gz"))
+    {
+      args[0] = "gzip";
+    }
+  else if (g_str_has_suffix (basename, "xz"))
+    {
+      args[0] = "xz";
+    }
+  else if (g_str_has_suffix (basename, "img")
+           || g_strcmp0 (basename, "endless-image") == 0)
+    {
+      gint pipefd[2];
+
+      if (!g_unix_open_pipe (pipefd, FD_CLOEXEC, &error))
+        {
+          g_task_return_error (task, error);
+          return FALSE;
+        }
+
+      *compressed = g_unix_output_stream_new (pipefd[1], /* close_fd */ TRUE);
+      *decompressed = g_unix_input_stream_new (pipefd[0], /* close_fd */ TRUE);
+      g_task_return_boolean (task, TRUE);
+      return TRUE;
+    }
+  else
+    {
+      g_task_return_new_error (task, GIS_INSTALL_ERROR, 0,
+                               "%s ends in neither '.xz', '.gz' nor '.img'",
+                               basename);
+      return FALSE;
+    }
+
+  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDIN_PIPE |
+                                        G_SUBPROCESS_FLAGS_STDOUT_PIPE);
+  subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
+  if (subprocess == NULL)
+    {
+      g_task_return_error (task, error);
+      return FALSE;
+    }
+
+  *compressed = g_object_ref (g_subprocess_get_stdin_pipe (subprocess));
+  *decompressed = g_object_ref (g_subprocess_get_stdout_pipe (subprocess));
+
+  g_subprocess_wait_check_async (subprocess, cancellable,
+                                 gis_scribe_decompress_wait_check_cb,
+                                 g_steal_pointer (&task));
+
+  return TRUE;
+}
+
+static void
 gis_scribe_subtask_cb (GObject      *source,
                        GAsyncResult *result,
                        gpointer      user_data)
@@ -1160,6 +1242,17 @@ gis_scribe_subtask_cb (GObject      *source,
   g_mutex_unlock (&self->mutex);
 }
 
+static void
+gis_scribe_setpipe_sz (const gchar          *what,
+                       GFileDescriptorBased *stream)
+{
+  int fd = g_file_descriptor_based_get_fd (stream);
+
+  if (fcntl (fd, F_SETPIPE_SZ, BUFFER_SIZE) < 0)
+    g_warning ("failed to set %s pipe size to %d: %s",
+               what, BUFFER_SIZE, g_strerror (errno));
+}
+
 void
 gis_scribe_write_async (GisScribe          *self,
                         GCancellable       *cancellable,
@@ -1167,11 +1260,9 @@ gis_scribe_write_async (GisScribe          *self,
                         gpointer            user_data)
 {
   g_autoptr(GTask) task = g_task_new (self, cancellable, callback, user_data);
-  gint pipefd[2];
-  g_autoptr(GInputStream) input = NULL;
+  g_autoptr(GInputStream) decompressed = NULL;
   g_autoptr(GOutputStream) write_pipe = NULL;
   g_autoptr(GOutputStream) gpg_stdin = NULL;
-  GError *error = NULL;
 
   if (self->started)
     {
@@ -1179,18 +1270,19 @@ gis_scribe_write_async (GisScribe          *self,
       return;
     }
 
-  if (!g_unix_open_pipe (pipefd, FD_CLOEXEC, &error))
-    {
-      g_task_return_error (task, error);
-      return;
-    }
-
   self->started = TRUE;
-  input = g_unix_input_stream_new (pipefd[0], /* close_fd */ TRUE);
-  write_pipe = g_unix_output_stream_new (pipefd[1], /* close_fd */ TRUE);
 
   /* Guard access to self->outstanding_tasks */
   g_mutex_lock (&self->mutex);
+
+  /* Attempt to spawn decompressor subprocess (or pipe-to-self) */
+  self->outstanding_tasks |= GIS_SCRIBE_TASK_DECOMPRESS;
+  if (!gis_scribe_begin_decompress (self, &write_pipe, &decompressed,
+                                    cancellable, gis_scribe_subtask_cb,
+                                    g_object_ref (task)))
+    {
+      goto out;
+    }
 
   /* Attempt to spawn GPG subprocess */
   self->outstanding_tasks |= GIS_SCRIBE_TASK_VERIFY;
@@ -1198,8 +1290,16 @@ gis_scribe_write_async (GisScribe          *self,
                                        g_object_ref (task));
   if (gpg_stdin == NULL)
     {
+      gis_scribe_close_output_stream_or_warn (write_pipe, cancellable,
+                                              "decompressor stdin");
+      gis_scribe_close_input_stream_or_warn (decompressed, cancellable,
+                                             "decompressor stdout");
       goto out;
     }
+
+  gis_scribe_setpipe_sz ("gpg stdin", G_FILE_DESCRIPTOR_BASED (gpg_stdin));
+  gis_scribe_setpipe_sz ("decompressor stdin", G_FILE_DESCRIPTOR_BASED (write_pipe));
+  gis_scribe_setpipe_sz ("decompressor stdout", G_FILE_DESCRIPTOR_BASED (decompressed));
 
   /* Start feeding the image to GPG and to one end of a pipe-to-self */
   self->outstanding_tasks |= GIS_SCRIBE_TASK_TEE;
@@ -1208,8 +1308,8 @@ gis_scribe_write_async (GisScribe          *self,
 
   /* Start reading from the other end of the pipe and writing to disk */
   self->outstanding_tasks |= GIS_SCRIBE_TASK_WRITE;
-  gis_scribe_begin_write (self, input, cancellable, gis_scribe_subtask_cb,
-                          g_object_ref (task));
+  gis_scribe_begin_write (self, decompressed, cancellable,
+                          gis_scribe_subtask_cb, g_object_ref (task));
 
 out:
   g_mutex_unlock (&self->mutex);
