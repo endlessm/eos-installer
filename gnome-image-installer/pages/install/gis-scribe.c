@@ -540,7 +540,7 @@ gis_scribe_write_thread_copy (GisScribe     *self,
   g_autofree gchar *buffer = gis_scribe_malloc_aligned (BUFFER_SIZE);
   g_autofree gchar *first_mib = gis_scribe_malloc_aligned (BUFFER_SIZE);
   gsize first_mib_bytes_read = 0;
-  gssize r = -1;
+  gsize r = 0;
   gsize w = 0;
 
   /* Read the first 1 MiB; write zeros to the target drive. This ensures the
@@ -555,10 +555,8 @@ gis_scribe_write_thread_copy (GisScribe     *self,
 
   do
     {
-      r = g_input_stream_read (self->decompressed, buffer, BUFFER_SIZE,
-                               cancellable, error);
-
-      if (r < 0)
+      if (!g_input_stream_read_all (self->decompressed, buffer, BUFFER_SIZE,
+                                    &r, cancellable, error))
         return FALSE;
 
       if (!g_output_stream_write_all (output, buffer, r,
