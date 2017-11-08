@@ -29,6 +29,8 @@
 #include <sys/ioctl.h>
 /* for BLKGETSIZE64, BLKDISCARD */
 #include <linux/fs.h>
+/* for sysconf() */
+#include <unistd.h>
 
 #include "gduxzdecompressor.h"
 #include "glnx-errors.h"
@@ -511,6 +513,23 @@ gis_scribe_write_thread_await_gpg (GisScribe *self,
   return FALSE;
 }
 
+/* Allocates size bytes, page-aligned. */
+G_GNUC_MALLOC
+G_GNUC_ALLOC_SIZE(1)
+static void *
+gis_scribe_malloc_aligned (size_t size)
+{
+  const size_t pagesize = sysconf (_SC_PAGESIZE);
+  void *buf = NULL;
+
+  if (posix_memalign (&buf, pagesize, size) != 0 || buf == NULL)
+    g_error ("%s: failed to allocate %" G_GSIZE_FORMAT " bytes "
+             "aligned to page size %" G_GSIZE_FORMAT ": %s",
+             G_STRFUNC, size, pagesize, g_strerror (errno));
+
+  return buf;
+}
+
 static gboolean
 gis_scribe_write_thread_copy (GisScribe     *self,
                               gint           fd,
@@ -518,8 +537,8 @@ gis_scribe_write_thread_copy (GisScribe     *self,
                               GCancellable  *cancellable,
                               GError       **error)
 {
-  g_autofree gchar *buffer = g_malloc0 (BUFFER_SIZE);
-  g_autofree gchar *first_mib = g_malloc0 (BUFFER_SIZE);
+  g_autofree gchar *buffer = gis_scribe_malloc_aligned (BUFFER_SIZE);
+  g_autofree gchar *first_mib = gis_scribe_malloc_aligned (BUFFER_SIZE);
   gsize first_mib_bytes_read = 0;
   gssize r = -1;
   gsize w = 0;
@@ -527,6 +546,7 @@ gis_scribe_write_thread_copy (GisScribe     *self,
   /* Read the first 1 MiB; write zeros to the target drive. This ensures the
    * system won't boot until the image is fully written.
    */
+  memset (first_mib, 0, BUFFER_SIZE);
   if (!g_output_stream_write_all (output, first_mib, BUFFER_SIZE,
                                   &w, cancellable, error)
       || !g_input_stream_read_all (self->decompressed, first_mib, BUFFER_SIZE,
@@ -1016,7 +1036,7 @@ gis_scribe_tee_thread (GTask            *task,
                        GisScribeTeeData *task_data,
                        GCancellable     *cancellable)
 {
-  g_autofree gchar *buffer = g_malloc0 (BUFFER_SIZE);
+  g_autofree gchar *buffer = gis_scribe_malloc_aligned (BUFFER_SIZE);
   GError *error = NULL;
   gssize r = -1;
 
