@@ -48,7 +48,6 @@ struct _GisInstallPagePrivate {
   guint pulse_id;
 
   GtkWidget *warning_dialog;
-  gboolean   writing;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
@@ -66,10 +65,6 @@ delete_event_cb (GtkWidget      *toplevel,
   GtkWidget *button;
   gboolean should_propagate;
   gint response_id;
-
-  /* If we're not writing, it's still safe to quit */
-  if (!priv->writing)
-    return GDK_EVENT_PROPAGATE;
 
   priv->warning_dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
                                                  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -234,14 +229,10 @@ gis_install_page_step_cb (GObject    *object,
                           gpointer    data)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (data);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   GisScribe *scribe = GIS_SCRIBE (object);
   guint step = gis_scribe_get_step (scribe);
 
   gis_install_page_update_step (install, step);
-
-  if (step == 2)
-    priv->writing = TRUE;
 }
 
 static void
