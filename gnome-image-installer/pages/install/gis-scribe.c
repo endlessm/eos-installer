@@ -108,6 +108,7 @@ typedef struct _GisScribe {
   gint drive_fd;
   guint64 bytes_written;
   guint set_indeterminate_progress_id;
+  gint64 start_time_usec;
 } GisScribe;
 
 /* Data for the subtask which reads the file from disk and feeds it to the
@@ -703,6 +704,20 @@ gis_scribe_convert_to_mbr (GisScribe *self,
 }
 
 static void
+gis_scribe_log_duration (GisScribe   *self,
+                         const gchar *label)
+{
+  gint64 now_usec = g_get_monotonic_time ();
+  gint64 duration = now_usec - self->start_time_usec;
+  gint64 hours = (duration / G_USEC_PER_SEC) / (60 * 60);
+  int minutes = ((duration / G_USEC_PER_SEC) / 60) % 60;
+  int seconds = (duration / G_USEC_PER_SEC) % 60;
+
+  g_message ("%s: %01" G_GINT64_FORMAT ":%02d:%02d",
+             label, hours, minutes, seconds);
+}
+
+static void
 gis_scribe_write_thread (GTask        *task,
                          gpointer      source_object,
                          gpointer      task_data,
@@ -762,6 +777,8 @@ gis_scribe_write_thread (GTask        *task,
       return;
     }
 
+  gis_scribe_log_duration (self, "image fully written");
+
   /* Sync, probe and repartition  can take a long time; notify the UI thread of
    * indeterminate progress.
    */
@@ -804,6 +821,8 @@ gis_scribe_write_thread (GTask        *task,
     g_task_return_error (task, error);
   else
     g_task_return_boolean (task, TRUE);
+
+  gis_scribe_log_duration (self, "write complete");
 }
 
 static void
@@ -1296,6 +1315,7 @@ gis_scribe_write_async (GisScribe          *self,
     }
 
   self->started = TRUE;
+  self->start_time_usec = g_get_monotonic_time ();
 
   /* Guard access to self->outstanding_tasks */
   g_mutex_lock (&self->mutex);
