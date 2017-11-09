@@ -406,6 +406,24 @@ gis_scribe_write_thread_copy (GisScribe     *self,
     }
   while (r > 0);
 
+  /* Check that we've written the same amount of data as we expected from the
+   * GPT header. This would only fail if there's something seriously wrong with
+   * the image builder, the decompressor, or the read/write loop above.
+   */
+  g_mutex_lock (&self->mutex);
+  /* Don't forget the first <= 1 MiB we saved for later! */
+  guint64 bytes_written = self->bytes_written + first_mib_bytes_read;
+  g_mutex_unlock (&self->mutex);
+
+  if (bytes_written != self->image_size)
+    {
+      g_set_error (error, GIS_INSTALL_ERROR, 0,
+                   "wrote %" G_GUINT64_FORMAT " bytes, "
+                   "expected to write %" G_GUINT64_FORMAT "bytes",
+                   bytes_written, self->image_size);
+      return FALSE;
+    }
+
   /* Now write the first 1 MiB to disk. Unfortunately GUnixOutputStream does
    * not implement GSeekable.
    */

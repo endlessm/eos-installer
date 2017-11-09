@@ -496,6 +496,31 @@ main (int argc, char *argv[])
               test_write_success,
               fixture_tear_down);
 
+  /* Valid signature for a truncated, uncompressed image. In the real
+   * application, this would mean that the length of the image according to its
+   * GPT does not match its actual uncompressed length, but the signature
+   * for the file is valid. This could only happen if there was a serious bug
+   * in the image builder -- but since it actually does resize the main
+   * partition part-way through creating it, it's not beyond the realms of
+   * possibility that a future implementation would resize the whole image file
+   * and be potentially broken.
+   *
+   * GisScribe relies on the application to tell it the uncompressed size, so
+   * we just give it an incorrect number.
+   */
+  TestData good_signature_truncated = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .uncompressed_size = IMAGE_SIZE_BYTES * 2,
+      .error_domain = GIS_INSTALL_ERROR,
+      /* TODO: .error_code */
+  };
+  g_test_add ("/scribe/good-signature-truncated", Fixture,
+              &good_signature_truncated,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
   /* Valid signature for a corrupt (specifically, truncated) gzipped image. By
    * having a valid signature we can be sure we're exercising the
    * "decompression error" path rather than the "signature invalid" path.
