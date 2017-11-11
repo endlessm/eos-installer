@@ -5,7 +5,9 @@
 # Translators:
 # Andika Triwidada <andika@gmail.com>, 2012-2015
 # Hartono <hartono.s10@gmail.com>, 2016
+# Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017
 # Roddy Shuler <roddy@endlessm.com>, 2016
+# Sendy Aditya Suryana <sendzation@gmail.com>, 2017
 # Septira Taruna <septira@endlessm.com>, 2017
 # Will Thompson <wjt@endlessm.com>, 2017
 msgid ""
@@ -13,8 +15,8 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-09-02 10:52-0700\n"
-"PO-Revision-Date: 2017-09-23 22:32+0000\n"
-"Last-Translator: Septira Taruna <septira@endlessm.com>\n"
+"PO-Revision-Date: 2017-11-09 04:48+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +67,7 @@ msgstr "Gagal mendaftar akun"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:790
 msgid "No supported way to authenticate with this domain"
-msgstr "Tidak ada cara yang didukung untuk mengotentikasi domain ini"
+msgstr "Tidak ada cara yang didukung untuk mengautentikasi domain ini"
 
 #: ../gnome-initial-setup/pages/account/gis-account-page.c:830
 msgid "Failed to join domain"
@@ -326,7 +328,7 @@ msgstr "Tambah Akun"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
 msgid "Mail"
-msgstr "E-mail"
+msgstr "Surel"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
 msgid "Contacts"
@@ -334,7 +336,7 @@ msgstr "Kontak"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
 msgid "Chat"
-msgstr "Chat"
+msgstr "Obrol"
 
 #: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
 msgid "Resources"
@@ -342,11 +344,11 @@ msgstr "Sumber Pengetahuan"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
 msgid "Error creating account"
-msgstr "Error saat membuat akun"
+msgstr "Galat saat membuat akun"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
 msgid "Error removing account"
-msgstr "Error saat menghapus akun"
+msgstr "Galat saat menghapus akun"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
 msgid "Are you sure you want to remove the account?"
@@ -362,17 +364,17 @@ msgstr "_Hapus"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
 msgid "Online Accounts"
-msgstr "Akun Online"
+msgstr "Akun Daring"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
 msgid "Connect to your existing data in the cloud"
-msgstr "Menyambung ke data Anda yang telah ada di cloud"
+msgstr "Menyambung ke data Anda yang telah ada di awan"
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
 msgid ""
 "Adding accounts will allow you to transparently connect to your online "
 "photos, contacts, mail, and more."
-msgstr "Menambah akun akan memperkenankan Anda tersambung secara transparan ke foto, kontak, surel, dan hal lainnya yang tersimpan secara online."
+msgstr "Menambah akun akan memperkenankan Anda tersambung secara transparan ke foto, kontak, surel, dan hal lainnya yang tersimpan secara daring."
 
 #: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
 msgid "_Add Account"
@@ -391,11 +393,11 @@ msgstr "Lebih banyak…"
 #. * did not yield any results
 #: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
 msgid "No inputs found"
-msgstr "Input tidak ditemukan"
+msgstr "Masukan tidak ditemukan"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
 msgid "Your keyboard layout seems to be:"
-msgstr "Tata letak keyboard Anda seperti:"
+msgstr "Tata letak papan tik Anda seperti:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
@@ -404,7 +406,7 @@ msgstr "Mohon tekan salah satu tombol berikut:"
 
 #: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
 msgid "Is the following key present on your keyboard?"
-msgstr "Apakah tombol-tombol berikut ada pada keyboard Anda?"
+msgstr "Apakah tombol-tombol berikut ada pada papan tik Anda?"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
 msgid "Typing"
@@ -412,15 +414,15 @@ msgstr "Mengetik"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
 msgid "Select your keyboard layout"
-msgstr "Pilih tata letak keyboard"
+msgstr "Pilih tata letak papan tik"
 
 #: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
 msgid "Help detect my keyboard layout"
-msgstr "Deteksi tata letak keyboard saya"
+msgstr "Deteksi tata letak papan tik saya"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
 msgid "Detect Keyboard Layout..."
-msgstr "Mendeteksi Tata Letak Keyboard…"
+msgstr "Mendeteksi Tata Letak Papan Tik…"
 
 #: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
 msgid "Select"
@@ -465,7 +467,7 @@ msgstr "Matikan"
 msgid ""
 "This installer will help guide you through installing Endless OS on your "
 "computer"
-msgstr "Installer ini akan memandu Anda dalam proses pemasangan Endless OS di komputer ini"
+msgstr "Pemasang ini akan memandu Anda dalam proses pemasangan Endless OS di komputer ini"
 
 #: ../gnome-initial-setup/pages/location/gis-location-page.c:662
 msgid "Search for a location"
@@ -651,7 +653,7 @@ msgstr "Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS Installer"
-msgstr "Installer Endless OS"
+msgstr "Pemasang Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:248
 msgid "Endless OS (non-free)"
@@ -716,22 +718,22 @@ msgstr "Pilih disk yang ingin Anda format ulang dengan Endless OS"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr "Pilih Disk:"
+msgstr "Pilih Diska:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr "Saya setuju untuk menghapus <b>semua file dan aplikasi saya</b>"
+msgstr "Saya setuju untuk menghapus <b>semua berkas dan aplikasi saya</b>"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr "Sepertinya Anda memiliki beberapa partisi di disk ini (misalnya drive C: dan D:). Memformat ulang dengan Endless OS akan menghapus <b>semua partisi</b> pada disk terpilih. Klik di sini untuk mengkonfirmasi."
+msgstr "Sepertinya Anda memiliki beberapa partisi di diska ini (misalnya drive C: dan D:). Memformat ulang dengan Endless OS akan menghapus <b>semua partisi</b> pada diska terpilih. Klik di sini untuk mengkonfirmasi."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr "Disk yang tepat tidak ditemukan."
+msgstr "Diska yang tepat tidak ditemukan."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:125
 msgid "Reformatting Finished"
@@ -751,7 +753,7 @@ msgstr "Berhasil! Matikan komputer lalu keluarkan DVD ini. Ketika memulai ulang,
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr "Ups, ada masalah dengan file Endless OS Anda."
+msgstr "Ups, ada masalah dengan berkas Endless OS Anda."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid ""
@@ -759,11 +761,11 @@ msgid ""
 "href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
 " href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr "Mohon hubungi <a href=\"mailto:bantuan@endlessm.com\">bantuan@endlessm.com</a> atau bergabung dengan <a href=\"https://community.endlessos.com/\">Komunitas Endless</a>untuk menyelesaikan kendala yang dihadapi."
+msgstr "Mohon hubungi <a href=\"mailto:support@endlessm.com\">bantuan@endlessm.com</a> atau bergabung dengan <a href=\"https://community.endlessos.com/\">Komunitas Endless</a>untuk menyelesaikan kendala yang dihadapi."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
-msgstr "Berhenti memformat disk?"
+msgstr "Berhenti memformat diska?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:97
 msgid ""
@@ -801,12 +803,12 @@ msgstr "Langkah %d dari %d"
 #: ../gnome-image-installer/pages/install/gis-install-page.c:560
 #, c-format
 msgid "Image verification error."
-msgstr "Kesalahan pada verifikasi file image."
+msgstr "Kesalahan pada verifikasi berkas image."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:632
 #, c-format
 msgid "The Endless OS signature file \"%s\" does not exist."
-msgstr "File signature Endless OS \"%s\" tidak ditemukan."
+msgstr "Berkas signature Endless OS \"%s\" tidak ditemukan."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:714
 msgid "Reformatting"

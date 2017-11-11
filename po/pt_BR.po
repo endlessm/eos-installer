@@ -763,7 +763,7 @@ msgid ""
 "href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
 " href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr "Para solucionar dúvidas, mande uma mensagem para <a href=\"mailto:ajuda@endlessm.com\">ajuda@endlessm.com</a>ou acesse a  <a href=\"https://community.endlessos.com/\">Comunidade Endless</a>."
+msgstr "Para solucionar dúvidas, mande uma mensagem para <a href=\"mailto:support@endlessm.com\">ajuda@endlessm.com</a>ou acesse a  <a href=\"https://community.endlessos.com/\">Comunidade Endless</a>."
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:94
 msgid "Stop reformatting the disk?"
