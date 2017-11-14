@@ -856,8 +856,9 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
   GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
   g_autofree gchar *line = NULL;
   g_auto(GStrv) arr = NULL;
-  gdouble curr, full;
+  guint64 curr, full;
   gchar *units = NULL;
+  g_autoptr(GError) error = NULL;
 
   line = g_data_input_stream_read_line_utf8 (task_data->stdout_, NULL,
                                              g_task_get_cancellable (task),
@@ -888,8 +889,13 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
       return G_SOURCE_CONTINUE;
     }
 
-  curr = g_ascii_strtod (arr[4], NULL);
-  full = g_ascii_strtod (arr[5], NULL);
+  if (!g_ascii_string_to_unsigned (arr[4], 10, 0, G_MAXUINT64, &curr, &error) ||
+      !g_ascii_string_to_unsigned (arr[5], 10, 0, G_MAXUINT64, &full, &error))
+    {
+      g_warning ("%s: couldn't parse GPG progress message '%s': %s",
+                 G_STRFUNC, line, error->message);
+      return G_SOURCE_CONTINUE;
+    }
   units = arr[6];
 
   if (full < 1024 && g_strcmp0 (units, "B") == 0)
@@ -909,7 +915,7 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
     }
   else
     {
-      self->gpg_progress = CLAMP (curr / full, 0, 1);
+      self->gpg_progress = CLAMP ((gdouble) curr / (gdouble) full, 0, 1);
     }
 
   return G_SOURCE_CONTINUE;
