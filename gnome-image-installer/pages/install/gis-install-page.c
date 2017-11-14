@@ -345,9 +345,18 @@ gis_install_page_prepare_write (GisPage *page)
 
   if (block == NULL)
     {
-      g_autoptr(GError) error = g_error_new (GIS_INSTALL_ERROR, 0,
-                                             _("Internal error"));
-      g_warning ("gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");
+      /* This path should not be reached: by this point, we should either have
+       * an error (in which case this function is not called) or we should know
+       * the target device (in which case block != NULL). To avoid translators
+       * translating a technical message which should never be shown, we only
+       * mark "Internal error" for translation.
+       */
+      g_autoptr(GError) error =
+        g_error_new (GIS_INSTALL_ERROR, 0,
+                     "%s: %s",
+                     _("Internal error"),
+                     "gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");
+      g_critical ("%s", error->message);
       gis_store_set_error (error);
       gis_install_page_teardown (GIS_PAGE (page));
     }

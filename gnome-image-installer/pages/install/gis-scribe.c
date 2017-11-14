@@ -781,9 +781,14 @@ gis_scribe_write_thread (GTask        *task,
 
       if (error == NULL)
         {
-          g_warning ("gis_scribe_write_thread_copy failed with no error");
+          /* This path should not be reached. To avoid translators
+           * translating a technical message which should never be shown, we only
+           * mark "Internal error" for translation.
+           */
           g_set_error (&error, G_IO_ERROR, G_IO_ERROR_FAILED,
-                       _("Internal error"));
+                       "%s: %s", _("Internal error"),
+                       "gis_scribe_write_thread_copy failed with no error");
+          g_critical ("%s", error->message);
         }
 
       g_task_return_error (task, g_steal_pointer (&error));
@@ -1200,10 +1205,16 @@ gis_scribe_begin_decompress (GisScribe          *self,
   basename = g_file_get_basename (self->image);
   if (basename == NULL)
     {
-      g_critical ("g_file_get_basename returned NULL");
-      g_task_return_new_error (task,
-                               GIS_INSTALL_ERROR, 0,
-                               _("Internal error"));
+      /* This path should not be reached since g_file_get_basename() cannot
+       * return NULL for local files. To avoid translators translating a
+       * technical message which should never be shown, we only mark "Internal
+       * error" for translation.
+       */
+      g_set_error (&error, GIS_INSTALL_ERROR, 0, "%s: %s",
+                   _("Internal error"),
+                   "g_file_get_basename returned NULL");
+      g_critical ("%s", error->message);
+      g_task_return_error (task, g_steal_pointer (&error));
       return FALSE;
     }
 
