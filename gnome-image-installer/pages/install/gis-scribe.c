@@ -37,6 +37,14 @@
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
 #define BUFFER_SIZE (1 * 1024 * 1024)
+/* MBR + two copies of (GPT header plus at least 32 512-byte sectors of
+ * partition entries)
+ */
+#define MINIMUM_IMAGE_SIZE ((1 + 33 * 2) * 512)
+/* You could imagine a compression format which compresses a degenerate GPT
+ * disk image to one byte.
+ */
+#define MINIMUM_COMPRESSED_SIZE 1
 
 typedef enum {
   GIS_SCRIBE_TASK_TEE        = 1 << 0,
@@ -346,14 +354,14 @@ gis_scribe_class_init (GisScribeClass *klass)
       "image-size",
       "Image Size",
       "Uncompressed size of :image, in bytes.",
-      0, G_MAXUINT64, 0,
+      MINIMUM_IMAGE_SIZE, G_MAXUINT64, MINIMUM_IMAGE_SIZE,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_COMPRESSED_SIZE] = g_param_spec_uint64 (
       "compressed-size",
       "Compressed Size",
       "Compressed size of :image, in bytes.",
-      0, G_MAXUINT64, 0,
+      MINIMUM_COMPRESSED_SIZE, G_MAXUINT64, MINIMUM_COMPRESSED_SIZE,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_SIGNATURE] = g_param_spec_object (
@@ -438,8 +446,8 @@ gis_scribe_new (GFile       *image,
                 gboolean     convert_to_mbr)
 {
   g_return_val_if_fail (G_IS_FILE (image), NULL);
-  g_return_val_if_fail (image_size_bytes > 0, NULL);
-  g_return_val_if_fail (compressed_size_bytes > 0, NULL);
+  g_return_val_if_fail (image_size_bytes > MINIMUM_IMAGE_SIZE, NULL);
+  g_return_val_if_fail (compressed_size_bytes > MINIMUM_COMPRESSED_SIZE, NULL);
   g_return_val_if_fail (G_IS_FILE (signature), NULL);
   g_return_val_if_fail (drive_path != NULL, NULL);
   g_return_val_if_fail (drive_fd >= 0, NULL);
