@@ -408,6 +408,11 @@ gis_scribe_class_init (GisScribeClass *klass)
       FALSE,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+  /**
+   * GisScribe:step:
+   *
+   * Current step, indexed from 1.
+   */
   props[PROP_STEP] = g_param_spec_uint (
       "step",
       "Step",
@@ -415,6 +420,14 @@ gis_scribe_class_init (GisScribeClass *klass)
       1, 2, 1,
       G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
+  /**
+   * GisScribe:progress:
+   *
+   * Progress in the current GisScribe:step, between 0 and 1 inclusive, or -1
+   * if exact progress can't be determined. Within a given step, this property
+   * is either a constant -1, or increases linearly with progress. It's not
+   * guaranteed to reach 1 before the step completes.
+   */
   props[PROP_PROGRESS] = g_param_spec_double (
       "progress",
       "Progress",
@@ -1311,6 +1324,14 @@ gis_scribe_setpipe_sz (const gchar          *what,
                what, BUFFER_SIZE, g_strerror (errno));
 }
 
+/**
+ * gis_scribe_write_async:
+ *
+ * Begins writing #GisScribe:image to #GisScribe:drive-fd. This may be called
+ * at most once on any given #GisScribe object. Once called, the target drive's
+ * contents should be considered lost, even if @cancellable is subsequently
+ * triggered.
+ */
 void
 gis_scribe_write_async (GisScribe          *self,
                         GCancellable       *cancellable,
@@ -1374,6 +1395,11 @@ out:
   g_mutex_unlock (&self->mutex);
 }
 
+/**
+ * gis_scribe_write_finish:
+ *
+ * Completes a call to gis_scribe_write_async().
+ */
 gboolean
 gis_scribe_write_finish (GisScribe    *self,
                          GAsyncResult *result,
@@ -1384,6 +1410,11 @@ gis_scribe_write_finish (GisScribe    *self,
   return g_task_propagate_boolean (task, error);
 }
 
+/**
+ * gis_scribe_get_step:
+ *
+ * Returns: the #GisScribe:step property.
+ */
 guint
 gis_scribe_get_step (GisScribe *self)
 {
@@ -1392,6 +1423,11 @@ gis_scribe_get_step (GisScribe *self)
   return self->step;
 }
 
+/**
+ * gis_scribe_get_progress:
+ *
+ * Returns: the #GisScribe:progress property.
+ */
 gdouble
 gis_scribe_get_progress (GisScribe *self)
 {
