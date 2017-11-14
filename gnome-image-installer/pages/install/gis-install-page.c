@@ -281,8 +281,8 @@ gis_install_page_open_for_restore_cb (GObject      *source,
   const gchar *signature_path = NULL;
   g_autoptr(GFile) signature = NULL;
   g_autoptr(GisScribe) scribe = NULL;
-  guint64 uncompressed_size = gis_store_get_required_size ();
-  guint64 compressed_size = gis_store_get_image_size ();
+  guint64 uncompressed_size_bytes = gis_store_get_required_size ();
+  guint64 compressed_size_bytes = gis_store_get_image_size ();
 
   if (!udisks_block_call_open_for_restore_finish (block, &fd_index, &fd_list,
                                                   result, &error))
@@ -310,11 +310,11 @@ gis_install_page_open_for_restore_cb (GObject      *source,
    * anywhere else seemed equally clumsy.
    */
   if (g_str_has_suffix (signature_path, ".img.asc"))
-    compressed_size = uncompressed_size;
+    compressed_size_bytes = uncompressed_size_bytes;
 
   scribe = gis_scribe_new (image,
-                           uncompressed_size,
-                           compressed_size,
+                           uncompressed_size_bytes,
+                           compressed_size_bytes,
                            signature,
                            udisks_block_get_device (block),
                            fd,
