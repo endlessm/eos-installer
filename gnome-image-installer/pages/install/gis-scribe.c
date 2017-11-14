@@ -544,7 +544,7 @@ static gboolean
 gis_scribe_write_thread_await_gpg (GisScribe *self,
                                    GError   **error)
 {
-  GError *local_error = NULL;
+  g_autoptr(GError) local_error = NULL;
 
   g_mutex_lock (&self->mutex);
   /* Wait until all other tasks have ended */
@@ -564,7 +564,7 @@ gis_scribe_write_thread_await_gpg (GisScribe *self,
   /* This error will already have been reported by whichever task failed, but
    * we have to throw *some* error from this task.
    */
-  g_propagate_error (error, local_error);
+  g_propagate_error (error, g_steal_pointer (&local_error));
   return FALSE;
 }
 
@@ -736,7 +736,7 @@ gis_scribe_write_thread (GTask        *task,
   gint fd = -1;
   g_autoptr(GOutputStream) output = NULL;
   gboolean ret;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   guint timer_id;
 
   /* Transfer ownership of drive_fd; the GOutputStream will close it. */
@@ -773,7 +773,7 @@ gis_scribe_write_thread (GTask        *task,
                        _("Internal error"));
         }
 
-      g_task_return_error (task, error);
+      g_task_return_error (task, g_steal_pointer (&error));
 
       /* On the happy path, gis_scribe_write_thread_copy() closes the
        * decompressed stream when it reaches EOF. If we hit a write error
@@ -802,13 +802,13 @@ gis_scribe_write_thread (GTask        *task,
   if (syncfs (fd) < 0)
     {
       glnx_throw_errno_prefix (&error, "syncfs failed");
-      g_task_return_error (task, error);
+      g_task_return_error (task, g_steal_pointer (&error));
       return;
     }
 
   if (!g_output_stream_close (output, cancellable, &error))
     {
-      g_task_return_error (task, error);
+      g_task_return_error (task, g_steal_pointer (&error));
       return;
     }
 
@@ -826,7 +826,7 @@ gis_scribe_write_thread (GTask        *task,
   g_mutex_unlock (&self->mutex);
 
   if (error != NULL)
-    g_task_return_error (task, error);
+    g_task_return_error (task, g_steal_pointer (&error));
   else
     g_task_return_boolean (task, TRUE);
 
@@ -1061,7 +1061,7 @@ gis_scribe_tee_thread (GTask            *task,
                        GCancellable     *cancellable)
 {
   g_autofree gchar *buffer = gis_scribe_malloc_aligned (BUFFER_SIZE);
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   gssize r = -1;
 
   do
@@ -1180,7 +1180,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
   const gchar *args[] = { NULL, "-cd", NULL };
   g_autoptr(GSubprocessLauncher) launcher = NULL;
   GSubprocess *subprocess = NULL;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_DECOMPRESS));
 
@@ -1210,7 +1210,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
 
       if (!g_unix_open_pipe (pipefd, FD_CLOEXEC, &error))
         {
-          g_task_return_error (task, error);
+          g_task_return_error (task, g_steal_pointer (&error));
           return FALSE;
         }
 
@@ -1232,7 +1232,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
   subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
   if (subprocess == NULL)
     {
-      g_task_return_error (task, error);
+      g_task_return_error (task, g_steal_pointer (&error));
       return FALSE;
     }
 
