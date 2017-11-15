@@ -9,7 +9,7 @@
       <!-- column-name image_size -->
       <column type="gchararray"/>
       <!-- column-name image_size_bytes -->
-      <column type="gint64"/>
+      <column type="guint64"/>
       <!-- column-name image_file -->
       <column type="gchararray"/>
       <!-- column-name image_signature -->

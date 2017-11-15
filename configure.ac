@@ -1,9 +1,12 @@
 AC_INIT([eos-installer],[3.10.1.1])
-AC_CONFIG_MACRO_DIR([m4])
+
+AC_CONFIG_AUX_DIR([build-aux])
+AC_CONFIG_MACRO_DIRS([m4 buildutil ext/libglnx])
 
 AX_IS_RELEASE([git-directory])
+AC_REQUIRE_AUX_FILE([tap-driver.sh])
 
-AM_INIT_AUTOMAKE([dist-xz no-dist-gzip foreign tar-ustar])
+AM_INIT_AUTOMAKE([1.13 dist-xz no-dist-gzip foreign tar-ustar subdir-objects])
 AM_SILENT_RULES([yes])
 
 AC_USE_SYSTEM_EXTENSIONS
@@ -53,6 +56,8 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   evince-view-3.0
                   evince-document-3.0
                   webkit2gtk-4.0)
+
+PKG_CHECK_MODULES([LIBGLNX], [gio-unix-2.0 >= $GLIB_REQUIRED_VERSION])
 
 PKG_CHECK_MODULES(COPY_WORKER, gio-2.0 gnome-keyring-1)
 
@@ -131,6 +136,9 @@ if test "x$with_systemdsystemunitdir" != "xno"; then
     AC_SUBST([systemdsystemunitdir], [$with_systemdsystemunitdir])
 fi
 
+GLIB_TESTS
+LIBGLNX_CONFIGURE
+
 AC_SUBST(INITIAL_SETUP_CFLAGS)
 AC_SUBST(INITIAL_SETUP_LIBS)
 
@@ -151,6 +159,7 @@ AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 Makefile
+ext/Makefile
 gnome-initial-setup/Makefile
 gnome-initial-setup/pages/Makefile
 gnome-initial-setup/pages/language/Makefile
@@ -173,5 +182,6 @@ gnome-image-installer/pages/install/Makefile
 po/Makefile.in
 data/Makefile
 eos-installer-data/Makefile
+tests/Makefile
 ])
 AC_OUTPUT

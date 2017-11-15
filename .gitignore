@@ -10,6 +10,8 @@ Makefile
 Makefile.in
 aclocal.m4
 autom4te.cache
+/build-aux
+compile
 config.h
 config.h.in
 config.log
@@ -37,6 +39,13 @@ po/POTFILES
 po/Rules-quot
 po/stamp-it
 stamp-h1
+test-driver
+test-*.log
+test-*.trs
+tests/test-scribe
+tests/w-8193.img*
+tests/w.img*
+tests/w.truncated*
 *~
 
 eos-installer-data/eos-installer.desktop
@@ -44,6 +53,12 @@ eos-installer-data/eos-installer.desktop
 eos-installer-*.tar.gz
 eos-installer-*.tar.bz2
 eos-installer-*.tar.xz
+
+ext/test-libglnx-errors
+ext/test-libglnx-fdio
+ext/test-libglnx-macros
+ext/test-libglnx-shutil
+ext/test-libglnx-xattrs
 
 gnome-image-installer/gnome-image-installer
 

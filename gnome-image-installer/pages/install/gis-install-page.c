@@ -29,6 +29,7 @@
 #include "config.h"
 #include "install-resources.h"
 #include "gis-install-page.h"
+#include "gis-scribe.h"
 #include "gis-store.h"
 
 #include <udisks/udisks.h>
@@ -42,36 +43,18 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-#include "gduxzdecompressor.h"
-
 struct _GisInstallPagePrivate {
-  GMutex copy_mutex;
-  GFile *image;
-  GObject *decompressor;
-  GInputStream *decompressed;
-  gint64 decompressed_size;
-  gint drive_fd;
-  gint64 bytes_written;
-  GThread *copythread;
-  GPid gpg;
-  GIOChannel *gpgout;
-  guint gpg_watch;
   UDisksClient *client;
   guint pulse_id;
 
   GtkWidget *warning_dialog;
-  gboolean   writing;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisInstallPage, gis_install_page, GIS_TYPE_PAGE);
 
-G_DEFINE_QUARK(install-error, gis_install_error);
-
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
-
-#define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
 
 static gboolean
 delete_event_cb (GtkWidget      *toplevel,
@@ -82,10 +65,6 @@ delete_event_cb (GtkWidget      *toplevel,
   GtkWidget *button;
   gboolean should_propagate;
   gint response_id;
-
-  /* If we're not writing, it's still safe to quit */
-  if (!priv->writing)
-    return GDK_EVENT_PROPAGATE;
 
   priv->warning_dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
                                                  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -125,123 +104,6 @@ delete_event_cb (GtkWidget      *toplevel,
   return should_propagate;
 }
 
-static gboolean
-gis_install_page_prepare_read (GisPage *page, GError **error)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GInputStream *input;
-  gchar *basename = NULL;
-  GError *e = NULL;
-
-  priv->decompressed_size = gis_store_get_required_size();
-  priv->image = G_FILE(gis_store_get_object(GIS_STORE_IMAGE));
-  g_object_ref (priv->image);
-  basename = g_file_get_basename(priv->image);
-  if (basename == NULL)
-    {
-      gchar *parse_name = g_file_get_parse_name(priv->image);
-      g_warning ("g_file_get_basename(\"%s\") returned NULL", parse_name);
-      g_free (parse_name);
-      *error = g_error_new (GIS_INSTALL_ERROR, 0, _("Internal error"));
-      g_return_val_if_reached (FALSE);
-    }
-
-  /* TODO: use more magical means */
-  if (g_str_has_suffix (basename, "gz"))
-    {
-      priv->decompressor = G_OBJECT (g_zlib_decompressor_new (G_ZLIB_COMPRESSOR_FORMAT_GZIP));
-    }
-  else if (g_str_has_suffix (basename, "xz"))
-    {
-      priv->decompressor = G_OBJECT (gdu_xz_decompressor_new ());
-    }
-  else if (g_str_has_suffix (basename, "img") || g_strcmp0 (basename, "endless-image") == 0)
-    {
-      priv->decompressor = NULL;
-    }
-  else
-    {
-      g_warning ("%s ends in neither '.xz', '.gz' nor '.img'", basename);
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
-      g_free (basename);
-      g_return_val_if_reached (FALSE);
-    }
-  g_free (basename);
-
-  input = (GInputStream *) g_file_read (priv->image, NULL, &e);
-  if (e != NULL)
-    {
-      g_propagate_error (error, e);
-      return FALSE;
-    }
-
-  if (priv->decompressor)
-    {
-      priv->decompressed = g_converter_input_stream_new (G_INPUT_STREAM (input),
-                                                         G_CONVERTER (priv->decompressor));
-      g_object_unref (input);
-    }
-  else
-    {
-      priv->decompressed = input;
-    }
-
-  return TRUE;
-}
-
-static gboolean
-gis_install_page_prepare_write (GisPage *page, GError **error)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GError *e = NULL;
-  GUnixFDList *fd_list = NULL;
-  GVariant *fd_index = NULL;
-  gint fd = -1;
-  UDisksBlock *block = UDISKS_BLOCK(gis_store_get_object(GIS_STORE_BLOCK_DEVICE));
-
-  if (block == NULL)
-    {
-      g_warning ("gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");
-      *error = g_error_new(GIS_INSTALL_ERROR, 0, _("Internal error"));
-      g_return_val_if_reached (FALSE);
-    }
-
-  if (!udisks_block_call_open_for_restore_sync (block,
-                                                g_variant_new ("a{sv}", NULL), /* options */
-                                                NULL, /* fd_list */
-                                                &fd_index,
-                                                &fd_list,
-                                                NULL, /* cancellable */
-                                                &e))
-    {
-      g_propagate_error (error, e);
-      return FALSE;
-    }
-
-  fd = g_unix_fd_list_get (fd_list, g_variant_get_handle (fd_index), &e);
-  if (fd < 0)
-    {
-      g_prefix_error (&e,
-                      "Error extracting fd with handle %d from D-Bus message: ",
-                      g_variant_get_handle (fd_index));
-      g_propagate_error (error, e);
-      return FALSE;
-    }
-
-  if (fd_index != NULL)
-    g_variant_unref (fd_index);
-
-  g_clear_object (&fd_list);
-
-  g_mutex_lock (&priv->copy_mutex);
-  priv->drive_fd = fd;
-  g_mutex_unlock (&priv->copy_mutex);
-
-  return TRUE;
-}
-
 static void
 gis_install_page_unmount_image_partition (GisPage *page)
 {
@@ -274,23 +136,16 @@ gis_install_page_unmount_image_partition (GisPage *page)
 }
 
 static void
-gis_install_page_close_drive (GisPage *page)
+gis_install_page_stop_pulsing (GisInstallPage *page)
 {
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
+  GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
 
-  g_mutex_lock (&priv->copy_mutex);
-
-  if (priv->drive_fd)
+  if (priv->pulse_id)
     {
-      syncfs (priv->drive_fd);
-      close (priv->drive_fd);
-      g_spawn_command_line_sync ("partprobe", NULL, NULL, NULL, NULL);
+      gtk_widget_remove_tick_callback ((GtkWidget *) progress, priv->pulse_id);
+      priv->pulse_id = 0;
     }
-
-  priv->drive_fd = -1;
-
-  g_mutex_unlock (&priv->copy_mutex);
 }
 
 static gboolean
@@ -300,31 +155,7 @@ gis_install_page_teardown (GisPage *page)
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
   GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
 
-  g_mutex_lock (&priv->copy_mutex);
-
-  if (priv->image != NULL)
-    g_object_unref (priv->image);
-  priv->image = NULL;
-
-  if (priv->decompressor != NULL)
-    g_object_unref (priv->decompressor);
-  priv->decompressor = NULL;
-
-  if (priv->decompressed != NULL)
-    g_object_unref (priv->decompressed);
-  priv->decompressed = NULL;
-
-  priv->bytes_written = 0;
-
-  if (priv->pulse_id)
-    {
-      gtk_widget_remove_tick_callback ((GtkWidget *) progress, priv->pulse_id);
-      priv->pulse_id = 0;
-    }
-
-  g_mutex_unlock (&priv->copy_mutex);
-
-  gis_install_page_close_drive (page);
+  gis_install_page_stop_pulsing (install);
 
   gis_install_page_unmount_image_partition (page);
 
@@ -351,27 +182,27 @@ gis_install_page_teardown (GisPage *page)
 }
 
 static gboolean
-gis_install_page_update_progress(GisPage *page)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
-
-  g_mutex_lock (&priv->copy_mutex);
-
-  gtk_progress_bar_set_fraction (bar, (gdouble)priv->bytes_written/(gdouble)priv->decompressed_size);
-
-  g_mutex_unlock (&priv->copy_mutex);
-
-  return TRUE;
-}
-
-static gboolean
 gis_install_page_pulse_progress (GtkProgressBar *bar)
 {
   gtk_progress_bar_pulse (bar);
 
   return TRUE;
+}
+
+static void
+gis_install_page_ensure_pulsing (GisInstallPage *page,
+                                 GtkProgressBar *progress)
+{
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
+
+  if (priv->pulse_id == 0)
+    {
+      gtk_progress_bar_set_pulse_step (progress, 1. / 60.);
+      priv->pulse_id = gtk_widget_add_tick_callback (
+          GTK_WIDGET (progress),
+          (GtkTickCallback) gis_install_page_pulse_progress,
+          NULL, NULL);
+    }
 }
 
 static gboolean
@@ -380,293 +211,164 @@ gis_install_page_is_efi_system (GisPage *page)
   return g_file_test ("/sys/firmware/efi", G_FILE_TEST_IS_DIR);
 }
 
-static gboolean
-gis_install_page_convert_to_mbr (GisPage *page, GError **error)
+static void
+gis_install_page_update_step (GisInstallPage *page,
+                              guint           step)
 {
-  UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
-  static const char *cmd = "/usr/sbin/eos-repartition-mbr";
-  g_autoptr(GSubprocessLauncher) launcher = NULL;
-  g_autoptr(GSubprocess) process = NULL;
-  g_autofree gchar *rootdev = NULL;
-  gint ret = 0;
-  GError *err = NULL;
+  g_assert (step <= 2);
+
+  g_autofree gchar *msg = g_strdup_printf (_("Step %d of %d"), step, 2);
+
+  gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
+}
+
+
+static void
+gis_install_page_step_cb (GObject    *object,
+                          GParamSpec *pspec,
+                          gpointer    data)
+{
+  GisInstallPage *install = GIS_INSTALL_PAGE (data);
+  GisScribe *scribe = GIS_SCRIBE (object);
+  guint step = gis_scribe_get_step (scribe);
+
+  gis_install_page_update_step (install, step);
+}
+
+static void
+gis_install_page_progress_cb (GObject    *object,
+                              GParamSpec *pspec,
+                              gpointer    data)
+{
+  GisPage *page = GIS_PAGE (data);
+  GisScribe *scribe = GIS_SCRIBE (object);
+  gdouble progress = gis_scribe_get_progress (scribe);
+  GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
+
+  if (progress < 0)
+    gis_install_page_ensure_pulsing (GIS_INSTALL_PAGE (page), bar);
+  else
+    gtk_progress_bar_set_fraction (bar, progress);
+}
+
+static void
+gis_install_page_write_cb (GObject      *source,
+                           GAsyncResult *result,
+                           gpointer      data)
+{
+  GisPage *page = GIS_PAGE (data);
+  GisScribe *scribe = GIS_SCRIBE (source);
+  g_autoptr(GError) error = NULL;
+
+  if (!gis_scribe_write_finish (scribe, result, &error))
+    gis_store_set_error (error);
+
+  gis_install_page_teardown (page);
+}
+
+static void
+gis_install_page_open_for_restore_cb (GObject      *source,
+                                      GAsyncResult *result,
+                                      gpointer      data)
+{
+  GisPage *page = GIS_PAGE (data);
+  UDisksBlock *block = UDISKS_BLOCK (source);
+  g_autoptr(GUnixFDList) fd_list = NULL;
+  g_autoptr(GVariant) fd_index = NULL;
+  gint fd = -1;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GFile) image = NULL;
+  const gchar *signature_path = NULL;
+  g_autoptr(GFile) signature = NULL;
+  g_autoptr(GisScribe) scribe = NULL;
+  guint64 uncompressed_size_bytes = gis_store_get_required_size ();
+  guint64 compressed_size_bytes = gis_store_get_image_size ();
+
+  if (!udisks_block_call_open_for_restore_finish (block, &fd_index, &fd_list,
+                                                  result, &error))
+    {
+      goto error;
+    }
+
+  fd = g_unix_fd_list_get (fd_list, g_variant_get_handle (fd_index), &error);
+  if (fd < 0)
+    {
+      g_prefix_error (&error,
+                      "Error extracting fd with handle %d from D-Bus message: ",
+                      g_variant_get_handle (fd_index));
+      goto error;
+    }
+
+  image = g_object_ref (gis_store_get_object (GIS_STORE_IMAGE));
+  signature_path = gis_store_get_image_signature ();
+  signature = g_file_new_for_path (signature_path);
+
+  /* For squashfs images, gis_store_get_image_size() is the size of the
+   * squashfs image, but the file we read is the mapped uncompressed image from
+   * within it. So for the purposes of the scribe, the "compressed size" is the
+   * uncompressed size. It's a bit clumsy to put this special-case here, but
+   * anywhere else seemed equally clumsy.
+   */
+  if (g_str_has_suffix (signature_path, ".img.asc"))
+    compressed_size_bytes = uncompressed_size_bytes;
+
+  scribe = gis_scribe_new (image,
+                           uncompressed_size_bytes,
+                           compressed_size_bytes,
+                           signature,
+                           udisks_block_get_device (block),
+                           fd,
+                           !gis_install_page_is_efi_system (page));
+  g_signal_connect (scribe, "notify::step",
+                    (GCallback) gis_install_page_step_cb, page);
+  g_signal_connect (scribe, "notify::progress",
+                    (GCallback) gis_install_page_progress_cb, page);
+
+  gis_scribe_write_async (scribe,
+                          NULL,
+                          gis_install_page_write_cb,
+                          page);
+  return;
+
+error:
+  gis_store_set_error (error);
+  gis_install_page_teardown (page);
+}
+
+static void
+gis_install_page_prepare_write (GisPage *page)
+{
+  GisInstallPage *install = GIS_INSTALL_PAGE (page);
+  g_autoptr(GUnixFDList) fd_list = NULL;
+  g_autoptr(GVariant) fd_index = NULL;
+  UDisksBlock *block = UDISKS_BLOCK(gis_store_get_object(GIS_STORE_BLOCK_DEVICE));
 
   if (block == NULL)
     {
-      g_printerr ("reached convert_to_mbr without a block device!\n");
-      g_set_error (error, GIS_INSTALL_ERROR, 0, _("Internal error"));
-      return FALSE;
-    }
-
-  rootdev = g_strdup (udisks_block_get_device (block));
-  g_print("launching %s %s via pkexec\n", cmd, rootdev);
-
-  launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_NONE);
-  /* pkexec won't let us run the program if $SHELL isn't in /etc/shells,
-   * so remove it from the environment.
-   */
-  g_subprocess_launcher_unsetenv (launcher, "SHELL");
-  process = g_subprocess_launcher_spawn (launcher, &err,
-                                         "pkexec", cmd, rootdev, NULL);
-  if (process == NULL ||
-      !g_subprocess_wait (process, NULL, &err))
-    {
-      g_printerr ("failed to run %s: %s\n", cmd, err->message);
-      g_propagate_error (error, err);
-      return FALSE;
-    }
-
-  ret = g_subprocess_get_exit_status (process);
-
-  if (ret != 0)
-    {
-      g_printerr ("%s returned %i\n", cmd, ret);
-      g_set_error (error, GIS_INSTALL_ERROR, 0, _("Internal error"));
-      return FALSE;
-    }
-
-  g_print ("%s succeeded\n", cmd);
-
-  return TRUE;
-}
-
-static gpointer
-gis_install_page_copy (GisPage *page)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GtkProgressBar *progress = OBJ (GtkProgressBar *, "install_progress");
-  GError *error = NULL;
-  gchar *buffer = NULL;
-  gssize buffer_size = 1 * 1024 * 1024;
-  gssize r, w = -1;
-  guint timer_id;
-
-  buffer = (gchar*) g_malloc0 (buffer_size);
-  priv->bytes_written = 0;
-  timer_id = g_timeout_add (1000, (GSourceFunc)gis_install_page_update_progress, page);
-
-  g_thread_yield();
-
-  priv->writing = TRUE;
-
-  do
-    {
-      r = g_input_stream_read (priv->decompressed,
-                               buffer, buffer_size,
-                               NULL, &error);
-
-      if (r > 0)
-        {
-          /* We lock to protect the bytes_written and access to drive_fd. */
-          g_mutex_lock (&priv->copy_mutex);
-
-          w = write (priv->drive_fd, buffer, r);
-          priv->bytes_written += w;
-
-          g_mutex_unlock (&priv->copy_mutex);
-        }
-    }
-  while (r > 0 && w > 0);
-
-  g_source_remove (timer_id);
-
-  if (r < 0 || error != NULL)
-    {
+      /* This path should not be reached: by this point, we should either have
+       * an error (in which case this function is not called) or we should know
+       * the target device (in which case block != NULL). To avoid translators
+       * translating a technical message which should never be shown, we only
+       * mark "Internal error" for translation.
+       */
+      g_autoptr(GError) error =
+        g_error_new (GIS_INSTALL_ERROR, 0,
+                     "%s: %s",
+                     _("Internal error"),
+                     "gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");
+      g_critical ("%s", error->message);
       gis_store_set_error (error);
-      g_error_free (error);
-      goto out;
+      gis_install_page_teardown (GIS_PAGE (page));
     }
-
-  /* set up a pulser and start the sync here, as it can be very slow *
-   * protect the pulse_id with the lock                              */
-  g_mutex_lock (&priv->copy_mutex);
-  gtk_progress_bar_set_pulse_step (progress, 1. / 60.);
-  priv->pulse_id = gtk_widget_add_tick_callback (
-      GTK_WIDGET (progress),
-      (GtkTickCallback) gis_install_page_pulse_progress,
-      NULL, NULL);
-  g_mutex_unlock (&priv->copy_mutex);
-
-  g_thread_yield();
-
-  gis_install_page_close_drive (page);
-
-  if (!gis_install_page_is_efi_system (page))
+  else
     {
-      g_print ("BIOS boot detected, converting system from GPT to MBR\n");
-
-      if (!gis_install_page_convert_to_mbr (page, &error))
-        {
-          gis_store_set_error (error);
-          g_error_free (error);
-        }
+      udisks_block_call_open_for_restore (block,
+                                          g_variant_new ("a{sv}", NULL), /* options */
+                                          NULL, /* fd_list */
+                                          NULL, /* cancellable */
+                                          gis_install_page_open_for_restore_cb,
+                                          install);
     }
-
-  priv->writing = FALSE;
-
-out:
-  g_idle_add ((GSourceFunc)gis_install_page_teardown, page);
-
-  return NULL;
-}
-
-
-static gboolean
-gis_install_page_prepare (GisPage *page)
-{
-  GError *error = NULL;
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  gchar *msg = g_strdup_printf (_("Step %d of %d"), 2, 2);
-  gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
-  g_free (msg);
-
-  g_mutex_init (&priv->copy_mutex);
-
-  g_source_remove (priv->gpg_watch);
-  g_io_channel_shutdown (priv->gpgout, TRUE, NULL);
-  g_io_channel_unref (priv->gpgout);
-  priv->gpgout = NULL;
-
-  if (!gis_install_page_prepare_read (page, &error))
-    {
-      gis_store_set_error (error);
-      g_error_free (error);
-      gis_install_page_teardown(page);
-      return FALSE;
-    }
-
-  if (!gis_install_page_prepare_write (page, &error))
-    {
-      gis_store_set_error (error);
-      g_error_free (error);
-      gis_install_page_teardown(page);
-      return FALSE;
-    }
-
-  priv->copythread = g_thread_new ("image-copy-thread",
-                                   (GThreadFunc)gis_install_page_copy, page);
-
-  return FALSE;
-}
-
-static void
-gis_install_page_verify_failed (GisPage *page,
-                                GError  *error)
-{
-  if (error == NULL)
-    {
-      error = g_error_new (GIS_INSTALL_ERROR, 0, _("Image verification error."));
-    }
-
-  gis_store_set_error (error);
-  g_error_free (error);
-  gis_install_page_teardown(page);
-}
-
-static void
-gis_install_page_gpg_watch (GPid pid, gint status, GisPage *page)
-{
-  if (!g_spawn_check_exit_status (status, NULL))
-    {
-      gis_install_page_verify_failed (page, NULL);
-      return;
-    }
-
-  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
-  g_spawn_close_pid (pid);
-  g_idle_add ((GSourceFunc)gis_install_page_prepare, page);
-}
-
-static gboolean
-gis_install_page_gpg_progress (GIOChannel *source, GIOCondition cond, GisPage *page)
-{
-  g_autofree gchar *line = NULL;
-
-  if (g_io_channel_read_line (source, &line, NULL, NULL, NULL) == G_IO_STATUS_NORMAL)
-  {
-    if (g_str_has_prefix (line, "[GNUPG:] PROGRESS"))
-      {
-        /* https://git.gnupg.org/cgi-bin/gitweb.cgi?p=gnupg.git;a=blob;f=doc/DETAILS;h=0be55f4d;hb=refs/heads/master#l1043
-         * [GNUPG:] PROGRESS <what> <char> <cur> <total> [<units>]
-         * For example:
-         * [GNUPG:] PROGRESS /dev/mapper/endless- ? 676 4442 MiB
-         */
-        GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
-        g_auto(GStrv) arr = g_strsplit (line, " ", -1);
-        gdouble curr = g_ascii_strtod (arr[4], NULL);
-        gdouble full = g_ascii_strtod (arr[5], NULL);
-
-        if (full == 0)
-          {
-            /* gpg can't determine the file size. Should not happen, since we
-             * gave it a hint.
-             */
-            gtk_progress_bar_pulse (bar);
-          }
-        else
-          {
-            gdouble frac = curr/full;
-            gtk_progress_bar_set_fraction (bar, frac);
-          }
-      }
-  }
-
-  return TRUE;
-}
-
-static gboolean
-gis_install_page_verify (GisPage *page)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GFile *image = G_FILE(gis_store_get_object (GIS_STORE_IMAGE));
-  gchar *image_path = g_file_get_path (image);
-  const gchar *signature_path = gis_store_get_image_signature ();
-  GFile *signature = g_file_new_for_path (signature_path);
-  gint outfd;
-  guint64 size = gis_store_get_required_size ();
-  g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT, size);
-  const gchar * const args[] = { "gpg",
-                    "--enable-progress-filter", "--status-fd", "1",
-                    /* Trust the one key in this keyring, and no others */
-                    "--keyring", IMAGE_KEYRING,
-                    "--no-default-keyring",
-                    "--trust-model", "always",
-                    "--input-size-hint", size_str,
-                    "--verify", signature_path, image_path, NULL };
-  GError *error = NULL;
-
-  if (!g_file_query_exists (signature, NULL))
-    {
-      error = g_error_new (GIS_INSTALL_ERROR, 0,
-          _("The Endless OS signature file \"%s\" does not exist."),
-          signature_path);
-      gis_install_page_verify_failed (page, error);
-      goto out;
-    }
-
-  if (!g_spawn_async_with_pipes (NULL, (gchar **) args, NULL,
-                                 G_SPAWN_SEARCH_PATH | G_SPAWN_DO_NOT_REAP_CHILD,
-                                 NULL, NULL, &priv->gpg,
-                                 NULL, &outfd, NULL, &error))
-    {
-      gis_install_page_verify_failed (page, error);
-      goto out;
-    }
-
-  priv->gpgout = g_io_channel_unix_new (outfd);
-  priv->gpg_watch = g_io_add_watch (priv->gpgout, G_IO_IN, (GIOFunc)gis_install_page_gpg_progress, page);
-
-  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
-
-  g_child_watch_add (priv->gpg, (GChildWatchFunc)gis_install_page_gpg_watch, page);
-
-out:
-  g_free (image_path);
-  g_object_unref (signature);
-  return FALSE;
 }
 
 static void
@@ -674,10 +376,8 @@ gis_install_page_shown (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  gchar *msg = g_strdup_printf (_("Step %d of %d"), 1, 2);
-  gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
-  g_free (msg);
 
+  gis_install_page_update_step (install, 1);
   priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
 
   if (gis_store_get_error () != NULL)
@@ -685,8 +385,6 @@ gis_install_page_shown (GisPage *page)
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
       return;
     }
-
-  g_idle_add ((GSourceFunc)gis_install_page_verify, page);
 
   /*
    * When the installer is in the middle of the copy operation, we have
@@ -697,6 +395,8 @@ gis_install_page_shown (GisPage *page)
                     "delete-event",
                     G_CALLBACK (delete_event_cb),
                     page);
+
+  gis_install_page_prepare_write (page);
 }
 
 static void
