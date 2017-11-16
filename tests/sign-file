@@ -39,6 +39,7 @@ def main():
     Using a purely transient temporary directory also helps ensure this is
     isolated from the host system.'''
     p = argparse.ArgumentParser(description=description, epilog=epilog)
+    p.add_argument('--gpg-path', default='gpg', help='Path to GPG')
     p.add_argument('privkey', help='path to exported private key')
     p.add_argument('file', help='path to file to sign')
     a = p.parse_args()
@@ -48,11 +49,14 @@ def main():
     except FileNotFoundError:
         pass
 
+    # Good enough...
+    gpgconf_path = a.gpg_path + 'conf'
+
     with tempfile.TemporaryDirectory() as gnupghome:
-        cmd("gpg", "--batch", "--homedir", gnupghome, "--import", a.privkey)
-        cmd("gpg", "--batch", "--homedir", gnupghome, "--detach-sign",
+        cmd(a.gpg_path, "--batch", "--homedir", gnupghome, "--import", a.privkey)
+        cmd(a.gpg_path, "--batch", "--homedir", gnupghome, "--detach-sign",
             "--armor", a.file)
-        cmd("gpgconf", "--homedir", gnupghome, "--kill", "gpg-agent")
+        cmd(gpgconf_path, "--homedir", gnupghome, "--kill", "gpg-agent")
 
 
 if __name__ == '__main__':

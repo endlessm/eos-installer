@@ -986,7 +986,7 @@ gis_scribe_begin_verify (GisScribe *self,
   g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT,
                                                 self->compressed_size_bytes);
   const gchar * const args[] = {
-      "gpg",
+      GPG_PATH,
       "--enable-progress-filter", "--status-fd", "1",
       /* Trust the one key in this keyring, and no others */
       "--keyring", self->keyring_path,
