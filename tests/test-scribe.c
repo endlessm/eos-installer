@@ -149,13 +149,22 @@ fixture_create_memfd (Fixture *fixture)
   g_autoptr(GOutputStream) output = NULL;
   int fd;
   gboolean ret;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
 
   fd = memfd_create ("target", MFD_CLOEXEC | MFD_ALLOW_SEALING);
   if (fd < 0)
     {
-      perror ("memfd_create failed");
-      g_assert_not_reached ();
+      g_set_error (&error, G_FILE_ERROR, g_file_error_from_errno (errno),
+                   "memfd_create failed: %s", g_strerror (errno));
+
+      if (error->code == G_FILE_ERROR_NOSYS)
+        {
+          /* The kernel is too old */
+          g_test_skip (error->message);
+          return -1;
+        }
+      /* otherwise, fail hard */
+      g_assert_no_error (error);
     }
 
   /* Fill to the desired size with easily-recognised data */
@@ -223,6 +232,9 @@ fixture_set_up (Fixture *fixture,
   if (data->create_memfd)
     {
       fd = fixture_create_memfd (fixture);
+      /* We may skip the test if memfd_create() is not supported */
+      if (fd < 0 && g_test_failed ())
+        return;
     }
   else
     {
@@ -295,7 +307,9 @@ static void
 fixture_tear_down (Fixture *fixture,
                    gconstpointer user_data)
 {
-  g_signal_handlers_disconnect_by_data (fixture->scribe, fixture);
+  if (fixture->scribe != NULL)
+    g_signal_handlers_disconnect_by_data (fixture->scribe, fixture);
+
   g_cancellable_cancel (fixture->cancellable);
   g_clear_object (&fixture->cancellable);
   g_clear_object (&fixture->scribe);
@@ -372,6 +386,10 @@ test_error (Fixture       *fixture,
   g_autoptr(GAsyncResult) result = NULL;
   gboolean ret;
   g_autoptr(GError) error = NULL;
+
+  /* Did fixture setup fail? */
+  if (g_test_failed ())
+    return;
 
   gis_scribe_write_async (fixture->scribe, fixture->cancellable,
                           test_scribe_write_cb, &result);
