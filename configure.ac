@@ -139,6 +139,12 @@ fi
 GLIB_TESTS
 LIBGLNX_CONFIGURE
 
+# Both the tests and the application invoke the GPG executable
+AC_ARG_VAR([GPG_PATH], [GPG executable])
+AC_PATH_PROG([GPG_PATH], [gpg])
+AS_IF([test -z "$GPG_PATH"], [AC_MSG_ERROR([GPG not found])])
+AC_DEFINE_UNQUOTED([GPG_PATH], ["$GPG_PATH"], [Path to GPG executable])
+
 AC_SUBST(INITIAL_SETUP_CFLAGS)
 AC_SUBST(INITIAL_SETUP_LIBS)
 
