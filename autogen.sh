@@ -25,4 +25,5 @@ fi
 sed -e 's,$(libglnx_srcpath),libglnx,g' < ext/libglnx/Makefile-libglnx.am >ext/libglnx/Makefile-libglnx.am.inc
 
 REQUIRED_AUTOMAKE_VERSION=1.13
+set +x
 . gnome-autogen.sh
