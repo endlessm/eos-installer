@@ -12,7 +12,7 @@ test -z "$srcdir" && srcdir=.
     exit 1
 }
 
-which gnome-autogen.sh || {
+which gnome-autogen.sh >/dev/null || {
     echo "You need to install gnome-common"
     exit 1
 }
