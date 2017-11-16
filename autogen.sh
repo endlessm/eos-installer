@@ -17,9 +17,8 @@ which gnome-autogen.sh || {
     exit 1
 }
 
-if ! test -f ext/libglnx/README.md; then
-    git submodule update --init
-fi
+git submodule update --init --recursive
+
 # Workaround automake bug with subdir-objects and computed paths; if
 # changing this, please also change ext/Makefile.am.
 sed -e 's,$(libglnx_srcpath),libglnx,g' < ext/libglnx/Makefile-libglnx.am >ext/libglnx/Makefile-libglnx.am.inc
