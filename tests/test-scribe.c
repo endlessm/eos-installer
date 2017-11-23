@@ -561,15 +561,29 @@ main (int argc, char *argv[])
    * GisScribe relies on the application to tell it the uncompressed size, so
    * we just give it an incorrect number.
    */
-  TestData good_signature_truncated = {
+  TestData length_mismatch = {
       .image_path = image_path,
       .signature_path = image_sig_path,
       .uncompressed_size = IMAGE_SIZE_BYTES * 2,
       .error_domain = GIS_INSTALL_ERROR,
       /* TODO: .error_code */
   };
-  g_test_add ("/scribe/good-signature-truncated", Fixture,
-              &good_signature_truncated,
+  g_test_add ("/scribe/length-mismatch/img", Fixture,
+              &length_mismatch,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* As above, but compressed.  */
+  TestData length_mismatch_gz = {
+      .image_path = image_gz_path,
+      .signature_path = image_gz_sig_path,
+      .uncompressed_size = IMAGE_SIZE_BYTES * 2,
+      .error_domain = GIS_INSTALL_ERROR,
+      /* TODO: .error_code */
+  };
+  g_test_add ("/scribe/length-mismatch/gz", Fixture,
+              &length_mismatch_gz,
               fixture_set_up,
               test_error,
               fixture_tear_down);
