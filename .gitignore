@@ -42,6 +42,7 @@ stamp-h1
 test-driver
 test-*.log
 test-*.trs
+tests/T20064.171120-020312.img*
 tests/test-scribe
 tests/w-8193.img*
 tests/w.img*

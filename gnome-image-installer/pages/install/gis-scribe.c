@@ -657,11 +657,33 @@ gis_scribe_write_thread_copy (GisScribe     *self,
 
   if (bytes_written != self->image_size_bytes)
     {
-      g_set_error (error, GIS_INSTALL_ERROR, 0,
-                   "wrote %" G_GUINT64_FORMAT " bytes, "
-                   "expected to write %" G_GUINT64_FORMAT " bytes",
-                   bytes_written, self->image_size_bytes);
-      return FALSE;
+      g_autoptr(GError) local_error =
+        g_error_new (GIS_INSTALL_ERROR, 0,
+                     "wrote %" G_GUINT64_FORMAT " bytes, "
+                     "expected to write %" G_GUINT64_FORMAT " bytes",
+                     bytes_written, self->image_size_bytes);
+
+      /* Due to an image builder bug, for a few days very large images might
+       * not be a round number of sectors long. We obtain the uncompressed size
+       * from the GPT header, which is expressed in sectors. The bug has been
+       * fixed but we want to allow these images through for now.
+       *
+       * https://phabricator.endlessm.com/T20064
+       */
+      g_autofree gchar *image_path = g_file_get_path (self->image);
+      if (bytes_written % 512 != 0
+          && self->image_size_bytes % 512 == 0
+          && bytes_written / 512 == self->image_size_bytes / 512
+          && g_regex_match_simple ("\\.1711(1[56789]|2[0123])-\\d{6}\\.",
+                                   image_path, 0, 0))
+        {
+          g_message ("%s; ignoring due to T20064", local_error->message);
+        }
+      else
+        {
+          g_propagate_error (error, g_steal_pointer (&local_error));
+          return FALSE;
+        }
     }
 
   /* Now write the first 1 MiB to disk. Unfortunately GUnixOutputStream does
