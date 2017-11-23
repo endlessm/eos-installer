@@ -659,7 +659,7 @@ gis_scribe_write_thread_copy (GisScribe     *self,
     {
       g_set_error (error, GIS_INSTALL_ERROR, 0,
                    "wrote %" G_GUINT64_FORMAT " bytes, "
-                   "expected to write %" G_GUINT64_FORMAT "bytes",
+                   "expected to write %" G_GUINT64_FORMAT " bytes",
                    bytes_written, self->image_size_bytes);
       return FALSE;
     }
