@@ -42,6 +42,3 @@ with the following setup:
 
 If you do not have an `eosimages` partition with at least one image file on it,
 running the app will take you straight to the error screen.
-
-Spurious change
----------------
