@@ -1,0 +1,40 @@
+#!/bin/bash -ex
+
+# Dump the environment, for reference
+env | sort
+
+# Show local and remote-tracking branches
+git branch --list -vv --all
+
+if [[ "$ghprbTargetBranch" = debian-* ]]; then
+  # TODO: build packaging PRs
+  exit 1
+else
+  OS_BRANCH="$ghprbTargetBranch"
+
+  # TODO: handle the case where the source repository is not the origin. In the
+  # case where there are no Debian packaging changes this is easy (and will
+  # work). But here we assume that any corresponding debian-FOO branch is on
+  # origin.
+
+  # TODO: teach jenkins-obs[-build] to accept a commit SHA-1, or a way
+  # to say "just build the current HEAD" since ghprb already checks out the
+  # merge commit for us.
+
+  # Despite its name, $sha1 here is of the form origin/pr/65/merge
+  GIT_BRANCH="${sha1#origin/}"
+
+  if git rev-parse "origin/debian-$ghprbSourceBranch" >/dev/null 2>&1; then
+    GIT_DEBIAN_BRANCH="debian-$ghprbSourceBranch"
+  elif git rev-parse "origin/$ghprbSourceBranch-debian" >/dev/null 2>&1; then
+    # Sometimes people name these branches this way
+    GIT_DEBIAN_BRANCH="$ghprbSourceBranch-debian"
+  else
+    GIT_DEBIAN_BRANCH="debian-$OS_BRANCH"
+  fi
+fi
+
+jenkins-obs --no-obs --debug \
+    --branch "$OS_BRANCH" \
+    --git-branch "$GIT_BRANCH" \
+    --git-debian-branch "$GIT_DEBIAN_BRANCH"
