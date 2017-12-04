@@ -724,7 +724,7 @@ main (int argc, char *argv[])
       .create_memfd = TRUE,
       .memfd_size = IMAGE_SIZE_BYTES / 2,
   };
-  g_test_add ("/scribe/write-error-halfway", Fixture, &write_error_halfway,
+  g_test_add ("/scribe/write-error/halfway", Fixture, &write_error_halfway,
               fixture_set_up,
               test_error,
               fixture_tear_down);
@@ -738,7 +738,7 @@ main (int argc, char *argv[])
       .create_memfd = TRUE,
       .memfd_size = IMAGE_SIZE_BYTES - 1,
   };
-  g_test_add ("/scribe/write-error-last-byte", Fixture, &write_error_last_byte,
+  g_test_add ("/scribe/write-error/last-byte", Fixture, &write_error_last_byte,
               fixture_set_up,
               test_error,
               fixture_tear_down);
