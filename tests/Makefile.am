@@ -1,5 +1,15 @@
 include $(top_srcdir)/buildutil/glib-tap.mk
 
+# Using GFile causes GIOModules to be probed, which (if gvfs is installed)
+# ultimately causes g_socket_class_init() to be called, which (as documented)
+# causes SIGPIPE to be ignored for the remainder of the program. This masked a
+# test failure on development systems (where gvfs is installed) which was found
+# on the build server (gvfs is not listed as a dependency, so SIGPIPE was not
+# implicitly ignored).
+#
+# Setting the search path to the empty string causes no modules to be loaded.
+AM_TESTS_ENVIRONMENT += GIO_MODULE_DIR=
+
 test_programs = \
 	test-scribe \
 	$(NULL)
