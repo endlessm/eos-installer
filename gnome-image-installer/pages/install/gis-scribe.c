@@ -337,6 +337,17 @@ gis_scribe_class_init (GisScribeClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  /* Ensure write() to a pipe whose read end is closed fails with EPIPE rather
+   * than killing the process with SIGPIPE. This precaution is also taken by
+   * Gtk+ and by any use of GSocket, so when run as part of the full
+   * application this is redundant, but when used in isolation this class does
+   * not use either of those.
+   *
+   * (You might hope that you could use send() with MSG_NOSIGNAL but this can
+   * only be used with socket fds, not pipes.)
+   */
+  signal (SIGPIPE, SIG_IGN);
+
   object_class->constructed = gis_scribe_constructed;
   object_class->set_property = gis_scribe_set_property;
   object_class->get_property = gis_scribe_get_property;
