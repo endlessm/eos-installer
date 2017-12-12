@@ -69,3 +69,4 @@ Conflicts: gnome-initial-setup
 Description: Endless OS installer (standalone session)
  This package contains configuration to automatically launch eos-installer
  in standalone installer images.
+
