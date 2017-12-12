@@ -394,7 +394,6 @@ gis_page_get_type();
   g_option_context_free (context);
 
   return status;
-}
 
 /* Epilogue {{{1 */
 /* vim: set foldmethod=marker: */
