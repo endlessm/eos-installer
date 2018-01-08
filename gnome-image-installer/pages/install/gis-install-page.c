@@ -70,9 +70,11 @@ delete_event_cb (GtkWidget      *toplevel,
                                                  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                                  GTK_MESSAGE_WARNING,
                                                  GTK_BUTTONS_NONE,
+                                                 "%s",
                                                  _("Stop reformatting the disk?"));
 
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (priv->warning_dialog),
+                                            "%s",
                                             _("The reformatting process has already begun. Cancelling "
                                               "now will leave this system unbootable."));
 
