@@ -20,7 +20,10 @@ sessiondir = $(datadir)/gnome-session/sessions
 session_DATA = eos-installer.session
 
 desktopdir = $(datadir)/gdm/greeter/applications
-desktop_DATA =	eos-installer.desktop eos-setup-shell.desktop $(NULL)
+desktop_DATA = \
+	com.endlessm.Installer.desktop \
+	eos-setup-shell.desktop \
+	$(NULL)
 
 systemdsystemunit_DATA = \
 	run-mount-eosimages.mount \
@@ -34,7 +37,7 @@ icon64_DATA = \
 
 EXTRA_DIST =						\
 	20-eos-installer.rules  		\
-	eos-installer.desktop.in.in		\
+	com.endlessm.Installer.desktop.in.in \
 	eos-installer.session			\
 	eos-setup-shell.desktop 		\
 	icons/hicolor/64x64/apps/com.endlessm.Installer.png \
@@ -42,7 +45,7 @@ EXTRA_DIST =						\
 	$(NULL)
 
 CLEANFILES =						\
-	eos-installer.desktop.in		\
-	eos-installer.desktop			\
+	com.endlessm.Installer.desktop.in		\
+	com.endlessm.Installer.desktop			\
 	$(NULL)
 
