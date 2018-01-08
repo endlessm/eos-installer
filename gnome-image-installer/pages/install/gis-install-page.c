@@ -48,6 +48,7 @@ struct _GisInstallPagePrivate {
   guint pulse_id;
 
   GtkWidget *warning_dialog;
+  guint inhibit_cookie;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
@@ -55,6 +56,12 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisInstallPage, gis_install_page, GIS_TYPE_PAGE);
 
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
+
+static const gchar *REFORMATTING_IN_PROGRESS_TITLE =
+  N_("Stop reformatting the disk?");
+static const gchar *REFORMATTING_IN_PROGRESS_WARNING =
+  N_("The reformatting process has already begun. Cancelling "
+     "now will leave this system unbootable.");
 
 static gboolean
 delete_event_cb (GtkWidget      *toplevel,
@@ -71,12 +78,11 @@ delete_event_cb (GtkWidget      *toplevel,
                                                  GTK_MESSAGE_WARNING,
                                                  GTK_BUTTONS_NONE,
                                                  "%s",
-                                                 _("Stop reformatting the disk?"));
+                                                 gettext (REFORMATTING_IN_PROGRESS_TITLE));
 
   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (priv->warning_dialog),
                                             "%s",
-                                            _("The reformatting process has already begun. Cancelling "
-                                              "now will leave this system unbootable."));
+                                            gettext (REFORMATTING_IN_PROGRESS_WARNING));
 
   /* Stop Reformatting */
   button = gtk_button_new_with_label (_("Stop Reformatting"));
@@ -177,6 +183,11 @@ gis_install_page_teardown (GisPage *page)
   g_signal_handlers_disconnect_by_func (gtk_widget_get_toplevel (GTK_WIDGET (page)),
                                         delete_event_cb,
                                         page);
+  if (priv->inhibit_cookie != 0)
+    {
+      gtk_application_uninhibit (GTK_APPLICATION (page->driver), priv->inhibit_cookie);
+      priv->inhibit_cookie = 0;
+    }
 
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 
@@ -378,6 +389,7 @@ gis_install_page_shown (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
+  GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (page));
 
   gis_install_page_update_step (install, 1);
   priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
@@ -393,10 +405,22 @@ gis_install_page_shown (GisPage *page)
    * to show a dialog asking the user if she ~really~ wants to quit the
    * application in the middle of a potentially dangerous operation.
    */
-  g_signal_connect (gtk_widget_get_toplevel (GTK_WIDGET (page)),
+  g_signal_connect (toplevel,
                     "delete-event",
                     G_CALLBACK (delete_event_cb),
                     page);
+
+  priv->inhibit_cookie =
+    gtk_application_inhibit (GTK_APPLICATION (page->driver),
+                             GTK_WINDOW (toplevel),
+                             /* If the computer is left unattended while
+                              * reformatting, don't allow it to sleep. */
+                             GTK_APPLICATION_INHIBIT_SUSPEND |
+                             /* LOGOUT includes shutting down the computer */
+                             GTK_APPLICATION_INHIBIT_LOGOUT,
+                             gettext (REFORMATTING_IN_PROGRESS_WARNING));
+  if (priv->inhibit_cookie == 0)
+    g_warning ("Failed to inhibit suspend/logout/shutdown");
 
   gis_install_page_prepare_write (page);
 }
