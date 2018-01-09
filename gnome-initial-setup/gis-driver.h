@@ -87,7 +87,8 @@ void gis_driver_hide_window (GisDriver *driver);
 
 void gis_driver_save_data (GisDriver *driver);
 
-GisDriver *gis_driver_new (GisDriverMode mode);
+GisDriver *gis_driver_new (GisDriverMode mode,
+                           gboolean      inhibit_idle);
 
 G_END_DECLS
 

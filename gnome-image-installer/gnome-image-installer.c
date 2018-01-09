@@ -350,6 +350,7 @@ main (int argc, char *argv[])
   GOptionContext *context;
   gchar *uuid = NULL;
   UDisksClient *udisks_client = NULL;
+  gboolean inhibit_idle = TRUE;
   GError *error = NULL;
 
 gis_page_get_type();
@@ -377,6 +378,27 @@ gis_page_get_type();
     {
       gis_store_enter_live_install ();
       gis_store_set_image_uuid (uuid);
+
+      /* When running from the FBE session, we don't want the screen to blank
+       * and show the lock screen cover.
+       *
+       * On a live image, the real gnome-initial-setup will still be running,
+       * and takes care of inhibiting idle. On eosinstaller images, we do it
+       * ourselves.  You might expect that it's harmless to have an additional
+       * idle inhibitor, but GNOME Shell shows all inhibitors in the Shutdown
+       * dialog, if it can resolve the GApplication:application-id (in our case
+       * com.endlessm.Installer) to a .desktop file. We need this to be true so
+       * we can inhibit shutdown with a nice message while the image is
+       * actually being written; but in that case, this inhibitor shows too as
+       * a separate entry, which is a bit ugly. For now we live with it in
+       * eosinstaller images, using an empty message to declutter the dialog a
+       * little.
+       *
+       * GNOME Shell doesn't show gnome-initial-setup's inhibitor because its
+       * app ID (org.gnome.InitialSetup) doesn't match its desktop file
+       * (gnome-initial-setup.desktop).
+       */
+      inhibit_idle = FALSE;
     }
 
   udisks_client = udisks_client_new_sync (NULL, &error);
@@ -386,7 +408,7 @@ gis_page_get_type();
   g_object_unref (udisks_client);
   mount_and_read_keys ();
 
-  driver = gis_driver_new (get_mode ());
+  driver = gis_driver_new (get_mode (), inhibit_idle);
   g_signal_connect (driver, "rebuild-pages", G_CALLBACK (rebuild_pages_cb), NULL);
   status = g_application_run (G_APPLICATION (driver), argc, argv);
 

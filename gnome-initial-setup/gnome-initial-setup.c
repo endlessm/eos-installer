@@ -337,7 +337,7 @@ main (int argc, char *argv[])
 
   gis_ensure_login_keyring ("gis");
 
-  driver = gis_driver_new (get_mode ());
+  driver = gis_driver_new (get_mode (), TRUE);
   g_signal_connect (driver, "rebuild-pages", G_CALLBACK (rebuild_pages_cb), NULL);
   status = g_application_run (G_APPLICATION (driver), argc, argv);
 
