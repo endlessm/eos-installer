@@ -49,7 +49,7 @@ tests/w.img*
 tests/w.truncated*
 *~
 
-eos-installer-data/eos-installer.desktop
+eos-installer-data/com.endlessm.Installer.desktop
 
 eos-installer-*.tar.gz
 eos-installer-*.tar.bz2
