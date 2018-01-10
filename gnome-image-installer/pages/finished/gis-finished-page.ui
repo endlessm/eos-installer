@@ -131,7 +131,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_top">16</property>
-                <property name="label" translatable="yes">Please contact &lt;a href="mailto:support@endlessm.com"&gt;support@endlessm.com&lt;/a&gt; or join the &lt;a href="https://community.endlessos.com/"&gt;Endless Community&lt;/a&gt; to troubleshoot.</property>
+                <property name="label">Please contact &lt;a href="mailto:support@endlessm.com"&gt;support@endlessm.com&lt;/a&gt; or join the &lt;a href="https://community.endlessos.com/"&gt;Endless Community&lt;/a&gt; to troubleshoot.</property>
                 <property name="use_markup">True</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>

@@ -51,6 +51,60 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisFinishedPage, gis_finished_page, GIS_TYPE_PAGE);
 #define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
 #define WID(name) OBJ(GtkWidget*,name)
 
+/* See endlessm/gnome-shell/js/gdm/authPrompt.js */
+#define CUSTOMER_SUPPORT_FILENAME "vendor-customer-support.ini"
+#define CUSTOMER_SUPPORT_GROUP_NAME "Customer Support"
+#define CUSTOMER_SUPPORT_KEY_EMAIL "Email"
+#define CUSTOMER_SUPPORT_EMAIL_FALLBACK "support@endlessm.com"
+
+static const gchar * const customer_support_paths[] = {
+  LOCALSTATEDIR "/lib/eos-image-defaults/" CUSTOMER_SUPPORT_FILENAME,
+  DATADIR "/gnome-shell/" CUSTOMER_SUPPORT_FILENAME,
+  NULL
+};
+
+static gchar *
+get_customer_support_email (void)
+{
+  g_autoptr(GKeyFile) key_file = g_key_file_new ();
+  const gchar * const *path_iter;
+  g_autofree gchar *support_email = NULL;
+  g_autoptr(GError) error = NULL;
+
+  for (path_iter = customer_support_paths; *path_iter != NULL; path_iter++)
+    {
+      if (!g_key_file_load_from_file (key_file, *path_iter, G_KEY_FILE_NONE,
+                                      &error))
+        {
+          if (!g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+            g_warning ("%s: %s", *path_iter, error->message);
+
+          g_clear_error (&error);
+          continue;
+        }
+
+      support_email = g_key_file_get_locale_string (key_file,
+                                                    CUSTOMER_SUPPORT_GROUP_NAME,
+                                                    CUSTOMER_SUPPORT_KEY_EMAIL,
+                                                    NULL, &error);
+      if (support_email == NULL)
+        {
+          g_warning ("[%s] %s key not found in %s: %s",
+                     CUSTOMER_SUPPORT_GROUP_NAME, CUSTOMER_SUPPORT_KEY_EMAIL,
+                     *path_iter, error->message);
+          g_clear_error (&error);
+        }
+      else
+        {
+          return g_steal_pointer (&support_email);
+        }
+    }
+
+  g_warning ("[%s] %s key not found in any %s, using default",
+             CUSTOMER_SUPPORT_GROUP_NAME, CUSTOMER_SUPPORT_KEY_EMAIL,
+             CUSTOMER_SUPPORT_FILENAME);
+  return g_strdup (CUSTOMER_SUPPORT_EMAIL_FALLBACK);
+}
 
 static void
 reboot_cb (GtkButton *button, GisFinishedPage *page)
@@ -166,6 +220,10 @@ gis_finished_page_constructed (GObject *object)
 static void
 gis_finished_page_locale_changed (GisPage *page)
 {
+  g_autofree gchar *support_email = NULL;
+  g_autofree gchar *support_email_markup = NULL;
+  g_autofree gchar *support_markup = NULL;
+
   if (gis_store_get_error() == NULL)
     {
       gis_page_set_title (page, _("Reformatting Finished"));
@@ -174,6 +232,14 @@ gis_finished_page_locale_changed (GisPage *page)
     {
       gis_page_set_title (page, "");
     }
+
+  support_email = get_customer_support_email ();
+  support_email_markup = g_strdup_printf ("<a href=\"mailto:%1$s\">%1$s</a>",
+                                          support_email);
+  /* Translators: the %s is the customer support email address */
+  support_markup = g_strdup_printf (_("Please contact %s or join the <a href=\"https://community.endlessos.com/\">Endless Community</a> to troubleshoot."),
+                                    support_email_markup);
+  gtk_label_set_markup (OBJ (GtkLabel *, "support_label"), support_markup);
 }
 
 static void

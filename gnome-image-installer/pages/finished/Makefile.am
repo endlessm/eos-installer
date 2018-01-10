@@ -5,6 +5,7 @@ AM_CPPFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \
 	-DLOCALSTATEDIR="\"$(localstatedir)\"" \
+	-DDATADIR="\"$(datadir)\"" \
 	-DUIDIR="\"$(uidir)\""
 
 BUILT_SOURCES =
