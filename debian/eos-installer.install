@@ -1,5 +1,5 @@
 debian/tmp/usr/lib/eos-installer/*
-debian/tmp/usr/share/gdm/greeter/applications/eos-installer.desktop
+debian/tmp/usr/share/gdm/greeter/applications/com.endlessm.Installer.desktop
 debian/tmp/usr/share/icons/*
 debian/tmp/usr/share/locale/*
 debian/tmp/usr/share/polkit-1/rules.d/20-eos-installer.rules
