@@ -32,27 +32,14 @@ int read_from_gzip(FILE *in_file, struct ptable *out_pt)
     return GPT_SUCCESS;
 }
 
-uint64_t get_gzip_disk_image_size(const char *filepath)
+int get_gzip_is_valid_eos_gpt(const char *filepath, uint64_t *size)
 {
     if(NULL == filepath) return 0;
     FILE *in_file = fopen(filepath, "r");
     if(NULL == in_file) return 0;
     struct ptable pt;
     if(read_from_gzip(in_file, &pt) == GPT_SUCCESS) {
-        return get_disk_size(&pt);
-    }
-    // error reading from disk
-    return 0;
-}
-
-int get_gzip_is_valid_eos_gpt(const char *filepath)
-{
-    if(NULL == filepath) return 0;
-    FILE *in_file = fopen(filepath, "r");
-    if(NULL == in_file) return 0;
-    struct ptable pt;
-    if(read_from_gzip(in_file, &pt) == GPT_SUCCESS) {
-        return is_eos_gpt_valid(&pt);
+        return is_eos_gpt_valid(&pt, size);
     }
     // error reading from disk
     return 0;

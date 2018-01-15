@@ -63,13 +63,11 @@ struct ptable {
     struct gpt_partition partitions[4]; // we only care about the first 4 partitions   
 } __attribute__((packed));
 
-uint64_t get_disk_size(struct ptable *pt);
-int is_eos_gpt_valid(struct ptable *pt);
+int is_eos_gpt_valid(struct ptable *pt, uint64_t *size);
 uint8_t is_nth_flag_set(uint64_t flags, uint8_t n);
 
 // helper function
-uint64_t get_disk_image_size(const char *filepath);
-int get_is_valid_eos_gpt(const char *filepath);
+int get_is_valid_eos_gpt(const char *filepath, uint64_t *size);
 
 #ifdef DEBUG_PRINTS
 void attributes_to_ascii(const uint8_t *attr, char *s);

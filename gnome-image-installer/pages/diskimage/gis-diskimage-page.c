@@ -327,31 +327,27 @@ add_image (
     {
       gchar *size = NULL;
       gchar *displayname = NULL;
+      gboolean valid = FALSE;
       guint64 required_size = 0;
 
-      /* TODO: make image size an out parameter of get_*_is_valid_eos_gpt */
-      if (g_str_has_suffix (image, ".img.gz") &&
-          get_gzip_is_valid_eos_gpt (image))
+      if (g_str_has_suffix (image, ".img.gz"))
         {
-          required_size = get_gzip_disk_image_size (image);
+          valid = get_gzip_is_valid_eos_gpt (image, &required_size);
         }
-      else if (g_str_has_suffix (image, ".img.xz") &&
-          get_xz_is_valid_eos_gpt (image))
+      else if (g_str_has_suffix (image, ".img.xz"))
         {
-          required_size = get_xz_disk_image_size (image);
+          valid = get_xz_is_valid_eos_gpt (image, &required_size);
         }
-      else if (image_device != NULL &&
-          get_is_valid_eos_gpt (image_device))
+      else if (image_device != NULL)
         {
-          required_size = get_disk_image_size (image_device);
+          valid = get_is_valid_eos_gpt (image_device, &required_size);
         }
-      else if (g_str_has_suffix (image, ".img") &&
-          get_is_valid_eos_gpt (image))
+      else if (g_str_has_suffix (image, ".img"))
         {
-          required_size = get_disk_image_size (image);
+          valid = get_is_valid_eos_gpt (image, &required_size);
         }
 
-      if (required_size != 0)
+      if (valid && required_size != 0)
         {
           displayname = get_display_name (image);
 
