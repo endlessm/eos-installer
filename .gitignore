@@ -64,6 +64,7 @@ ext/test-libglnx-xattrs
 gnome-image-installer/gnome-image-installer
 
 gnome-image-installer/gis-assistant-resources.[ch]
+gnome-image-installer/pages/confirm/confirm-resources.[ch]
 gnome-image-installer/pages/diskimage/diskimage-resources.[ch]
 gnome-image-installer/pages/disktarget/disktarget-resources.[ch]
 gnome-image-installer/pages/finished/finished-resources.[ch]

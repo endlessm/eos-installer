@@ -181,6 +181,7 @@ gnome-initial-setup/pages/keyboard/Makefile
 gnome-image-installer/Makefile
 gnome-image-installer/util/Makefile
 gnome-image-installer/pages/Makefile
+gnome-image-installer/pages/confirm/Makefile
 gnome-image-installer/pages/diskimage/Makefile
 gnome-image-installer/pages/disktarget/Makefile
 gnome-image-installer/pages/finished/Makefile

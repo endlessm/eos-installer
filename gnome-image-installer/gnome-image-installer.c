@@ -42,6 +42,7 @@
 #include "pages/account/gis-account-page.h"
 #include "pages/location/gis-location-page.h"
 #include "pages/goa/gis-goa-page.h"
+#include "pages/confirm/gis-confirm-page.h"
 #include "pages/diskimage/gis-diskimage-page.h"
 #include "pages/disktarget/gis-disktarget-page.h"
 #include "pages/finished/gis-finished-page.h"
@@ -66,6 +67,7 @@ static PageData page_table[] = {
   PAGE (language),
   PAGE (diskimage),
   PAGE (disktarget),
+  PAGE (confirm),
   PAGE (install),
   PAGE (finished),
   { NULL },
