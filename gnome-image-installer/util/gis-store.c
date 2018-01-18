@@ -32,9 +32,8 @@ static guint64 _image_size = 0;
 static gchar *_name = NULL;
 static gchar *_signature = NULL;
 static GError *_error = NULL;
-static gboolean _unattended = FALSE;
+static GisUnattendedConfig *_config = NULL;
 static gboolean _live_install = FALSE;
-static GKeyFile *_keys = NULL;
 static gchar *_uuid = NULL;
 
 GObject *gis_store_get_object(gint key)
@@ -137,14 +136,37 @@ void gis_store_clear_error(void)
   g_clear_error (&_error);
 }
 
-void gis_store_enter_unattended(void)
+/**
+ * gis_store_enter_unattended:
+ * @config: (transfer none): unattended mode configuration
+ *
+ * Enter unattended mode.
+ */
+void
+gis_store_enter_unattended (GisUnattendedConfig *config)
 {
-  _unattended = TRUE;
+  g_return_if_fail (config != NULL);
+  g_return_if_fail (_config == NULL);
+
+  _config = g_object_ref (config);
 }
 
-gboolean gis_store_is_unattended(void)
+gboolean
+gis_store_is_unattended (void)
 {
-  return _unattended;
+  return _config != NULL;
+}
+
+/**
+ * gis_store_get_unattended_config:
+ *
+ * Returns: (nullable) (transfer none): the unattended config, or %NULL if we
+ *  are not in unattended mode.
+ */
+GisUnattendedConfig *
+gis_store_get_unattended_config (void)
+{
+  return _config;
 }
 
 void gis_store_enter_live_install(void)
@@ -157,14 +179,12 @@ gboolean gis_store_is_live_install(void)
   return _live_install;
 }
 
-void gis_store_set_key_file(GKeyFile *keys)
-{
-  _keys = keys;
-}
-
 GKeyFile *gis_store_get_key_file(void)
 {
-  return _keys;
+  if (_config == NULL)
+    return NULL;
+
+  return gis_unattended_config_get_key_file (_config);
 }
 
 

@@ -59,6 +59,8 @@ G_DECLARE_FINAL_TYPE (GisUnattendedConfig, gis_unattended_config, GIS, UNATTENDE
 GisUnattendedConfig *gis_unattended_config_new (const gchar *file_path,
                                                 GError **error);
 
+GKeyFile *gis_unattended_config_get_key_file (GisUnattendedConfig *self);
+
 G_END_DECLS
 
 #endif /* GIS_UNATTENDED_CONFIG_H */

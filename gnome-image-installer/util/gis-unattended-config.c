@@ -170,3 +170,17 @@ gis_unattended_config_new (const gchar *file_path,
                          "file-path", file_path,
                          NULL);
 }
+
+/**
+ * gis_unattended_config_get_key_file:
+ *
+ * This is a transitional function which we should remove in favour of
+ * structured accessors.
+ *
+ * Returns: (transfer none): the underlying key file.
+ */
+GKeyFile *
+gis_unattended_config_get_key_file (GisUnattendedConfig *self)
+{
+  return self->key_file;
+}
