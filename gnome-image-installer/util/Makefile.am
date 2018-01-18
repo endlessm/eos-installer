@@ -2,6 +2,7 @@ noinst_LTLIBRARIES = libgiiutil.la
 
 libgiiutil_la_SOURCES = \
 	gis-store.c gis-store.h \
+	gis-unattended-config.c gis-unattended-config.h \
 	gduxzdecompressor.c gduxzdecompressor.h \
 	gpt.c gpt.h gpt_errors.h \
 	gpt_gz.c gpt_gz.h \
@@ -12,6 +13,9 @@ libgiiutil_la_CFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	-I "$(srcdir)/.." \
 	-I "$(srcdir)/../../gnome-initial-setup" \
+	-I $(top_srcdir)/ext/libglnx \
 	$(WARN_CFLAGS)
-libgiiutil_la_LIBADD = $(INITIAL_SETUP_LIBS) -lz
+libgiiutil_la_LIBADD = $(INITIAL_SETUP_LIBS) -lz \
+	$(top_builddir)/ext/libglnx.la \
+	$(NULL)
 libgiiutil_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined $(WARN_LDFLAGS)
