@@ -135,7 +135,10 @@ read_unattended_ini (const gchar *path)
   if (error != NULL &&
       !g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
     {
-      g_warning ("Error loading %s: %s", ini, error->message);
+      /* Translators: the placeholder is the name of a configuration file, such
+       * as "/run/mount/eosimages/unattended.ini". */
+      g_prefix_error (&error, _("Error loading ‘%s’: "), ini);
+      gis_store_set_error (error);
     }
   else if (config != NULL)
     {
