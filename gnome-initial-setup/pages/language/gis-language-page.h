@@ -54,7 +54,7 @@ GType gis_language_page_get_type (void);
 
 void gis_prepare_language_page (GisDriver *driver);
 
-void gis_language_page_preselect_language (gchar *locale_id);
+void gis_language_page_preselect_language (const gchar *locale_id);
 
 G_END_DECLS
 

@@ -75,7 +75,7 @@ G_DEFINE_TYPE_WITH_PRIVATE (GisLanguagePage, gis_language_page, GIS_TYPE_PAGE);
 static gchar *_preselected = NULL;
 
 void
-gis_language_page_preselect_language (gchar *locale_id)
+gis_language_page_preselect_language (const gchar *locale_id)
 {
   if (_preselected != NULL)
     g_free (_preselected);

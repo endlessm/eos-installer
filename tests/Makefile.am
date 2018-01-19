@@ -20,6 +20,8 @@ dist_test_data = \
 	secret.asc \
 	sign-file \
 	unattended/empty.ini \
+	unattended/full.ini \
+	unattended/non-utf8-locale.ini \
 	wjt.asc \
 	$(NULL)
 

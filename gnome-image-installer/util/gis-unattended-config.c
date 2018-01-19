@@ -24,6 +24,9 @@
 
 #include "glnx-errors.h"
 
+#define EOS_GROUP "EndlessOS"
+#define LOCALE_KEY "locale"
+
 typedef struct _GisUnattendedConfig {
   GObject parent;
 
@@ -31,6 +34,8 @@ typedef struct _GisUnattendedConfig {
   gboolean initialized;
 
   GKeyFile *key_file;
+
+  gchar *locale;
 } GisUnattendedConfig;
 
 G_DEFINE_QUARK (gis-unattended-error, gis_unattended_error);
@@ -95,6 +100,7 @@ gis_unattended_config_finalize (GObject *object)
   GisUnattendedConfig *self = GIS_UNATTENDED_CONFIG (object);
 
   g_clear_pointer (&self->file_path, g_free);
+  g_clear_pointer (&self->locale, g_free);
 
   G_OBJECT_CLASS (gis_unattended_config_parent_class)->finalize (object);
 }
@@ -116,6 +122,49 @@ gis_unattended_config_class_init (GisUnattendedConfigClass *klass)
       G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPERTIES, props);
+}
+
+static gboolean
+key_file_get_optional_string (GKeyFile    *key_file,
+                              const gchar *group_name,
+                              const gchar *key,
+                              gchar      **value_out,
+                              GError     **error)
+{
+  g_autoptr(GError) local_error = NULL;
+  g_autofree gchar *value = NULL;
+
+  value = g_key_file_get_string (key_file, group_name, key, &local_error);
+  if (value == NULL &&
+      !g_error_matches (local_error, G_KEY_FILE_ERROR,
+                        G_KEY_FILE_ERROR_GROUP_NOT_FOUND) &&
+      !g_error_matches (local_error, G_KEY_FILE_ERROR,
+                        G_KEY_FILE_ERROR_KEY_NOT_FOUND))
+    {
+      /* Other possible errors include invalid UTF-8, which is reported here
+       * rather than by g_key_file_load_from_file().
+       */
+      g_set_error_literal (error, GIS_UNATTENDED_ERROR,
+                           GIS_UNATTENDED_ERROR_READ,
+                           local_error->message);
+      return FALSE;
+    }
+
+  *value_out = g_steal_pointer (&value);
+  return TRUE;
+}
+
+static gboolean
+gis_unattended_config_populate_fields (GisUnattendedConfig *self,
+                                       GError **error)
+{
+  if (!key_file_get_optional_string (self->key_file,
+                                     EOS_GROUP, LOCALE_KEY,
+                                     &self->locale,
+                                     error))
+    return FALSE;
+
+  return TRUE;
 }
 
 static gboolean
@@ -150,7 +199,7 @@ gis_unattended_config_initable_init (GInitable    *initable,
       return FALSE;
     }
 
-  return TRUE;
+  return gis_unattended_config_populate_fields (self, error);
 }
 
 static void
@@ -169,6 +218,18 @@ gis_unattended_config_new (const gchar *file_path,
   return g_initable_new (GIS_TYPE_UNATTENDED_CONFIG, NULL, error,
                          "file-path", file_path,
                          NULL);
+}
+
+/**
+ * gis_unattended_config_get_locale:
+ *
+ * Returns: (nullable) (transfer none): the locale specified in @self, or %NULL
+ *  if none was specified.
+ */
+const gchar *
+gis_unattended_config_get_locale (GisUnattendedConfig *self)
+{
+  return self->locale;
 }
 
 /**

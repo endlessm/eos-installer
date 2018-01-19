@@ -94,6 +94,23 @@ test_parse_empty (void)
   config = gis_unattended_config_new (empty_ini, &error);
   g_assert_no_error (error);
   g_assert_nonnull (config);
+
+  g_assert_cmpstr (gis_unattended_config_get_locale (config), ==, NULL);
+}
+
+static void
+test_parse_full (void)
+{
+  g_autofree gchar *full_ini =
+    g_test_build_filename (G_TEST_DIST, "unattended/full.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (full_ini, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (config);
+
+  g_assert_cmpstr (gis_unattended_config_get_locale (config), ==, "pt_BR.utf8");
 }
 
 static void
@@ -146,6 +163,21 @@ test_parse_unreadable (Fixture *fixture,
   g_assert_null (config);
 }
 
+static void
+test_parse_non_utf8_locale (void)
+{
+  g_autofree gchar *non_utf8_locale =
+    g_test_build_filename (G_TEST_DIST, "unattended/non-utf8-locale.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (non_utf8_locale, &error);
+  g_assert_error (error,
+                  GIS_UNATTENDED_ERROR,
+                  GIS_UNATTENDED_ERROR_READ);
+  g_assert_null (config);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -155,10 +187,12 @@ main (int argc, char *argv[])
   g_test_bug_base ("https://phabricator.endlessm.com/");
 
   g_test_add_func ("/unattended-config/empty", test_parse_empty);
+  g_test_add_func ("/unattended-config/full", test_parse_full);
   g_test_add_func ("/unattended-config/malformed", test_parse_malformed);
   g_test_add_func ("/unattended-config/noent", test_parse_noent);
   g_test_add ("/unattended-config/unreadable", Fixture, NULL, fixture_set_up,
               test_parse_unreadable, fixture_tear_down);
+  g_test_add_func ("/unattended-config/non-utf8-locale", test_parse_non_utf8_locale);
 
   return g_test_run ();
 }

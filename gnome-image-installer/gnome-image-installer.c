@@ -183,12 +183,10 @@ read_unattended_ini (const gchar *path)
   else if (config != NULL)
     {
       GKeyFile *keys = gis_unattended_config_get_key_file (config);
-      gchar *locale = g_key_file_get_string (keys, EOS_GROUP, LOCALE_KEY, NULL);
+      const gchar *locale = gis_unattended_config_get_locale (config);
+
       if (locale != NULL)
-        {
-          gis_language_page_preselect_language (locale);
-          g_free (locale);
-        }
+        gis_language_page_preselect_language (locale);
 
       if (g_key_file_has_group (keys, UNATTENDED_GROUP))
         {
