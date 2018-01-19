@@ -76,10 +76,7 @@ static PageData page_table[] = {
 #undef PAGE
 
 #define EOS_GROUP "EndlessOS"
-#define UNATTENDED_GROUP "Unattended"
 #define LOCALE_KEY "locale"
-#define VENDOR_KEY "vendor"
-#define PRODUCT_KEY "product"
 
 static void
 destroy_pages_after (GisAssistant *assistant,
@@ -98,46 +95,6 @@ destroy_pages_after (GisAssistant *assistant,
     next = l->next;
     gtk_widget_destroy (GTK_WIDGET (l->data));
   }
-}
-
-static gchar*
-sanitize_string (gchar *string)
-{
-  gchar *r = string;
-  gchar *w = string;
-
-  if (string == NULL)
-    return NULL;
-
-  for (;*r != '\0'; r++)
-    {
-      if (*r < 32 || *r > 126)
-        continue;
-      *w = *r;
-      w++;
-    }
-  *w = '\0';
-  return g_ascii_strdown(string, -1);
-}
-
-static gchar *
-read_sanitized_string (const gchar *filename,
-                       GError     **error)
-{
-  gchar *contents = NULL;
-  gchar *sanitized = NULL;
-
-  if (g_file_get_contents (filename, &contents, NULL, error))
-    {
-      sanitized = sanitize_string (contents);
-      g_free (contents);
-    }
-  else
-    {
-      g_prefix_error (error, "failed to read %s", filename);
-    }
-
-  return sanitized;
 }
 
 /**
@@ -182,47 +139,15 @@ read_unattended_ini (const gchar *path)
     }
   else if (config != NULL)
     {
-      GKeyFile *keys = gis_unattended_config_get_key_file (config);
       const gchar *locale = gis_unattended_config_get_locale (config);
 
       if (locale != NULL)
         gis_language_page_preselect_language (locale);
 
-      if (g_key_file_has_group (keys, UNATTENDED_GROUP))
-        {
-          gchar *vendor = NULL;
-          gchar *product = NULL;
-
-          if (NULL == (vendor = read_sanitized_string ("/sys/class/dmi/id/sys_vendor", &error)) ||
-              NULL == (product = read_sanitized_string ("/sys/class/dmi/id/product_name", &error)))
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-            }
-          else
-            {
-              gchar *target_vendor = g_key_file_get_string (keys, UNATTENDED_GROUP, VENDOR_KEY, NULL);
-              gchar *target_product = g_key_file_get_string (keys, UNATTENDED_GROUP, PRODUCT_KEY, NULL);
-
-              if (g_ascii_strcasecmp (vendor, target_vendor) == 0
-               && g_ascii_strcasecmp (product, target_product) == 0)
-                {
-                  /* The rest of the magic happens on each page as we go along */
-                  gis_store_enter_unattended (config);
-                }
-              else
-                {
-                  g_warning ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
-                           target_product, target_vendor, product, vendor);
-                  /* Continue in attended mode */
-                }
-              g_free (target_vendor);
-              g_free (target_product);
-            }
-
-            g_free (vendor);
-            g_free (product);
-        }
+      /* The rest of the magic happens as we go along: each page gleans the
+       * relevant facts from the config.
+       */
+      gis_store_enter_unattended (config);
     }
 }
 

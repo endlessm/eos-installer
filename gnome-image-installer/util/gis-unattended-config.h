@@ -56,10 +56,32 @@ typedef enum {
 #define GIS_TYPE_UNATTENDED_CONFIG (gis_unattended_config_get_type ())
 G_DECLARE_FINAL_TYPE (GisUnattendedConfig, gis_unattended_config, GIS, UNATTENDED_CONFIG, GObject);
 
+/**
+ * GisUnattendedComputerMatch:
+ * @GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED: the unattended configuration doesn't
+ *  specify any target computers. Confirmation is required before reformatting.
+ * @GIS_UNATTENDED_COMPUTER_MATCHES: the unattended configuration specifies
+ *  some target computers, and the given vendor/product matches. No explicit
+ *  confirmation is required before reformatting.
+ * @GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH: the unattended configuration
+ *  specifies some target computers, but the given vendor/product doesn't match
+ *  any of them. Explicit confirmation, with a warning, is required before
+ *  reformatting.
+ */
+typedef enum {
+    GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED,
+    GIS_UNATTENDED_COMPUTER_MATCHES,
+    GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH
+} GisUnattendedComputerMatch;
+
 GisUnattendedConfig *gis_unattended_config_new (const gchar *file_path,
                                                 GError **error);
 
 const gchar *gis_unattended_config_get_locale (GisUnattendedConfig *self);
+
+GisUnattendedComputerMatch gis_unattended_config_match_computer (GisUnattendedConfig *self,
+                                                                 const gchar *vendor,
+                                                                 const gchar *product);
 
 GKeyFile *gis_unattended_config_get_key_file (GisUnattendedConfig *self);
 

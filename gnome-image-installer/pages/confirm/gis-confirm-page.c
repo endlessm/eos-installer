@@ -26,6 +26,7 @@
 #include "config.h"
 #include "confirm-resources.h"
 #include "gis-confirm-page.h"
+#include "gis-dmi.h"
 #include "gis-store.h"
 
 #include <udisks/udisks.h>
@@ -142,9 +143,13 @@ gis_confirm_page_shown (GisPage *page)
   UDisksDrive *target_drive = NULL;
   g_autofree gchar *target_model = NULL;
   g_autofree gchar *target_size = NULL;
-  /* TODO */
-  gboolean target_computer_specified = TRUE;
-  gboolean target_computer_matches = TRUE;
+  g_autofree gchar *vendor = NULL;
+  g_autofree gchar *product = NULL;
+  g_autofree gchar *unknown_markup = g_markup_printf_escaped ("<i>%s</i>",
+                                                              _("Unknown"));
+  GisUnattendedConfig *config;
+  GisUnattendedComputerMatch match;
+  g_autoptr(GError) error = NULL;
 
   if (gis_store_get_error() != NULL)
     {
@@ -152,7 +157,21 @@ gis_confirm_page_shown (GisPage *page)
       return;
     }
 
-  /* TODO: update DMI labels */
+  if (!gis_dmi_read_vendor_product (&vendor, &product, &error))
+    {
+      g_warning ("Failed to read DMI data: %s", error->message);
+      g_clear_error (&error);
+    }
+
+  if (vendor != NULL)
+    gtk_label_set_text (priv->vendor_label, vendor);
+  else
+    gtk_label_set_markup (priv->vendor_label, unknown_markup);
+
+  if (product != NULL)
+    gtk_label_set_text (priv->product_label, product);
+  else
+    gtk_label_set_markup (priv->product_label, unknown_markup);
 
   image_file = G_FILE (gis_store_get_object (GIS_STORE_IMAGE));
   image_basename = g_file_get_basename (image_file);
@@ -174,18 +193,26 @@ gis_confirm_page_shown (GisPage *page)
 
   g_clear_object (&target_drive);
 
+  config = gis_store_get_unattended_config ();
+  g_assert (config != NULL);
+  match = gis_unattended_config_match_computer (config, vendor, product);
   gtk_widget_set_visible (GTK_WIDGET (priv->countdown_label),
-                          target_computer_specified && target_computer_matches);
+                          match == GIS_UNATTENDED_COMPUTER_MATCHES);
   gtk_widget_set_visible (GTK_WIDGET (priv->wrong_computer_box),
-                          target_computer_specified && !target_computer_matches);
-  if (target_computer_specified && target_computer_matches)
+                          match == GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH);
+  switch (match)
     {
+    case GIS_UNATTENDED_COMPUTER_MATCHES:
       gis_confirm_page_start_countdown (self);
-    }
-  else if (target_computer_specified && !target_computer_matches)
-    {
+      break;
+    case GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH:
       gtk_button_set_label (priv->continue_button,
                             _("C_ontinue Anyway and Destroy Data"));
+      break;
+    case GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED:
+    default:
+      /* no action needed */
+      break;
     }
 
   gtk_widget_grab_default (GTK_WIDGET (priv->cancel_button));

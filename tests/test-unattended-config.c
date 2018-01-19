@@ -18,6 +18,7 @@
  * 02111-1307, USA.
  */
 #include "config.h"
+#include <string.h>
 #include <locale.h>
 #include <string.h>
 #include <glib/gstdio.h>
@@ -90,12 +91,19 @@ test_parse_empty (void)
     g_test_build_filename (G_TEST_DIST, "unattended/empty.ini", NULL);
   g_autoptr(GisUnattendedConfig) config = NULL;
   g_autoptr(GError) error = NULL;
+  GisUnattendedComputerMatch match;
 
   config = gis_unattended_config_new (empty_ini, &error);
   g_assert_no_error (error);
   g_assert_nonnull (config);
 
   g_assert_cmpstr (gis_unattended_config_get_locale (config), ==, NULL);
+
+  match = gis_unattended_config_match_computer (config, "vendor", "product");
+  g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED);
+
+  match = gis_unattended_config_match_computer (config, NULL, NULL);
+  g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED);
 }
 
 static void
@@ -105,12 +113,32 @@ test_parse_full (void)
     g_test_build_filename (G_TEST_DIST, "unattended/full.ini", NULL);
   g_autoptr(GisUnattendedConfig) config = NULL;
   g_autoptr(GError) error = NULL;
+  GisUnattendedComputerMatch match;
 
   config = gis_unattended_config_new (full_ini, &error);
   g_assert_no_error (error);
   g_assert_nonnull (config);
 
   g_assert_cmpstr (gis_unattended_config_get_locale (config), ==, "pt_BR.utf8");
+
+  match = gis_unattended_config_match_computer (config, "Asus", "X441SA");
+  g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_MATCHES);
+
+  match = gis_unattended_config_match_computer (config, "GIGABYTE",
+                                                "GB-BXBT-2807");
+  g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_MATCHES);
+
+  match = gis_unattended_config_match_computer (config, "Dell Inc.",
+                                                "XPS 13 9343");
+  g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH);
+
+  /* Test case-insensitivity */
+  match = gis_unattended_config_match_computer (config, "dELL iNC.",
+                                                "xps 13 9343");
+  g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH);
+
+  match = gis_unattended_config_match_computer (config, NULL, NULL);
+  g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH);
 }
 
 static void
@@ -178,6 +206,38 @@ test_parse_non_utf8_locale (void)
   g_assert_null (config);
 }
 
+static void
+test_missing_vendor (void)
+{
+  g_autofree gchar *missing_vendor_ini =
+    g_test_build_filename (G_TEST_DIST, "unattended/missing-vendor.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (missing_vendor_ini, &error);
+  g_assert_error (error,
+                  GIS_UNATTENDED_ERROR,
+                  GIS_UNATTENDED_ERROR_INVALID_COMPUTER);
+  g_assert_nonnull (strstr (error->message, "Computer 1"));
+  g_assert_null (config);
+}
+
+static void
+test_missing_product (void)
+{
+  g_autofree gchar *missing_product_ini =
+    g_test_build_filename (G_TEST_DIST, "unattended/missing-product.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (missing_product_ini, &error);
+  g_assert_error (error,
+                  GIS_UNATTENDED_ERROR,
+                  GIS_UNATTENDED_ERROR_INVALID_COMPUTER);
+  g_assert_nonnull (strstr (error->message, "Computer 2"));
+  g_assert_null (config);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -193,6 +253,8 @@ main (int argc, char *argv[])
   g_test_add ("/unattended-config/unreadable", Fixture, NULL, fixture_set_up,
               test_parse_unreadable, fixture_tear_down);
   g_test_add_func ("/unattended-config/non-utf8-locale", test_parse_non_utf8_locale);
+  g_test_add_func ("/unattended-config/computer/missing-vendor", test_missing_vendor);
+  g_test_add_func ("/unattended-config/computer/missing-product", test_missing_product);
 
   return g_test_run ();
 }

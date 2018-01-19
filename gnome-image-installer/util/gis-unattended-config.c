@@ -27,6 +27,10 @@
 #define EOS_GROUP "EndlessOS"
 #define LOCALE_KEY "locale"
 
+#define COMPUTER_GROUP_PREFIX "Computer"
+#define VENDOR_KEY "vendor"
+#define PRODUCT_KEY "product"
+
 typedef struct _GisUnattendedConfig {
   GObject parent;
 
@@ -36,6 +40,11 @@ typedef struct _GisUnattendedConfig {
   GKeyFile *key_file;
 
   gchar *locale;
+  /* Equal-length arrays of (owned) char *, where the pair at a given index
+   * corresponds to a computer listed in the unattended config file.
+   */
+  GPtrArray *vendors;
+  GPtrArray *products;
 } GisUnattendedConfig;
 
 G_DEFINE_QUARK (gis-unattended-error, gis_unattended_error);
@@ -60,6 +69,8 @@ static void
 gis_unattended_config_init (GisUnattendedConfig *self)
 {
   self->key_file = g_key_file_new ();
+  self->vendors = g_ptr_array_new_with_free_func (g_free);
+  self->products = g_ptr_array_new_with_free_func (g_free);
 }
 
 static void
@@ -101,6 +112,8 @@ gis_unattended_config_finalize (GObject *object)
 
   g_clear_pointer (&self->file_path, g_free);
   g_clear_pointer (&self->locale, g_free);
+  g_clear_pointer (&self->vendors, g_ptr_array_unref);
+  g_clear_pointer (&self->products, g_ptr_array_unref);
 
   G_OBJECT_CLASS (gis_unattended_config_parent_class)->finalize (object);
 }
@@ -158,11 +171,41 @@ static gboolean
 gis_unattended_config_populate_fields (GisUnattendedConfig *self,
                                        GError **error)
 {
+  g_auto(GStrv) groups = g_key_file_get_groups (self->key_file, NULL);
+  gchar **group;
+
   if (!key_file_get_optional_string (self->key_file,
                                      EOS_GROUP, LOCALE_KEY,
                                      &self->locale,
                                      error))
     return FALSE;
+
+  for (group = groups; *group != NULL; group++)
+    {
+      if (g_str_has_prefix (*group, COMPUTER_GROUP_PREFIX))
+        {
+          g_autoptr(GError) local_error = NULL;
+          g_autofree gchar *vendor = NULL;
+          g_autofree gchar *product = NULL;
+
+          /* both fields are mandatory, so fail on any error */
+          if (NULL == (vendor =
+                       g_key_file_get_string (self->key_file, *group,
+                                              VENDOR_KEY, &local_error)) ||
+              NULL == (product =
+                       g_key_file_get_string (self->key_file, *group,
+                                              PRODUCT_KEY, &local_error)))
+            {
+              g_set_error_literal (error, GIS_UNATTENDED_ERROR,
+                                   GIS_UNATTENDED_ERROR_INVALID_COMPUTER,
+                                   local_error->message);
+              return FALSE;
+            }
+
+          g_ptr_array_add (self->vendors, g_steal_pointer (&vendor));
+          g_ptr_array_add (self->products, g_steal_pointer (&product));
+        }
+    }
 
   return TRUE;
 }
@@ -230,6 +273,46 @@ const gchar *
 gis_unattended_config_get_locale (GisUnattendedConfig *self)
 {
   return self->locale;
+}
+
+/**
+ * gis_unattended_config_match_computer:
+ * @vendor: (nullable): the current computer's vendor, or %NULL if it could not
+ *  be determined
+ * @product: (nullable): the current computer's model, or %NULL if it could not
+ *  be determined
+ *
+ * Compares @vendor and @product to the computer(s) listed in the unattended
+ * configuration, ASCII case-insensitively. In the special case where @vendor
+ * or @product is %NULL, this function will never return
+ * %GIS_UNATTENDED_COMPUTER_MATCHES.
+ *
+ * Returns: whether the current computer matches the computers listed in @self
+ */
+GisUnattendedComputerMatch
+gis_unattended_config_match_computer (GisUnattendedConfig *self,
+                                      const gchar *vendor,
+                                      const gchar *product)
+{
+  guint n_computers = self->vendors->len;
+  guint i;
+
+  g_assert_cmpuint (self->vendors->len, ==, self->products->len);
+
+  if (n_computers == 0)
+    return GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED;
+
+  if (vendor == NULL || product == NULL)
+    return GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH;
+
+  for (i = 0; i < n_computers; i++)
+    {
+      if (g_strcmp0 (g_ptr_array_index (self->vendors, i), vendor) == 0 &&
+          g_strcmp0 (g_ptr_array_index (self->products, i), product) == 0)
+        return GIS_UNATTENDED_COMPUTER_MATCHES;
+    }
+
+  return GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH;
 }
 
 /**
