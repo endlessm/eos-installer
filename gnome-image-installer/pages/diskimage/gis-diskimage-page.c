@@ -436,7 +436,7 @@ first_existing (
 static gboolean
 gis_diskimage_page_add_live_image (
     GtkListStore        *store,
-    gchar               *path,
+    const gchar         *path,
     const gchar         *ufile,
     GError             **error)
 {
@@ -505,15 +505,16 @@ gis_diskimage_page_add_live_image (
 }
 
 static void
-gis_diskimage_page_populate_model(GisPage *page, gchar *path)
+gis_diskimage_page_populate_model (GisPage     *page,
+                                   const gchar *path)
 {
   g_autoptr(GError) error = NULL;
-  gchar *file = NULL;
+  const gchar *file = NULL;
   GisUnattendedConfig *config = gis_store_get_unattended_config ();
   const gchar *ufile =
     (config != NULL) ? gis_unattended_config_get_image (config) : NULL;
   GtkListStore *store = OBJ(GtkListStore*, "image_store");
-  GDir *dir;
+  g_autoptr(GDir) dir = NULL;
   GtkTreeIter iter;
   gboolean is_live = gis_store_is_live_install ();
 
@@ -527,7 +528,7 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
 
   gtk_list_store_clear(store);
 
-  for (file = (gchar*)g_dir_read_name (dir); file != NULL; file = (gchar*)g_dir_read_name (dir))
+  while ((file = g_dir_read_name (dir)))
     {
       /* ufile is only set in the unattended case */
       if (ufile == NULL || g_strcmp0 (ufile, file) == 0)
@@ -565,26 +566,23 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
       gis_store_set_error (error);
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
     }
-
-  g_dir_close (dir);
 }
 
 static void
 gis_diskimage_page_mount_ready (GObject *source, GAsyncResult *res, GisPage *page)
 {
   UDisksFilesystem *fs = UDISKS_FILESYSTEM (source);
-  GError *error = NULL;
-  gchar *path = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autofree gchar *path = NULL;
 
   if (!udisks_filesystem_call_mount_finish (fs, &path, res, &error))
     {
       gis_store_set_error (error);
-      g_error_free (error);
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
       return;
     }
 
-  gis_diskimage_page_populate_model(page, path);
+  gis_diskimage_page_populate_model (page, path);
 }
 
 static void
@@ -653,7 +651,7 @@ gis_diskimage_page_mount (GisPage *page)
 
       if (mounts != NULL && mounts[0] != NULL)
         {
-          gis_diskimage_page_populate_model(page, (gchar*)mounts[0]);
+          gis_diskimage_page_populate_model (page, mounts[0]);
         }
       else
         {
