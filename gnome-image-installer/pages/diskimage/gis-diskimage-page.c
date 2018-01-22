@@ -124,13 +124,15 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 
   gis_page_set_complete (page, TRUE);
 
-  if (gis_store_is_unattended())
+  if (gis_store_is_unattended ())
     {
       if (gtk_tree_model_iter_n_children (model, NULL) > 1)
         {
-          GError *error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+          g_autoptr(GError) error =
+            g_error_new_literal (GIS_UNATTENDED_ERROR,
+                                 GIS_UNATTENDED_ERROR_IMAGE_AMBIGUOUS,
+                                 _("More than one image was found"));
           gis_store_set_error (error);
-          g_clear_error (&error);
         }
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
     }
@@ -433,10 +435,10 @@ first_existing (
  */
 static gboolean
 gis_diskimage_page_add_live_image (
-    GtkListStore *store,
-    gchar        *path,
-    const gchar  *ufile,
-    GError      **error)
+    GtkListStore        *store,
+    gchar               *path,
+    const gchar         *ufile,
+    GError             **error)
 {
   g_autofree gchar *endless_img_path = g_build_path (
       "/", path, "endless", "endless.img", NULL);
@@ -473,9 +475,10 @@ gis_diskimage_page_add_live_image (
 
   if (ufile != NULL && g_strcmp0 (ufile, live_flag_contents) != 0)
     {
-      g_set_error (error, GIS_IMAGE_ERROR, 0,
-          "live image '%s' doesn't match unattended image '%s'",
-          live_flag_contents, ufile);
+      g_set_error (error, GIS_UNATTENDED_ERROR,
+                   GIS_UNATTENDED_ERROR_IMAGE_NOT_FOUND,
+                   "Live image ‘%s’ doesn't match configured image ‘%s’",
+                   live_flag_contents, ufile);
       return FALSE;
     }
 
@@ -504,9 +507,11 @@ gis_diskimage_page_add_live_image (
 static void
 gis_diskimage_page_populate_model(GisPage *page, gchar *path)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   gchar *file = NULL;
-  gchar *ufile = NULL;
+  GisUnattendedConfig *config = gis_store_get_unattended_config ();
+  const gchar *ufile =
+    (config != NULL) ? gis_unattended_config_get_image (config) : NULL;
   GtkListStore *store = OBJ(GtkListStore*, "image_store");
   GDir *dir;
   GtkTreeIter iter;
@@ -516,37 +521,20 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
   if (dir == NULL)
     {
       gis_store_set_error (error);
-      g_clear_error (&error);
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
       return;
     }
 
   gtk_list_store_clear(store);
 
-  if (gis_store_is_unattended())
-    {
-      GKeyFile *keys = gis_store_get_key_file();
-      if (keys != NULL)
-        {
-          ufile = g_key_file_get_string (keys, "Unattended", "image", NULL);
-        }
-    }
-
   for (file = (gchar*)g_dir_read_name (dir); file != NULL; file = (gchar*)g_dir_read_name (dir))
     {
-      gchar *fullpath = g_build_path ("/", path, file, NULL);
-
       /* ufile is only set in the unattended case */
-      if (ufile != NULL)
+      if (ufile == NULL || g_strcmp0 (ufile, file) == 0)
         {
-          if (g_str_equal (ufile, file))
-            add_image (store, fullpath, NULL, NULL);
-        }
-      else
-        {
+          g_autofree gchar *fullpath = g_build_path ("/", path, file, NULL);
           add_image (store, fullpath, NULL, NULL);
         }
-      g_free (fullpath);
     }
 
   if (is_live &&
@@ -563,9 +551,18 @@ gis_diskimage_page_populate_model(GisPage *page, gchar *path)
   else
     {
       if (error == NULL)
-        error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+        {
+          if (ufile != NULL)
+            g_set_error (&error, GIS_UNATTENDED_ERROR,
+                         GIS_UNATTENDED_ERROR_IMAGE_NOT_FOUND,
+                         /* Translators: the placeholder is a filename. */
+                         _("Configured image '%s' was not found."),
+                         ufile);
+          else
+            g_set_error_literal (&error, GIS_IMAGE_ERROR, 0,
+                                 _("No suitable images were found."));
+        }
       gis_store_set_error (error);
-      g_clear_error (&error);
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
     }
 
@@ -593,7 +590,7 @@ gis_diskimage_page_mount_ready (GObject *source, GAsyncResult *res, GisPage *pag
 static void
 gis_diskimage_page_mount (GisPage *page)
 {
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   gboolean is_live = gis_store_is_live_install ();
   const gchar *uuid = gis_store_get_image_uuid ();
   UDisksClient *client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
@@ -667,9 +664,9 @@ gis_diskimage_page_mount (GisPage *page)
       return;
     }
 
-  error = g_error_new (GIS_IMAGE_ERROR, 0, _("No suitable images were found."));
+  error = g_error_new (GIS_IMAGE_ERROR, 0,
+                       _("Could not find partition holding Endless OS files"));
   gis_store_set_error (error);
-  g_clear_error (&error);
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 }
 

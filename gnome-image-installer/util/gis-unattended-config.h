@@ -79,6 +79,11 @@ GisUnattendedConfig *gis_unattended_config_new (const gchar *file_path,
 
 const gchar *gis_unattended_config_get_locale (GisUnattendedConfig *self);
 
+const gchar *gis_unattended_config_get_image (GisUnattendedConfig *self);
+
+gboolean gis_unattended_config_matches_device (GisUnattendedConfig *self,
+                                               const gchar *device);
+
 GisUnattendedComputerMatch gis_unattended_config_match_computer (GisUnattendedConfig *self,
                                                                  const gchar *vendor,
                                                                  const gchar *product);

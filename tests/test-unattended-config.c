@@ -104,6 +104,10 @@ test_parse_empty (void)
 
   match = gis_unattended_config_match_computer (config, NULL, NULL);
   g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED);
+
+  g_assert_null (gis_unattended_config_get_image (config));
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/sda"));
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/mmcblk0"));
 }
 
 static void
@@ -139,6 +143,12 @@ test_parse_full (void)
 
   match = gis_unattended_config_match_computer (config, NULL, NULL);
   g_assert_cmpuint (match, ==, GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH);
+
+  g_assert_cmpstr (gis_unattended_config_get_image (config), ==,
+                   "eos-eos3.3-amd64-amd64.180115-104625.en.img.gz");
+
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/sda"));
+  g_assert_false (gis_unattended_config_matches_device (config, "/dev/mmcblk0"));
 }
 
 static void
@@ -238,6 +248,101 @@ test_missing_product (void)
   g_assert_null (config);
 }
 
+static void
+test_full_block_device_path (void)
+{
+  g_autofree gchar *full_block_device_path =
+    g_test_build_filename (G_TEST_DIST, "unattended/full-block-device-path.ini",
+                           NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (full_block_device_path, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (config);
+
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/sda"));
+  g_assert_false (gis_unattended_config_matches_device (config, "/dev/sdb"));
+  g_assert_false (gis_unattended_config_matches_device (config, "/dev/mmcblk0"));
+}
+
+static void
+test_missing_block_device (void)
+{
+  g_autofree gchar *missing_block_deviceini =
+    g_test_build_filename (G_TEST_DIST, "unattended/missing-block-device.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (missing_block_deviceini, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (config);
+
+  g_assert_cmpstr (gis_unattended_config_get_image (config), ==,
+                   "eos-eos3.3-amd64-amd64.180115-104625.en.img.gz");
+
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/sda"));
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/mmcblk0"));
+}
+
+static void
+test_blank_block_device (void)
+{
+  g_autofree gchar *blank_block_deviceini =
+    g_test_build_filename (G_TEST_DIST, "unattended/blank-block-device.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  /* The semantics of the 'block-device' key are:
+   * - if it starts with a /, require an exact match
+   * - otherwise, match the prefix of the device's basename
+   *
+   * Empty string would match any block device. Given that you can just omit
+   * this key entirely to match any device, it's probably an error to leave it
+   * blank. Let's report it.
+   */
+  config = gis_unattended_config_new (blank_block_deviceini, &error);
+  g_assert_error (error,
+                  GIS_UNATTENDED_ERROR,
+                  GIS_UNATTENDED_ERROR_INVALID_IMAGE);
+  g_assert_null (config);
+}
+
+static void
+test_missing_filename (void)
+{
+  g_autofree gchar *missing_filename_ini =
+    g_test_build_filename (G_TEST_DIST, "unattended/missing-filename.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (missing_filename_ini, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (config);
+
+  g_assert_null (gis_unattended_config_get_image (config));
+
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/sda"));
+  g_assert_false (gis_unattended_config_matches_device (config, "/dev/mmcblk0"));
+}
+
+static void
+test_two_images (void)
+{
+  g_autofree gchar *two_images_ini =
+    g_test_build_filename (G_TEST_DIST, "unattended/two-images.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (two_images_ini, &error);
+  g_assert_nonnull (strstr (error->message, "Image 1"));
+  g_assert_nonnull (strstr (error->message, "Image 2"));
+  g_assert_error (error,
+                  GIS_UNATTENDED_ERROR,
+                  GIS_UNATTENDED_ERROR_INVALID_IMAGE);
+  g_assert_null (config);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -255,6 +360,11 @@ main (int argc, char *argv[])
   g_test_add_func ("/unattended-config/non-utf8-locale", test_parse_non_utf8_locale);
   g_test_add_func ("/unattended-config/computer/missing-vendor", test_missing_vendor);
   g_test_add_func ("/unattended-config/computer/missing-product", test_missing_product);
+  g_test_add_func ("/unattended-config/image/full-block-device-path", test_full_block_device_path);
+  g_test_add_func ("/unattended-config/image/blank-block-device", test_blank_block_device);
+  g_test_add_func ("/unattended-config/image/missing-block-device", test_missing_block_device);
+  g_test_add_func ("/unattended-config/image/missing-filename", test_missing_filename);
+  g_test_add_func ("/unattended-config/image/two-images", test_two_images);
 
   return g_test_run ();
 }

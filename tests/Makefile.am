@@ -20,11 +20,16 @@ dist_test_data = \
 	public.asc \
 	secret.asc \
 	sign-file \
+	unattended/blank-block-device.ini \
 	unattended/empty.ini \
+	unattended/full-block-device-path.ini \
 	unattended/full.ini \
+	unattended/missing-block-device.ini \
+	unattended/missing-filename.ini \
 	unattended/missing-product.ini \
 	unattended/missing-vendor.ini \
 	unattended/non-utf8-locale.ini \
+	unattended/two-images.ini \
 	wjt.asc \
 	$(NULL)
 

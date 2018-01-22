@@ -31,6 +31,10 @@
 #define VENDOR_KEY "vendor"
 #define PRODUCT_KEY "product"
 
+#define IMAGE_GROUP_PREFIX "Image"
+#define FILENAME_KEY "filename"
+#define BLOCK_DEVICE_KEY "block-device"
+
 typedef struct _GisUnattendedConfig {
   GObject parent;
 
@@ -45,6 +49,10 @@ typedef struct _GisUnattendedConfig {
    */
   GPtrArray *vendors;
   GPtrArray *products;
+
+  /** Basename of image file */
+  gchar *filename;
+  gchar *block_device;
 } GisUnattendedConfig;
 
 G_DEFINE_QUARK (gis-unattended-error, gis_unattended_error);
@@ -114,6 +122,8 @@ gis_unattended_config_finalize (GObject *object)
   g_clear_pointer (&self->locale, g_free);
   g_clear_pointer (&self->vendors, g_ptr_array_unref);
   g_clear_pointer (&self->products, g_ptr_array_unref);
+  g_clear_pointer (&self->filename, g_free);
+  g_clear_pointer (&self->block_device, g_free);
 
   G_OBJECT_CLASS (gis_unattended_config_parent_class)->finalize (object);
 }
@@ -168,11 +178,41 @@ key_file_get_optional_string (GKeyFile    *key_file,
 }
 
 static gboolean
+key_file_get_optional_nonempty_string (GKeyFile    *key_file,
+                                       const gchar *group_name,
+                                       const gchar *key,
+                                       gchar      **value_out,
+                                       GError     **error)
+{
+  g_return_val_if_fail (value_out != NULL && *value_out == NULL, FALSE);
+
+  if (!key_file_get_optional_string (key_file, group_name, key, value_out,
+                                     error))
+    return FALSE;
+
+  if (*value_out != NULL && **value_out == '\0')
+    {
+      g_set_error (error, GIS_UNATTENDED_ERROR,
+                   GIS_UNATTENDED_ERROR_INVALID_IMAGE,
+                   /* Translators: this error refers to a configuration
+                    * file. The placeholder is the name of a field in
+                    * the file.
+                    */
+                   _("%s key is empty"),
+                   key);
+      return FALSE;
+    }
+
+  return TRUE;
+}
+
+static gboolean
 gis_unattended_config_populate_fields (GisUnattendedConfig *self,
                                        GError **error)
 {
   g_auto(GStrv) groups = g_key_file_get_groups (self->key_file, NULL);
   gchar **group;
+  const gchar *seen_image_group = NULL;
 
   if (!key_file_get_optional_string (self->key_file,
                                      EOS_GROUP, LOCALE_KEY,
@@ -204,6 +244,32 @@ gis_unattended_config_populate_fields (GisUnattendedConfig *self,
 
           g_ptr_array_add (self->vendors, g_steal_pointer (&vendor));
           g_ptr_array_add (self->products, g_steal_pointer (&product));
+        }
+      else if (g_str_has_prefix (*group, IMAGE_GROUP_PREFIX))
+        {
+          if (seen_image_group != NULL)
+            {
+              g_set_error (error, GIS_UNATTENDED_ERROR,
+                           GIS_UNATTENDED_ERROR_INVALID_IMAGE,
+                           /* Translators: this error refers to a configuration
+                            * file. The placeholders are all the name of
+                            * sections in an .ini-style file.
+                            */
+                           _("More than one %s section (%s and %s)"),
+                           "Image", seen_image_group, *group);
+              return FALSE;
+            }
+
+          seen_image_group = *group;
+          if (!key_file_get_optional_nonempty_string (self->key_file,
+                                                      *group, FILENAME_KEY,
+                                                      &self->filename,
+                                                      error) ||
+              !key_file_get_optional_nonempty_string (self->key_file,
+                                                      *group, BLOCK_DEVICE_KEY,
+                                                      &self->block_device,
+                                                      error))
+            return FALSE;
         }
     }
 
@@ -273,6 +339,41 @@ const gchar *
 gis_unattended_config_get_locale (GisUnattendedConfig *self)
 {
   return self->locale;
+}
+
+/**
+ * gis_unattended_config_get_image:
+ *
+ * Returns: the basename of the configured image, or %NULL if no specific image
+ *  is configured.
+ */
+const gchar *
+gis_unattended_config_get_image (GisUnattendedConfig *self)
+{
+  return self->filename;
+}
+
+/**
+ * gis_unattended_config_matches_device:
+ * @device: full path to a block device
+ *
+ * Returns: %TRUE if @device matches the configured target device, or if none
+ *  is configured.
+ */
+gboolean
+gis_unattended_config_matches_device (GisUnattendedConfig *self,
+                                      const gchar *device)
+{
+  g_autofree gchar *basename = NULL;
+
+  if (self->block_device == NULL)
+    return TRUE;
+
+  if (self->block_device[0] == '/')
+    return g_strcmp0 (device, self->block_device) == 0;
+
+  basename = g_path_get_basename (device);
+  return g_str_has_prefix (basename, self->block_device);
 }
 
 /**

@@ -138,10 +138,11 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
     {
       if (gtk_tree_model_iter_n_children (model, NULL) > 1)
         {
-          const gchar *text = gtk_label_get_text (OBJ (GtkLabel*, "suitable_disks_label"));
-          GError *error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
+          g_autoptr(GError) error =
+            g_error_new_literal (GIS_UNATTENDED_ERROR,
+                                 GIS_UNATTENDED_ERROR_DEVICE_AMBIGUOUS,
+                                 _("More than one candidate block device was found."));
           gis_store_set_error (error);
-          g_clear_error (&error);
         }
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
     }
@@ -265,22 +266,13 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GList *objects = g_dbus_object_manager_get_objects(manager);
   GtkListStore *store = OBJ(GtkListStore*, "target_store");
   GtkTreeIter i;
-  gchar *umodel = NULL;
+  GisUnattendedConfig *config = gis_store_get_unattended_config ();
   UDisksDrive *root = NULL;
   UDisksDrive *image_drive = UDISKS_DRIVE (gis_store_get_object (GIS_STORE_IMAGE_DRIVE));
   const gchar *image_drive_path = NULL;
 
   if (image_drive != NULL)
     image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (image_drive));
-
-  if (gis_store_is_unattended())
-    {
-      GKeyFile *keys = gis_store_get_key_file();
-      if (keys != NULL)
-        {
-          umodel = g_key_file_get_string (keys, "Unattended", "model", NULL);
-        }
-    }
 
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear(store);
@@ -292,6 +284,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       const gchar *object_path;
       UDisksDrive *drive = udisks_object_peek_drive(object);
       UDisksBlock *block;
+      const gchar *block_device;
       gboolean has_data_partitions;
       if (drive == NULL)
         continue;
@@ -307,14 +300,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
         }
 
       skip_if (drive == root, "it is the root device");
-
-      if (gis_store_is_unattended() && umodel != NULL)
-        {
-          const gchar *model = udisks_drive_get_model (drive);
-          skip_if (!g_str_equal (umodel, model),
-                   "its model '%s' does not match '%s'", model, umodel);
-        }
-
       skip_if (udisks_drive_get_optical (drive), "optical");
       skip_if (udisks_drive_get_ejectable (drive), "ejectable");
 
@@ -323,6 +308,10 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
       skip_if (0 == g_strcmp0 (object_path, image_drive_path),
                "it hosts the image partition");
+      block_device = udisks_block_get_device (block);
+      skip_if (config != NULL &&
+               !gis_unattended_config_matches_device (config, block_device),
+               "it doesn't match the unattended config");
 #undef skip_if
 
       if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
@@ -364,13 +353,23 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
       GList *pages = g_list_last (gis_assistant_get_all_pages (assistant));
       const gchar *text = gtk_label_get_text (OBJ (GtkLabel*, "suitable_disks_label"));
-      GError *error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
+      g_autoptr(GError) error = NULL;
+
+      if (gis_store_is_unattended ())
+        {
+          error = g_error_new_literal (GIS_UNATTENDED_ERROR,
+                                       GIS_UNATTENDED_ERROR_DEVICE_NOT_FOUND,
+                                       text);
+        }
+      else
+        {
+          error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
+        }
 
       pages = g_list_remove (pages, pages->prev->data);
       gis_page_set_forward_text (page, _("Finish"));
       gis_assistant_locale_changed (assistant);
       gis_store_set_error (error);
-      g_clear_error (&error);
       gis_page_set_complete (GIS_PAGE (page), TRUE);
 
       if (gis_store_is_unattended())
