@@ -637,18 +637,6 @@ gis_diskimage_page_mount (GisPage *page)
 
       g_print ("found label or UUID partition at %s\n", dev);
 
-      mounts = udisks_filesystem_get_mount_points (fs);
-
-      if (mounts != NULL && mounts[0] != NULL)
-        {
-          gis_diskimage_page_populate_model(page, (gchar*)mounts[0]);
-        }
-      else
-        {
-          udisks_filesystem_call_mount (fs, g_variant_new ("a{sv}", NULL), NULL,
-                                        (GAsyncReadyCallback)gis_diskimage_page_mount_ready, page);
-        }
-
       drive = udisks_client_get_drive_for_block (client, block);
       if (drive != NULL)
         {
@@ -660,6 +648,18 @@ gis_diskimage_page_mount (GisPage *page)
        * device (because we can't mount the real one directly). In this case,
        * the UDisksBlock has no associated UDisksDrive.
        */
+
+      mounts = udisks_filesystem_get_mount_points (fs);
+
+      if (mounts != NULL && mounts[0] != NULL)
+        {
+          gis_diskimage_page_populate_model(page, (gchar*)mounts[0]);
+        }
+      else
+        {
+          udisks_filesystem_call_mount (fs, g_variant_new ("a{sv}", NULL), NULL,
+                                        (GAsyncReadyCallback)gis_diskimage_page_mount_ready, page);
+        }
 
       return;
     }
