@@ -179,14 +179,5 @@ gboolean gis_store_is_live_install(void)
   return _live_install;
 }
 
-GKeyFile *gis_store_get_key_file(void)
-{
-  if (_config == NULL)
-    return NULL;
-
-  return gis_unattended_config_get_key_file (_config);
-}
-
-
 /* Epilogue {{{1 */
 /* vim: set foldmethod=marker: */

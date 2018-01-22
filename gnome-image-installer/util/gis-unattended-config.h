@@ -88,8 +88,6 @@ GisUnattendedComputerMatch gis_unattended_config_match_computer (GisUnattendedCo
                                                                  const gchar *vendor,
                                                                  const gchar *product);
 
-GKeyFile *gis_unattended_config_get_key_file (GisUnattendedConfig *self);
-
 G_END_DECLS
 
 #endif /* GIS_UNATTENDED_CONFIG_H */

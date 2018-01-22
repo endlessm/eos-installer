@@ -79,8 +79,6 @@ GisUnattendedConfig *gis_store_get_unattended_config (void);
 void gis_store_enter_live_install(void);
 gboolean gis_store_is_live_install(void);
 
-GKeyFile *gis_store_get_key_file(void);
-
 G_END_DECLS
 
 #endif /* __GIS_STORE_H__ */
