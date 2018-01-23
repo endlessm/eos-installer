@@ -276,8 +276,11 @@ rebuild_pages_cb (GisDriver *driver)
 
   gis_assistant_locale_changed (assistant);
 
-  /* Skip welcome page in unattended mode */
-  if (gis_store_is_unattended () && !gis_store_is_live_install ())
+  /* In non-live mode, skip welcome page if we're in unattended mode or have
+   * already encountered an error.
+   */
+  if ((gis_store_is_unattended () || gis_store_get_error () != NULL) &&
+      !gis_store_is_live_install ())
     gis_assistant_next_page (assistant);
 }
 

@@ -673,7 +673,10 @@ gis_diskimage_page_shown_idle_cb (gpointer user_data)
 {
   GisPage *page = GIS_PAGE (user_data);
 
-  gis_diskimage_page_mount (page);
+  if (gis_store_get_error () != NULL)
+    gis_assistant_next_page (gis_driver_get_assistant (page->driver));
+  else
+    gis_diskimage_page_mount (page);
 
   return G_SOURCE_REMOVE;
 }
