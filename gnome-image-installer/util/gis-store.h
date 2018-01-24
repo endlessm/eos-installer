@@ -42,7 +42,14 @@ typedef enum {
   /* UDisksClient: global shared UDisks client proxy */
   GIS_STORE_UDISKS_CLIENT,
 
-  /* UDisksDrive: drive hosting partition hosting GIS_STORE_IMAGE */
+  /* GFile: mount point of partition holding GIS_STORE_IMAGE. This is not
+   * always the parent directory of GIS_STORE_IMAGE!
+   */
+  GIS_STORE_IMAGE_DIR,
+
+  /* UDisksDrive: drive hosting partition mounted at GIS_STORE_IMAGE_DIR, or
+   * NULL if it can't be determined
+   */
   GIS_STORE_IMAGE_DRIVE,
 
   GIS_STORE_N_OBJECTS

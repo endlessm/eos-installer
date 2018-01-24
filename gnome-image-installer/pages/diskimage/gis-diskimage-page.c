@@ -508,6 +508,7 @@ static void
 gis_diskimage_page_populate_model (GisPage     *page,
                                    const gchar *path)
 {
+  g_autoptr(GFile) path_file = g_file_new_for_path (path);
   g_autoptr(GError) error = NULL;
   const gchar *file = NULL;
   GisUnattendedConfig *config = gis_store_get_unattended_config ();
@@ -526,6 +527,7 @@ gis_diskimage_page_populate_model (GisPage     *page,
       return;
     }
 
+  gis_store_set_object (GIS_STORE_IMAGE_DIR, G_OBJECT (path_file));
   gtk_list_store_clear(store);
 
   while ((file = g_dir_read_name (dir)))
