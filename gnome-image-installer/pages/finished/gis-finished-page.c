@@ -1,7 +1,7 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
  * Copyright (C) 2012 Red Hat
- *               2016 Endless Mobile, Inc.
+ * Copyright (C) 2016–2018 Endless Mobile, Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -182,7 +182,18 @@ gis_finished_page_shown (GisPage *page)
   if (error != NULL)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
-      gtk_label_set_text (OBJ (GtkLabel*, "error_label"), error->message);
+      GtkLabel *error_heading_label = OBJ (GtkLabel*, "error_heading_label");
+      GtkLabel *error_label = OBJ (GtkLabel*, "error_label");
+
+      if (error->domain == GIS_UNATTENDED_ERROR)
+        gtk_label_set_text (error_heading_label,
+                            _("Oops, something is wrong with your unattended installation configuration."));
+      /* Otherwise, leave the default message (indicating a problem with the
+       * image file). TODO: handle other domains that indicate problems
+       * elsewhere.
+       */
+
+      gtk_label_set_text (error_label, error->message);
       gtk_widget_show (WID ("error_box"));
       gtk_widget_hide (WID ("success_box"));
       gis_assistant_locale_changed (assistant);
