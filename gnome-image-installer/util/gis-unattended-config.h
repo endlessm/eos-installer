@@ -88,6 +88,15 @@ GisUnattendedComputerMatch gis_unattended_config_match_computer (GisUnattendedCo
                                                                  const gchar *vendor,
                                                                  const gchar *product);
 
+gboolean gis_unattended_config_write (const gchar *target_path,
+                                      const gchar *locale,
+                                      const gchar *image,
+                                      const gchar *block_device,
+                                      const gchar *vendor,
+                                      const gchar *product,
+                                      gchar      **backup_basename,
+                                      GError     **error);
+
 G_END_DECLS
 
 #endif /* GIS_UNATTENDED_CONFIG_H */

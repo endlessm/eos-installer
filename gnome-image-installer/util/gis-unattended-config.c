@@ -21,8 +21,10 @@
 #include "gis-unattended-config.h"
 
 #include <glib/gi18n.h>
+#include <glib/gstdio.h>
 
 #include "glnx-errors.h"
+#include "glnx-fdio.h"
 
 #define EOS_GROUP "EndlessOS"
 #define LOCALE_KEY "locale"
@@ -414,4 +416,118 @@ gis_unattended_config_match_computer (GisUnattendedConfig *self,
     }
 
   return GIS_UNATTENDED_COMPUTER_DOES_NOT_MATCH;
+}
+
+static gchar *
+invent_backup_name (const gchar *source,
+                    GError     **error)
+{
+  g_autofree gchar *dirname = g_path_get_dirname (source);
+  g_autofree gchar *basename = g_path_get_basename (source);
+  gchar *dot = strrchr (basename, '.');
+  g_autofree gchar *target_basename = NULL;
+  g_autofree gchar *target = NULL;
+  gint fd = -1;
+
+  if (dot == NULL)
+    {
+      target_basename = g_strjoin (".", basename, "XXXXXX", NULL);
+    }
+  else
+    {
+      *dot = '\0';
+      target_basename = g_strjoin (".", basename, "XXXXXX", dot + 1, NULL);
+    }
+
+  target = g_build_path (G_DIR_SEPARATOR_S, dirname, target_basename, NULL);
+  if ((fd = g_mkstemp (target)) < 0)
+    return glnx_null_throw_errno_prefix (error,
+                                         "Couldn't create a backup file in ‘%s’",
+                                         dirname);
+
+  /* We just want the fresh filename */
+  if (!g_close (fd, error))
+    return NULL;
+
+  return g_steal_pointer (&target);
+}
+
+static gboolean
+key_file_save_to_file_with_backup (GKeyFile    *key_file,
+                                   const gchar *target_path,
+                                   gchar      **backup_basename,
+                                   GError     **error)
+{
+  g_autoptr(GFile) target_file = g_file_new_for_path (target_path);
+  g_autofree gchar *backup_path = NULL;
+
+  if (!g_file_query_exists (target_file, NULL))
+    {
+      *backup_basename = NULL;
+      return g_key_file_save_to_file (key_file, target_path, error);
+    }
+
+  backup_path = invent_backup_name (target_path, error);
+  if (backup_path == NULL)
+    return FALSE;
+
+  if (!g_key_file_save_to_file (key_file, backup_path, error))
+    return FALSE;
+
+  if (glnx_renameat2_exchange (AT_FDCWD, target_path,
+                               AT_FDCWD, backup_path) < 0)
+    return glnx_throw_errno_prefix (error, "Couldn't exchange ‘%s’ and ‘%s’",
+                                    target_path, backup_path);
+
+  *backup_basename = g_path_get_basename (backup_path);
+  return TRUE;
+}
+
+/**
+ * gis_unattended_config_write:
+ * @target_path: where to write new unattended config. If it already exists,
+ *  the existing file will be renamed to a unique name in the same directory.
+ * @backup_basename: (out) (nullable) (not optional): set to the basename of
+ *  backup of @target_path, if it already existed, or to %NULL if it did not.
+ *
+ * Either @vendor and @product must both be %NULL, or they must both be
+ * non-%NULL.
+ */
+gboolean
+gis_unattended_config_write (const gchar *target_path,
+                             const gchar *locale,
+                             const gchar *image,
+                             const gchar *block_device,
+                             const gchar *vendor,
+                             const gchar *product,
+                             gchar      **backup_basename,
+                             GError     **error)
+{
+  g_autoptr(GKeyFile) key_file = g_key_file_new ();
+
+  if (locale != NULL)
+    g_key_file_set_string (key_file, EOS_GROUP, LOCALE_KEY, locale);
+
+  if (image != NULL)
+    g_key_file_set_string (key_file, IMAGE_GROUP_PREFIX, FILENAME_KEY, image);
+
+  if (block_device != NULL)
+    g_key_file_set_string (key_file, IMAGE_GROUP_PREFIX, BLOCK_DEVICE_KEY,
+                           block_device);
+
+  if (vendor != NULL)
+    {
+      g_return_val_if_fail (product != NULL, FALSE);
+      g_key_file_set_string (key_file, COMPUTER_GROUP_PREFIX, VENDOR_KEY,
+                             vendor);
+      g_key_file_set_string (key_file, COMPUTER_GROUP_PREFIX, PRODUCT_KEY,
+                             product);
+    }
+  else
+    {
+      g_return_val_if_fail (product == NULL, FALSE);
+    }
+
+  return key_file_save_to_file_with_backup (key_file, target_path,
+                                            backup_basename, error);
 }

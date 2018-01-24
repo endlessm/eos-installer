@@ -343,6 +343,117 @@ test_two_images (void)
   g_assert_null (config);
 }
 
+static void
+test_write_empty (Fixture *fixture,
+                  gconstpointer data)
+{
+  g_autofree gchar *path = g_build_path ("/", fixture->tmpdir,
+                                         "unattended.ini", NULL);
+  g_autofree gchar *backup = NULL;
+  g_autoptr(GError) error = NULL;
+  gboolean ret;
+  g_autoptr(GisUnattendedConfig) config = NULL;
+
+  ret = gis_unattended_config_write (path, NULL, NULL, NULL, NULL, NULL,
+                                     &backup, &error);
+  g_assert_no_error (error);
+  g_assert_true (ret);
+  g_assert_cmpstr (backup, ==, NULL);
+
+  config = gis_unattended_config_new (path, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (config);
+
+  g_assert_cmpstr (gis_unattended_config_get_locale (config), ==, NULL);
+  g_assert_cmpstr (gis_unattended_config_get_image (config), ==, NULL);
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/sda"));
+  g_assert_true (gis_unattended_config_matches_device (config,
+                                                       "/dev/mmcblk0"));
+  g_assert_cmpuint (gis_unattended_config_match_computer (config, "a", "b"),
+                    ==, GIS_UNATTENDED_COMPUTER_NOT_SPECIFIED);
+}
+
+static void
+test_write_full (Fixture *fixture,
+                 gconstpointer data)
+{
+  g_autofree gchar *path = g_build_path ("/", fixture->tmpdir,
+                                         "unattended.ini", NULL);
+  g_autofree gchar *backup = NULL;
+  g_autoptr(GError) error = NULL;
+  gboolean ret;
+  g_autoptr(GisUnattendedConfig) config = NULL;
+
+  ret = gis_unattended_config_write (path, "en_GB.utf8", "foo.img.gz",
+                                     "/dev/sda", "vendor", "product",
+                                     &backup, &error);
+  g_assert_no_error (error);
+  g_assert_true (ret);
+  g_assert_cmpstr (backup, ==, NULL);
+
+  config = gis_unattended_config_new (path, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (config);
+
+  g_assert_cmpstr (gis_unattended_config_get_locale (config), ==, "en_GB.utf8");
+  g_assert_cmpstr (gis_unattended_config_get_image (config), ==, "foo.img.gz");
+  g_assert_true (gis_unattended_config_matches_device (config, "/dev/sda"));
+  g_assert_false (gis_unattended_config_matches_device (config,
+                                                        "/dev/mmcblk0"));
+  g_assert_cmpuint (gis_unattended_config_match_computer (config, "vendor",
+                                                          "product"),
+                    ==, GIS_UNATTENDED_COMPUTER_MATCHES);
+}
+
+static void
+test_write_rename_existing (Fixture *fixture,
+                            gconstpointer data)
+{
+  const gchar *extension = data; /* NULL or ".ini" */
+  g_autofree gchar *basename = g_strconcat ("unattended", extension, NULL);
+  g_autofree gchar *path = g_build_path ("/", fixture->tmpdir, basename, NULL);
+  g_autoptr(GError) error = NULL;
+  gboolean ret;
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autofree gchar *backup = NULL;
+  g_autofree gchar *backup_path = NULL;
+  g_autofree gchar *backup_contents = NULL;
+
+  ret = g_file_set_contents (path, "old contents", -1, &error);
+  g_assert_no_error (error);
+  g_assert_true (ret);
+
+  ret = gis_unattended_config_write (path, NULL, NULL, NULL, "vendor",
+                                     "product", &backup, &error);
+  g_assert_no_error (error);
+  g_assert_true (ret);
+  g_assert_nonnull (backup);
+
+  /* The file should have been overwritten */
+  config = gis_unattended_config_new (path, &error);
+  g_assert_no_error (error);
+  g_assert_nonnull (config);
+  g_assert_cmpuint (gis_unattended_config_match_computer (config, "vendor",
+                                                          "product"),
+                    ==, GIS_UNATTENDED_COMPUTER_MATCHES);
+
+  /* The backup should have a reasonable name */
+  if (!g_str_has_prefix (backup, "unattended.") ||
+      (extension != NULL && !g_str_has_suffix (backup, ".ini")))
+    {
+      g_test_message ("Backup file had unexpected name: %s", backup);
+      g_test_fail ();
+      return;
+    }
+
+  /* It should contain the old contents */
+  backup_path = g_build_path ("/", fixture->tmpdir, backup, NULL);
+  ret = g_file_get_contents (backup_path, &backup_contents, NULL, &error);
+  g_assert_no_error (error);
+  g_assert_true (ret);
+  g_assert_cmpstr (backup_contents, ==, "old contents");
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -365,6 +476,17 @@ main (int argc, char *argv[])
   g_test_add_func ("/unattended-config/image/missing-block-device", test_missing_block_device);
   g_test_add_func ("/unattended-config/image/missing-filename", test_missing_filename);
   g_test_add_func ("/unattended-config/image/two-images", test_two_images);
+
+  g_test_add ("/unattended-config/write/empty", Fixture, NULL, fixture_set_up,
+              test_write_empty, fixture_tear_down);
+  g_test_add ("/unattended-config/write/full", Fixture, NULL, fixture_set_up,
+              test_write_full, fixture_tear_down);
+  g_test_add ("/unattended-config/write/rename-existing/no-extension", Fixture,
+              NULL, fixture_set_up, test_write_rename_existing,
+              fixture_tear_down);
+  g_test_add ("/unattended-config/write/rename-existing/ini-extension", Fixture,
+              ".ini", fixture_set_up, test_write_rename_existing,
+              fixture_tear_down);
 
   return g_test_run ();
 }
