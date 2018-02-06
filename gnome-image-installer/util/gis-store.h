@@ -28,6 +28,8 @@
 #include "gnome-image-installer.h"
 #include <glib.h>
 
+#include "gis-unattended-config.h"
+
 G_BEGIN_DECLS
 
 typedef enum {
@@ -40,7 +42,14 @@ typedef enum {
   /* UDisksClient: global shared UDisks client proxy */
   GIS_STORE_UDISKS_CLIENT,
 
-  /* UDisksDrive: drive hosting partition hosting GIS_STORE_IMAGE */
+  /* GFile: mount point of partition holding GIS_STORE_IMAGE. This is not
+   * always the parent directory of GIS_STORE_IMAGE!
+   */
+  GIS_STORE_IMAGE_DIR,
+
+  /* UDisksDrive: drive hosting partition mounted at GIS_STORE_IMAGE_DIR, or
+   * NULL if it can't be determined
+   */
   GIS_STORE_IMAGE_DRIVE,
 
   GIS_STORE_N_OBJECTS
@@ -70,14 +79,12 @@ GError *gis_store_get_error(void);
 void gis_store_set_error(GError *error);
 void gis_store_clear_error(void);
 
-void gis_store_enter_unattended(void);
-gboolean gis_store_is_unattended(void);
+void gis_store_enter_unattended (GisUnattendedConfig *config);
+gboolean gis_store_is_unattended (void);
+GisUnattendedConfig *gis_store_get_unattended_config (void);
 
 void gis_store_enter_live_install(void);
 gboolean gis_store_is_live_install(void);
-
-void gis_store_set_key_file(GKeyFile *keys);
-GKeyFile *gis_store_get_key_file(void);
 
 G_END_DECLS
 

@@ -11,13 +11,25 @@ include $(top_srcdir)/buildutil/glib-tap.mk
 AM_TESTS_ENVIRONMENT += GIO_MODULE_DIR=
 
 test_programs = \
+	test-dmi \
 	test-scribe \
+	test-unattended-config \
 	$(NULL)
 
 dist_test_data = \
 	public.asc \
 	secret.asc \
 	sign-file \
+	unattended/blank-block-device.ini \
+	unattended/empty.ini \
+	unattended/full-block-device-path.ini \
+	unattended/full.ini \
+	unattended/missing-block-device.ini \
+	unattended/missing-filename.ini \
+	unattended/missing-product.ini \
+	unattended/missing-vendor.ini \
+	unattended/non-utf8-locale.ini \
+	unattended/two-images.ini \
 	wjt.asc \
 	$(NULL)
 
@@ -93,5 +105,39 @@ test_scribe_LDADD = \
 	$(top_builddir)/gnome-image-installer/pages/install/libgisinstall.la \
 	$(NULL)
 test_scribe_LDFLAGS = \
+	$(WARN_LDFLAGS) \
+	$(NULL)
+
+test_unattended_config_SOURCES = test-unattended-config.c
+test_unattended_config_CFLAGS = \
+	$(INITIAL_SETUP_CFLAGS) \
+	$(IMAGE_INSTALLER_CFLAGS) \
+	-I $(top_srcdir)/ext/libglnx \
+	-I $(top_srcdir)/gnome-image-installer/util \
+	$(WARN_CFLAGS) \
+	$(NULL)
+test_unattended_config_LDADD = \
+	$(INITIAL_SETUP_LIBS) \
+	$(IMAGE_INSTALLER_LIBS) \
+	$(top_builddir)/ext/libglnx.la \
+	$(top_builddir)/gnome-image-installer/util/libgiiutil.la \
+	$(NULL)
+test_unattended_config_LDFLAGS = \
+	$(WARN_LDFLAGS) \
+	$(NULL)
+
+test_dmi_SOURCES = test-dmi.c
+test_dmi_CFLAGS = \
+	$(INITIAL_SETUP_CFLAGS) \
+	$(IMAGE_INSTALLER_CFLAGS) \
+	-I $(top_srcdir)/gnome-image-installer/util \
+	$(WARN_CFLAGS) \
+	$(NULL)
+test_dmi_LDADD = \
+	$(INITIAL_SETUP_LIBS) \
+	$(IMAGE_INSTALLER_LIBS) \
+	$(top_builddir)/gnome-image-installer/util/libgiiutil.la \
+	$(NULL)
+test_dmi_LDFLAGS = \
 	$(WARN_LDFLAGS) \
 	$(NULL)

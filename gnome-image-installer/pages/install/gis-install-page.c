@@ -44,7 +44,6 @@
 #include <fcntl.h>
 
 struct _GisInstallPagePrivate {
-  UDisksClient *client;
   guint pulse_id;
 
   GtkWidget *warning_dialog;
@@ -113,37 +112,6 @@ delete_event_cb (GtkWidget      *toplevel,
 }
 
 static void
-gis_install_page_unmount_image_partition (GisPage *page)
-{
-  GisInstallPage *install = GIS_INSTALL_PAGE (page);
-  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GDBusObjectManager *manager = udisks_client_get_object_manager(priv->client);
-  GList *objects = g_dbus_object_manager_get_objects(manager);
-  GList *l;
-  const gchar *label;
-
-  if (gis_store_is_live_install ())
-    label = "eoslive";
-  else
-    label = "eosimages";
-
-  for (l = objects; l != NULL; l = l->next)
-    {
-      UDisksFilesystem *fs;
-      UDisksBlock *block = udisks_object_peek_block (UDISKS_OBJECT (l->data));
-
-      if (block == NULL)
-        continue;
-
-      if (!g_str_equal (label, udisks_block_get_id_label (block)))
-        continue;
-
-      fs = udisks_object_peek_filesystem (UDISKS_OBJECT (l->data));
-      udisks_filesystem_call_unmount_sync (fs, g_variant_new ("a{sv}", NULL), NULL, NULL);
-    }
-}
-
-static void
 gis_install_page_stop_pulsing (GisInstallPage *page)
 {
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
@@ -164,8 +132,6 @@ gis_install_page_teardown (GisPage *page)
   GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
 
   gis_install_page_stop_pulsing (install);
-
-  gis_install_page_unmount_image_partition (page);
 
   gtk_progress_bar_set_fraction (progress, 1.0);
 
@@ -392,7 +358,6 @@ gis_install_page_shown (GisPage *page)
   GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (page));
 
   gis_install_page_update_step (install, 1);
-  priv->client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
 
   if (gis_store_get_error () != NULL)
     {

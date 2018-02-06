@@ -1,7 +1,7 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
  * Copyright (C) 2012 Red Hat
- *               2016 Endless Mobile, Inc.
+ * Copyright (C) 2016–2018 Endless Mobile, Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -30,6 +30,7 @@
 #include "finished-resources.h"
 #include "gis-finished-page.h"
 #include "gis-store.h"
+#include "gis-dmi.h"
 
 #include <gtk/gtkx.h>
 #include <glib/gstdio.h>
@@ -43,6 +44,8 @@
 
 struct _GisFinishedPagePrivate {
   gint led_state;
+
+  GtkAccelGroup *accel_group;
 };
 typedef struct _GisFinishedPagePrivate GisFinishedPagePrivate;
 
@@ -182,7 +185,18 @@ gis_finished_page_shown (GisPage *page)
   if (error != NULL)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
-      gtk_label_set_text (OBJ (GtkLabel*, "error_label"), error->message);
+      GtkLabel *error_heading_label = OBJ (GtkLabel*, "error_heading_label");
+      GtkLabel *error_label = OBJ (GtkLabel*, "error_label");
+
+      if (error->domain == GIS_UNATTENDED_ERROR)
+        gtk_label_set_text (error_heading_label,
+                            _("Oops, something is wrong with your unattended installation configuration."));
+      /* Otherwise, leave the default message (indicating a problem with the
+       * image file). TODO: handle other domains that indicate problems
+       * elsewhere.
+       */
+
+      gtk_label_set_text (error_label, error->message);
       gtk_widget_show (WID ("error_box"));
       gtk_widget_hide (WID ("success_box"));
       gis_assistant_locale_changed (assistant);
@@ -201,10 +215,89 @@ gis_finished_page_shown (GisPage *page)
     }
 }
 
+static gboolean
+write_unattended_config (gchar  **backup,
+                         GError **error)
+{
+  GFile *image_file = NULL;
+  GFile *image_dir = NULL;
+  g_autoptr(GFile) unattended_ini_file = NULL;
+  g_autofree gchar *unattended_ini = NULL;
+  const gchar *locale = setlocale (LC_ALL, NULL);
+  g_autofree gchar *image = NULL;
+  UDisksBlock *block = NULL;
+  g_autofree gchar *vendor = NULL;
+  g_autofree gchar *product = NULL;
+  const GError *existing_error = gis_store_get_error ();
+
+  /* Refuse to write a new unattended.ini if installation failed, reminding the
+   * user of the error.
+   */
+  if (existing_error != NULL)
+    {
+      g_propagate_error (error, g_error_copy (existing_error));
+      return FALSE;
+    }
+
+  image_file = G_FILE (gis_store_get_object (GIS_STORE_IMAGE));
+  image = g_file_get_basename (image_file);
+  image_dir = G_FILE (gis_store_get_object (GIS_STORE_IMAGE_DIR));
+  unattended_ini_file = g_file_get_child (image_dir, "unattended.ini");
+  unattended_ini = g_file_get_path (unattended_ini_file);
+  block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
+
+  if (!gis_dmi_read_vendor_product (&vendor, &product, error))
+    return FALSE;
+
+  return gis_unattended_config_write (unattended_ini, locale, image,
+                                      udisks_block_get_device (block), vendor,
+                                      product, backup, error);
+}
+
+static void
+write_unattended_config_cb (GisFinishedPage *self)
+{
+  g_autofree gchar *backup = NULL;
+  g_autoptr(GError) error = NULL;
+  GtkMessageType message_type = GTK_MESSAGE_INFO;
+  const gchar *message = NULL;
+  g_autofree gchar *secondary = NULL;
+  GtkWidget *dialog = NULL;
+
+  if (write_unattended_config (&backup, &error))
+    {
+      message = _("Unattended installation configuration file created");
+
+      if (backup != NULL)
+        secondary = g_strdup_printf (_("The previous file was renamed to ‘%s’."),
+                                     backup);
+    }
+  else
+    {
+      message_type = GTK_MESSAGE_ERROR;
+      message = _("Unattended installation configuration file could not be created.");
+      secondary = g_strdup (error->message);
+    }
+
+  dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                   message_type,
+                                   GTK_BUTTONS_OK,
+                                   "%s", message);
+  if (secondary != NULL)
+    gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+                                              "%s", secondary);
+
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (dialog);
+}
+
 static void
 gis_finished_page_constructed (GObject *object)
 {
   GisFinishedPage *page = GIS_FINISHED_PAGE (object);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (page);
+  g_autoptr(GClosure) closure = NULL;
 
   G_OBJECT_CLASS (gis_finished_page_parent_class)->constructed (object);
 
@@ -214,7 +307,23 @@ gis_finished_page_constructed (GObject *object)
 
   g_signal_connect (OBJ (GtkButton *, "restart_button"), "clicked", G_CALLBACK(reboot_cb), page);
 
+  /* Use Ctrl+U to write unattended config */
+  priv->accel_group = gtk_accel_group_new ();
+  closure = g_cclosure_new_swap (G_CALLBACK (write_unattended_config_cb), page, NULL);
+  gtk_accel_group_connect (priv->accel_group, GDK_KEY_u, GDK_CONTROL_MASK, 0, closure);
+
   gtk_widget_show (GTK_WIDGET (page));
+}
+
+static void
+gis_finished_page_dispose (GObject *object)
+{
+  GisFinishedPage *self = GIS_FINISHED_PAGE (object);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
+
+  g_clear_object (&priv->accel_group);
+
+  G_OBJECT_CLASS (gis_finished_page_parent_class)->dispose (object);
 }
 
 static void
@@ -242,6 +351,15 @@ gis_finished_page_locale_changed (GisPage *page)
   gtk_label_set_markup (OBJ (GtkLabel *, "support_label"), support_markup);
 }
 
+static GtkAccelGroup *
+gis_finished_page_get_accel_group (GisPage *page)
+{
+  GisFinishedPage *self = GIS_FINISHED_PAGE (page);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
+
+  return priv->accel_group;
+}
+
 static void
 gis_finished_page_class_init (GisFinishedPageClass *klass)
 {
@@ -250,8 +368,10 @@ gis_finished_page_class_init (GisFinishedPageClass *klass)
 
   page_class->page_id = PAGE_ID;
   page_class->locale_changed = gis_finished_page_locale_changed;
+  page_class->get_accel_group = gis_finished_page_get_accel_group;
   page_class->shown = gis_finished_page_shown;
   object_class->constructed = gis_finished_page_constructed;
+  object_class->dispose = gis_finished_page_dispose;
 }
 
 static void

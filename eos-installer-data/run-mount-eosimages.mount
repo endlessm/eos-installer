@@ -1,9 +1,9 @@
 [Unit]
-Description=EOS exFAT images partition
+Description=Endless OS reformatter images partition
 
 [Mount]
 What=LABEL=eosimages
-Where=/run/media/eosimages
+Where=/run/mount/eosimages
 Type=exfat
 Options=rw,noatime,nodev,nosuid,noexec,nofail,allow_other
 DirectoryMode=0755

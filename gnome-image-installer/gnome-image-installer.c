@@ -42,6 +42,7 @@
 #include "pages/account/gis-account-page.h"
 #include "pages/location/gis-location-page.h"
 #include "pages/goa/gis-goa-page.h"
+#include "pages/confirm/gis-confirm-page.h"
 #include "pages/diskimage/gis-diskimage-page.h"
 #include "pages/disktarget/gis-disktarget-page.h"
 #include "pages/finished/gis-finished-page.h"
@@ -66,6 +67,7 @@ static PageData page_table[] = {
   PAGE (language),
   PAGE (diskimage),
   PAGE (disktarget),
+  PAGE (confirm),
   PAGE (install),
   PAGE (finished),
   { NULL },
@@ -74,10 +76,7 @@ static PageData page_table[] = {
 #undef PAGE
 
 #define EOS_GROUP "EndlessOS"
-#define UNATTENDED_GROUP "Unattended"
 #define LOCALE_KEY "locale"
-#define VENDOR_KEY "vendor"
-#define PRODUCT_KEY "product"
 
 static void
 destroy_pages_after (GisAssistant *assistant,
@@ -98,104 +97,65 @@ destroy_pages_after (GisAssistant *assistant,
   }
 }
 
-static gchar*
-sanitize_string (gchar *string)
-{
-  gchar *r = string;
-  gchar *w = string;
-
-  if (string == NULL)
-    return NULL;
-
-  for (;*r != '\0'; r++)
-    {
-      if (*r < 32 || *r > 126)
-        continue;
-      *w = *r;
-      w++;
-    }
-  *w = '\0';
-  return g_ascii_strdown(string, -1);
-}
-
-static gchar *
-read_sanitized_string (const gchar *filename,
-                       GError     **error)
-{
-  gchar *contents = NULL;
-  gchar *sanitized = NULL;
-
-  if (g_file_get_contents (filename, &contents, NULL, error))
-    {
-      sanitized = sanitize_string (contents);
-      g_free (contents);
-    }
-  else
-    {
-      g_prefix_error (error, "failed to read %s", filename);
-    }
-
-  return sanitized;
-}
-
+/**
+ * read_install_ini:
+ * @path: path to directory holding image files
+ *
+ * Reads install.ini within @path, if it exists, and applies the locale
+ * specified within, if any. This file is created by the winstaller
+ * when creating a reformatter USB, containing the locale that the winstaller
+ * itself was displayed in.
+ *
+ * Historically, this file was also used to configure unattended installations,
+ * but this functionality is now split out into a separate file. If a locale is
+ * specified both install.ini and unattended.ini, the latter takes precedence.
+ */
 static void
-read_keys (const gchar *path)
+read_install_ini (const gchar *path)
 {
-  gchar *ini = g_build_path ("/", path, "install.ini", NULL);
-  GKeyFile *keys = g_key_file_new();
+  g_autofree gchar *ini = g_build_path ("/", path, "install.ini", NULL);
+  g_autoptr(GKeyFile) keys = g_key_file_new ();
+  g_autofree gchar *locale = NULL;
 
   if (g_key_file_load_from_file (keys, ini, G_KEY_FILE_NONE, NULL))
+    locale = g_key_file_get_string (keys, EOS_GROUP, LOCALE_KEY, NULL);
+
+  if (locale != NULL)
+    gis_language_page_preselect_language (locale);
+}
+
+static void
+read_unattended_ini (const gchar *path)
+{
+  g_autofree gchar *ini = g_build_path ("/", path, "unattended.ini", NULL);
+  g_autoptr(GisUnattendedConfig) config = NULL;
+  g_autoptr(GError) error = NULL;
+
+  config = gis_unattended_config_new (ini, &error);
+  if (error != NULL &&
+      !g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
     {
-      gchar *locale = g_key_file_get_string (keys, EOS_GROUP, LOCALE_KEY, NULL);
+      /* Translators: the placeholder is the name of a configuration file, such
+       * as "/run/mount/eosimages/unattended.ini". */
+      g_prefix_error (&error, _("Error loading ‘%s’: "), ini);
+      gis_store_set_error (error);
+    }
+  else if (config != NULL)
+    {
+      const gchar *locale = gis_unattended_config_get_locale (config);
+
       if (locale != NULL)
-        {
-          gis_language_page_preselect_language (locale);
-          g_free (locale);
-        }
+        gis_language_page_preselect_language (locale);
 
-      gis_store_set_key_file (keys);
-
-      if (g_key_file_has_group (keys, UNATTENDED_GROUP))
-        {
-          gchar *vendor = NULL;
-          gchar *product = NULL;
-          GError *error = NULL;
-
-          if (NULL == (vendor = read_sanitized_string ("/sys/class/dmi/id/sys_vendor", &error)) ||
-              NULL == (product = read_sanitized_string ("/sys/class/dmi/id/product_name", &error)))
-            {
-              g_warning ("%s", error->message);
-              g_clear_error (&error);
-            }
-          else
-            {
-              gchar *target_vendor = g_key_file_get_string (keys, UNATTENDED_GROUP, VENDOR_KEY, NULL);
-              gchar *target_product = g_key_file_get_string (keys, UNATTENDED_GROUP, PRODUCT_KEY, NULL);
-
-              if (g_ascii_strcasecmp (vendor, target_vendor) == 0
-               && g_ascii_strcasecmp (product, target_product) == 0)
-                {
-                  /* We just set the flag here, rest of the magic happens as we go */
-                  gis_store_enter_unattended();
-                }
-              else
-                {
-                  g_warning ("Unattended mode requested but target device is wrong: expected '%s' from '%s' but system reports '%s' from '%s'",
-                           target_product, target_vendor, product, vendor);
-                  /* Continue in attended mode */
-                }
-              g_free (target_vendor);
-              g_free (target_product);
-            }
-
-            g_free (vendor);
-            g_free (product);
-        }
+      /* The rest of the magic happens as we go along: each page gleans the
+       * relevant facts from the config.
+       */
+      gis_store_enter_unattended (config);
     }
 }
 
 static void
-mount_and_read_keys (void)
+mount_and_read_unattended_ini (void)
 {
   UDisksClient *client = UDISKS_CLIENT (gis_store_get_object (GIS_STORE_UDISKS_CLIENT));
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
@@ -208,7 +168,8 @@ mount_and_read_keys (void)
       UDisksBlock *block = udisks_object_peek_block (object);
       UDisksFilesystem *fs = NULL;
       const gchar *const*mounts = NULL;
-      gchar *path = NULL;
+      g_autofree gchar *path_to_free = NULL;
+      const gchar *path = NULL;
 
       if (block == NULL)
         continue;
@@ -226,16 +187,18 @@ mount_and_read_keys (void)
       mounts = udisks_filesystem_get_mount_points (fs);
 
       if (mounts != NULL && mounts[0] != NULL)
+        path = mounts[0];
+      else if (udisks_filesystem_call_mount_sync (fs, g_variant_new ("a{sv}", NULL),
+                                                  &path_to_free, NULL, NULL))
+        path = path_to_free;
+
+      if (path != NULL)
         {
-          read_keys (mounts[0]);
-          return;
+          read_install_ini (path);
+          read_unattended_ini (path);
         }
 
-      if (udisks_filesystem_call_mount_sync (fs, g_variant_new ("a{sv}", NULL),
-                                             &path, NULL, NULL))
-        {
-          read_keys (path);
-        }
+      break;
     }
 }
 
@@ -313,8 +276,11 @@ rebuild_pages_cb (GisDriver *driver)
 
   gis_assistant_locale_changed (assistant);
 
-  /* Skip welcome page in unattended mode */
-  if (gis_store_is_unattended () && !gis_store_is_live_install ())
+  /* In non-live mode, skip welcome page if we're in unattended mode or have
+   * already encountered an error.
+   */
+  if ((gis_store_is_unattended () || gis_store_get_error () != NULL) &&
+      !gis_store_is_live_install ())
     gis_assistant_next_page (assistant);
 }
 
@@ -406,7 +372,7 @@ gis_page_get_type();
     g_error ("Failed to connect to UDisks: %s", error->message);
   gis_store_set_object (GIS_STORE_UDISKS_CLIENT, G_OBJECT (udisks_client));
   g_object_unref (udisks_client);
-  mount_and_read_keys ();
+  mount_and_read_unattended_ini ();
 
   driver = gis_driver_new (get_mode (), inhibit_idle);
   g_signal_connect (driver, "rebuild-pages", G_CALLBACK (rebuild_pages_cb), NULL);

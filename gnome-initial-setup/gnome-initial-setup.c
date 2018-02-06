@@ -25,6 +25,7 @@
 
 #include "gnome-initial-setup.h"
 
+#include <locale.h>
 #include <pwd.h>
 #include <unistd.h>
 #include <stdlib.h>

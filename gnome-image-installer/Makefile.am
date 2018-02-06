@@ -44,6 +44,7 @@ gnome_image_installer_LDADD =	\
 	$(gisdir)/pages/display/libgisdisplay.la \
 	$(gisdir)/pages/endless-eula/libgisendlesseula.la \
 	$(gisdir)/pages/eulas/libgiseulas.la \
+	pages/confirm/libgisconfirm.la \
 	pages/diskimage/libgisdiskimage.la \
 	pages/disktarget/libgisdisktarget.la \
 	pages/install/libgisinstall.la \

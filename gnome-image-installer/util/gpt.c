@@ -142,7 +142,7 @@ void print_gpt_data(struct ptable *pt)
 }
 #endif
 
-uint64_t get_disk_size(struct ptable *pt)
+static uint64_t get_disk_size(struct ptable *pt)
 {
     if(NULL==pt) return 0;
     return SECTOR_SIZE +    // mbr
@@ -152,10 +152,15 @@ uint64_t get_disk_size(struct ptable *pt)
 }
 
 /**
- * Checks the GPT for validity
- * returns 1 if the GPT is valid, 0 otherwise
- **/
-int is_eos_gpt_valid(struct ptable *pt)
+ * is_eos_gpt_valid:
+ * @size: (out) (optional): location to store the disk size, in bytes, if the
+ *  GPT is valid
+ *
+ * Checks the GPT for validity.
+ *
+ * Returns: 1 if the GPT is valid, 0 otherwise
+ */
+int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
 {
     int i = 0;
 
@@ -242,10 +247,13 @@ int is_eos_gpt_valid(struct ptable *pt)
         return 0;
     }
 
+    if (size != NULL) {
+        *size = get_disk_size(pt);
+    }
     return 1; // success, GPT is valid
 }
 
-uint64_t get_disk_image_size(const char *filepath)
+int get_is_valid_eos_gpt(const char *filepath, uint64_t *size)
 {
     if(NULL == filepath) return 0;
     FILE *in_file = fopen(filepath, "r");
@@ -253,22 +261,7 @@ uint64_t get_disk_image_size(const char *filepath)
     struct ptable pt;
     if(fread(&pt, sizeof(pt), 1, in_file) == 1) {
         fclose(in_file);
-        return get_disk_size(&pt);
-    }
-    // error reading from disk
-    fclose(in_file);
-    return 0;
-}
-
-int get_is_valid_eos_gpt(const char *filepath)
-{
-    if(NULL == filepath) return 0;
-    FILE *in_file = fopen(filepath, "r");
-    if(NULL == in_file) return 0;
-    struct ptable pt;
-    if(fread(&pt, sizeof(pt), 1, in_file) == 1) {
-        fclose(in_file);
-        return is_eos_gpt_valid(&pt);
+        return is_eos_gpt_valid(&pt, size);
     }
     // error reading from disk
     fclose(in_file);
