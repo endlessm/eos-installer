@@ -71,11 +71,6 @@ struct _GisDriverPrivate {
   GtkWindow *main_window;
   GisAssistant *assistant;
 
-  ActUser *user_account;
-  const gchar *user_password;
-
-  gchar *lang_id;
-
   GisDriverMode mode;
   gboolean inhibit_idle;
 };
@@ -87,17 +82,6 @@ static void
 assistant_page_changed (GtkScrolledWindow *sw)
 {
   gtk_adjustment_set_value (gtk_scrolled_window_get_vadjustment (sw), 0);
-}
-
-static void
-gis_driver_finalize (GObject *object)
-{
-  GisDriver *driver = GIS_DRIVER (object);
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-
-  g_free (priv->lang_id);
-
-  G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
 }
 
 static void
@@ -162,41 +146,6 @@ gis_driver_get_assistant (GisDriver *driver)
 {
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   return priv->assistant;
-}
-
-void
-gis_driver_set_user_language (GisDriver *driver, const gchar *lang_id)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  g_free (priv->lang_id);
-  priv->lang_id = g_strdup (lang_id);
-}
-
-const gchar *
-gis_driver_get_user_language (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  return priv->lang_id;
-}
-
-void
-gis_driver_set_user_permissions (GisDriver   *driver,
-                                 ActUser     *user,
-                                 const gchar *password)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  priv->user_account = user;
-  priv->user_password = password;
-}
-
-void
-gis_driver_get_user_permissions (GisDriver    *driver,
-                                 ActUser     **user,
-                                 const gchar **password)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  *user = priv->user_account;
-  *password = priv->user_password;
 }
 
 void
@@ -367,7 +316,6 @@ gis_driver_class_init (GisDriverClass *klass)
 
   gobject_class->get_property = gis_driver_get_property;
   gobject_class->set_property = gis_driver_set_property;
-  gobject_class->finalize = gis_driver_finalize;
   application_class->startup = gis_driver_startup;
   application_class->activate = gis_driver_activate;
   klass->locale_changed = gis_driver_real_locale_changed;

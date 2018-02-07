@@ -28,7 +28,6 @@ GTK_REQUIRED_VERSION=3.7.11
 GNOME_DESKTOP_REQUIRED_VERSION=3.7.5
 
 PKG_CHECK_MODULES(INITIAL_SETUP,
-                  accountsservice
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                   gtk+-3.0 >= $GTK_REQUIRED_VERSION
                   gio-unix-2.0 >= $GLIB_REQUIRED_VERSION

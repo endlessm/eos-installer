@@ -26,7 +26,6 @@
 
 #include "gis-assistant.h"
 #include "gis-page.h"
-#include <act/act-user-manager.h>
 
 G_BEGIN_DECLS
 
@@ -62,19 +61,6 @@ GType gis_driver_get_type (void);
 
 GisAssistant *gis_driver_get_assistant (GisDriver *driver);
 void gis_driver_locale_changed (GisDriver *driver);
-
-void gis_driver_set_user_permissions (GisDriver   *driver,
-                                      ActUser     *user,
-                                      const gchar *password);
-
-void gis_driver_get_user_permissions (GisDriver    *driver,
-                                      ActUser     **user,
-                                      const gchar **password);
-
-void gis_driver_set_user_language (GisDriver   *driver,
-                                   const gchar *lang_id);
-
-const gchar *gis_driver_get_user_language (GisDriver   *driver);
 
 GisDriverMode gis_driver_get_mode (GisDriver *driver);
 
