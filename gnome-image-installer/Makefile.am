@@ -39,11 +39,6 @@ gnome_image_installer_LDADD =	\
 	$(top_builddir)/ext/libglnx.la \
 	util/libgiiutil.la \
 	$(gisdir)/libgisutil.la \
-	$(gisdir)/pages/language/libgislanguage.la \
-	$(gisdir)/pages/keyboard/libgiskeyboard.la \
-	$(gisdir)/pages/display/libgisdisplay.la \
-	$(gisdir)/pages/endless-eula/libgisendlesseula.la \
-	$(gisdir)/pages/eulas/libgiseulas.la \
 	pages/confirm/libgisconfirm.la \
 	pages/diskimage/libgisdiskimage.la \
 	pages/disktarget/libgisdisktarget.la \

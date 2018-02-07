@@ -32,16 +32,6 @@
 #include <glib/gi18n.h>
 #include <udisks/udisks.h>
 
-#include "pages/language/cc-common-language.h"
-#include "pages/language/gis-language-page.h"
-#include "pages/keyboard/gis-keyboard-page.h"
-#include "pages/display/gis-display-page.h"
-#include "pages/endless-eula/gis-endless-eula-page.h"
-#include "pages/eulas/gis-eula-pages.h"
-#include "pages/network/gis-network-page.h"
-#include "pages/account/gis-account-page.h"
-#include "pages/location/gis-location-page.h"
-#include "pages/goa/gis-goa-page.h"
 #include "pages/confirm/gis-confirm-page.h"
 #include "pages/diskimage/gis-diskimage-page.h"
 #include "pages/disktarget/gis-disktarget-page.h"
@@ -64,7 +54,6 @@ typedef struct {
 #define PAGE(name) { #name, gis_prepare_ ## name ## _page }
 
 static PageData page_table[] = {
-  PAGE (language),
   PAGE (diskimage),
   PAGE (disktarget),
   PAGE (confirm),
@@ -97,33 +86,6 @@ destroy_pages_after (GisAssistant *assistant,
   }
 }
 
-/**
- * read_install_ini:
- * @path: path to directory holding image files
- *
- * Reads install.ini within @path, if it exists, and applies the locale
- * specified within, if any. This file is created by the winstaller
- * when creating a reformatter USB, containing the locale that the winstaller
- * itself was displayed in.
- *
- * Historically, this file was also used to configure unattended installations,
- * but this functionality is now split out into a separate file. If a locale is
- * specified both install.ini and unattended.ini, the latter takes precedence.
- */
-static void
-read_install_ini (const gchar *path)
-{
-  g_autofree gchar *ini = g_build_path ("/", path, "install.ini", NULL);
-  g_autoptr(GKeyFile) keys = g_key_file_new ();
-  g_autofree gchar *locale = NULL;
-
-  if (g_key_file_load_from_file (keys, ini, G_KEY_FILE_NONE, NULL))
-    locale = g_key_file_get_string (keys, EOS_GROUP, LOCALE_KEY, NULL);
-
-  if (locale != NULL)
-    gis_language_page_preselect_language (locale);
-}
-
 static void
 read_unattended_ini (const gchar *path)
 {
@@ -142,12 +104,8 @@ read_unattended_ini (const gchar *path)
     }
   else if (config != NULL)
     {
-      const gchar *locale = gis_unattended_config_get_locale (config);
-
-      if (locale != NULL)
-        gis_language_page_preselect_language (locale);
-
-      /* The rest of the magic happens as we go along: each page gleans the
+      /* Locale is handled in gnome-initial-setup.
+       * The rest of the magic happens as we go along: each page gleans the
        * relevant facts from the config.
        */
       gis_store_enter_unattended (config);
@@ -194,7 +152,6 @@ mount_and_read_unattended_ini (void)
 
       if (path != NULL)
         {
-          read_install_ini (path);
           read_unattended_ini (path);
         }
 
@@ -248,18 +205,12 @@ check_for_live_boot (gchar **uuid)
 static void
 rebuild_pages_cb (GisDriver *driver)
 {
-  PageData *page_data;
+  PageData *page_data = page_table;
   GisAssistant *assistant;
   GisPage *current_page;
 
   assistant = gis_driver_get_assistant (driver);
   current_page = gis_assistant_get_current_page (assistant);
-
-  /* Omit welcome page entirely in live mode */
-  if (gis_store_is_live_install ())
-    page_data = page_table + 1;
-  else
-    page_data = page_table;
 
   if (current_page != NULL) {
     destroy_pages_after (assistant, current_page);
@@ -275,13 +226,6 @@ rebuild_pages_cb (GisDriver *driver)
       page_data->prepare_page_func (driver);
 
   gis_assistant_locale_changed (assistant);
-
-  /* In non-live mode, skip welcome page if we're in unattended mode or have
-   * already encountered an error.
-   */
-  if ((gis_store_is_unattended () || gis_store_get_error () != NULL) &&
-      !gis_store_is_live_install ())
-    gis_assistant_next_page (assistant);
 }
 
 static gboolean
