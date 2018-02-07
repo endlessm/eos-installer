@@ -3,18 +3,14 @@ SUBDIRS = util pages
 BUILT_SOURCES =
 
 # TODO: ugly, but let's see if splitting makes sense
-uidir = $(datadir)/gnome-initial-setup
 gisdir = ./../gnome-initial-setup
 gissrcdir = $(srcdir)/../gnome-initial-setup
-
-$(info ${uidir})
 
 AM_CPPFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \
 	-DSECRET_API_SUBJECT_TO_CHANGE \
 	-DGCR_API_SUBJECT_TO_CHANGE \
-	-DUIDIR="\"$(uidir)\"" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\" \
 	-DDATADIR=\""$(datadir)"\" \
