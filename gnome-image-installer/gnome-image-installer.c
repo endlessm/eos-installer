@@ -282,8 +282,6 @@ gis_page_get_type();
 
   gtk_init (&argc, &argv);
 
-  gis_ensure_login_keyring ("gis");
-
   if (check_for_live_boot (&uuid))
     {
       gis_store_enter_live_install ();

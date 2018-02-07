@@ -31,7 +31,6 @@ PKG_CHECK_MODULES(INITIAL_SETUP,
                   gnome-desktop-3.0 >= $GNOME_DESKTOP_REQUIRED_VERSION
                   gtk+-3.0 >= $GTK_REQUIRED_VERSION
                   gio-unix-2.0 >= $GLIB_REQUIRED_VERSION
-                  libsecret-1
                   )
 
 PKG_CHECK_MODULES([LIBGLNX], [gio-unix-2.0 >= $GLIB_REQUIRED_VERSION])

@@ -35,7 +35,6 @@ typedef struct _GisPage      GisPage;
 #include "gis-driver.h"
 #include "gis-assistant.h"
 #include "gis-page.h"
-#include "gis-keyring.h"
 
 void gis_add_setup_done_file (void);
 

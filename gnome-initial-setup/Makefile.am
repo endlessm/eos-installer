@@ -26,7 +26,6 @@ libgisutil_la_SOURCES = \
 	gnome-initial-setup.h \
 	gis-page.c gis-page.h \
 	gis-driver.c gis-driver.h \
-	gis-keyring.c gis-keyring.h \
 	gis-window.c gis-window.h
 
 libgisutil_la_CFLAGS = $(INITIAL_SETUP_CFLAGS)
