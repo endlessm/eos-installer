@@ -167,17 +167,6 @@ AC_CONFIG_FILES([
 Makefile
 ext/Makefile
 gnome-initial-setup/Makefile
-gnome-initial-setup/pages/Makefile
-gnome-initial-setup/pages/language/Makefile
-gnome-initial-setup/pages/display/Makefile
-gnome-initial-setup/pages/endless-eula/Makefile
-gnome-initial-setup/pages/eulas/Makefile
-gnome-initial-setup/pages/account/Makefile
-gnome-initial-setup/pages/location/Makefile
-gnome-initial-setup/pages/network/Makefile
-gnome-initial-setup/pages/goa/Makefile
-gnome-initial-setup/pages/summary/Makefile
-gnome-initial-setup/pages/keyboard/Makefile
 gnome-image-installer/Makefile
 gnome-image-installer/util/Makefile
 gnome-image-installer/pages/Makefile
@@ -187,7 +176,6 @@ gnome-image-installer/pages/disktarget/Makefile
 gnome-image-installer/pages/finished/Makefile
 gnome-image-installer/pages/install/Makefile
 po/Makefile.in
-data/Makefile
 eos-installer-data/Makefile
 tests/Makefile
 ])

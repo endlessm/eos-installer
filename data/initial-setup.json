@@ -1,8 +1,0 @@
-{
-    "hasWindows": true,
-    "components": ["networkAgent"],
-    "panel": { "left": [],
-               "center": [],
-               "right": ["a11yGreeter", "keyboard", "aggregateMenu", "powerMenu"]
-    }
-}

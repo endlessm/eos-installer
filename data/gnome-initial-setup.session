@@ -1,3 +1,0 @@
-[GNOME Session]
-Name=GNOME Initial Setup
-RequiredComponents=setup-shell;gnome-initial-setup;gnome-settings-daemon;
