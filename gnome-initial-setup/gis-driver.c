@@ -350,8 +350,6 @@ gis_driver_startup (GApplication *app)
 
   priv->assistant = gis_window_get_assistant (GIS_WINDOW (priv->main_window));
 
-  gis_driver_set_user_language (driver, setlocale (LC_MESSAGES, NULL));
-
   prepare_main_window (driver);
   rebuild_pages (driver);
 }
