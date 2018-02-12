@@ -16,7 +16,7 @@ edit = $(AM_V_GEN) sed \
 rulesdir = $(datadir)/polkit-1/rules.d
 rules_DATA = 20-eos-installer.rules
 
-desktopdir = $(datadir)/gdm/greeter/applications
+desktopdir = $(datadir)/applications
 desktop_DATA = \
 	com.endlessm.Installer.desktop \
 	$(NULL)
