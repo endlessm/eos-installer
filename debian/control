@@ -5,37 +5,13 @@ Maintainer: Robert McQueen <robert@endlessm.com>
 Build-Depends: cdbs (>= 0.4.41),
 	       dh-autoreconf,
 	       debhelper (>= 9),
-	       geoclue-2.0,
 	       gnome-pkg-tools (>= 0.13),
 	       gnome-common,
 	       intltool,
-	       network-manager-dev (>= 0.9.6.4),
-	       libgeocode-glib-dev,
-	       libnm-glib-dev (>= 0.9.6.4),
-	       libnm-util-dev (>= 0.9.6.4),
-	       libnm-gtk-dev (>= 0.9.6.4),
-	       libpolkit-gobject-1-dev (>= 0.103),
-	       libaccountsservice-dev,
 	       libgnome-desktop-3-dev (>= 3.7.5),
-               libgnome-keyring-dev,
-	       libgstreamer1.0-dev,
-	       libfontconfig1-dev,
-	       libgweather-3-dev,
-	       libgoa-1.0-dev,
 	       libgtk-3-dev (>= 3.7.11),
 	       libglib2.0-dev (>= 2.40.0),
-	       libgdm-dev,
 	       libpango1.0-dev (>= 1.32.5),
-	       libpwquality-dev,
-	       libibus-1.0-dev,
-	       libkrb5-dev,
-	       libsecret-1-dev,
-	       iso-codes,
-	       libclutter-gst-2.0-dev,
-	       valac,
-	       zint-devel,
-	       libevince-dev,
-	       libwebkit2gtk-4.0-dev,
 	       libudisks2-dev,
 	       liblzma-dev,
 	       libattr1-dev,
@@ -48,7 +24,6 @@ Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends},
          eos-image-keyring,
-         gdm3,
          gnupg,
 	 policykit-1 (>= 0.106),
 	 udisks2,
@@ -65,8 +40,8 @@ Description: Endless OS installer debugging symbols
 Package: eos-installer-standalone
 Architecture: all
 Depends: ${misc:Depends},
-         eos-installer (= ${binary:Version})
-Conflicts: gnome-initial-setup
+         eos-installer (= ${binary:Version}),
+         gnome-initial-setup
 Description: Endless OS installer (standalone session)
  This package contains configuration to automatically launch eos-installer
  in standalone installer images.
