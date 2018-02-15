@@ -134,42 +134,55 @@ toggle_leds (GisPage *page)
 #define EOS_IMAGE_VERSION_ALT_PATH "/"
 
 static gchar *
-get_image_version (const gchar *path)
+gis_page_util_get_image_version (const gchar *path,
+                                 GError     **error)
 {
   ssize_t attrsize;
-  gchar *value;
+  g_autofree gchar *value = NULL;
 
   g_return_val_if_fail (path != NULL, NULL);
 
   attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, NULL, 0);
-  if (attrsize < 0) {
-    g_message ("Error examining " EOS_IMAGE_VERSION_XATTR " on %s: %s",
-               path, g_strerror (errno));
-    return NULL;
-  }
+  if (attrsize >= 0)
+    {
+      value = g_malloc (attrsize + 1);
+      value[attrsize] = 0;
 
-  value = g_malloc (attrsize + 1);
-  value[attrsize] = 0;
+      attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, value,
+                           attrsize);
+    }
 
-  attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, value,
-                       attrsize);
-  if (attrsize < 0) {
-    g_warning ("Error reading " EOS_IMAGE_VERSION_XATTR " on %s: %s",
-               path, g_strerror (errno));
-    g_free (value);
-    return NULL;
-  }
-
-  return value;
+  if (attrsize >= 0)
+    {
+      return g_steal_pointer (&value);
+    }
+  else
+    {
+      int errsv = errno;
+      g_set_error (error, G_IO_ERROR, g_io_error_from_errno (errsv),
+                   "Error examining " EOS_IMAGE_VERSION_XATTR " on %s: %s",
+                   path, g_strerror (errsv));
+      return NULL;
+    }
 }
 
 static gboolean
 is_eosdvd (void)
 {
-  g_autofree gchar *image_version = get_image_version (EOS_IMAGE_VERSION_PATH);
+  g_autoptr(GError) error_sysroot = NULL;
+  g_autoptr(GError) error_root = NULL;
+  g_autofree char *image_version =
+    gis_page_util_get_image_version (EOS_IMAGE_VERSION_PATH, &error_sysroot);
 
   if (image_version == NULL)
-    image_version = get_image_version (EOS_IMAGE_VERSION_ALT_PATH);
+    image_version =
+      gis_page_util_get_image_version (EOS_IMAGE_VERSION_ALT_PATH, &error_root);
+
+  if (image_version == NULL)
+    {
+      g_warning ("%s", error_sysroot->message);
+      g_warning ("%s", error_root->message);
+    }
 
   return image_version != NULL &&
     g_str_has_prefix (image_version, "eosdvd-");
