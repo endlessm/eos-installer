@@ -50,7 +50,8 @@ Depends: ${shlibs:Depends},
          eos-image-keyring,
          gdm3,
          gnupg,
-	 policykit-1 (>= 0.106)
+	 policykit-1 (>= 0.106),
+	 udisks2,
 Description: Endless OS installer
 
 Package: eos-installer-dbg
