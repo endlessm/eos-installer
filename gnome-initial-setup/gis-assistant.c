@@ -41,6 +41,7 @@ static GParamSpec *obj_props[PROP_LAST];
 enum {
   NEXT_PAGE,
   PAGE_CHANGED,
+  QUIT,
   LAST_SIGNAL,
 };
 
@@ -158,18 +159,27 @@ static GisPage *
 find_prev_page (GisPage *page)
 {
   GList *l = page->assistant_priv->link->prev;
-  while (!should_show_page (l)) {
-    l = l->prev;
-  }
-  return GIS_PAGE (l->data);
+  for (; l != NULL; l = l->prev)
+    {
+      if (should_show_page (l))
+        return GIS_PAGE (l->data);
+    }
+  return NULL;
 }
 
 void
 gis_assistant_previous_page (GisAssistant *assistant)
 {
   GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
+  GisPage *previous_page;
+
   g_return_if_fail (priv->current_page != NULL);
-  gis_assistant_switch_to (assistant, GIS_ASSISTANT_PREV, find_prev_page (priv->current_page));
+  previous_page = find_prev_page (priv->current_page);
+
+  if (previous_page == NULL)
+    g_signal_emit (assistant, signals[QUIT], 0);
+  else
+    gis_assistant_switch_to (assistant, GIS_ASSISTANT_PREV, previous_page);
 }
 
 static void
@@ -249,11 +259,15 @@ update_navigation_buttons (GisAssistant *assistant)
     }
   else
     {
-      gboolean can_go_forward, is_first_page;
+      gboolean can_go_forward, is_first_page, show_back_button;
 
       is_first_page = (page_priv->link->prev == NULL);
+      show_back_button =
+        /* Show a back button on the first page if running from FBE. */
+        (!is_first_page || priv->mode == GIS_DRIVER_MODE_NEW_USER) &&
+        !gis_page_get_hide_backward_button (page);
 
-      gtk_widget_set_visible (priv->back, !gis_page_get_hide_backward_button (page) && !is_first_page);
+      gtk_widget_set_visible (priv->back, show_back_button);
       gtk_widget_set_visible (priv->forward, !gis_page_get_hide_forward_button (page));
 
       can_go_forward = gis_page_get_complete (page);
@@ -566,6 +580,21 @@ gis_assistant_class_init (GisAssistantClass *klass)
                   G_TYPE_FROM_CLASS (gobject_class),
                   G_SIGNAL_RUN_LAST,
                   G_STRUCT_OFFSET (GisAssistantClass, page_changed),
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
+
+  /**
+   * GisAssistant::quit:
+   * @assistant: the #GisAssistant
+   *
+   * The ::quit signal is emitted when the user presses "Back" on the first
+   * page.
+   */
+  signals[QUIT] =
+    g_signal_new ("quit",
+                  G_TYPE_FROM_CLASS (gobject_class),
+                  G_SIGNAL_RUN_LAST,
+                  G_STRUCT_OFFSET (GisAssistantClass, quit),
                   NULL, NULL, NULL,
                   G_TYPE_NONE, 0);
 }

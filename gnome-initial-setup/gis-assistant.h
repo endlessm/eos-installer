@@ -55,6 +55,7 @@ struct _GisAssistantClass
 
   void (* next_page) (GisAssistant *assistant, GisPage *page);
   void (* page_changed) (GisAssistant *assistant);
+  void (* quit) (GisAssistant *assistant);
 };
 
 GType gis_assistant_get_type (void);

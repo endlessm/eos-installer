@@ -112,7 +112,10 @@ prepare_main_window (GisDriver *driver)
   gtk_window_set_titlebar (priv->main_window, titlebar);
 
   gis_assistant_set_mode (priv->assistant, priv->mode);
-
+  g_signal_connect_swapped (priv->assistant,
+                            "quit",
+                            G_CALLBACK (g_application_quit),
+                            G_APPLICATION (driver));
 }
 
 static gboolean
