@@ -107,10 +107,12 @@ prepare_main_window (GisDriver *driver)
   titlebar = gis_assistant_get_titlebar (priv->assistant);
   if (priv->mode == GIS_DRIVER_MODE_EXISTING_USER)
     {
-      gis_assistant_enable_controls (priv->assistant);
       gtk_window_set_deletable (priv->main_window, TRUE);
     }
   gtk_window_set_titlebar (priv->main_window, titlebar);
+
+  gis_assistant_set_mode (priv->assistant, priv->mode);
+
 }
 
 static gboolean

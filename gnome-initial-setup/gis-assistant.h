@@ -24,6 +24,7 @@
 #ifndef __GIS_ASSISTANT_H__
 #define __GIS_ASSISTANT_H__
 
+#include "gis-driver-mode.h"
 #include "gis-page.h"
 
 G_BEGIN_DECLS
@@ -58,6 +59,8 @@ struct _GisAssistantClass
 
 GType gis_assistant_get_type (void);
 
+void      gis_assistant_set_mode          (GisAssistant *assistant,
+                                           GisDriverMode mode);
 void      gis_assistant_add_page          (GisAssistant *assistant,
                                            GisPage      *page);
 
@@ -70,7 +73,6 @@ GtkWidget *gis_assistant_get_titlebar     (GisAssistant *assistant);
 
 void      gis_assistant_locale_changed    (GisAssistant *assistant);
 void      gis_assistant_save_data         (GisAssistant *assistant);
-void      gis_assistant_enable_controls   (GisAssistant *assistant);
 
 G_END_DECLS
 

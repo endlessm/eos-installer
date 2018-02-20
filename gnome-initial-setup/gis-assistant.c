@@ -60,7 +60,7 @@ struct _GisAssistantPrivate
   GList *pages;
   GisPage *current_page;
 
-  gboolean enable_controls;
+  GisDriverMode mode;
 };
 typedef struct _GisAssistantPrivate GisAssistantPrivate;
 
@@ -239,7 +239,7 @@ update_navigation_buttons (GisAssistant *assistant)
   is_last_page = (page_priv->link->next == NULL);
 
   gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (priv->titlebar),
-                                        priv->enable_controls &&
+                                        priv->mode == GIS_DRIVER_MODE_EXISTING_USER &&
                                         !gis_page_get_hide_window_controls (page));
 
   if (is_last_page)
@@ -461,10 +461,11 @@ gis_assistant_save_data (GisAssistant *assistant)
 }
 
 void
-gis_assistant_enable_controls (GisAssistant *assistant)
+gis_assistant_set_mode (GisAssistant *assistant,
+                        GisDriverMode mode)
 {
   GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
-  priv->enable_controls = TRUE;
+  priv->mode = mode;
 }
 
 static void
@@ -473,6 +474,8 @@ gis_assistant_init (GisAssistant *assistant)
   GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
 
   gtk_widget_init_template (GTK_WIDGET (assistant));
+
+  priv->mode = GIS_DRIVER_MODE_NEW_USER;
 
   g_signal_connect (priv->stack, "notify::visible-child",
                     G_CALLBACK (current_page_changed), assistant);
