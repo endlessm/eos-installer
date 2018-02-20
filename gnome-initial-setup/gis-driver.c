@@ -31,25 +31,6 @@
 #include "gis-assistant.h"
 #include "gis-window.h"
 
-#define GIS_TYPE_DRIVER_MODE (gis_driver_mode_get_type ())
-
-/* Statically include this for now. Maybe later
- * we'll generate this from glib-mkenums. */
-GType
-gis_driver_mode_get_type (void) {
-  static GType enum_type_id = 0;
-  if (G_UNLIKELY (!enum_type_id))
-    {
-      static const GEnumValue values[] = {
-        { GIS_DRIVER_MODE_NEW_USER, "GIS_DRIVER_MODE_NEW_USER", "new_user" },
-        { GIS_DRIVER_MODE_EXISTING_USER, "GIS_DRIVER_MODE_EXISTING_USER", "existing_user" },
-        { 0, NULL, NULL }
-      };
-      enum_type_id = g_enum_register_static("GisDriverMode", values);
-    }
-  return enum_type_id;
-}
-
 enum {
   REBUILD_PAGES,
   LOCALE_CHANGED,

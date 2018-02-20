@@ -25,6 +25,7 @@
 #define __GIS_DRIVER_H__
 
 #include "gis-assistant.h"
+#include "gis-driver-mode.h"
 #include "gis-page.h"
 
 G_BEGIN_DECLS
@@ -51,11 +52,6 @@ struct _GisDriverClass
   void (* rebuild_pages) (GisDriver *driver);
   void (* locale_changed) (GisDriver *driver);
 };
-
-typedef enum {
-  GIS_DRIVER_MODE_NEW_USER,
-  GIS_DRIVER_MODE_EXISTING_USER,
-} GisDriverMode;
 
 GType gis_driver_get_type (void);
 
