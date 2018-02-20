@@ -71,8 +71,7 @@ void gis_driver_add_page (GisDriver *driver,
 
 void gis_driver_save_data (GisDriver *driver);
 
-GisDriver *gis_driver_new (GisDriverMode mode,
-                           gboolean      inhibit_idle);
+GisDriver *gis_driver_new (GisDriverMode mode);
 
 G_END_DECLS
 

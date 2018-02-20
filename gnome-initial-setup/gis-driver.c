@@ -61,7 +61,6 @@ static guint signals[LAST_SIGNAL];
 enum {
   PROP_0,
   PROP_MODE,
-  PROP_INHIBIT_IDLE,
   PROP_LAST,
 };
 
@@ -72,7 +71,6 @@ struct _GisDriverPrivate {
   GisAssistant *assistant;
 
   GisDriverMode mode;
-  gboolean inhibit_idle;
 };
 typedef struct _GisDriverPrivate GisDriverPrivate;
 
@@ -205,9 +203,6 @@ gis_driver_get_property (GObject      *object,
     case PROP_MODE:
       g_value_set_enum (value, priv->mode);
       break;
-    case PROP_INHIBIT_IDLE:
-      g_value_set_boolean (value, priv->inhibit_idle);
-      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -226,9 +221,6 @@ gis_driver_set_property (GObject      *object,
     {
     case PROP_MODE:
       priv->mode = g_value_get_enum (value);
-      break;
-    case PROP_INHIBIT_IDLE:
-      priv->inhibit_idle = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -273,16 +265,6 @@ gis_driver_startup (GApplication *app)
   G_APPLICATION_CLASS (gis_driver_parent_class)->startup (app);
 
   priv->main_window = GTK_WINDOW (gis_window_new (driver));
-
-  if (priv->inhibit_idle)
-    {
-      /* This inhibitor is (unfortunately) shown on the shutdown dialog, so use
-       * an empty reason to minimize clutter.
-       */
-      gtk_application_inhibit (GTK_APPLICATION (app), priv->main_window,
-                               GTK_APPLICATION_INHIBIT_IDLE,
-                               " ");
-    }
 
   g_signal_connect (priv->main_window,
                     "realize",
@@ -334,13 +316,6 @@ gis_driver_class_init (GisDriverClass *klass)
                        GIS_DRIVER_MODE_EXISTING_USER,
                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  obj_props[PROP_INHIBIT_IDLE] =
-    g_param_spec_boolean ("inhibit-idle", "Inhibit Idle",
-                          "TRUE if the system should be inhibited from going "
-                          "idle",
-                          FALSE,
-                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
-
   g_object_class_install_properties (gobject_class, PROP_LAST, obj_props);
 }
 
@@ -352,12 +327,10 @@ gis_driver_save_data (GisDriver *driver)
 }
 
 GisDriver *
-gis_driver_new (GisDriverMode mode,
-                gboolean      inhibit_idle)
+gis_driver_new (GisDriverMode mode)
 {
   return g_object_new (GIS_TYPE_DRIVER,
                        "application-id", "com.endlessm.Installer",
                        "mode", mode,
-                       "inhibit-idle", inhibit_idle,
                        NULL);
 }
