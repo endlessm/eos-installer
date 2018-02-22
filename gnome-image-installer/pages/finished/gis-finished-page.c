@@ -344,12 +344,6 @@ gis_finished_page_dispose (GObject *object)
   G_OBJECT_CLASS (gis_finished_page_parent_class)->dispose (object);
 }
 
-static GtkBuilder *
-gis_finished_page_get_builder (GisPage *page)
-{
-  return NULL;
-}
-
 static void
 gis_finished_page_locale_changed (GisPage *page)
 {
@@ -405,7 +399,6 @@ gis_finished_page_class_init (GisFinishedPageClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, support_label);
 
   page_class->page_id = PAGE_ID;
-  page_class->get_builder = gis_finished_page_get_builder;
   page_class->locale_changed = gis_finished_page_locale_changed;
   page_class->get_accel_group = gis_finished_page_get_accel_group;
   page_class->shown = gis_finished_page_shown;

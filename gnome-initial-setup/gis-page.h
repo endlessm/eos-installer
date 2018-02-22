@@ -48,7 +48,6 @@ struct _GisPage
   GtkBin parent;
 
   GisDriver *driver;
-  GtkBuilder *builder;
 
   GisAssistantPagePrivate *assistant_priv;
 };
@@ -61,7 +60,6 @@ struct _GisPageClass
   gboolean hide_window_controls;
   const char *page_id;
 
-  GtkBuilder * (*get_builder) (GisPage *page);
   void         (*locale_changed) (GisPage *page);
   GtkAccelGroup * (*get_accel_group) (GisPage *page);
   gboolean     (*apply) (GisPage *page,

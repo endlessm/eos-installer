@@ -718,12 +718,6 @@ gis_diskimage_page_locale_changed (GisPage *page)
   gis_page_set_title (page, _("Reformat with Endless OS"));
 }
 
-static GtkBuilder *
-gis_diskimage_page_get_builder (GisPage *page)
-{
-  return NULL;
-}
-
 static void
 gis_diskimage_page_class_init (GisDiskImagePageClass *klass)
 {
@@ -736,7 +730,6 @@ gis_diskimage_page_class_init (GisDiskImagePageClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskImagePage, image_combo);
 
   page_class->page_id = PAGE_ID;
-  page_class->get_builder = gis_diskimage_page_get_builder;
   page_class->locale_changed = gis_diskimage_page_locale_changed;
   page_class->shown = gis_diskimage_page_shown;
   object_class->constructed = gis_diskimage_page_constructed;

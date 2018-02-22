@@ -402,12 +402,6 @@ gis_install_page_constructed (GObject *object)
   gtk_widget_show (GTK_WIDGET (page));
 }
 
-static GtkBuilder *
-gis_install_page_get_builder (GisPage *page)
-{
-  return NULL;
-}
-
 static void
 gis_install_page_locale_changed (GisPage *page)
 {
@@ -429,7 +423,6 @@ gis_install_page_class_init (GisInstallPageClass *klass)
   page_class->hide_forward_button = TRUE;
   page_class->hide_backward_button = TRUE;
   page_class->hide_window_controls = TRUE;
-  page_class->get_builder = gis_install_page_get_builder;
   page_class->locale_changed = gis_install_page_locale_changed;
   page_class->shown = gis_install_page_shown;
   object_class->constructed = gis_install_page_constructed;

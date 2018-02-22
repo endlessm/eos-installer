@@ -436,12 +436,6 @@ gis_disktarget_page_locale_changed (GisPage *page)
   gis_page_set_title (page, _("Select Disk"));
 }
 
-static GtkBuilder *
-gis_disktarget_page_get_builder (GisPage *page)
-{
-  return NULL;
-}
-
 static void
 gis_disktarget_page_class_init (GisDiskTargetPageClass *klass)
 {
@@ -464,7 +458,6 @@ gis_disktarget_page_class_init (GisDiskTargetPageClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, suitable_disks_label);
 
   page_class->page_id = PAGE_ID;
-  page_class->get_builder = gis_disktarget_page_get_builder;
   page_class->locale_changed = gis_disktarget_page_locale_changed;
   page_class->shown = gis_disktarget_page_shown;
   object_class->constructed = gis_disktarget_page_constructed;
