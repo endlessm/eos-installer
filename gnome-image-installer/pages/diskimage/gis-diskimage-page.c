@@ -45,14 +45,12 @@
 #include <errno.h>
 
 struct _GisDiskImagePagePrivate {
-  gint dummy;
+    GtkListStore *image_store;
+    GtkComboBox *image_combo;
 };
 typedef struct _GisDiskImagePagePrivate GisDiskImagePagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE);
-
-#define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
-#define WID(name) OBJ(GtkWidget*,name)
 
 G_DEFINE_QUARK(image-error, gis_image_error);
 
@@ -508,13 +506,14 @@ static void
 gis_diskimage_page_populate_model (GisPage     *page,
                                    const gchar *path)
 {
+  GisDiskImagePage *self = GIS_DISK_IMAGE_PAGE (page);
+  GisDiskImagePagePrivate *priv = gis_diskimage_page_get_instance_private (self);
   g_autoptr(GFile) path_file = g_file_new_for_path (path);
   g_autoptr(GError) error = NULL;
   const gchar *file = NULL;
   GisUnattendedConfig *config = gis_store_get_unattended_config ();
   const gchar *ufile =
     (config != NULL) ? gis_unattended_config_get_image (config) : NULL;
-  GtkListStore *store = OBJ(GtkListStore*, "image_store");
   g_autoptr(GDir) dir = NULL;
   GtkTreeIter iter;
   gboolean is_live = gis_store_is_live_install ();
@@ -528,7 +527,7 @@ gis_diskimage_page_populate_model (GisPage     *page,
     }
 
   gis_store_set_object (GIS_STORE_IMAGE_DIR, G_OBJECT (path_file));
-  gtk_list_store_clear(store);
+  gtk_list_store_clear (priv->image_store);
 
   while ((file = g_dir_read_name (dir)))
     {
@@ -536,20 +535,19 @@ gis_diskimage_page_populate_model (GisPage     *page,
       if (ufile == NULL || g_strcmp0 (ufile, file) == 0)
         {
           g_autofree gchar *fullpath = g_build_path ("/", path, file, NULL);
-          add_image (store, fullpath, NULL, NULL);
+          add_image (priv->image_store, fullpath, NULL, NULL);
         }
     }
 
   if (is_live &&
-      !gis_diskimage_page_add_live_image (store, path, ufile, &error))
+      !gis_diskimage_page_add_live_image (priv->image_store, path, ufile, &error))
     {
       g_print ("finding live image failed: %s\n", error->message);
     }
 
-  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &iter))
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->image_store), &iter))
     {
-      GtkComboBox *combo = OBJ (GtkComboBox*, "imagecombo");
-      gtk_combo_box_set_active_iter (combo, &iter);
+      gtk_combo_box_set_active_iter (priv->image_combo, &iter);
     }
   else
     {
@@ -701,16 +699,15 @@ static void
 gis_diskimage_page_constructed (GObject *object)
 {
   GisDiskImagePage *page = GIS_DISK_IMAGE_PAGE (object);
+  GisDiskImagePagePrivate *priv = gis_diskimage_page_get_instance_private (page);
 
   G_OBJECT_CLASS (gis_diskimage_page_parent_class)->constructed (object);
 
-  gtk_container_add (GTK_CONTAINER (page), WID ("diskimage-page"));
-
   gis_page_set_complete (GIS_PAGE (page), FALSE);
 
-  g_signal_connect(OBJ(GObject*, "imagecombo"),
-                       "changed", G_CALLBACK(gis_diskimage_page_selection_changed),
-                       page);
+  g_signal_connect (priv->image_combo,
+                    "changed", G_CALLBACK(gis_diskimage_page_selection_changed),
+                    page);
 
   gtk_widget_show (GTK_WIDGET (page));
 }
@@ -721,13 +718,25 @@ gis_diskimage_page_locale_changed (GisPage *page)
   gis_page_set_title (page, _("Reformat with Endless OS"));
 }
 
+static GtkBuilder *
+gis_diskimage_page_get_builder (GisPage *page)
+{
+  return NULL;
+}
+
 static void
 gis_diskimage_page_class_init (GisDiskImagePageClass *klass)
 {
   GisPageClass *page_class = GIS_PAGE_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass), "/org/gnome/initial-setup/gis-diskimage-page.ui");
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskImagePage, image_store);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskImagePage, image_combo);
+
   page_class->page_id = PAGE_ID;
+  page_class->get_builder = gis_diskimage_page_get_builder;
   page_class->locale_changed = gis_diskimage_page_locale_changed;
   page_class->shown = gis_diskimage_page_shown;
   object_class->constructed = gis_diskimage_page_constructed;
@@ -737,6 +746,8 @@ static void
 gis_diskimage_page_init (GisDiskImagePage *page)
 {
   g_resources_register (diskimage_get_resource ());
+
+  gtk_widget_init_template (GTK_WIDGET (page));
 }
 
 void
