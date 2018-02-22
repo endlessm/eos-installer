@@ -48,7 +48,6 @@ struct _GisAssistantClass
 {
   GtkBoxClass parent_class;
 
-  void (* next_page) (GisAssistant *assistant, GisPage *page);
   void (* page_changed) (GisAssistant *assistant);
   void (* quit) (GisAssistant *assistant);
 };
