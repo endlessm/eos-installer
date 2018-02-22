@@ -43,20 +43,28 @@ G_DEFINE_QUARK(disk-error, gis_disk_error);
 struct _GisDiskTargetPagePrivate {
   UDisksClient *client;
   gboolean has_valid_disks;
+
+  GtkComboBox *disk_combo;
+  GtkListStore *target_store;
+
+  GtkBox *confirm_box;
+  GtkToggleButton *confirm_button;
+  GtkToggleButton *partition_button;
+
+  GtkBox *error_box;
+  GtkBox *too_small_box;
+  GtkLabel *too_small_label;
+  GtkBox *suitable_disks_box;
+  GtkLabel *suitable_disks_label;
 };
 typedef struct _GisDiskTargetPagePrivate GisDiskTargetPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisDiskTargetPage, gis_disktarget_page, GIS_TYPE_PAGE);
 
-#define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
-#define WID(name) OBJ(GtkWidget*,name)
-
 static void
 check_can_continue(GisDiskTargetPage *page)
 {
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (page);
-  GtkToggleButton *button = OBJ (GtkToggleButton*, "confirmbutton");
-  GtkToggleButton *pbutton = OBJ (GtkToggleButton*, "partitionbutton");
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
   UDisksDrive *drive = NULL;
 
@@ -75,10 +83,11 @@ check_can_continue(GisDiskTargetPage *page)
   if (udisks_drive_get_size(drive) < gis_store_get_required_size())
     return;
 
-  if (!gtk_toggle_button_get_active (button))
+  if (!gtk_toggle_button_get_active (priv->confirm_button))
     return;
 
-  if (gtk_widget_get_visible (GTK_WIDGET (pbutton)) && !gtk_toggle_button_get_active (pbutton))
+  if (gtk_widget_get_visible (GTK_WIDGET (priv->partition_button)) &&
+      !gtk_toggle_button_get_active (priv->partition_button))
     return;
 
   gis_page_set_complete (GIS_PAGE (page), TRUE);
@@ -100,13 +109,13 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   gboolean has_data_partitions = FALSE;
 
-  gtk_widget_hide (WID ("partitionbutton"));
+  gtk_widget_hide (GTK_WIDGET (priv->partition_button));
 
   if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &i))
     {
-      gtk_widget_hide (WID ("confirm_box"));
-      gtk_widget_hide (WID ("partitionbutton"));
-      gtk_widget_show (WID ("error_box"));
+      gtk_widget_hide (GTK_WIDGET (priv->confirm_box));
+      gtk_widget_hide (GTK_WIDGET (priv->partition_button));
+      gtk_widget_show (GTK_WIDGET (priv->error_box));
       return;
     }
 
@@ -126,9 +135,9 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
               _("The location you have chosen is too small: you need %s to reformat with %s."),
               size,
               gis_store_get_image_name());
-          gtk_label_set_text (OBJ (GtkLabel*, "too_small_label"), msg);
-          gtk_widget_hide (WID ("confirm_box"));
-          gtk_widget_show (WID ("error_box"));
+          gtk_label_set_text (priv->too_small_label, msg);
+          gtk_widget_hide (GTK_WIDGET (priv->confirm_box));
+          gtk_widget_show (GTK_WIDGET (priv->error_box));
           check_can_continue (disktarget);
           return;
         }
@@ -148,10 +157,10 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
     }
   else
     {
-      gtk_widget_show (WID ("confirm_box"));
+      gtk_widget_show (GTK_WIDGET (priv->confirm_box));
       if (has_data_partitions)
-        gtk_widget_show (WID ("partitionbutton"));
-      gtk_widget_hide (WID ("error_box"));
+        gtk_widget_show (GTK_WIDGET (priv->partition_button));
+      gtk_widget_hide (GTK_WIDGET (priv->error_box));
       check_can_continue(disktarget);
     }
 }
@@ -264,7 +273,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (disktarget);
   GDBusObjectManager *manager = udisks_client_get_object_manager(client);
   GList *objects = g_dbus_object_manager_get_objects(manager);
-  GtkListStore *store = OBJ(GtkListStore*, "target_store");
   GtkTreeIter i;
   GisUnattendedConfig *config = gis_store_get_unattended_config ();
   UDisksDrive *root = NULL;
@@ -275,7 +283,7 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
     image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (image_drive));
 
   priv->has_valid_disks = FALSE;
-  gtk_list_store_clear(store);
+  gtk_list_store_clear (priv->target_store);
   root = gis_disktarget_page_get_root_drive (client);
   for (l = objects; l != NULL; l = l->next)
     {
@@ -326,33 +334,36 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
                                    udisks_drive_get_model(drive));
       targetsize = g_format_size_full (udisks_drive_get_size(drive),
                                        G_FORMAT_SIZE_DEFAULT);
-      gtk_list_store_append(store, &i);
-      gtk_list_store_set(store, &i, 0, targetname, 1, targetsize,
-                                    2, G_OBJECT(block), 3, has_data_partitions, -1);
+      gtk_list_store_append (priv->target_store, &i);
+      gtk_list_store_set (priv->target_store, &i,
+                          0, targetname,
+                          1, targetsize,
+                          2, G_OBJECT(block),
+                          3, has_data_partitions,
+                          -1);
       g_free(targetname);
       g_free(targetsize);
     }
   g_clear_object (&root);
 
-  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (store), &i))
+  if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->target_store), &i))
     {
-      GtkComboBox *combo = OBJ (GtkComboBox*, "diskcombo");
-      gtk_combo_box_set_active_iter (combo, &i);
+      gtk_combo_box_set_active_iter (priv->disk_combo, &i);
     }
   else
     {
-      gtk_widget_hide (WID ("confirm_box"));
-      gtk_widget_hide (WID ("partitionbutton"));
-      gtk_widget_hide (WID ("too_small_box"));
-      gtk_widget_show (WID ("error_box"));
+      gtk_widget_hide (GTK_WIDGET (priv->confirm_box));
+      gtk_widget_hide (GTK_WIDGET (priv->partition_button));
+      gtk_widget_hide (GTK_WIDGET (priv->too_small_box));
+      gtk_widget_show (GTK_WIDGET (priv->error_box));
     }
 
-  gtk_widget_set_visible (WID ("suitable_disks_box"), !priv->has_valid_disks);
+  gtk_widget_set_visible (GTK_WIDGET (priv->suitable_disks_box), !priv->has_valid_disks);
   if (!priv->has_valid_disks)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
       GList *pages = g_list_last (gis_assistant_get_all_pages (assistant));
-      const gchar *text = gtk_label_get_text (OBJ (GtkLabel*, "suitable_disks_label"));
+      const gchar *text = gtk_label_get_text (priv->suitable_disks_label);
       g_autoptr(GError) error = NULL;
 
       if (gis_store_is_unattended ())
@@ -398,25 +409,24 @@ static void
 gis_disktarget_page_constructed (GObject *object)
 {
   GisDiskTargetPage *page = GIS_DISK_TARGET_PAGE (object);
+  GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (page);
 
   G_OBJECT_CLASS (gis_disktarget_page_parent_class)->constructed (object);
-
-  gtk_container_add (GTK_CONTAINER (page), WID ("disktarget-page"));
 
   gis_page_set_complete (GIS_PAGE (page), FALSE);
 
   gtk_widget_show (GTK_WIDGET (page));
 
-  g_signal_connect(OBJ(GObject*, "diskcombo"),
-                       "changed", G_CALLBACK(gis_disktarget_page_selection_changed),
-                       page);
+  g_signal_connect (priv->disk_combo,
+                    "changed", G_CALLBACK (gis_disktarget_page_selection_changed),
+                    page);
 
-  g_signal_connect(OBJ(GObject*, "confirmbutton"),
-                       "toggled", G_CALLBACK(gis_disktarget_page_confirm_toggled),
-                       page);
-  g_signal_connect(OBJ(GObject*, "partitionbutton"),
-                       "toggled", G_CALLBACK(gis_disktarget_page_confirm_toggled),
-                       page);
+  g_signal_connect (priv->confirm_button,
+                    "toggled", G_CALLBACK (gis_disktarget_page_confirm_toggled),
+                    page);
+  g_signal_connect (priv->partition_button,
+                    "toggled", G_CALLBACK (gis_disktarget_page_confirm_toggled),
+                    page);
 
 }
 
@@ -426,13 +436,35 @@ gis_disktarget_page_locale_changed (GisPage *page)
   gis_page_set_title (page, _("Select Disk"));
 }
 
+static GtkBuilder *
+gis_disktarget_page_get_builder (GisPage *page)
+{
+  return NULL;
+}
+
 static void
 gis_disktarget_page_class_init (GisDiskTargetPageClass *klass)
 {
   GisPageClass *page_class = GIS_PAGE_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass), "/org/gnome/initial-setup/gis-disktarget-page.ui");
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, disk_combo);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, target_store);
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, confirm_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, confirm_button);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, partition_button);
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, error_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, too_small_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, too_small_label);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, suitable_disks_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisDiskTargetPage, suitable_disks_label);
+
   page_class->page_id = PAGE_ID;
+  page_class->get_builder = gis_disktarget_page_get_builder;
   page_class->locale_changed = gis_disktarget_page_locale_changed;
   page_class->shown = gis_disktarget_page_shown;
   object_class->constructed = gis_disktarget_page_constructed;
@@ -442,6 +474,8 @@ static void
 gis_disktarget_page_init (GisDiskTargetPage *page)
 {
   g_resources_register (disktarget_get_resource ());
+
+  gtk_widget_init_template (GTK_WIDGET (page));
 }
 
 void
