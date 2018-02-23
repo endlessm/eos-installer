@@ -262,8 +262,6 @@ main (int argc, char *argv[])
   UDisksClient *udisks_client = NULL;
   GError *error = NULL;
 
-gis_page_get_type();
-
   GOptionEntry entries[] = {
     { "force-new-user", 0, 0, G_OPTION_ARG_NONE, &force_new_user_mode,
       _("Force new user mode"), NULL },
