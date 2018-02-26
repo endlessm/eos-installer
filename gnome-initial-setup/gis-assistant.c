@@ -99,23 +99,31 @@ gis_assistant_switch_to (GisAssistant          *assistant,
 {
   GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
 
+  g_return_if_fail (page != NULL);
+
   gtk_stack_set_visible_child (GTK_STACK (priv->stack), GTK_WIDGET (page));
 }
 
 static inline gboolean
-should_show_page (GList *l)
+should_show_page (GisPage *page)
 {
-  return l != NULL && gtk_widget_get_visible (GTK_WIDGET (l->data));
+  return gtk_widget_get_visible (GTK_WIDGET (page));
 }
 
 static GisPage *
 find_next_page (GisPage *page)
 {
   GList *l = page->assistant_priv->link->next;
-  while (!should_show_page (l)) {
-    l = l->next;
-  }
-  return GIS_PAGE (l->data);
+
+  for (; l != NULL; l = l->next)
+    {
+      GisPage *page = GIS_PAGE (l->data);
+
+      if (should_show_page (page))
+        return page;
+    }
+
+  return NULL;
 }
 
 static void
@@ -153,11 +161,15 @@ static GisPage *
 find_prev_page (GisPage *page)
 {
   GList *l = page->assistant_priv->link->prev;
+
   for (; l != NULL; l = l->prev)
     {
-      if (should_show_page (l))
-        return GIS_PAGE (l->data);
+      GisPage *page = GIS_PAGE (l->data);
+
+      if (should_show_page (page))
+        return page;
     }
+
   return NULL;
 }
 
