@@ -454,10 +454,7 @@ gis_diskimage_page_add_live_image (
     return FALSE;
 
   if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL, error))
-    {
-      g_prefix_error (error, "Couldn't read %s: ", live_flag_path);
-      return FALSE;
-    }
+    return FALSE;
 
   /* live_flag_contents contains the name that 'endless.img' would have had;
    * so we should be able to find its signature at ${live_flag_contents}.asc
