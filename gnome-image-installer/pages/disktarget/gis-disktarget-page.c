@@ -362,7 +362,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   if (!priv->has_valid_disks)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
-      GList *pages = g_list_last (gis_assistant_get_all_pages (assistant));
       const gchar *text = gtk_label_get_text (priv->suitable_disks_label);
       g_autoptr(GError) error = NULL;
 
@@ -377,7 +376,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
           error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
         }
 
-      pages = g_list_remove (pages, pages->prev->data);
       gis_page_set_forward_text (page, _("Finish"));
       gis_assistant_locale_changed (assistant);
       gis_store_set_error (error);
