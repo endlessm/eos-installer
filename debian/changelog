@@ -1,3 +1,10 @@
+eos-installer (1.0-5) eos; urgency=medium
+
+  * Fully split from gnome-initial-setup; make -standalone package coexist
+    rather than conflicting.
+
+ -- Will Thompson <wjt@endlessm.com>  Fri, 09 Feb 2018 19:22:29 +0000
+
 eos-installer (1.0-4) eos; urgency=medium
 
   * Include icon.
