@@ -87,7 +87,9 @@ w.truncated.%z: w.img.%z
 # Test "images" are signed by a throwaway key with no passphrase.
 # The public half is used as the test keyring
 %.asc: % secret.asc sign-file
-	$(AM_V_GEN) $(srcdir)/sign-file --gpg-path $(GPG_PATH) \
+	$(AM_V_GEN) $(srcdir)/sign-file \
+		--gpg-path $(GPG_PATH) \
+		--gpgconf-path $(GPGCONF_PATH) \
 		$(srcdir)/secret.asc $<
 
 test_scribe_SOURCES = test-scribe.c
