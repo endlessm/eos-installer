@@ -126,7 +126,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
           g_autoptr(GError) error =
             g_error_new_literal (GIS_UNATTENDED_ERROR,
                                  GIS_UNATTENDED_ERROR_IMAGE_AMBIGUOUS,
-                                 _("More than one image was found"));
+                                 _("More than one image was found."));
           gis_store_set_error (error);
         }
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
@@ -393,7 +393,7 @@ file_exists (
     return TRUE;
 
   g_set_error (error, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_FOUND,
-               "%s doesn't exist", path);
+               _("Image file ‘%s’ does not exist."), path);
   return FALSE;
 }
 
@@ -418,7 +418,7 @@ first_existing (
       return b;
     }
 
-  g_prefix_error (error, "%s; ", error2->message);
+  g_prefix_error (error, "%s ", error2->message);
   g_clear_error (&error2);
   return NULL;
 }
@@ -470,7 +470,7 @@ gis_diskimage_page_add_live_image (
     {
       g_set_error (error, GIS_UNATTENDED_ERROR,
                    GIS_UNATTENDED_ERROR_IMAGE_NOT_FOUND,
-                   "Live image ‘%s’ doesn't match configured image ‘%s’",
+                   _("Live image ‘%s’ does not match configured image ‘%s’."),
                    live_flag_contents, ufile);
       return FALSE;
     }
@@ -489,8 +489,8 @@ gis_diskimage_page_add_live_image (
     {
       // TODO: mount the squashfs image and read endless.img from within it?
       g_set_error (error, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_SUPPORTED,
-          "can't find image device %s; and can't use %s directly\n",
-          live_device_path, endless_path);
+                   _("Cannot find image device ‘%s’ and cannot use ‘%s’ directly."),
+                   live_device_path, endless_path);
       return FALSE;
     }
 
@@ -552,7 +552,7 @@ gis_diskimage_page_populate_model (GisPage     *page,
             g_set_error (&error, GIS_UNATTENDED_ERROR,
                          GIS_UNATTENDED_ERROR_IMAGE_NOT_FOUND,
                          /* Translators: the placeholder is a filename. */
-                         _("Configured image '%s' was not found."),
+                         _("Configured image ‘%s’ was not found."),
                          ufile);
           else
             g_set_error_literal (&error, GIS_IMAGE_ERROR,
@@ -659,7 +659,7 @@ gis_diskimage_page_mount (GisPage *page)
     }
 
   error = g_error_new (GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_FOUND,
-                       _("Could not find partition holding Endless OS files"));
+                       _("Could not find partition holding Endless OS files."));
   gis_store_set_error (error);
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 }

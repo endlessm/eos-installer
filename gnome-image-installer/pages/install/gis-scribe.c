@@ -665,10 +665,18 @@ gis_scribe_write_thread_copy (GisScribe     *self,
 
   if (bytes_written != self->image_size_bytes)
     {
+      /* The ' flag is a Single UNIX Specification extension to group the
+       * number with thousands' grouping characters if the locale information
+       * indicates any. We don't use g_format_size_full(...,
+       * G_FORMAT_SIZE_LONG_FORMAT) because it also includes the rounded value
+       * (eg "101.2 GB (101,241,834,086 bytes)"); the rounded value is unlikely
+       * to be helpful when the discrepency is < 512 bytes, as is likely (see
+       * below).
+       */
       g_autoptr(GError) local_error =
         g_error_new (GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_WRONG_SIZE,
-                     "wrote %" G_GUINT64_FORMAT " bytes, "
-                     "expected to write %" G_GUINT64_FORMAT " bytes",
+                     _("Wrote %'" G_GUINT64_FORMAT " bytes, but "
+                       "expected to write %'" G_GUINT64_FORMAT " bytes."),
                      bytes_written, self->image_size_bytes);
 
       /* Due to an image builder bug, for a few days very large images might
@@ -817,8 +825,9 @@ gis_scribe_write_thread (GTask        *task,
            */
           g_set_error (&error, GIS_INSTALL_ERROR,
                        GIS_INSTALL_ERROR_INTERNAL_ERROR,
-                       "%s: %s", _("Internal error"),
-                       "gis_scribe_write_thread_copy failed with no error");
+                       "%s: %s",
+                       _("Internal error"),
+                       "gis_scribe_write_thread_copy failed with no error.");
           g_critical ("%s", error->message);
         }
 
@@ -1040,7 +1049,7 @@ gis_scribe_begin_verify (GisScribe *self,
     {
       g_task_return_new_error (
           task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
-          _("The Endless OS signature file \"%s\" does not exist."),
+          _("The signature file ‘%s’ does not exist."),
           signature_path);
       return NULL;
     }
@@ -1247,7 +1256,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
       g_set_error (&error, GIS_INSTALL_ERROR, GIS_INSTALL_ERROR_INTERNAL_ERROR,
                    "%s: %s",
                    _("Internal error"),
-                   "g_file_get_basename returned NULL");
+                   "g_file_get_basename returned NULL.");
       g_critical ("%s", error->message);
       g_task_return_error (task, g_steal_pointer (&error));
       return FALSE;
