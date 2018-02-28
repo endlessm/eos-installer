@@ -6,7 +6,8 @@ fixed disk. It is branded as “Reformat with Endless OS” or “Reformat” to
 confusion with the Endless Installer for Windows.
 
 It is derived from `gnome-initial-setup`, the first boot experience for GNOME
-(and Endless OS). The majority of the g-i-s code is not used.
+(and Endless OS), but the majority of the `gnome-initial-setup` code has been
+excised.
 
 
 Modes

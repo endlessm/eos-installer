@@ -48,13 +48,13 @@ struct _GisInstallPagePrivate {
 
   GtkWidget *warning_dialog;
   guint inhibit_cookie;
+
+  GtkLabel *install_label;
+  GtkProgressBar *install_progress;
 };
 typedef struct _GisInstallPagePrivate GisInstallPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisInstallPage, gis_install_page, GIS_TYPE_PAGE);
-
-#define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
-#define WID(name) OBJ(GtkWidget*,name)
 
 static const gchar *REFORMATTING_IN_PROGRESS_TITLE =
   N_("Stop reformatting the disk?");
@@ -115,11 +115,10 @@ static void
 gis_install_page_stop_pulsing (GisInstallPage *page)
 {
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
-  GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
 
   if (priv->pulse_id)
     {
-      gtk_widget_remove_tick_callback ((GtkWidget *) progress, priv->pulse_id);
+      gtk_widget_remove_tick_callback (GTK_WIDGET (priv->install_progress), priv->pulse_id);
       priv->pulse_id = 0;
     }
 }
@@ -129,11 +128,10 @@ gis_install_page_teardown (GisPage *page)
 {
   GisInstallPage *install = GIS_INSTALL_PAGE (page);
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (install);
-  GtkProgressBar *progress = OBJ (GtkProgressBar*, "install_progress");
 
   gis_install_page_stop_pulsing (install);
 
-  gtk_progress_bar_set_fraction (progress, 1.0);
+  gtk_progress_bar_set_fraction (priv->install_progress, 1.0);
 
   /*
    * If there's a message dialog asking whether the user wants to quit, and
@@ -169,16 +167,15 @@ gis_install_page_pulse_progress (GtkProgressBar *bar)
 }
 
 static void
-gis_install_page_ensure_pulsing (GisInstallPage *page,
-                                 GtkProgressBar *progress)
+gis_install_page_ensure_pulsing (GisInstallPage *page)
 {
   GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
 
   if (priv->pulse_id == 0)
     {
-      gtk_progress_bar_set_pulse_step (progress, 1. / 60.);
+      gtk_progress_bar_set_pulse_step (priv->install_progress, 1. / 60.);
       priv->pulse_id = gtk_widget_add_tick_callback (
-          GTK_WIDGET (progress),
+          GTK_WIDGET (priv->install_progress),
           (GtkTickCallback) gis_install_page_pulse_progress,
           NULL, NULL);
     }
@@ -194,11 +191,13 @@ static void
 gis_install_page_update_step (GisInstallPage *page,
                               guint           step)
 {
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
+
   g_assert (step <= 2);
 
   g_autofree gchar *msg = g_strdup_printf (_("Step %d of %d"), step, 2);
 
-  gtk_label_set_text (OBJ (GtkLabel*, "install_label"), msg);
+  gtk_label_set_text (priv->install_label, msg);
 }
 
 
@@ -219,15 +218,15 @@ gis_install_page_progress_cb (GObject    *object,
                               GParamSpec *pspec,
                               gpointer    data)
 {
-  GisPage *page = GIS_PAGE (data);
+  GisInstallPage *self = GIS_INSTALL_PAGE (data);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (self);
   GisScribe *scribe = GIS_SCRIBE (object);
   gdouble progress = gis_scribe_get_progress (scribe);
-  GtkProgressBar *bar = OBJ (GtkProgressBar*, "install_progress");
 
   if (progress < 0)
-    gis_install_page_ensure_pulsing (GIS_INSTALL_PAGE (page), bar);
+    gis_install_page_ensure_pulsing (self);
   else
-    gtk_progress_bar_set_fraction (bar, progress);
+    gtk_progress_bar_set_fraction (priv->install_progress, progress);
 }
 
 static void
@@ -394,17 +393,11 @@ static void
 gis_install_page_constructed (GObject *object)
 {
   GisInstallPage *page = GIS_INSTALL_PAGE (object);
+  GisInstallPagePrivate *priv = gis_install_page_get_instance_private (page);
 
   G_OBJECT_CLASS (gis_install_page_parent_class)->constructed (object);
 
-  gtk_container_add (GTK_CONTAINER (page), WID ("install-page"));
-
-  gtk_progress_bar_set_fraction (OBJ (GtkProgressBar*, "install_progress"), 0.0);
-
-  gtk_overlay_add_overlay (OBJ (GtkOverlay*, "graphics_overlay"), WID ("infolabels"));
-
-  // XXX: FOR DEBUGGING, hide the buttons in final
-  gis_page_set_complete (GIS_PAGE (page), FALSE);
+  gtk_progress_bar_set_fraction (priv->install_progress, 0.0);
 
   gtk_widget_show (GTK_WIDGET (page));
 }
@@ -421,6 +414,11 @@ gis_install_page_class_init (GisInstallPageClass *klass)
   GisPageClass *page_class = GIS_PAGE_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass), "/org/gnome/initial-setup/gis-install-page.ui");
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisInstallPage, install_label);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisInstallPage, install_progress);
+
   page_class->page_id = PAGE_ID;
   page_class->hide_forward_button = TRUE;
   page_class->hide_backward_button = TRUE;
@@ -431,9 +429,11 @@ gis_install_page_class_init (GisInstallPageClass *klass)
 }
 
 static void
-gis_install_page_init (GisInstallPage *page)
+gis_install_page_init (GisInstallPage *self)
 {
   g_resources_register (install_get_resource ());
+
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void

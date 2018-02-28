@@ -1,6 +1,7 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
- * Copyright (C) 2012 Red Hat
+ * Copyright © 2012 Red Hat
+ * Copyright © 2018 Endless Mobile, Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,27 +17,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
- *
- * Written by:
- *     Jasper St. Pierre <jstpierre@mecheye.net>
  */
 
-#ifndef __GNOME_INITIAL_SETUP_H__
-#define __GNOME_INITIAL_SETUP_H__
+#include "config.h"
 
-#include <gtk/gtk.h>
-#include <gio/gio.h>
-#include <glib/gi18n.h>
+#include "gis-driver-mode.h"
 
-typedef struct _GisDriver    GisDriver;
-typedef struct _GisAssistant GisAssistant;
-typedef struct _GisPage      GisPage;
+/* Statically include this for now. Maybe later
+ * we'll generate this from glib-mkenums. */
+GType
+gis_driver_mode_get_type (void) {
+  static GType enum_type_id = 0;
 
-#include "gis-driver.h"
-#include "gis-assistant.h"
-#include "gis-page.h"
+  if (g_once_init_enter (&enum_type_id))
+    {
+      static const GEnumValue values[] = {
+        { GIS_DRIVER_MODE_NEW_USER, "GIS_DRIVER_MODE_NEW_USER", "new_user" },
+        { GIS_DRIVER_MODE_EXISTING_USER, "GIS_DRIVER_MODE_EXISTING_USER", "existing_user" },
+        { 0, NULL, NULL }
+      };
+      g_once_init_leave (&enum_type_id,
+                         g_enum_register_static ("GisDriverMode", values));
+    }
 
-void gis_add_setup_done_file (void);
-
-#endif /* __GNOME_INITIAL_SETUP_H__ */
-
+  return enum_type_id;
+}

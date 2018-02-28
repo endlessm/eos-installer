@@ -36,7 +36,6 @@ typedef struct _GisPage      GisPage;
 #include "gis-driver.h"
 #include "gis-assistant.h"
 #include "gis-page.h"
-#include "gis-keyring.h"
 
 #endif /* __GNOME_IMAGE_INSTALLER_H__ */
 

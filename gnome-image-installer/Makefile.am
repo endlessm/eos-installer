@@ -3,18 +3,14 @@ SUBDIRS = util pages
 BUILT_SOURCES =
 
 # TODO: ugly, but let's see if splitting makes sense
-uidir = $(datadir)/gnome-initial-setup
 gisdir = ./../gnome-initial-setup
 gissrcdir = $(srcdir)/../gnome-initial-setup
-
-$(info ${uidir})
 
 AM_CPPFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \
 	-DSECRET_API_SUBJECT_TO_CHANGE \
 	-DGCR_API_SUBJECT_TO_CHANGE \
-	-DUIDIR="\"$(uidir)\"" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" \
 	-DLIBLOCALEDIR=\""$(prefix)/lib/locale"\" \
 	-DDATADIR=\""$(datadir)"\" \
@@ -39,11 +35,6 @@ gnome_image_installer_LDADD =	\
 	$(top_builddir)/ext/libglnx.la \
 	util/libgiiutil.la \
 	$(gisdir)/libgisutil.la \
-	$(gisdir)/pages/language/libgislanguage.la \
-	$(gisdir)/pages/keyboard/libgiskeyboard.la \
-	$(gisdir)/pages/display/libgisdisplay.la \
-	$(gisdir)/pages/endless-eula/libgisendlesseula.la \
-	$(gisdir)/pages/eulas/libgiseulas.la \
 	pages/confirm/libgisconfirm.la \
 	pages/diskimage/libgisdiskimage.la \
 	pages/disktarget/libgisdisktarget.la \

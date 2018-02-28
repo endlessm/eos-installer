@@ -16,13 +16,9 @@ edit = $(AM_V_GEN) sed \
 rulesdir = $(datadir)/polkit-1/rules.d
 rules_DATA = 20-eos-installer.rules
 
-sessiondir = $(datadir)/gnome-session/sessions
-session_DATA = eos-installer.session
-
-desktopdir = $(datadir)/gdm/greeter/applications
+desktopdir = $(datadir)/applications
 desktop_DATA = \
 	com.endlessm.Installer.desktop \
-	eos-setup-shell.desktop \
 	$(NULL)
 
 systemdsystemunit_DATA = \
@@ -38,8 +34,6 @@ icon64_DATA = \
 EXTRA_DIST =						\
 	20-eos-installer.rules  		\
 	com.endlessm.Installer.desktop.in.in \
-	eos-installer.session			\
-	eos-setup-shell.desktop 		\
 	icons/hicolor/64x64/apps/com.endlessm.Installer.png \
 	run-mount-eosimages.mount
 	$(NULL)

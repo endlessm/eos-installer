@@ -122,7 +122,7 @@ gis_window_new (GisDriver *driver)
   return g_object_new (GIS_TYPE_WINDOW,
 		       "application", driver,
 		       "type", GTK_WINDOW_TOPLEVEL,
-		       "icon-name", "preferences-system",
+		       "icon-name", "com.endlessm.Installer",
 		       "resizable", TRUE,
 		       "window-position", GTK_WIN_POS_CENTER_ALWAYS,
 		       "deletable", FALSE,

@@ -7,3 +7,4 @@ Type=Application
 StartupNotify=true
 Categories=GNOME;GTK;System;
 OnlyShowIn=GNOME;
+NoDisplay=true

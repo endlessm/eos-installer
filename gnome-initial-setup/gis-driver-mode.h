@@ -1,6 +1,7 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
- * Copyright (C) 2012 Red Hat
+ * Copyright © 2012 Red Hat
+ * Copyright © 2018 Endless Mobile, Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,23 +17,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
  * 02111-1307, USA.
- *
- * Written by:
- *     Jasper St. Pierre <jstpierre@mecheye.net>
  */
 
-#ifndef __GIS_EULA_PAGES_H__
-#define __GIS_EULA_PAGES_H__
+#ifndef __GIS_DRIVER_MODE_H__
+#define __GIS_DRIVER_MODE_H__
 
 #include <glib-object.h>
 
-#include "gnome-initial-setup.h"
+/**
+ * GisDriverMode:
+ * @GIS_DRIVER_MODE_NEW_USER: running within first-boot experience
+ * @GIS_DRIVER_MODE_EXISTING_USER: running within a user session
+ */
+typedef enum {
+  GIS_DRIVER_MODE_NEW_USER,
+  GIS_DRIVER_MODE_EXISTING_USER,
+} GisDriverMode;
 
-G_BEGIN_DECLS
+#define GIS_TYPE_DRIVER_MODE (gis_driver_mode_get_type ())
 
-void gis_prepare_eula_page (GisDriver *driver);
+GType gis_driver_mode_get_type (void);
 
-G_END_DECLS
-
-#endif /* __GIS_EULA_PAGES_H__ */
-
+#endif /* __GIS_DRIVER_MODE_H__ */

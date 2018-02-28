@@ -48,7 +48,6 @@ struct _GisPage
   GtkBin parent;
 
   GisDriver *driver;
-  GtkBuilder *builder;
 
   GisAssistantPagePrivate *assistant_priv;
 };
@@ -61,7 +60,6 @@ struct _GisPageClass
   gboolean hide_window_controls;
   const char *page_id;
 
-  GtkBuilder * (*get_builder) (GisPage *page);
   void         (*locale_changed) (GisPage *page);
   GtkAccelGroup * (*get_accel_group) (GisPage *page);
   gboolean     (*apply) (GisPage *page,
@@ -78,7 +76,6 @@ const char *       gis_page_get_forward_text (GisPage *page);
 void         gis_page_set_forward_text (GisPage *page, const char *text);
 gboolean     gis_page_get_complete (GisPage *page);
 void         gis_page_set_complete (GisPage *page, gboolean complete);
-GtkWidget *  gis_page_get_action_widget (GisPage *page);
 GtkAccelGroup *  gis_page_get_accel_group (GisPage *page);
 void         gis_page_locale_changed (GisPage *page);
 void         gis_page_apply_begin (GisPage *page, GisPageApplyCallback callback, gpointer user_data);

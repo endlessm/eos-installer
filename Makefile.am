@@ -7,7 +7,6 @@ SUBDIRS = \
     gnome-initial-setup \
     gnome-image-installer \
     po \
-    data \
     eos-installer-data \
     tests \
     $(NULL)
@@ -19,7 +18,6 @@ EXTRA_DIST = \
     buildutil/tap-test \
     COPYING \
     AUTHORS \
-    NEWS \
     eos-installer.doap
 
 DISTCHECK_CONFIGURE_FLAGS = \

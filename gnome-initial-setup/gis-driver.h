@@ -25,8 +25,8 @@
 #define __GIS_DRIVER_H__
 
 #include "gis-assistant.h"
+#include "gis-driver-mode.h"
 #include "gis-page.h"
-#include <act/act-user-manager.h>
 
 G_BEGIN_DECLS
 
@@ -53,28 +53,10 @@ struct _GisDriverClass
   void (* locale_changed) (GisDriver *driver);
 };
 
-typedef enum {
-  GIS_DRIVER_MODE_NEW_USER,
-  GIS_DRIVER_MODE_EXISTING_USER,
-} GisDriverMode;
-
 GType gis_driver_get_type (void);
 
 GisAssistant *gis_driver_get_assistant (GisDriver *driver);
 void gis_driver_locale_changed (GisDriver *driver);
-
-void gis_driver_set_user_permissions (GisDriver   *driver,
-                                      ActUser     *user,
-                                      const gchar *password);
-
-void gis_driver_get_user_permissions (GisDriver    *driver,
-                                      ActUser     **user,
-                                      const gchar **password);
-
-void gis_driver_set_user_language (GisDriver   *driver,
-                                   const gchar *lang_id);
-
-const gchar *gis_driver_get_user_language (GisDriver   *driver);
 
 GisDriverMode gis_driver_get_mode (GisDriver *driver);
 
@@ -83,12 +65,9 @@ gboolean gis_driver_is_small_screen (void);
 void gis_driver_add_page (GisDriver *driver,
                           GisPage   *page);
 
-void gis_driver_hide_window (GisDriver *driver);
-
 void gis_driver_save_data (GisDriver *driver);
 
-GisDriver *gis_driver_new (GisDriverMode mode,
-                           gboolean      inhibit_idle);
+GisDriver *gis_driver_new (GisDriverMode mode);
 
 G_END_DECLS
 

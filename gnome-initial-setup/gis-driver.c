@@ -31,25 +31,6 @@
 #include "gis-assistant.h"
 #include "gis-window.h"
 
-#define GIS_TYPE_DRIVER_MODE (gis_driver_mode_get_type ())
-
-/* Statically include this for now. Maybe later
- * we'll generate this from glib-mkenums. */
-GType
-gis_driver_mode_get_type (void) {
-  static GType enum_type_id = 0;
-  if (G_UNLIKELY (!enum_type_id))
-    {
-      static const GEnumValue values[] = {
-        { GIS_DRIVER_MODE_NEW_USER, "GIS_DRIVER_MODE_NEW_USER", "new_user" },
-        { GIS_DRIVER_MODE_EXISTING_USER, "GIS_DRIVER_MODE_EXISTING_USER", "existing_user" },
-        { 0, NULL, NULL }
-      };
-      enum_type_id = g_enum_register_static("GisDriverMode", values);
-    }
-  return enum_type_id;
-}
-
 enum {
   REBUILD_PAGES,
   LOCALE_CHANGED,
@@ -61,7 +42,6 @@ static guint signals[LAST_SIGNAL];
 enum {
   PROP_0,
   PROP_MODE,
-  PROP_INHIBIT_IDLE,
   PROP_LAST,
 };
 
@@ -71,13 +51,7 @@ struct _GisDriverPrivate {
   GtkWindow *main_window;
   GisAssistant *assistant;
 
-  ActUser *user_account;
-  const gchar *user_password;
-
-  gchar *lang_id;
-
   GisDriverMode mode;
-  gboolean inhibit_idle;
 };
 typedef struct _GisDriverPrivate GisDriverPrivate;
 
@@ -87,17 +61,6 @@ static void
 assistant_page_changed (GtkScrolledWindow *sw)
 {
   gtk_adjustment_set_value (gtk_scrolled_window_get_vadjustment (sw), 0);
-}
-
-static void
-gis_driver_finalize (GObject *object)
-{
-  GisDriver *driver = GIS_DRIVER (object);
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-
-  g_free (priv->lang_id);
-
-  G_OBJECT_CLASS (gis_driver_parent_class)->finalize (object);
 }
 
 static void
@@ -144,10 +107,15 @@ prepare_main_window (GisDriver *driver)
   titlebar = gis_assistant_get_titlebar (priv->assistant);
   if (priv->mode == GIS_DRIVER_MODE_EXISTING_USER)
     {
-      gis_assistant_enable_controls (priv->assistant);
       gtk_window_set_deletable (priv->main_window, TRUE);
     }
   gtk_window_set_titlebar (priv->main_window, titlebar);
+
+  gis_assistant_set_mode (priv->assistant, priv->mode);
+  g_signal_connect_swapped (priv->assistant,
+                            "quit",
+                            G_CALLBACK (g_application_quit),
+                            G_APPLICATION (driver));
 }
 
 static gboolean
@@ -165,54 +133,11 @@ gis_driver_get_assistant (GisDriver *driver)
 }
 
 void
-gis_driver_set_user_language (GisDriver *driver, const gchar *lang_id)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  g_free (priv->lang_id);
-  priv->lang_id = g_strdup (lang_id);
-}
-
-const gchar *
-gis_driver_get_user_language (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  return priv->lang_id;
-}
-
-void
-gis_driver_set_user_permissions (GisDriver   *driver,
-                                 ActUser     *user,
-                                 const gchar *password)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  priv->user_account = user;
-  priv->user_password = password;
-}
-
-void
-gis_driver_get_user_permissions (GisDriver    *driver,
-                                 ActUser     **user,
-                                 const gchar **password)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-  *user = priv->user_account;
-  *password = priv->user_password;
-}
-
-void
 gis_driver_add_page (GisDriver *driver,
                      GisPage   *page)
 {
   GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
   gis_assistant_add_page (priv->assistant, page);
-}
-
-void
-gis_driver_hide_window (GisDriver *driver)
-{
-  GisDriverPrivate *priv = gis_driver_get_instance_private (driver);
-
-  gtk_widget_hide (GTK_WIDGET (priv->main_window));
 }
 
 static void
@@ -264,9 +189,6 @@ gis_driver_get_property (GObject      *object,
     case PROP_MODE:
       g_value_set_enum (value, priv->mode);
       break;
-    case PROP_INHIBIT_IDLE:
-      g_value_set_boolean (value, priv->inhibit_idle);
-      break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -285,9 +207,6 @@ gis_driver_set_property (GObject      *object,
     {
     case PROP_MODE:
       priv->mode = g_value_get_enum (value);
-      break;
-    case PROP_INHIBIT_IDLE:
-      priv->inhibit_idle = g_value_get_boolean (value);
       break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -333,24 +252,12 @@ gis_driver_startup (GApplication *app)
 
   priv->main_window = GTK_WINDOW (gis_window_new (driver));
 
-  if (priv->inhibit_idle)
-    {
-      /* This inhibitor is (unfortunately) shown on the shutdown dialog, so use
-       * an empty reason to minimize clutter.
-       */
-      gtk_application_inhibit (GTK_APPLICATION (app), priv->main_window,
-                               GTK_APPLICATION_INHIBIT_IDLE,
-                               " ");
-    }
-
   g_signal_connect (priv->main_window,
                     "realize",
                     G_CALLBACK (window_realize_cb),
                     app);
 
   priv->assistant = gis_window_get_assistant (GIS_WINDOW (priv->main_window));
-
-  gis_driver_set_user_language (driver, setlocale (LC_MESSAGES, NULL));
 
   prepare_main_window (driver);
   rebuild_pages (driver);
@@ -369,7 +276,6 @@ gis_driver_class_init (GisDriverClass *klass)
 
   gobject_class->get_property = gis_driver_get_property;
   gobject_class->set_property = gis_driver_set_property;
-  gobject_class->finalize = gis_driver_finalize;
   application_class->startup = gis_driver_startup;
   application_class->activate = gis_driver_activate;
   klass->locale_changed = gis_driver_real_locale_changed;
@@ -396,13 +302,6 @@ gis_driver_class_init (GisDriverClass *klass)
                        GIS_DRIVER_MODE_EXISTING_USER,
                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
-  obj_props[PROP_INHIBIT_IDLE] =
-    g_param_spec_boolean ("inhibit-idle", "Inhibit Idle",
-                          "TRUE if the system should be inhibited from going "
-                          "idle",
-                          FALSE,
-                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
-
   g_object_class_install_properties (gobject_class, PROP_LAST, obj_props);
 }
 
@@ -414,12 +313,10 @@ gis_driver_save_data (GisDriver *driver)
 }
 
 GisDriver *
-gis_driver_new (GisDriverMode mode,
-                gboolean      inhibit_idle)
+gis_driver_new (GisDriverMode mode)
 {
   return g_object_new (GIS_TYPE_DRIVER,
                        "application-id", "com.endlessm.Installer",
                        "mode", mode,
-                       "inhibit-idle", inhibit_idle,
                        NULL);
 }

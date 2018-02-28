@@ -46,13 +46,20 @@ struct _GisFinishedPagePrivate {
   gint led_state;
 
   GtkAccelGroup *accel_group;
+
+  GtkWidget *success_box;
+  GtkWidget *removelabel_usb;
+  GtkWidget *removelabel_dvd;
+  GtkButton *restart_button;
+
+  GtkWidget *error_box;
+  GtkLabel *error_heading_label;
+  GtkLabel *error_label;
+  GtkLabel *support_label;
 };
 typedef struct _GisFinishedPagePrivate GisFinishedPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisFinishedPage, gis_finished_page, GIS_TYPE_PAGE);
-
-#define OBJ(type,name) ((type)gtk_builder_get_object(GIS_PAGE(page)->builder,(name)))
-#define WID(name) OBJ(GtkWidget*,name)
 
 /* See endlessm/gnome-shell/js/gdm/authPrompt.js */
 #define CUSTOMER_SUPPORT_FILENAME "vendor-customer-support.ini"
@@ -134,42 +141,55 @@ toggle_leds (GisPage *page)
 #define EOS_IMAGE_VERSION_ALT_PATH "/"
 
 static gchar *
-get_image_version (const gchar *path)
+gis_page_util_get_image_version (const gchar *path,
+                                 GError     **error)
 {
   ssize_t attrsize;
-  gchar *value;
+  g_autofree gchar *value = NULL;
 
   g_return_val_if_fail (path != NULL, NULL);
 
   attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, NULL, 0);
-  if (attrsize < 0) {
-    g_message ("Error examining " EOS_IMAGE_VERSION_XATTR " on %s: %s",
-               path, g_strerror (errno));
-    return NULL;
-  }
+  if (attrsize >= 0)
+    {
+      value = g_malloc (attrsize + 1);
+      value[attrsize] = 0;
 
-  value = g_malloc (attrsize + 1);
-  value[attrsize] = 0;
+      attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, value,
+                           attrsize);
+    }
 
-  attrsize = getxattr (path, EOS_IMAGE_VERSION_XATTR, value,
-                       attrsize);
-  if (attrsize < 0) {
-    g_warning ("Error reading " EOS_IMAGE_VERSION_XATTR " on %s: %s",
-               path, g_strerror (errno));
-    g_free (value);
-    return NULL;
-  }
-
-  return value;
+  if (attrsize >= 0)
+    {
+      return g_steal_pointer (&value);
+    }
+  else
+    {
+      int errsv = errno;
+      g_set_error (error, G_IO_ERROR, g_io_error_from_errno (errsv),
+                   "Error examining " EOS_IMAGE_VERSION_XATTR " on %s: %s",
+                   path, g_strerror (errsv));
+      return NULL;
+    }
 }
 
 static gboolean
 is_eosdvd (void)
 {
-  g_autofree gchar *image_version = get_image_version (EOS_IMAGE_VERSION_PATH);
+  g_autoptr(GError) error_sysroot = NULL;
+  g_autoptr(GError) error_root = NULL;
+  g_autofree char *image_version =
+    gis_page_util_get_image_version (EOS_IMAGE_VERSION_PATH, &error_sysroot);
 
   if (image_version == NULL)
-    image_version = get_image_version (EOS_IMAGE_VERSION_ALT_PATH);
+    image_version =
+      gis_page_util_get_image_version (EOS_IMAGE_VERSION_ALT_PATH, &error_root);
+
+  if (image_version == NULL)
+    {
+      g_warning ("%s", error_sysroot->message);
+      g_warning ("%s", error_root->message);
+    }
 
   return image_version != NULL &&
     g_str_has_prefix (image_version, "eosdvd-");
@@ -178,6 +198,8 @@ is_eosdvd (void)
 static void
 gis_finished_page_shown (GisPage *page)
 {
+  GisFinishedPage *self = GIS_FINISHED_PAGE (page);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
   GError *error = gis_store_get_error();
 
   gis_driver_save_data (GIS_PAGE (page)->driver);
@@ -185,20 +207,18 @@ gis_finished_page_shown (GisPage *page)
   if (error != NULL)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
-      GtkLabel *error_heading_label = OBJ (GtkLabel*, "error_heading_label");
-      GtkLabel *error_label = OBJ (GtkLabel*, "error_label");
 
       if (error->domain == GIS_UNATTENDED_ERROR)
-        gtk_label_set_text (error_heading_label,
+        gtk_label_set_text (priv->error_heading_label,
                             _("Oops, something is wrong with your unattended installation configuration."));
       /* Otherwise, leave the default message (indicating a problem with the
        * image file). TODO: handle other domains that indicate problems
        * elsewhere.
        */
 
-      gtk_label_set_text (error_label, error->message);
-      gtk_widget_show (WID ("error_box"));
-      gtk_widget_hide (WID ("success_box"));
+      gtk_label_set_text (priv->error_label, error->message);
+      gtk_widget_show (priv->error_box);
+      gtk_widget_hide (priv->success_box);
       gis_assistant_locale_changed (assistant);
 
       if (gis_store_is_unattended())
@@ -210,8 +230,8 @@ gis_finished_page_shown (GisPage *page)
     {
       gboolean optical = is_eosdvd ();
 
-      gtk_widget_set_visible (WID ("removelabel_usb"), !optical);
-      gtk_widget_set_visible (WID ("removelabel_dvd"),  optical);
+      gtk_widget_set_visible (priv->removelabel_usb, !optical);
+      gtk_widget_set_visible (priv->removelabel_dvd,  optical);
     }
 }
 
@@ -301,11 +321,9 @@ gis_finished_page_constructed (GObject *object)
 
   G_OBJECT_CLASS (gis_finished_page_parent_class)->constructed (object);
 
-  gtk_container_add (GTK_CONTAINER (page), WID ("finished-page"));
-
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 
-  g_signal_connect (OBJ (GtkButton *, "restart_button"), "clicked", G_CALLBACK(reboot_cb), page);
+  g_signal_connect (priv->restart_button, "clicked", G_CALLBACK (reboot_cb), page);
 
   /* Use Ctrl+U to write unattended config */
   priv->accel_group = gtk_accel_group_new ();
@@ -329,6 +347,8 @@ gis_finished_page_dispose (GObject *object)
 static void
 gis_finished_page_locale_changed (GisPage *page)
 {
+  GisFinishedPage *self = GIS_FINISHED_PAGE (page);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
   g_autofree gchar *support_email = NULL;
   g_autofree gchar *support_email_markup = NULL;
   g_autofree gchar *support_markup = NULL;
@@ -348,7 +368,7 @@ gis_finished_page_locale_changed (GisPage *page)
   /* Translators: the %s is the customer support email address */
   support_markup = g_strdup_printf (_("Please contact %s or join the <a href=\"https://community.endlessos.com/\">Endless Community</a> to troubleshoot."),
                                     support_email_markup);
-  gtk_label_set_markup (OBJ (GtkLabel *, "support_label"), support_markup);
+  gtk_label_set_markup (priv->support_label, support_markup);
 }
 
 static GtkAccelGroup *
@@ -366,6 +386,18 @@ gis_finished_page_class_init (GisFinishedPageClass *klass)
   GisPageClass *page_class = GIS_PAGE_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
+  gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass), "/org/gnome/initial-setup/gis-finished-page.ui");
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, success_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, removelabel_usb);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, removelabel_dvd);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, restart_button);
+
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, error_box);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, error_heading_label);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, error_label);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, support_label);
+
   page_class->page_id = PAGE_ID;
   page_class->locale_changed = gis_finished_page_locale_changed;
   page_class->get_accel_group = gis_finished_page_get_accel_group;
@@ -375,9 +407,11 @@ gis_finished_page_class_init (GisFinishedPageClass *klass)
 }
 
 static void
-gis_finished_page_init (GisFinishedPage *page)
+gis_finished_page_init (GisFinishedPage *self)
 {
   g_resources_register (finished_get_resource ());
+
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 void

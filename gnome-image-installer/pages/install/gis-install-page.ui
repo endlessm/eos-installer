@@ -2,125 +2,131 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.2"/>
-  <object class="GtkBox" id="infolabels">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="halign">start</property>
-    <property name="margin_left">48</property>
-    <property name="margin_top">48</property>
-    <property name="orientation">vertical</property>
+  <template class="GisInstallPage" parent="GisPage">
     <child>
-      <object class="GtkLabel" id="label1">
+      <object class="GtkBox" id="box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="halign">start</property>
-        <property name="label" translatable="yes">Endless OS</property>
-        <property name="xalign">0</property>
-        <attributes>
-          <attribute name="weight" value="bold"/>
-          <attribute name="scale" value="2"/>
-          <attribute name="foreground" value="#ffffffffffff"/>
-        </attributes>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkLabel" id="label2">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="halign">start</property>
-        <property name="margin_top">16</property>
-        <property name="label" translatable="yes">Fast, easy to use and powerful – with or without internet.
-
-Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on.</property>
-        <property name="wrap">True</property>
-        <property name="max_width_chars">26</property>
-        <property name="xalign">0</property>
-        <attributes>
-          <attribute name="foreground" value="#ffffffffffff"/>
-        </attributes>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">True</property>
-        <property name="position">1</property>
-      </packing>
-    </child>
-  </object>
-  <object class="GtkBox" id="install-page">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_left">64</property>
-    <property name="margin_right">64</property>
-    <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkBox" id="padbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="margin_left">64</property>
+        <property name="margin_right">64</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">16</property>
         <child>
-          <object class="GtkLabel" id="install_label">
+          <object class="GtkBox" id="padbox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_top">32</property>
-            <property name="label" translatable="yes">Step %d of %d</property>
-            <property name="justify">center</property>
-            <attributes>
-              <attribute name="weight" value="bold"/>
-              <attribute name="scale" value="1.1000000000000001"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkProgressBar" id="install_progress">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkOverlay" id="graphics_overlay">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">16</property>
             <child>
-              <object class="GtkImage" id="infographics">
+              <object class="GtkLabel" id="install_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xpad">12</property>
-                <property name="ypad">12</property>
-                <property name="pixbuf">software_screens.png</property>
+                <property name="margin_top">32</property>
+                <property name="label" translatable="yes">Step %d of %d</property>
+                <property name="justify">center</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                  <attribute name="scale" value="1.1000000000000001"/>
+                </attributes>
               </object>
               <packing>
-                <property name="index">-1</property>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkProgressBar" id="install_progress">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkOverlay" id="graphics_overlay">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkImage" id="infographics">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xpad">12</property>
+                    <property name="ypad">12</property>
+                    <property name="resource">/org/gnome/initial-setup/software_screens.png</property>
+                  </object>
+                  <packing>
+                    <property name="index">-1</property>
+                  </packing>
+                </child>
+                <child type="overlay">
+                  <object class="GtkBox" id="infolabels">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="halign">start</property>
+                    <property name="margin_left">48</property>
+                    <property name="margin_top">48</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="label1">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Endless OS</property>
+                        <property name="xalign">0</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="scale" value="2"/>
+                          <attribute name="foreground" value="#ffffffffffff"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label2">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="margin_top">16</property>
+                        <property name="label" translatable="yes">Fast, easy to use and powerful – with or without internet.
+
+Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on.</property>
+                        <property name="wrap">True</property>
+                        <property name="max_width_chars">26</property>
+                        <property name="xalign">0</property>
+                        <attributes>
+                          <attribute name="foreground" value="#ffffffffffff"/>
+                        </attributes>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
+            <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
     </child>
-  </object>
+  </template>
 </interface>

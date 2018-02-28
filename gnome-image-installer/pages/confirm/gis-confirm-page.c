@@ -259,15 +259,6 @@ gis_confirm_page_constructed (GObject *object)
   gtk_widget_show (GTK_WIDGET (self));
 }
 
-static GtkBuilder *
-gis_confirm_page_get_builder (GisPage *page)
-{
-  /* This class uses the newer gtk_widget_class_set_template_from_resource()
-   * mechanism.
-   */
-  return NULL;
-}
-
 static void
 gis_confirm_page_locale_changed (GisPage *page)
 {
@@ -302,7 +293,6 @@ gis_confirm_page_class_init (GisConfirmPageClass *klass)
   page_class->hide_forward_button = TRUE;
   page_class->hide_backward_button = TRUE;
   page_class->page_id = PAGE_ID;
-  page_class->get_builder = gis_confirm_page_get_builder;
   page_class->locale_changed = gis_confirm_page_locale_changed;
   page_class->shown = gis_confirm_page_shown;
   object_class->constructed = gis_confirm_page_constructed;
