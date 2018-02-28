@@ -251,6 +251,14 @@ gis_finished_page_shown (GisPage *page)
         {
           g_timeout_add_seconds (1, (GSourceFunc)toggle_leds, page);
         }
+
+      /* If running within a live session, hide the "Turn off" button on error,
+       * since we have a perfectly good [X] button on the titlebar and we want
+       * to encourage the user to notice the link to the diagnostics file.
+       */
+      GisDriverMode mode = gis_driver_get_mode (GIS_PAGE (self)->driver);
+      gtk_widget_set_visible (GTK_WIDGET (priv->restart_button),
+                              mode == GIS_DRIVER_MODE_NEW_USER);
     }
   else
     {
