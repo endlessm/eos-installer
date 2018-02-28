@@ -206,16 +206,43 @@ gis_finished_page_shown (GisPage *page)
   if (error != NULL)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
+      const gchar *heading = NULL;
+      const gchar *detail = error->message;
 
       if (error->domain == GIS_UNATTENDED_ERROR)
-        gtk_label_set_text (priv->error_heading_label,
-                            _("Oops, something is wrong with your unattended installation configuration."));
-      /* Otherwise, leave the default message (indicating a problem with the
-       * image file). TODO: handle other domains that indicate problems
-       * elsewhere.
-       */
+        {
+          heading = _("Oops, something is wrong with your unattended installation configuration.");
+        }
+      else if (error->domain == GIS_IMAGE_ERROR)
+        {
+          heading = _("Oops, something is wrong with your Endless OS file.");
+        }
+      else if (error->domain == GIS_DISK_ERROR)
+        {
+          heading = _("Oops, something went wrong while finding suitable disks to reformat.");
+        }
+      else if (error->domain == GIS_INSTALL_ERROR)
+        {
+          heading = _("Oops, something went wrong while reformatting.");
+        }
+      else if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          heading = error->message;
+          detail = NULL;
+          gtk_widget_hide (GTK_WIDGET (priv->error_label));
+          gtk_widget_hide (GTK_WIDGET (priv->support_label));
+        }
+      else
+        {
+          heading = _("Oops, something went wrong.");
+        }
 
-      gtk_label_set_text (priv->error_label, error->message);
+      if (heading != NULL)
+        gtk_label_set_text (priv->error_heading_label, heading);
+
+      if (detail != NULL)
+        gtk_label_set_text (priv->error_label, detail);
+
       gtk_widget_show (priv->error_box);
       gtk_widget_hide (priv->success_box);
       gis_assistant_locale_changed (assistant);
