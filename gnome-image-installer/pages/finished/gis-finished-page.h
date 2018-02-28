@@ -37,6 +37,8 @@ G_BEGIN_DECLS
 typedef struct _GisFinishedPage        GisFinishedPage;
 typedef struct _GisFinishedPageClass   GisFinishedPageClass;
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GisFinishedPage, g_object_unref);
+
 struct _GisFinishedPage
 {
   GisPage parent;

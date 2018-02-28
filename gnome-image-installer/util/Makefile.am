@@ -5,6 +5,7 @@ libgiiutil_la_SOURCES = \
 	gis-errors.c gis-errors.h \
 	gis-store.c gis-store.h \
 	gis-unattended-config.c gis-unattended-config.h \
+	gis-write-diagnostics.c gis-write-diagnostics.h \
 	gduxzdecompressor.c gduxzdecompressor.h \
 	gpt.c gpt.h gpt_errors.h \
 	gpt_gz.c gpt_gz.h \

@@ -30,11 +30,13 @@
 #include "gis-finished-page.h"
 #include "gis-store.h"
 #include "gis-dmi.h"
+#include "gis-write-diagnostics.h"
 
 #include <gtk/gtkx.h>
 #include <glib/gstdio.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <attr/xattr.h>
@@ -46,6 +48,8 @@ struct _GisFinishedPagePrivate {
 
   GtkAccelGroup *accel_group;
 
+  GDesktopAppInfo *gedit;
+
   GtkWidget *success_box;
   GtkWidget *removelabel_usb;
   GtkWidget *removelabel_dvd;
@@ -54,6 +58,7 @@ struct _GisFinishedPagePrivate {
   GtkWidget *error_box;
   GtkLabel *error_heading_label;
   GtkLabel *error_label;
+  GtkLabel *diagnostics_label;
   GtkLabel *support_label;
 };
 typedef struct _GisFinishedPagePrivate GisFinishedPagePrivate;
@@ -133,6 +138,48 @@ toggle_leds (GisPage *page)
   XChangeKeyboardControl(GDK_DISPLAY_XDISPLAY(gtk_widget_get_display(GTK_WIDGET(page))), KBLedMode, &values);
   priv->led_state = priv->led_state == 1 ? 0 : 1;
   return TRUE;
+}
+
+static void
+write_diagnostics_cb (GObject      *source,
+                      GAsyncResult *result,
+                      gpointer      user_data)
+{
+  g_autoptr(GisFinishedPage) self = GIS_FINISHED_PAGE (user_data);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GFile) output = gis_write_diagnostics_finish (result, &error);
+
+  g_application_release (G_APPLICATION (GIS_PAGE (self)->driver));
+
+  if (output != NULL)
+    {
+      g_autofree gchar *basename_ = g_file_get_basename (output);
+      g_autofree gchar *link = NULL;
+      g_autofree gchar *markup = NULL;
+
+      if (priv->gedit != NULL)
+        {
+          g_assert (error == NULL);
+          g_autofree gchar *url = g_file_get_uri (output);
+
+          link = g_markup_printf_escaped ("<a href=\"%s\">%s</a>",
+                                          url, basename_);
+        }
+      else
+        {
+          link = g_strdup (basename_);
+        }
+
+      markup = g_strdup_printf (_("A debug log has been saved as %s."), link);
+      gtk_label_set_markup (priv->diagnostics_label, markup);
+    }
+  else if (error != NULL)
+    {
+      g_prefix_error (&error, _("Failed to save debug log: "));
+      gtk_label_set_text (priv->diagnostics_label, error->message);
+    }
+  /* else, both possible target directories were NULL */
 }
 
 #define EOS_IMAGE_VERSION_XATTR "user.eos-image-version"
@@ -230,6 +277,7 @@ gis_finished_page_shown (GisPage *page)
           heading = error->message;
           detail = NULL;
           gtk_widget_hide (GTK_WIDGET (priv->error_label));
+          gtk_widget_hide (GTK_WIDGET (priv->diagnostics_label));
           gtk_widget_hide (GTK_WIDGET (priv->support_label));
         }
       else
@@ -246,6 +294,21 @@ gis_finished_page_shown (GisPage *page)
       gtk_widget_show (priv->error_box);
       gtk_widget_hide (priv->success_box);
       gis_assistant_locale_changed (assistant);
+
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          /* Running eos-diagnostics can be slow enough that we can't do it
+           * synchronously on the UI thread.
+           */
+          GFile *image_dir = G_FILE (gis_store_get_object (GIS_STORE_IMAGE_DIR));
+          /* See implementation of gis_write_diagnostics_async for rationale. */
+          const gchar *home_dir = priv->gedit != NULL ? g_get_home_dir () : NULL;
+
+          g_application_hold (G_APPLICATION (page->driver));
+          gis_write_diagnostics_async (NULL, image_dir, home_dir,
+                                       NULL, write_diagnostics_cb,
+                                       g_object_ref (self));
+        }
 
       if (gis_store_is_unattended())
         {
@@ -346,6 +409,31 @@ write_unattended_config_cb (GisFinishedPage *self)
   gtk_widget_destroy (dialog);
 }
 
+static gboolean
+diagnostics_label_activate_link_cb (GtkLabel    *label,
+                                    const gchar *uri,
+                                    gpointer     user_data)
+{
+  GisFinishedPage *self = GIS_FINISHED_PAGE (user_data);
+  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
+  g_autoptr(GList) uris = g_list_prepend (NULL, (gchar *) uri);
+  g_autoptr(GError) error = NULL;
+
+  /* We cannot rely on the default handler, because the FBE session is
+   * configured to associate a dummy handler (namely `/bin/true`) with all MIME
+   * types. So, explicitly launch gedit. (If it's not installed, there should
+   * be no link in this label, and this handler should not be connected.)
+   */
+  g_return_val_if_fail (priv->gedit != NULL, FALSE);
+
+  if (g_app_info_launch_uris (G_APP_INFO (priv->gedit), uris, NULL,
+                              &error))
+    return TRUE;
+
+  g_warning ("Failed to launch gedit for %s: %s", uri, error->message);
+  return FALSE;
+}
+
 static void
 gis_finished_page_constructed (GObject *object)
 {
@@ -358,6 +446,11 @@ gis_finished_page_constructed (GObject *object)
   gis_page_set_complete (GIS_PAGE (page), TRUE);
 
   g_signal_connect (priv->restart_button, "clicked", G_CALLBACK (reboot_cb), page);
+
+  priv->gedit = g_desktop_app_info_new ("org.gnome.gedit.desktop");
+  if (priv->gedit != NULL)
+    g_signal_connect (priv->diagnostics_label, "activate-link",
+                      G_CALLBACK (diagnostics_label_activate_link_cb), page);
 
   /* Use Ctrl+U to write unattended config */
   priv->accel_group = gtk_accel_group_new ();
@@ -374,6 +467,7 @@ gis_finished_page_dispose (GObject *object)
   GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
 
   g_clear_object (&priv->accel_group);
+  g_clear_object (&priv->gedit);
 
   G_OBJECT_CLASS (gis_finished_page_parent_class)->dispose (object);
 }
@@ -430,6 +524,7 @@ gis_finished_page_class_init (GisFinishedPageClass *klass)
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, error_box);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, error_heading_label);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, error_label);
+  gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, diagnostics_label);
   gtk_widget_class_bind_template_child_private (GTK_WIDGET_CLASS (klass), GisFinishedPage, support_label);
 
   page_class->page_id = PAGE_ID;
