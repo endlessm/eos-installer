@@ -25,6 +25,7 @@
 #include "confirm-resources.h"
 #include "gis-confirm-page.h"
 #include "gis-dmi.h"
+#include "gis-errors.h"
 #include "gis-store.h"
 
 #include <udisks/udisks.h>

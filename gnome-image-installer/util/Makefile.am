@@ -2,6 +2,7 @@ noinst_LTLIBRARIES = libgiiutil.la
 
 libgiiutil_la_SOURCES = \
 	gis-dmi.c gis-dmi.h \
+	gis-errors.c gis-errors.h \
 	gis-store.c gis-store.h \
 	gis-unattended-config.c gis-unattended-config.h \
 	gduxzdecompressor.c gduxzdecompressor.h \

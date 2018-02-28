@@ -96,6 +96,7 @@ test_scribe_CFLAGS = \
 	$(IMAGE_INSTALLER_CFLAGS) \
 	-I $(top_srcdir)/ext/libglnx \
 	-I $(top_srcdir)/gnome-image-installer/pages/install \
+	-I $(top_srcdir)/gnome-image-installer/util \
 	$(WARN_CFLAGS) \
 	$(NULL)
 test_scribe_LDADD = \

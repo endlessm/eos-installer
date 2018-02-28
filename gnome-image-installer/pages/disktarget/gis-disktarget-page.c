@@ -27,6 +27,7 @@
 #include "config.h"
 #include "disktarget-resources.h"
 #include "gis-disktarget-page.h"
+#include "gis-errors.h"
 #include "gis-store.h"
 
 #include <udisks/udisks.h>
@@ -35,8 +36,6 @@
 #include <gio/gio.h>
 #include <stdlib.h>
 #include <errno.h>
-
-G_DEFINE_QUARK(disk-error, gis_disk_error);
 
 struct _GisDiskTargetPagePrivate {
   UDisksClient *client;

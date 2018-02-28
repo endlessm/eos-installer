@@ -27,6 +27,7 @@
 #include "config.h"
 #include "diskimage-resources.h"
 #include "gis-diskimage-page.h"
+#include "gis-errors.h"
 #include "gis-store.h"
 #include "gpt.h"
 #include "gpt_gz.h"
@@ -49,8 +50,6 @@ struct _GisDiskImagePagePrivate {
 typedef struct _GisDiskImagePagePrivate GisDiskImagePagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE);
-
-G_DEFINE_QUARK(image-error, gis_image_error);
 
 /* A device-mapped copy of endless.img used in image boots.
  * We prefer to use this to endless.img from the filesystem for two reasons:

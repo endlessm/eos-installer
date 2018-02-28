@@ -26,6 +26,7 @@
 
 #include "config.h"
 #include "finished-resources.h"
+#include "gis-errors.h"
 #include "gis-finished-page.h"
 #include "gis-store.h"
 #include "gis-dmi.h"

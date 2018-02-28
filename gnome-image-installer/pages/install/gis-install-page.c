@@ -26,6 +26,7 @@
 
 #include "config.h"
 #include "install-resources.h"
+#include "gis-errors.h"
 #include "gis-install-page.h"
 #include "gis-scribe.h"
 #include "gis-store.h"

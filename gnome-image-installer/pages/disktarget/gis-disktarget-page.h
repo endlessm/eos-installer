@@ -51,9 +51,6 @@ GType gis_disktarget_page_get_type (void);
 
 void gis_prepare_disktarget_page (GisDriver *driver);
 
-GQuark gis_disk_error_quark (void);
-#define GIS_DISK_ERROR gis_disk_error_quark()
-
 G_END_DECLS
 
 #endif /* __GIS_DISK_TARGET_PAGE_H__ */

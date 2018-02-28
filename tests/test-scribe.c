@@ -30,6 +30,7 @@
 #include <gio/gunixinputstream.h>
 #include <gio/gunixoutputstream.h>
 
+#include "gis-errors.h"
 #include "gis-scribe.h"
 #include "glnx-missing.h"
 

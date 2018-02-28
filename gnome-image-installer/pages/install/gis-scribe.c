@@ -32,6 +32,7 @@
 #include <unistd.h>
 
 #include "glnx-errors.h"
+#include "gis-errors.h"
 
 #define IMAGE_KEYRING "/usr/share/keyrings/eos-image-keyring.gpg"
 #define BUFFER_SIZE (1 * 1024 * 1024)
@@ -150,8 +151,6 @@ gis_scribe_gpg_data_free (GisScribeGpgData *data)
 
   g_slice_free (GisScribeGpgData, data);
 }
-
-G_DEFINE_QUARK (install-error, gis_install_error)
 
 G_DEFINE_TYPE (GisScribe, gis_scribe, G_TYPE_OBJECT)
 

@@ -23,9 +23,6 @@
 
 G_BEGIN_DECLS
 
-GQuark gis_install_error_quark (void);
-#define GIS_INSTALL_ERROR gis_install_error_quark()
-
 #define GIS_TYPE_SCRIBE (gis_scribe_get_type ())
 G_DECLARE_FINAL_TYPE (GisScribe, gis_scribe, GIS, SCRIBE, GObject)
 
