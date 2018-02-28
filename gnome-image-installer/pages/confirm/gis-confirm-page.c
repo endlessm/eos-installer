@@ -58,7 +58,6 @@ struct _GisConfirmPagePrivate {
 typedef struct _GisConfirmPagePrivate GisConfirmPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisConfirmPage, gis_confirm_page, GIS_TYPE_PAGE);
-G_DEFINE_QUARK (confirm-error, gis_confirm_error);
 
 static void
 gis_confirm_page_advance (GisConfirmPage *self)

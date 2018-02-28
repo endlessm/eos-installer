@@ -47,13 +47,6 @@ GType gis_confirm_page_get_type (void);
 
 void gis_prepare_confirm_page (GisDriver *driver);
 
-GQuark gis_confirm_error_quark (void);
-#define GIS_CONFIRM_ERROR gis_confirm_error_quark()
-
-typedef enum {
-    GIS_CONFIRM_ERROR_CANCELLED,
-} GisConfirmError;
-
 G_END_DECLS
 
 #endif /* __GIS_CONFIRM_PAGE_H__ */
