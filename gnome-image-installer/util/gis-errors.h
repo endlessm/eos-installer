@@ -22,9 +22,24 @@
 GQuark gis_image_error_quark (void);
 #define GIS_IMAGE_ERROR gis_image_error_quark()
 
+typedef enum {
+    GIS_IMAGE_ERROR_NOT_FOUND,
+    GIS_IMAGE_ERROR_NOT_SUPPORTED,
+    GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+    GIS_IMAGE_ERROR_WRONG_SIZE,
+} GisImageError;
+
 GQuark gis_disk_error_quark (void);
 #define GIS_DISK_ERROR gis_disk_error_quark()
+
+typedef enum {
+    GIS_DISK_ERROR_NO_SUITABLE_DISKS_FOUND,
+} GisDiskError;
 
 GQuark gis_install_error_quark (void);
 #define GIS_INSTALL_ERROR gis_install_error_quark()
 
+typedef enum {
+    GIS_INSTALL_ERROR_INTERNAL_ERROR,
+    GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
+} GisInstallError;

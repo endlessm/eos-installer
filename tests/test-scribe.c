@@ -514,8 +514,8 @@ main (int argc, char *argv[])
   TestData bad_signature = {
       .image_path = image_path,
       .signature_path = image_gz_sig_path,
-      .error_domain = GIS_INSTALL_ERROR,
-      /* TODO: .error_code */
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
   };
   g_test_add ("/scribe/bad-signature",
               Fixture, &bad_signature,
@@ -528,8 +528,8 @@ main (int argc, char *argv[])
   TestData untrusted_signature = {
       .image_path = image_path,
       .signature_path = wjt_sig_path,
-      .error_domain = GIS_INSTALL_ERROR,
-      /* TODO: .error_code */
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
   };
   g_test_add ("/scribe/untrusted-signature",
               Fixture, &untrusted_signature,
@@ -583,8 +583,8 @@ main (int argc, char *argv[])
       .image_path = image_path,
       .signature_path = image_sig_path,
       .uncompressed_size = IMAGE_SIZE_BYTES * 2,
-      .error_domain = GIS_INSTALL_ERROR,
-      /* TODO: .error_code */
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_WRONG_SIZE,
   };
   g_test_add ("/scribe/length-mismatch/img", Fixture,
               &length_mismatch,
@@ -597,8 +597,8 @@ main (int argc, char *argv[])
       .image_path = image_gz_path,
       .signature_path = image_gz_sig_path,
       .uncompressed_size = IMAGE_SIZE_BYTES * 2,
-      .error_domain = GIS_INSTALL_ERROR,
-      /* TODO: .error_code */
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_WRONG_SIZE,
   };
   g_test_add ("/scribe/length-mismatch/gz", Fixture,
               &length_mismatch_gz,
@@ -643,9 +643,8 @@ main (int argc, char *argv[])
   TestData good_signature_truncated_gz = {
       .image_path = trunc_gz_path,
       .signature_path = trunc_gz_sig_path,
-      /* TODO: report a kinder error than "child process exited with code 1" */
-      .error_domain = G_SPAWN_EXIT_ERROR,
-      .error_code = 1,
+      .error_domain = GIS_INSTALL_ERROR,
+      .error_code = GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
   };
   g_test_add ("/scribe/good-signature-truncated-gz", Fixture,
               &good_signature_truncated_gz,
@@ -658,9 +657,8 @@ main (int argc, char *argv[])
   TestData good_signature_truncated_xz = {
       .image_path = trunc_xz_path,
       .signature_path = trunc_xz_sig_path,
-      /* TODO: report a kinder error than "child process exited with code 1" */
-      .error_domain = G_SPAWN_EXIT_ERROR,
-      .error_code = 1,
+      .error_domain = GIS_INSTALL_ERROR,
+      .error_code = GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
   };
   g_test_add ("/scribe/good-signature-truncated-xz", Fixture,
               &good_signature_truncated_xz,

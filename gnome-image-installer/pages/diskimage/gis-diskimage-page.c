@@ -392,7 +392,8 @@ file_exists (
   if (g_file_query_exists (file, NULL))
     return TRUE;
 
-  g_set_error (error, GIS_IMAGE_ERROR, 0, "%s doesn't exist", path);
+  g_set_error (error, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_FOUND,
+               "%s doesn't exist", path);
   return FALSE;
 }
 
@@ -487,7 +488,7 @@ gis_diskimage_page_add_live_image (
   else
     {
       // TODO: mount the squashfs image and read endless.img from within it?
-      g_set_error (error, GIS_IMAGE_ERROR, 0,
+      g_set_error (error, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_SUPPORTED,
           "can't find image device %s; and can't use %s directly\n",
           live_device_path, endless_path);
       return FALSE;
@@ -554,7 +555,8 @@ gis_diskimage_page_populate_model (GisPage     *page,
                          _("Configured image '%s' was not found."),
                          ufile);
           else
-            g_set_error_literal (&error, GIS_IMAGE_ERROR, 0,
+            g_set_error_literal (&error, GIS_IMAGE_ERROR,
+                                 GIS_IMAGE_ERROR_NOT_FOUND,
                                  _("No suitable images were found."));
         }
       gis_store_set_error (error);
@@ -656,7 +658,7 @@ gis_diskimage_page_mount (GisPage *page)
       return;
     }
 
-  error = g_error_new (GIS_IMAGE_ERROR, 0,
+  error = g_error_new (GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_FOUND,
                        _("Could not find partition holding Endless OS files"));
   gis_store_set_error (error);
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));

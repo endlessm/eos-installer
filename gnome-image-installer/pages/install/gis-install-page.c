@@ -329,7 +329,7 @@ gis_install_page_prepare_write (GisPage *page)
        * mark "Internal error" for translation.
        */
       g_autoptr(GError) error =
-        g_error_new (GIS_INSTALL_ERROR, 0,
+        g_error_new (GIS_INSTALL_ERROR, GIS_INSTALL_ERROR_INTERNAL_ERROR,
                      "%s: %s",
                      _("Internal error"),
                      "gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");

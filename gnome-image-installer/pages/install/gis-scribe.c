@@ -666,7 +666,7 @@ gis_scribe_write_thread_copy (GisScribe     *self,
   if (bytes_written != self->image_size_bytes)
     {
       g_autoptr(GError) local_error =
-        g_error_new (GIS_INSTALL_ERROR, 0,
+        g_error_new (GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_WRONG_SIZE,
                      "wrote %" G_GUINT64_FORMAT " bytes, "
                      "expected to write %" G_GUINT64_FORMAT " bytes",
                      bytes_written, self->image_size_bytes);
@@ -815,7 +815,8 @@ gis_scribe_write_thread (GTask        *task,
            * translating a technical message which should never be shown, we only
            * mark "Internal error" for translation.
            */
-          g_set_error (&error, G_IO_ERROR, G_IO_ERROR_FAILED,
+          g_set_error (&error, GIS_INSTALL_ERROR,
+                       GIS_INSTALL_ERROR_INTERNAL_ERROR,
                        "%s: %s", _("Internal error"),
                        "gis_scribe_write_thread_copy failed with no error");
           g_critical ("%s", error->message);
@@ -991,7 +992,8 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
     {
       /* TODO: surface more details about the error */
       g_message ("GPG subprocess failed: %s", error->message);
-      g_task_return_new_error (task, GIS_INSTALL_ERROR, 0,
+      g_task_return_new_error (task, GIS_IMAGE_ERROR,
+                               GIS_IMAGE_ERROR_VERIFICATION_FAILED,
                                _("Image verification error."));
     }
 }
@@ -1037,7 +1039,7 @@ gis_scribe_begin_verify (GisScribe *self,
   if (!g_file_query_exists (self->signature, NULL))
     {
       g_task_return_new_error (
-          task, GIS_INSTALL_ERROR, 0,
+          task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
           _("The Endless OS signature file \"%s\" does not exist."),
           signature_path);
       return NULL;
@@ -1195,8 +1197,10 @@ gis_scribe_decompress_wait_check_cb (GObject      *source,
     }
   else
     {
-      g_prefix_error (&error, "decompressor subprocess failed: ");
-      g_task_return_error (task, g_steal_pointer (&error));
+      g_message ("decompressor subprocess failed: %s", error->message);
+      g_task_return_new_error (task, GIS_INSTALL_ERROR,
+                               GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
+                               _("Could not decompress the image file."));
     }
 }
 
@@ -1240,7 +1244,8 @@ gis_scribe_begin_decompress (GisScribe          *self,
        * technical message which should never be shown, we only mark "Internal
        * error" for translation.
        */
-      g_set_error (&error, GIS_INSTALL_ERROR, 0, "%s: %s",
+      g_set_error (&error, GIS_INSTALL_ERROR, GIS_INSTALL_ERROR_INTERNAL_ERROR,
+                   "%s: %s",
                    _("Internal error"),
                    "g_file_get_basename returned NULL");
       g_critical ("%s", error->message);
@@ -1275,8 +1280,13 @@ gis_scribe_begin_decompress (GisScribe          *self,
     }
   else
     {
-      g_task_return_new_error (task, GIS_INSTALL_ERROR, 0,
-                               "%s ends in neither '.xz', '.gz' nor '.img'",
+      /* This should not be reachable, because only images with known
+       * extensions are shown on the image selection page.
+       */
+      g_task_return_new_error (task, GIS_INSTALL_ERROR,
+                               GIS_INSTALL_ERROR_INTERNAL_ERROR,
+                               "%s: ‘%s’ ends in neither ‘.xz’, ‘.gz’ nor ‘.img’.",
+                               _("Internal error"),
                                basename);
       return FALSE;
     }
@@ -1386,7 +1396,9 @@ gis_scribe_write_async (GisScribe          *self,
 
   if (self->started)
     {
-      g_task_return_new_error (task, GIS_INSTALL_ERROR, 0, "already started");
+      g_task_return_new_error (task, GIS_INSTALL_ERROR,
+                               GIS_INSTALL_ERROR_INTERNAL_ERROR,
+                               "already started");
       return;
     }
 

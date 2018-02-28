@@ -370,7 +370,9 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
         }
       else
         {
-          error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
+          error = g_error_new_literal (GIS_DISK_ERROR,
+                                       GIS_DISK_ERROR_NO_SUITABLE_DISKS_FOUND,
+                                       text);
         }
 
       gis_page_set_forward_text (page, _("Finish"));
