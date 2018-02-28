@@ -481,8 +481,8 @@ gis_diskimage_page_add_live_image (
     }
   else if (endless_path == endless_img_path)
     {
-      g_print ("can't find image device %s; will use %s directly\n",
-               live_device_path, endless_img_path);
+      g_message ("can't find image device %s; will use %s directly",
+                 live_device_path, endless_img_path);
       add_image (store, endless_img_path, NULL, live_sig);
     }
   else
@@ -537,7 +537,7 @@ gis_diskimage_page_populate_model (GisPage     *page,
   if (is_live &&
       !gis_diskimage_page_add_live_image (priv->image_store, path, ufile, &error))
     {
-      g_print ("finding live image failed: %s\n", error->message);
+      g_warning ("finding live image failed: %s", error->message);
     }
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->image_store), &iter))
@@ -618,7 +618,7 @@ gis_diskimage_page_mount (GisPage *page)
 
       if (udisks_block_get_hint_ignore (block))
         {
-          g_print ("skipping %s with ignore hint set\n", dev);
+          g_message ("skipping %s with ignore hint set", dev);
           continue;
         }
 
@@ -629,7 +629,7 @@ gis_diskimage_page_mount (GisPage *page)
           continue;
         }
 
-      g_print ("found label or UUID partition at %s\n", dev);
+      g_message ("found label or UUID partition at %s", dev);
 
       drive = udisks_client_get_drive_for_block (client, block);
       if (drive != NULL)

@@ -252,8 +252,8 @@ gis_disktarget_page_get_root_drive (UDisksClient *client)
           continue;
         }
 
-      g_print ("found root filesystem %s\n",
-               g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+      g_message ("found root filesystem %s",
+                 g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
       drive = udisks_client_get_drive_for_block (client, block);
       if (drive == NULL)
         g_warning ("Couldn't get UDisksDrive for block");
@@ -295,12 +295,11 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
         continue;
 
       object_path = g_dbus_object_get_object_path (G_DBUS_OBJECT (object));
-      g_print ("considering drive %s\n", object_path);
 
 #define skip_if(cond, reason, ...) \
       if (cond) \
         { \
-          g_print ("skipping %s: " reason "\n", object_path, ##__VA_ARGS__); \
+          g_message ("skipping drive %s: " reason, object_path, ##__VA_ARGS__); \
           continue; \
         }
 
@@ -318,6 +317,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
                !gis_unattended_config_matches_device (config, block_device),
                "it doesn't match the unattended config");
 #undef skip_if
+
+      g_message ("adding drive %s to list", object_path);
 
       if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
         {

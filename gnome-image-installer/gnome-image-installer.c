@@ -162,7 +162,7 @@ static gboolean
 check_for_live_boot (gchar **uuid)
 {
   const gchar *force = NULL;
-  GError *error = NULL;
+  g_autoptr(GError) error = NULL;
   g_autofree gchar *cmdline = NULL;
   gboolean live_boot = FALSE;
   g_autoptr(GRegex) reg = NULL;
@@ -173,28 +173,27 @@ check_for_live_boot (gchar **uuid)
   force = g_getenv ("EI_FORCE_LIVE_BOOT_UUID");
   if (force != NULL && *force != '\0')
     {
-      g_print ("EI_FORCE_LIVE_BOOT_UUID set to %s\n", force);
+      g_message ("EI_FORCE_LIVE_BOOT_UUID set to %s", force);
       *uuid = g_strdup (force);
       return TRUE;
     }
 
   if (!g_file_get_contents ("/proc/cmdline", &cmdline, NULL, &error))
     {
-      g_printerr ("unable to read /proc/cmdline: %s\n", error->message);
-      g_error_free (error);
+      g_warning ("unable to read /proc/cmdline: %s", error->message);
       return FALSE;
     }
 
   live_boot = g_regex_match_simple ("\\bendless\\.live_boot\\b", cmdline, 0, 0);
 
-  g_print ("set live_boot to %u from /proc/cmdline: %s\n", live_boot, cmdline);
+  g_debug ("set live_boot to %u from /proc/cmdline: %s", live_boot, cmdline);
 
   reg = g_regex_new ("\\bendless\\.image\\.device=UUID=([^\\s]*)", 0, 0, NULL);
   g_regex_match (reg, cmdline, 0, &info);
   if (g_match_info_matches (info))
     {
       *uuid = g_match_info_fetch (info, 1);
-      g_print ("set UUID to %s\n", *uuid);
+      g_debug ("set UUID to %s", *uuid);
     }
 
   return live_boot;
