@@ -178,6 +178,7 @@ write_diagnostics_cb (GObject      *source,
     {
       g_prefix_error (&error, _("Failed to save debug log: "));
       gtk_label_set_text (priv->diagnostics_label, error->message);
+      g_warning ("%s: %s", G_STRFUNC, error->message);
     }
   /* else, both possible target directories were NULL */
 }
@@ -255,6 +256,9 @@ gis_finished_page_shown (GisPage *page)
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
       const gchar *heading = NULL;
       const gchar *detail = error->message;
+
+      g_warning ("%s: %s %d %s", G_STRFUNC,
+                 g_quark_to_string (error->domain), error->code, error->message);
 
       if (error->domain == GIS_UNATTENDED_ERROR)
         {
