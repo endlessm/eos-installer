@@ -33,6 +33,7 @@
 #include "gis-errors.h"
 #include "gis-scribe.h"
 #include "glnx-missing.h"
+#include "glnx-shutil.h"
 
 /* A 4 MiB file of "w"s (0x77) */
 #define IMAGE "w.img"
@@ -255,45 +256,11 @@ fixture_set_up (Fixture *fixture,
 }
 
 static void
-rm_r (const gchar *path)
-{
-  g_autoptr(GFile) file = g_file_new_for_path (path);
-  g_autoptr(GFileEnumerator) enumerator = NULL;
-  GFile *child = NULL;
-  GError *error = NULL;
-
-  enumerator = g_file_enumerate_children (
-      file, NULL, G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS, NULL, &error);
-  g_assert_no_error (error);
-
-  while (g_file_enumerator_iterate (enumerator, NULL, &child, NULL, &error) &&
-         child != NULL)
-    {
-      if (!g_file_delete (child, NULL, &error))
-        {
-          g_autofree gchar *child_path = g_file_get_path (child);
-          g_warning ("Failed to delete %s: %s", child_path, error->message);
-          g_clear_error (&error);
-        }
-    }
-
-  if (error != NULL)
-    {
-      g_warning ("Error while enumerating %s: %s", path, error->message);
-      g_clear_error (&error);
-    }
-
-  if (!g_file_delete (file, NULL, &error))
-    {
-      g_warning ("Failed to delete %s: %s", path, error->message);
-      g_clear_error (&error);
-    }
-}
-
-static void
 fixture_tear_down (Fixture *fixture,
                    gconstpointer user_data)
 {
+  g_autoptr(GError) error = NULL;
+
   g_signal_handlers_disconnect_by_data (fixture->scribe, fixture);
   g_cancellable_cancel (fixture->cancellable);
   g_clear_object (&fixture->cancellable);
@@ -307,7 +274,9 @@ fixture_tear_down (Fixture *fixture,
   if (fixture->memfd != -1 && 0 != close (fixture->memfd))
     perror ("close (fixture->memfd)");
 
-  rm_r (fixture->tmpdir);
+  if (!glnx_shutil_rm_rf_at (AT_FDCWD, fixture->tmpdir, NULL, &error))
+    g_warning ("Failed to remove %s: %s", fixture->tmpdir, error->message);
+
   g_clear_pointer (&fixture->tmpdir, g_free);
 }
 
