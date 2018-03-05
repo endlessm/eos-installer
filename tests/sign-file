@@ -13,9 +13,7 @@
 # General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
-# 02111-1307, USA.
+# along with this program; if not, see <http://www.gnu.org/licenses/>.
 import argparse
 import os
 import subprocess
@@ -40,6 +38,7 @@ def main():
     isolated from the host system.'''
     p = argparse.ArgumentParser(description=description, epilog=epilog)
     p.add_argument('--gpg-path', default='gpg', help='Path to GPG')
+    p.add_argument('--gpgconf-path', default='gpgconf', help='Path to gpgconf')
     p.add_argument('privkey', help='path to exported private key')
     p.add_argument('file', help='path to file to sign')
     a = p.parse_args()
@@ -49,14 +48,11 @@ def main():
     except FileNotFoundError:
         pass
 
-    # Good enough...
-    gpgconf_path = a.gpg_path + 'conf'
-
     with tempfile.TemporaryDirectory() as gnupghome:
         cmd(a.gpg_path, "--batch", "--homedir", gnupghome, "--import", a.privkey)
         cmd(a.gpg_path, "--batch", "--homedir", gnupghome, "--detach-sign",
             "--armor", a.file)
-        cmd(gpgconf_path, "--homedir", gnupghome, "--kill", "gpg-agent")
+        cmd(a.gpgconf_path, "--homedir", gnupghome, "--kill", "gpg-agent")
 
 
 if __name__ == '__main__':

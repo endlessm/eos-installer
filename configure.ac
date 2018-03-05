@@ -58,6 +58,12 @@ AC_PATH_PROG([GPG_PATH], [gpg])
 AS_IF([test -z "$GPG_PATH"], [AC_MSG_ERROR([GPG not found])])
 AC_DEFINE_UNQUOTED([GPG_PATH], ["$GPG_PATH"], [Path to GPG executable])
 
+# The tests also need gpgconf
+AC_ARG_VAR([GPGCONF_PATH], [gpgconf executable])
+AC_PATH_PROG([GPGCONF_PATH], [gpgconf])
+AS_IF([test -z "$GPGCONF_PATH"], [AC_MSG_ERROR([gpgconf not found])])
+AC_DEFINE_UNQUOTED([GPGCONF_PATH], ["$GPGCONF_PATH"], [Path to gpgconf executable])
+
 AC_SUBST(INITIAL_SETUP_CFLAGS)
 AC_SUBST(INITIAL_SETUP_LIBS)
 

@@ -13,9 +13,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef GIS_SCRIBE_H
@@ -24,9 +22,6 @@
 #include <gio/gio.h>
 
 G_BEGIN_DECLS
-
-GQuark gis_install_error_quark (void);
-#define GIS_INSTALL_ERROR gis_install_error_quark()
 
 #define GIS_TYPE_SCRIBE (gis_scribe_get_type ())
 G_DECLARE_FINAL_TYPE (GisScribe, gis_scribe, GIS, SCRIBE, GObject)

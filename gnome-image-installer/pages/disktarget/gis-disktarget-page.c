@@ -14,9 +14,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  * Original code written by:
  *     Jasper St. Pierre <jstpierre@mecheye.net>
@@ -29,6 +27,7 @@
 #include "config.h"
 #include "disktarget-resources.h"
 #include "gis-disktarget-page.h"
+#include "gis-errors.h"
 #include "gis-store.h"
 
 #include <udisks/udisks.h>
@@ -37,8 +36,6 @@
 #include <gio/gio.h>
 #include <stdlib.h>
 #include <errno.h>
-
-G_DEFINE_QUARK(disk-error, gis_disk_error);
 
 struct _GisDiskTargetPagePrivate {
   UDisksClient *client;
@@ -255,8 +252,8 @@ gis_disktarget_page_get_root_drive (UDisksClient *client)
           continue;
         }
 
-      g_print ("found root filesystem %s\n",
-               g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
+      g_message ("found root filesystem %s",
+                 g_dbus_object_get_object_path (G_DBUS_OBJECT (object)));
       drive = udisks_client_get_drive_for_block (client, block);
       if (drive == NULL)
         g_warning ("Couldn't get UDisksDrive for block");
@@ -298,12 +295,11 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
         continue;
 
       object_path = g_dbus_object_get_object_path (G_DBUS_OBJECT (object));
-      g_print ("considering drive %s\n", object_path);
 
 #define skip_if(cond, reason, ...) \
       if (cond) \
         { \
-          g_print ("skipping %s: " reason "\n", object_path, ##__VA_ARGS__); \
+          g_message ("skipping drive %s: " reason, object_path, ##__VA_ARGS__); \
           continue; \
         }
 
@@ -321,6 +317,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
                !gis_unattended_config_matches_device (config, block_device),
                "it doesn't match the unattended config");
 #undef skip_if
+
+      g_message ("adding drive %s to list", object_path);
 
       if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
         {
@@ -362,7 +360,6 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   if (!priv->has_valid_disks)
     {
       GisAssistant *assistant = gis_driver_get_assistant (page->driver);
-      GList *pages = g_list_last (gis_assistant_get_all_pages (assistant));
       const gchar *text = gtk_label_get_text (priv->suitable_disks_label);
       g_autoptr(GError) error = NULL;
 
@@ -374,10 +371,11 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
         }
       else
         {
-          error = g_error_new_literal (GIS_DISK_ERROR, 0, text);
+          error = g_error_new_literal (GIS_DISK_ERROR,
+                                       GIS_DISK_ERROR_NO_SUITABLE_DISKS_FOUND,
+                                       text);
         }
 
-      pages = g_list_remove (pages, pages->prev->data);
       gis_page_set_forward_text (page, _("Finish"));
       gis_assistant_locale_changed (assistant);
       gis_store_set_error (error);

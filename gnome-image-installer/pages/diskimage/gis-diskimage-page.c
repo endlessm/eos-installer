@@ -14,9 +14,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  * Original code written by:
  *     Jasper St. Pierre <jstpierre@mecheye.net>
@@ -29,6 +27,7 @@
 #include "config.h"
 #include "diskimage-resources.h"
 #include "gis-diskimage-page.h"
+#include "gis-errors.h"
 #include "gis-store.h"
 #include "gpt.h"
 #include "gpt_gz.h"
@@ -51,8 +50,6 @@ struct _GisDiskImagePagePrivate {
 typedef struct _GisDiskImagePagePrivate GisDiskImagePagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE);
-
-G_DEFINE_QUARK(image-error, gis_image_error);
 
 /* A device-mapped copy of endless.img used in image boots.
  * We prefer to use this to endless.img from the filesystem for two reasons:
@@ -129,7 +126,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
           g_autoptr(GError) error =
             g_error_new_literal (GIS_UNATTENDED_ERROR,
                                  GIS_UNATTENDED_ERROR_IMAGE_AMBIGUOUS,
-                                 _("More than one image was found"));
+                                 _("More than one image was found."));
           gis_store_set_error (error);
         }
       gis_assistant_next_page (gis_driver_get_assistant (page->driver));
@@ -395,7 +392,8 @@ file_exists (
   if (g_file_query_exists (file, NULL))
     return TRUE;
 
-  g_set_error (error, GIS_IMAGE_ERROR, 0, "%s doesn't exist", path);
+  g_set_error (error, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_FOUND,
+               _("Image file ‘%s’ does not exist."), path);
   return FALSE;
 }
 
@@ -420,7 +418,7 @@ first_existing (
       return b;
     }
 
-  g_prefix_error (error, "%s; ", error2->message);
+  g_prefix_error (error, "%s ", error2->message);
   g_clear_error (&error2);
   return NULL;
 }
@@ -454,10 +452,7 @@ gis_diskimage_page_add_live_image (
     return FALSE;
 
   if (!g_file_get_contents (live_flag_path, &live_flag_contents, NULL, error))
-    {
-      g_prefix_error (error, "Couldn't read %s: ", live_flag_path);
-      return FALSE;
-    }
+    return FALSE;
 
   /* live_flag_contents contains the name that 'endless.img' would have had;
    * so we should be able to find its signature at ${live_flag_contents}.asc
@@ -475,7 +470,7 @@ gis_diskimage_page_add_live_image (
     {
       g_set_error (error, GIS_UNATTENDED_ERROR,
                    GIS_UNATTENDED_ERROR_IMAGE_NOT_FOUND,
-                   "Live image ‘%s’ doesn't match configured image ‘%s’",
+                   _("Live image ‘%s’ does not match configured image ‘%s’."),
                    live_flag_contents, ufile);
       return FALSE;
     }
@@ -486,16 +481,16 @@ gis_diskimage_page_add_live_image (
     }
   else if (endless_path == endless_img_path)
     {
-      g_print ("can't find image device %s; will use %s directly\n",
-               live_device_path, endless_img_path);
+      g_message ("can't find image device %s; will use %s directly",
+                 live_device_path, endless_img_path);
       add_image (store, endless_img_path, NULL, live_sig);
     }
   else
     {
       // TODO: mount the squashfs image and read endless.img from within it?
-      g_set_error (error, GIS_IMAGE_ERROR, 0,
-          "can't find image device %s; and can't use %s directly\n",
-          live_device_path, endless_path);
+      g_set_error (error, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_SUPPORTED,
+                   _("Cannot find image device ‘%s’ and cannot use ‘%s’ directly."),
+                   live_device_path, endless_path);
       return FALSE;
     }
 
@@ -542,7 +537,7 @@ gis_diskimage_page_populate_model (GisPage     *page,
   if (is_live &&
       !gis_diskimage_page_add_live_image (priv->image_store, path, ufile, &error))
     {
-      g_print ("finding live image failed: %s\n", error->message);
+      g_warning ("finding live image failed: %s", error->message);
     }
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->image_store), &iter))
@@ -557,10 +552,11 @@ gis_diskimage_page_populate_model (GisPage     *page,
             g_set_error (&error, GIS_UNATTENDED_ERROR,
                          GIS_UNATTENDED_ERROR_IMAGE_NOT_FOUND,
                          /* Translators: the placeholder is a filename. */
-                         _("Configured image '%s' was not found."),
+                         _("Configured image ‘%s’ was not found."),
                          ufile);
           else
-            g_set_error_literal (&error, GIS_IMAGE_ERROR, 0,
+            g_set_error_literal (&error, GIS_IMAGE_ERROR,
+                                 GIS_IMAGE_ERROR_NOT_FOUND,
                                  _("No suitable images were found."));
         }
       gis_store_set_error (error);
@@ -622,7 +618,7 @@ gis_diskimage_page_mount (GisPage *page)
 
       if (udisks_block_get_hint_ignore (block))
         {
-          g_print ("skipping %s with ignore hint set\n", dev);
+          g_message ("skipping %s with ignore hint set", dev);
           continue;
         }
 
@@ -633,7 +629,7 @@ gis_diskimage_page_mount (GisPage *page)
           continue;
         }
 
-      g_print ("found label or UUID partition at %s\n", dev);
+      g_message ("found label or UUID partition at %s", dev);
 
       drive = udisks_client_get_drive_for_block (client, block);
       if (drive != NULL)
@@ -662,8 +658,8 @@ gis_diskimage_page_mount (GisPage *page)
       return;
     }
 
-  error = g_error_new (GIS_IMAGE_ERROR, 0,
-                       _("Could not find partition holding Endless OS files"));
+  error = g_error_new (GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_NOT_FOUND,
+                       _("Could not find partition holding Endless OS files."));
   gis_store_set_error (error);
   gis_assistant_next_page (gis_driver_get_assistant (page->driver));
 }

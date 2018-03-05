@@ -14,9 +14,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  * Original code written by:
  *     Jasper St. Pierre <jstpierre@mecheye.net>
@@ -52,9 +50,6 @@ struct _GisDiskTargetPageClass
 GType gis_disktarget_page_get_type (void);
 
 void gis_prepare_disktarget_page (GisDriver *driver);
-
-GQuark gis_disk_error_quark (void);
-#define GIS_DISK_ERROR gis_disk_error_quark()
 
 G_END_DECLS
 

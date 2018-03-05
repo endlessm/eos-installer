@@ -1,7 +1,6 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*- */
 /*
- * Copyright (C) 2012 Red Hat
- *               2016 Endless Mobile, Inc.
+ * Copyright © 2018 Endless Mobile, Inc.
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,25 +14,9 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
- *
- * Original code written by:
- *     Jasper St. Pierre <jstpierre@mecheye.net>
  */
+#include "gis-errors.h"
 
-#ifndef __GNOME_IMAGE_INSTALLER_H__
-#define __GNOME_IMAGE_INSTALLER_H__
-
-#include <gtk/gtk.h>
-#include <gio/gio.h>
-#include <glib/gi18n.h>
-
-typedef struct _GisDriver    GisDriver;
-typedef struct _GisAssistant GisAssistant;
-typedef struct _GisPage      GisPage;
-
-#include "gis-driver.h"
-#include "gis-assistant.h"
-#include "gis-page.h"
-
-#endif /* __GNOME_IMAGE_INSTALLER_H__ */
-
+G_DEFINE_QUARK (image-error, gis_image_error);
+G_DEFINE_QUARK (disk-error, gis_disk_error);
+G_DEFINE_QUARK (install-error, gis_install_error);

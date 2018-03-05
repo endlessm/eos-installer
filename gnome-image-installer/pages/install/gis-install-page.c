@@ -14,9 +14,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  * Original code written by:
  *     Jasper St. Pierre <jstpierre@mecheye.net>
@@ -28,6 +26,7 @@
 
 #include "config.h"
 #include "install-resources.h"
+#include "gis-errors.h"
 #include "gis-install-page.h"
 #include "gis-scribe.h"
 #include "gis-store.h"
@@ -330,7 +329,7 @@ gis_install_page_prepare_write (GisPage *page)
        * mark "Internal error" for translation.
        */
       g_autoptr(GError) error =
-        g_error_new (GIS_INSTALL_ERROR, 0,
+        g_error_new (GIS_INSTALL_ERROR, GIS_INSTALL_ERROR_INTERNAL_ERROR,
                      "%s: %s",
                      _("Internal error"),
                      "gis_store_get_object(GIS_STORE_BLOCK_DEVICE) == NULL");

@@ -14,6 +14,7 @@ test_programs = \
 	test-dmi \
 	test-scribe \
 	test-unattended-config \
+	test-write-diagnostics \
 	$(NULL)
 
 dist_test_data = \
@@ -87,7 +88,9 @@ w.truncated.%z: w.img.%z
 # Test "images" are signed by a throwaway key with no passphrase.
 # The public half is used as the test keyring
 %.asc: % secret.asc sign-file
-	$(AM_V_GEN) $(srcdir)/sign-file --gpg-path $(GPG_PATH) \
+	$(AM_V_GEN) $(srcdir)/sign-file \
+		--gpg-path $(GPG_PATH) \
+		--gpgconf-path $(GPGCONF_PATH) \
 		$(srcdir)/secret.asc $<
 
 test_scribe_SOURCES = test-scribe.c
@@ -96,6 +99,7 @@ test_scribe_CFLAGS = \
 	$(IMAGE_INSTALLER_CFLAGS) \
 	-I $(top_srcdir)/ext/libglnx \
 	-I $(top_srcdir)/gnome-image-installer/pages/install \
+	-I $(top_srcdir)/gnome-image-installer/util \
 	$(WARN_CFLAGS) \
 	$(NULL)
 test_scribe_LDADD = \
@@ -139,5 +143,23 @@ test_dmi_LDADD = \
 	$(top_builddir)/gnome-image-installer/util/libgiiutil.la \
 	$(NULL)
 test_dmi_LDFLAGS = \
+	$(WARN_LDFLAGS) \
+	$(NULL)
+
+test_write_diagnostics_SOURCES = test-write-diagnostics.c
+test_write_diagnostics_CFLAGS = \
+	$(INITIAL_SETUP_CFLAGS) \
+	$(IMAGE_INSTALLER_CFLAGS) \
+	-I $(top_srcdir)/ext/libglnx \
+	-I $(top_srcdir)/gnome-image-installer/util \
+	$(WARN_CFLAGS) \
+	$(NULL)
+test_write_diagnostics_LDADD = \
+	$(INITIAL_SETUP_LIBS) \
+	$(IMAGE_INSTALLER_LIBS) \
+	$(top_builddir)/ext/libglnx.la \
+	$(top_builddir)/gnome-image-installer/util/libgiiutil.la \
+	$(NULL)
+test_write_diagnostics_LDFLAGS = \
 	$(WARN_LDFLAGS) \
 	$(NULL)

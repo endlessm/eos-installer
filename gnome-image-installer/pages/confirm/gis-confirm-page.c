@@ -13,9 +13,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
  */
 
@@ -27,6 +25,7 @@
 #include "confirm-resources.h"
 #include "gis-confirm-page.h"
 #include "gis-dmi.h"
+#include "gis-errors.h"
 #include "gis-store.h"
 
 #include <udisks/udisks.h>
@@ -60,7 +59,6 @@ struct _GisConfirmPagePrivate {
 typedef struct _GisConfirmPagePrivate GisConfirmPagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisConfirmPage, gis_confirm_page, GIS_TYPE_PAGE);
-G_DEFINE_QUARK (confirm-error, gis_confirm_error);
 
 static void
 gis_confirm_page_advance (GisConfirmPage *self)

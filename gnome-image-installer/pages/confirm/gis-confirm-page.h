@@ -13,9 +13,7 @@
  * General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
- * 02111-1307, USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #ifndef __GIS_CONFIRM_PAGE_H__
@@ -48,13 +46,6 @@ struct _GisConfirmPageClass
 GType gis_confirm_page_get_type (void);
 
 void gis_prepare_confirm_page (GisDriver *driver);
-
-GQuark gis_confirm_error_quark (void);
-#define GIS_CONFIRM_ERROR gis_confirm_error_quark()
-
-typedef enum {
-    GIS_CONFIRM_ERROR_CANCELLED,
-} GisConfirmError;
 
 G_END_DECLS
 
