@@ -3,654 +3,142 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Roddy Shuler <roddy@endlessm.com>, 2016
+# Roddy Shuler <roddy@endlessm.com>, 2016,2018
 # Unticha Pramgoed <unticha@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-02 10:52-0700\n"
-"PO-Revision-Date: 2017-09-22 23:27+0000\n"
+"POT-Creation-Date: 2018-04-16 14:37-0700\n"
+"PO-Revision-Date: 2018-04-16 21:42+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
-"Language-Team: Thai (http://www.transifex.com/endless-mobile-inc/eos-installer/language/th/)\n"
+"Language-Team: Thai (http://www.transifex.com/endless-os/eos-installer/language/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: th\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/gnome-initial-setup.desktop.in.in.h:1
-#: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
-msgid "Initial Setup"
-msgstr "ตั้งค่าเริ่มแรก"
-
-#: ../gnome-initial-setup/gis-assistant.c:305
+#: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
 msgstr "_ต่อไป"
 
-#: ../gnome-initial-setup/gis-assistant.c:444
+#: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
 msgstr "_ก่อนหน้า"
 
-#: ../gnome-initial-setup/gis-assistant.c:445
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
+#: ../gnome-initial-setup/gis-assistant.c:427
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
 msgid "_Cancel"
 msgstr "_ยกเลิก"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:359
+#. Translators: the placeholder is the name of a configuration file, such
+#. * as "/run/mount/eosimages/unattended.ini".
+#: ../gnome-image-installer/gnome-image-installer.c:100
+#, c-format
+msgid "Error loading ‘%s’: "
+msgstr ""
+
+#: ../gnome-image-installer/gnome-image-installer.c:264
 msgid "Force new user mode"
 msgstr "โหมดผู้ใช้ใหม่แบบบังคับ"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:363
+#: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "- GNOME initial setup"
 msgstr "- การตั้งค่าเริ่มต้นสำหรับ GNOME "
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-msgid "No password"
-msgstr "ไม่มีรหัสผ่าน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
-msgid "Passwords do not match"
-msgstr "รหัสผ่านไม่ตรงกัน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
-msgid "Failed to register account"
-msgstr "การลงทะเบียนบัญชีล้มเหลว"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
-msgid "No supported way to authenticate with this domain"
-msgstr "ไม่มีวิธีที่สนับสนุนเพื่อรับรองกับโดเมนนี้"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
-msgid "Failed to join domain"
-msgstr "เข้าร่วมโดเมนไม่สำเร็จ"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
-msgid "Failed to log into domain"
-msgstr "ล้มเหลวในการเข้าสู่ระบบโดเมน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
-msgid "Login"
-msgstr "เข้าระบบ"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-msgid "Create a Personal Account"
-msgstr "สร้างบัญชีผู้ใช้ส่วนบุคคล"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid ""
-"Type your full name and a password that you'll remember. Pay attention to "
-"upper case letters."
-msgstr "พิมพ์ชื่อ-นามสกุลและรหัสผ่านที่คุณจะจดจำได้  ใส่ใจกับตัวอักษรเล็กและใหญ่"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid "_Full Name"
-msgstr "_ชื่อเต็ม"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
-msgid "_Username"
-msgstr "_ชื่อผู้ใช้"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
-msgid ""
-"The username will be used to name your personal folder, and it cannot be "
-"changed."
-msgstr "ชื่อผู้ใช้จะใช้ในการตั้งชื่อโฟลเดอร์ส่วนบุคคลของคุณ และจะไม่สามารถเปลี่ยนแปลงได้"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-msgid "_Password"
-msgstr "_รหัสผ่าน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
-msgid "_Confirm password"
-msgstr "_ยืนยันรหัสผ่าน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
-msgid "Show password"
-msgstr "แสดงรหัสผ่าน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid ""
-"Make sure you write down your password to remember it! You can write "
-"yourself a reminder here, but note that this password reminder can be seen "
-"by others."
-msgstr "ขอให้แน่ใจว่าคุณได้จดบันทึกรหัสผ่านไว้แล้ว!  คุณสามารถเขียนการแจ้งเตือนได้ที่นี่ แต่โปรดทราบว่าตัวแจ้งเตือนรหัสผ่านอาจถูกผู้อื่นพบเห็นได้"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "Password _reminder"
-msgstr "ตัวช่วยจำ _รหัสผ่าน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-msgid "To continue, please make sure you fill in all the blanks."
-msgstr "เพื่อทำต่อ ตรวจสอบให้แน่ใจว่าคุณกรอกข้อมูลในช่องว่างครบทุกช่อง"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
-msgid "page 1"
-msgstr "หน้า 1"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
-msgid "Create an Enterprise Account"
-msgstr "สร้างบัญชีผู้ประกอบการ"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
-msgid "_Domain"
-msgstr "_โดเมน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
-msgid "Enterprise domain or realm name"
-msgstr "โดเมนผู้ประกอบการหรือชื่อบริเวณ"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
-msgid "C_ontinue"
-msgstr "ต่_อไป"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
-msgid "Domain Administrator Login"
-msgstr "เข้าสู่ระบบในฐานะผู้ดูแลโดเมน"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
-msgid ""
-"In order to use enterprise logins, this computer needs to be\n"
-"enrolled in the domain. Please have your network administrator\n"
-"type their domain password here, and choose a unique computer\n"
-"name for your computer."
-msgstr "ในการใช้การเข้าสู่ระบบแบบผู้ประกอบการ คอมพิวเตอร์นี้จะต้องสมัครอยู่ในโดเมน กรุณาให้ผู้ดูแลเครือข่ายของคุณพิมพ์รหัสผ่านโดเมนที่นี่ และเลือกชื่อคอมพิวเตอร์ให้กับคอมพิวเตอร์ของคุณ"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
-msgid "_Computer"
-msgstr "_คอมพิวเตอร์"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
-msgid "Administrator _Name"
-msgstr "ชื่อ _ผู้ดูแล"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
-msgid "Administrator Password"
-msgstr "รหัสผ่านผู้ดูแล"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:94
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "สั้นเกินไป"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "ยังไม่ดีพอ"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:108
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "หละหลวม"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:111
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "พอใช้"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:114
-msgctxt "Password strength"
-msgid "Good"
-msgstr "ใช้ได้"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:117
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "แน่นหนา"
-
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
-msgid "Cannot automatically join this type of domain"
-msgstr "ไม่สามารถเข้าร่วมโดเมนประเภทนี้ได้อัตโนมัติ"
-
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:93
 #, c-format
-msgid "No such domain or realm found"
-msgstr "ไม่มีโดเมนหรือบริเวณปรากฏ"
+msgid "Installation will commence automatically in %d second."
+msgid_plural "Installation will commence automatically in %d seconds."
+msgstr[0] ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
-#, c-format
-msgid "Cannot log in as %s at the %s domain"
-msgstr "ไม่สามารถลงชื่อเข้าใช้ในฐานะ %s ที่โดเมน %s ได้"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
+msgid "Unknown"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
-msgid "Invalid password, please try again"
-msgstr "รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
+msgid "C_ontinue Anyway and Destroy Data"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
-#, c-format
-msgid "Couldn't connect to the %s domain: %s"
-msgstr "ไม่สามารถเชื่อมต่อไปยังโดเมน %s: %s"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
+msgid "Unattended installation was cancelled."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:150
-#, c-format
-msgid "A user with the username '%s' already exists"
-msgstr "มีผู้ใช้ที่ใช้ชื่อ '%s' อยู่ก่อนแล้ว"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
+msgid "Endless OS Unattended Installation"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:154
-#, c-format
-msgid "The username is too long"
-msgstr "ชื่อผู้ใช้ยาวเกินไป"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
+msgid "Computer Vendor"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:157
-msgid "The username cannot start with a '-'"
-msgstr "ชื่อผู้ใช้ไม่สามารถขึ้นต้นด้วย '-'"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
+msgid "Product"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:160
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
+msgid "Image"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
+msgid "Target"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
+msgid "Device"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
+msgid "Size"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
-msgstr "ชื่อผู้ใช้จะต้องประกอบด้วยเพียง:\n➣ ตัวอักษรภาษาอังกฤษ\n➣ ตัวเลข\n➣ สัญลักษณ์ใดสัญลักษณ์หนึ่งของ '.', '-' and '_'"
+"All data on this target disk will be destroyed. You will lose <b>all of your"
+" apps, files and documents</b>."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:281
-msgid "Display"
-msgstr "การแสดงผล"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
-msgid "Adjust for TV screen"
-msgstr "ปรับสำหรับหน้าจอทีวี"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid "Do you see this at the bottom right corner of your screen?"
-msgstr "คุณมองเห็นสิ่งนี้ที่มุมขวาล่างของหน้าจอหรือไม่?"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "I see it"
-msgstr "ฉันเห็นแล้ว"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
-msgid "I do not see it. Shrink screen to fit TV."
-msgstr "ฉันมองไม่เห็น ย่อขนาดหน้าจอให้พอดีทีวี"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
-msgid "Terms of Use"
-msgstr "ข้อกำหนดการใช้"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
-msgid "Third Party Software"
-msgstr "ซอฟต์แวร์บุคคลที่สาม"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
-msgid "_Accept and continue"
-msgstr "_ยอมรับและไปต่อ"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Please read the following terms of use carefully"
-msgstr "กรุณาอ่านข้อกำหนดการใช้ต่อไปนี้อย่างละเอียดรอบคอบ"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
-"By clicking \"Accept and continue,\" you acknowledge that you have read, "
-"understood, and agree to be bound by the following terms and conditions."
-msgstr "เมื่อคลิกที่ \"ยอมรับและไปต่อ\" จะถือว่าคุณได้อ่าน เข้าใจ และยอมรับข้อกำหนดและเงื่อนไขดังต่อไปนี้แล้ว"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Help make Endless better for everyone"
-msgstr "ช่วยกันทำให้ Endless ดียิ่งขึ้นสำหรับทุกคน"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
-msgid ""
-"Automatically save and send usage statistics and problem reports to Endless."
-" All data is anonymous."
-msgstr "บันทึกและส่งสถิติการใช้งานและรายงานปัญหาไปยัง Endless โดยอัตโนมัติ โดยข้อมูลทั้งหมดจะไม่ปรากฏชื่อ"
-
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
-msgid "License Agreements"
-msgstr "ข้อตกลงสัญญาอนุญาต"
-
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
-msgid ""
-"I have _agreed to the terms and conditions in this end user license "
-"agreement."
-msgstr "ฉัน_เห็นด้วยกับข้อตกลงและเงื่อนไขในข้อตกลงสัญญาอนุญาตสิทธิ์ผู้ใช้นี้"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
-msgctxt "Online Account"
-msgid "Other"
-msgstr "อื่นๆ"
-
-#. translators: This is the title of the "Add Account" dialog.
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
-msgid "Add Account"
-msgstr "เพิ่มบัญชี"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
-msgid "Mail"
-msgstr "เมล"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
-msgid "Contacts"
-msgstr "ที่อยู่ติดต่อ"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
-msgid "Chat"
-msgstr "แชท"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
-msgid "Resources"
-msgstr "แหล่งที่มา"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
-msgid "Error creating account"
-msgstr "เกิดข้อผิดพลาดขณะสร้างบัญชี"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
-msgid "Error removing account"
-msgstr "เกิดข้อผิดพลาดขณะลบบัญชี"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
-msgid "Are you sure you want to remove the account?"
-msgstr "คุณแน่ใจหรือว่าจะลบบัญชีนี้?"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
-msgid "This will not remove the account on the server."
-msgstr "การลบนี้จะไม่เป็นการลบบัญชีที่เซิร์ฟเวอร์"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
-msgid "_Remove"
-msgstr "_ลบ"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
-msgid "Online Accounts"
-msgstr "บัญชีออนไลน์"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
-msgid "Connect to your existing data in the cloud"
-msgstr "เชื่อมต่อกับข้อมูลที่มีอยู่แล้วของคุณบนคลาวด์"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
-msgid ""
-"Adding accounts will allow you to transparently connect to your online "
-"photos, contacts, mail, and more."
-msgstr "การเพิ่มบัญชีจะทำให้คุณสามารถเชื่อมต่อไปยังภาพถ่าย รายชื่อผู้ติดต่อ เมล และอื่นๆ ออนไลน์ได้"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
-msgid "_Add Account"
-msgstr "_เพิ่มบัญชีผู้ใช้"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
-msgid "Preview"
-msgstr "ตัวอย่าง"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
-msgid "More…"
-msgstr "เพิ่มเติม..."
-
-#. Translators: a search for input methods or keyboard layouts
-#. * did not yield any results
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
-msgid "No inputs found"
-msgstr "ไม่พบอินพุต"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
-msgid "Your keyboard layout seems to be:"
-msgstr "เลย์เอาต์แป้นพิมพ์ของคุณดูจะเป็น:"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
-msgid "Please press one of the following keys:"
-msgstr "กรุณากดหนึ่งในคีย์ดังต่อไปนี้:"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
-msgid "Is the following key present on your keyboard?"
-msgstr "คีย์ต่อไปนี้มีปรากฏอยู่บนคีย์บอร์ดของคุณหรือไม่?"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
-msgid "Typing"
-msgstr "กำลังพิมพ์"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select your keyboard layout"
-msgstr "เลือกผังคีย์บอร์ดของคุณ"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-msgid "Help detect my keyboard layout"
-msgstr "ช่วยตรวจสอบเลย์เอาต์แป้นพิมพ์ของฉัน"
-
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
-msgid "Detect Keyboard Layout..."
-msgstr "ตรวจพบผังคีย์บอร์ด..."
-
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
-msgid "Select"
-msgstr "เลือก"
-
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
-msgid "No languages found"
-msgstr "ไม่พบภาษา"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
-msgid "Disabled"
-msgstr "ปิดใช้งาน"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
-#, c-format
-msgid "SD Card: %s"
-msgstr "SD Card: %s"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
-msgid "Welcome"
-msgstr "ยินดีต้อนรับ"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
-msgid "Welcome to Endless!"
-msgstr "ยินดีต้อนรับสู่ Endless!"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
-msgid "Let's set up your computer..."
-msgstr "มาตั้งค่าคอมพิวเตอร์ของคุณกัน..."
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
-msgid "Test Mode"
-msgstr "โหมดทดสอบ"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:5
-msgid "Power Off"
-msgstr "ปิดเครื่อง"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
-msgid ""
-"This installer will help guide you through installing Endless OS on your "
-"computer"
-msgstr "ตัวติดตั้งจะช่วยแนะนำคุณขณะติดตั้ง Endless OS บนคอมพิวเตอร์ของคุณ"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
-msgid "Search for a location"
-msgstr "ค้นหาตำแหน่งที่ตั้ง"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
-msgid "Location"
-msgstr "ตำแหน่งที่ตั้ง"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
-msgid "January"
-msgstr "มกราคม"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
-msgid "February"
-msgstr "กุมภาพันธ์"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
-msgid "March"
-msgstr "มีนาคม"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
-msgid "April"
-msgstr "เมษายน"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
-msgid "May"
-msgstr "พฤษภาคม"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
-msgid "June"
-msgstr "มิถุนายน"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
-msgid "July"
-msgstr "กรกฎาคม"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
-msgid "August"
-msgstr "สิงหาคม"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
-msgid "September"
-msgstr "กันยายน"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
-msgid "October"
-msgstr "ตุลาคม"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
-msgid "November"
-msgstr "พฤศจิกายน"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
-msgid "December"
-msgstr "ธันวาคม"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
-msgid "Choose Your Location"
-msgstr "เลือกตำแหน่งที่ตั้งของคุณ"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
-msgid "_Determine your location automatically"
-msgstr "_พิจารณาตำแหน่งที่ตั้งของคุณโดยอัตโนมัติ"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
-msgid "Time Zone"
-msgstr "เขตเวลา"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-msgid "Network Time"
-msgstr "เวลาเครือข่าย"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
-msgid "16"
-msgstr "16"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
-msgid "45"
-msgstr "45"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
-msgid ":"
-msgstr ":"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
-msgctxt "Wireless access point"
-msgid "Other…"
-msgstr "อื่นๆ..."
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
-msgid "Network is not available."
-msgstr "ไม่มีเครือข่าย"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
-msgid "No network devices found."
-msgstr "ไม่พบอุปกรณ์เครือข่าย"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
-msgid "Checking for available wireless networks"
-msgstr "กำลังตรวจเครือข่ายไร้สายที่มีอยู่"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
-msgid "Network"
-msgstr "เครือข่าย"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
-msgid "Wireless Networks"
-msgstr "เครือข่ายไร้สาย"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
-msgid ""
-"Do you have wireless internet (WiFi)? If you do, connect your computer to "
-"the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer "
-"password."
-msgstr "คุณมีอินเตอร์เน็ตไร้สาย (WIFI) หรือไม่? หากคุณมี เชื่อมต่ออินเตอร์เน็ตเข้ากับคอมพิวเตอร์ของคุณโดยคลิกที่ชื่อเครือข่าย WiFi และกรอกรหัสผ่านเครือข่าย รหัสผ่านนี้อาจแตกต่างไปจากรหัสผ่านคอมพิวเตอร์ของคุณ"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
-msgid ""
-"TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set"
-" it up in \"Network Settings.\""
-msgstr "คำแนะนำ: คุณสามารถใช้คอมพิวเตอร์ของคุณโดยไม่มีอินเตอร์เน็ตหากคุณไม่สามารถเชื่อมต่อได้ในขณะนี้ ถ้าคุณสามารถเชื่อมต่ออินเตอร์เน็ตได้ในอนาคต คุณสามารถตั้งค่าได้ที่ \"การตั้งค่าเครือข่าย\""
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-msgid "No wireless available"
-msgstr "ไม่มีสัญญาณไร้สายที่สามารถใช้งานได้"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
-msgid "_Skip WiFi setup"
-msgstr "_ข้ามการติดตั้ง WiFi"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
-#, c-format
-msgid "_Start using %s"
-msgstr "_เริ่มใช้ %s"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
-msgid "Thank You"
-msgstr "ขอขอบคุณ"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
-msgid "Your computer is ready to use."
-msgstr "คอมพิวเตอร์ของคุณพร้อมใช้งานแล้ว"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
-msgid "You may change these options at any time in Settings."
-msgstr "คุณอาจเปลี่ยนแปลงตัวเลือกเหล่านี้ได้ทุกเวลาในการตั้งค่า"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
-msgid "_Start using GNOME 3"
-msgstr "เ_ริ่มใช้ GNOME 3"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:131
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:569
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:664
-#, c-format
-msgid "No suitable images were found."
-msgstr "ไม่พบภาพที่เหมาะสม"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:174
+"Configured computer vendor and product information does not match this "
+"computer."
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
+msgid "C_ontinue and Destroy Data"
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
+msgid "More than one image was found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
 msgstr "พื้นฐาน"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:176
 msgid "Aluno"
 msgstr "Aluno"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:184
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:181
 msgid "Escola"
 msgstr "Escola"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:240
 msgid "Endless OS Installer"
 msgstr "ตัวติดตั้ง Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:248
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
 msgid "Endless OS (non-free)"
 msgstr "Endless OS (แบบต้องชำระเงิน)"
 
@@ -658,28 +146,58 @@ msgstr "Endless OS (แบบต้องชำระเงิน)"
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:258
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:255
 msgid "Endless OS (OEM)"
 msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:267
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:264
 msgid "Endless OS (DVD)"
 msgstr "Endless OS (DVD)"
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:274
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:271
 msgid "Educa Endless"
 msgstr "Educa Endless"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:304
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:301
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:699
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
+#, c-format
+msgid "Image file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:473
+#, c-format
+msgid "Live image ‘%s’ does not match configured image ‘%s’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
+#, c-format
+msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
+msgstr ""
+
+#. Translators: the placeholder is a filename.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
+#, c-format
+msgid "Configured image ‘%s’ was not found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
+msgid "No suitable images were found."
+msgstr "ไม่พบภาพที่เหมาะสม"
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
+#, c-format
+msgid "Could not find partition holding Endless OS files."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
 msgstr "ฟอร์แมตใหม่ด้วย Endless OS"
 
@@ -692,18 +210,22 @@ msgstr "คุณต้องการใช้ Endless เวอร์ชั่
 msgid "Use existing version:"
 msgstr "ใช้เวอร์ชั่นที่มีอยู่:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
 msgstr "ตำแหน่งที่คุณเลือกมีพื้นที่น้อยเกินไป: คุณต้องการ %s เพื่อรีฟอร์แมตด้วย %s"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:367
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
+msgid "More than one candidate block device was found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
 msgstr "เสร็จสิ้น"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:426
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
 msgid "Select Disk"
 msgstr "เลือกดิสก์"
 
@@ -730,9 +252,62 @@ msgstr "ดูเหมือนว่าคุณจะมีหลายพา
 msgid "No suitable disks found."
 msgstr "ไม่พบดิสก์ที่เหมาะสม"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:125
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
+#, c-format
+msgid "A debug log has been saved as %s."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
+msgid "Failed to save debug log: "
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
+msgid ""
+"Oops, something is wrong with your unattended installation configuration."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
+msgid "Oops, something is wrong with your Endless OS file."
+msgstr "มีบางสิ่งผิดพลาดกับไฟล์ Endless OS ของคุณ"
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
+msgid "Oops, something went wrong while finding suitable disks to reformat."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
+msgid "Oops, something went wrong while reformatting."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+msgid "Oops, something went wrong."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
+msgid "Unattended installation configuration file created"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
+#, c-format
+msgid "The previous file was renamed to ‘%s’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
+msgid "Unattended installation configuration file could not be created."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
 msgid "Reformatting Finished"
 msgstr "ฟอร์แมตใหม่เสร็จแล้ว"
+
+#. Translators: the %s is the customer support email address
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:501
+#, c-format
+msgid ""
+"Please contact %s or join the <a "
+"href=\"https://community.endlessos.com/\">Endless Community</a> to "
+"troubleshoot."
+msgstr "โปรดติดต่อ %s หรือเข้าร่วม<a href=\"https://community.endlessos.com/\">ชุมชน Endless</a> เพื่อแก้ไขปัญหา"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -746,75 +321,88 @@ msgid ""
 "Endless OS will be ready for you to set up and enjoy!"
 msgstr "สำเร็จ! ปิดเครื่องคอมพิวเตอร์ของคุณและนำ DVD ออก เมื่อคุณรีสตาร์ต Endless OS จะพร้อมให้คุณติดตั้งและสนุกกับการใช้งาน!"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
-msgid "Oops, something is wrong with your Endless OS file."
-msgstr "มีบางสิ่งผิดพลาดกับไฟล์ Endless OS ของคุณ"
-
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
-msgid ""
-"Please contact <a "
-"href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
-" href=\"https://community.endlessos.com/\">Endless Community</a> to "
-"troubleshoot."
-msgstr "โปรดติดต่อ <a href=\"mailto:support@endlessm.com\">support@endlessm.com</a> หรือเข้าร่วม<a href=\"https://community.endlessos.com/\">ชุมชน Endless</a> เพื่อแก้ไขปัญหา"
+msgid "Power Off"
+msgstr "ปิดเครื่อง"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:94
+#: ../gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
 msgstr "หยุดการรีฟอร์แมตดิสก์นี้"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:97
+#: ../gnome-image-installer/pages/install/gis-install-page.c:61
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
 msgstr "ขั้นตอนการรีฟอร์แมตเริ่มไปแล้ว การยกเลิกตอนนี้จะทำให้ไม่สามารถบูตระบบได้"
 
 #. Stop Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:101
+#: ../gnome-image-installer/pages/install/gis-install-page.c:86
 msgid "Stop Reformatting"
 msgstr "หยุดการรีฟอร์แมต"
 
 #. Continue Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:108
+#: ../gnome-image-installer/pages/install/gis-install-page.c:93
 msgid "Continue Reformatting"
 msgstr "ดำเนินการฟอร์แมตซ้ำต่อไป"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:146
-#: ../gnome-image-installer/pages/install/gis-install-page.c:166
-#: ../gnome-image-installer/pages/install/gis-install-page.c:207
-#: ../gnome-image-installer/pages/install/gis-install-page.c:397
-#: ../gnome-image-installer/pages/install/gis-install-page.c:424
+#: ../gnome-image-installer/pages/install/gis-install-page.c:197
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#, no-c-format
+msgid "Step %d of %d"
+msgstr "ขั้นตอนที่ %d จาก %d "
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:334
+#: ../gnome-image-installer/pages/install/gis-scribe.c:829
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1258
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1298
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "ข้อผิดพลาดภายใน"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:521
-#: ../gnome-image-installer/pages/install/gis-install-page.c:665
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
-#, no-c-format
-msgid "Step %d of %d"
-msgstr "ขั้นตอนที่ %d จาก %d "
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:560
-#, c-format
-msgid "Image verification error."
-msgstr "ความผิดพลาดในการยืนยันภาพ"
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:632
-#, c-format
-msgid "The Endless OS signature file \"%s\" does not exist."
-msgstr "ไม่มีไฟล์ลายเซ็น Endless OS \"%s\""
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:714
+#: ../gnome-image-installer/pages/install/gis-install-page.c:407
 msgid "Reformatting"
 msgstr "กำลังฟอร์แมตใหม่"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:4
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "ใช้ได้อย่างรวดเร็วและง่ายดาย ทั้งยังมีประสิทธภาพไม่ว่าจะมีหรือไม่มีอินเทอร์เน็ต\n\nEndless OS พรีโหลดพร้อมกับแอพมากกว่า 100 แอพ ทำให้มีประโยชน์ตั้งแต่คุณเปิดใช้งาน"
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:678
+msgid "Wrote %'"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1006
+msgid "Image verification error."
+msgstr "ความผิดพลาดในการยืนยันภาพ"
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1052
+#, c-format
+msgid "The signature file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1212
+msgid "Could not decompress the image file."
+msgstr ""
+
+#. Translators: this error refers to a configuration
+#. * file. The placeholder is the name of a field in
+#. * the file.
+#: ../gnome-image-installer/util/gis-unattended-config.c:201
+#, c-format
+msgid "%s key is empty"
+msgstr ""
+
+#. Translators: this error refers to a configuration
+#. * file. The placeholders are all the name of
+#. * sections in an .ini-style file.
+#: ../gnome-image-installer/util/gis-unattended-config.c:258
+#, c-format
+msgid "More than one %s section (%s and %s)"
+msgstr ""
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
@@ -828,6 +416,6 @@ msgstr "มีความจำไม่พอ"
 msgid "Need more input"
 msgstr "ต้องการอินพุตเพิ่ม"
 
-#: ../eos-installer-data/eos-installer.desktop.in.in.h:1
+#: ../eos-installer-data/com.endlessm.Installer.desktop.in.in.h:1
 msgid "Reformat"
 msgstr "ฟอร์แมตใหม่"

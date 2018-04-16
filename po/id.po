@@ -6,7 +6,7 @@
 # Andika Triwidada <andika@gmail.com>, 2012-2015
 # Hartono <hartono.s10@gmail.com>, 2016
 # Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017
-# Roddy Shuler <roddy@endlessm.com>, 2016
+# Roddy Shuler <roddy@endlessm.com>, 2016,2018
 # Sendy Aditya Suryana <sendzation@gmail.com>, 2017
 # Septira Taruna <septira@endlessm.com>, 2017
 # Will Thompson <wjt@endlessm.com>, 2017
@@ -14,648 +14,136 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-02 10:52-0700\n"
-"PO-Revision-Date: 2017-11-09 04:48+0000\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
-"Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-installer/language/id/)\n"
+"POT-Creation-Date: 2018-04-16 14:37-0700\n"
+"PO-Revision-Date: 2018-04-16 21:42+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"Language-Team: Indonesian (http://www.transifex.com/endless-os/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/gnome-initial-setup.desktop.in.in.h:1
-#: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
-msgid "Initial Setup"
-msgstr "Penyiapan Awal"
-
-#: ../gnome-initial-setup/gis-assistant.c:305
+#: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
 msgstr "Sela_njutnya"
 
-#: ../gnome-initial-setup/gis-assistant.c:444
+#: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
 msgstr "Se_belumya"
 
-#: ../gnome-initial-setup/gis-assistant.c:445
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
+#: ../gnome-initial-setup/gis-assistant.c:427
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
 msgid "_Cancel"
 msgstr "_Batal"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:359
+#. Translators: the placeholder is the name of a configuration file, such
+#. * as "/run/mount/eosimages/unattended.ini".
+#: ../gnome-image-installer/gnome-image-installer.c:100
+#, c-format
+msgid "Error loading ‘%s’: "
+msgstr ""
+
+#: ../gnome-image-installer/gnome-image-installer.c:264
 msgid "Force new user mode"
 msgstr "Paksakan mode pengguna baru"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:363
+#: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "- GNOME initial setup"
 msgstr "- GNOME Penyiapan Awal"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-msgid "No password"
-msgstr "Tanpa kata sandi"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
-msgid "Passwords do not match"
-msgstr "Kata sandi tidak cocok"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
-msgid "Failed to register account"
-msgstr "Gagal mendaftar akun"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
-msgid "No supported way to authenticate with this domain"
-msgstr "Tidak ada cara yang didukung untuk mengautentikasi domain ini"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
-msgid "Failed to join domain"
-msgstr "Gagal bergabung dengan domain"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
-msgid "Failed to log into domain"
-msgstr "Gagal masuk ke domain"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
-msgid "Login"
-msgstr "Log masuk"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-msgid "Create a Personal Account"
-msgstr "Buat Akun Pribadi"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid ""
-"Type your full name and a password that you'll remember. Pay attention to "
-"upper case letters."
-msgstr "Ketik nama lengkap Anda dan kata sandi yang akan Anda ingat. Harap perhatikan huruf besar dan huruf kecil."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid "_Full Name"
-msgstr "Nama _Lengkap"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
-msgid "_Username"
-msgstr "Nama Ak_un Pengguna"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
-msgid ""
-"The username will be used to name your personal folder, and it cannot be "
-"changed."
-msgstr "Nama akun pengguna akan dipakai untuk menamai folder pribadi Anda, dan tak dapat diubah."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-msgid "_Password"
-msgstr "Kata _Sandi"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
-msgid "_Confirm password"
-msgstr "_Konfirmasi kata sandi:"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
-msgid "Show password"
-msgstr "Perlihatkan kata sandi"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid ""
-"Make sure you write down your password to remember it! You can write "
-"yourself a reminder here, but note that this password reminder can be seen "
-"by others."
-msgstr "Pastikan Anda mencatat kata sandi supaya tetap diingat! Anda bisa menulis petunjuk untuk diri Anda di sini, tetapi harap diingat bahwa petunjuk kata sandi ini dapat dilihat oleh orang lain."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "Password _reminder"
-msgstr "Pe_tunjuk kata sandi"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-msgid "To continue, please make sure you fill in all the blanks."
-msgstr "Untuk melanjutkan, pastikan Anda telah mengisi semua kolom kosong."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
-msgid "page 1"
-msgstr "halaman 1"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
-msgid "Create an Enterprise Account"
-msgstr "Buat Akun Enterprise"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
-msgid "_Domain"
-msgstr "_Domain"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
-msgid "Enterprise domain or realm name"
-msgstr "Nama realm atau domain enterprise"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
-msgid "C_ontinue"
-msgstr "L_anjutkan"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
-msgid "Domain Administrator Login"
-msgstr "Log Masuk Administrator Domain"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
-msgid ""
-"In order to use enterprise logins, this computer needs to be\n"
-"enrolled in the domain. Please have your network administrator\n"
-"type their domain password here, and choose a unique computer\n"
-"name for your computer."
-msgstr "Untuk memakai log masuk enterprise, komputer ini perlu didaftarkan\nke dalam domain. Mintalah administrator jaringan Anda mengetikkan\nkata sandi domainnya di sini, dan pilih sebuah nama komputer yang unik\nbagi komputer Anda."
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
-msgid "_Computer"
-msgstr "_Komputer"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
-msgid "Administrator _Name"
-msgstr "_Nama Administrator"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
-msgid "Administrator Password"
-msgstr "Kata Sandi Administrator"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:94
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "Terlalu pendek"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "Tidak cukup bagus"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:108
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "Lemah"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:111
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "Sedang"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:114
-msgctxt "Password strength"
-msgid "Good"
-msgstr "Bagus"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:117
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "Kuat"
-
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
-msgid "Cannot automatically join this type of domain"
-msgstr "Tidak bisa otomatis bergabung dengan domain tipe ini"
-
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:93
 #, c-format
-msgid "No such domain or realm found"
-msgstr "Domain atau realm tak ditemukan"
+msgid "Installation will commence automatically in %d second."
+msgid_plural "Installation will commence automatically in %d seconds."
+msgstr[0] ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
-#, c-format
-msgid "Cannot log in as %s at the %s domain"
-msgstr "Tidak bisa masuk sebagai %s pada domain %s"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
+msgid "Unknown"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
-msgid "Invalid password, please try again"
-msgstr "Kata sandi salah, mohon coba lagi"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
+msgid "C_ontinue Anyway and Destroy Data"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
-#, c-format
-msgid "Couldn't connect to the %s domain: %s"
-msgstr "Tidak bisa menyambung ke domain %s: %s"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
+msgid "Unattended installation was cancelled."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:150
-#, c-format
-msgid "A user with the username '%s' already exists"
-msgstr "Pengguna dengan nama akun '%s' telah ada"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
+msgid "Endless OS Unattended Installation"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:154
-#, c-format
-msgid "The username is too long"
-msgstr "Nama akun pengguna terlalu panjang"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
+msgid "Computer Vendor"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:157
-msgid "The username cannot start with a '-'"
-msgstr "Nama akun pengguna tidak boleh diawali dengan '-'"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
+msgid "Product"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:160
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
+msgid "Image"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
+msgid "Target"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
+msgid "Device"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
+msgid "Size"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
-msgstr "Nama pengguna hanya boleh terdiri dari:\n ➣ huruf dari alfabet Bahasa Inggris\n ➣ angka\n ➣ karakter '.', '-', atau '_'"
+"All data on this target disk will be destroyed. You will lose <b>all of your"
+" apps, files and documents</b>."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:281
-msgid "Display"
-msgstr "Layar"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
-msgid "Adjust for TV screen"
-msgstr "Sesuaikan untuk layar TV"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid "Do you see this at the bottom right corner of your screen?"
-msgstr "Apakah Anda melihat ini di bagian sudut kanan bawah layar Anda?"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "I see it"
-msgstr "Saya melihatnya"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
-msgid "I do not see it. Shrink screen to fit TV."
-msgstr "Saya tidak melihatnya. Kecilkan layar agar sesuai dengan TV."
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
-msgid "Terms of Use"
-msgstr "Syarat Penggunaan"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
-msgid "Third Party Software"
-msgstr "Perangkat Lunak Pihak Ketiga"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
-msgid "_Accept and continue"
-msgstr "_Terima dan lanjutkan"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Please read the following terms of use carefully"
-msgstr "Mohon baca syarat dan ketentuan penggunaan berikut ini dengan seksama"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
-"By clicking \"Accept and continue,\" you acknowledge that you have read, "
-"understood, and agree to be bound by the following terms and conditions."
-msgstr "Dengan mengklik \"Menerima dan Lanjutkan,\" Anda menyatakan bahwa Anda telah membaca, memahami, dan menyetujui untuk mematuhi syarat dan ketentuan berikut."
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Help make Endless better for everyone"
-msgstr "Bantu membuat Endless menjadi lebih baik untuk semua orang"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
-msgid ""
-"Automatically save and send usage statistics and problem reports to Endless."
-" All data is anonymous."
-msgstr "Secara otomatis menyimpan dan mengirimkan statistik penggunaan dan laporan masalah ke Endless. Semua data anonim."
-
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
-msgid "License Agreements"
-msgstr "Persetujuan Lisensi"
-
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
-msgid ""
-"I have _agreed to the terms and conditions in this end user license "
-"agreement."
-msgstr "Saya telah setuj_u dengan syarat dan ketentuan dalam perjanjian lisensi pengguna akhir ini."
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
-msgctxt "Online Account"
-msgid "Other"
-msgstr "Lainnya"
-
-#. translators: This is the title of the "Add Account" dialog.
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
-msgid "Add Account"
-msgstr "Tambah Akun"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
-msgid "Mail"
-msgstr "Surel"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
-msgid "Contacts"
-msgstr "Kontak"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
-msgid "Chat"
-msgstr "Obrol"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
-msgid "Resources"
-msgstr "Sumber Pengetahuan"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
-msgid "Error creating account"
-msgstr "Galat saat membuat akun"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
-msgid "Error removing account"
-msgstr "Galat saat menghapus akun"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
-msgid "Are you sure you want to remove the account?"
-msgstr "Apakah Anda yakin akan menghapus akun tersebut?"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
-msgid "This will not remove the account on the server."
-msgstr "Ini tak akan menghapus akun pada server."
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
-msgid "_Remove"
-msgstr "_Hapus"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
-msgid "Online Accounts"
-msgstr "Akun Daring"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
-msgid "Connect to your existing data in the cloud"
-msgstr "Menyambung ke data Anda yang telah ada di awan"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
-msgid ""
-"Adding accounts will allow you to transparently connect to your online "
-"photos, contacts, mail, and more."
-msgstr "Menambah akun akan memperkenankan Anda tersambung secara transparan ke foto, kontak, surel, dan hal lainnya yang tersimpan secara daring."
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
-msgid "_Add Account"
-msgstr "Tambah _Akun"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
-msgid "Preview"
-msgstr "Pratinjau"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
-msgid "More…"
-msgstr "Lebih banyak…"
-
-#. Translators: a search for input methods or keyboard layouts
-#. * did not yield any results
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
-msgid "No inputs found"
-msgstr "Masukan tidak ditemukan"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
-msgid "Your keyboard layout seems to be:"
-msgstr "Tata letak papan tik Anda seperti:"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
-msgid "Please press one of the following keys:"
-msgstr "Mohon tekan salah satu tombol berikut:"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
-msgid "Is the following key present on your keyboard?"
-msgstr "Apakah tombol-tombol berikut ada pada papan tik Anda?"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
-msgid "Typing"
-msgstr "Mengetik"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select your keyboard layout"
-msgstr "Pilih tata letak papan tik"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-msgid "Help detect my keyboard layout"
-msgstr "Deteksi tata letak papan tik saya"
-
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
-msgid "Detect Keyboard Layout..."
-msgstr "Mendeteksi Tata Letak Papan Tik…"
-
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
-msgid "Select"
-msgstr "Pilih"
-
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
-msgid "No languages found"
-msgstr "Tidak ada bahasa yang ditemukan"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
-msgid "Disabled"
-msgstr "Nonaktif"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
-#, c-format
-msgid "SD Card: %s"
-msgstr "Kartu SD: %s"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
-msgid "Welcome"
-msgstr "Selamat Datang"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
-msgid "Welcome to Endless!"
-msgstr "Selamat datang di Endless!"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
-msgid "Let's set up your computer..."
-msgstr "Mari siapkan komputer Anda…"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
-msgid "Test Mode"
-msgstr "Mode Uji Coba "
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:5
-msgid "Power Off"
-msgstr "Matikan"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
-msgid ""
-"This installer will help guide you through installing Endless OS on your "
-"computer"
-msgstr "Pemasang ini akan memandu Anda dalam proses pemasangan Endless OS di komputer ini"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
-msgid "Search for a location"
-msgstr "Cari lokasi"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
-msgid "Location"
-msgstr "Lokasi"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
-msgid "January"
-msgstr "Januari"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
-msgid "February"
-msgstr "Februari"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
-msgid "March"
-msgstr "Maret"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
-msgid "April"
-msgstr "April"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
-msgid "May"
-msgstr "Mei"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
-msgid "June"
-msgstr "Juni"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
-msgid "July"
-msgstr "Juli"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
-msgid "August"
-msgstr "Agustus"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
-msgid "September"
-msgstr "September"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
-msgid "October"
-msgstr "Oktober"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
-msgid "November"
-msgstr "November"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
-msgid "December"
-msgstr "Desember"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
-msgid "Choose Your Location"
-msgstr "Pilih Lokasi Anda"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
-msgid "_Determine your location automatically"
-msgstr "Tentukan lokasi An_da secara otomatis"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
-msgid "Time Zone"
-msgstr "Zona Waktu"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-msgid "Network Time"
-msgstr "Waktu Jaringan"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
-msgid "16"
-msgstr "16"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
-msgid "45"
-msgstr "45"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
-msgid ":"
-msgstr ":"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
-msgctxt "Wireless access point"
-msgid "Other…"
-msgstr "Lainnya…"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
-msgid "Network is not available."
-msgstr "Jaringan tak tersedia."
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
-msgid "No network devices found."
-msgstr "Tidak ditemukan perangkat jaringan."
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
-msgid "Checking for available wireless networks"
-msgstr "Memeriksa ketersediaan jaringan nirkabel"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
-msgid "Network"
-msgstr "Jaringan"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
-msgid "Wireless Networks"
-msgstr "Jaringan Nirkabel"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
-msgid ""
-"Do you have wireless internet (WiFi)? If you do, connect your computer to "
-"the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer "
-"password."
-msgstr "Anda punya internet nirkabel (Wi-Fi)? Jika ya, hubungkan komputer Anda ke internet dengan mengklik nama jaringan Wi-Fi lalu masukkan kata sandi jaringan. Kata sandi ini mungkin berbeda dari kata sandi komputer Anda."
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
-msgid ""
-"TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set"
-" it up in \"Network Settings.\""
-msgstr "TIPS: Anda tetap bisa menggunakan komputer tanpa internet jika pada saat ini tidak memiliki koneksi. Jika Anda mendapatkan koneksi internet di waktu mendatang, Anda dapat mengaturnya pada \"Pengaturan Jaringan\"."
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-msgid "No wireless available"
-msgstr "Tidak ada jaringan nirkabel yang tersedia"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
-msgid "_Skip WiFi setup"
-msgstr "_Lewati pengaturan WiFi"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
-#, c-format
-msgid "_Start using %s"
-msgstr "_Mulai memakai %s"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
-msgid "Thank You"
-msgstr "Terima Kasih"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
-msgid "Your computer is ready to use."
-msgstr "Komputer Anda siap digunakan."
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
-msgid "You may change these options at any time in Settings."
-msgstr "Anda bisa mengubah opsi-opsi ini kapan saja di Pengaturan."
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
-msgid "_Start using GNOME 3"
-msgstr "_Mulai memakai GNOME 3"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:131
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:569
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:664
-#, c-format
-msgid "No suitable images were found."
-msgstr "Tidak ditemukan file image yang tepat."
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:174
+"Configured computer vendor and product information does not match this "
+"computer."
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
+msgid "C_ontinue and Destroy Data"
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
+msgid "More than one image was found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
 msgstr "Dasar"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:176
 msgid "Aluno"
 msgstr "Aluno"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:184
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:181
 msgid "Escola"
 msgstr "Escola"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:240
 msgid "Endless OS Installer"
 msgstr "Pemasang Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:248
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
 msgid "Endless OS (non-free)"
 msgstr "Endless OS (non-free)"
 
@@ -663,28 +151,58 @@ msgstr "Endless OS (non-free)"
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:258
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:255
 msgid "Endless OS (OEM)"
 msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:267
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:264
 msgid "Endless OS (DVD)"
 msgstr "Endless OS (DVD)"
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:274
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:271
 msgid "Educa Endless"
 msgstr "Educa Endless"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:304
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:301
 msgid "Full"
 msgstr "Lengkap"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:699
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
+#, c-format
+msgid "Image file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:473
+#, c-format
+msgid "Live image ‘%s’ does not match configured image ‘%s’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
+#, c-format
+msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
+msgstr ""
+
+#. Translators: the placeholder is a filename.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
+#, c-format
+msgid "Configured image ‘%s’ was not found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
+msgid "No suitable images were found."
+msgstr "Tidak ditemukan file image yang tepat."
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
+#, c-format
+msgid "Could not find partition holding Endless OS files."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
 msgstr "Format ulang dengan Endless OS"
 
@@ -697,18 +215,22 @@ msgstr "Apakah ini versi Endless OS yang ingin Anda gunakan? Jika tidak, unduh v
 msgid "Use existing version:"
 msgstr "Gunakan versi yang sudah ada:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
 msgstr "Lokasi yang Anda pilih terlalu kecil: Anda memerlukan %s untuk memformat ulang dengan %s."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:367
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
+msgid "More than one candidate block device was found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
 msgstr "Selesai"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:426
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
 msgid "Select Disk"
 msgstr "Pilih Disk"
 
@@ -735,9 +257,62 @@ msgstr "Sepertinya Anda memiliki beberapa partisi di diska ini (misalnya drive C
 msgid "No suitable disks found."
 msgstr "Diska yang tepat tidak ditemukan."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:125
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
+#, c-format
+msgid "A debug log has been saved as %s."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
+msgid "Failed to save debug log: "
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
+msgid ""
+"Oops, something is wrong with your unattended installation configuration."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
+msgid "Oops, something is wrong with your Endless OS file."
+msgstr "Ups, ada masalah dengan berkas Endless OS Anda."
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
+msgid "Oops, something went wrong while finding suitable disks to reformat."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
+msgid "Oops, something went wrong while reformatting."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+msgid "Oops, something went wrong."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
+msgid "Unattended installation configuration file created"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
+#, c-format
+msgid "The previous file was renamed to ‘%s’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
+msgid "Unattended installation configuration file could not be created."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
 msgid "Reformatting Finished"
 msgstr "Selesai Memformat Ulang"
+
+#. Translators: the %s is the customer support email address
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:501
+#, c-format
+msgid ""
+"Please contact %s or join the <a "
+"href=\"https://community.endlessos.com/\">Endless Community</a> to "
+"troubleshoot."
+msgstr "Mohon hubungi %s atau bergabung dengan <a href=\"https://community.endlessos.com/\">Komunitas Endless</a>untuk menyelesaikan kendala yang dihadapi."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
@@ -751,75 +326,88 @@ msgid ""
 "Endless OS will be ready for you to set up and enjoy!"
 msgstr "Berhasil! Matikan komputer lalu keluarkan DVD ini. Ketika memulai ulang, Endless OS akan siap untuk Anda atur dan gunakan!"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
-msgid "Oops, something is wrong with your Endless OS file."
-msgstr "Ups, ada masalah dengan berkas Endless OS Anda."
-
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
-msgid ""
-"Please contact <a "
-"href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
-" href=\"https://community.endlessos.com/\">Endless Community</a> to "
-"troubleshoot."
-msgstr "Mohon hubungi <a href=\"mailto:bantuan@endlessm.com\">bantuan@endlessm.com</a> atau bergabung dengan <a href=\"https://community.endlessos.com/\">Komunitas Endless</a>untuk menyelesaikan kendala yang dihadapi."
+msgid "Power Off"
+msgstr "Matikan"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:94
+#: ../gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
 msgstr "Berhenti memformat diska?"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:97
+#: ../gnome-image-installer/pages/install/gis-install-page.c:61
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
 msgstr "Proses format ulang telah dimulai. Membatalkan sekarang akan menyebabkan sistem tidak dapat di-boot."
 
 #. Stop Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:101
+#: ../gnome-image-installer/pages/install/gis-install-page.c:86
 msgid "Stop Reformatting"
 msgstr "Berhenti Memformat Ulang"
 
 #. Continue Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:108
+#: ../gnome-image-installer/pages/install/gis-install-page.c:93
 msgid "Continue Reformatting"
 msgstr "Lanjutkan Memformat Ulang"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:146
-#: ../gnome-image-installer/pages/install/gis-install-page.c:166
-#: ../gnome-image-installer/pages/install/gis-install-page.c:207
-#: ../gnome-image-installer/pages/install/gis-install-page.c:397
-#: ../gnome-image-installer/pages/install/gis-install-page.c:424
+#: ../gnome-image-installer/pages/install/gis-install-page.c:197
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#, no-c-format
+msgid "Step %d of %d"
+msgstr "Langkah %d dari %d"
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:334
+#: ../gnome-image-installer/pages/install/gis-scribe.c:829
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1258
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1298
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "Kesalahan internal"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:521
-#: ../gnome-image-installer/pages/install/gis-install-page.c:665
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
-#, no-c-format
-msgid "Step %d of %d"
-msgstr "Langkah %d dari %d"
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:560
-#, c-format
-msgid "Image verification error."
-msgstr "Kesalahan pada verifikasi berkas image."
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:632
-#, c-format
-msgid "The Endless OS signature file \"%s\" does not exist."
-msgstr "Berkas signature Endless OS \"%s\" tidak ditemukan."
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:714
+#: ../gnome-image-installer/pages/install/gis-install-page.c:407
 msgid "Reformatting"
 msgstr "Memformat Ulang"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:4
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "Cepat, mudah, dan hebat – dengan ataupun tanpa internet.\n\nEndless OS dilengkapi dengan lebih dari 100 aplikasi, langsung bermanfaat begitu mulai Anda nyalakan."
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:678
+msgid "Wrote %'"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1006
+msgid "Image verification error."
+msgstr "Kesalahan pada verifikasi berkas image."
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1052
+#, c-format
+msgid "The signature file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1212
+msgid "Could not decompress the image file."
+msgstr ""
+
+#. Translators: this error refers to a configuration
+#. * file. The placeholder is the name of a field in
+#. * the file.
+#: ../gnome-image-installer/util/gis-unattended-config.c:201
+#, c-format
+msgid "%s key is empty"
+msgstr ""
+
+#. Translators: this error refers to a configuration
+#. * file. The placeholders are all the name of
+#. * sections in an .ini-style file.
+#: ../gnome-image-installer/util/gis-unattended-config.c:258
+#, c-format
+msgid "More than one %s section (%s and %s)"
+msgstr ""
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
@@ -833,6 +421,6 @@ msgstr "Memori tidak cukup"
 msgid "Need more input"
 msgstr "Butuh lebih banyak input"
 
-#: ../eos-installer-data/eos-installer.desktop.in.in.h:1
+#: ../eos-installer-data/com.endlessm.Installer.desktop.in.in.h:1
 msgid "Reformat"
 msgstr "Format Ulang"

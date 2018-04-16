@@ -3,711 +3,234 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Roddy Shuler <roddy@endlessm.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-02 10:52-0700\n"
-"PO-Revision-Date: 2017-09-23 08:10+0000\n"
+"POT-Creation-Date: 2018-04-16 14:37-0700\n"
+"PO-Revision-Date: 2018-04-16 21:42+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
-"Language-Team: Chinese (Taiwan) (http://www.transifex.com/endless-mobile-inc/eos-installer/language/zh_TW/)\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/endless-os/eos-installer/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../data/gnome-initial-setup.desktop.in.in.h:1
-#: ../data/gnome-initial-setup-first-login.desktop.in.in.h:1
-msgid "Initial Setup"
-msgstr "初始設定"
-
-#: ../gnome-initial-setup/gis-assistant.c:305
+#: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
 msgstr "下一步(_N)"
 
-#: ../gnome-initial-setup/gis-assistant.c:444
+#: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
-msgstr "上一個(_P)"
+msgstr "上一步(_P)"
 
-#: ../gnome-initial-setup/gis-assistant.c:445
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:379
+#: ../gnome-initial-setup/gis-assistant.c:427
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:295
-#: ../gnome-image-installer/gnome-image-installer.c:359
-msgid "Force new user mode"
-msgstr "強迫新使用者模式"
+#. Translators: the placeholder is the name of a configuration file, such
+#. * as "/run/mount/eosimages/unattended.ini".
+#: ../gnome-image-installer/gnome-image-installer.c:100
+#, c-format
+msgid "Error loading ‘%s’: "
+msgstr ""
 
-#: ../gnome-initial-setup/gnome-initial-setup.c:299
-#: ../gnome-image-installer/gnome-image-installer.c:363
+#: ../gnome-image-installer/gnome-image-installer.c:264
+msgid "Force new user mode"
+msgstr "強制新使用者模式"
+
+#: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "- GNOME initial setup"
 msgstr "- GNOME 初始設定"
 
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:333
-msgid "No password"
-msgstr "無密碼"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:336
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:450
-msgid "Passwords do not match"
-msgstr "密碼不相符"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:582
-msgid "Failed to register account"
-msgstr "無法註冊帳號"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:790
-msgid "No supported way to authenticate with this domain"
-msgstr "沒有支援這個網域的核對方式"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:830
-msgid "Failed to join domain"
-msgstr "無法加入網域"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:898
-msgid "Failed to log into domain"
-msgstr "無法登入到網域"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.c:1327
-msgid "Login"
-msgstr "登入"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:1
-msgid "Create a Personal Account"
-msgstr "建立個人帳戶"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:2
-msgid ""
-"Type your full name and a password that you'll remember. Pay attention to "
-"upper case letters."
-msgstr "輸入全名及易記的密碼。注意大寫字母。"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:3
-msgid "_Full Name"
-msgstr "全名(_F)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:4
-msgid "_Username"
-msgstr "使用者名稱(_U)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:5
-msgid ""
-"The username will be used to name your personal folder, and it cannot be "
-"changed."
-msgstr "使用者名稱將會是您的個人資料夾名稱，且無法變更。"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:6
-msgid "_Password"
-msgstr "密碼(_P)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:7
-msgid "_Confirm password"
-msgstr "確認密碼(_C)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:8
-msgid "Show password"
-msgstr "顯示密碼"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:9
-msgid ""
-"Make sure you write down your password to remember it! You can write "
-"yourself a reminder here, but note that this password reminder can be seen "
-"by others."
-msgstr "務必寫下您的密碼來記住！您可以在此寫下提示給自己，但注意，其他人也看得到這個密碼提示。"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:10
-msgid "Password _reminder"
-msgstr "密碼_提醒"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:11
-msgid "To continue, please make sure you fill in all the blanks."
-msgstr "請填寫所有空格後再繼續。"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:12
-msgid "page 1"
-msgstr "第 1 頁"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:13
-msgid "Create an Enterprise Account"
-msgstr "建立企業版帳號"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:14
-msgid "_Domain"
-msgstr "網域(_D)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:15
-msgid "Enterprise domain or realm name"
-msgstr "企業網域或領域名稱"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:16
-msgid "C_ontinue"
-msgstr "繼續(_O)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:17
-msgid "Domain Administrator Login"
-msgstr "網域系統管理員登入"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:18
-msgid ""
-"In order to use enterprise logins, this computer needs to be\n"
-"enrolled in the domain. Please have your network administrator\n"
-"type their domain password here, and choose a unique computer\n"
-"name for your computer."
-msgstr "為了使用企業登入，這臺電腦需要\n加入網域。請讓您的網路系統管理者\n在此輸入他們的網域密碼及用於您的\n電腦的獨特電腦名稱。"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:22
-msgid "_Computer"
-msgstr "電腦(_C)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:23
-msgid "Administrator _Name"
-msgstr "系統管理員名稱(_N)"
-
-#: ../gnome-initial-setup/pages/account/gis-account-page.ui.h:24
-msgid "Administrator Password"
-msgstr "系統管理員密碼"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:94
-msgctxt "Password strength"
-msgid "Too short"
-msgstr "太短"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:99
-msgctxt "Password strength"
-msgid "Not good enough"
-msgstr "不夠好"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:108
-msgctxt "Password strength"
-msgid "Weak"
-msgstr "太弱"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:111
-msgctxt "Password strength"
-msgid "Fair"
-msgstr "一般"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:114
-msgctxt "Password strength"
-msgid "Good"
-msgstr "良好"
-
-#: ../gnome-initial-setup/pages/account/pw-utils.c:117
-msgctxt "Password strength"
-msgid "Strong"
-msgstr "強固"
-
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:352
-msgid "Cannot automatically join this type of domain"
-msgstr "不能自動加入這個類型的網域"
-
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:415
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:93
 #, c-format
-msgid "No such domain or realm found"
-msgstr "找不到這個網域或領域名稱"
+msgid "Installation will commence automatically in %d second."
+msgid_plural "Installation will commence automatically in %d seconds."
+msgstr[0] ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:822
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:836
-#, c-format
-msgid "Cannot log in as %s at the %s domain"
-msgstr "不能以 %s 身分登入 %s 網域"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
+msgid "Unknown"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:828
-msgid "Invalid password, please try again"
-msgstr "密碼錯誤，請再試一次"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
+msgid "C_ontinue Anyway and Destroy Data"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-realm-manager.c:841
-#, c-format
-msgid "Couldn't connect to the %s domain: %s"
-msgstr "無法連接到 %s 網域：%s"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
+msgid "Unattended installation was cancelled."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:150
-#, c-format
-msgid "A user with the username '%s' already exists"
-msgstr "以使用者名稱「%s」為名的使用者已經存在"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
+msgid "Endless OS Unattended Installation"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:154
-#, c-format
-msgid "The username is too long"
-msgstr "使用者名稱太長了"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
+msgid "Computer Vendor"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:157
-msgid "The username cannot start with a '-'"
-msgstr "使用者名稱不能以 '-' 字母開頭"
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
+msgid "Product"
+msgstr ""
 
-#: ../gnome-initial-setup/pages/account/um-utils.c:160
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
+msgid "Image"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
+msgid "Target"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
+msgid "Device"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
+msgid "Size"
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
-"The username must only consist of:\n"
-" ➣ letters from the English alphabet\n"
-" ➣ digits\n"
-" ➣ any of the characters '.', '-' and '_'"
-msgstr "使用者名稱必須由這些字組成：\n  ➣ 英文字母\n  ➣ 數字\n  ➣ 其他字元如 '.'、 '-' 和 '_'"
+"All data on this target disk will be destroyed. You will lose <b>all of your"
+" apps, files and documents</b>."
+msgstr ""
 
-#: ../gnome-initial-setup/pages/display/gis-display-page.c:281
-msgid "Display"
-msgstr "顯示"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:1
-msgid "Adjust for TV screen"
-msgstr "配合電視螢幕調整"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:2
-msgid "Do you see this at the bottom right corner of your screen?"
-msgstr "您在畫面的右下角有看到這個嗎？"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:3
-msgid "I see it"
-msgstr "我看到了"
-
-#: ../gnome-initial-setup/pages/display/gis-display-page.ui.h:4
-msgid "I do not see it. Shrink screen to fit TV."
-msgstr "我看不到。配合電視縮小螢幕。"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:239
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:345
-msgid "Terms of Use"
-msgstr "使用規定"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:244
-msgid "Third Party Software"
-msgstr "協力廠商軟體"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.c:338
-msgid "_Accept and continue"
-msgstr "_接受並繼續"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:1
-msgid "Please read the following terms of use carefully"
-msgstr "請仔細閱讀下列使用條款"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:2
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
-"By clicking \"Accept and continue,\" you acknowledge that you have read, "
-"understood, and agree to be bound by the following terms and conditions."
-msgstr "按一下「接受並繼續」，即表示您已閱讀、瞭解並同意下列條款與條件。"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:3
-msgid "Help make Endless better for everyone"
-msgstr "提供協助，讓 Endless 更適合每個人使用"
-
-#: ../gnome-initial-setup/pages/endless-eula/gis-endless-eula-page.ui.h:4
-msgid ""
-"Automatically save and send usage statistics and problem reports to Endless."
-" All data is anonymous."
-msgstr "自動儲存並寄送使用數據統計及問題報告給 Endless。所有的資料皆為匿名。"
-
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.c:324
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:1
-msgid "License Agreements"
-msgstr "授權同意"
-
-#: ../gnome-initial-setup/pages/eulas/gis-eula-page.ui.h:2
-msgid ""
-"I have _agreed to the terms and conditions in this end user license "
-"agreement."
-msgstr "我已同意這個條款與條件(_A)"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:200
-msgctxt "Online Account"
-msgid "Other"
-msgstr "其他"
-
-#. translators: This is the title of the "Add Account" dialog.
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:318
-msgid "Add Account"
-msgstr "加入帳號"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:357
-msgid "Mail"
-msgstr "郵件"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:363
-msgid "Contacts"
-msgstr "連絡人"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:369
-msgid "Chat"
-msgstr "聊天"
-
-#: ../gnome-initial-setup/pages/goa/cc-online-accounts-add-account-dialog.c:375
-msgid "Resources"
-msgstr "資源"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:99
-msgid "Error creating account"
-msgstr "建立帳號時發生錯誤"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:145
-msgid "Error removing account"
-msgstr "移除帳號時發生錯誤"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:171
-msgid "Are you sure you want to remove the account?"
-msgstr "確定要移除這個帳號？"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:173
-msgid "This will not remove the account on the server."
-msgstr "這不會移除伺服器上的帳號。"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:174
-msgid "_Remove"
-msgstr "移除(_R)"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.c:434
-msgid "Online Accounts"
-msgstr "線上帳號"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:1
-msgid "Connect to your existing data in the cloud"
-msgstr "與您雲端的既有資料連接"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:2
-msgid ""
-"Adding accounts will allow you to transparently connect to your online "
-"photos, contacts, mail, and more."
-msgstr "加入帳號可讓您透明的連接到您的線上相片、聯絡人、郵件...等等。"
-
-#: ../gnome-initial-setup/pages/goa/gis-goa-page.ui.h:3
-msgid "_Add Account"
-msgstr "加入帳號(_A)"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:240
-msgid "Preview"
-msgstr "預覽"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:297
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:184
-msgid "More…"
-msgstr "更多…"
-
-#. Translators: a search for input methods or keyboard layouts
-#. * did not yield any results
-#: ../gnome-initial-setup/pages/keyboard/cc-input-chooser.c:318
-msgid "No inputs found"
-msgstr "未找到輸入端"
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:190
-msgid "Your keyboard layout seems to be:"
-msgstr "您的鍵盤配置似乎是："
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:304
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:2
-msgid "Please press one of the following keys:"
-msgstr "請按下列任一個按鍵："
-
-#: ../gnome-initial-setup/pages/keyboard/cc-keyboard-query.c:305
-msgid "Is the following key present on your keyboard?"
-msgstr "您的鍵盤是否有下列鍵？"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.c:276
-msgid "Typing"
-msgstr "輸入中"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:1
-msgid "Select your keyboard layout"
-msgstr "選擇你的鍵盤布局"
-
-#: ../gnome-initial-setup/pages/keyboard/gis-keyboard-page.ui.h:2
-msgid "Help detect my keyboard layout"
-msgstr "幫助我檢測鍵盤布局"
-
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:1
-msgid "Detect Keyboard Layout..."
-msgstr "偵測鍵盤配置..."
-
-#: ../gnome-initial-setup/pages/keyboard/keyboard-detector.ui.h:3
-msgid "Select"
-msgstr "選擇"
-
-#: ../gnome-initial-setup/pages/language/cc-language-chooser.c:201
-msgid "No languages found"
-msgstr "找不到語言"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:603
-msgid "Disabled"
-msgstr "已關閉"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:605
-#, c-format
-msgid "SD Card: %s"
-msgstr "SD 記憶卡：%s"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:684
-msgid "Welcome"
-msgstr "歡迎使用"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:688
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:3
-msgid "Welcome to Endless!"
-msgstr "歡迎來到 Endless！"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.c:690
-msgid "Let's set up your computer..."
-msgstr "設定您的電腦……"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:1
-msgid "Test Mode"
-msgstr "測試模式"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:2
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:5
-msgid "Power Off"
-msgstr "關閉電源"
-
-#: ../gnome-initial-setup/pages/language/gis-language-page.ui.h:4
-msgid ""
-"This installer will help guide you through installing Endless OS on your "
-"computer"
-msgstr "此安裝程式會指引您在電腦上安裝 Endless OS "
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:662
-msgid "Search for a location"
-msgstr "搜尋位置"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.c:790
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:15
-msgid "Location"
-msgstr "位置"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:1
-msgid "January"
-msgstr "一月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:2
-msgid "February"
-msgstr "二月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:3
-msgid "March"
-msgstr "3 月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:4
-msgid "April"
-msgstr "4 月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:5
-msgid "May"
-msgstr "五月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:6
-msgid "June"
-msgstr "六月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:7
-msgid "July"
-msgstr "七月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:8
-msgid "August"
-msgstr "八月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:9
-msgid "September"
-msgstr "九月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:10
-msgid "October"
-msgstr "十月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:11
-msgid "November"
-msgstr "十一月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:12
-msgid "December"
-msgstr "12 月"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:13
-msgid "Choose Your Location"
-msgstr "選擇您的位置"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:14
-msgid "_Determine your location automatically"
-msgstr "自動判斷您的位置(_D)"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:16
-msgid "Time Zone"
-msgstr "時區"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:17
-msgid "Network Time"
-msgstr "網路時間"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:18
-msgid "16"
-msgstr "16"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:19
-msgid "45"
-msgstr "45"
-
-#: ../gnome-initial-setup/pages/location/gis-location-page.ui.h:20
-msgid ":"
-msgstr "："
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:334
-msgctxt "Wireless access point"
-msgid "Other…"
-msgstr "其他…"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:370
-msgid "Network is not available."
-msgstr "網路無法使用。"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:372
-msgid "No network devices found."
-msgstr "找不到網路裝置。"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:443
-msgid "Checking for available wireless networks"
-msgstr "檢查有沒有無線網路可用"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.c:714
-msgid "Network"
-msgstr "網路"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:1
-msgid "Wireless Networks"
-msgstr "無線網路"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:2
-msgid ""
-"Do you have wireless internet (WiFi)? If you do, connect your computer to "
-"the internet by clicking on the name of your WiFi network and entering the "
-"network password. This password may be different from your computer "
-"password."
-msgstr "您是否有無線網路（WiFi）？如果有，請點選 WiFi 網路名稱、輸入網路密碼以將電腦連線至網際網路。此密碼可能與您電腦的密碼不同。"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:3
-msgid ""
-"TIP: You can use your computer without internet if you do not have a "
-"connection now. If you get an internet connection in the future, you can set"
-" it up in \"Network Settings.\""
-msgstr "建議：如果你現在沒有連接網路，你可以在沒有網路的狀態下使用你的電腦。如果你在之後連接上網路，你可以在「網路設定」中將其設定完畢。"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:4
-msgid "No wireless available"
-msgstr "無法連結無線網路"
-
-#: ../gnome-initial-setup/pages/network/gis-network-page.ui.h:5
-msgid "_Skip WiFi setup"
-msgstr "略過 WiFi 設定(_S)"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:394
-#, c-format
-msgid "_Start using %s"
-msgstr "開始使用 %s"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.c:420
-msgid "Thank You"
-msgstr "謝謝您"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:1
-msgid "Your computer is ready to use."
-msgstr "您的電腦已經可以使用。"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:2
-msgid "You may change these options at any time in Settings."
-msgstr "您可以在任何時間於設定值中改變這些選項。"
-
-#: ../gnome-initial-setup/pages/summary/gis-summary-page.ui.h:3
-msgid "_Start using GNOME 3"
-msgstr "開始使用 Gnome 3(_S)"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:131
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:569
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:664
-#, c-format
-msgid "No suitable images were found."
-msgstr "找不到合適的影像。"
-
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:174
+"Configured computer vendor and product information does not match this "
+"computer."
+msgstr ""
+
+#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
+msgid "C_ontinue and Destroy Data"
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
+msgid "More than one image was found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
 msgstr "基本"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:176
 msgid "Aluno"
 msgstr "Aluno"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:184
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:181
 msgid "Escola"
 msgstr "Escola"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:1
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
-msgstr "Endless 作業系統"
+msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:240
 msgid "Endless OS Installer"
 msgstr "Endless OS 安裝程式"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:248
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
 msgid "Endless OS (non-free)"
-msgstr "Endless 作業系統（非自由軟體）"
+msgstr "Endless OS（非自由軟體）"
 
 #. Translators: this is the edition of Endless OS pre-installed by
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:258
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:255
 msgid "Endless OS (OEM)"
-msgstr "Endless 作業系統 (OEM)"
+msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:267
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:264
 msgid "Endless OS (DVD)"
 msgstr "Endless OS (DVD)"
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:274
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:271
 msgid "Educa Endless"
 msgstr "Educa Endless"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:304
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:301
 msgid "Full"
 msgstr "完整"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:699
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
+#, c-format
+msgid "Image file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:473
+#, c-format
+msgid "Live image ‘%s’ does not match configured image ‘%s’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
+#, c-format
+msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
+msgstr ""
+
+#. Translators: the placeholder is a filename.
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
+#, c-format
+msgid "Configured image ‘%s’ was not found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
+msgid "No suitable images were found."
+msgstr "找不到合適的影像。"
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
+#, c-format
+msgid "Could not find partition holding Endless OS files."
+msgstr ""
+
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
-msgstr "以 Endless 作業系統重新格式化"
+msgstr "以 Endless OS重新格式化"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr "這是您想使用的 Endless 作業系統版本嗎？不是的話，就下載另一個版本。"
+msgstr "這是您想使用的 Endless OS版本嗎？不是的話，就下載另一個版本。"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
-msgstr "使用現行版："
+msgstr "使用既有版本："
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:127
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
-msgstr "你所選的位置太小：需要 %s 以與 %s 重定格式"
+msgstr "您所選的位置太小：需要 %s 以與 %s 重定格式"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:367
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
+msgid "More than one candidate block device was found."
+msgstr ""
+
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
 msgstr "完成"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:426
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
 msgid "Select Disk"
 msgstr "選擇磁碟"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr "選擇你想要安裝 Endless 作業系統於其中的磁盤"
+msgstr "選擇您想要安裝 Endless OS於其中的磁盤"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -722,101 +245,167 @@ msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr "此磁碟似乎有數個分割區（如 C 槽及 D 槽）。以 Endless OS  重新格式化將會抹除選定磁碟的<b>所有分割區</b>。請按此確認。"
+msgstr "此磁碟似乎有數個分割區（如 C 槽及 D 槽）。以 Endless OS 重新格式化將會抹除選定磁碟的<b>所有分割區</b>。請按此確認。"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
 msgstr "找不到適合的磁碟。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:125
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
+#, c-format
+msgid "A debug log has been saved as %s."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
+msgid "Failed to save debug log: "
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
+msgid ""
+"Oops, something is wrong with your unattended installation configuration."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
+msgid "Oops, something is wrong with your Endless OS file."
+msgstr "糟糕！您的 Endless OS檔案似乎有問題。"
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
+msgid "Oops, something went wrong while finding suitable disks to reformat."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
+msgid "Oops, something went wrong while reformatting."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
+#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+msgid "Oops, something went wrong."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
+msgid "Unattended installation configuration file created"
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
+#, c-format
+msgid "The previous file was renamed to ‘%s’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
+msgid "Unattended installation configuration file could not be created."
+msgstr ""
+
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
 msgid "Reformatting Finished"
 msgstr "重新格式化已完成"
+
+#. Translators: the %s is the customer support email address
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:501
+#, c-format
+msgid ""
+"Please contact %s or join the <a "
+"href=\"https://community.endlessos.com/\">Endless Community</a> to "
+"troubleshoot."
+msgstr "請聯絡%s或加入<a href=\"https://community.endlessos.com/\"> Endless 社群</a>來進行錯誤排除。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
-msgstr "成功了！關閉你的電腦電源接著拔除你的 USB 裝置。當你重新開機時，Endless 作業系統便會準備供你設定並開始使用！"
+msgstr "成功了！關閉您的電腦電源接著拔除您的 USB 裝置。當您重新開機時，Endless OS便會準備供您設定並開始使用！"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
-msgstr "成功！關閉您的電腦並移除 DVD。重新啟動後\n Endless OS 將準備就緒，讓您進行設定並使用！"
-
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
-msgid "Oops, something is wrong with your Endless OS file."
-msgstr "糟糕！您的 Endless 作業系統檔案似乎有問題。"
+msgstr "成功！關閉您的電腦並移除 DVD。重新啟動後 Endless OS 將準備就緒，讓您進行設定並使用！"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
-msgid ""
-"Please contact <a "
-"href=\"mailto:support@endlessm.com\">support@endlessm.com</a> or join the <a"
-" href=\"https://community.endlessos.com/\">Endless Community</a> to "
-"troubleshoot."
-msgstr "請聯絡<a href=\"mailto:support@endlessm.com\">support@endlessm.com</a>或加入<a href=\"https://community.endlessos.com/\"> Endless 社群</a>來進行錯誤排除。"
+msgid "Power Off"
+msgstr "關閉電源"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:94
+#: ../gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
 msgstr "停止格式化硬碟嗎？"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:97
+#: ../gnome-image-installer/pages/install/gis-install-page.c:61
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
 msgstr "重新格式化程序已經開始，現在取消會導致此系統無法開機。"
 
 #. Stop Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:101
+#: ../gnome-image-installer/pages/install/gis-install-page.c:86
 msgid "Stop Reformatting"
 msgstr "停止重新格式化"
 
 #. Continue Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:108
+#: ../gnome-image-installer/pages/install/gis-install-page.c:93
 msgid "Continue Reformatting"
 msgstr "繼續重新格式化"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:146
-#: ../gnome-image-installer/pages/install/gis-install-page.c:166
-#: ../gnome-image-installer/pages/install/gis-install-page.c:207
-#: ../gnome-image-installer/pages/install/gis-install-page.c:397
-#: ../gnome-image-installer/pages/install/gis-install-page.c:424
+#: ../gnome-image-installer/pages/install/gis-install-page.c:197
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#, no-c-format
+msgid "Step %d of %d"
+msgstr "步驟 %d 之 %d"
+
+#: ../gnome-image-installer/pages/install/gis-install-page.c:334
+#: ../gnome-image-installer/pages/install/gis-scribe.c:829
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1258
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1298
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "內部錯誤"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:521
-#: ../gnome-image-installer/pages/install/gis-install-page.c:665
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:6
-#, no-c-format
-msgid "Step %d of %d"
-msgstr "步驟 %d 之 %d"
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:560
-#, c-format
-msgid "Image verification error."
-msgstr "圖片驗證錯誤。"
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:632
-#, c-format
-msgid "The Endless OS signature file \"%s\" does not exist."
-msgstr "Endless OS 簽署文件「%s」不存在。"
-
-#: ../gnome-image-installer/pages/install/gis-install-page.c:714
+#: ../gnome-image-installer/pages/install/gis-install-page.c:407
 msgid "Reformatting"
 msgstr "正在重新格式化"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
+#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:4
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
-msgstr "使用方式快速又簡單，功能強大，且無論網際網路連線或離線均可使用。\n\nEndless 作業系統已預先載入超過 100 種應用程式，啟動即輕鬆上手。"
+msgstr "使用方式快速又簡單，功能強大，且無論網際網路連線或離線均可使用。\n\nEndless OS已預先載入超過 100 種應用程式，啟動即輕鬆上手。"
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:678
+msgid "Wrote %'"
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1006
+msgid "Image verification error."
+msgstr "影像驗證錯誤。"
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1052
+#, c-format
+msgid "The signature file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1212
+msgid "Could not decompress the image file."
+msgstr ""
+
+#. Translators: this error refers to a configuration
+#. * file. The placeholder is the name of a field in
+#. * the file.
+#: ../gnome-image-installer/util/gis-unattended-config.c:201
+#, c-format
+msgid "%s key is empty"
+msgstr ""
+
+#. Translators: this error refers to a configuration
+#. * file. The placeholders are all the name of
+#. * sections in an .ini-style file.
+#: ../gnome-image-installer/util/gis-unattended-config.c:258
+#, c-format
+msgid "More than one %s section (%s and %s)"
+msgstr ""
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr "壓縮資料無效"
+msgstr "無效的壓縮資料"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
@@ -826,6 +415,6 @@ msgstr "記憶體不足"
 msgid "Need more input"
 msgstr "需要其他輸入"
 
-#: ../eos-installer-data/eos-installer.desktop.in.in.h:1
+#: ../eos-installer-data/com.endlessm.Installer.desktop.in.in.h:1
 msgid "Reformat"
 msgstr "重新格式化"
