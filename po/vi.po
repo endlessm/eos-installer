@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-16 14:37-0700\n"
-"PO-Revision-Date: 2018-04-16 21:42+0000\n"
+"PO-Revision-Date: 2018-04-28 13:27+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-os/eos-installer/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "T_hôi"
 #: ../gnome-image-installer/gnome-image-installer.c:100
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr ""
+msgstr "Lỗi khi tải '%s':"
 
 #: ../gnome-image-installer/gnome-image-installer.c:264
 msgid "Force new user mode"
@@ -51,67 +51,67 @@ msgstr "- Cài đặt GNOME lần đầu"
 #, c-format
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
-msgstr[0] ""
+msgstr[0] "Việc cài đặt sẽ tự động tiến hành sau %d giây."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "Chưa rõ"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
-msgstr ""
+msgstr "_Vẫn Tiếp tục và Hủy Dữ liệu"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
-msgstr ""
+msgstr "Cài đặt tự động đã bị hủy."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
-msgstr ""
+msgstr "Cài đặt Tự động HĐH Endless"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "Công ty cung cấp máy tính"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "Sản phẩm"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
-msgstr ""
+msgstr "Hình ảnh"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
 msgid "Target"
-msgstr ""
+msgstr "Mục tiêu"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "Thiết bị"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "Kích thước"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
-msgstr ""
+msgstr "Tất cả dữ liệu trên ổ đĩa mục tiêu này sẽ bị hủy. Bạn sẽ mất <b>tất cả các ứng dụng, tập tin và tài liệu của mình</b>."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
-msgstr ""
+msgstr "Nhà cung cấp máy tính được cấu hình và thông tin sản phẩm không khớp với máy tính này."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
 msgid "C_ontinue and Destroy Data"
-msgstr ""
+msgstr "T_tiếp tục và Hủy dữ liệu"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
 msgid "More than one image was found."
-msgstr ""
+msgstr "Đã tìm thấy nhiều hơn một bức ảnh."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
@@ -170,23 +170,23 @@ msgstr "Full"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
-msgstr ""
+msgstr "Tập tin ảnh '%s' không tồn tại."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:473
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
-msgstr ""
+msgstr "Ảnh trực tiếp '%s' không khớp với ảnh được cấu hình '%s'."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
-msgstr ""
+msgstr "Không thể tìm ảnh thiết bị '%s' và không thể dùng '%s' trực tiếp."
 
 #. Translators: the placeholder is a filename.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
 #, c-format
 msgid "Configured image ‘%s’ was not found."
-msgstr ""
+msgstr "Không tìm thấy ảnh '%s' được cấu hình."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
 msgid "No suitable images were found."
@@ -195,7 +195,7 @@ msgstr "Không tìm thấy hình ảnh thích hợp."
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
 #, c-format
 msgid "Could not find partition holding Endless OS files."
-msgstr ""
+msgstr "Không thể tìm thấy phân vùng chứa tập tin HĐH Endless."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
@@ -219,7 +219,7 @@ msgstr "Vị trí bạn chọn quá nhỏ. Bạn cần %s để định dạng l
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
-msgstr ""
+msgstr "Tìm thấy nhiều hơn một thiết bị khối của ứng viên."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
@@ -255,16 +255,16 @@ msgstr "Không tìm thấy các ổ đĩa thích hợp."
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
 #, c-format
 msgid "A debug log has been saved as %s."
-msgstr ""
+msgstr "Bản ghi gỡ lỗi đã được lưu thành %s."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
 msgid "Failed to save debug log: "
-msgstr ""
+msgstr "Lưu bản ghi gỡ lỗi thất bại:"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
-msgstr ""
+msgstr "Ôi, đã xảy ra lỗi với cấu hình cài đặt tự động của bạn."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
 msgid "Oops, something is wrong with your Endless OS file."
@@ -272,29 +272,29 @@ msgstr "Rất tiếc, có gì đó sai với tập tin Endless OS của bạn."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
 msgid "Oops, something went wrong while finding suitable disks to reformat."
-msgstr ""
+msgstr "Ôi, đã xảy ra lỗi khi đang tìm ổ đĩa thích hợp để định dạng lại."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
 msgid "Oops, something went wrong while reformatting."
-msgstr ""
+msgstr "Xin lỗi, có lỗi xảy ra khi đang định dạng lại."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
-msgstr ""
+msgstr "Ôi, đã xảy ra lỗi."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
 msgid "Unattended installation configuration file created"
-msgstr ""
+msgstr "Đã tạo tập tin cấu hình cài đặt tự động"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
-msgstr ""
+msgstr "Đã đổi tên tập tin trước đó thành '%s'"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
 msgid "Unattended installation configuration file could not be created."
-msgstr ""
+msgstr "Không thể tạo tệp cấu hình cài đặt tự hành."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
 msgid "Reformatting Finished"
@@ -373,7 +373,7 @@ msgstr "Sử dụng nhanh chóng, dễ dàng và mạnh mẽ - có hoặc không
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:678
 msgid "Wrote %'"
-msgstr ""
+msgstr "Đã ghi %'"
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1006
 msgid "Image verification error."
@@ -382,11 +382,11 @@ msgstr "Lỗi xác thực hình ảnh."
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1052
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
-msgstr ""
+msgstr "Tập tin chữ ký '%s' không tồn tại."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1212
 msgid "Could not decompress the image file."
-msgstr ""
+msgstr "Không thể giải nén tập tin ảnh."
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
@@ -394,7 +394,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr ""
+msgstr "%s phím bị trống"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
@@ -402,7 +402,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
-msgstr ""
+msgstr "Nhiều hơn một %s mục (%s và %s)"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"

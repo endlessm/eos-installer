@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-16 14:37-0700\n"
-"PO-Revision-Date: 2018-04-16 21:42+0000\n"
+"PO-Revision-Date: 2018-04-30 06:16+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Thai (http://www.transifex.com/endless-os/eos-installer/language/th/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "_ยกเลิก"
 #: ../gnome-image-installer/gnome-image-installer.c:100
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr ""
+msgstr "ข้อผิดพลาดขณะกำลังโหลด ‘%s’:"
 
 #: ../gnome-image-installer/gnome-image-installer.c:264
 msgid "Force new user mode"
@@ -51,67 +51,67 @@ msgstr "- การตั้งค่าเริ่มต้นสำหรั�
 #, c-format
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
-msgstr[0] ""
+msgstr[0] "การติดตั้งจะเริ่มขึ้นอัตโนมัติใน %d วินาที"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "ไม่รู้จัก"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
-msgstr ""
+msgstr "ยังดำเนินการต่อและทำลายข้อมูล"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
-msgstr ""
+msgstr "การติดตั้งแบบอัตโนมัติถูกยกเลิก"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
-msgstr ""
+msgstr "การติดตั้ง Endless OS แบบผู้ใช้ไม่ต้องใส่ข้อมูล"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "ผู้จำหน่ายคอมพิวเตอร์"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "ผลิตภัณฑ์"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
-msgstr ""
+msgstr "ภาพ"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
 msgid "Target"
-msgstr ""
+msgstr "เป้าหมาย"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "อุปกรณ์"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "ขนาด"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
-msgstr ""
+msgstr "ข้อมูลทั้งหมดในดิสก์เป้าหมายนี้จะถูกทำลาย คุณจะสูญเสีย<b>แอป ไฟล์ และเอกสารของคุณทั้งหมด</b>"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
-msgstr ""
+msgstr "ผู้จำหน่ายคอมพิวเตอร์และข้อมูลผลิตภัณฑ์ที่กำหนดค่าไว้ไม่สอดคล้องกับคอมพิวเตอร์นี้"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
 msgid "C_ontinue and Destroy Data"
-msgstr ""
+msgstr "ดำเนินการต่อและทำลายข้อมูล"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
 msgid "More than one image was found."
-msgstr ""
+msgstr "พบภาพมากกว่าหนึ่งภาพ"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
@@ -170,23 +170,23 @@ msgstr "Full"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
-msgstr ""
+msgstr "ไม่มีไฟล์อิมเมจ ‘%s’ "
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:473
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
-msgstr ""
+msgstr "ภาพสด ‘%s’ ไม่ตรงกับภาพ ‘%s’ ที่กำหนดค่าไว้"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
-msgstr ""
+msgstr "ค้นหาอุปกรณ์อิมเมจ ‘%s’ ไม่เจอ และไม่สามารถใช้ ‘%s’ ได้โดยตรง"
 
 #. Translators: the placeholder is a filename.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
 #, c-format
 msgid "Configured image ‘%s’ was not found."
-msgstr ""
+msgstr "ไม่พบภาพ ‘%s’ ที่ปรับแต่งแล้ว"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
 msgid "No suitable images were found."
@@ -195,7 +195,7 @@ msgstr "ไม่พบภาพที่เหมาะสม"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
 #, c-format
 msgid "Could not find partition holding Endless OS files."
-msgstr ""
+msgstr "ค้นหาพาร์ทิชันที่เก็บไฟล์ระบบปฏิบัติการของ Endless ไม่เจอ"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
@@ -219,7 +219,7 @@ msgstr "ตำแหน่งที่คุณเลือกมีพื้น
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
-msgstr ""
+msgstr "พบอุปกรณ์บล็อกผู้สมัครมากกว่า 1 ชุด"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
@@ -255,16 +255,16 @@ msgstr "ไม่พบดิสก์ที่เหมาะสม"
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
 #, c-format
 msgid "A debug log has been saved as %s."
-msgstr ""
+msgstr "บันทึกล็อกดีบักเป็น %s แล้ว"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
 msgid "Failed to save debug log: "
-msgstr ""
+msgstr "บันทึกล็อกการแก้ไขจุดบกพร่องไม่สำเร็จ:"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
-msgstr ""
+msgstr "อุ๊ย มีบางสิ่งผิดปกติกับการกำหนดค่าสำหรับการติดตั้งแบบผู้ใช้ไม่ต้องใส่ข้อมูลของคุณ"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
 msgid "Oops, something is wrong with your Endless OS file."
@@ -272,29 +272,29 @@ msgstr "มีบางสิ่งผิดพลาดกับไฟล์ En
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
 msgid "Oops, something went wrong while finding suitable disks to reformat."
-msgstr ""
+msgstr "อุปส์ เกิดข้อผิดพลาดบางอย่างขณะค้นหาดิสก์ที่เหมาะสำหรับจัดรูปแบบใหม่"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
 msgid "Oops, something went wrong while reformatting."
-msgstr ""
+msgstr "อุ๊ย มีบางสิ่งผิดปกติขณะกำลังฟอร์แมตใหม่"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
-msgstr ""
+msgstr "อุปส์ เกิดข้อผิดพลาดบางอย่าง"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
 msgid "Unattended installation configuration file created"
-msgstr ""
+msgstr "สร้างไฟล์การกำหนดค่าสำหรับการติดตั้งแบบผู้ใช้ไม่ต้องใส่ข้อมูลแล้ว"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
-msgstr ""
+msgstr "ชื่อไฟล์ก่อนหน้านี้ถูกแก้ไขเป็น ‘%s’"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
 msgid "Unattended installation configuration file could not be created."
-msgstr ""
+msgstr "ไม่สามารถสร้างไฟล์กำหนดค่าการติดตั้งแบบผู้ใช้ไม่ต้องใส่ข้อมูลได้"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
 msgid "Reformatting Finished"
@@ -373,7 +373,7 @@ msgstr "ใช้ได้อย่างรวดเร็วและง่า
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:678
 msgid "Wrote %'"
-msgstr ""
+msgstr "เขียน %' แล้ว"
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1006
 msgid "Image verification error."
@@ -382,11 +382,11 @@ msgstr "ความผิดพลาดในการยืนยันภา
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1052
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
-msgstr ""
+msgstr "ไม่ปรากฏไฟล์ลายเซ็นต์ ‘%s’"
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1212
 msgid "Could not decompress the image file."
-msgstr ""
+msgstr "ไม่สามารถเลิกการบีบอัดไฟล์อิมเมจ"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
@@ -394,7 +394,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr ""
+msgstr "ปุ่ม %s ว่าง"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
@@ -402,7 +402,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
-msgstr ""
+msgstr "มากกว่าหนึ่งส่วน %s (%s และ %s)"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"

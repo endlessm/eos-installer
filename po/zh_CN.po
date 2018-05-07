@@ -9,6 +9,7 @@
 # CN C2 <e2f48d4sf5ds@outlook.com>, 2016-2017
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
 # e2f_cn c5 <jarvisn@ecinnovations.com>, 2017
+# e2f_cn c9 <e2f_cn_c9@outlook.com>, 2018
 # liuxuejiao <liuxuejiao_endless@126.com>, 2016
 # Roddy Shuler <roddy@endlessm.com>, 2016,2018
 # tanyuanxing <tanyuanxingendless@126.com>, 2016
@@ -19,8 +20,8 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-04-16 14:37-0700\n"
-"PO-Revision-Date: 2018-04-16 21:42+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"PO-Revision-Date: 2018-05-02 09:40+0000\n"
+"Last-Translator: e2f_cn c9 <e2f_cn_c9@outlook.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-os/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +47,7 @@ msgstr "取消(_C)"
 #: ../gnome-image-installer/gnome-image-installer.c:100
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr ""
+msgstr "加载‘%s’时出错："
 
 #: ../gnome-image-installer/gnome-image-installer.c:264
 msgid "Force new user mode"
@@ -60,67 +61,67 @@ msgstr "GNOME初始设置"
 #, c-format
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
-msgstr[0] ""
+msgstr[0] "安装将在%d秒后自动开始。"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
-msgstr ""
+msgstr "仍然继续并销毁数据"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
-msgstr ""
+msgstr "自动安装已取消。"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
-msgstr ""
+msgstr "Endless 操作系统自动安装"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "电脑供应商"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "产品"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
-msgstr ""
+msgstr "图像"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
 msgid "Target"
-msgstr ""
+msgstr "目标"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "设备"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "尺寸"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
-msgstr ""
+msgstr "所有在此目标磁盘的数据都将销毁。您将失去您<b>中的所有应用程序、文件和文档</b>。"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
-msgstr ""
+msgstr "配置的电脑供应商和产品信息与此电脑不匹配。"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
 msgid "C_ontinue and Destroy Data"
-msgstr ""
+msgstr "继续并销毁数据"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
 msgid "More than one image was found."
-msgstr ""
+msgstr "发现多个图像。"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
@@ -179,23 +180,23 @@ msgstr "Full"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
-msgstr ""
+msgstr "图像文件‘%s’不存在。"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:473
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
-msgstr ""
+msgstr "实时图像‘%s’ 与配置图像‘%s’不匹配。"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
-msgstr ""
+msgstr "无法找到图像设备 ‘%s’，无法直接使用‘%s’ 。"
 
 #. Translators: the placeholder is a filename.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
 #, c-format
 msgid "Configured image ‘%s’ was not found."
-msgstr ""
+msgstr "未找到配置图像‘%s’。"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
 msgid "No suitable images were found."
@@ -204,7 +205,7 @@ msgstr "没找到可用图像。"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
 #, c-format
 msgid "Could not find partition holding Endless OS files."
-msgstr ""
+msgstr "无法找到保存 Endless 操作系统文件的分区"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
@@ -228,7 +229,7 @@ msgstr "您选择的位置内存不足：您还需要 %s 才能使用 %s 重新�
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
-msgstr ""
+msgstr "发现多个候选设备。"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
@@ -264,16 +265,16 @@ msgstr "没找到可用磁盘。"
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
 #, c-format
 msgid "A debug log has been saved as %s."
-msgstr ""
+msgstr "已将调试日志保存为%s。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
 msgid "Failed to save debug log: "
-msgstr ""
+msgstr "无法保存调试日志："
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
-msgstr ""
+msgstr "哎呀，您的自动安装配置出错了。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
 msgid "Oops, something is wrong with your Endless OS file."
@@ -281,29 +282,29 @@ msgstr "哎呀，Endless操作系统文件出错。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
 msgid "Oops, something went wrong while finding suitable disks to reformat."
-msgstr ""
+msgstr "哎呀，在寻找合适的磁盘重新格式化时出错了。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
 msgid "Oops, something went wrong while reformatting."
-msgstr ""
+msgstr "哎呀，重新格式化时出错了。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
-msgstr ""
+msgstr "哎呀！出错了。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
 msgid "Unattended installation configuration file created"
-msgstr ""
+msgstr "自动安装配置文件已创建"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
-msgstr ""
+msgstr "前一个文件重命名为 ‘%s’。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
 msgid "Unattended installation configuration file could not be created."
-msgstr ""
+msgstr "自动安装配置文件无法创建。"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
 msgid "Reformatting Finished"
@@ -382,7 +383,7 @@ msgstr "快捷使用，强大功能 - 线上线下皆可使用。\nEndless操作
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:678
 msgid "Wrote %'"
-msgstr ""
+msgstr "写入%'"
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1006
 msgid "Image verification error."
@@ -391,11 +392,11 @@ msgstr "图像认证出错。"
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1052
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
-msgstr ""
+msgstr "签名文件‘%s’不存在。"
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1212
 msgid "Could not decompress the image file."
-msgstr ""
+msgstr "无法解压图像文件。"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
@@ -403,7 +404,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr ""
+msgstr "%s键为空"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
@@ -411,7 +412,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
-msgstr ""
+msgstr "多于一%s节（%s和%s）"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
