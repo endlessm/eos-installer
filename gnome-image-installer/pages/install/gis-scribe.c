@@ -1117,8 +1117,10 @@ gis_scribe_tee_thread (GTask            *task,
                        GisScribeTeeData *task_data,
                        GCancellable     *cancellable)
 {
+  GisScribe *self = GIS_SCRIBE (source_object);
   g_autofree gchar *buffer = gis_scribe_malloc_aligned (BUFFER_SIZE);
   g_autoptr(GError) error = NULL;
+  guint64 bytes_teed = 0;
   gssize r = -1;
 
   do
@@ -1145,8 +1147,17 @@ gis_scribe_tee_thread (GTask            *task,
           g_prefix_error (&error, "error writing image to self: ");
           break;
         }
+
+      bytes_teed += r;
     }
   while (r > 0);
+
+  if (error == NULL && bytes_teed != self->compressed_size_bytes)
+    g_set_error (&error, GIS_INSTALL_ERROR, GIS_INSTALL_ERROR_INTERNAL_ERROR,
+                 "%s: teed %" G_GUINT64_FORMAT " bytes but "
+                 "compressed size was %" G_GUINT64_FORMAT " bytes",
+                 _("Internal error"),
+                 bytes_teed, self->compressed_size_bytes);
 
   if (error == NULL)
     g_task_return_boolean (task, TRUE);
