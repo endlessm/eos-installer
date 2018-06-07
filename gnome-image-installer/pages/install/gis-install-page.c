@@ -278,7 +278,7 @@ gis_install_page_open_for_restore_cb (GObject      *source,
       goto error;
     }
 
-  image = g_object_ref (gis_store_get_object (GIS_STORE_IMAGE));
+  image = g_object_ref (G_FILE (gis_store_get_object (GIS_STORE_IMAGE)));
   signature_path = gis_store_get_image_signature ();
   signature = g_file_new_for_path (signature_path);
 
