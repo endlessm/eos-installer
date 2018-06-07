@@ -815,8 +815,6 @@ gis_scribe_write_thread (GTask        *task,
 
   if (!ret)
     {
-      g_autoptr(GError) close_error = NULL;
-
       if (error == NULL)
         {
           /* This path should not be reached. To avoid translators
