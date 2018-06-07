@@ -158,9 +158,11 @@ gis_install_page_teardown (GisPage *page)
 }
 
 static gboolean
-gis_install_page_pulse_progress (GtkProgressBar *bar)
+gis_install_page_pulse_progress (GtkWidget *bar,
+                                 GdkFrameClock *frame_clock,
+                                 gpointer user_data)
 {
-  gtk_progress_bar_pulse (bar);
+  gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
 
   return TRUE;
 }
@@ -175,7 +177,7 @@ gis_install_page_ensure_pulsing (GisInstallPage *page)
       gtk_progress_bar_set_pulse_step (priv->install_progress, 1. / 60.);
       priv->pulse_id = gtk_widget_add_tick_callback (
           GTK_WIDGET (priv->install_progress),
-          (GtkTickCallback) gis_install_page_pulse_progress,
+          gis_install_page_pulse_progress,
           NULL, NULL);
     }
 }

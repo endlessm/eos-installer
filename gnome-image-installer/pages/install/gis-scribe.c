@@ -1072,7 +1072,7 @@ gis_scribe_begin_verify (GisScribe *self,
     g_pollable_input_stream_create_source (G_POLLABLE_INPUT_STREAM (gpg_stdout),
                                            cancellable);
   g_task_attach_source (task, task_data->stdout_source,
-                        (GSourceFunc) gis_scribe_gpg_progress);
+                        (GSourceFunc) (void (*)(void)) gis_scribe_gpg_progress);
 
   g_subprocess_wait_check_async (task_data->subprocess, cancellable,
                                  gis_scribe_gpg_wait_check_cb,
