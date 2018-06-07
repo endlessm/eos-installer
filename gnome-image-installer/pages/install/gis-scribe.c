@@ -1034,6 +1034,7 @@ gis_scribe_begin_verify (GisScribe *self,
       "--input-size-hint", size_str,
       "--verify", signature_path, "-", NULL
   };
+  g_autofree gchar *args_flat = g_strjoinv (" ", (gchar **) args);
   g_autoptr(GSubprocessLauncher) launcher = NULL;
   GInputStream *gpg_stdout = NULL;
   GOutputStream *gpg_stdin = NULL;
@@ -1052,6 +1053,7 @@ gis_scribe_begin_verify (GisScribe *self,
       return NULL;
     }
 
+  g_message ("Spawning %s", args_flat);
   launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDIN_PIPE |
                                         G_SUBPROCESS_FLAGS_STDOUT_PIPE);
   task_data->subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
