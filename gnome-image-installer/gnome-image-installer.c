@@ -77,6 +77,10 @@ destroy_pages_after (GisAssistant *assistant,
     if (l->data == page)
       break;
 
+  /* This function is called with the current page, so it should certainly be
+   * found in list of pages.
+   */
+  g_return_if_fail (l != NULL);
   l = l->next;
   for (; l != NULL; l = next) {
     next = l->next;
