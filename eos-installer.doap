@@ -4,16 +4,16 @@
          xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name xml:lang="en">Endless OS Installer</name>
-  <shortdesc xml:lang="en">Installing your OS</shortdesc>
+  <name xml:lang="en">Endless OS Reformatter</name>
+  <shortdesc xml:lang="en">Reformat your computer with Endless OS</shortdesc>
 
   <category rdf:resource="http://api.gnome.org/doap-extensions#desktop" />
 
   <maintainer>
     <foaf:Person>
-      <foaf:name>Jasper St. Pierre</foaf:name>
-      <foaf:mbox rdf:resource="mailto:jstpierre@mecheye.net" />
-      <gnome:userid>jstpierre</gnome:userid>
+      <foaf:name>Will Thompson</foaf:name>
+      <foaf:mbox rdf:resource="mailto:wjt@endlessm.com" />
+      <gnome:userid>wjt</gnome:userid>
     </foaf:Person>
   </maintainer>
 </Project>

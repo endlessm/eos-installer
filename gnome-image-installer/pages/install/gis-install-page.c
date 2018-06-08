@@ -158,9 +158,11 @@ gis_install_page_teardown (GisPage *page)
 }
 
 static gboolean
-gis_install_page_pulse_progress (GtkProgressBar *bar)
+gis_install_page_pulse_progress (GtkWidget *bar,
+                                 GdkFrameClock *frame_clock,
+                                 gpointer user_data)
 {
-  gtk_progress_bar_pulse (bar);
+  gtk_progress_bar_pulse (GTK_PROGRESS_BAR (bar));
 
   return TRUE;
 }
@@ -175,7 +177,7 @@ gis_install_page_ensure_pulsing (GisInstallPage *page)
       gtk_progress_bar_set_pulse_step (priv->install_progress, 1. / 60.);
       priv->pulse_id = gtk_widget_add_tick_callback (
           GTK_WIDGET (priv->install_progress),
-          (GtkTickCallback) gis_install_page_pulse_progress,
+          gis_install_page_pulse_progress,
           NULL, NULL);
     }
 }
@@ -276,7 +278,7 @@ gis_install_page_open_for_restore_cb (GObject      *source,
       goto error;
     }
 
-  image = g_object_ref (gis_store_get_object (GIS_STORE_IMAGE));
+  image = g_object_ref (G_FILE (gis_store_get_object (GIS_STORE_IMAGE)));
   signature_path = gis_store_get_image_signature ();
   signature = g_file_new_for_path (signature_path);
 

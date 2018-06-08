@@ -74,6 +74,10 @@ typedef struct _GisScribe {
   GObject parent;
 
   GFile *image;
+  /* Normally NULL, in which case 'image' is opened, but used by tests to test
+   * error cases.
+   */
+  GInputStream *image_input;
   guint64 image_size_bytes;
   /* Compressed size of 'image'. We need to provide this to GPG so it can
    * indicate its progress, since it reads the image data from a pipe. Equal to
@@ -84,6 +88,7 @@ typedef struct _GisScribe {
   gchar *keyring_path;
   gchar *drive_path;
   gboolean convert_to_mbr;
+  gchar *gpg_path;
 
   gboolean started;
   guint step;
@@ -156,6 +161,7 @@ G_DEFINE_TYPE (GisScribe, gis_scribe, G_TYPE_OBJECT)
 
 typedef enum {
   PROP_IMAGE = 1,
+  PROP_IMAGE_INPUT,
   PROP_IMAGE_SIZE,
   PROP_COMPRESSED_SIZE,
   PROP_SIGNATURE,
@@ -165,6 +171,7 @@ typedef enum {
   PROP_CONVERT_TO_MBR,
   PROP_STEP,
   PROP_PROGRESS,
+  PROP_GPG_PATH,
   N_PROPERTIES
 } GisScribePropertyId;
 
@@ -183,6 +190,11 @@ gis_scribe_set_property (GObject      *object,
     case PROP_IMAGE:
       g_clear_object (&self->image);
       self->image = G_FILE (g_value_dup_object (value));
+      break;
+
+    case PROP_IMAGE_INPUT:
+      g_clear_object (&self->image_input);
+      self->image_input = G_INPUT_STREAM (g_value_dup_object (value));
       break;
 
     case PROP_IMAGE_SIZE:
@@ -218,6 +230,11 @@ gis_scribe_set_property (GObject      *object,
       self->convert_to_mbr = g_value_get_boolean (value);
       break;
 
+    case PROP_GPG_PATH:
+      g_free (self->gpg_path);
+      self->gpg_path = g_value_dup_string (value);
+      break;
+
     case PROP_STEP:
     case PROP_PROGRESS:
     case N_PROPERTIES:
@@ -239,6 +256,10 @@ gis_scribe_get_property (GObject      *object,
     {
     case PROP_IMAGE:
       g_value_set_object (value, self->image);
+      break;
+
+    case PROP_IMAGE_INPUT:
+      g_value_set_object (value, self->image_input);
       break;
 
     case PROP_IMAGE_SIZE:
@@ -277,6 +298,10 @@ gis_scribe_get_property (GObject      *object,
       g_value_set_double (value, self->overall_progress);
       break;
 
+    case PROP_GPG_PATH:
+      g_value_set_string (value, self->gpg_path);
+      break;
+
     case N_PROPERTIES:
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -296,6 +321,8 @@ gis_scribe_constructed (GObject *object)
   g_return_if_fail (self->keyring_path != NULL);
   g_return_if_fail (self->drive_path != NULL);
   g_return_if_fail (self->drive_fd >= 0);
+  g_return_if_fail (self->gpg_path != NULL);
+  g_return_if_fail (g_path_is_absolute (self->gpg_path));
 }
 
 static void
@@ -304,6 +331,7 @@ gis_scribe_dispose (GObject *object)
   GisScribe *self = GIS_SCRIBE (object);
 
   g_clear_object (&self->image);
+  g_clear_object (&self->image_input);
   g_clear_object (&self->signature);
 
   G_OBJECT_CLASS (gis_scribe_parent_class)->dispose (object);
@@ -318,6 +346,7 @@ gis_scribe_finalize (GObject *object)
 
   g_clear_pointer (&self->keyring_path, g_free);
   g_clear_pointer (&self->drive_path, g_free);
+  g_clear_pointer (&self->gpg_path, g_free);
   g_clear_error (&self->error);
   g_mutex_clear (&self->mutex);
   g_cond_clear (&self->cond);
@@ -356,6 +385,14 @@ gis_scribe_class_init (GisScribeClass *klass)
       "Image",
       "Image file to write to disk.",
       G_TYPE_FILE,
+      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_IMAGE_INPUT] = g_param_spec_object (
+      "image-input",
+      "Image input stream",
+      "Input stream to read :image from, or %NULL to allow this class to open "
+      "it itself. (Used by test suite.)",
+      G_TYPE_INPUT_STREAM,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_IMAGE_SIZE] = g_param_spec_uint64 (
@@ -414,6 +451,13 @@ gis_scribe_class_init (GisScribeClass *klass)
       "Convert to MBR?",
       "Whether to convert the partition table from GPT to MBR after writing",
       FALSE,
+      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_GPG_PATH] = g_param_spec_string (
+      "gpg-path",
+      "GPG path",
+      "Path to GPG executable",
+      GPG_PATH,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   /**
@@ -483,6 +527,38 @@ gis_scribe_new (GFile       *image,
       "drive-fd", drive_fd,
       "convert-to-mbr", convert_to_mbr,
       NULL);
+}
+
+static void
+task_return_error (GisScribe *self,
+                   GTask     *task,
+                   GError    *error)
+{
+  g_mutex_lock (&self->mutex);
+  if (self->error == NULL)
+    self->error = g_error_copy (error);
+  g_mutex_unlock (&self->mutex);
+
+  g_task_return_error (task, g_steal_pointer (&error));
+}
+
+G_GNUC_PRINTF (5, 6)
+static void
+task_return_new_error (GisScribe   *self,
+                       GTask       *task,
+                       GQuark       domain,
+                       gint         code,
+                       const gchar *format,
+                       ...)
+{
+  va_list args;
+  GError *error;
+
+  va_start (args, format);
+  error = g_error_new_valist (domain, code, format, args);
+  va_end (args);
+
+  task_return_error (self, task, g_steal_pointer (&error));
 }
 
 static void
@@ -815,8 +891,6 @@ gis_scribe_write_thread (GTask        *task,
 
   if (!ret)
     {
-      g_autoptr(GError) close_error = NULL;
-
       if (error == NULL)
         {
           /* This path should not be reached. To avoid translators
@@ -831,7 +905,7 @@ gis_scribe_write_thread (GTask        *task,
           g_critical ("%s", error->message);
         }
 
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
 
       /* On the happy path, gis_scribe_write_thread_copy() closes the
        * decompressed stream when it reaches EOF. If we hit a write error
@@ -860,13 +934,13 @@ gis_scribe_write_thread (GTask        *task,
   if (syncfs (fd) < 0)
     {
       glnx_throw_errno_prefix (&error, "syncfs failed");
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return;
     }
 
   if (!g_output_stream_close (output, cancellable, &error))
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return;
     }
 
@@ -884,7 +958,7 @@ gis_scribe_write_thread (GTask        *task,
   g_mutex_unlock (&self->mutex);
 
   if (error != NULL)
-    g_task_return_error (task, g_steal_pointer (&error));
+    task_return_error (self, task, g_steal_pointer (&error));
   else
     g_task_return_boolean (task, TRUE);
 
@@ -986,6 +1060,7 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
 {
   GSubprocess *gpg_subprocess = G_SUBPROCESS (source);
   g_autoptr(GTask) task = G_TASK (data);
+  GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
   GisScribeGpgData *task_data = g_task_get_task_data (task);
   gboolean ok;
   g_autoptr(GError) error = NULL;
@@ -1001,9 +1076,9 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
     {
       /* TODO: surface more details about the error */
       g_message ("GPG subprocess failed: %s", error->message);
-      g_task_return_new_error (task, GIS_IMAGE_ERROR,
-                               GIS_IMAGE_ERROR_VERIFICATION_FAILED,
-                               _("Image verification error."));
+      task_return_new_error (self, task, GIS_IMAGE_ERROR,
+                             GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+                             _("Image verification error."));
     }
 }
 
@@ -1027,7 +1102,7 @@ gis_scribe_begin_verify (GisScribe *self,
   g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT,
                                                 self->compressed_size_bytes);
   const gchar * const args[] = {
-      GPG_PATH,
+      self->gpg_path,
       "--enable-progress-filter", "--status-fd", "1",
       /* Trust the one key in this keyring, and no others */
       "--keyring", self->keyring_path,
@@ -1036,6 +1111,7 @@ gis_scribe_begin_verify (GisScribe *self,
       "--input-size-hint", size_str,
       "--verify", signature_path, "-", NULL
   };
+  g_autofree gchar *args_flat = g_strjoinv (" ", (gchar **) args);
   g_autoptr(GSubprocessLauncher) launcher = NULL;
   GInputStream *gpg_stdout = NULL;
   GOutputStream *gpg_stdin = NULL;
@@ -1047,19 +1123,20 @@ gis_scribe_begin_verify (GisScribe *self,
 
   if (!g_file_query_exists (self->signature, NULL))
     {
-      g_task_return_new_error (
-          task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+      task_return_new_error (
+          self, task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
           _("The signature file ‘%s’ does not exist."),
           signature_path);
       return NULL;
     }
 
+  g_message ("Spawning %s", args_flat);
   launcher = g_subprocess_launcher_new (G_SUBPROCESS_FLAGS_STDIN_PIPE |
                                         G_SUBPROCESS_FLAGS_STDOUT_PIPE);
   task_data->subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
   if (task_data->subprocess == NULL)
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return NULL;
     }
 
@@ -1072,7 +1149,7 @@ gis_scribe_begin_verify (GisScribe *self,
     g_pollable_input_stream_create_source (G_POLLABLE_INPUT_STREAM (gpg_stdout),
                                            cancellable);
   g_task_attach_source (task, task_data->stdout_source,
-                        (GSourceFunc) gis_scribe_gpg_progress);
+                        (GSourceFunc) (void (*)(void)) gis_scribe_gpg_progress);
 
   g_subprocess_wait_check_async (task_data->subprocess, cancellable,
                                  gis_scribe_gpg_wait_check_cb,
@@ -1119,8 +1196,10 @@ gis_scribe_tee_thread (GTask            *task,
                        GisScribeTeeData *task_data,
                        GCancellable     *cancellable)
 {
+  GisScribe *self = GIS_SCRIBE (source_object);
   g_autofree gchar *buffer = gis_scribe_malloc_aligned (BUFFER_SIZE);
   g_autoptr(GError) error = NULL;
+  guint64 bytes_teed = 0;
   gssize r = -1;
 
   do
@@ -1147,13 +1226,22 @@ gis_scribe_tee_thread (GTask            *task,
           g_prefix_error (&error, "error writing image to self: ");
           break;
         }
+
+      bytes_teed += r;
     }
   while (r > 0);
+
+  if (error == NULL && bytes_teed != self->compressed_size_bytes)
+    g_set_error (&error, GIS_INSTALL_ERROR, GIS_INSTALL_ERROR_INTERNAL_ERROR,
+                 "%s: teed %" G_GUINT64_FORMAT " bytes but "
+                 "compressed size was %" G_GUINT64_FORMAT " bytes",
+                 _("Internal error"),
+                 bytes_teed, self->compressed_size_bytes);
 
   if (error == NULL)
     g_task_return_boolean (task, TRUE);
   else
-    g_task_return_error (task, g_steal_pointer (&error));
+    task_return_error (self, task, g_steal_pointer (&error));
 
   gis_scribe_tee_close (task_data, cancellable);
 }
@@ -1177,12 +1265,15 @@ gis_scribe_begin_tee (GisScribe          *self,
   g_task_set_task_data (task, task_data,
                         (GDestroyNotify) gis_scribe_tee_data_free);
 
-  task_data->image_input =
-    G_INPUT_STREAM (g_file_read (self->image, cancellable, &error));
+  if (self->image_input != NULL)
+    task_data->image_input = g_steal_pointer (&self->image_input);
+  else
+    task_data->image_input =
+      G_INPUT_STREAM (g_file_read (self->image, cancellable, &error));
 
   if (task_data->image_input == NULL)
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       gis_scribe_tee_close (task_data, cancellable);
     }
   else
@@ -1198,6 +1289,7 @@ gis_scribe_decompress_wait_check_cb (GObject      *source,
 {
   g_autoptr(GSubprocess) subprocess = G_SUBPROCESS (source);
   g_autoptr(GTask) task = G_TASK (data);
+  GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
   g_autoptr(GError) error = NULL;
 
   if (g_subprocess_wait_check_finish (subprocess, result, &error))
@@ -1207,9 +1299,9 @@ gis_scribe_decompress_wait_check_cb (GObject      *source,
   else
     {
       g_message ("decompressor subprocess failed: %s", error->message);
-      g_task_return_new_error (task, GIS_INSTALL_ERROR,
-                               GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
-                               _("Could not decompress the image file."));
+      task_return_new_error (self, task, GIS_INSTALL_ERROR,
+                             GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
+                             _("Could not decompress the image file."));
     }
 }
 
@@ -1258,7 +1350,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
                    _("Internal error"),
                    "g_file_get_basename returned NULL.");
       g_critical ("%s", error->message);
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return FALSE;
     }
 
@@ -1278,7 +1370,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
 
       if (!g_unix_open_pipe (pipefd, FD_CLOEXEC, &error))
         {
-          g_task_return_error (task, g_steal_pointer (&error));
+          task_return_error (self, task, g_steal_pointer (&error));
           return FALSE;
         }
 
@@ -1292,11 +1384,11 @@ gis_scribe_begin_decompress (GisScribe          *self,
       /* This should not be reachable, because only images with known
        * extensions are shown on the image selection page.
        */
-      g_task_return_new_error (task, GIS_INSTALL_ERROR,
-                               GIS_INSTALL_ERROR_INTERNAL_ERROR,
-                               "%s: ‘%s’ ends in neither ‘.xz’, ‘.gz’ nor ‘.img’.",
-                               _("Internal error"),
-                               basename);
+      task_return_new_error (self, task, GIS_INSTALL_ERROR,
+                             GIS_INSTALL_ERROR_INTERNAL_ERROR,
+                             "%s: ‘%s’ ends in neither ‘.xz’, ‘.gz’ nor ‘.img’.",
+                             _("Internal error"),
+                             basename);
       return FALSE;
     }
 
@@ -1305,7 +1397,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
   subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
   if (subprocess == NULL)
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return FALSE;
     }
 
@@ -1338,16 +1430,13 @@ gis_scribe_subtask_cb (GObject      *source,
     {
       g_debug ("%s: %s completed successfully", G_STRFUNC, inner_task_name);
     }
-  else if (self->error == NULL)
-    {
-      g_debug ("%s: saving error from %s to report later: %s", G_STRFUNC,
-               inner_task_name, error->message);
-      g_propagate_error (&self->error, g_steal_pointer (&error));
-    }
   else
     {
-      g_debug ("%s: discarding subsequent error from %s: %s", G_STRFUNC,
-               inner_task_name, error->message);
+      /* Whichever task failed first should set this */
+      g_warn_if_fail (self->error != NULL);
+
+      g_message ("%s: %s failed: %s", G_STRFUNC, inner_task_name,
+                 error->message);
       g_clear_error (&error);
     }
 

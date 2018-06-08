@@ -21,6 +21,7 @@
 #include <fcntl.h>
 #include <locale.h>
 #include <string.h>
+#include <sys/mman.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -34,6 +35,8 @@
 #include "gis-scribe.h"
 #include "glnx-missing.h"
 #include "glnx-shutil.h"
+
+#include "test-error-input-stream.h"
 
 /* A 4 MiB file of "w"s (0x77) */
 #define IMAGE "w.img"
@@ -56,6 +59,13 @@ typedef struct {
 
   gboolean create_memfd;
   off_t memfd_size;
+
+  /* If read_error.domain != 0, give the scribe a TestErrorInputStream which
+   * fails at read_error_offset with read_error. */
+  GError read_error;
+  guint64 read_error_offset;
+
+  const gchar *gpg_path;
 } TestData;
 
 typedef struct {
@@ -187,6 +197,7 @@ fixture_set_up (Fixture *fixture,
   const TestData *data = user_data;
   g_autoptr(GFileInfo) info = NULL;
   goffset compressed_size;
+  g_autoptr(GInputStream) image_input = NULL;
   GError *error = NULL;
   int fd;
 
@@ -217,6 +228,20 @@ fixture_set_up (Fixture *fixture,
   compressed_size = g_file_info_get_size (info);
   g_assert_cmpint (compressed_size, >, 0);
 
+  if (data->read_error.domain != 0)
+    {
+      g_autoptr(GInputStream) real_input =
+        G_INPUT_STREAM (g_file_read (fixture->image, NULL, &error));
+
+      g_assert_no_error (error);
+      g_assert_nonnull (real_input);
+
+      image_input = test_error_input_stream_new (real_input,
+                                                 data->read_error_offset,
+                                                 &data->read_error);
+    }
+
+
   fixture->target_path = g_build_filename (fixture->tmpdir, "target.img", NULL);
   fixture->target = g_file_new_for_path (fixture->target_path);
 
@@ -240,12 +265,14 @@ fixture_set_up (Fixture *fixture,
   g_assert (fd >= 0);
   fixture->scribe = g_object_new (GIS_TYPE_SCRIBE,
                                   "image", fixture->image,
+                                  "image-input", image_input,
                                   "image-size", fixture->uncompressed_size,
                                   "compressed-size", (guint64) compressed_size,
                                   "signature", fixture->signature,
                                   "keyring-path", keyring_path,
                                   "drive-path", fixture->target_path,
                                   "drive-fd", fd,
+                                  data->gpg_path ? "gpg-path" : NULL, data->gpg_path,
                                   NULL);
   g_signal_connect (fixture->scribe, "notify::step",
                     (GCallback) test_scribe_notify_step_cb, fixture);
@@ -348,9 +375,16 @@ test_error (Fixture       *fixture,
 
   ret = gis_scribe_write_finish (fixture->scribe, result, &error);
   g_assert_false (ret);
-  g_assert_error (error,
-                  fixture->data->error_domain,
-                  fixture->data->error_code);
+
+  /* In some cases we don't care what the error is, just that there is an
+   * error.
+   */
+  if (fixture->data->error_domain != 0)
+    g_assert_error (error,
+                    fixture->data->error_domain,
+                    fixture->data->error_code);
+  else
+    g_assert_nonnull (error);
 
   assert_first_mib_zeroed (fixture);
 }
@@ -705,6 +739,93 @@ main (int argc, char *argv[])
       .memfd_size = IMAGE_SIZE_BYTES - 1,
   };
   g_test_add ("/scribe/write-error/last-byte", Fixture, &write_error_last_byte,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Valid signature but read fails immediately */
+  TestData read_error_start = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .read_error_offset = 0,
+      .read_error = {
+          .domain = G_IO_ERROR,
+          .code = G_IO_ERROR_TIMED_OUT, /* just some error we can distinguish */
+          .message = (gchar *) "oh no",
+      },
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_TIMED_OUT,
+  };
+  g_test_add ("/scribe/read-error/start", Fixture, &read_error_start,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Valid signature but read fails mid-way */
+  TestData read_error_midway = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .read_error_offset = IMAGE_SIZE_BYTES / 2,
+      .read_error = {
+          .domain = G_IO_ERROR,
+          .code = G_IO_ERROR_TIMED_OUT, /* just some error we can distinguish */
+          .message = (gchar *) "oh no",
+      },
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_TIMED_OUT,
+  };
+  g_test_add ("/scribe/read-error/midway", Fixture, &read_error_midway,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Valid signature but read fails at the very end */
+  TestData read_error_end = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .read_error_offset = IMAGE_SIZE_BYTES - 1,
+      .read_error = {
+          .domain = G_IO_ERROR,
+          .code = G_IO_ERROR_TIMED_OUT, /* just some error we can distinguish */
+          .message = (gchar *) "oh no",
+      },
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_TIMED_OUT,
+  };
+  g_test_add ("/scribe/read-error/end", Fixture, &read_error_end,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* What happens if GPG gives up on us before we've finished feeding it the
+   * whole file?
+   */
+  TestData gpg_exits_prematurely_success = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .gpg_path = "/bin/true",
+      /* As far as the GPG subtask is concerned, everything's fine; it's only
+       * the tee task that's upset.
+       */
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_BROKEN_PIPE,
+  };
+  g_test_add ("/scribe/gpg-exits-prematurely/success", Fixture, &gpg_exits_prematurely_success,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  TestData gpg_exits_prematurely_failure = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .gpg_path = "/bin/false",
+      /* There is a race between the GPG subtask noticing that GPG has died,
+       * and the tee subtask noticing the GPG pipe is closed. We don't care
+       * which error we get.
+       */
+      .error_domain = 0,
+  };
+  g_test_add ("/scribe/gpg-exits-prematurely/failure", Fixture, &gpg_exits_prematurely_failure,
               fixture_set_up,
               test_error,
               fixture_tear_down);

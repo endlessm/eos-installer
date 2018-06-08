@@ -37,6 +37,7 @@
 #include <glib/gi18n.h>
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <locale.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <attr/xattr.h>
