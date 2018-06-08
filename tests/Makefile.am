@@ -93,7 +93,11 @@ w.truncated.%z: w.img.%z
 		--gpgconf-path $(GPGCONF_PATH) \
 		$(srcdir)/secret.asc $<
 
-test_scribe_SOURCES = test-scribe.c
+test_scribe_SOURCES = \
+	test-error-input-stream.c \
+	test-error-input-stream.h \
+	test-scribe.c \
+	$(NULL)
 test_scribe_CFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \

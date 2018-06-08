@@ -74,6 +74,10 @@ typedef struct _GisScribe {
   GObject parent;
 
   GFile *image;
+  /* Normally NULL, in which case 'image' is opened, but used by tests to test
+   * error cases.
+   */
+  GInputStream *image_input;
   guint64 image_size_bytes;
   /* Compressed size of 'image'. We need to provide this to GPG so it can
    * indicate its progress, since it reads the image data from a pipe. Equal to
@@ -156,6 +160,7 @@ G_DEFINE_TYPE (GisScribe, gis_scribe, G_TYPE_OBJECT)
 
 typedef enum {
   PROP_IMAGE = 1,
+  PROP_IMAGE_INPUT,
   PROP_IMAGE_SIZE,
   PROP_COMPRESSED_SIZE,
   PROP_SIGNATURE,
@@ -183,6 +188,11 @@ gis_scribe_set_property (GObject      *object,
     case PROP_IMAGE:
       g_clear_object (&self->image);
       self->image = G_FILE (g_value_dup_object (value));
+      break;
+
+    case PROP_IMAGE_INPUT:
+      g_clear_object (&self->image_input);
+      self->image_input = G_INPUT_STREAM (g_value_dup_object (value));
       break;
 
     case PROP_IMAGE_SIZE:
@@ -239,6 +249,10 @@ gis_scribe_get_property (GObject      *object,
     {
     case PROP_IMAGE:
       g_value_set_object (value, self->image);
+      break;
+
+    case PROP_IMAGE_INPUT:
+      g_value_set_object (value, self->image_input);
       break;
 
     case PROP_IMAGE_SIZE:
@@ -304,6 +318,7 @@ gis_scribe_dispose (GObject *object)
   GisScribe *self = GIS_SCRIBE (object);
 
   g_clear_object (&self->image);
+  g_clear_object (&self->image_input);
   g_clear_object (&self->signature);
 
   G_OBJECT_CLASS (gis_scribe_parent_class)->dispose (object);
@@ -356,6 +371,14 @@ gis_scribe_class_init (GisScribeClass *klass)
       "Image",
       "Image file to write to disk.",
       G_TYPE_FILE,
+      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_IMAGE_INPUT] = g_param_spec_object (
+      "image-input",
+      "Image input stream",
+      "Input stream to read :image from, or %NULL to allow this class to open "
+      "it itself. (Used by test suite.)",
+      G_TYPE_INPUT_STREAM,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   props[PROP_IMAGE_SIZE] = g_param_spec_uint64 (
@@ -1188,8 +1211,11 @@ gis_scribe_begin_tee (GisScribe          *self,
   g_task_set_task_data (task, task_data,
                         (GDestroyNotify) gis_scribe_tee_data_free);
 
-  task_data->image_input =
-    G_INPUT_STREAM (g_file_read (self->image, cancellable, &error));
+  if (self->image_input != NULL)
+    task_data->image_input = g_steal_pointer (&self->image_input);
+  else
+    task_data->image_input =
+      G_INPUT_STREAM (g_file_read (self->image, cancellable, &error));
 
   if (task_data->image_input == NULL)
     {
