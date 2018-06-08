@@ -509,6 +509,38 @@ gis_scribe_new (GFile       *image,
 }
 
 static void
+task_return_error (GisScribe *self,
+                   GTask     *task,
+                   GError    *error)
+{
+  g_mutex_lock (&self->mutex);
+  if (self->error == NULL)
+    self->error = g_error_copy (error);
+  g_mutex_unlock (&self->mutex);
+
+  g_task_return_error (task, g_steal_pointer (&error));
+}
+
+G_GNUC_PRINTF (5, 6)
+static void
+task_return_new_error (GisScribe   *self,
+                       GTask       *task,
+                       GQuark       domain,
+                       gint         code,
+                       const gchar *format,
+                       ...)
+{
+  va_list args;
+  GError *error;
+
+  va_start (args, format);
+  error = g_error_new_valist (domain, code, format, args);
+  va_end (args);
+
+  task_return_error (self, task, g_steal_pointer (&error));
+}
+
+static void
 gis_scribe_close_input_stream_or_warn (GInputStream *stream,
                                        GCancellable *cancellable,
                                        const gchar  *label)
@@ -852,7 +884,7 @@ gis_scribe_write_thread (GTask        *task,
           g_critical ("%s", error->message);
         }
 
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
 
       /* On the happy path, gis_scribe_write_thread_copy() closes the
        * decompressed stream when it reaches EOF. If we hit a write error
@@ -881,13 +913,13 @@ gis_scribe_write_thread (GTask        *task,
   if (syncfs (fd) < 0)
     {
       glnx_throw_errno_prefix (&error, "syncfs failed");
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return;
     }
 
   if (!g_output_stream_close (output, cancellable, &error))
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return;
     }
 
@@ -905,7 +937,7 @@ gis_scribe_write_thread (GTask        *task,
   g_mutex_unlock (&self->mutex);
 
   if (error != NULL)
-    g_task_return_error (task, g_steal_pointer (&error));
+    task_return_error (self, task, g_steal_pointer (&error));
   else
     g_task_return_boolean (task, TRUE);
 
@@ -1007,6 +1039,7 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
 {
   GSubprocess *gpg_subprocess = G_SUBPROCESS (source);
   g_autoptr(GTask) task = G_TASK (data);
+  GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
   GisScribeGpgData *task_data = g_task_get_task_data (task);
   gboolean ok;
   g_autoptr(GError) error = NULL;
@@ -1022,9 +1055,9 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
     {
       /* TODO: surface more details about the error */
       g_message ("GPG subprocess failed: %s", error->message);
-      g_task_return_new_error (task, GIS_IMAGE_ERROR,
-                               GIS_IMAGE_ERROR_VERIFICATION_FAILED,
-                               _("Image verification error."));
+      task_return_new_error (self, task, GIS_IMAGE_ERROR,
+                             GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+                             _("Image verification error."));
     }
 }
 
@@ -1069,8 +1102,8 @@ gis_scribe_begin_verify (GisScribe *self,
 
   if (!g_file_query_exists (self->signature, NULL))
     {
-      g_task_return_new_error (
-          task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+      task_return_new_error (
+          self, task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
           _("The signature file ‘%s’ does not exist."),
           signature_path);
       return NULL;
@@ -1082,7 +1115,7 @@ gis_scribe_begin_verify (GisScribe *self,
   task_data->subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
   if (task_data->subprocess == NULL)
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return NULL;
     }
 
@@ -1187,7 +1220,7 @@ gis_scribe_tee_thread (GTask            *task,
   if (error == NULL)
     g_task_return_boolean (task, TRUE);
   else
-    g_task_return_error (task, g_steal_pointer (&error));
+    task_return_error (self, task, g_steal_pointer (&error));
 
   gis_scribe_tee_close (task_data, cancellable);
 }
@@ -1219,7 +1252,7 @@ gis_scribe_begin_tee (GisScribe          *self,
 
   if (task_data->image_input == NULL)
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       gis_scribe_tee_close (task_data, cancellable);
     }
   else
@@ -1235,6 +1268,7 @@ gis_scribe_decompress_wait_check_cb (GObject      *source,
 {
   g_autoptr(GSubprocess) subprocess = G_SUBPROCESS (source);
   g_autoptr(GTask) task = G_TASK (data);
+  GisScribe *self = GIS_SCRIBE (g_task_get_source_object (task));
   g_autoptr(GError) error = NULL;
 
   if (g_subprocess_wait_check_finish (subprocess, result, &error))
@@ -1244,9 +1278,9 @@ gis_scribe_decompress_wait_check_cb (GObject      *source,
   else
     {
       g_message ("decompressor subprocess failed: %s", error->message);
-      g_task_return_new_error (task, GIS_INSTALL_ERROR,
-                               GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
-                               _("Could not decompress the image file."));
+      task_return_new_error (self, task, GIS_INSTALL_ERROR,
+                             GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
+                             _("Could not decompress the image file."));
     }
 }
 
@@ -1295,7 +1329,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
                    _("Internal error"),
                    "g_file_get_basename returned NULL.");
       g_critical ("%s", error->message);
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return FALSE;
     }
 
@@ -1315,7 +1349,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
 
       if (!g_unix_open_pipe (pipefd, FD_CLOEXEC, &error))
         {
-          g_task_return_error (task, g_steal_pointer (&error));
+          task_return_error (self, task, g_steal_pointer (&error));
           return FALSE;
         }
 
@@ -1329,11 +1363,11 @@ gis_scribe_begin_decompress (GisScribe          *self,
       /* This should not be reachable, because only images with known
        * extensions are shown on the image selection page.
        */
-      g_task_return_new_error (task, GIS_INSTALL_ERROR,
-                               GIS_INSTALL_ERROR_INTERNAL_ERROR,
-                               "%s: ‘%s’ ends in neither ‘.xz’, ‘.gz’ nor ‘.img’.",
-                               _("Internal error"),
-                               basename);
+      task_return_new_error (self, task, GIS_INSTALL_ERROR,
+                             GIS_INSTALL_ERROR_INTERNAL_ERROR,
+                             "%s: ‘%s’ ends in neither ‘.xz’, ‘.gz’ nor ‘.img’.",
+                             _("Internal error"),
+                             basename);
       return FALSE;
     }
 
@@ -1342,7 +1376,7 @@ gis_scribe_begin_decompress (GisScribe          *self,
   subprocess = g_subprocess_launcher_spawnv (launcher, args, &error);
   if (subprocess == NULL)
     {
-      g_task_return_error (task, g_steal_pointer (&error));
+      task_return_error (self, task, g_steal_pointer (&error));
       return FALSE;
     }
 
@@ -1375,16 +1409,13 @@ gis_scribe_subtask_cb (GObject      *source,
     {
       g_debug ("%s: %s completed successfully", G_STRFUNC, inner_task_name);
     }
-  else if (self->error == NULL)
-    {
-      g_debug ("%s: saving error from %s to report later: %s", G_STRFUNC,
-               inner_task_name, error->message);
-      g_propagate_error (&self->error, g_steal_pointer (&error));
-    }
   else
     {
-      g_debug ("%s: discarding subsequent error from %s: %s", G_STRFUNC,
-               inner_task_name, error->message);
+      /* Whichever task failed first should set this */
+      g_warn_if_fail (self->error != NULL);
+
+      g_message ("%s: %s failed: %s", G_STRFUNC, inner_task_name,
+                 error->message);
       g_clear_error (&error);
     }
 
