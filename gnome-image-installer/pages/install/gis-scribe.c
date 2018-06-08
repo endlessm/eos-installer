@@ -88,6 +88,7 @@ typedef struct _GisScribe {
   gchar *keyring_path;
   gchar *drive_path;
   gboolean convert_to_mbr;
+  gchar *gpg_path;
 
   gboolean started;
   guint step;
@@ -170,6 +171,7 @@ typedef enum {
   PROP_CONVERT_TO_MBR,
   PROP_STEP,
   PROP_PROGRESS,
+  PROP_GPG_PATH,
   N_PROPERTIES
 } GisScribePropertyId;
 
@@ -226,6 +228,11 @@ gis_scribe_set_property (GObject      *object,
 
     case PROP_CONVERT_TO_MBR:
       self->convert_to_mbr = g_value_get_boolean (value);
+      break;
+
+    case PROP_GPG_PATH:
+      g_free (self->gpg_path);
+      self->gpg_path = g_value_dup_string (value);
       break;
 
     case PROP_STEP:
@@ -291,6 +298,10 @@ gis_scribe_get_property (GObject      *object,
       g_value_set_double (value, self->overall_progress);
       break;
 
+    case PROP_GPG_PATH:
+      g_value_set_string (value, self->gpg_path);
+      break;
+
     case N_PROPERTIES:
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
@@ -310,6 +321,8 @@ gis_scribe_constructed (GObject *object)
   g_return_if_fail (self->keyring_path != NULL);
   g_return_if_fail (self->drive_path != NULL);
   g_return_if_fail (self->drive_fd >= 0);
+  g_return_if_fail (self->gpg_path != NULL);
+  g_return_if_fail (g_path_is_absolute (self->gpg_path));
 }
 
 static void
@@ -333,6 +346,7 @@ gis_scribe_finalize (GObject *object)
 
   g_clear_pointer (&self->keyring_path, g_free);
   g_clear_pointer (&self->drive_path, g_free);
+  g_clear_pointer (&self->gpg_path, g_free);
   g_clear_error (&self->error);
   g_mutex_clear (&self->mutex);
   g_cond_clear (&self->cond);
@@ -437,6 +451,13 @@ gis_scribe_class_init (GisScribeClass *klass)
       "Convert to MBR?",
       "Whether to convert the partition table from GPT to MBR after writing",
       FALSE,
+      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_GPG_PATH] = g_param_spec_string (
+      "gpg-path",
+      "GPG path",
+      "Path to GPG executable",
+      GPG_PATH,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   /**
@@ -1081,7 +1102,7 @@ gis_scribe_begin_verify (GisScribe *self,
   g_autofree gchar *size_str = g_strdup_printf ("%" G_GUINT64_FORMAT,
                                                 self->compressed_size_bytes);
   const gchar * const args[] = {
-      GPG_PATH,
+      self->gpg_path,
       "--enable-progress-filter", "--status-fd", "1",
       /* Trust the one key in this keyring, and no others */
       "--keyring", self->keyring_path,

@@ -64,6 +64,8 @@ typedef struct {
    * fails at read_error_offset with read_error. */
   GError read_error;
   guint64 read_error_offset;
+
+  const gchar *gpg_path;
 } TestData;
 
 typedef struct {
@@ -270,6 +272,7 @@ fixture_set_up (Fixture *fixture,
                                   "keyring-path", keyring_path,
                                   "drive-path", fixture->target_path,
                                   "drive-fd", fd,
+                                  data->gpg_path ? "gpg-path" : NULL, data->gpg_path,
                                   NULL);
   g_signal_connect (fixture->scribe, "notify::step",
                     (GCallback) test_scribe_notify_step_cb, fixture);
@@ -372,9 +375,16 @@ test_error (Fixture       *fixture,
 
   ret = gis_scribe_write_finish (fixture->scribe, result, &error);
   g_assert_false (ret);
-  g_assert_error (error,
-                  fixture->data->error_domain,
-                  fixture->data->error_code);
+
+  /* In some cases we don't care what the error is, just that there is an
+   * error.
+   */
+  if (fixture->data->error_domain != 0)
+    g_assert_error (error,
+                    fixture->data->error_domain,
+                    fixture->data->error_code);
+  else
+    g_assert_nonnull (error);
 
   assert_first_mib_zeroed (fixture);
 }
@@ -783,6 +793,39 @@ main (int argc, char *argv[])
       .error_code = G_IO_ERROR_TIMED_OUT,
   };
   g_test_add ("/scribe/read-error/end", Fixture, &read_error_end,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* What happens if GPG gives up on us before we've finished feeding it the
+   * whole file?
+   */
+  TestData gpg_exits_prematurely_success = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .gpg_path = "/bin/true",
+      /* As far as the GPG subtask is concerned, everything's fine; it's only
+       * the tee task that's upset.
+       */
+      .error_domain = G_IO_ERROR,
+      .error_code = G_IO_ERROR_BROKEN_PIPE,
+  };
+  g_test_add ("/scribe/gpg-exits-prematurely/success", Fixture, &gpg_exits_prematurely_success,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  TestData gpg_exits_prematurely_failure = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .gpg_path = "/bin/false",
+      /* There is a race between the GPG subtask noticing that GPG has died,
+       * and the tee subtask noticing the GPG pipe is closed. We don't care
+       * which error we get.
+       */
+      .error_domain = 0,
+  };
+  g_test_add ("/scribe/gpg-exits-prematurely/failure", Fixture, &gpg_exits_prematurely_failure,
               fixture_set_up,
               test_error,
               fixture_tear_down);
