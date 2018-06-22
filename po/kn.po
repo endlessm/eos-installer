@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: kn\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
@@ -51,6 +51,7 @@ msgstr "- GNOME ಆರಂಭಿಕ ಏರ್ಪಾಡು"
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
 msgstr[0] ""
+msgstr[1] ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
