@@ -46,6 +46,7 @@ tests/T20064.171120-020312.img*
 tests/test-dmi
 tests/test-scribe
 tests/test-unattended-config
+tests/test-write-diagnostics
 tests/w-8193.img*
 tests/w.img*
 tests/w.truncated*
