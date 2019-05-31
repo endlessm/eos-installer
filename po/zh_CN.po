@@ -6,12 +6,12 @@
 # Aron Xu <aronxu@gnome.org>, 2012
 # Cheng Lu <chenglu1990@gmail.com>, 2012
 # chenzibing <chenzibing_endless@126.com>, 2016
-# CN C2 <e2f48d4sf5ds@outlook.com>, 2016-2017
+# 759b81c7bb2252a11f36c89344f31007, 2016-2017
 # Dianjin Wang <1132321739qq@gmail.com>, 2013
 # e2f_cn c5 <jarvisn@ecinnovations.com>, 2017
-# e2f_cn c9 <e2f_cn_c9@outlook.com>, 2018
+# 5c1f498cdfcd3e8829513039a952cd0d, 2018
 # liuxuejiao <liuxuejiao_endless@126.com>, 2016
-# Roddy Shuler <roddy@endlessm.com>, 2016,2018
+# Roddy Shuler <roddy@stanfordalumni.org>, 2016,2018
 # tanyuanxing <tanyuanxingendless@126.com>, 2016
 # zhifeng peng <jnufeng@126.com>, 2016
 # zhoushumin <zhoushumin_endless@126.com>, 2016
@@ -19,9 +19,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-16 14:37-0700\n"
+"POT-Creation-Date: 2019-05-31 17:37+0100\n"
 "PO-Revision-Date: 2018-05-02 09:40+0000\n"
-"Last-Translator: e2f_cn c9 <e2f_cn_c9@outlook.com>\n"
+"Last-Translator: 5c1f498cdfcd3e8829513039a952cd0d\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-os/eos-installer/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,16 +44,16 @@ msgstr "取消(_C)"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
-#: ../gnome-image-installer/gnome-image-installer.c:100
+#: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
 msgstr "加载‘%s’时出错："
 
-#: ../gnome-image-installer/gnome-image-installer.c:264
+#: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
 msgstr "强制新建用户模式"
 
-#: ../gnome-image-installer/gnome-image-installer.c:268
+#: ../gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
 msgstr "GNOME初始设置"
 
@@ -262,56 +262,56 @@ msgstr "该磁盘上似乎有多个分区(如C:盘和D:盘)。使用Endless操�
 msgid "No suitable disks found."
 msgstr "没找到可用磁盘。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
 msgid "A debug log has been saved as %s."
 msgstr "已将调试日志保存为%s。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
 msgstr "无法保存调试日志："
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
 msgstr "哎呀，您的自动安装配置出错了。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
 msgid "Oops, something is wrong with your Endless OS file."
 msgstr "哎呀，Endless操作系统文件出错。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
 msgid "Oops, something went wrong while finding suitable disks to reformat."
 msgstr "哎呀，在寻找合适的磁盘重新格式化时出错了。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
 msgid "Oops, something went wrong while reformatting."
 msgstr "哎呀，重新格式化时出错了。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
 msgstr "哎呀！出错了。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
 msgid "Unattended installation configuration file created"
 msgstr "自动安装配置文件已创建"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
 msgstr "前一个文件重命名为 ‘%s’。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
 msgid "Unattended installation configuration file could not be created."
 msgstr "自动安装配置文件无法创建。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
 msgid "Reformatting Finished"
 msgstr "重新格式化完成"
 
 #. Translators: the %s is the customer support email address
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:501
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
@@ -355,22 +355,23 @@ msgstr "停止重新格式化"
 msgid "Continue Reformatting"
 msgstr "继续重新格式化"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:197
+#: ../gnome-image-installer/pages/install/gis-install-page.c:199
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "第%d步，共%d步"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:334
-#: ../gnome-image-installer/pages/install/gis-scribe.c:829
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1258
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1298
+#: ../gnome-image-installer/pages/install/gis-install-page.c:336
+#: ../gnome-image-installer/pages/install/gis-scribe.c:903
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1238
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1350
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1390
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "内部错误"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:407
+#: ../gnome-image-installer/pages/install/gis-install-page.c:409
 msgid "Reformatting"
 msgstr "正在重新格式化"
 
@@ -381,20 +382,20 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "快捷使用，强大功能 - 线上线下皆可使用。\nEndless操作系统预装了100多应用，打开即可使用。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:678
+#: ../gnome-image-installer/pages/install/gis-scribe.c:754
 msgid "Wrote %'"
 msgstr "写入%'"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1006
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1081
 msgid "Image verification error."
 msgstr "图像认证出错。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1052
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1128
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "签名文件‘%s’不存在。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1212
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1304
 msgid "Could not decompress the image file."
 msgstr "无法解压图像文件。"
 

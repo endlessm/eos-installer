@@ -6,6 +6,7 @@
 # brentx <deweerdt.brent@gmail.com>, 2013
 # tyfjoh, 2013
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2014-2015
+# Heimen Stoffels <vistausss@outlook.com>, 2018
 # Nathan Follens <nthn@unseen.is>, 2015
 # Reinout van Schouwen <reinouts@gnome.org>, 2013-2014
 # Wouter Bolsterlee <wbolster@gnome.org>, 2013
@@ -13,9 +14,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-16 14:37-0700\n"
-"PO-Revision-Date: 2018-04-16 21:42+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2019-05-31 17:37+0100\n"
+"PO-Revision-Date: 2018-11-14 13:25+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/endless-os/eos-installer/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,16 +39,16 @@ msgstr "_Annuleren"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
-#: ../gnome-image-installer/gnome-image-installer.c:100
+#: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr ""
+msgstr "Fout bij laden van '%s':"
 
-#: ../gnome-image-installer/gnome-image-installer.c:264
+#: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
 msgstr "Modus voor nieuwe gebruiker forceren"
 
-#: ../gnome-image-installer/gnome-image-installer.c:268
+#: ../gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
 msgstr "– Instellingen voor eerste gebruik van Gnome"
 
@@ -55,97 +56,97 @@ msgstr "– Instellingen voor eerste gebruik van Gnome"
 #, c-format
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "De installatie begint automatisch over %d seconde."
+msgstr[1] "De installatie begint automatisch over %d seconden."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
-msgstr ""
+msgstr "Tó_ch doorgaan en gegevens vernietigen"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
-msgstr ""
+msgstr "De onbegeleide installatie is afgebroken."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
-msgstr ""
+msgstr "Endless OS - Onbegeleide installatie"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "Computerleverancier"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "Product"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
-msgstr ""
+msgstr "Schijfafbeelding"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
 msgid "Target"
-msgstr ""
+msgstr "Doel"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "Apparaat"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "Grootte"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
-msgstr ""
+msgstr "Alle gegevens op de doelschijf worden vernietigd. <b>Al je apps, bestanden en documenten</b> gaan verloren."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
-msgstr ""
+msgstr "De ingestelde computerleverancier en productinformatie komen niet overeen met deze computer."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
 msgid "C_ontinue and Destroy Data"
-msgstr ""
+msgstr "D_oorgaan en gegevens vernietigen"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
 msgid "More than one image was found."
-msgstr ""
+msgstr "Er is meer dan één afbeelding aangetroffen."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
-msgstr ""
+msgstr "Basis"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:176
 msgid "Aluno"
-msgstr ""
+msgstr "Aluno"
 
 #. Translators: this is the name of a version of Educa Endless, which you
 #. should leave untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:181
 msgid "Escola"
-msgstr ""
+msgstr "Escola"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
-msgstr ""
+msgstr "Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:240
 msgid "Endless OS Installer"
-msgstr ""
+msgstr "Endless OS - Installatie"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
 msgid "Endless OS (non-free)"
-msgstr ""
+msgstr "Endless OS (niet-vrij)"
 
 #. Translators: this is the edition of Endless OS pre-installed by
 #. * Original Equipment Manufacturers. If there is not a
@@ -153,245 +154,246 @@ msgstr ""
 #. * please do not translate this.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:255
 msgid "Endless OS (OEM)"
-msgstr ""
+msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:264
 msgid "Endless OS (DVD)"
-msgstr ""
+msgstr "Endless OS (DVD)"
 
 #. Translators: this is a brand name, which you should leave
 #. untranslated.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:271
 msgid "Educa Endless"
-msgstr ""
+msgstr "Educa Endless"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:301
 msgid "Full"
-msgstr ""
+msgstr "Volledig"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
-msgstr ""
+msgstr "Het afbeeldingsbestand '%s' bestaat niet."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:473
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
-msgstr ""
+msgstr "De live-schijfafbeelding '%s' komt niet overeen met de ingestelde afbeelding '%s'."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
-msgstr ""
+msgstr "Het schijfafbeeldingsapparaat '%s' kan niet worden gevonden en '%s' kan niet direct worden gebruikt."
 
 #. Translators: the placeholder is a filename.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
 #, c-format
 msgid "Configured image ‘%s’ was not found."
-msgstr ""
+msgstr "De ingestelde schijfafbeelding '%s' kan niet worden gevonden."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
 msgid "No suitable images were found."
-msgstr ""
+msgstr "Geen geschikte afbeeldingen aangetroffen."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
 #, c-format
 msgid "Could not find partition holding Endless OS files."
-msgstr ""
+msgstr "De partitie met Endless OS-bestanden kan niet worden gevonden."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
-msgstr ""
+msgstr "Opnieuw formatteren met Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr ""
+msgstr "Is dit de Endless OS-versie die je wilt gebruiken? Als dat niet zo is, download dan een andere."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
-msgstr ""
+msgstr "Bestaande versie gebruiken:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
-msgstr ""
+msgstr "De gekozen locatie is te klein: je hebt %s nodig om opnieuw te formatteren met %s."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
-msgstr ""
+msgstr "Meer dan één blokapparaat-kandidaat aangetroffen."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
-msgstr ""
+msgstr "Afronden"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
 msgid "Select Disk"
-msgstr ""
+msgstr "Schijf kiezen"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr ""
+msgstr "Kies de schijf die je opnieuw wilt formatteren met Endless OS"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "Schijf kiezen:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr ""
+msgstr "Ik ga akkoord met het wissen van <b>al mijn bestanden en apps</b>"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr ""
+msgstr "Het lijkt erop dat je meerdere partities hebt op deze schijf (bijv. schijf C: en D:). Door opnieuw te formatteren met Endless OS gaan <b>alle partities</b> verloren. Klik hier om te bevestigen."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr ""
+msgstr "Geen geschikte schijven aangetroffen."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
 msgid "A debug log has been saved as %s."
-msgstr ""
+msgstr "Er is een foutopsporingslogbestand opgeslagen als %s."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
-msgstr ""
+msgstr "Kan foutopsporingslogbestand niet opslaan:"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
-msgstr ""
+msgstr "Oeps, er is iets misgegaan bij het instellen van je onbegeleide installatie."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr ""
+msgstr "Oeps, er is iets mis met je Endless OS-bestand."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
 msgid "Oops, something went wrong while finding suitable disks to reformat."
-msgstr ""
+msgstr "Oeps, er is iets misgegaan tijdens zoeken naar geschikte schijven om opnieuw te formatteren."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
 msgid "Oops, something went wrong while reformatting."
-msgstr ""
+msgstr "Oeps, er is iets misgegaan tijdens het opnieuw formatteren."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
-msgstr ""
+msgstr "Oeps, er is iets misgegaan."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
 msgid "Unattended installation configuration file created"
-msgstr ""
+msgstr "Configuratiebestand gecreëerd voor onbegeleide installatie"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
-msgstr ""
+msgstr "De naam van het vorige bestand is gewijzigd in '%s'."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
 msgid "Unattended installation configuration file could not be created."
-msgstr ""
+msgstr "Het configuratiebestand voor onbegeleide installatie kan niet worden gecreëerd."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
 msgid "Reformatting Finished"
-msgstr ""
+msgstr "Opnieuw formatteren afgerond"
 
 #. Translators: the %s is the customer support email address
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:501
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
 "href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr ""
+msgstr "Neem contact op met %s of word lid van de <a href=\"https://community.endlessos.com/\">Endless-gemeenschap</a> om dit probleem op te lossen."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "Voltooid! Schakel je computer uit en verwijder je USB-apparaat. Als je de computer weer aanzet, dan is Endless OS klaar voor gebruik!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
-msgstr ""
+msgstr "Voltooid! Schakel je computer uit en verwijder de DVD. Als je de computer weer aanzet, dan is Endless OS klaar voor gebruik!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
-msgstr ""
+msgstr "Uitschakelen"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
-msgstr ""
+msgstr "Stoppen met opnieuw formatteren?"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:61
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr ""
+msgstr "Het opnieuw formatteren is al begonnen. Afbreken leidt tot een niet-opstartbaar systeem."
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:86
 msgid "Stop Reformatting"
-msgstr ""
+msgstr "Stoppen met opnieuw formatteren"
 
 #. Continue Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:93
 msgid "Continue Reformatting"
-msgstr ""
+msgstr "Doorgaan met opnieuw formatteren"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:197
+#: ../gnome-image-installer/pages/install/gis-install-page.c:199
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
-msgstr ""
+msgstr "Stap %d van %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:334
-#: ../gnome-image-installer/pages/install/gis-scribe.c:829
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1258
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1298
+#: ../gnome-image-installer/pages/install/gis-install-page.c:336
+#: ../gnome-image-installer/pages/install/gis-scribe.c:903
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1238
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1350
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1390
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "Interne fout"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:407
+#: ../gnome-image-installer/pages/install/gis-install-page.c:409
 msgid "Reformatting"
-msgstr ""
+msgstr "Bezig met opnieuw formatteren"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:4
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
-msgstr ""
+msgstr "Snel, eenvoudig te gebruiken en krachtig - mét of zónder internet.\n\nEndless OS wordt geleverd met meer dan 100 apps, zodat je meteen aan de slag kunt zodra je opstart."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:678
+#: ../gnome-image-installer/pages/install/gis-scribe.c:754
 msgid "Wrote %'"
-msgstr ""
+msgstr "%' weggeschreven"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1006
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1081
 msgid "Image verification error."
-msgstr ""
+msgstr "Afbeeldingsverificatiefout."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1052
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1128
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
-msgstr ""
+msgstr "Het bestand voor ondertekening, '%s', bestaat niet."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1212
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1304
 msgid "Could not decompress the image file."
-msgstr ""
+msgstr "Kan het afbeeldingsbestand niet uitpakken."
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
@@ -399,7 +401,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr ""
+msgstr "De sleutel %s is leeg"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
@@ -407,20 +409,20 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
-msgstr ""
+msgstr "Meer dan één %s-sectie (%s en %s)"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr ""
+msgstr "Ongeldige ingepakte gegevens"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr ""
+msgstr "Onvoldoende geheugen"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
-msgstr ""
+msgstr "Meer invoer benodigd"
 
 #: ../eos-installer-data/com.endlessm.Installer.desktop.in.in.h:1
 msgid "Reformat"
-msgstr ""
+msgstr "Opnieuw formatteren"

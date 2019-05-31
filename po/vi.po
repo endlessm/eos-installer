@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Roddy Shuler <roddy@endlessm.com>, 2016,2018
+# Roddy Shuler <roddy@stanfordalumni.org>, 2016,2018
 # Trần Ngọc Quân <vnwildman@gmail.com>, 2014-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-16 14:37-0700\n"
+"POT-Creation-Date: 2019-05-31 17:37+0100\n"
 "PO-Revision-Date: 2018-04-28 13:27+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"Last-Translator: Roddy Shuler <roddy@stanfordalumni.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-os/eos-installer/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,16 +34,16 @@ msgstr "T_hôi"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
-#: ../gnome-image-installer/gnome-image-installer.c:100
+#: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
 msgstr "Lỗi khi tải '%s':"
 
-#: ../gnome-image-installer/gnome-image-installer.c:264
+#: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
 msgstr "Ép chế độ người dùng mới"
 
-#: ../gnome-image-installer/gnome-image-installer.c:268
+#: ../gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
 msgstr "- Cài đặt GNOME lần đầu"
 
@@ -252,56 +252,56 @@ msgstr "Có vẻ như bạn có nhiều phân vùng trên ổ đĩa này (chẳn
 msgid "No suitable disks found."
 msgstr "Không tìm thấy các ổ đĩa thích hợp."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
 msgid "A debug log has been saved as %s."
 msgstr "Bản ghi gỡ lỗi đã được lưu thành %s."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
 msgstr "Lưu bản ghi gỡ lỗi thất bại:"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
 msgstr "Ôi, đã xảy ra lỗi với cấu hình cài đặt tự động của bạn."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
 msgid "Oops, something is wrong with your Endless OS file."
 msgstr "Rất tiếc, có gì đó sai với tập tin Endless OS của bạn."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
 msgid "Oops, something went wrong while finding suitable disks to reformat."
 msgstr "Ôi, đã xảy ra lỗi khi đang tìm ổ đĩa thích hợp để định dạng lại."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
 msgid "Oops, something went wrong while reformatting."
 msgstr "Xin lỗi, có lỗi xảy ra khi đang định dạng lại."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
 msgstr "Ôi, đã xảy ra lỗi."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
 msgid "Unattended installation configuration file created"
 msgstr "Đã tạo tập tin cấu hình cài đặt tự động"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
 msgstr "Đã đổi tên tập tin trước đó thành '%s'"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
 msgid "Unattended installation configuration file could not be created."
 msgstr "Không thể tạo tệp cấu hình cài đặt tự hành."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
 msgid "Reformatting Finished"
 msgstr "Hoàn tất Định dạng lại"
 
 #. Translators: the %s is the customer support email address
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:501
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
@@ -345,22 +345,23 @@ msgstr "Dừng Định dạng lại"
 msgid "Continue Reformatting"
 msgstr "Tiếp tục Định dạng lại"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:197
+#: ../gnome-image-installer/pages/install/gis-install-page.c:199
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "Bước %d trong số %d bước"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:334
-#: ../gnome-image-installer/pages/install/gis-scribe.c:829
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1258
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1298
+#: ../gnome-image-installer/pages/install/gis-install-page.c:336
+#: ../gnome-image-installer/pages/install/gis-scribe.c:903
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1238
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1350
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1390
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "Lỗi nội tại"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:407
+#: ../gnome-image-installer/pages/install/gis-install-page.c:409
 msgid "Reformatting"
 msgstr "Đang định dạng lại"
 
@@ -371,20 +372,20 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "Sử dụng nhanh chóng, dễ dàng và mạnh mẽ - có hoặc không có internet.\n\nHệ điều hành Endless OS được nạp sẵn hơn 100 ứng dụng, để nó hữu ích ngay từ giây phút bạn bật nó lên."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:678
+#: ../gnome-image-installer/pages/install/gis-scribe.c:754
 msgid "Wrote %'"
 msgstr "Đã ghi %'"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1006
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1081
 msgid "Image verification error."
 msgstr "Lỗi xác thực hình ảnh."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1052
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1128
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "Tập tin chữ ký '%s' không tồn tại."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1212
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1304
 msgid "Could not decompress the image file."
 msgstr "Không thể giải nén tập tin ảnh."
 

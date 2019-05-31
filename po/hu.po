@@ -5,14 +5,15 @@
 # Translators:
 # Balázs Úr <urbalazs at gmail dot com>, 2013-2015
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2012-2013,2016
+# Gyula Szabó <gyhun95@gmail.com>, 2018
 # Zoltan Hoppar <hopparz@gmail.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-16 14:37-0700\n"
-"PO-Revision-Date: 2018-04-16 21:42+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2019-05-31 17:37+0100\n"
+"PO-Revision-Date: 2018-08-14 08:48+0000\n"
+"Last-Translator: Gyula Szabó <gyhun95@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/endless-os/eos-installer/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,29 +23,29 @@ msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
-msgstr "_Következő"
+msgstr "Következő"
 
 #: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
-msgstr "_Előző"
+msgstr "Előző"
 
 #: ../gnome-initial-setup/gis-assistant.c:427
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
 msgid "_Cancel"
-msgstr "Mé_gse"
+msgstr "Mégse"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
-#: ../gnome-image-installer/gnome-image-installer.c:100
+#: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr ""
+msgstr "Hiba a '%s' betöltése során"
 
-#: ../gnome-image-installer/gnome-image-installer.c:264
+#: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
 msgstr "Új felhasználói mód kényszerítése"
 
-#: ../gnome-image-installer/gnome-image-installer.c:268
+#: ../gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
 msgstr "- GNOME kiinduló beállítások"
 
@@ -57,11 +58,11 @@ msgstr[1] ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "Ismeretlen"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
-msgstr ""
+msgstr "Folytatás mindenképp az adatok törlésével"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
@@ -77,7 +78,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "Termék"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
@@ -113,7 +114,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
 msgid "More than one image was found."
-msgstr ""
+msgstr "Több mint egy kép található"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
@@ -192,12 +193,12 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
 msgid "No suitable images were found."
-msgstr "Nincs használható elérhető lemezkép."
+msgstr "Nem található megfelelő lemezkép."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
 #, c-format
 msgid "Could not find partition holding Endless OS files."
-msgstr ""
+msgstr "Nem található Endless OS-t tartalmazó partíció."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:714
 msgid "Reformat with Endless OS"
@@ -206,11 +207,11 @@ msgstr "Újraformázás Endless OS rendszerrel"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr "Ez az az Endless Os verzió amit használni szeretne? Ha nem, töltsön le egy másikat."
+msgstr "Ez az az Endless OS verzió amit használni szeretne? Ha nem, töltsön le egy másikat."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
-msgstr "Jelenlegi verzió használata:"
+msgstr "Ezen verzió használata:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
@@ -254,56 +255,56 @@ msgstr "Úgy tűnik több partíciója is van egy lemezen (pl. C: és D:). Újra
 msgid "No suitable disks found."
 msgstr "Nem található alkalmas lemez."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:174
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
 msgid "A debug log has been saved as %s."
-msgstr ""
+msgstr "A hibanapló mentve, mint: %s."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:179
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
-msgstr ""
+msgstr "Nem sikerült menteni a következő hibanaplót: %s."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:265
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:269
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr "Hoppá, valami balul sült el az Endless OS fájljával kapcsolatban."
+msgstr "Hoppá! Valami gond van az Endless OS fájlal kapcsolatosan."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:273
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
 msgid "Oops, something went wrong while finding suitable disks to reformat."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:277
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
 msgid "Oops, something went wrong while reformatting."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:289
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
-msgstr ""
+msgstr "Hoppá! Valami rosszul sült el."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:390
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
 msgid "Unattended installation configuration file created"
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:393
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:399
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
 msgid "Unattended installation configuration file could not be created."
 msgstr ""
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:490
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
 msgid "Reformatting Finished"
 msgstr "Újraformázás befejeződött."
 
 #. Translators: the %s is the customer support email address
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:501
+#: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
@@ -347,22 +348,23 @@ msgstr "Újraformázás megállítása"
 msgid "Continue Reformatting"
 msgstr "Újraformázás folytatása"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:197
+#: ../gnome-image-installer/pages/install/gis-install-page.c:199
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
 msgstr "%d lépés ennyiből: %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:334
-#: ../gnome-image-installer/pages/install/gis-scribe.c:829
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1258
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1298
+#: ../gnome-image-installer/pages/install/gis-install-page.c:336
+#: ../gnome-image-installer/pages/install/gis-scribe.c:903
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1238
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1350
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1390
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "Belső hiba"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:407
+#: ../gnome-image-installer/pages/install/gis-install-page.c:409
 msgid "Reformatting"
 msgstr "Újraformázás"
 
@@ -373,20 +375,20 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "Gyors, könnyű használni és erőteljes - internettel vagy annélkül.\n\nEndless OS előkészítve több, mint 100 alkalmazással érkezik, hasznosan attól a pillanattól kezdve, hogy bekapcsolja a gépét."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:678
+#: ../gnome-image-installer/pages/install/gis-scribe.c:754
 msgid "Wrote %'"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1006
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1081
 msgid "Image verification error."
 msgstr "Lemezkép ellenőrzési hiba."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1052
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1128
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1212
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1304
 msgid "Could not decompress the image file."
 msgstr ""
 
@@ -408,11 +410,11 @@ msgstr ""
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
-msgstr "Hibás tömörített adat."
+msgstr "Hibás tömörített adat"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
-msgstr "Kevés memória"
+msgstr "Kevés a memória"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
