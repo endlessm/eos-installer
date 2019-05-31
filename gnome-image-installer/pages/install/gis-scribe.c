@@ -682,6 +682,23 @@ gis_scribe_malloc_aligned (size_t size)
   return buf;
 }
 
+static gchar *
+format_bytes (guint64 bytes)
+{
+  /* The ' flag is a Single UNIX Specification extension to group the
+   * number with thousands' grouping characters if the locale information
+   * indicates any. We don't use g_format_size_full(...,
+   * G_FORMAT_SIZE_LONG_FORMAT) because it also includes the rounded value
+   * (eg "101.2 GB (101,241,834,086 bytes)"); the rounded value is unlikely
+   * to be helpful when the discrepency is < 512 bytes, as is likely (see
+   * below).
+   *
+   * Some combination of this and G_GUINT64_FORMAT confuses xgettext if it is
+   * used in the translatable string where this value is used.
+   */
+  return g_strdup_printf ("%'" G_GUINT64_FORMAT, bytes);
+}
+
 static gboolean
 gis_scribe_write_thread_copy (GisScribe     *self,
                               GInputStream  *decompressed,
@@ -741,19 +758,15 @@ gis_scribe_write_thread_copy (GisScribe     *self,
 
   if (bytes_written != self->image_size_bytes)
     {
-      /* The ' flag is a Single UNIX Specification extension to group the
-       * number with thousands' grouping characters if the locale information
-       * indicates any. We don't use g_format_size_full(...,
-       * G_FORMAT_SIZE_LONG_FORMAT) because it also includes the rounded value
-       * (eg "101.2 GB (101,241,834,086 bytes)"); the rounded value is unlikely
-       * to be helpful when the discrepency is < 512 bytes, as is likely (see
-       * below).
+      /* See comment on format_bytes() to understand why these are formatted
+       * separately.
        */
+      g_autofree gchar *bytes_written_str = format_bytes (bytes_written);
+      g_autofree gchar *expected_bytes_str = format_bytes (self->image_size_bytes);
       g_autoptr(GError) local_error =
         g_error_new (GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_WRONG_SIZE,
-                     _("Wrote %'" G_GUINT64_FORMAT " bytes, but "
-                       "expected to write %'" G_GUINT64_FORMAT " bytes."),
-                     bytes_written, self->image_size_bytes);
+                     _("Wrote %s bytes, but expected to write %s bytes."),
+                     bytes_written_str, expected_bytes_str);
 
       /* Due to an image builder bug, for a few days very large images might
        * not be a round number of sectors long. We obtain the uncompressed size
