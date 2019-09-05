@@ -6,7 +6,7 @@
 # brentx <deweerdt.brent@gmail.com>, 2013
 # tyfjoh, 2013
 # Hannie Dumoleyn <hannie@ubuntu-nl.org>, 2014-2015
-# Heimen Stoffels <vistausss@outlook.com>, 2018
+# Heimen Stoffels <vistausss@outlook.com>, 2018-2019
 # Nathan Follens <nthn@unseen.is>, 2015
 # Reinout van Schouwen <reinouts@gnome.org>, 2013-2014
 # Wouter Bolsterlee <wbolster@gnome.org>, 2013
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 17:37+0100\n"
-"PO-Revision-Date: 2018-11-14 13:25+0000\n"
+"POT-Creation-Date: 2019-09-04 09:38+0000\n"
+"PO-Revision-Date: 2019-09-04 14:53+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@outlook.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/endless-os/eos-installer/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -358,10 +358,10 @@ msgid "Step %d of %d"
 msgstr "Stap %d van %d"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:336
-#: ../gnome-image-installer/pages/install/gis-scribe.c:903
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1238
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1350
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1390
+#: ../gnome-image-installer/pages/install/gis-scribe.c:916
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1251
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1363
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1403
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
@@ -378,20 +378,21 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "Snel, eenvoudig te gebruiken en krachtig - mét of zónder internet.\n\nEndless OS wordt geleverd met meer dan 100 apps, zodat je meteen aan de slag kunt zodra je opstart."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:754
-msgid "Wrote %'"
-msgstr "%' weggeschreven"
+#: ../gnome-image-installer/pages/install/gis-scribe.c:768
+#, c-format
+msgid "Wrote %s bytes, but expected to write %s bytes."
+msgstr "%s bytes weggeschreven; %s verwacht."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1081
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1094
 msgid "Image verification error."
 msgstr "Afbeeldingsverificatiefout."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1128
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1141
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "Het bestand voor ondertekening, '%s', bestaat niet."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1304
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1317
 msgid "Could not decompress the image file."
 msgstr "Kan het afbeeldingsbestand niet uitpakken."
 
