@@ -61,6 +61,18 @@ def main():
             "--armor", a.file)
         cmd(a.gpgconf_path, "--homedir", gnupghome, "--kill", "gpg-agent")
 
+        # When running on Jenkins, this socket is sometimes unlinked midway
+        # through TemporaryDirectory.cleanup(). There is no way to tell
+        # TemporaryDirectory.cleanup() to ignore errors, even though the
+        # underlying function (shutil.rmtree) supports this. Work around this
+        # by ensuring the socket is unlinked before
+        # TemporaryDirectory.cleanup() is called (by
+        # TemporaryDirectory.__exit__() when we leave this scope).
+        try:
+            os.unlink(os.path.join(gnupghome, "S.gpg-agent.extra"))
+        except FileNotFoundError:
+            pass
+
 
 if __name__ == '__main__':
     main()
