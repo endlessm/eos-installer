@@ -548,23 +548,6 @@ gis_diskimage_page_populate_model (GisPage     *page,
 }
 
 static void
-gis_diskimage_page_mount_ready (GObject *source, GAsyncResult *res, GisPage *page)
-{
-  UDisksFilesystem *fs = UDISKS_FILESYSTEM (source);
-  g_autoptr(GError) error = NULL;
-  g_autofree gchar *path = NULL;
-
-  if (!udisks_filesystem_call_mount_finish (fs, &path, res, &error))
-    {
-      gis_store_set_error (error);
-      gis_assistant_next_page (gis_driver_get_assistant (page->driver));
-      return;
-    }
-
-  gis_diskimage_page_populate_model (page, path);
-}
-
-static void
 gis_diskimage_page_mount (GisPage *page)
 {
   g_autoptr(GError) error = NULL;
@@ -634,8 +617,18 @@ gis_diskimage_page_mount (GisPage *page)
         }
       else
         {
-          udisks_filesystem_call_mount (fs, g_variant_new ("a{sv}", NULL), NULL,
-                                        (GAsyncReadyCallback)gis_diskimage_page_mount_ready, page);
+          g_autofree gchar *path = NULL;
+          GVariant *options = g_variant_new ("a{sv}", NULL);
+          gboolean ret;
+          ret = udisks_filesystem_call_mount_sync (fs, options, &path,
+                                                   NULL, &error);
+          if (!ret) {
+            g_message ("Mount failed: %s", error->message);
+            g_clear_error (&error);
+            continue;
+          }
+
+          gis_diskimage_page_populate_model (page, path);
         }
 
       return;
