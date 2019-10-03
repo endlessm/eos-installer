@@ -15,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 17:37+0100\n"
-"PO-Revision-Date: 2018-05-04 06:00+0000\n"
-"Last-Translator: Roddy Shuler <roddy@stanfordalumni.org>\n"
+"POT-Creation-Date: 2019-09-04 09:38+0000\n"
+"PO-Revision-Date: 2019-09-04 09:40+0000\n"
+"Last-Translator: Will Thompson <wjt@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-os/eos-installer/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -359,10 +359,10 @@ msgid "Step %d of %d"
 msgstr "Paso %d de %d"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:336
-#: ../gnome-image-installer/pages/install/gis-scribe.c:903
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1238
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1350
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1390
+#: ../gnome-image-installer/pages/install/gis-scribe.c:916
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1251
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1363
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1403
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
@@ -379,20 +379,21 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "Rápido, fácil de usar y poderoso - con o sin internet.\n\nEndless OS viene cargado con más de 100 programas para que te sea útil desde el momento en que lo enciendas."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:754
-msgid "Wrote %'"
-msgstr "Escribió %'"
+#: ../gnome-image-installer/pages/install/gis-scribe.c:768
+#, c-format
+msgid "Wrote %s bytes, but expected to write %s bytes."
+msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1081
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1094
 msgid "Image verification error."
 msgstr "Error de verificación de la imagen."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1128
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1141
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "No existe el archivo con la firma ‘%s’"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1304
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1317
 msgid "Could not decompress the image file."
 msgstr "No se ha podido descomprimir el archivo de imagen."
 
