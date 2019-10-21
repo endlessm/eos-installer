@@ -19,26 +19,39 @@ try {
 
 
 polkit.addRule(function(action, subject) {
-    if (subject.user !== 'gnome-initial-setup' && !(subject.user === 'live' && isLiveSystem))
-        return undefined;
+    // This rule should allow the live user any permissions given to the
+    // gnome-initial-setup user in 20-gnome-initial-setup.rules, that are needed
+    // to run eos-installer. Currently there is only one.
 
-    var actionMatches = (action.id === 'org.freedesktop.udisks2.filesystem-mount-system' ||
-                         action.id === 'com.endlessm.Metrics.SetEnabled' ||
-                         action.id === 'com.endlessm.TestMode' ||
-                         action.id.indexOf('org.freedesktop.hostname1.') === 0 ||
-                         action.id.indexOf('org.freedesktop.NetworkManager.') === 0 ||
-                         action.id.indexOf('org.freedesktop.locale1.') === 0 ||
-                         action.id.indexOf('org.freedesktop.accounts.') === 0 ||
-                         action.id.indexOf('org.freedesktop.timedate1.') === 0 ||
-                         action.id.indexOf('org.freedesktop.udisks2.') === 0 ||
-                         action.id.indexOf('org.freedesktop.RealtimeKit1.') === 0);
-
-    if (action.id === 'org.freedesktop.policykit.exec' &&
-            action.lookup('program') === '/usr/sbin/eos-repartition-mbr') {
-        actionMatches = true;
+    if (subject.user === 'live' && isLiveSystem &&
+        action.id === 'org.freedesktop.udisks2.filesystem-mount-system') {
+        if (subject.local)
+            return 'yes';
+        else
+            return 'auth_admin';
     }
 
-    if (actionMatches) {
+    return undefined;
+});
+
+polkit.addRule((action, subject) => {
+    // This rule should check only actions that are not already permitted by
+    // 20-gnome-initial-setup.rules, and permit them to both the live user and
+    // the gnome-initial-setup user.
+
+    if (!subject.user !== 'gnome-initial-setup' &&
+        !(subject.user === 'live' && isLiveSystem))
+        return undefined;
+
+    const allowedUdisksActions = [
+        'org.freedesktop.udisks2.filesystem-mount',
+        'org.freedesktop.udisks2.open-device',
+        'org.freedesktop.udisks2.open-device-system',
+    ];
+
+    if (allowedUdisksActions.includes(action.id) ||
+        (action.id === 'org.freedesktop.policykit.exec' &&
+            action.lookup('program') === '/usr/sbin/eos-repartition-mbr')) {
         if (subject.local)
             return 'yes';
         else
