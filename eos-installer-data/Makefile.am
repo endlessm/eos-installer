@@ -14,7 +14,7 @@ edit = $(AM_V_GEN) sed \
 @INTLTOOL_DESKTOP_RULE@
 
 rulesdir = $(datadir)/polkit-1/rules.d
-rules_DATA = 20-eos-installer.rules
+rules_DATA = 90-eos-installer.rules
 
 desktopdir = $(datadir)/applications
 desktop_DATA = \
@@ -32,7 +32,7 @@ icon64_DATA = \
 
 
 EXTRA_DIST =						\
-	20-eos-installer.rules  		\
+	90-eos-installer.rules  		\
 	com.endlessm.Installer.desktop.in.in \
 	icons/hicolor/64x64/apps/com.endlessm.Installer.png \
 	run-mount-eosimages.mount
