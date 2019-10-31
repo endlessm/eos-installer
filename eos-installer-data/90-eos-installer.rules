@@ -39,7 +39,7 @@ polkit.addRule((action, subject) => {
     // 20-gnome-initial-setup.rules, and permit them to both the live user and
     // the gnome-initial-setup user.
 
-    if (!subject.user !== 'gnome-initial-setup' &&
+    if (subject.user !== 'gnome-initial-setup' &&
         !(subject.user === 'live' && isLiveSystem))
         return undefined;
 
