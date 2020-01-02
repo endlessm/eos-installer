@@ -4,13 +4,14 @@
 # 
 # Translators:
 # abuyop <abuyop@gmail.com>, 2019
+# abuyop <abuyop@gmail.com>, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-04 09:38+0000\n"
-"PO-Revision-Date: 2019-09-19 04:01+0000\n"
-"Last-Translator: abuyop <abuyop@gmail.com>\n"
+"PO-Revision-Date: 2019-11-05 18:29+0000\n"
+"Last-Translator: Khairul Aizat Kamarudzzaman <mohdfenris@gmail.com>\n"
 "Language-Team: Malay (http://www.transifex.com/endless-os/eos-installer/language/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgstr "B_atal"
 #: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr "Ralat memuatkan '%s':"
+msgstr "Ralat memuatkan '%s': "
 
 #: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
@@ -185,11 +186,11 @@ msgstr "Gagal mencari peranti '%s' dan tidak dapat guna '%s' secara terus."
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
 #, c-format
 msgid "Configured image ‘%s’ was not found."
-msgstr "Imej terkonfigur '%s' tidak ditemui."
+msgstr "Imej yang dikonfigurasi ' %s ' tidak dijumpai."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:560
 msgid "No suitable images were found."
-msgstr "Tiada imej sari kata ditemui."
+msgstr "Tiada imej yang sesuai ditemui."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:662
 #, c-format
@@ -258,7 +259,7 @@ msgstr "Satu log nyahpepijat telah disimpan sebagai %s."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
-msgstr "Gagal menyimpan log nyahpepijat:"
+msgstr "Gagal menyimpan log nyahpepijat: "
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
@@ -284,7 +285,7 @@ msgstr "Alamak, ada masalah berlaku."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
 msgid "Unattended installation configuration file created"
-msgstr "Fail kongfigurasi pemasangan tak berjaga telah dicipta."
+msgstr "Fail konfigurasi pemasangan tanpa kawal selia dicipta"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
 #, c-format
