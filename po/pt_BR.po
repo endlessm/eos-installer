@@ -6,6 +6,7 @@
 # Abner Silva <abner@endlessm.com>, 2014
 # Enrico Nicoletto <liverig@gmail.com>, 2013
 # Felipe Borges <felipeborges@src.gnome.org>, 2012
+# Georges Basile Stavracas Neto <georges@endlessm.com>, 2020
 # Georges Basile Stavracas Neto <georges.stavracas@gmail.com>, 2013
 # Leandro Stanger <leandrostanger@hotmail.com>, 2019
 # Mariana Barbosa <mariana@endlessm.com>, 2016-2017
@@ -19,8 +20,8 @@ msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-04 09:38+0000\n"
-"PO-Revision-Date: 2019-10-03 12:36+0000\n"
-"Last-Translator: Leandro Stanger <leandrostanger@hotmail.com>\n"
+"PO-Revision-Date: 2020-01-03 17:49+0000\n"
+"Last-Translator: Georges Basile Stavracas Neto <georges@endlessm.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/endless-os/eos-installer/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -69,11 +70,11 @@ msgstr "Desconhecido"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
-msgstr "C_ontinue de qualquer maneira e Destrua Dados"
+msgstr "C_ontinuar mesmo assim e destruir dados"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
-msgstr "Instalação autônoma foi cancelada."
+msgstr "Instalação desacompanhada foi cancelada."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
@@ -97,7 +98,7 @@ msgstr "Destino"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr "Aparelho"
+msgstr "Dispositivo"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
@@ -107,7 +108,7 @@ msgstr "Tamanho"
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
-msgstr "Todos os dados neste disco de destino serão destruídos. Você perderá <b> todos os seus aplicativos, arquivos e documentos </b>."
+msgstr "Todos os dados neste disco de destino serão destruídos. Você perderá <b>todos os seus aplicativos, arquivos e documentos</b>."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
@@ -117,11 +118,11 @@ msgstr "O fornecedor do computador configurado e as informações do produto nã
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
 msgid "C_ontinue and Destroy Data"
-msgstr "C_ontinue e Destrua Dados"
+msgstr "C_ontinuar e destruir dados"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
 msgid "More than one image was found."
-msgstr "Mais doq ue uma imagem foi encontrada."
+msgstr "Mais de uma imagem foi encontrada."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
@@ -146,7 +147,7 @@ msgstr "Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:240
 msgid "Endless OS Installer"
-msgstr "Instalador Endless OS"
+msgstr "Instalador do Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
 msgid "Endless OS (non-free)"
@@ -175,7 +176,7 @@ msgstr "Educa Endless"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:301
 msgid "Full"
-msgstr "Full"
+msgstr "Completo"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
@@ -190,7 +191,7 @@ msgstr "A imagem ao vivo  ‘%s’ não corresponde à imagem configurada ‘%s�
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:492
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
-msgstr "Não foi possível encontrar o dispositivo de imagem \"% s\" e não é possível usar o ‘%s’ diretamente."
+msgstr "Não foi possível encontrar o dispositivo de imagem '%s' e não é possível usar ‘%s’ diretamente."
 
 #. Translators: the placeholder is a filename.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:555
@@ -249,7 +250,7 @@ msgstr "Selecione o disco:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr "Eu concordo em apagar <b>, todos os meus arquivos e aplicativos</b>"
+msgstr "Eu concordo em apagar <b>todos os meus arquivos e aplicativos</b>"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
@@ -274,11 +275,11 @@ msgstr "Falha ao salvar log de depuração:"
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
-msgstr "Opa, algo está errado com sua configuração de instalação autônoma."
+msgstr "Opa, algo está errado com sua configuração de instalação desacompanhada."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
 msgid "Oops, something is wrong with your Endless OS file."
-msgstr "Ops! Aconteceu um erro com seu arquivo Endless OS"
+msgstr "Opa, algo deu errado com seu arquivo Endless OS"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
 msgid "Oops, something went wrong while finding suitable disks to reformat."
@@ -295,7 +296,7 @@ msgstr "Opa, algo deu errado."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
 msgid "Unattended installation configuration file created"
-msgstr "Arquivo de configuração de instalação autônoma criado"
+msgstr "Arquivo de configuração de instalação desacompanhada criado"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
 #, c-format
@@ -304,7 +305,7 @@ msgstr "O arquivo anterior foi renomeado para ‘%s’."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
 msgid "Unattended installation configuration file could not be created."
-msgstr "O arquivo de configuração da instalação autônoma não pôde ser criado."
+msgstr "O arquivo de configuração da instalação desacompanhada não pôde ser criado."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
 msgid "Reformatting Finished"
@@ -359,7 +360,7 @@ msgstr "Continuar a formatação"
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
 #, no-c-format
 msgid "Step %d of %d"
-msgstr "Progresso %d de %d"
+msgstr "Passo %d de %d"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:336
 #: ../gnome-image-installer/pages/install/gis-scribe.c:916
@@ -385,7 +386,7 @@ msgstr "Rápido, fácil de usar e rico em conteúdo –com ou sem internet.\n\nO
 #: ../gnome-image-installer/pages/install/gis-scribe.c:768
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
-msgstr "Escrevi %s bytes, mas espera-se escrever %s bytes."
+msgstr " %s bytes foram escritos, mas esperava-se escrever %s bytes."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1094
 msgid "Image verification error."
@@ -406,7 +407,7 @@ msgstr "Não foi possível descompactar o arquivo de imagem."
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr "%s chave está vazia"
+msgstr "Chave %s está vazia"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
