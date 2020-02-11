@@ -1,0 +1,38 @@
+libgiiutil = static_library('giiutil',
+    [
+        'crc32.c',
+        'crc32.h',
+        'gduxzdecompressor.c',
+        'gduxzdecompressor.h',
+        'gis-dmi.c',
+        'gis-dmi.h',
+        'gis-errors.c',
+        'gis-errors.h',
+        'gis-store.c',
+        'gis-store.h',
+        'gis-unattended-config.c',
+        'gis-unattended-config.h',
+        'gis-write-diagnostics.c',
+        'gis-write-diagnostics.h',
+        'gpt.c',
+        'gpt_errors.h',
+        'gpt_gz.c',
+        'gpt_gz.h',
+        'gpt.h',
+        'gpt_lzma.c',
+        'gpt_lzma.h',
+    ],
+    dependencies: [
+        gio_unix_dep,
+        libgisutil_dep,
+        libglnx_dep,
+        dependency('zlib'),
+    ],
+    include_directories: [
+        config_h_dir,
+    ],
+)
+libgiiutil_dep = declare_dependency(
+    link_with: libgiiutil,
+    include_directories: include_directories('.'),
+)
