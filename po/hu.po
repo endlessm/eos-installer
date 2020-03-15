@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Balázs Úr <urbalazs at gmail dot com>, 2013-2015
+# bela erdei <bela@dandre.hu>, 2020
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2012-2013,2016
 # Gyula Szabó <gyhun95@gmail.com>, 2018
 # Zoltan Hoppar <hopparz@gmail.com>, 2018
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-08 12:35+0000\n"
-"PO-Revision-Date: 2020-02-23 13:35+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2020-03-15 12:34+0000\n"
+"PO-Revision-Date: 2020-03-08 13:21+0000\n"
+"Last-Translator: bela erdei <bela@dandre.hu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/endless-os/eos-installer/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,15 +67,15 @@ msgstr "Folytatás mindenképp az adatok törlésével"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
-msgstr ""
+msgstr "A felügyelet nélküli telepítés meg lett szakítva."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
-msgstr ""
+msgstr "Endless OS felügyelet nélküli telepítés"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "Számítógép gyártó"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
@@ -82,25 +83,25 @@ msgstr "Termék"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
-msgstr ""
+msgstr "Kép"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
 msgid "Target"
-msgstr ""
+msgstr "Cél"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "Eszköz"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "Méret"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
-msgstr ""
+msgstr "Az összes adat a cél lemezen megsemmisül. \nElveszik az összes alkalmazásod, állományod, dokumentumod."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
@@ -373,7 +374,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1317
 msgid "Could not decompress the image file."
-msgstr ""
+msgstr "Nem lehetet kitömöríteni a kép filet."
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
@@ -381,7 +382,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr ""
+msgstr "%s kulcs üres"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
