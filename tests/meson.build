@@ -13,6 +13,66 @@ test_env.set('MALLOC_CHECK_', '2')
 # Setting the search path to the empty string causes no modules to be loaded.
 test_env.set('GIO_MODULE_DIR', '')
 
+gpg = find_program('gpg2', 'gpg')
+gpgconf = find_program('gpgconf')
+sign_file = [
+  find_program('sign-file'),
+  '--gpg-path', gpg.path(),
+  '--gpgconf-path', gpgconf.path(),
+  files('secret.asc'),
+  '@INPUT@',
+]
+gz = [find_program('gzip'), '-1', '--keep', '--force', '@INPUT@']
+xz = [find_program('xz'), '-0', '--keep', '--force', '@INPUT@']
+make_fake_image = find_program('make-fake-image')
+
+test_scribe_cases = {
+  'w': '2 ** 22',
+}
+test_scribe_generated_sources = []
+foreach basename, size : test_scribe_cases
+  w_img = custom_target('w.img',
+    command: [make_fake_image, size, '@OUTPUT@'],
+    output: '@0@.img'.format(basename),
+  )
+  w_img_asc = custom_target('w.img.asc',
+    command: sign_file,
+    input: w_img,
+    output: 'w.img.asc',
+  )
+  w_img_xz = custom_target('w.img.xz',
+    command: xz,
+    input: w_img,
+    output: 'w.img.xz',
+  )
+  w_img_xz_asc = custom_target('w.img.xz.asc',
+    command: sign_file,
+    input: w_img_xz,
+    output: 'w.img.xz.asc',
+  )
+  w_img_gz = custom_target('w.img.gz',
+    command: gz,
+    input: w_img,
+    output: 'w.img.gz',
+  )
+  w_img_gz_asc = custom_target('w.img.gz.asc',
+    command: sign_file,
+    input: w_img_gz,
+    output: '@PLAINNAME@.asc',
+  )
+  test_scribe_generated_sources += [
+    w_img,
+    w_img_asc,
+    w_img_xz,
+    w_img_xz_asc,
+    w_img_gz,
+    w_img_gz_asc,
+  ]
+endforeach
+
+# TODO: foo.img.?z -> foo.truncated.?z generatorw:w
+# TODO: generate the three files full o' w's and then compress and sign them...
+
 tests = {
   'dmi': {},
   'unattended-config': {},
@@ -22,8 +82,11 @@ tests = {
     'sources': [
       'test-error-input-stream.c',
       'test-error-input-stream.h',
+      test_scribe_generated_sources,
     ],
-    'dependencies': [libgisinstall_dep],
+    'dependencies': [
+      libgisinstall_dep,
+    ]
   },
 }
 
