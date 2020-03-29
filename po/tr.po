@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# abc Def <hdogan1974@gmail.com>, 2020
 # Emin Tufan <etcetin@gmail.com>, 2013
 # Koray KIRCAOĞLU <koraym@gmail.com>, 2017
 # Muha Aliss <muhaaliss@gmail.com>, 2019
@@ -12,9 +13,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-15 12:34+0000\n"
-"PO-Revision-Date: 2020-02-23 13:35+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"POT-Creation-Date: 2020-03-29 12:34+0000\n"
+"PO-Revision-Date: 2020-03-29 00:00+0000\n"
+"Last-Translator: abc Def <hdogan1974@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/endless-os/eos-installer/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -205,7 +206,7 @@ msgstr "Seçtiğiniz konum yetersiz, ihtiyacınız olan %s"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
-msgstr ""
+msgstr "Birden fazla aday blok aygıtı bulundu."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
@@ -390,7 +391,7 @@ msgstr "%s anahtarı boş"
 #: ../gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
-msgstr ""
+msgstr "Birden fazla %s bölüm (%s ve %s)"
 
 #: ../gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
