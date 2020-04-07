@@ -76,8 +76,6 @@ AC_SUBST(INITIAL_SETUP_LIBS)
 AX_COMPILER_FLAGS([WARN_CFLAGS], [WARN_LDFLAGS], [], [],
                   [-Wno-declaration-after-statement -Wno-packed])
 
-GNOME_MAINTAINER_MODE_DEFINES
-
 AC_SUBST(CFLAGS)
 AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 

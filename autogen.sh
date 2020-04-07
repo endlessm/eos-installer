@@ -1,21 +1,26 @@
 #!/bin/sh
 # Run this to generate all the initial makefiles, etc.
-set -ex
+test -n "$srcdir" || srcdir=$(dirname "$0")
+test -n "$srcdir" || srcdir=.
 
-srcdir=`dirname $0`
-test -z "$srcdir" && srcdir=.
+olddir=$(pwd)
 
-(test -f $srcdir/configure.ac \
-  && test -f $srcdir/eos-installer.doap) || {
-    echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
-    echo " top-level eos-installer directory"
-    exit 1
+cd $srcdir
+
+(test -f configure.ac) || {
+        echo "*** ERROR: Directory '$srcdir' does not look like the top-level project directory ***"
+        exit 1
 }
 
-which gnome-autogen.sh >/dev/null || {
-    echo "You need to install gnome-common"
-    exit 1
-}
+# shellcheck disable=SC2016
+PKG_NAME=$(autoconf --trace 'AC_INIT:$1' configure.ac)
+
+if [ "$#" = 0 -a "x$NOCONFIGURE" = "x" ]; then
+        echo "*** WARNING: I am going to run 'configure' with no arguments." >&2
+        echo "*** If you wish to pass any to it, please specify them on the" >&2
+        echo "*** '$0' command line." >&2
+        echo "" >&2
+fi
 
 git submodule update --init --recursive
 
@@ -23,6 +28,19 @@ git submodule update --init --recursive
 # changing this, please also change ext/Makefile.am.
 sed -e 's,$(libglnx_srcpath),libglnx,g' < ext/libglnx/Makefile-libglnx.am >ext/libglnx/Makefile-libglnx.am.inc
 
-REQUIRED_AUTOMAKE_VERSION=1.13
-set +x
-. gnome-autogen.sh
+aclocal --install || exit 1
+intltoolize --force --copy --automake || exit 1
+autoreconf --verbose --force --install || exit 1
+
+cd "$olddir"
+if [ "$NOCONFIGURE" = "" ]; then
+        $srcdir/configure "$@" || exit 1
+
+        if [ "$1" = "--help" ]; then
+                exit 0
+        else
+                echo "Now type 'make' to compile $PKG_NAME" || exit 1
+        fi
+else
+        echo "Skipping configure process."
+fi
