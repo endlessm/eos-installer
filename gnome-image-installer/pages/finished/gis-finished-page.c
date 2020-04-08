@@ -40,7 +40,7 @@
 #include <locale.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <attr/xattr.h>
+#include <sys/xattr.h>
 
 #include <udisks/udisks.h>
 
