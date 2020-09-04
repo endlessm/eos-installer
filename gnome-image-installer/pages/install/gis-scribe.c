@@ -763,32 +763,11 @@ gis_scribe_write_thread_copy (GisScribe     *self,
        */
       g_autofree gchar *bytes_written_str = format_bytes (bytes_written);
       g_autofree gchar *expected_bytes_str = format_bytes (self->image_size_bytes);
-      g_autoptr(GError) local_error =
-        g_error_new (GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_WRONG_SIZE,
-                     _("Wrote %s bytes, but expected to write %s bytes."),
-                     bytes_written_str, expected_bytes_str);
-
-      /* Due to an image builder bug, for a few days very large images might
-       * not be a round number of sectors long. We obtain the uncompressed size
-       * from the GPT header, which is expressed in sectors. The bug has been
-       * fixed but we want to allow these images through for now.
-       *
-       * https://phabricator.endlessm.com/T20064
-       */
-      g_autofree gchar *image_path = g_file_get_path (self->image);
-      if (bytes_written % 512 != 0
-          && self->image_size_bytes % 512 == 0
-          && bytes_written / 512 == self->image_size_bytes / 512
-          && g_regex_match_simple ("\\.1711(1[56789]|2[0123])-\\d{6}\\.",
-                                   image_path, 0, 0))
-        {
-          g_message ("%s; ignoring due to T20064", local_error->message);
-        }
-      else
-        {
-          g_propagate_error (error, g_steal_pointer (&local_error));
-          return FALSE;
-        }
+      g_set_error (error,
+                   GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_WRONG_SIZE,
+                   _("Wrote %s bytes, but expected to write %s bytes."),
+                   bytes_written_str, expected_bytes_str);
+      return FALSE;
     }
 
   /* Now write the first 1 MiB to disk. Unfortunately GUnixOutputStream does

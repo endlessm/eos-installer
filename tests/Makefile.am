@@ -51,10 +51,6 @@ test_data = \
 	w-8193.img.gz.asc \
 	w-8193.img.xz \
 	w-8193.img.xz.asc \
-	T20064.171120-020312.img \
-	T20064.171120-020312.img.asc \
-	T20064.171120-020312.img.gz \
-	T20064.171120-020312.img.gz.asc \
 	$(NULL)
 
 CLEANFILES += $(test_data)
@@ -68,11 +64,6 @@ w.img:
 # never) a multiple of 1 MiB, which is the buffer size we read and write.
 w-8193.img:
 	$(AM_V_GEN) python3 -c 'print("w" * (8193 * 512), end="")' > $@
-
-# There was a narrow window where images were not necessarily a multiple of 512
-# bytes long. We have a special case for them.
-T20064.171120-020312.img:
-	$(AM_V_GEN) python3 -c 'print("w" * (8192 * 512 + 1), end="")' > $@
 
 # Truncated compressed files, with valid signatures, to test handling of
 # decompression errors.

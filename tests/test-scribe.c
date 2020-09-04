@@ -420,39 +420,6 @@ test_write_success (Fixture       *fixture,
                    target_contents, target_length);
 }
 
-static void
-test_T20064_workaround (Fixture       *fixture,
-                        gconstpointer  user_data)
-{
-  g_autoptr(GAsyncResult) result = NULL;
-  gboolean ret;
-  g_autofree gchar *target_contents = NULL;
-  gsize target_length = 0;
-  gsize expected_length = 8192 * 512 + 1;
-  g_autofree gchar *expected_contents = g_malloc (expected_length);
-  GError *error = NULL;
-
-  g_test_bug ("T20064");
-
-  gis_scribe_write_async (fixture->scribe, fixture->cancellable,
-                          test_scribe_write_cb, &result);
-  while (result == NULL)
-    g_main_context_iteration (NULL, TRUE);
-
-  ret = gis_scribe_write_finish (fixture->scribe, result, &error);
-  g_assert_no_error (error);
-  g_assert_true (ret);
-
-  ret = g_file_get_contents (fixture->target_path,
-                             &target_contents, &target_length,
-                             &error);
-  g_assert_no_error (error);
-  g_assert (ret);
-
-  memset (expected_contents, IMAGE_BYTE, expected_length);
-  g_assert_cmpmem (expected_contents, expected_length,
-                   target_contents, target_length);
-}
 static gchar *
 test_build_filename (GTestFileType file_type,
                      const gchar  *basename)
@@ -490,10 +457,6 @@ main (int argc, char *argv[])
   g_autofree gchar *s8193_gz_sig_path = test_build_filename (G_TEST_BUILT, "w-8193.img.gz.asc");
   g_autofree gchar *s8193_xz_path     = test_build_filename (G_TEST_BUILT, "w-8193.img.xz");
   g_autofree gchar *s8193_xz_sig_path = test_build_filename (G_TEST_BUILT, "w-8193.img.xz.asc");
-  g_autofree gchar *t20064_path       = test_build_filename (G_TEST_BUILT, "T20064.171120-020312.img");
-  g_autofree gchar *t20064_sig_path   = test_build_filename (G_TEST_BUILT, "T20064.171120-020312.img.asc");
-  g_autofree gchar *t20064_gz_path    = test_build_filename (G_TEST_BUILT, "T20064.171120-020312.img.gz");
-  g_autofree gchar *t20064_gz_sig_path= test_build_filename (G_TEST_BUILT, "T20064.171120-020312.img.gz.asc");
   g_autofree gchar *wjt_sig_path      = test_build_filename (G_TEST_DIST, "wjt.asc");
 
   /* Globals */
@@ -607,36 +570,6 @@ main (int argc, char *argv[])
               &length_mismatch_gz,
               fixture_set_up,
               test_error,
-              fixture_tear_down);
-
-  /* A workaround for exactly the kind of image-builder bug that
-   * /scribe/length-mismatch/{img,gz} are testing that we catch. For a few
-   * days, larger images really could be up to 511 bytes longer than the size
-   * implied by the GPT header.
-   *
-   * We have a workaround for these cases, triggered by matching the date in
-   * the path, to allow writing these images to succeed.
-   */
-  TestData length_mismatch_t20064 = {
-      .image_path = t20064_path,
-      .signature_path = t20064_sig_path,
-      .uncompressed_size = 8192 * 512,
-  };
-  g_test_add ("/scribe/length-mismatch/T20064/img", Fixture,
-              &length_mismatch_t20064,
-              fixture_set_up,
-              test_T20064_workaround,
-              fixture_tear_down);
-
-  TestData length_mismatch_t20064_gz = {
-      .image_path = t20064_gz_path,
-      .signature_path = t20064_gz_sig_path,
-      .uncompressed_size = 8192 * 512,
-  };
-  g_test_add ("/scribe/length-mismatch/T20064/gz", Fixture,
-              &length_mismatch_t20064_gz,
-              fixture_set_up,
-              test_T20064_workaround,
               fixture_tear_down);
 
   /* Valid signature for a corrupt (specifically, truncated) gzipped image. By
