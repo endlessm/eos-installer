@@ -27,35 +27,38 @@ xz = [find_program('xz'), '-0', '--keep', '--force', '@INPUT@']
 make_fake_image = find_program('make-fake-image')
 
 test_scribe_cases = {
+  # "OS image" consisting of the same byte repeated to 4 MiB
   'w': '2 ** 22',
+  # 
+  'w-8193': '2 * 8193
 }
 test_scribe_generated_sources = []
 foreach basename, size : test_scribe_cases
-  w_img = custom_target('w.img',
+  w_img = custom_target(basename + '.img',
     command: [make_fake_image, size, '@OUTPUT@'],
     output: '@0@.img'.format(basename),
   )
-  w_img_asc = custom_target('w.img.asc',
+  w_img_asc = custom_target(basename + '.img.asc',
     command: sign_file,
     input: w_img,
     output: 'w.img.asc',
   )
-  w_img_xz = custom_target('w.img.xz',
+  w_img_xz = custom_target(basename + '.img.xz',
     command: xz,
     input: w_img,
     output: 'w.img.xz',
   )
-  w_img_xz_asc = custom_target('w.img.xz.asc',
+  w_img_xz_asc = custom_target(basename + '.img.xz.asc',
     command: sign_file,
     input: w_img_xz,
     output: 'w.img.xz.asc',
   )
-  w_img_gz = custom_target('w.img.gz',
+  w_img_gz = custom_target(basename + '.img.gz',
     command: gz,
     input: w_img,
     output: 'w.img.gz',
   )
-  w_img_gz_asc = custom_target('w.img.gz.asc',
+  w_img_gz_asc = custom_target(basename + 'w.img.gz.asc',
     command: sign_file,
     input: w_img_gz,
     output: '@PLAINNAME@.asc',
