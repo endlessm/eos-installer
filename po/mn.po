@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-29 12:34+0000\n"
+"POT-Creation-Date: 2020-10-13 15:14+0000\n"
 "PO-Revision-Date: 2020-02-23 13:35+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
 "Language-Team: Mongolian (http://www.transifex.com/endless-os/eos-installer/language/mn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -333,10 +333,10 @@ msgid "Step %d of %d"
 msgstr ""
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:336
-#: ../gnome-image-installer/pages/install/gis-scribe.c:916
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1251
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1363
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1403
+#: ../gnome-image-installer/pages/install/gis-scribe.c:895
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1230
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1342
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1382
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
@@ -358,16 +358,16 @@ msgstr ""
 msgid "Wrote %s bytes, but expected to write %s bytes."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1094
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1073
 msgid "Image verification error."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1141
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1120
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1317
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1296
 msgid "Could not decompress the image file."
 msgstr ""
 
