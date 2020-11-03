@@ -7,13 +7,14 @@
 # 25c299dc371da5bff014f86901f492aa, 2016-2017
 # Rajesh Ranjan <rajeshkajha@yahoo.com>, 2013-2014
 # Roddy Shuler <roddy@stanfordalumni.org>, 2016,2018
+# Will Thompson <wjt@endlessos.org>, 2020
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-13 15:14+0000\n"
-"PO-Revision-Date: 2020-02-23 13:35+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"POT-Creation-Date: 2020-10-28 16:33+0000\n"
+"PO-Revision-Date: 2020-11-03 12:32+0000\n"
+"Last-Translator: Will Thompson <wjt@endlessos.org>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-os/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -360,7 +361,7 @@ msgstr "तीव्र, उपयोग में आसान और शक्
 #: ../gnome-image-installer/pages/install/gis-scribe.c:768
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
-msgstr ""
+msgstr "%s बाइट्स लिखें, लेकिन %s बाइट्स लिखने की उम्मीद थी। "
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1073
 msgid "Image verification error."
