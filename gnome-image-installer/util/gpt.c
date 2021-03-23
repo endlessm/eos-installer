@@ -3,7 +3,6 @@
 #include "crc32.h"
 
 static uint8_t GPT_GUID_EFI[] = {0x28, 0x73, 0x2a, 0xc1, 0x1f, 0xf8, 0xd2, 0x11, 0xba, 0x4b, 0x00, 0xa0, 0xc9, 0x3e, 0xc9, 0x3b};
-static uint8_t GPT_GUID_BOOT[] = {0x48, 0x61, 0x68, 0x21, 0x49, 0x64, 0x6f, 0x6e, 0x74, 0x4e, 0x65, 0x65, 0x64, 0x45, 0x46, 0x49};
 static uint8_t GPT_GUID_LINUX_DATA[] = {0xaf, 0x3d, 0xc6, 0x0f, 0x83, 0x84, 0x72, 0x47, 0x8e, 0x79, 0x3d, 0x69, 0xd8, 0x47, 0x7d, 0xe4};
 static uint8_t GPT_GUID_LINUX_ROOTFS1[] = {0x40, 0x95, 0x47, 0x44, 0x97, 0xf2, 0x41, 0xb2, 0x9a, 0xf7, 0xd1, 0x31, 0xd5, 0xf0, 0x45, 0x8a};
 static uint8_t GPT_GUID_LINUX_ROOTFS2[] = {0xe3, 0xbc, 0x68, 0x4f, 0xcd, 0xe8, 0xb1, 0x4d, 0x96, 0xe7, 0xfb, 0xca, 0xf9, 0x84, 0xb7, 0x09};
@@ -162,7 +161,7 @@ static uint64_t get_disk_size(struct ptable *pt)
  */
 int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
 {
-    int i = 0;
+    size_t i = 0;
 
     if(NULL==pt) return 0;
 
@@ -190,8 +189,10 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
         //  invalid partition size
         return 0;
     }
-    if(pt->header.ptable_count < 3 ) {
-        //  need at least 3 partitions
+    if(pt->header.ptable_count < 2 ) {
+        //  Disk images must have at least 2 partitions: the ESP and the OS
+        //  partition. Endless OS images have an additional BIOS Boot partition
+        //  in between, but GNOME OS images (for example) do not.
         return 0;
     }
     for(i=0; i<512-GPT_HEADER_SIZE; i++) {
@@ -199,12 +200,6 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
             //  padding must be 0
             return 0;
         }
-    }
-    uint64_t flags = 0;
-    memcpy(&flags, pt->partitions[2].attributes, 8);
-    if(!is_nth_flag_set(flags, 55)) {
-        //  55th flag must be 1 for EOS images
-        return 0;
     }
     //  crc32 of header, with 'crc' field zero'ed
     struct gpt_header testcrc_header;
@@ -229,22 +224,31 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
     }
     free(buffer);
 
-    // partition GUIDs
+    // The first partition must be an EFI System Partition
     if(memcmp(&pt->partitions[0].type_guid, GPT_GUID_EFI, 16)!=0) {
-        // invalid first partition GUID
         return 0;
     }
-    if(memcmp(&pt->partitions[1].type_guid, GPT_GUID_BOOT, 16)!=0) {
-        // invalid second partition GUID
-        return 0;
+
+    // A subsequent partition must be a Linux rootfs.
+    int has_root = 0;
+    for (i = 1; i < pt->header.ptable_count; ++i) {
+      if (memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_DATA, 16)==0
+          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS1, 16)==0
+          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS2, 16)==0
+          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS3, 16)==0
+          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS4, 16)==0) {
+        uint64_t flags = 0;
+        memcpy(&flags, pt->partitions[i].attributes, 8);
+        if(!is_nth_flag_set(flags, 55)) {
+          //  55th flag must be 1 for EOS images
+          continue ;
+        }
+        has_root=1;
+        break ;
+      }
     }
-    if(memcmp(&pt->partitions[2].type_guid, GPT_GUID_LINUX_DATA, 16)!=0
-    && memcmp(&pt->partitions[2].type_guid, GPT_GUID_LINUX_ROOTFS1, 16)!=0
-    && memcmp(&pt->partitions[2].type_guid, GPT_GUID_LINUX_ROOTFS2, 16)!=0
-    && memcmp(&pt->partitions[2].type_guid, GPT_GUID_LINUX_ROOTFS3, 16)!=0
-    && memcmp(&pt->partitions[2].type_guid, GPT_GUID_LINUX_ROOTFS4, 16)!=0) {
-        // invalid third partition GUID
-        return 0;
+    if (!has_root) {
+      return 0;
     }
 
     if (size != NULL) {
