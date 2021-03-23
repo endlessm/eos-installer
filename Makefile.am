@@ -22,3 +22,7 @@ EXTRA_DIST = \
 
 DISTCHECK_CONFIGURE_FLAGS = \
     --with-systemdsystemunitdir=$$dc_install_base/$(systemdsystemunitdir)
+
+# FIXME: Work around https://bugs.launchpad.net/intltool/+bug/1712194
+distclean-local:
+	rm -f po/.intltool-merge-cache.lock
