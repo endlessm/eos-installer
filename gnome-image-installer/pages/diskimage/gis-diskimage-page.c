@@ -74,6 +74,7 @@ enum {
     IMAGE_SIZE_BYTES,
     IMAGE_FILE,
     IMAGE_SIGNATURE,
+    IMAGE_CHECKSUM,
     ALIGN,
     IMAGE_REQUIRED_SIZE
 };
@@ -83,6 +84,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 {
   GtkTreeIter i;
   gchar *image, *name, *signature = NULL;
+  g_autofree gchar *checksum = NULL;
   GtkTreeModel *model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   GFile *file = NULL;
   guint64 size_bytes;
@@ -98,6 +100,7 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
       IMAGE_NAME, &name,
       IMAGE_FILE, &image,
       IMAGE_SIGNATURE, &signature,
+      IMAGE_CHECKSUM, &checksum,
       IMAGE_SIZE_BYTES, &size_bytes,
       IMAGE_REQUIRED_SIZE, &required_size,
       -1);
@@ -116,6 +119,11 @@ gis_diskimage_page_selection_changed(GtkWidget *combo, GisPage *page)
 
   gis_store_set_image_signature (signature);
   g_free (signature);
+
+  if (checksum == NULL)
+    checksum = g_strjoin (NULL, image, ".sha256", NULL);
+
+  gis_store_set_image_checksum (checksum);
 
   gis_page_set_complete (page, TRUE);
 
@@ -202,7 +210,7 @@ static gchar *get_display_name(const gchar *fullname)
   GMatchInfo *info;
   gchar *name = NULL;
 
-  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-(?:[^-]+)-(?:[^.]+)\\.(?:[^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img(?:\\.([gx]z|asc))$", 0, 0, NULL);
+  reg = g_regex_new ("^.*/([^-]+)-([^-]+)-(?:[^-]+)-(?:[^.]+)\\.(?:[^.]+)\\.([^.]+)(?:\\.(disk\\d))?\\.img(?:\\.([gx]z|asc|sha256))$", 0, 0, NULL);
   g_regex_match (reg, fullname, 0, &info);
   if (g_match_info_matches (info))
     {
@@ -295,7 +303,8 @@ add_image (
     GtkListStore *store,
     const gchar  *image,
     const gchar  *image_device,
-    const gchar  *signature)
+    const gchar  *signature,
+    const gchar  *checksum)
 {
   GtkTreeIter i;
   GError *error = NULL;
@@ -331,11 +340,18 @@ add_image (
         {
           displayname = get_display_name (image);
 
-          /* if we have a signature file passed in, attempt to get the name
-           * from that too */
-          if (displayname == NULL && signature != NULL)
+          /* if we have a signature file or checksum file passed in,
+           * attempt to get the name from that too */
+          if (displayname == NULL)
             {
-              displayname = get_display_name (signature);
+              if (signature != NULL)
+                {
+                  displayname = get_display_name (signature);
+                }
+              if (displayname == NULL && checksum != NULL)
+                {
+                  displayname = get_display_name (checksum);
+                }
             }
         }
 
@@ -352,6 +368,7 @@ add_image (
                               IMAGE_SIZE_BYTES, (guint64) size_bytes,
                               IMAGE_FILE, image_device != NULL ? image_device : image,
                               IMAGE_SIGNATURE, signature,
+                              IMAGE_CHECKSUM, checksum,
                               IMAGE_REQUIRED_SIZE, required_size,
                               -1);
           g_free (size);
@@ -428,6 +445,8 @@ gis_diskimage_page_add_live_image (
   g_autofree gchar *live_flag_contents = NULL;
   g_autofree gchar *live_sig_basename = NULL;
   g_autofree gchar *live_sig = NULL;
+  g_autofree gchar *live_csum_basename = NULL;
+  g_autofree gchar *live_csum = NULL;
   gchar *endless_path; /* either endless_img_path or endless_squash_path */
 
   endless_path = first_existing (endless_img_path, endless_squash_path, error);
@@ -443,8 +462,10 @@ gis_diskimage_page_add_live_image (
   g_strstrip (live_flag_contents);
   live_sig_basename = g_strdup_printf ("%s.%s", live_flag_contents, "asc");
   live_sig = g_build_path ("/", path, "endless", live_sig_basename, NULL);
+  live_csum_basename = g_strdup_printf ("%s.%s", live_flag_contents, "sha256");
+  live_csum = g_build_path ("/", path, "endless", live_csum_basename, NULL);
 
-  if (!file_exists (live_sig, error))
+  if (!first_existing (live_sig, live_csum, error))
     {
       return FALSE;
     }
@@ -460,13 +481,13 @@ gis_diskimage_page_add_live_image (
 
   if (file_exists (live_device_path, NULL))
     {
-      add_image (store, endless_path, live_device_path, live_sig);
+      add_image (store, endless_path, live_device_path, live_sig, live_csum);
     }
   else if (endless_path == endless_img_path)
     {
       g_message ("can't find image device %s; will use %s directly",
                  live_device_path, endless_img_path);
-      add_image (store, endless_img_path, NULL, live_sig);
+      add_image (store, endless_img_path, NULL, live_sig, live_csum);
     }
   else
     {
@@ -513,7 +534,7 @@ gis_diskimage_page_populate_model (GisPage     *page,
       if (ufile == NULL || g_strcmp0 (ufile, file) == 0)
         {
           g_autofree gchar *fullpath = g_build_path ("/", path, file, NULL);
-          add_image (priv->image_store, fullpath, NULL, NULL);
+          add_image (priv->image_store, fullpath, NULL, NULL, NULL);
         }
     }
 

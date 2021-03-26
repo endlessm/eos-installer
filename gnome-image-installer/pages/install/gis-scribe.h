@@ -31,6 +31,7 @@ gis_scribe_new (GFile       *image,
                 guint64      image_size,
                 guint64      compressed_size,
                 GFile       *signature,
+                GFile       *checksum,
                 const gchar *drive_path,
                 gint         drive_fd,
                 gboolean     convert_to_mbr);

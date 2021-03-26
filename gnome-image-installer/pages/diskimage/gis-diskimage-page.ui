@@ -14,6 +14,8 @@
       <column type="gchararray"/>
       <!-- column-name image_signature -->
       <column type="gchararray"/>
+      <!-- column-name image_checksum -->
+      <column type="gchararray"/>
       <!-- column-name align -->
       <column type="PangoAlignment"/>
       <!-- column-name required_size -->
@@ -132,7 +134,7 @@
                             <property name="xpad">24</property>
                           </object>
                           <attributes>
-                            <attribute name="alignment">5</attribute>
+                            <attribute name="alignment">6</attribute>
                             <attribute name="text">1</attribute>
                           </attributes>
                         </child>

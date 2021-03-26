@@ -85,6 +85,7 @@ typedef struct _GisScribe {
    */
   guint64 compressed_size_bytes;
   GFile *signature;
+  GFile *checksum;
   gchar *keyring_path;
   gchar *drive_path;
   gboolean convert_to_mbr;
@@ -92,9 +93,9 @@ typedef struct _GisScribe {
 
   gboolean started;
   guint step;
-  gdouble gpg_progress;
+  gdouble verify_progress;
 
-  /* MIN(gpg_progress, bytes_written / image_size_bytes) */
+  /* MIN(verify_progress, bytes_written / image_size_bytes) */
   gdouble overall_progress;
 
   GMutex mutex;
@@ -111,9 +112,9 @@ typedef struct _GisScribe {
 
   /* The first error reported by a subtask, or NULL if all (so far) have
    * completed successfully. In particular, this is non-NULL if
-   * (outstanding_tasks & GIS_SCRIBE_TASK_VERIFY) == 0 (ie the GPG step has
-   * completed) and GPG returned an error. The write sub-task uses this as a
-   * signal to abort the write process.
+   * (outstanding_tasks & GIS_SCRIBE_TASK_VERIFY) == 0 (ie the verify step has
+   * completed) and verification returned an error. The write sub-task uses
+   * this as a signal to abort the write process.
    */
   GError *error;
 
@@ -129,7 +130,7 @@ typedef struct _GisScribe {
 typedef struct {
   GInputStream *image_input;
 
-  GOutputStream *gpg_stdin;
+  GOutputStream *verify_pipe;
   GOutputStream *write_pipe;
 } GisScribeTeeData;
 
@@ -157,6 +158,21 @@ gis_scribe_gpg_data_free (GisScribeGpgData *data)
   g_slice_free (GisScribeGpgData, data);
 }
 
+/* String length of a sha256 checksum hex digest */
+#define CHECKSUM_STRLEN 64
+
+typedef struct {
+  gchar expected_checksum[CHECKSUM_STRLEN + 1];
+  GInputStream *input;
+} GisScribeChecksumData;
+
+static void
+gis_scribe_checksum_data_free (GisScribeChecksumData *data)
+{
+  g_clear_object (&data->input);
+  g_slice_free (GisScribeChecksumData, data);
+}
+
 G_DEFINE_TYPE (GisScribe, gis_scribe, G_TYPE_OBJECT)
 
 typedef enum {
@@ -165,6 +181,7 @@ typedef enum {
   PROP_IMAGE_SIZE,
   PROP_COMPRESSED_SIZE,
   PROP_SIGNATURE,
+  PROP_CHECKSUM,
   PROP_KEYRING_PATH,
   PROP_DRIVE_PATH,
   PROP_DRIVE_FD,
@@ -208,6 +225,11 @@ gis_scribe_set_property (GObject      *object,
     case PROP_SIGNATURE:
       g_clear_object (&self->signature);
       self->signature = G_FILE (g_value_dup_object (value));
+      break;
+
+    case PROP_CHECKSUM:
+      g_clear_object (&self->checksum);
+      self->checksum = G_FILE (g_value_dup_object (value));
       break;
 
     case PROP_KEYRING_PATH:
@@ -274,6 +296,10 @@ gis_scribe_get_property (GObject      *object,
       g_value_set_object (value, self->signature);
       break;
 
+    case PROP_CHECKSUM:
+      g_value_set_object (value, self->checksum);
+      break;
+
     case PROP_KEYRING_PATH:
       g_value_set_string (value, self->keyring_path);
       break;
@@ -318,6 +344,7 @@ gis_scribe_constructed (GObject *object)
 
   g_return_if_fail (self->image != NULL);
   g_return_if_fail (self->signature != NULL);
+  g_return_if_fail (self->checksum != NULL);
   g_return_if_fail (self->keyring_path != NULL);
   g_return_if_fail (self->drive_path != NULL);
   g_return_if_fail (self->drive_fd >= 0);
@@ -333,6 +360,7 @@ gis_scribe_dispose (GObject *object)
   g_clear_object (&self->image);
   g_clear_object (&self->image_input);
   g_clear_object (&self->signature);
+  g_clear_object (&self->checksum);
 
   G_OBJECT_CLASS (gis_scribe_parent_class)->dispose (object);
 }
@@ -413,6 +441,13 @@ gis_scribe_class_init (GisScribeClass *klass)
       "signature",
       "Signature",
       "Detached GPG signature for :image.",
+      G_TYPE_FILE,
+      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  props[PROP_CHECKSUM] = g_param_spec_object (
+      "checksum",
+      "Checksum",
+      "File containing SHA256 checksum for :image.",
       G_TYPE_FILE,
       G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
@@ -506,6 +541,7 @@ gis_scribe_new (GFile       *image,
                 guint64      image_size_bytes,
                 guint64      compressed_size_bytes,
                 GFile       *signature,
+                GFile       *checksum,
                 const gchar *drive_path,
                 gint         drive_fd,
                 gboolean     convert_to_mbr)
@@ -523,6 +559,7 @@ gis_scribe_new (GFile       *image,
       "image-size", image_size_bytes,
       "compressed-size", compressed_size_bytes,
       "signature", signature,
+      "checksum", checksum,
       "drive-path", drive_path,
       "drive-fd", drive_fd,
       "convert-to-mbr", convert_to_mbr,
@@ -602,10 +639,10 @@ gis_scribe_update_progress (gpointer data)
    * pretty close in the compressed case assuming the compression ratio is
    * roughly constant throughout the file.
    */
-  progress = MIN (self->gpg_progress, write_progress);
+  progress = MIN (self->verify_progress, write_progress);
 
-  g_debug ("%s: GPG progress %3.0f%%, write progress %3.0f%%",
-           G_STRFUNC, self->gpg_progress * 100, write_progress * 100);
+  g_debug ("%s: verify progress %3.0f%%, write progress %3.0f%%",
+           G_STRFUNC, self->verify_progress * 100, write_progress * 100);
 
   if (progress != self->overall_progress)
     {
@@ -638,8 +675,8 @@ gis_scribe_blkdiscard (gint     fd,
 }
 
 static gboolean
-gis_scribe_write_thread_await_gpg (GisScribe *self,
-                                   GError   **error)
+gis_scribe_write_thread_await_verify (GisScribe *self,
+                                      GError   **error)
 {
   g_autoptr(GError) local_error = NULL;
 
@@ -743,8 +780,8 @@ gis_scribe_write_thread_copy (GisScribe     *self,
   if (!g_input_stream_close (decompressed, cancellable, error))
     return FALSE;
 
-  /* Wait for GPG verification to complete */
-  if (!gis_scribe_write_thread_await_gpg (self, error))
+  /* Wait for verification to complete */
+  if (!gis_scribe_write_thread_await_verify (self, error))
     return FALSE;
 
   /* Check that we've written the same amount of data as we expected from the
@@ -1035,11 +1072,11 @@ gis_scribe_gpg_progress (GObject *pollable_stream,
       /* gpg can't determine the file size. Should not happen, since we
        * gave it a hint.
        */
-      self->gpg_progress = -1;
+      self->verify_progress = -1;
     }
   else
     {
-      self->gpg_progress = CLAMP ((gdouble) curr / (gdouble) full, 0, 1);
+      self->verify_progress = CLAMP ((gdouble) curr / (gdouble) full, 0, 1);
     }
 
   return G_SOURCE_CONTINUE;
@@ -1083,10 +1120,10 @@ gis_scribe_gpg_wait_check_cb (GObject      *source,
  * Returns: (transfer full): the GPG subprocess' stdin, or %NULL on error.
  */
 static GOutputStream *
-gis_scribe_begin_verify (GisScribe *self,
-                         GCancellable *cancellable,
-                         GAsyncReadyCallback callback,
-                         gpointer data)
+gis_scribe_begin_verify_gpg (GisScribe *self,
+                             GCancellable *cancellable,
+                             GAsyncReadyCallback callback,
+                             gpointer data)
 {
   g_autoptr(GTask) task = g_task_new (self, cancellable, callback, data);
   GisScribeGpgData *task_data = g_slice_new0 (GisScribeGpgData);
@@ -1151,6 +1188,134 @@ gis_scribe_begin_verify (GisScribe *self,
 }
 
 static void
+checksum_in_thread (GTask        *task,
+                    gpointer      source,
+                    gpointer      task_data,
+                    GCancellable *cancellable)
+{
+  GisScribe *self = source;
+  GisScribeChecksumData *checksum_data = task_data;
+  gsize len;
+  guint8 buf[BUFFER_SIZE];
+  g_autoptr(GChecksum) sha256sum = g_checksum_new (G_CHECKSUM_SHA256);
+  g_autoptr(GError) error = NULL;
+  guint64 bytes_checksummed = 0;
+  const gchar *digest;
+
+  for (;;) {
+    if (!g_input_stream_read_all (checksum_data->input, buf, sizeof (buf), &len,
+                                  NULL, &error))
+      {
+        task_return_error (self, task, g_steal_pointer (&error));
+        return;
+      }
+
+    if (len == 0)
+      break;
+
+    g_checksum_update (sha256sum, buf, len);
+
+    bytes_checksummed += len;
+    self->verify_progress = ((gdouble) bytes_checksummed) / ((gdouble) self->image_size_bytes);
+  }
+
+  digest = g_checksum_get_string (sha256sum);
+  if (g_strcmp0 (digest, checksum_data->expected_checksum) != 0)
+    {
+      task_return_new_error (
+          self, task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+          _("Image checksum ‘%s‘ does not match expected checksum ‘%s‘."),
+          digest, checksum_data->expected_checksum);
+      return;
+    }
+
+  g_task_return_boolean (task, TRUE);
+}
+
+static GOutputStream *
+gis_scribe_begin_verify_checksum (GisScribe           *self,
+                                  GCancellable        *cancellable,
+                                  GAsyncReadyCallback  callback,
+                                  gpointer             data)
+{
+  g_autoptr(GTask) task = g_task_new (self, cancellable, callback, data);
+  GisScribeChecksumData *task_data = g_slice_new0 (GisScribeChecksumData);
+  g_autofree gchar *checksum_path = g_file_get_path (self->checksum);
+  g_autofree gchar *checksum_contents = NULL;
+  g_auto(GStrv) checksum_words = NULL;
+  gsize checksum_len;
+  gchar *cur;
+  gint pipefd[2];
+  g_autoptr(GError) error = NULL;
+
+  g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_VERIFY));
+  g_task_set_task_data (task, task_data,
+                        (GDestroyNotify) gis_scribe_checksum_data_free);
+
+  if (!g_file_query_exists (self->checksum, NULL))
+    {
+      task_return_new_error (
+          self, task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+          _("The checksum file ‘%s’ does not exist."),
+          checksum_path);
+      return NULL;
+    }
+
+  /* Read in the checksum file to get the expected checksum. */
+  if (!g_file_load_contents (self->checksum, cancellable, &checksum_contents,
+                             &checksum_len, NULL, &error))
+    {
+      task_return_error (self, task, g_steal_pointer (&error));
+      return NULL;
+    }
+
+  g_strstrip (checksum_contents);
+  checksum_words = g_strsplit (checksum_contents, " ", -1);
+  if (checksum_words[0] == NULL)
+    {
+      task_return_new_error (
+          self, task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+          _("The checksum file ‘%s’ does not contain a checksum."),
+          checksum_path);
+      return NULL;
+    }
+
+  if (strlen (checksum_words[0]) != CHECKSUM_STRLEN)
+    {
+      task_return_new_error (
+          self, task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+          _("The checksum ‘%s’ does not contain %d characters."),
+          checksum_words[0], CHECKSUM_STRLEN);
+      return NULL;
+    }
+
+  for (cur = checksum_words[0]; cur && *cur; cur++)
+    {
+      if (!g_ascii_isxdigit (*cur)) {
+        task_return_new_error (
+            self, task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+            _("The checksum ‘%s’ contains invalid character ‘%c’."),
+            checksum_words[0], *cur);
+        return NULL;
+      }
+    }
+
+  g_strlcpy (task_data->expected_checksum, checksum_words[0],
+             sizeof (task_data->expected_checksum));
+
+  if (!g_unix_open_pipe (pipefd, FD_CLOEXEC, &error))
+    {
+      task_return_error (self, task, g_steal_pointer (&error));
+      return FALSE;
+    }
+
+  task_data->input = g_unix_input_stream_new (pipefd[0], TRUE);
+  g_task_run_in_thread (task, checksum_in_thread);
+
+  return g_unix_output_stream_new (pipefd[1], TRUE);
+}
+
+static void
 gis_scribe_tee_close (GisScribeTeeData *data,
                       GCancellable     *cancellable)
 {
@@ -1158,9 +1323,11 @@ gis_scribe_tee_close (GisScribeTeeData *data,
     gis_scribe_close_input_stream_or_warn (data->image_input, cancellable,
                                            "file input stream");
 
-  /* Closing its stdin will ultimately cause the GPG subprocess to exit. */
-  gis_scribe_close_output_stream_or_warn (data->gpg_stdin, cancellable,
-                                          "GPG stdin");
+  /* Closing the verify pipe will ultimately cause the GPG subprocess to
+   * exit when stdin is closed or the checksum read thread to terminate.
+   */
+  gis_scribe_close_output_stream_or_warn (data->verify_pipe, cancellable,
+                                          "verify pipe");
 
   /* Similarly, closing the pipe will cause the write thread to terminate. */
   gis_scribe_close_output_stream_or_warn (data->write_pipe, cancellable,
@@ -1173,13 +1340,13 @@ gis_scribe_tee_data_free (GisScribeTeeData *data)
   gis_scribe_tee_close (data, NULL);
 
   g_clear_object (&data->image_input);
-  g_clear_object (&data->gpg_stdin);
+  g_clear_object (&data->verify_pipe);
   g_clear_object (&data->write_pipe);
 
   g_slice_free (GisScribeTeeData, data);
 }
 
-/* Reads the image from disk and writes it to both the GPG subprocess and the
+/* Reads the image from disk and writes it to both the verify pipe and the
  * writer thread.
  */
 static void
@@ -1205,10 +1372,10 @@ gis_scribe_tee_thread (GTask            *task,
           break;
         }
 
-      if (!g_output_stream_write_all (task_data->gpg_stdin, buffer, r,
+      if (!g_output_stream_write_all (task_data->verify_pipe, buffer, r,
                                       NULL, cancellable, &error))
         {
-          g_prefix_error (&error, "error writing image to GPG: ");
+          g_prefix_error (&error, "error writing image to verifier: ");
           break;
         }
 
@@ -1240,7 +1407,7 @@ gis_scribe_tee_thread (GTask            *task,
 
 static void
 gis_scribe_begin_tee (GisScribe          *self,
-                      GOutputStream      *gpg_stdin,
+                      GOutputStream      *verify_pipe,
                       GOutputStream      *write_pipe,
                       GCancellable       *cancellable,
                       GAsyncReadyCallback callback,
@@ -1250,7 +1417,7 @@ gis_scribe_begin_tee (GisScribe          *self,
   GisScribeTeeData *task_data = g_slice_new0 (GisScribeTeeData);
   g_autoptr(GError) error = NULL;
 
-  task_data->gpg_stdin = g_object_ref (gpg_stdin);
+  task_data->verify_pipe = g_object_ref (verify_pipe);
   task_data->write_pipe = g_object_ref (write_pipe);
 
   g_task_set_source_tag (task, GUINT_TO_POINTER (GIS_SCRIBE_TASK_TEE));
@@ -1480,15 +1647,38 @@ gis_scribe_write_async (GisScribe          *self,
                         gpointer            user_data)
 {
   g_autoptr(GTask) task = g_task_new (self, cancellable, callback, user_data);
+  gboolean verify_gpg;
   g_autoptr(GInputStream) decompressed = NULL;
   g_autoptr(GOutputStream) write_pipe = NULL;
-  g_autoptr(GOutputStream) gpg_stdin = NULL;
+  g_autoptr(GOutputStream) verify_pipe = NULL;
 
   if (self->started)
     {
       g_task_return_new_error (task, GIS_INSTALL_ERROR,
                                GIS_INSTALL_ERROR_INTERNAL_ERROR,
                                "already started");
+      return;
+    }
+
+  /* Make sure one of the verification files exists before starting any
+   * subtasks.
+   */
+  if (g_file_query_exists (self->signature, cancellable))
+    {
+      verify_gpg = TRUE;
+    }
+  else if (g_file_query_exists (self->checksum, cancellable))
+    {
+      verify_gpg = FALSE;
+    }
+  else
+    {
+      g_autofree gchar *signature_path = g_file_get_path (self->signature);
+      g_autofree gchar *checksum_path = g_file_get_path (self->checksum);
+      g_task_return_new_error (
+          task, GIS_IMAGE_ERROR, GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+          _("Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."),
+          signature_path, checksum_path);
       return;
     }
 
@@ -1504,13 +1694,24 @@ gis_scribe_write_async (GisScribe          *self,
                                     g_object_ref (task)))
     return;
 
-  /* Attempt to spawn GPG subprocess */
+  /* Attempt to spawn GPG subprocess or checksum thread */
   g_mutex_lock (&self->mutex);
   self->outstanding_tasks |= GIS_SCRIBE_TASK_VERIFY;
   g_mutex_unlock (&self->mutex);
-  gpg_stdin = gis_scribe_begin_verify (self, cancellable, gis_scribe_subtask_cb,
-                                       g_object_ref (task));
-  if (gpg_stdin == NULL)
+  if (verify_gpg)
+    {
+      verify_pipe = gis_scribe_begin_verify_gpg (self, cancellable,
+                                                 gis_scribe_subtask_cb,
+                                                 g_object_ref (task));
+    }
+  else
+    {
+      verify_pipe = gis_scribe_begin_verify_checksum (self, cancellable,
+                                                      gis_scribe_subtask_cb,
+                                                      g_object_ref (task));
+    }
+
+  if (verify_pipe == NULL)
     {
       gis_scribe_close_output_stream_or_warn (write_pipe, cancellable,
                                               "decompressor stdin");
@@ -1519,15 +1720,17 @@ gis_scribe_write_async (GisScribe          *self,
       return;
     }
 
-  gis_scribe_setpipe_sz ("gpg stdin", G_FILE_DESCRIPTOR_BASED (gpg_stdin));
+  gis_scribe_setpipe_sz ("verify input", G_FILE_DESCRIPTOR_BASED (verify_pipe));
   gis_scribe_setpipe_sz ("decompressor stdin", G_FILE_DESCRIPTOR_BASED (write_pipe));
   gis_scribe_setpipe_sz ("decompressor stdout", G_FILE_DESCRIPTOR_BASED (decompressed));
 
-  /* Start feeding the image to GPG and to one end of a pipe-to-self */
+  /* Start feeding the image to the verification pipe and to one end of a
+   * pipe-to-self
+   */
   g_mutex_lock (&self->mutex);
   self->outstanding_tasks |= GIS_SCRIBE_TASK_TEE;
   g_mutex_unlock (&self->mutex);
-  gis_scribe_begin_tee (self, gpg_stdin, write_pipe, cancellable,
+  gis_scribe_begin_tee (self, verify_pipe, write_pipe, cancellable,
                         gis_scribe_subtask_cb, g_object_ref (task));
 
   /* Start reading from the other end of the pipe and writing to disk */

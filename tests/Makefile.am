@@ -32,15 +32,21 @@ dist_test_data = \
 	unattended/non-utf8-locale.ini \
 	unattended/two-images.ini \
 	wjt.asc \
+	bad.sha256 \
+	invalid-1.sha256 \
+	invalid-2.sha256 \
 	$(NULL)
 
 test_data = \
 	w.img \
 	w.img.asc \
+	w.img.sha256 \
 	w.img.gz \
 	w.img.gz.asc \
+	w.img.gz.sha256 \
 	w.img.xz \
 	w.img.xz.asc \
+	w.img.xz.sha256 \
 	w.truncated.gz \
 	w.truncated.gz.asc \
 	w.truncated.xz \
@@ -83,6 +89,9 @@ w.truncated.%z: w.img.%z
 		--gpg-path $(GPG_PATH) \
 		--gpgconf-path $(GPGCONF_PATH) \
 		$(srcdir)/secret.asc $<
+
+%.sha256: %
+	$(AM_V_GEN) sha256sum $< >$@
 
 test_scribe_SOURCES = \
 	test-error-input-stream.c \
