@@ -129,12 +129,11 @@ One way to run this application while developing it is with the following setup:
   signature. This can be a loopback device if you want to avoid using removable
   media, but it has to have a GPT. (xz decompression is really slow, so gz is
   strongly recommended.)
-* Disk 2: a target disk large enough to write the OS image to. `eos-installer`
-  only considers non-removable disks with a corresponding block device to be
-  install targets, so unless you have a computer with multiple built-in disks,
-  you'll need to either do all this in a virtual machine with multiple fixed
-  disks, or temporarily patch the checks in the `disktarget` page to allow a
-  loopback device or removable disk to be the install target.
+* Disk 2: a target disk or loop associated file large enough to write the OS
+  image to. `eos-installer` only considers non-removable disks with a
+  corresponding block device to be install targets, so unless you have a
+  computer with multiple built-in disks, you'll need to either do all this in a
+  virtual machine with multiple fixed disks, or use a loopback device.
 
 If you do not have an `eosimages` partition with at least one image file on it,
 running the app will take you straight to the error screen.
