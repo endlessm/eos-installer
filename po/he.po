@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Omer I.S. <omeritzicschwartz@gmail.com>, 2021
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2012
 # Yosef Or Boczko <yoseforb@gmail.com>, 2013
 # Yosef Or Boczko <yoseforb@gnome.org>, 2013-2016
@@ -10,9 +11,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-28 16:33+0000\n"
-"PO-Revision-Date: 2020-02-23 13:35+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"POT-Creation-Date: 2021-03-31 16:33+0000\n"
+"PO-Revision-Date: 2021-03-30 15:37+0000\n"
+"Last-Translator: Omer I.S. <omeritzicschwartz@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/endless-os/eos-installer/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +23,11 @@ msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
-msgstr "ה_בא"
+msgstr "ק_דימה"
 
 #: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
-msgstr "ה_קודם"
+msgstr "א_חורה"
 
 #: ../gnome-initial-setup/gis-assistant.c:427
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
@@ -79,23 +80,23 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "מוצר"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
-msgstr ""
+msgstr "תמונה"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
 msgid "Target"
-msgstr ""
+msgstr "יעד"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "התקן"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "גודל"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
@@ -209,7 +210,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
 msgid "Finish"
-msgstr ""
+msgstr "סיו"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
 msgid "Select Disk"
@@ -225,7 +226,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr ""
+msgstr "מחיקת <b>כל הקבצים והיישומים שלי</b> מוסכמת מבחינתי"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
@@ -262,12 +263,12 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
 msgid "Oops, something went wrong while reformatting."
-msgstr ""
+msgstr "אופס, משהו השתבש במהלך הפרמוט."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
 msgid "Oops, something went wrong."
-msgstr ""
+msgstr "אופס, משהו השתבש."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
 msgid "Unattended installation configuration file created"
@@ -309,7 +310,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
-msgstr ""
+msgstr "כיבוי"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
@@ -345,7 +346,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "שגיאה פנימית"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:409
 msgid "Reformatting"

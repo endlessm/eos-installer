@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Hela Basa, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-28 16:33+0000\n"
-"PO-Revision-Date: 2020-02-23 13:35+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"POT-Creation-Date: 2021-03-31 16:33+0000\n"
+"PO-Revision-Date: 2021-03-30 10:34+0000\n"
+"Last-Translator: Hela Basa\n"
 "Language-Team: Sinhala (http://www.transifex.com/endless-os/eos-installer/language/si/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,16 +20,16 @@ msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
-msgstr ""
+msgstr "ඊලඟ (_N)"
 
 #: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
-msgstr ""
+msgstr "පෙර (_P)"
 
 #: ../gnome-initial-setup/gis-assistant.c:427
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
 msgid "_Cancel"
-msgstr ""
+msgstr "අවලංගු (_C)"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
@@ -54,7 +55,7 @@ msgstr[1] ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "නොදන්නා"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
@@ -70,11 +71,11 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "පරිගණක විකිණුම්කරු"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "නිෂ්පාදනය"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
@@ -86,11 +87,11 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "උපාංගය"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "ප්‍රමාණය"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
@@ -114,12 +115,12 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
 msgid "Basic"
-msgstr ""
+msgstr "මූලික"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:225
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
-msgstr ""
+msgstr "එන්ඩ්ලස් ඕඑස්"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:230
 msgid "Endless OS Installer"
@@ -208,7 +209,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
 msgid "Select Disk"
-msgstr ""
+msgstr "තැටිය තෝරන්න"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
@@ -216,7 +217,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "තැටිය තෝරන්න"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
@@ -231,7 +232,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr ""
+msgstr "සුදුසු තැටි හමු නොවිණි"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
@@ -340,7 +341,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "අභ්‍යන්තර දෝෂයකි"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:409
 msgid "Reformatting"
@@ -377,7 +378,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr ""
+msgstr "%s යතුර හිස් ය"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of

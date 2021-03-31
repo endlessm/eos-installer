@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Anish A <aneesh.nl@gmail.com>, 2013
+# Anish Sheela <aneesh.nl@gmail.com>, 2013
 # Razee Marikar <razeetg@yahoo.co.uk>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-28 16:33+0000\n"
+"POT-Creation-Date: 2021-03-31 16:33+0000\n"
 "PO-Revision-Date: 2020-02-23 13:35+0000\n"
 "Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
 "Language-Team: Malayalam (http://www.transifex.com/endless-os/eos-installer/language/ml/)\n"
