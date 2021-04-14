@@ -135,5 +135,37 @@ One way to run this application while developing it is with the following setup:
   computer with multiple built-in disks, you'll need to either do all this in a
   virtual machine with multiple fixed disks, or use a loopback device.
 
+To use loop devices for testing, the following procedure can be used:
+
+```
+# Create a source disk image to store the images to be installed
+truncate -s 5G src.img
+# Write a GPT partition table with a single Linux partition
+sfdisk src.img <<"EOF"
+label: gpt
+type=L
+EOF
+# Attach a loop device with partition scanning to the source image
+src_loop=$(sudo losetup -P --show -f src.img)
+# Make an exFAT file system on the first partition with the eosimages label
+sudo mkfs.exfat -n eosimages "${src_loop}p1"
+# Mount it and copy the to be installed image files to it
+sudo mount -t exfat -o "uid=$(id -u),gid=$(id -g)" "${src_loop}p1" /mnt
+cp eos*.img.* /mnt
+# Create a target disk image to install to
+truncate -s 5G tgt.img
+# Attach a loop device with partition scanning to the target image
+tgt_loop=$(sudo losetup -P --show -f tgt.img)
+```
+
+Now `eos-installer` can be run. To cleanup, unmount the source image and detach
+the loop devices:
+
+```
+sudo umount /mnt
+sudo losetup -d "$src_loop"
+sudo losetup -d "$tgt_loop"
+```
+
 If you do not have an `eosimages` partition with at least one image file on it,
 running the app will take you straight to the error screen.
