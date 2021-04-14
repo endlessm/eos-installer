@@ -64,6 +64,7 @@ check_can_continue(GisDiskTargetPage *page)
   GisDiskTargetPagePrivate *priv = gis_disktarget_page_get_instance_private (page);
   UDisksBlock *block = UDISKS_BLOCK (gis_store_get_object (GIS_STORE_BLOCK_DEVICE));
   UDisksDrive *drive = NULL;
+  guint64 available;
 
   if (!priv->has_valid_disks)
     return;
@@ -74,10 +75,8 @@ check_can_continue(GisDiskTargetPage *page)
     return;
 
   drive = udisks_client_get_drive_for_block (priv->client, UDISKS_BLOCK(block));
-  if (drive == NULL)
-    return;
-
-  if (udisks_drive_get_size(drive) < gis_store_get_required_size())
+  available = drive ? udisks_drive_get_size (drive) : udisks_block_get_size (block);
+  if (available < gis_store_get_required_size())
     return;
 
   if (!gtk_toggle_button_get_active (priv->confirm_button))
@@ -121,9 +120,10 @@ gis_disktarget_page_selection_changed(GtkWidget *combo, GisPage *page)
   if (block != NULL)
     {
       UDisksDrive *drive = udisks_client_get_drive_for_block (priv->client, UDISKS_BLOCK(block));
+      guint64 available = drive ? udisks_drive_get_size (drive) : udisks_block_get_size (UDISKS_BLOCK(block));
       gis_store_set_object (GIS_STORE_BLOCK_DEVICE, block);
       g_object_unref(block);
-      if (udisks_drive_get_size(drive) < gis_store_get_required_size())
+      if (available < gis_store_get_required_size())
         {
           g_autofree gchar *size = g_format_size_full (
               gis_store_get_required_size (),
@@ -273,11 +273,17 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GtkTreeIter i;
   GisUnattendedConfig *config = gis_store_get_unattended_config ();
   UDisksDrive *root = NULL;
-  UDisksDrive *image_drive = UDISKS_DRIVE (gis_store_get_object (GIS_STORE_IMAGE_DRIVE));
+  GObject *image_source = gis_store_get_object (GIS_STORE_IMAGE_SOURCE);
   const gchar *image_drive_path = NULL;
+  const gchar *image_loop_path = NULL;
 
-  if (image_drive != NULL)
-    image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (image_drive));
+  if (image_source != NULL)
+    {
+      if (UDISKS_IS_DRIVE (image_source))
+        image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (UDISKS_DRIVE (image_source)));
+      else if (UDISKS_IS_LOOP (image_source))
+        image_loop_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (UDISKS_LOOP (image_source)));
+    }
 
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear (priv->target_store);
@@ -287,51 +293,82 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
       gchar *targetname, *targetsize;
       UDisksObject *object = UDISKS_OBJECT(l->data);
       const gchar *object_path;
+      const gchar *object_type;
       UDisksDrive *drive = udisks_object_peek_drive(object);
+      UDisksLoop *loop = udisks_object_peek_loop(object);
       UDisksBlock *block;
       const gchar *block_device;
       gboolean has_data_partitions;
-      if (drive == NULL)
+      if (drive == NULL && loop == NULL)
         continue;
 
       object_path = g_dbus_object_get_object_path (G_DBUS_OBJECT (object));
+      object_type = drive ? "drive" : "loop";
 
 #define skip_if(cond, reason, ...) \
       if (cond) \
         { \
-          g_message ("skipping drive %s: " reason, object_path, ##__VA_ARGS__); \
+          g_message ("skipping %s %s: " reason, object_type, object_path, ##__VA_ARGS__); \
           continue; \
         }
 
-      skip_if (drive == root, "it is the root device");
-      skip_if (udisks_drive_get_optical (drive), "optical");
-      skip_if (udisks_drive_get_ejectable (drive), "ejectable");
+      if (drive)
+        {
+          skip_if (drive == root, "it is the root device");
+          skip_if (udisks_drive_get_optical (drive), "optical");
+          skip_if (udisks_drive_get_ejectable (drive), "ejectable");
 
-      block = udisks_client_get_block_for_drive(client, drive, TRUE);
-      skip_if (block == NULL, "no corresponding block object");
+          block = udisks_client_get_block_for_drive(client, drive, TRUE);
+          skip_if (block == NULL, "no corresponding block object");
 
-      skip_if (0 == g_strcmp0 (object_path, image_drive_path),
-               "it hosts the image partition");
+          skip_if (0 == g_strcmp0 (object_path, image_drive_path),
+                   "it hosts the image partition");
+
+          if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
+            {
+              priv->has_valid_disks = TRUE;
+            }
+
+          targetname = g_strdup_printf("%s %s",
+                                       udisks_drive_get_vendor(drive),
+                                       udisks_drive_get_model(drive));
+          targetsize = g_format_size_full (udisks_drive_get_size(drive),
+                                           G_FORMAT_SIZE_DEFAULT);
+        }
+      else
+        {
+          const gchar *backing_file = udisks_loop_get_backing_file (loop);
+          skip_if (backing_file == NULL || *backing_file == '\0',
+                   "no backing file");
+
+          block = udisks_object_peek_block (object);
+          skip_if (block == NULL, "no corresponding block object");
+
+          skip_if (0 == g_strcmp0 (object_path, image_loop_path),
+                   "it hosts the image partition");
+
+          if (udisks_block_get_size (block) >= gis_store_get_required_size ())
+            {
+              priv->has_valid_disks = TRUE;
+            }
+
+          targetname = g_strdup_printf("%s %s",
+                                       udisks_block_get_device (block),
+                                       backing_file);
+          targetsize = g_format_size_full (udisks_block_get_size (block),
+                                           G_FORMAT_SIZE_DEFAULT);
+        }
+
       block_device = udisks_block_get_device (block);
       skip_if (config != NULL &&
                !gis_unattended_config_matches_device (config, block_device),
                "it doesn't match the unattended config");
 #undef skip_if
 
-      g_message ("adding drive %s to list", object_path);
-
-      if (udisks_drive_get_size(drive) >= gis_store_get_required_size())
-        {
-          priv->has_valid_disks = TRUE;
-        }
+      g_message ("adding %s %s to list", object_type, object_path);
 
       has_data_partitions = gis_disktarget_page_has_data_partitions(page, objects, block);
 
-      targetname = g_strdup_printf("%s %s",
-                                   udisks_drive_get_vendor(drive),
-                                   udisks_drive_get_model(drive));
-      targetsize = g_format_size_full (udisks_drive_get_size(drive),
-                                       G_FORMAT_SIZE_DEFAULT);
       gtk_list_store_append (priv->target_store, &i);
       gtk_list_store_set (priv->target_store, &i,
                           0, targetname,

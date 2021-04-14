@@ -45,10 +45,11 @@ typedef enum {
    */
   GIS_STORE_IMAGE_DIR,
 
-  /* UDisksDrive: drive hosting partition mounted at GIS_STORE_IMAGE_DIR, or
-   * NULL if it can't be determined
+  /* UDisksDrive or UDisksLoop: drive or loop block device hosting
+   * partition mounted at GIS_STORE_IMAGE_DIR, or NULL if it can't be
+   * determined. Check with UDISKS_IS_DRIVE or UDISKS_IS_LOOP.
    */
-  GIS_STORE_IMAGE_DRIVE,
+  GIS_STORE_IMAGE_SOURCE,
 
   GIS_STORE_N_OBJECTS
 } GISStoreObjectKey;
