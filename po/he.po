@@ -3,7 +3,8 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Omer I.S. <omeritzicschwartz@gmail.com>, 2021
+# Omeritzics Games <omeritzicschwartz@gmail.com>, 2021
+# Omeritzics Games <omeritzicschwartz@gmail.com>, 2021
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2012
 # Yosef Or Boczko <yoseforb@gmail.com>, 2013
 # Yosef Or Boczko <yoseforb@gnome.org>, 2013-2016
@@ -11,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-31 16:33+0000\n"
-"PO-Revision-Date: 2021-03-30 15:37+0000\n"
-"Last-Translator: Omer I.S. <omeritzicschwartz@gmail.com>\n"
+"POT-Creation-Date: 2021-04-14 16:33+0000\n"
+"PO-Revision-Date: 2021-04-09 14:02+0000\n"
+"Last-Translator: Omeritzics Games <omeritzicschwartz@gmail.com>\n"
 "Language-Team: Hebrew (http://www.transifex.com/endless-os/eos-installer/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,7 +40,7 @@ msgstr "_ביטול"
 #: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr ""
+msgstr "שגיאה בטעינת \"%s\": "
 
 #: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
@@ -60,7 +61,7 @@ msgstr[3] ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "לא ידוע"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
@@ -76,7 +77,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "יצרן המחשב"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
@@ -152,7 +153,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:284
 msgid "Full"
-msgstr ""
+msgstr "מלא"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:379
 #, c-format
