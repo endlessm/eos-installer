@@ -1495,20 +1495,19 @@ gis_scribe_write_async (GisScribe          *self,
   self->started = TRUE;
   self->start_time_usec = g_get_monotonic_time ();
 
-  /* Guard access to self->outstanding_tasks */
-  g_mutex_lock (&self->mutex);
-
   /* Attempt to spawn decompressor subprocess (or pipe-to-self) */
+  g_mutex_lock (&self->mutex);
   self->outstanding_tasks |= GIS_SCRIBE_TASK_DECOMPRESS;
+  g_mutex_unlock (&self->mutex);
   if (!gis_scribe_begin_decompress (self, &write_pipe, &decompressed,
                                     cancellable, gis_scribe_subtask_cb,
                                     g_object_ref (task)))
-    {
-      goto out;
-    }
+    return;
 
   /* Attempt to spawn GPG subprocess */
+  g_mutex_lock (&self->mutex);
   self->outstanding_tasks |= GIS_SCRIBE_TASK_VERIFY;
+  g_mutex_unlock (&self->mutex);
   gpg_stdin = gis_scribe_begin_verify (self, cancellable, gis_scribe_subtask_cb,
                                        g_object_ref (task));
   if (gpg_stdin == NULL)
@@ -1517,7 +1516,7 @@ gis_scribe_write_async (GisScribe          *self,
                                               "decompressor stdin");
       gis_scribe_close_input_stream_or_warn (decompressed, cancellable,
                                              "decompressor stdout");
-      goto out;
+      return;
     }
 
   gis_scribe_setpipe_sz ("gpg stdin", G_FILE_DESCRIPTOR_BASED (gpg_stdin));
@@ -1525,17 +1524,18 @@ gis_scribe_write_async (GisScribe          *self,
   gis_scribe_setpipe_sz ("decompressor stdout", G_FILE_DESCRIPTOR_BASED (decompressed));
 
   /* Start feeding the image to GPG and to one end of a pipe-to-self */
+  g_mutex_lock (&self->mutex);
   self->outstanding_tasks |= GIS_SCRIBE_TASK_TEE;
+  g_mutex_unlock (&self->mutex);
   gis_scribe_begin_tee (self, gpg_stdin, write_pipe, cancellable,
                         gis_scribe_subtask_cb, g_object_ref (task));
 
   /* Start reading from the other end of the pipe and writing to disk */
+  g_mutex_lock (&self->mutex);
   self->outstanding_tasks |= GIS_SCRIBE_TASK_WRITE;
+  g_mutex_unlock (&self->mutex);
   gis_scribe_begin_write (self, decompressed, cancellable,
                           gis_scribe_subtask_cb, g_object_ref (task));
-
-out:
-  g_mutex_unlock (&self->mutex);
 }
 
 /**
