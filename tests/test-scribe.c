@@ -57,6 +57,11 @@ typedef struct {
   GQuark error_domain;
   gint error_code;
 
+  /* If the error occurs during setup, then no writing will occur and those
+   * tests should be skipped.
+   */
+  gboolean setup_error;
+
   gboolean create_memfd;
   off_t memfd_size;
 
@@ -361,6 +366,28 @@ assert_first_mib_zeroed (Fixture *fixture)
 }
 
 static void
+assert_no_writes (Fixture *fixture)
+{
+  gboolean ret;
+  gsize target_length = 0;
+  g_autofree gchar *target_contents = NULL;
+  gsize expected_length = fixture->uncompressed_size;
+  g_autofree gchar *expected_contents = g_strnfill (expected_length, 'D');
+  g_autoptr(GError) error = NULL;
+
+  /* This should not be called when a memfd is in use */
+  g_assert_false (fixture->data->create_memfd);
+
+  ret = g_file_get_contents (fixture->target_path,
+                             &target_contents, &target_length,
+                             &error);
+  g_assert_no_error (error);
+  g_assert (ret);
+  g_assert_cmpmem (target_contents, target_length,
+                   expected_contents, expected_length);
+}
+
+static void
 test_error (Fixture       *fixture,
             gconstpointer  user_data)
 {
@@ -386,7 +413,10 @@ test_error (Fixture       *fixture,
   else
     g_assert_nonnull (error);
 
-  assert_first_mib_zeroed (fixture);
+  if (fixture->data->setup_error)
+    assert_no_writes (fixture);
+  else
+    assert_first_mib_zeroed (fixture);
 }
 
 static void
@@ -458,6 +488,9 @@ main (int argc, char *argv[])
   g_autofree gchar *s8193_xz_path     = test_build_filename (G_TEST_BUILT, "w-8193.img.xz");
   g_autofree gchar *s8193_xz_sig_path = test_build_filename (G_TEST_BUILT, "w-8193.img.xz.asc");
   g_autofree gchar *wjt_sig_path      = test_build_filename (G_TEST_DIST, "wjt.asc");
+
+  /* A missing file for various tests. */
+  g_autofree gchar *missing_path = g_test_build_filename (G_TEST_BUILT, "nonexistent", NULL);
 
   /* Globals */
   keyring_path = test_build_filename (G_TEST_DIST, "public.asc");
@@ -759,6 +792,35 @@ main (int argc, char *argv[])
       .error_domain = 0,
   };
   g_test_add ("/scribe/gpg-exits-prematurely/failure", Fixture, &gpg_exits_prematurely_failure,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Missing signature file */
+  TestData missing_signature = {
+      .image_path = image_path,
+      .signature_path = missing_path,
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+      .setup_error = TRUE,
+  };
+  g_test_add ("/scribe/missing-signature",
+              Fixture, &missing_signature,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Missing gpg command */
+  TestData missing_gpg = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .gpg_path = missing_path,
+      .error_domain = G_SPAWN_ERROR,
+      .error_code = G_SPAWN_ERROR_NOENT,
+      .setup_error = TRUE,
+  };
+  g_test_add ("/scribe/missing-gpg",
+              Fixture, &missing_gpg,
               fixture_set_up,
               test_error,
               fixture_tear_down);
