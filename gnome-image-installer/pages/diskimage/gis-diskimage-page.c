@@ -600,13 +600,20 @@ gis_diskimage_page_mount (GisPage *page)
       drive = udisks_client_get_drive_for_block (client, block);
       if (drive != NULL)
         {
-          gis_store_set_object (GIS_STORE_IMAGE_DRIVE, G_OBJECT (drive));
+          gis_store_set_object (GIS_STORE_IMAGE_SOURCE, G_OBJECT (drive));
           g_clear_object (&drive);
+        }
+      else
+        {
+          g_autoptr(UDisksLoop) loop = udisks_client_get_loop_for_block (client,
+                                                                         block);
+          if (loop != NULL)
+            gis_store_set_object (GIS_STORE_IMAGE_SOURCE, G_OBJECT (loop));
         }
       /* If running from exFAT or NTFS, where we use device mapper rather than
        * loopback mount, the image host partition we use is on another mapped
        * device (because we can't mount the real one directly). In this case,
-       * the UDisksBlock has no associated UDisksDrive.
+       * the UDisksBlock has no associated UDisksDrive or UDisksLoop.
        */
 
       mounts = udisks_filesystem_get_mount_points (fs);

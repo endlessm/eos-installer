@@ -273,11 +273,17 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
   GtkTreeIter i;
   GisUnattendedConfig *config = gis_store_get_unattended_config ();
   UDisksDrive *root = NULL;
-  UDisksDrive *image_drive = UDISKS_DRIVE (gis_store_get_object (GIS_STORE_IMAGE_DRIVE));
+  GObject *image_source = gis_store_get_object (GIS_STORE_IMAGE_SOURCE);
   const gchar *image_drive_path = NULL;
+  const gchar *image_loop_path = NULL;
 
-  if (image_drive != NULL)
-    image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (image_drive));
+  if (image_source != NULL)
+    {
+      if (UDISKS_IS_DRIVE (image_source))
+        image_drive_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (UDISKS_DRIVE (image_source)));
+      else if (UDISKS_IS_LOOP (image_source))
+        image_loop_path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (UDISKS_LOOP (image_source)));
+    }
 
   priv->has_valid_disks = FALSE;
   gtk_list_store_clear (priv->target_store);
@@ -337,6 +343,9 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
 
           block = udisks_object_peek_block (object);
           skip_if (block == NULL, "no corresponding block object");
+
+          skip_if (0 == g_strcmp0 (object_path, image_loop_path),
+                   "it hosts the image partition");
 
           if (udisks_block_get_size (block) >= gis_store_get_required_size ())
             {
