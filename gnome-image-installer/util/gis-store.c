@@ -29,6 +29,7 @@ static guint64 _size = 0;
 static guint64 _image_size = 0;
 static gchar *_name = NULL;
 static gchar *_signature = NULL;
+static gchar *_checksum = NULL;
 static GError *_error = NULL;
 static GisUnattendedConfig *_config = NULL;
 static gboolean _live_install = FALSE;
@@ -105,6 +106,17 @@ void gis_store_set_image_signature (const gchar *signature)
 {
   g_free (_signature);
   _signature = g_strdup (signature);
+}
+
+const gchar *gis_store_get_image_checksum (void)
+{
+  return _checksum;
+}
+
+void gis_store_set_image_checksum (const gchar *checksum)
+{
+  g_free (_checksum);
+  _checksum = g_strdup (checksum);
 }
 
 const gchar *gis_store_get_image_uuid (void)

@@ -50,12 +50,18 @@ static gchar *keyring_path = NULL;
 typedef struct {
   const gchar *image_path;
   const gchar *signature_path;
+  const gchar *checksum_path;
   /* Defaults to IMAGE_SIZE_BYTES */
   gsize uncompressed_size;
 
   /* Domain and code for the expected error, if any. */
   GQuark error_domain;
   gint error_code;
+
+  /* If the error occurs during setup, then no writing will occur and those
+   * tests should be skipped.
+   */
+  gboolean setup_error;
 
   gboolean create_memfd;
   off_t memfd_size;
@@ -76,6 +82,7 @@ typedef struct {
   gchar *tmpdir;
   GFile *image;
   GFile *signature;
+  GFile *checksum;
   gchar *target_path;
   GFile *target;
   /* Equal to data->uncompressed_size if that is non-0; IMAGE_SIZE_BYTES
@@ -211,6 +218,7 @@ fixture_set_up (Fixture *fixture,
 
   fixture->image = g_file_new_for_path (data->image_path);
   fixture->signature = g_file_new_for_path (data->signature_path);
+  fixture->checksum = g_file_new_for_path (data->checksum_path);
 
   /* In the app itself, we have already determined the compressed size of the
    * image (including special-cases when stat() doesn't work), so it's
@@ -269,6 +277,7 @@ fixture_set_up (Fixture *fixture,
                                   "image-size", fixture->uncompressed_size,
                                   "compressed-size", (guint64) compressed_size,
                                   "signature", fixture->signature,
+                                  "checksum", fixture->checksum,
                                   "keyring-path", keyring_path,
                                   "drive-path", fixture->target_path,
                                   "drive-fd", fd,
@@ -294,6 +303,7 @@ fixture_tear_down (Fixture *fixture,
   g_clear_object (&fixture->scribe);
   g_clear_object (&fixture->image);
   g_clear_object (&fixture->signature);
+  g_clear_object (&fixture->checksum);
   g_clear_pointer (&fixture->target_path, g_free);
   g_clear_object (&fixture->target);
   g_clear_pointer (&fixture->main_thread, g_thread_unref);
@@ -361,6 +371,28 @@ assert_first_mib_zeroed (Fixture *fixture)
 }
 
 static void
+assert_no_writes (Fixture *fixture)
+{
+  gboolean ret;
+  gsize target_length = 0;
+  g_autofree gchar *target_contents = NULL;
+  gsize expected_length = fixture->uncompressed_size;
+  g_autofree gchar *expected_contents = g_strnfill (expected_length, 'D');
+  g_autoptr(GError) error = NULL;
+
+  /* This should not be called when a memfd is in use */
+  g_assert_false (fixture->data->create_memfd);
+
+  ret = g_file_get_contents (fixture->target_path,
+                             &target_contents, &target_length,
+                             &error);
+  g_assert_no_error (error);
+  g_assert (ret);
+  g_assert_cmpmem (target_contents, target_length,
+                   expected_contents, expected_length);
+}
+
+static void
 test_error (Fixture       *fixture,
             gconstpointer  user_data)
 {
@@ -386,7 +418,10 @@ test_error (Fixture       *fixture,
   else
     g_assert_nonnull (error);
 
-  assert_first_mib_zeroed (fixture);
+  if (fixture->data->setup_error)
+    assert_no_writes (fixture);
+  else
+    assert_first_mib_zeroed (fixture);
 }
 
 static void
@@ -441,23 +476,32 @@ main (int argc, char *argv[])
   g_test_bug_base ("https://phabricator.endlessm.com/");
 
   /* Autofreed locals */
-  g_autofree gchar *image_path        = test_build_filename (G_TEST_BUILT, IMAGE);
-  g_autofree gchar *image_sig_path    = test_build_filename (G_TEST_BUILT, IMAGE ".asc");
-  g_autofree gchar *image_gz_path     = test_build_filename (G_TEST_BUILT, IMAGE ".gz");
-  g_autofree gchar *image_gz_sig_path = test_build_filename (G_TEST_BUILT, IMAGE ".gz.asc");
-  g_autofree gchar *image_xz_path     = test_build_filename (G_TEST_BUILT, IMAGE ".xz");
-  g_autofree gchar *image_xz_sig_path = test_build_filename (G_TEST_BUILT, IMAGE ".xz.asc");
-  g_autofree gchar *trunc_gz_path     = test_build_filename (G_TEST_BUILT, "w.truncated.gz");
-  g_autofree gchar *trunc_gz_sig_path = test_build_filename (G_TEST_BUILT, "w.truncated.gz.asc");
-  g_autofree gchar *trunc_xz_path     = test_build_filename (G_TEST_BUILT, "w.truncated.gz");
-  g_autofree gchar *trunc_xz_sig_path = test_build_filename (G_TEST_BUILT, "w.truncated.gz.asc");
-  g_autofree gchar *s8193_path        = test_build_filename (G_TEST_BUILT, "w-8193.img");
-  g_autofree gchar *s8193_sig_path    = test_build_filename (G_TEST_BUILT, "w-8193.img.asc");
-  g_autofree gchar *s8193_gz_path     = test_build_filename (G_TEST_BUILT, "w-8193.img.gz");
-  g_autofree gchar *s8193_gz_sig_path = test_build_filename (G_TEST_BUILT, "w-8193.img.gz.asc");
-  g_autofree gchar *s8193_xz_path     = test_build_filename (G_TEST_BUILT, "w-8193.img.xz");
-  g_autofree gchar *s8193_xz_sig_path = test_build_filename (G_TEST_BUILT, "w-8193.img.xz.asc");
-  g_autofree gchar *wjt_sig_path      = test_build_filename (G_TEST_DIST, "wjt.asc");
+  g_autofree gchar *image_path         = test_build_filename (G_TEST_BUILT, IMAGE);
+  g_autofree gchar *image_sig_path     = test_build_filename (G_TEST_BUILT, IMAGE ".asc");
+  g_autofree gchar *image_csum_path    = test_build_filename (G_TEST_BUILT, IMAGE ".sha256");
+  g_autofree gchar *image_gz_path      = test_build_filename (G_TEST_BUILT, IMAGE ".gz");
+  g_autofree gchar *image_gz_sig_path  = test_build_filename (G_TEST_BUILT, IMAGE ".gz.asc");
+  g_autofree gchar *image_gz_csum_path = test_build_filename (G_TEST_BUILT, IMAGE ".gz.sha256");
+  g_autofree gchar *image_xz_path      = test_build_filename (G_TEST_BUILT, IMAGE ".xz");
+  g_autofree gchar *image_xz_sig_path  = test_build_filename (G_TEST_BUILT, IMAGE ".xz.asc");
+  g_autofree gchar *image_xz_csum_path = test_build_filename (G_TEST_BUILT, IMAGE ".xz.sha256");
+  g_autofree gchar *trunc_gz_path      = test_build_filename (G_TEST_BUILT, "w.truncated.gz");
+  g_autofree gchar *trunc_gz_sig_path  = test_build_filename (G_TEST_BUILT, "w.truncated.gz.asc");
+  g_autofree gchar *trunc_xz_path      = test_build_filename (G_TEST_BUILT, "w.truncated.gz");
+  g_autofree gchar *trunc_xz_sig_path  = test_build_filename (G_TEST_BUILT, "w.truncated.gz.asc");
+  g_autofree gchar *s8193_path         = test_build_filename (G_TEST_BUILT, "w-8193.img");
+  g_autofree gchar *s8193_sig_path     = test_build_filename (G_TEST_BUILT, "w-8193.img.asc");
+  g_autofree gchar *s8193_gz_path      = test_build_filename (G_TEST_BUILT, "w-8193.img.gz");
+  g_autofree gchar *s8193_gz_sig_path  = test_build_filename (G_TEST_BUILT, "w-8193.img.gz.asc");
+  g_autofree gchar *s8193_xz_path      = test_build_filename (G_TEST_BUILT, "w-8193.img.xz");
+  g_autofree gchar *s8193_xz_sig_path  = test_build_filename (G_TEST_BUILT, "w-8193.img.xz.asc");
+  g_autofree gchar *wjt_sig_path       = test_build_filename (G_TEST_DIST, "wjt.asc");
+  g_autofree gchar *bad_csum_path      = test_build_filename (G_TEST_DIST, "bad.sha256");
+  g_autofree gchar *invalid1_csum_path = test_build_filename (G_TEST_DIST, "invalid-1.sha256");
+  g_autofree gchar *invalid2_csum_path = test_build_filename (G_TEST_DIST, "invalid-2.sha256");
+
+  /* A missing file for various tests. */
+  g_autofree gchar *missing_path = g_test_build_filename (G_TEST_BUILT, "nonexistent", NULL);
 
   /* Globals */
   keyring_path = test_build_filename (G_TEST_DIST, "public.asc");
@@ -468,6 +512,7 @@ main (int argc, char *argv[])
   TestData noop_data = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = image_csum_path,
   };
   g_test_add ("/scribe/noop", Fixture, &noop_data,
               fixture_set_up,
@@ -480,6 +525,7 @@ main (int argc, char *argv[])
   TestData bad_signature = {
       .image_path = image_path,
       .signature_path = image_gz_sig_path,
+      .checksum_path = missing_path,
       .error_domain = GIS_IMAGE_ERROR,
       .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
   };
@@ -494,6 +540,7 @@ main (int argc, char *argv[])
   TestData untrusted_signature = {
       .image_path = image_path,
       .signature_path = wjt_sig_path,
+      .checksum_path = missing_path,
       .error_domain = GIS_IMAGE_ERROR,
       .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
   };
@@ -507,6 +554,7 @@ main (int argc, char *argv[])
   TestData good_signature = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
   };
   g_test_add ("/scribe/good-signature-img", Fixture, &good_signature,
               fixture_set_up,
@@ -517,6 +565,7 @@ main (int argc, char *argv[])
   TestData good_signature_gz = {
       .image_path = image_gz_path,
       .signature_path = image_gz_sig_path,
+      .checksum_path = missing_path,
   };
   g_test_add ("/scribe/good-signature-gz", Fixture, &good_signature_gz,
               fixture_set_up,
@@ -527,8 +576,86 @@ main (int argc, char *argv[])
   TestData good_signature_xz = {
       .image_path = image_xz_path,
       .signature_path = image_xz_sig_path,
+      .checksum_path = missing_path,
   };
   g_test_add ("/scribe/good-signature-xz", Fixture, &good_signature_xz,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  /* A valid checksum that doesn't match the image */
+  TestData bad_checksum = {
+      .image_path = image_path,
+      .signature_path = missing_path,
+      .checksum_path = bad_csum_path,
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+  };
+  g_test_add ("/scribe/bad-checksum",
+              Fixture, &bad_checksum,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* The checksum in this file doesn't have enough characters */
+  TestData invalid1_checksum = {
+      .image_path = image_path,
+      .signature_path = missing_path,
+      .checksum_path = invalid1_csum_path,
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+      .setup_error = TRUE,
+  };
+  g_test_add ("/scribe/invalid-checksum/bad-length",
+              Fixture, &invalid1_checksum,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* The checksum in this file has invalid characters */
+  TestData invalid2_checksum = {
+      .image_path = image_path,
+      .signature_path = missing_path,
+      .checksum_path = invalid2_csum_path,
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+      .setup_error = TRUE,
+  };
+  g_test_add ("/scribe/invalid-checksum/bad-characters",
+              Fixture, &invalid2_checksum,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Valid checksum for an uncompressed image */
+  TestData good_checksum = {
+      .image_path = image_path,
+      .signature_path = missing_path,
+      .checksum_path = image_csum_path,
+  };
+  g_test_add ("/scribe/good-checksum/img", Fixture, &good_checksum,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  /* Valid checksum for a gzipped image */
+  TestData good_checksum_gz = {
+      .image_path = image_gz_path,
+      .signature_path = missing_path,
+      .checksum_path = image_gz_csum_path,
+  };
+  g_test_add ("/scribe/good-checksum/gz", Fixture, &good_checksum_gz,
+              fixture_set_up,
+              test_write_success,
+              fixture_tear_down);
+
+  /* Valid checksum for a xzipped image */
+  TestData good_checksum_xz = {
+      .image_path = image_xz_path,
+      .signature_path = missing_path,
+      .checksum_path = image_xz_csum_path,
+  };
+  g_test_add ("/scribe/good-checksum/xz", Fixture, &good_checksum_xz,
               fixture_set_up,
               test_write_success,
               fixture_tear_down);
@@ -548,6 +675,7 @@ main (int argc, char *argv[])
   TestData length_mismatch = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .uncompressed_size = IMAGE_SIZE_BYTES * 2,
       .error_domain = GIS_IMAGE_ERROR,
       .error_code = GIS_IMAGE_ERROR_WRONG_SIZE,
@@ -562,6 +690,7 @@ main (int argc, char *argv[])
   TestData length_mismatch_gz = {
       .image_path = image_gz_path,
       .signature_path = image_gz_sig_path,
+      .checksum_path = missing_path,
       .uncompressed_size = IMAGE_SIZE_BYTES * 2,
       .error_domain = GIS_IMAGE_ERROR,
       .error_code = GIS_IMAGE_ERROR_WRONG_SIZE,
@@ -579,6 +708,7 @@ main (int argc, char *argv[])
   TestData good_signature_truncated_gz = {
       .image_path = trunc_gz_path,
       .signature_path = trunc_gz_sig_path,
+      .checksum_path = missing_path,
       .error_domain = GIS_INSTALL_ERROR,
       .error_code = GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
   };
@@ -593,6 +723,7 @@ main (int argc, char *argv[])
   TestData good_signature_truncated_xz = {
       .image_path = trunc_xz_path,
       .signature_path = trunc_xz_sig_path,
+      .checksum_path = missing_path,
       .error_domain = GIS_INSTALL_ERROR,
       .error_code = GIS_INSTALL_ERROR_DECOMPRESSION_FAILED,
   };
@@ -607,6 +738,7 @@ main (int argc, char *argv[])
   TestData s8193 = {
       .image_path = s8193_path,
       .signature_path = s8193_sig_path,
+      .checksum_path = missing_path,
       .uncompressed_size = 8193 * 512,
   };
   g_test_add ("/scribe/8193-sector", Fixture,
@@ -620,6 +752,7 @@ main (int argc, char *argv[])
   TestData s8193_gz = {
       .image_path = s8193_gz_path,
       .signature_path = s8193_gz_sig_path,
+      .checksum_path = missing_path,
       .uncompressed_size = 8193 * 512,
   };
   g_test_add ("/scribe/8193-sector-gz", Fixture,
@@ -633,6 +766,7 @@ main (int argc, char *argv[])
   TestData s8193_xz = {
       .image_path = s8193_xz_path,
       .signature_path = s8193_xz_sig_path,
+      .checksum_path = missing_path,
       .uncompressed_size = 8193 * 512,
   };
   g_test_add ("/scribe/8193-sector-xz", Fixture,
@@ -652,6 +786,7 @@ main (int argc, char *argv[])
   TestData write_error_halfway = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .error_domain = G_IO_ERROR,
       .error_code = G_IO_ERROR_PERMISSION_DENIED,
       .create_memfd = TRUE,
@@ -666,6 +801,7 @@ main (int argc, char *argv[])
   TestData write_error_last_byte = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .error_domain = G_IO_ERROR,
       .error_code = G_IO_ERROR_PERMISSION_DENIED,
       .create_memfd = TRUE,
@@ -680,6 +816,7 @@ main (int argc, char *argv[])
   TestData read_error_start = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .read_error_offset = 0,
       .read_error = {
           .domain = G_IO_ERROR,
@@ -698,6 +835,7 @@ main (int argc, char *argv[])
   TestData read_error_midway = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .read_error_offset = IMAGE_SIZE_BYTES / 2,
       .read_error = {
           .domain = G_IO_ERROR,
@@ -716,6 +854,7 @@ main (int argc, char *argv[])
   TestData read_error_end = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .read_error_offset = IMAGE_SIZE_BYTES - 1,
       .read_error = {
           .domain = G_IO_ERROR,
@@ -736,6 +875,7 @@ main (int argc, char *argv[])
   TestData gpg_exits_prematurely_success = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .gpg_path = "/bin/true",
       /* As far as the GPG subtask is concerned, everything's fine; it's only
        * the tee task that's upset.
@@ -751,6 +891,7 @@ main (int argc, char *argv[])
   TestData gpg_exits_prematurely_failure = {
       .image_path = image_path,
       .signature_path = image_sig_path,
+      .checksum_path = missing_path,
       .gpg_path = "/bin/false",
       /* There is a race between the GPG subtask noticing that GPG has died,
        * and the tee subtask noticing the GPG pipe is closed. We don't care
@@ -759,6 +900,37 @@ main (int argc, char *argv[])
       .error_domain = 0,
   };
   g_test_add ("/scribe/gpg-exits-prematurely/failure", Fixture, &gpg_exits_prematurely_failure,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Missing verification files */
+  TestData missing_verification = {
+      .image_path = image_path,
+      .signature_path = missing_path,
+      .checksum_path = missing_path,
+      .error_domain = GIS_IMAGE_ERROR,
+      .error_code = GIS_IMAGE_ERROR_VERIFICATION_FAILED,
+      .setup_error = TRUE,
+  };
+  g_test_add ("/scribe/missing-verification",
+              Fixture, &missing_verification,
+              fixture_set_up,
+              test_error,
+              fixture_tear_down);
+
+  /* Missing gpg command */
+  TestData missing_gpg = {
+      .image_path = image_path,
+      .signature_path = image_sig_path,
+      .checksum_path = missing_path,
+      .gpg_path = missing_path,
+      .error_domain = G_SPAWN_ERROR,
+      .error_code = G_SPAWN_ERROR_NOENT,
+      .setup_error = TRUE,
+  };
+  g_test_add ("/scribe/missing-gpg",
+              Fixture, &missing_gpg,
               fixture_set_up,
               test_error,
               fixture_tear_down);

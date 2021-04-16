@@ -74,6 +74,9 @@ void gis_store_set_image_uuid(const gchar *uuid);
 const gchar *gis_store_get_image_signature(void);
 void gis_store_set_image_signature(const gchar *signature);
 
+const gchar *gis_store_get_image_checksum(void);
+void gis_store_set_image_checksum(const gchar *signature);
+
 GError *gis_store_get_error(void);
 void gis_store_set_error(GError *error);
 void gis_store_clear_error(void);

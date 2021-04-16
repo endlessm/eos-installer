@@ -259,6 +259,8 @@ gis_install_page_open_for_restore_cb (GObject      *source,
   g_autoptr(GFile) image = NULL;
   const gchar *signature_path = NULL;
   g_autoptr(GFile) signature = NULL;
+  const gchar *checksum_path = NULL;
+  g_autoptr(GFile) checksum = NULL;
   g_autoptr(GisScribe) scribe = NULL;
   guint64 uncompressed_size_bytes = gis_store_get_required_size ();
   guint64 compressed_size_bytes = gis_store_get_image_size ();
@@ -281,6 +283,8 @@ gis_install_page_open_for_restore_cb (GObject      *source,
   image = g_object_ref (G_FILE (gis_store_get_object (GIS_STORE_IMAGE)));
   signature_path = gis_store_get_image_signature ();
   signature = g_file_new_for_path (signature_path);
+  checksum_path = gis_store_get_image_checksum ();
+  checksum = g_file_new_for_path (checksum_path);
 
   /* For squashfs images, gis_store_get_image_size() is the size of the
    * squashfs image, but the file we read is the mapped uncompressed image from
@@ -295,6 +299,7 @@ gis_install_page_open_for_restore_cb (GObject      *source,
                            uncompressed_size_bytes,
                            compressed_size_bytes,
                            signature,
+                           checksum,
                            udisks_block_get_device (block),
                            fd,
                            !gis_install_page_is_efi_system (page));
