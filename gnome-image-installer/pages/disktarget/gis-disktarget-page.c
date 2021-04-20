@@ -359,6 +359,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
                                            G_FORMAT_SIZE_DEFAULT);
         }
 
+      skip_if (udisks_block_get_read_only (block), "block device is read-only");
+
       block_device = udisks_block_get_device (block);
       skip_if (config != NULL &&
                !gis_unattended_config_matches_device (config, block_device),
