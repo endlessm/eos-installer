@@ -340,6 +340,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
           const gchar *backing_file = udisks_loop_get_backing_file (loop);
           skip_if (backing_file == NULL || *backing_file == '\0',
                    "no backing file");
+          skip_if (!g_file_test (backing_file, G_FILE_TEST_EXISTS),
+                   "backing file %s does not exist", backing_file);
 
           block = udisks_object_peek_block (object);
           skip_if (block == NULL, "no corresponding block object");
@@ -358,6 +360,8 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
           targetsize = g_format_size_full (udisks_block_get_size (block),
                                            G_FORMAT_SIZE_DEFAULT);
         }
+
+      skip_if (udisks_block_get_read_only (block), "block device is read-only");
 
       block_device = udisks_block_get_device (block);
       skip_if (config != NULL &&
