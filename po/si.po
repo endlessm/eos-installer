@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-05 16:33+0000\n"
-"PO-Revision-Date: 2021-03-30 10:34+0000\n"
+"POT-Creation-Date: 2021-06-16 16:33+0000\n"
+"PO-Revision-Date: 2021-06-12 14:19+0000\n"
 "Last-Translator: Hela Basa\n"
 "Language-Team: Sinhala (http://www.transifex.com/endless-os/eos-installer/language/si/)\n"
 "MIME-Version: 1.0\n"
@@ -124,7 +124,7 @@ msgstr "එන්ඩ්ලස් ඕඑස්"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:230
 msgid "Endless OS Installer"
-msgstr ""
+msgstr "එන්ඩ්ලස් ඕඑස් ස්ථාපකය"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
 msgid "Endless OS (non-free)"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:284
 msgid "Full"
-msgstr ""
+msgstr "සම්පූර්ණ"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:379
 #, c-format
