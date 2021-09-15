@@ -12,9 +12,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-28 16:33+0000\n"
-"PO-Revision-Date: 2020-11-03 12:32+0000\n"
-"Last-Translator: Will Thompson <wjt@endlessos.org>\n"
+"POT-Creation-Date: 2021-09-15 12:13+0000\n"
+"PO-Revision-Date: 2021-09-15 12:14+0000\n"
+"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-os/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -113,24 +113,24 @@ msgstr "कॉन्फ़िगर किया गया कंप्यूट
 msgid "C_ontinue and Destroy Data"
 msgstr "C_ontinue और डेटा नष्ट करें"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
 msgid "More than one image was found."
 msgstr "एक से अधिक छवि मिलीं."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Basic"
 msgstr "मूल"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:225
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:230
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Endless OS Installer"
 msgstr "Endless OS इंस्टॉलर"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS (non-free)"
 msgstr "Endless OS (शुल्क सहित)"
 
@@ -138,52 +138,52 @@ msgstr "Endless OS (शुल्क सहित)"
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
 msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:254
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
 msgid "Endless OS (DVD)"
 msgstr "Endless OS (DVD)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:284
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:379
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
 msgstr "छवि फ़ाइल '%s' मौजूद नहीं है."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:456
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
 msgstr "लाइव छवि '%s' कॉन्फ़िगर की गई छवि '%s' से मेल नहीं खाती है."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:475
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:496
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
 msgstr "छवि डिवाइस '%s' नहीं ढूंढ पा रहा और '%s' का सीधे उपयोग नहीं किया जा सकता."
 
 #. Translators: the placeholder is a filename.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:538
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:559
 #, c-format
 msgid "Configured image ‘%s’ was not found."
 msgstr "कॉन्फ़िगर की गई छवि '%s' नहीं मिली."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:543
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:564
 msgid "No suitable images were found."
 msgstr "कोई भी उपयुक्त छवियां नहीं मिलीं."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:638
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:666
 #, c-format
 msgid "Could not find partition holding Endless OS files."
 msgstr "एंडलेस ओएस फाइलों को रखने वाला विभाजन नहीं मिल सका."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:690
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:718
 msgid "Reformat with Endless OS"
 msgstr "Endless OS से पुनः फ़ॉर्मेट करें"
 
@@ -207,11 +207,11 @@ msgstr "जो स्थान आपने चुना है, वह बह�
 msgid "More than one candidate block device was found."
 msgstr "एक से अधिक उम्मीदवार की ब्लॉक डिवाइस मिली."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
 msgid "Finish"
 msgstr "समाप्त करें"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
 msgid "Select Disk"
 msgstr "डिस्क का चयन करें"
 
@@ -337,17 +337,17 @@ msgstr "पुनः स्वरूपित करना जारी रख�
 msgid "Step %d of %d"
 msgstr "चरण %d में से %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:336
-#: ../gnome-image-installer/pages/install/gis-scribe.c:895
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1230
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1342
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1382
+#: ../gnome-image-installer/pages/install/gis-install-page.c:341
+#: ../gnome-image-installer/pages/install/gis-scribe.c:932
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1397
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1509
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1549
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "आंतरिक त्रुटि"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:409
+#: ../gnome-image-installer/pages/install/gis-install-page.c:414
 msgid "Reformatting"
 msgstr "पुनः फ़ॉर्मेट हो रहा है"
 
@@ -358,23 +358,53 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "तीव्र, उपयोग में आसान और शक्तिशाली – इंटरनेट के साथ या उसके बिना.\n\nEndless OS में पहले से 100 से अधिक ऐप्स लोड होते हैं, जो आपके द्वारा इसे चालू करते ही इसे उपयोगी बना देता है."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:768
+#: ../gnome-image-installer/pages/install/gis-scribe.c:805
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
 msgstr "%s बाइट्स लिखें, लेकिन %s बाइट्स लिखने की उम्मीद थी। "
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1073
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1110
 msgid "Image verification error."
 msgstr "छवि सत्यापन त्रुटि."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1120
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1157
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "सिग्नेचर फ़ाइल '%s' मौजूद नहीं है."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1296
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1227
+#, c-format
+msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1259
+#, c-format
+msgid "The checksum file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1278
+#, c-format
+msgid "The checksum file ‘%s’ does not contain a checksum."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1287
+#, c-format
+msgid "The checksum ‘%s’ does not contain %d characters."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1297
+#, c-format
+msgid "The checksum ‘%s’ contains invalid character ‘%c’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
 msgstr "इमेज फ़ाइल डीकम्प्रेस नहीं कर सका"
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1680
+#, c-format
+msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
+msgstr ""
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in

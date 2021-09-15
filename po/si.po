@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Hela Basa, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-28 16:33+0000\n"
-"PO-Revision-Date: 2020-02-23 13:35+0000\n"
+"POT-Creation-Date: 2021-09-15 12:13+0000\n"
+"PO-Revision-Date: 2021-09-15 12:14+0000\n"
 "Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
 "Language-Team: Sinhala (http://www.transifex.com/endless-os/eos-installer/language/si/)\n"
 "MIME-Version: 1.0\n"
@@ -19,16 +20,16 @@ msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
-msgstr ""
+msgstr "ඊලඟ (_N)"
 
 #: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
-msgstr ""
+msgstr "පෙර (_P)"
 
 #: ../gnome-initial-setup/gis-assistant.c:427
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
 msgid "_Cancel"
-msgstr ""
+msgstr "අවලංගු (_C)"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
@@ -54,7 +55,7 @@ msgstr[1] ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
-msgstr ""
+msgstr "නොදන්නා"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
@@ -70,11 +71,11 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "පරිගණක විකිණුම්කරු"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "නිෂ්පාදනය"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
@@ -86,11 +87,11 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "උපාංගය"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "ප්‍රමාණය"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
@@ -108,24 +109,24 @@ msgstr ""
 msgid "C_ontinue and Destroy Data"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
 msgid "More than one image was found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Basic"
-msgstr ""
+msgstr "මූලික"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:225
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
-msgstr ""
+msgstr "එන්ඩ්ලස් ඕඑස්"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:230
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Endless OS Installer"
-msgstr ""
+msgstr "එන්ඩ්ලස් ඕඑස් ස්ථාපකය"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS (non-free)"
 msgstr ""
 
@@ -133,52 +134,52 @@ msgstr ""
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
 msgstr ""
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:254
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
 msgid "Endless OS (DVD)"
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:284
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
-msgstr ""
+msgstr "සම්පූර්ණ"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:379
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:456
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:475
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:496
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
 msgstr ""
 
 #. Translators: the placeholder is a filename.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:538
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:559
 #, c-format
 msgid "Configured image ‘%s’ was not found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:543
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:564
 msgid "No suitable images were found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:638
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:666
 #, c-format
 msgid "Could not find partition holding Endless OS files."
 msgstr ""
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:690
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:718
 msgid "Reformat with Endless OS"
 msgstr ""
 
@@ -202,13 +203,13 @@ msgstr ""
 msgid "More than one candidate block device was found."
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
 msgid "Finish"
 msgstr ""
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
 msgid "Select Disk"
-msgstr ""
+msgstr "තැටිය තෝරන්න"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
@@ -216,7 +217,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
-msgstr ""
+msgstr "තැටිය තෝරන්න"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
@@ -231,7 +232,7 @@ msgstr ""
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
-msgstr ""
+msgstr "සුදුසු තැටි හමු නොවිණි"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
@@ -332,17 +333,17 @@ msgstr ""
 msgid "Step %d of %d"
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:336
-#: ../gnome-image-installer/pages/install/gis-scribe.c:895
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1230
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1342
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1382
+#: ../gnome-image-installer/pages/install/gis-install-page.c:341
+#: ../gnome-image-installer/pages/install/gis-scribe.c:932
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1397
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1509
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1549
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr ""
+msgstr "අභ්‍යන්තර දෝෂයකි"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:409
+#: ../gnome-image-installer/pages/install/gis-install-page.c:414
 msgid "Reformatting"
 msgstr ""
 
@@ -353,22 +354,52 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:768
+#: ../gnome-image-installer/pages/install/gis-scribe.c:805
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1073
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1110
 msgid "Image verification error."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1120
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1157
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1296
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1227
+#, c-format
+msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1259
+#, c-format
+msgid "The checksum file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1278
+#, c-format
+msgid "The checksum file ‘%s’ does not contain a checksum."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1287
+#, c-format
+msgid "The checksum ‘%s’ does not contain %d characters."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1297
+#, c-format
+msgid "The checksum ‘%s’ contains invalid character ‘%c’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1680
+#, c-format
+msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
 msgstr ""
 
 #. Translators: this error refers to a configuration
@@ -377,7 +408,7 @@ msgstr ""
 #: ../gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
-msgstr ""
+msgstr "%s යතුර හිස් ය"
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-28 16:33+0000\n"
-"PO-Revision-Date: 2020-02-23 13:35+0000\n"
+"POT-Creation-Date: 2021-09-15 12:13+0000\n"
+"PO-Revision-Date: 2021-09-15 12:14+0000\n"
 "Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-os/eos-installer/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -109,24 +109,24 @@ msgstr "Nhà cung cấp máy tính được cấu hình và thông tin sản ph�
 msgid "C_ontinue and Destroy Data"
 msgstr "T_tiếp tục và Hủy dữ liệu"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:129
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
 msgid "More than one image was found."
 msgstr "Đã tìm thấy nhiều hơn một bức ảnh."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:171
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Basic"
 msgstr "Cơ bản"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:225
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:230
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Endless OS Installer"
 msgstr "Trình Cài đặt HĐH Endless"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:235
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS (non-free)"
 msgstr "HĐH Endless (không miễn phí)"
 
@@ -134,52 +134,52 @@ msgstr "HĐH Endless (không miễn phí)"
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:245
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
 msgstr "HĐH Endless (OEM - Nhà sản xuất thiết bị gốc)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:254
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
 msgid "Endless OS (DVD)"
 msgstr "HĐH Endless (DVD)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:284
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:379
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
 msgstr "Tập tin ảnh '%s' không tồn tại."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:456
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
 msgstr "Ảnh trực tiếp '%s' không khớp với ảnh được cấu hình '%s'."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:475
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:496
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
 msgstr "Không thể tìm ảnh thiết bị '%s' và không thể dùng '%s' trực tiếp."
 
 #. Translators: the placeholder is a filename.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:538
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:559
 #, c-format
 msgid "Configured image ‘%s’ was not found."
 msgstr "Không tìm thấy ảnh '%s' được cấu hình."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:543
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:564
 msgid "No suitable images were found."
 msgstr "Không tìm thấy hình ảnh thích hợp."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:638
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:666
 #, c-format
 msgid "Could not find partition holding Endless OS files."
 msgstr "Không thể tìm thấy phân vùng chứa tập tin HĐH Endless."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:690
+#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:718
 msgid "Reformat with Endless OS"
 msgstr "Định dạng lại với HĐH Endless"
 
@@ -203,11 +203,11 @@ msgstr "Vị trí bạn chọn quá nhỏ. Bạn cần %s để định dạng l
 msgid "More than one candidate block device was found."
 msgstr "Tìm thấy nhiều hơn một thiết bị khối của ứng viên."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:379
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
 msgid "Finish"
 msgstr "Hoàn thành"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:434
+#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
 msgid "Select Disk"
 msgstr "Chọn Đĩa"
 
@@ -333,17 +333,17 @@ msgstr "Tiếp tục Định dạng lại"
 msgid "Step %d of %d"
 msgstr "Bước %d trong số %d bước"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:336
-#: ../gnome-image-installer/pages/install/gis-scribe.c:895
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1230
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1342
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1382
+#: ../gnome-image-installer/pages/install/gis-install-page.c:341
+#: ../gnome-image-installer/pages/install/gis-scribe.c:932
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1397
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1509
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1549
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "Lỗi nội tại"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:409
+#: ../gnome-image-installer/pages/install/gis-install-page.c:414
 msgid "Reformatting"
 msgstr "Đang định dạng lại"
 
@@ -354,23 +354,53 @@ msgid ""
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "Sử dụng nhanh chóng, dễ dàng và mạnh mẽ - có hoặc không có internet.\n\nHệ điều hành Endless OS được nạp sẵn hơn 100 ứng dụng, để nó hữu ích ngay từ giây phút bạn bật nó lên."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:768
+#: ../gnome-image-installer/pages/install/gis-scribe.c:805
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1073
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1110
 msgid "Image verification error."
 msgstr "Lỗi xác thực hình ảnh."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1120
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1157
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "Tập tin chữ ký '%s' không tồn tại."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1296
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1227
+#, c-format
+msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1259
+#, c-format
+msgid "The checksum file ‘%s’ does not exist."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1278
+#, c-format
+msgid "The checksum file ‘%s’ does not contain a checksum."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1287
+#, c-format
+msgid "The checksum ‘%s’ does not contain %d characters."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1297
+#, c-format
+msgid "The checksum ‘%s’ contains invalid character ‘%c’."
+msgstr ""
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
 msgstr "Không thể giải nén tập tin ảnh."
+
+#: ../gnome-image-installer/pages/install/gis-scribe.c:1680
+#, c-format
+msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
+msgstr ""
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
