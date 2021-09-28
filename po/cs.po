@@ -6,14 +6,15 @@
 # Adam Matoušek <adamatousek@gmail.com>, 2012-2013
 # Marek Černocký <marek@manet.cz>, 2013-2016
 # MICHAL D. <black23@gmail.com>, 2017
-# Pavel Borecki <pavel.borecki@gmail.com>, 2020
+# Pavel Borecki <pavel.borecki@gmail.com>, 2020-2021
+# Will Thompson <wjt@endlessos.org>, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-15 12:13+0000\n"
-"PO-Revision-Date: 2021-09-15 12:14+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"POT-Creation-Date: 2021-09-27 14:03+0000\n"
+"PO-Revision-Date: 2021-09-28 08:42+0000\n"
+"Last-Translator: Will Thompson <wjt@endlessos.org>\n"
 "Language-Team: Czech (http://www.transifex.com/endless-os/eos-installer/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +48,7 @@ msgstr "Vynutit režim nového uživatele"
 
 #: ../gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
-msgstr "– Prvotní nastavení"
+msgstr "– úvodní nastavení GNOME"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:93
 #, c-format
@@ -152,7 +153,7 @@ msgstr "Endless OS (DVD)"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
-msgstr "Plný"
+msgstr "Plná"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
@@ -162,7 +163,7 @@ msgstr "Soubor s obrazem „%s“ neexistuje."
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
-msgstr "Obraz systému „%s“ neodpovídá nastavenému „%s“."
+msgstr "Obraz Live systému „%s“ neodpovídá nastavenému „%s“."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:496
 #, c-format
@@ -186,12 +187,12 @@ msgstr "Nedaří se najít oddíl obsahující soubory s Endless OS."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:718
 msgid "Reformat with Endless OS"
-msgstr "Přeformátovat s Endless OS"
+msgstr "Přeformátovat na Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
-msgstr "Je toto verze Endless OS, kterou chcete používat? Pokud ne, stáhněte si jinou."
+msgstr "Je toto varianta Endless OS, kterou chcete používat? Pokud ne, stáhněte si jinou."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
 msgid "Use existing version:"
@@ -202,7 +203,7 @@ msgstr "Použít existující verzi:"
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
-msgstr "Umístění, které jste zvolili je příliš malé: je potřeba %s pro přeformátování s %s."
+msgstr "Umístění, které jste zvolili je příliš malé: je potřeba %s pro přeformátování na %s."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
@@ -218,7 +219,7 @@ msgstr "Zvolte disk"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr "Vyberte disk, který chcete přeformátovat s Endless OS"
+msgstr "Vyberte disk, který chcete přeformátovat na Endless OS"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -233,7 +234,7 @@ msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr "Zdá se, že na disku máte vícero oddílů (například C: a D:). Přeformátování s Endless OS ze zvoleného disku odstraní <b>všechny oddíly</b>. Prosím potvrďte kliknutím sem."
+msgstr "Zdá se, že na disku máte vícero oddílů (například C: a D:). Přeformátování na Endless OS ze zvoleného disku odstraní <b>všechny oddíly</b>. Prosím potvrďte to kliknutím sem."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
 msgid "No suitable disks found."
@@ -242,7 +243,7 @@ msgstr "Nenalezeny žádné vhodné disky."
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
 msgid "A debug log has been saved as %s."
-msgstr "Záznam s ladícími událostmi byl uloženo jako %s."
+msgstr "Záznam s ladícími událostmi byl uložen jako %s."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
@@ -285,7 +286,7 @@ msgstr "Soubor s nastaveními pro bezobslužnou instalaci se nepodařilo vytvoř
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
 msgid "Reformatting Finished"
-msgstr "Přeformátovávání dokončeno"
+msgstr "Přeformátování dokončeno"
 
 #. Translators: the %s is the customer support email address
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
@@ -294,19 +295,19 @@ msgid ""
 "Please contact %s or join the <a "
 "href=\"https://community.endlessos.com/\">Endless Community</a> to "
 "troubleshoot."
-msgstr "Pro řešení se obraťte na %s nebo se připojte ke <a href=\"https://community.endlessos.com/\">komunitě kolem Endless</a>."
+msgstr "Ohledně řešení se obraťte na %s nebo se připojte ke <a href=\"https://community.endlessos.com/\">komunitě kolem Endless</a>."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
-msgstr "Úspěch! Počítač vypněte a pak USB zařízení vyjměte. Po restartu bude Endless OS připravený pro nainstalování a užívání si!"
+msgstr "Úspěch! Počítač vypněte a pak USB zařízení vyjměte. Po restartu bude Endless OS připravený pro donastavení a užívání si ho!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
-msgstr "Úspěch! Počítač vypněte a pak DVD disk vyjměte. Po restartu bude Endless OS připravený pro nainstalování a užívání si!"
+msgstr "Úspěch! Počítač vypněte a pak DVD disk vyjměte. Po restartu bude Endless OS připravený pro donastavení a užívání si ho!"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
 msgid "Power Off"
@@ -320,7 +321,7 @@ msgstr "Zastavit přeformátovávání disku?"
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
-msgstr "Proces přeformátovávání už začal. Zrušení zanechá váš počítač nestartovatelný."
+msgstr "Proces přeformátovávání už začal. Zrušení zanechá váš počítač nenastartovatelný."
 
 #. Stop Reformatting
 #: ../gnome-image-installer/pages/install/gis-install-page.c:86
@@ -346,7 +347,7 @@ msgstr "Krok %d z %d"
 #: ../gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
-msgstr "Interní chyba"
+msgstr "Vnitřní chyba"
 
 #: ../gnome-image-installer/pages/install/gis-install-page.c:414
 msgid "Reformatting"
@@ -376,27 +377,27 @@ msgstr "Soubor s podpisem „%s“ neexistuje."
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1227
 #, c-format
 msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
-msgstr ""
+msgstr "Kontrolní součet obrazu „%s“ neodpovídá očekávánému „%s“."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1259
 #, c-format
 msgid "The checksum file ‘%s’ does not exist."
-msgstr ""
+msgstr "Soubor s kontrolním součtem „%s“ neexistuje."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1278
 #, c-format
 msgid "The checksum file ‘%s’ does not contain a checksum."
-msgstr ""
+msgstr "Soubor s kontrolním součtem „%s“ neobsahuje kontrolní součet."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1287
 #, c-format
 msgid "The checksum ‘%s’ does not contain %d characters."
-msgstr ""
+msgstr "Soubor s kontrolním součtem „%s“ neobsahuje %d znaků."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1297
 #, c-format
 msgid "The checksum ‘%s’ contains invalid character ‘%c’."
-msgstr ""
+msgstr "Soubor s kontrolním součtem „%s“ obsahuje neplaný znak „%c“."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
@@ -405,7 +406,7 @@ msgstr "Nedaří se rozbalit soubor s obrazem."
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1680
 #, c-format
 msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
-msgstr ""
+msgstr "Neexistuje ani soubor s podpisem „%s“, ani soubor s kontrolním součtem „%s“."
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
