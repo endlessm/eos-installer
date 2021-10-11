@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Ardit Dani <ardit.dani@gmail.com>, 2019
+# Ardit Dani <ardit.dani@gmail.com>, 2019,2021
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-27 14:03+0000\n"
-"PO-Revision-Date: 2021-09-15 12:14+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"POT-Creation-Date: 2021-10-11 14:04+0000\n"
+"PO-Revision-Date: 2021-10-10 21:06+0000\n"
+"Last-Translator: Ardit Dani <ardit.dani@gmail.com>\n"
 "Language-Team: Albanian (http://www.transifex.com/endless-os/eos-installer/language/sq/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: ../gnome-initial-setup/gis-assistant.c:290
 msgid "_Next"
-msgstr "_Vijo"
+msgstr "_Tjetër"
 
 #: ../gnome-initial-setup/gis-assistant.c:426
 msgid "_Previous"
@@ -36,11 +36,11 @@ msgstr "_Anulo"
 #: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr "Gabim ngarkim ‘%s’: "
+msgstr "Gabim ngarkimi ‘%s’: "
 
 #: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
-msgstr "Forconi modalitetin përdoruesit ri"
+msgstr "Forconi modalitetin përdorues ri"
 
 #: ../gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
@@ -59,7 +59,7 @@ msgstr "Panjohur"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
-msgstr ""
+msgstr "V_azhdo Gjithsesi dhe Shkatërro Informacionin"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
