@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-11 14:04+0000\n"
-"PO-Revision-Date: 2021-10-10 21:06+0000\n"
+"POT-Creation-Date: 2021-10-25 14:03+0000\n"
+"PO-Revision-Date: 2021-10-23 21:25+0000\n"
 "Last-Translator: Ardit Dani <ardit.dani@gmail.com>\n"
 "Language-Team: Albanian (http://www.transifex.com/endless-os/eos-installer/language/sq/)\n"
 "MIME-Version: 1.0\n"
@@ -63,72 +63,72 @@ msgstr "V_azhdo Gjithsesi dhe Shkatërro Informacionin"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
-msgstr ""
+msgstr "Instalimi i pambikëqyrur u anulua."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
-msgstr ""
+msgstr "Endless OS Instalim pa Mbikëqyrje"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
 msgid "Computer Vendor"
-msgstr ""
+msgstr "Shitës Kompjuteri"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
 msgid "Product"
-msgstr ""
+msgstr "Produkt"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
 msgid "Image"
-msgstr ""
+msgstr "Imazh"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
 msgid "Target"
-msgstr ""
+msgstr "Objektiv"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
 msgid "Device"
-msgstr ""
+msgstr "Pajisje"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
 msgid "Size"
-msgstr ""
+msgstr "Përmasë"
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
-msgstr ""
+msgstr "Të gjitha të dhënat në këtë disk do të shkatërrohen. Ti do te humbesh <b>të gjitha aplikacionet, skedarët dhe dokumentet tuaja</b>."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
-msgstr ""
+msgstr "Informacioni i konfiguruar i shitësit dhe produktit të kompjuterit nuk përputhet me këtë kompjuter."
 
 #: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
 msgid "C_ontinue and Destroy Data"
-msgstr ""
+msgstr "V_azhdoni dhe shkatërroni të dhënat"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
 msgid "More than one image was found."
-msgstr ""
+msgstr "U gjetën më shumë se një imazh."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Basic"
-msgstr ""
+msgstr "Minimal"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
 #: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
 msgid "Endless OS"
-msgstr ""
+msgstr "Endless OS"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Endless OS Installer"
-msgstr ""
+msgstr "Endless OS Instalues"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS (non-free)"
-msgstr ""
+msgstr "Endless OS (jo-falas)"
 
 #. Translators: this is the edition of Endless OS pre-installed by
 #. * Original Equipment Manufacturers. If there is not a
@@ -136,23 +136,23 @@ msgstr ""
 #. * please do not translate this.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
-msgstr ""
+msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
 msgid "Endless OS (DVD)"
-msgstr ""
+msgstr "Endless OS (DVD)"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
-msgstr ""
+msgstr "Plotë"
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
-msgstr ""
+msgstr "Skedari imazhit ‘%s’ nuk ekziston."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
 #, c-format
