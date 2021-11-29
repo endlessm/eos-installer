@@ -5,7 +5,9 @@
 # Translators:
 # Andika Triwidada <andika@gmail.com>, 2012-2015
 # Hartono <hartono.s10@gmail.com>, 2016
-# Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017
+# Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2021
+# Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017,2021
+# Roddy Shuler <roddy@stanfordalumni.org>, 2016,2018
 # Roddy Shuler <roddy@stanfordalumni.org>, 2016,2018
 # Sendy Aditya Suryana <sendzation@gmail.com>, 2017
 # Septira Taruna <septira@endlessm.com>, 2017
@@ -14,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-25 14:03+0000\n"
-"PO-Revision-Date: 2021-09-15 12:14+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"POT-Creation-Date: 2021-11-29 15:02+0000\n"
+"PO-Revision-Date: 2021-11-25 04:38+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-os/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +44,7 @@ msgstr "_Batal"
 #: ../gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
-msgstr "Eror memuat ‘%s’:"
+msgstr "Galat memuat '%s': "
 
 #: ../gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
@@ -157,7 +159,7 @@ msgstr "Lengkap"
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
 #, c-format
 msgid "Image file ‘%s’ does not exist."
-msgstr "Berkas gambar ‘%s’ tidak ada. "
+msgstr "Berkas gambar ‘%s’ tidak ada."
 
 #: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
 #, c-format
@@ -246,7 +248,7 @@ msgstr "Sebuah debug log telah tersimpan sebagai %s."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
-msgstr "Gagal menyimpan debug log:"
+msgstr "Gagal menyimpan log awakutu: "
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
@@ -362,7 +364,7 @@ msgstr "Cepat, mudah, dan hebat – dengan ataupun tanpa internet.\n\nEndless OS
 #: ../gnome-image-installer/pages/install/gis-scribe.c:805
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
-msgstr ""
+msgstr "Menulis %s bita, tetapi diharapkan untuk menulis %s bita."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1110
 msgid "Image verification error."
@@ -376,27 +378,27 @@ msgstr "Berkas khusus ‘%s’ tidak ada."
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1227
 #, c-format
 msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
-msgstr ""
+msgstr "Checksum citra '%s' tidak sesuai dengan checksum yang diharapkan '%s'."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1259
 #, c-format
 msgid "The checksum file ‘%s’ does not exist."
-msgstr ""
+msgstr "Berkas checksum '%s' tidak ada."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1278
 #, c-format
 msgid "The checksum file ‘%s’ does not contain a checksum."
-msgstr ""
+msgstr "Berkas checksum '%s' tidak berisi checksum."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1287
 #, c-format
 msgid "The checksum ‘%s’ does not contain %d characters."
-msgstr ""
+msgstr "Checksum '%s' tidak mengandung karakter %d."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1297
 #, c-format
 msgid "The checksum ‘%s’ contains invalid character ‘%c’."
-msgstr ""
+msgstr "Checksum '%s' berisi karakter tidak valid '%c'."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
@@ -405,7 +407,7 @@ msgstr "Tidak dapat mendekompresi berkas citra."
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1680
 #, c-format
 msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
-msgstr ""
+msgstr "Baik berkas tanda tangan '%s' maupun file checksum '%s' tidak ada."
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
