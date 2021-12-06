@@ -5,6 +5,7 @@
 # Translators:
 # Benjamin Steinwender <b@stbe.at>, 2013
 # Christian Kirbach <christian.kirbach@gmail.com>, 2013
+# Ettore Atalan <atalanttore@googlemail.com>, 2021
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2012,2016
 # Stefan Schroeder <ondekoza@gmail.com>, 2016
 # Thomas Siegele <tsiegele@gmx.at>, 2019
@@ -14,9 +15,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 15:02+0000\n"
-"PO-Revision-Date: 2021-09-15 12:14+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"POT-Creation-Date: 2021-12-06 15:03+0000\n"
+"PO-Revision-Date: 2021-11-29 18:28+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German (http://www.transifex.com/endless-os/eos-installer/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -219,7 +220,7 @@ msgstr "Festplatte auswählen"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
 msgid "Select the disk you'd like to reformat with Endless OS"
-msgstr "Wähle die Festplatte, auf der Endless-OS installiert werden soll"
+msgstr "Wähle die Festplatte, auf der Endless OS installiert werden soll"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
 msgid "Select Disk:"
@@ -227,7 +228,7 @@ msgstr "Festplatte auswählen:"
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
 msgid "I agree to erasing <b>all of my files and apps</b>"
-msgstr "Ich bin damit einverstanden, dass <b>alle meine Dateien und Programme gelöscht werden</b>."
+msgstr "Ich bin damit einverstanden, dass <b>alle meine Dateien und Programme</b> gelöscht werden."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
 msgid ""
@@ -243,11 +244,11 @@ msgstr "Keine geeignete Festplatte gefunden"
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
 #, c-format
 msgid "A debug log has been saved as %s."
-msgstr "Ein Fehlersuche-Log wurde unter %s gespeichert."
+msgstr "Ein Fehlersucheprotokoll wurde unter %s gespeichert."
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
 msgid "Failed to save debug log: "
-msgstr "Konnte Fehlersuche-Log nicht speichern:"
+msgstr "Konnte Fehlersucheprotokoll nicht speichern:"
 
 #: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
 msgid ""
