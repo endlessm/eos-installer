@@ -124,11 +124,11 @@ One way to run this application while developing it is with the following setup:
 * Host system: a normal Endless OS installation. Build `eos-installer` in
   `toolbox`, and run it on the host system.
 * Disk 1: a GPT-formatted drive with an exFAT partition with label `eosimages`.
-  This partition should contain an Endless OS disk image (`.img.xz` or
-  `.img.gz`) in its root directory, and a corresponding `.img.[gx]z.asc` GPG
-  signature. This can be a loopback device if you want to avoid using removable
-  media, but it has to have a GPT. (xz decompression is really slow, so gz is
-  strongly recommended.)
+  This partition should contain an Endless OS disk image (`.img`, `.img.xz` or
+  `.img.gz`) in its root directory, and a corresponding `.img(.[gx]z)?.asc` GPG
+  signature or `.img(.[gx]z)?.sha256` SHA-256 checksum. This can be a loopback
+  device if you want to avoid using removable media, but it has to have a
+  GPT. (xz decompression is really slow, so gz is strongly recommended.)
 * Disk 2: a target disk or loop associated file large enough to write the OS
   image to. `eos-installer` only considers non-removable disks with a
   corresponding block device to be install targets, so unless you have a
