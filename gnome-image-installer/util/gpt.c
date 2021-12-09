@@ -1,3 +1,5 @@
+#include <glib.h>
+
 #include "config.h"
 #include "gpt.h"
 #include "crc32.h"
@@ -166,38 +168,39 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
     if(NULL==pt) return 0;
 
     if(memcmp(pt->header.signature, "EFI PART", 8)!=0) {
-        //  invalid signature
+        g_warning("invalid signature");
         return 0;
     }
     if(pt->header.revision != 0x00010000) {
-        //  invalid revision
+        g_warning("invalid revision");
         return 0;
     }
     if(pt->header.header_size != GPT_HEADER_SIZE) {
-        //  invalid header size
+        g_warning("invalid header size");
         return 0;
     }
     if(pt->header.reserved != 0) {
-        //  reserved bytes must be 0
+        g_warning("reserved bytes must be 0");
         return 0;
     }
     if(pt->header.ptable_starting_lba != 2) {
-        //  should always be 2
+        g_warning("starting LBA should always be 2");
         return 0;
     }
     if(pt->header.ptable_partition_size != 128) {
-        //  invalid partition size
+        g_warning("invalid partition table entry size");
         return 0;
     }
     if(pt->header.ptable_count < 2 ) {
         //  Disk images must have at least 2 partitions: the ESP and the OS
         //  partition. Endless OS images have an additional BIOS Boot partition
         //  in between, but GNOME OS images (for example) do not.
+        g_warning("not enough partitions");
         return 0;
     }
     for(i=0; i<512-GPT_HEADER_SIZE; i++) {
         if(pt->header.padding[i] != 0) {
-            //  padding must be 0
+            g_warning("GPT header padding must be zeroed");
             return 0;
         }
     }
@@ -207,7 +210,7 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
     memcpy(&testcrc_header, &pt->header, GPT_HEADER_SIZE);
     testcrc_header.crc = 0;
     if(calc_crc32((uint8_t*)(&testcrc_header), GPT_HEADER_SIZE)!=pt->header.crc) {
-        //  invalid header crc
+        g_warning("invalid header crc");
         return 0;
     }
     //  crc32 of partition table
@@ -218,7 +221,7 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
         memcpy(buffer+(i*pt->header.ptable_partition_size), (uint8_t*)(&pt->partitions[i]), pt->header.ptable_partition_size);
     }
     if(calc_crc32(buffer, n) != pt->header.ptable_crc) {
-        //  invalid partition table crc
+        g_warning("invalid partition table crc");
         free(buffer);
         return 0;
     }
@@ -226,6 +229,7 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
 
     // The first partition must be an EFI System Partition
     if(memcmp(&pt->partitions[0].type_guid, GPT_GUID_EFI, 16)!=0) {
+        g_warning("first partition must be ESP");
         return 0;
     }
 
@@ -248,6 +252,7 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
       }
     }
     if (!has_root) {
+      g_warning("no root partition found");
       return 0;
     }
 
