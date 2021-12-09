@@ -336,44 +336,51 @@ add_image (
           valid = get_is_valid_eos_gpt (image, &required_size);
         }
 
-      if (valid && required_size != 0)
+      if (!valid || required_size == 0)
         {
-          displayname = get_display_name (image);
+          g_warning ("%s is not a valid image file", image);
+          return;
+        }
 
-          /* if we have a signature file or checksum file passed in,
-           * attempt to get the name from that too */
-          if (displayname == NULL)
+      displayname = get_display_name (image);
+
+      /* if we have a signature file or checksum file passed in,
+       * attempt to get the name from that too */
+      if (displayname == NULL)
+        {
+          if (signature != NULL)
             {
-              if (signature != NULL)
-                {
-                  displayname = get_display_name (signature);
-                }
-              if (displayname == NULL && checksum != NULL)
-                {
-                  displayname = get_display_name (checksum);
-                }
+              displayname = get_display_name (signature);
+            }
+          if (displayname == NULL && checksum != NULL)
+            {
+              displayname = get_display_name (checksum);
             }
         }
 
-      if (displayname != NULL)
+      if (displayname == NULL)
         {
-          goffset size_bytes = g_file_info_get_size (fi);
-          g_warn_if_fail (size_bytes >= 0);
-          size = g_format_size_full (size_bytes, G_FORMAT_SIZE_DEFAULT);
-
-          gtk_list_store_append (store, &i);
-          gtk_list_store_set (store, &i,
-                              IMAGE_NAME, displayname,
-                              IMAGE_SIZE, size,
-                              IMAGE_SIZE_BYTES, (guint64) size_bytes,
-                              IMAGE_FILE, image_device != NULL ? image_device : image,
-                              IMAGE_SIGNATURE, signature,
-                              IMAGE_CHECKSUM, checksum,
-                              IMAGE_REQUIRED_SIZE, required_size,
-                              -1);
-          g_free (size);
-          g_free (displayname);
+          g_warning ("Could not determine display name for %s", image);
+          return;
         }
+
+      goffset size_bytes = g_file_info_get_size (fi);
+      g_warn_if_fail (size_bytes >= 0);
+      size = g_format_size_full (size_bytes, G_FORMAT_SIZE_DEFAULT);
+
+      gtk_list_store_append (store, &i);
+      g_message ("storing image %s", image);
+      gtk_list_store_set (store, &i,
+                          IMAGE_NAME, displayname,
+                          IMAGE_SIZE, size,
+                          IMAGE_SIZE_BYTES, (guint64) size_bytes,
+                          IMAGE_FILE, image_device != NULL ? image_device : image,
+                          IMAGE_SIGNATURE, signature,
+                          IMAGE_CHECKSUM, checksum,
+                          IMAGE_REQUIRED_SIZE, required_size,
+                          -1);
+      g_free (size);
+      g_free (displayname);
     }
   else
     {
