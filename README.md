@@ -20,10 +20,10 @@ It is typically launched by [our branch of
 session as a normal app in some scenarios, as described below.
 
 Unlike a traditional installer, this application knows almost nothing about the
-OS being installed. It takes a disk image (possibly compressed) and a GPG
-signature, and writes the disk image to disk while verifying its GPG signature
-in parallel. The disk image is treated as just a stream of bytes, except in
-these respects:
+OS being installed. It takes a disk image (possibly compressed) and either a GPG
+signature or a SHA256 checksum, and writes the disk image to disk while
+verifying its GPG signature or checksum in parallel. The disk image is treated
+as just a stream of bytes, except in these respects:
 
 * The start of the image is examined to check that it has a [GUID Partition
   Table](https://en.wikipedia.org/wiki/GUID_Partition_Table) with an [EFI
@@ -37,11 +37,15 @@ these respects:
   and Endless OS disk images are typically (much!) larger than this threshold.
 * The first 1 MiB of the disk image is reserved, with zeros written to disk
   instead. Once the rest of the image has been decompressed and written, if its
-  GPG signature is valid, then the first 1MiB is written at the start of the
+  GPG signature or SHA256 checksum is valid, then the first 1MiB is written at the start of the
   disk. This prevents booting into a partially-written or corrupt installation.
 
 Apart from these details, you can essentially think of this app as a glorified
 GUI for `zcat | gpg --verify | dd`.
+
+The GPG signature, if present, is verified against a keyring located at
+`/usr/share/keyrings/eos-image-keyring.gpg`. If both a GPG signature and SHA256
+checksum are present, the GPG signature is preferred.
 
 [rufus]: https://github.com/endlessm/rufus
 [gis]: https://gitlab.gnome.org/gnome/gnome-initial-setup
@@ -69,7 +73,7 @@ There are two disk layouts for live systems:
 2. An ISO image, produced by [eos-image-builder][eib] as part of the OS build
    process. Ignoring the bootloader stuff, this is an ISO9660 filesystem which
    contains a SquashFS disk image containing an Endless OS disk image, and
-   signatures for both the uncompressed disk image and the SquashFS image
+   signatures or checksums for both the uncompressed disk image and the SquashFS image
    alongside it.
 
 These are both treated very similarly by `eos-installer`. Once it has located
@@ -102,9 +106,9 @@ image to be installed to removable media. The resulting partition layout is:
 - EFI and BIOS boot partitions
 - a small ext4 partition containing the `eosinstaller` OS deployment
 - an exFAT partition with label `eosimages`, occupying the rest of the device
-  containing the OS image to be installed and its corresponding signature
+  containing the OS image to be installed and its corresponding signature or checksum
   
-One can copy additional OS images and their corresponding signatures to the
+One can copy additional OS images and their corresponding signatures or checksums to the
 exFAT partition, and they'll be offered as extra choices by `eos-installer`.
 
 This mode is less useful to end users – you can't try the OS you're about to
@@ -124,11 +128,14 @@ One way to run this application while developing it is with the following setup:
 * Host system: a normal Endless OS installation. Build `eos-installer` in
   `toolbox`, and run it on the host system.
 * Disk 1: a GPT-formatted drive with an exFAT partition with label `eosimages`.
-  This partition should contain an Endless OS disk image (`.img.xz` or
-  `.img.gz`) in its root directory, and a corresponding `.img.[gx]z.asc` GPG
-  signature. This can be a loopback device if you want to avoid using removable
-  media, but it has to have a GPT. (xz decompression is really slow, so gz is
-  strongly recommended.)
+  As shown below, this can be a loopback device if you want to avoid using
+  removable media, but it has to have a GPT.  This partition should contain, in
+  its root directory:
+  - a GPT disk image (`.img`, `.img.xz` or
+    `.img.gz`). `xz` decompression is *really* slow, so `gz` is strongly
+    recommended.
+  - either a corresponding `.img(.[gx]z)?.asc` GPG
+  signature, or a corresponding `.img(.[gx]z)?.sha256` SHA-256 checksum.
 * Disk 2: a target disk or loop associated file large enough to write the OS
   image to. `eos-installer` only considers non-removable disks with a
   corresponding block device to be install targets, so unless you have a
