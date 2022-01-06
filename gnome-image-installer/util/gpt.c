@@ -16,6 +16,10 @@ static uint8_t GPT_GUID_LINUX_ROOTFS_X86[] = {0x40, 0x95, 0x47, 0x44, 0x97, 0xf2
 static uint8_t GPT_GUID_LINUX_ROOTFS_X86_64[] = {0xe3, 0xbc, 0x68, 0x4f, 0xcd, 0xe8, 0xb1, 0x4d, 0x96, 0xe7, 0xfb, 0xca, 0xf9, 0x84, 0xb7, 0x09};
 static uint8_t GPT_GUID_LINUX_ROOTFS_ARM[] = {0x10, 0xd7, 0xda, 0x69, 0xe4, 0x2c, 0x3c, 0x4e, 0xb1, 0x6c, 0x21, 0xa1, 0xd4, 0x9a, 0xbe, 0xd3};
 static uint8_t GPT_GUID_LINUX_ROOTFS_AARCH64[] = {0x45, 0xb0, 0x21, 0xb9, 0xf0, 0x1d, 0xc3, 0x41, 0xaf, 0x44, 0x4c, 0x6f, 0x28, 0x0d, 0x3f, 0xae};
+static uint8_t GPT_GUID_LINUX_ROOTFS_RISCV_32[] = {0xfe, 0xa7, 0xd5, 0x60, 0x7d, 0x8e, 0x5c, 0x43, 0xb7, 0x14, 0x3d, 0xd8, 0x16, 0x21, 0x44, 0xe1};
+static uint8_t GPT_GUID_LINUX_ROOTFS_RISCV_64[] = {0xa6, 0x70, 0xec, 0x72, 0x74, 0xcf, 0xe6, 0x40, 0xbd, 0x49, 0x4b, 0xda, 0x08, 0xe8, 0xf2, 0x24};
+
+
 
 uint8_t is_nth_flag_set(uint64_t flags, uint8_t n)
 {
@@ -246,7 +250,9 @@ int is_eos_gpt_valid(struct ptable *pt, uint64_t *size)
           || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS_X86, 16)==0
           || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS_X86_64, 16)==0
           || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS_ARM, 16)==0
-          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS_AARCH64, 16)==0) {
+          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS_AARCH64, 16)==0
+          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS_RISCV_32, 16)==0
+          || memcmp(&pt->partitions[i].type_guid, GPT_GUID_LINUX_ROOTFS_RISCV_64, 16)==0) {
         uint64_t flags = 0;
         memcpy(&flags, pt->partitions[i].attributes, 8);
         if(!is_nth_flag_set(flags, 55)) {
