@@ -2,7 +2,7 @@
 
 For mass-installation environments, `eos-installer` supports an unattended mode that can be used to reformat systems with Endless OS with minimal keypresses and other user interactions. If appropriately configured, no interaction is required beyond booting the system from USB.
 
-At present, this mode is only supported on "standalone" reformatter USBs, which can be created using `eos-write-installer` on Endless OS, or by <kbd>Ctrl</kbd>-clicking the “click here” link at the bottom of the first page of the Endless Installer for Windows and choosing “Create Reformatter USB”.
+At present, this mode is only supported on ["standalone" reformatter USBs](https://support.endlessos.org/en/deployment/reformatter-usb), which can be created using `eos-write-installer` on Endless OS, or by <kbd>Ctrl</kbd>-clicking the “click here” link at the bottom of the first page of the Endless Installer for Windows and choosing “Create Reformatter USB”.
 
 Once you have a reformatter USB, the easiest way to configure it for unattended mode is to run it in the normal, attended mode on your target system. Once the installation is complete, press <kbd>Ctrl</kbd><kbd>U</kbd> when you reach the “Reformatting Finished” page. This will write an `unattended.ini` configuration file matching this system and the options you chose; you can now use this USB stick to reformat other computers (with the same manufacturer and model) without any user interaction.
 
