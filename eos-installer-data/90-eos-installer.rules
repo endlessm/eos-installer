@@ -34,7 +34,7 @@ polkit.addRule(function(action, subject) {
     return undefined;
 });
 
-polkit.addRule((action, subject) => {
+polkit.addRule(function(action, subject) {
     // This rule should check only actions that are not already permitted by
     // 20-gnome-initial-setup.rules, and permit them to both the live user and
     // the gnome-initial-setup user.
