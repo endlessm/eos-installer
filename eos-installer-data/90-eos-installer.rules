@@ -43,13 +43,13 @@ polkit.addRule(function(action, subject) {
         !(subject.user === 'live' && isLiveSystem))
         return undefined;
 
-    const allowedUdisksActions = [
+    var allowedUdisksActions = [
         'org.freedesktop.udisks2.filesystem-mount',
         'org.freedesktop.udisks2.open-device',
         'org.freedesktop.udisks2.open-device-system',
     ];
 
-    if (allowedUdisksActions.includes(action.id) ||
+    if (allowedUdisksActions.indexOf(action.id) >= 0 ||
         (action.id === 'org.freedesktop.policykit.exec' &&
             action.lookup('program') === '/usr/sbin/eos-repartition-mbr')) {
         if (subject.local)
