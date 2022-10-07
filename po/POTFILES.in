@@ -1,15 +1,15 @@
 gnome-initial-setup/gis-assistant.c
 gnome-image-installer/gnome-image-installer.c
 gnome-image-installer/pages/confirm/gis-confirm-page.c
-[type: gettext/glade]gnome-image-installer/pages/confirm/gis-confirm-page.ui
+gnome-image-installer/pages/confirm/gis-confirm-page.ui
 gnome-image-installer/pages/diskimage/gis-diskimage-page.c
-[type: gettext/glade]gnome-image-installer/pages/diskimage/gis-diskimage-page.ui
+gnome-image-installer/pages/diskimage/gis-diskimage-page.ui
 gnome-image-installer/pages/disktarget/gis-disktarget-page.c
-[type: gettext/glade]gnome-image-installer/pages/disktarget/gis-disktarget-page.ui
+gnome-image-installer/pages/disktarget/gis-disktarget-page.ui
 gnome-image-installer/pages/finished/gis-finished-page.c
-[type: gettext/glade]gnome-image-installer/pages/finished/gis-finished-page.ui
+gnome-image-installer/pages/finished/gis-finished-page.ui
 gnome-image-installer/pages/install/gis-install-page.c
-[type: gettext/glade]gnome-image-installer/pages/install/gis-install-page.ui
+gnome-image-installer/pages/install/gis-install-page.ui
 gnome-image-installer/pages/install/gis-scribe.c
 gnome-image-installer/util/gis-unattended-config.c
 gnome-image-installer/util/gduxzdecompressor.c

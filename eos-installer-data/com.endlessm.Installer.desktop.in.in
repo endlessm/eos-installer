@@ -1,5 +1,5 @@
 [Desktop Entry]
-_Name=Reformat
+Name=Reformat
 Icon=com.endlessm.Installer
 Exec=@LIBEXECDIR@/gnome-image-installer
 Terminal=false
