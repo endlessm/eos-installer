@@ -16,9 +16,9 @@ libgiiutil_la_CFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	-I "$(srcdir)/.." \
 	-I "$(srcdir)/../../gnome-initial-setup" \
-	-I $(top_srcdir)/ext/libglnx \
+	-I $(top_srcdir)/subprojects/libglnx \
 	$(WARN_CFLAGS)
 libgiiutil_la_LIBADD = $(INITIAL_SETUP_LIBS) -lz \
-	$(top_builddir)/ext/libglnx.la \
+	$(top_builddir)/subprojects/libglnx.la \
 	$(NULL)
 libgiiutil_la_LDFLAGS = -export_dynamic -avoid-version -module -no-undefined $(WARN_LDFLAGS)

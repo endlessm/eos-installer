@@ -101,7 +101,7 @@ test_scribe_SOURCES = \
 test_scribe_CFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \
-	-I $(top_srcdir)/ext/libglnx \
+	-I $(top_srcdir)/subprojects/libglnx \
 	-I $(top_srcdir)/gnome-image-installer/pages/install \
 	-I $(top_srcdir)/gnome-image-installer/util \
 	$(WARN_CFLAGS) \
@@ -109,7 +109,7 @@ test_scribe_CFLAGS = \
 test_scribe_LDADD = \
 	$(INITIAL_SETUP_LIBS) \
 	$(IMAGE_INSTALLER_LIBS) \
-	$(top_builddir)/ext/libglnx.la \
+	$(top_builddir)/subprojects/libglnx.la \
 	$(top_builddir)/gnome-image-installer/pages/install/libgisinstall.la \
 	$(NULL)
 test_scribe_LDFLAGS = \
@@ -120,14 +120,14 @@ test_unattended_config_SOURCES = test-unattended-config.c
 test_unattended_config_CFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \
-	-I $(top_srcdir)/ext/libglnx \
+	-I $(top_srcdir)/subprojects/libglnx \
 	-I $(top_srcdir)/gnome-image-installer/util \
 	$(WARN_CFLAGS) \
 	$(NULL)
 test_unattended_config_LDADD = \
 	$(INITIAL_SETUP_LIBS) \
 	$(IMAGE_INSTALLER_LIBS) \
-	$(top_builddir)/ext/libglnx.la \
+	$(top_builddir)/subprojects/libglnx.la \
 	$(top_builddir)/gnome-image-installer/util/libgiiutil.la \
 	$(NULL)
 test_unattended_config_LDFLAGS = \
@@ -154,14 +154,14 @@ test_write_diagnostics_SOURCES = test-write-diagnostics.c
 test_write_diagnostics_CFLAGS = \
 	$(INITIAL_SETUP_CFLAGS) \
 	$(IMAGE_INSTALLER_CFLAGS) \
-	-I $(top_srcdir)/ext/libglnx \
+	-I $(top_srcdir)/subprojects/libglnx \
 	-I $(top_srcdir)/gnome-image-installer/util \
 	$(WARN_CFLAGS) \
 	$(NULL)
 test_write_diagnostics_LDADD = \
 	$(INITIAL_SETUP_LIBS) \
 	$(IMAGE_INSTALLER_LIBS) \
-	$(top_builddir)/ext/libglnx.la \
+	$(top_builddir)/subprojects/libglnx.la \
 	$(top_builddir)/gnome-image-installer/util/libgiiutil.la \
 	$(NULL)
 test_write_diagnostics_LDFLAGS = \

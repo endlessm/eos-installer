@@ -57,11 +57,11 @@ eos-installer-*.tar.gz
 eos-installer-*.tar.bz2
 eos-installer-*.tar.xz
 
-ext/test-libglnx-errors
-ext/test-libglnx-fdio
-ext/test-libglnx-macros
-ext/test-libglnx-shutil
-ext/test-libglnx-xattrs
+subprojects/test-libglnx-errors
+subprojects/test-libglnx-fdio
+subprojects/test-libglnx-macros
+subprojects/test-libglnx-shutil
+subprojects/test-libglnx-xattrs
 
 gnome-image-installer/gnome-image-installer
 

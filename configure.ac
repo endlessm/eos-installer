@@ -1,7 +1,7 @@
 AC_INIT([eos-installer],[3.10.1.1])
 
 AC_CONFIG_AUX_DIR([build-aux])
-AC_CONFIG_MACRO_DIRS([m4 buildutil ext/libglnx])
+AC_CONFIG_MACRO_DIRS([m4 buildutil subprojects/libglnx])
 
 AX_IS_RELEASE([git-directory])
 AC_REQUIRE_AUX_FILE([tap-driver.sh])
@@ -82,7 +82,7 @@ AC_PATH_PROG(GLIB_COMPILE_RESOURCES, glib-compile-resources)
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 Makefile
-ext/Makefile
+subprojects/Makefile
 gnome-initial-setup/Makefile
 gnome-image-installer/Makefile
 gnome-image-installer/util/Makefile

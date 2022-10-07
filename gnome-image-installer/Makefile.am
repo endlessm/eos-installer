@@ -32,7 +32,7 @@ gnome_image_installer_SOURCES = \
 	gnome-image-installer.c gnome-image-installer.h
 
 gnome_image_installer_LDADD =	\
-	$(top_builddir)/ext/libglnx.la \
+	$(top_builddir)/subprojects/libglnx.la \
 	util/libgiiutil.la \
 	$(gisdir)/libgisutil.la \
 	pages/confirm/libgisconfirm.la \
