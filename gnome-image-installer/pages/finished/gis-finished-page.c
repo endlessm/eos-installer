@@ -45,8 +45,6 @@
 #include <udisks/udisks.h>
 
 struct _GisFinishedPagePrivate {
-  gint led_state;
-
   GtkAccelGroup *accel_group;
 
   GDesktopAppInfo *gedit;
@@ -126,19 +124,6 @@ reboot_cb (GtkButton *button, GisFinishedPage *page)
 {
   g_spawn_command_line_sync ("poweroff", NULL, NULL, NULL, NULL);
   g_application_quit(G_APPLICATION (GIS_PAGE (page)->driver));
-}
-
-static gboolean
-toggle_leds (GisPage *page)
-{
-  XKeyboardControl values;
-  GisFinishedPage *summary = GIS_FINISHED_PAGE (page);
-  GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (summary);
-
-  values.led_mode = priv->led_state;
-  XChangeKeyboardControl(GDK_DISPLAY_XDISPLAY(gtk_widget_get_display(GTK_WIDGET(page))), KBLedMode, &values);
-  priv->led_state = priv->led_state == 1 ? 0 : 1;
-  return TRUE;
 }
 
 static void
@@ -313,11 +298,6 @@ gis_finished_page_shown (GisPage *page)
           gis_write_diagnostics_async (NULL, image_dir, home_dir,
                                        NULL, write_diagnostics_cb,
                                        g_object_ref (self));
-        }
-
-      if (gis_store_is_unattended())
-        {
-          g_timeout_add_seconds (1, (GSourceFunc)toggle_leds, page);
         }
 
       /* If running within a live session, hide the "Turn off" button on error,
