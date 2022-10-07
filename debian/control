@@ -3,7 +3,7 @@ Section: misc
 Priority: optional
 Maintainer: Endless OS Team <maintainers@endlessos.org>
 Build-Depends: debhelper-compat (= 12),
-	       gnome-common,
+	       gettext,
 	       gnupg,
 	       libattr1-dev,
 	       libglib2.0-dev (>= 2.40.0),
@@ -12,6 +12,8 @@ Build-Depends: debhelper-compat (= 12),
 	       liblzma-dev,
 	       libpango1.0-dev (>= 1.32.5),
 	       libudisks2-dev,
+	       meson (>= 0.55.0),
+	       pkg-config,
 Standards-Version: 4.5.0
 Homepage: https://endlessos.org/
 
