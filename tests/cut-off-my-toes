@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+head --bytes $(( $(stat --format='%s' "${1:?}") / 2 )) "$1" >"${1/img/truncated}"

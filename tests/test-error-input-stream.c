@@ -14,7 +14,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
-#include "config.h"
 #include "test-error-input-stream.h"
 
 /* We store the maximum offset as a guint64, due to it being a property and

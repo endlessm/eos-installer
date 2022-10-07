@@ -19,7 +19,7 @@
 #ifndef __GIS_CONFIRM_PAGE_H__
 #define __GIS_CONFIRM_PAGE_H__
 
-#include "gnome-image-installer.h"
+#include "gnome-initial-setup.h"
 
 G_BEGIN_DECLS
 
