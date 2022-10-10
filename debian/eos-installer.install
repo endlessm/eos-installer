@@ -2,4 +2,4 @@ debian/tmp/usr/lib/eos-installer/*
 debian/tmp/usr/share/applications/com.endlessm.Installer.desktop
 debian/tmp/usr/share/icons/*
 debian/tmp/usr/share/locale/*
-debian/tmp/usr/share/polkit-1/rules.d/20-eos-installer.rules
+debian/tmp/usr/share/polkit-1/rules.d/90-eos-installer.rules
