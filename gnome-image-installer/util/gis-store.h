@@ -23,7 +23,6 @@
 #ifndef __GIS_STORE_H__
 #define __GIS_STORE_H__
 
-#include "gnome-image-installer.h"
 #include <glib.h>
 
 #include "gis-unattended-config.h"

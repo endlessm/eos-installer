@@ -27,6 +27,7 @@
 #include <gtk/gtk.h>
 
 #include "gis-assistant.h"
+#include "gis-assistant-resources.h"
 
 enum {
   PROP_0,
@@ -494,6 +495,8 @@ static void
 gis_assistant_class_init (GisAssistantClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+
+  (void) gis_assistant_get_resource ();
 
   gtk_widget_class_set_template_from_resource (GTK_WIDGET_CLASS (klass), "/org/gnome/initial-setup/gis-assistant.ui");
 

@@ -1,0 +1,5 @@
+subdir('confirm')
+subdir('diskimage')
+subdir('disktarget')
+subdir('finished')
+subdir('install')
