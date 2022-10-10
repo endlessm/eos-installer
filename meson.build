@@ -15,11 +15,7 @@ cc = meson.get_compiler('c')
 gnome = import('gnome')
 i18n = import('i18n')
 
-libglnx_dep = subproject(
-    'libglnx',
-    # https://gitlab.gnome.org/GNOME/libglnx/-/merge_requests/36
-    default_options: ['warning_level=2'],
-).get_variable('libglnx_dep')
+libglnx_dep = subproject('libglnx').get_variable('libglnx_dep')
 gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.40.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.7.11')
 udisks_dep = dependency('udisks2')
