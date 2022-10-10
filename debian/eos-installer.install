@@ -1,4 +1,4 @@
-debian/tmp/usr/lib/eos-installer/*
+debian/tmp/usr/libexec/gnome-image-installer
 debian/tmp/usr/share/applications/com.endlessm.Installer.desktop
 debian/tmp/usr/share/icons/*
 debian/tmp/usr/share/locale/*

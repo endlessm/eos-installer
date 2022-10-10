@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/gnome.mk
--include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
-include /usr/share/cdbs/1/rules/autoreconf.mk
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export DEB_LDFLAGS_MAINT_APPEND = -Wl,-z,defs -Wl,--as-needed
+
+%:
+	dh $@
