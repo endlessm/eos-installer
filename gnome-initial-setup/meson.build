@@ -16,6 +16,7 @@ libgisutil = static_library('gisutil',
         'gis-window.c',
         'gis-window.h',
         'gnome-initial-setup.h',
+        gis_assistant_resources,
     ],
     dependencies: [
         gtk_dep,

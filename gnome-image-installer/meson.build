@@ -3,10 +3,6 @@ subdir('pages')
 
 executable('gnome-image-installer',
     [
-        # FIXME: For unknown reasons, these must be compiled & linked here,
-        # not linked into libgisutil.
-        gis_assistant_resources,
-
         'gnome-image-installer.c',
         'gnome-image-installer.h',
     ],
