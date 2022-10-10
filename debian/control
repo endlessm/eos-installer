@@ -1,7 +1,7 @@
 Source: eos-installer
 Section: misc
 Priority: optional
-Maintainer: Robert McQueen <robert@endlessm.com>
+Maintainer: Endless OS Team <maintainers@endlessos.org>
 Build-Depends: cdbs (>= 0.4.41),
 	       dh-autoreconf,
 	       debhelper (>= 9),
@@ -17,7 +17,7 @@ Build-Depends: cdbs (>= 0.4.41),
 	       libattr1-dev,
 	       gnupg,
 Standards-Version: 3.9.4
-Homepage: https://endlessm.com
+Homepage: https://endlessos.org/
 
 Package: eos-installer
 Architecture: any
