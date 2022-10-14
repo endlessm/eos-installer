@@ -14,9 +14,6 @@ i18n.merge_file(
     type: 'desktop'
 )
 
-data_conf = configuration_data()
-data_conf.set('libexecdir', libexecdir)
-
 install_data(
     'run-mount-eosimages.mount',
     install_dir: systemdsystemunitdir,
