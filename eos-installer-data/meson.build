@@ -1,5 +1,5 @@
 desktop_conf = configuration_data()
-desktop_conf.set('LIBEXECDIR', libexecdir)
+desktop_conf.set('LIBEXECDIR', prefix / libexecdir)
 
 i18n.merge_file(
     input: configure_file(
