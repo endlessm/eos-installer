@@ -1,5 +1,5 @@
 desktop_conf = configuration_data()
-desktop_conf.set('LIBEXECDIR', libexecdir)
+desktop_conf.set('LIBEXECDIR', prefix / libexecdir)
 
 i18n.merge_file(
     input: configure_file(
@@ -13,9 +13,6 @@ i18n.merge_file(
     install: true,
     type: 'desktop'
 )
-
-data_conf = configuration_data()
-data_conf.set('libexecdir', libexecdir)
 
 install_data(
     'run-mount-eosimages.mount',
