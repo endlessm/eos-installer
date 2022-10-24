@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Shaddai, 2019-2020
+# Shaddai, 2019-2020,2022
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-30 14:02+0000\n"
+"POT-Creation-Date: 2022-10-24 14:03+0000\n"
 "PO-Revision-Date: 2016-05-17 15:37+0000\n"
-"Last-Translator: Shaddai, 2019-2020\n"
+"Last-Translator: Shaddai, 2019-2020,2022\n"
 "Language-Team: Slovenian (http://www.transifex.com/endless-os/eos-installer/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -373,27 +373,27 @@ msgstr "Podatkovna datoteka ‘%s’ne obstaja."
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1227
 #, c-format
 msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
-msgstr ""
+msgstr "Kontrolna vsota datoteke ‘%s’  se ne ujema s pričakovano kontrolno vsoto ‘%s’."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1259
 #, c-format
 msgid "The checksum file ‘%s’ does not exist."
-msgstr ""
+msgstr "Datoteka ‘%s’ kontrolne vsote ne obstaja."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1278
 #, c-format
 msgid "The checksum file ‘%s’ does not contain a checksum."
-msgstr ""
+msgstr "Datoteka kontrolne vsote‘%s’ ne vsebuje kontrolne vsote."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1287
 #, c-format
 msgid "The checksum ‘%s’ does not contain %d characters."
-msgstr ""
+msgstr "Kontrolna vsota ‘%s’ ne vsebuje %d znakov."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1297
 #, c-format
 msgid "The checksum ‘%s’ contains invalid character ‘%c’."
-msgstr ""
+msgstr "Kontrolna vsota ‘%s’ vsebuje neveljaven znak ‘%c’."
 
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
@@ -402,7 +402,7 @@ msgstr "Pogonske datoteke ni bilo mogoče razširiti. "
 #: ../gnome-image-installer/pages/install/gis-scribe.c:1680
 #, c-format
 msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
-msgstr ""
+msgstr "Ne obstajata niti datoteka podpisa ‘%s’ niti datoteka kontrolne vsote ‘%s’."
 
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
