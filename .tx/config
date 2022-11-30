@@ -1,7 +1,7 @@
 [main]
 host = https://www.transifex.com
 
-[eos-installer.app]
+[o:endless-os:p:eos-installer:r:app]
 source_file = po/eos-installer.pot
 source_lang = en
 file_filter = po/<lang>.po
