@@ -202,7 +202,7 @@ msgstr "Geçerli sürümü kullan:"
 #, no-c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
-msgstr "Seçtiğiniz konum yetersiz, ihtiyacınız olan %s"
+msgstr "Seçtiğiniz konum yetersiz, ihtiyacınız olan %s ile yeniden formatlamak için %s."
 
 #: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
