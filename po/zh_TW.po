@@ -1,16 +1,16 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eos-installer package.
 # 
 # Translators:
 # Roddy Shuler <roddy@stanfordalumni.org>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 15:02+0000\n"
-"PO-Revision-Date: 2021-09-15 12:14+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"Report-Msgid-Bugs-To: https://github.com/endlessm/eos-installer/issues\n"
+"POT-Creation-Date: 2022-12-08 00:08+0000\n"
+"PO-Revision-Date: 2016-05-17 15:37+0000\n"
+"Last-Translator: Roddy Shuler <roddy@stanfordalumni.org>, 2018\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/endless-os/eos-installer/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,114 +18,114 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../gnome-initial-setup/gis-assistant.c:290
+#: gnome-initial-setup/gis-assistant.c:291
 msgid "_Next"
 msgstr "下一步(_N)"
 
-#: ../gnome-initial-setup/gis-assistant.c:426
+#: gnome-initial-setup/gis-assistant.c:427
 msgid "_Previous"
 msgstr "上一步(_P)"
 
-#: ../gnome-initial-setup/gis-assistant.c:427
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
+#: gnome-initial-setup/gis-assistant.c:428
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:339
 msgid "_Cancel"
 msgstr "取消(_C)"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
-#: ../gnome-image-installer/gnome-image-installer.c:104
+#: gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
 msgstr "載入 ‘%s’ 錯誤："
 
-#: ../gnome-image-installer/gnome-image-installer.c:268
+#: gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
 msgstr "強制新使用者模式"
 
-#: ../gnome-image-installer/gnome-image-installer.c:272
+#: gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
 msgstr "- GNOME 初始設定"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:93
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:93
 #, c-format
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
 msgstr[0] "安裝將在 %d 秒內自動開始。"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
 msgstr "未知"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
 msgstr "仍要繼續並銷毀數據"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
 msgstr "已取消自動安裝。"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
 msgstr "Endless OS 自動安裝"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:27
 msgid "Computer Vendor"
 msgstr "電腦供應商"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:61
 msgid "Product"
 msgstr "產品"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:110
 msgid "Image"
 msgstr "圖像"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:141
 msgid "Target"
 msgstr "目標"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:172
 msgid "Device"
 msgstr "裝置"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:203
 msgid "Size"
 msgstr "大小"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:256
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
 msgstr "此目標磁碟上的所有數據將被銷毀。你將失去<b>所有應用程式、檔案和文件</b>。"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:297
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
 msgstr "配置的電腦供應商及產品資訊與此電腦不相符。"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:354
 msgid "C_ontinue and Destroy Data"
 msgstr "繼續並銷毀數據"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
 msgid "More than one image was found."
 msgstr "找到多於一幅圖像。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Basic"
 msgstr "基本"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
+#: gnome-image-installer/pages/install/gis-install-page.ui:77
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Endless OS Installer"
 msgstr "Endless OS 安裝程式"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS (non-free)"
 msgstr "Endless OS（非自由軟體）"
 
@@ -133,156 +133,156 @@ msgstr "Endless OS（非自由軟體）"
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
 msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
 msgid "Endless OS (DVD)"
 msgstr "Endless OS (DVD)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
 msgstr "完整"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:403
 #, c-format
 msgid "Image file ‘%s’ does not exist."
 msgstr "圖像檔案 ‘%s’ 並不存在。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:484
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
 msgstr "實時圖像 ‘%s’ 與配置圖像 ‘%s’ 不符。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:496
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:503
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
 msgstr "找不到圖像裝置 ‘%s’，也無法直接使用 ‘%s’。"
 
 #. Translators: the placeholder is a filename.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:559
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:566
 #, c-format
 msgid "Configured image ‘%s’ was not found."
 msgstr "找不到配置圖像 ‘%s’。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:564
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:571
 msgid "No suitable images were found."
 msgstr "找不到合適的影像。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:666
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:673
 #, c-format
 msgid "Could not find partition holding Endless OS files."
 msgstr "找不到用來存放 Endless 操作系統檔案的分區。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:718
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:725
 msgid "Reformat with Endless OS"
 msgstr "以 Endless OS重新格式化"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.ui:37
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
 msgstr "這是您想使用的 Endless OS版本嗎？不是的話，就下載另一個版本。"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.ui:104
 msgid "Use existing version:"
 msgstr "使用既有版本："
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
-#, no-c-format
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:211
+#, c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
 msgstr "您所選的位置太小：需要 %s 以與 %s 重定格式"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
 msgstr "找到多於一個候選區塊裝置。 "
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
 msgid "Finish"
 msgstr "完成"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
 msgid "Select Disk"
 msgstr "選擇磁碟"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:29
 msgid "Select the disk you'd like to reformat with Endless OS"
 msgstr "選擇您想要安裝 Endless OS於其中的磁盤"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:55
 msgid "Select Disk:"
 msgstr "選取磁碟："
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:137
 msgid "I agree to erasing <b>all of my files and apps</b>"
 msgstr "我同意清除 <b>我的所有檔案和應用程式</b>"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:162
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
 msgstr "此磁碟似乎有數個分割區（如 C 槽及 D 槽）。以 Endless OS 重新格式化將會抹除選定磁碟的<b>所有分割區</b>。請按此確認。"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:256
 msgid "No suitable disks found."
 msgstr "找不到適合的磁碟。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
+#: gnome-image-installer/pages/finished/gis-finished-page.c:160
 #, c-format
 msgid "A debug log has been saved as %s."
 msgstr "偵錯日誌已儲存為 %s。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
+#: gnome-image-installer/pages/finished/gis-finished-page.c:165
 msgid "Failed to save debug log: "
 msgstr "無法儲存偵錯日誌："
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
+#: gnome-image-installer/pages/finished/gis-finished-page.c:251
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
 msgstr "糟糕！你的自動安裝配置出現問題。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
+#: gnome-image-installer/pages/finished/gis-finished-page.c:255
 msgid "Oops, something is wrong with your Endless OS file."
 msgstr "糟糕！您的 Endless OS檔案似乎有問題。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
+#: gnome-image-installer/pages/finished/gis-finished-page.c:259
 msgid "Oops, something went wrong while finding suitable disks to reformat."
 msgstr "糟糕！尋找適合重新格式化的磁碟時出現問題。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
+#: gnome-image-installer/pages/finished/gis-finished-page.c:263
 msgid "Oops, something went wrong while reformatting."
 msgstr "糟糕！重新格式化時出錯。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+#: gnome-image-installer/pages/finished/gis-finished-page.c:275
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:102
 msgid "Oops, something went wrong."
 msgstr "哎呀！出錯了。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
+#: gnome-image-installer/pages/finished/gis-finished-page.c:371
 msgid "Unattended installation configuration file created"
 msgstr "已經建立自動安裝配置檔案"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
+#: gnome-image-installer/pages/finished/gis-finished-page.c:374
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
 msgstr "之前的檔案已更名為 ‘%s’。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
+#: gnome-image-installer/pages/finished/gis-finished-page.c:380
 msgid "Unattended installation configuration file could not be created."
 msgstr "無法建立自動安裝配置檔案。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
+#: gnome-image-installer/pages/finished/gis-finished-page.c:471
 msgid "Reformatting Finished"
 msgstr "重新格式化已完成"
 
 #. Translators: the %s is the customer support email address
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
+#: gnome-image-installer/pages/finished/gis-finished-page.c:482
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
@@ -290,113 +290,113 @@ msgid ""
 "troubleshoot."
 msgstr "請聯絡%s或加入<a href=\"https://community.endlessos.com/\"> Endless 社群</a>來進行錯誤排除。"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:40
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
 msgstr "成功了！關閉您的電腦電源接著拔除您的 USB 裝置。當您重新開機時，Endless OS便會準備供您設定並開始使用！"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:59
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
 msgstr "成功！關閉您的電腦並移除 DVD。重新啟動後 Endless OS 將準備就緒，讓您進行設定並使用！"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:173
 msgid "Power Off"
 msgstr "關閉電源"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:59
+#: gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
 msgstr "停止格式化硬碟嗎？"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:61
+#: gnome-image-installer/pages/install/gis-install-page.c:61
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
 msgstr "重新格式化程序已經開始，現在取消會導致此系統無法開機。"
 
 #. Stop Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:86
+#: gnome-image-installer/pages/install/gis-install-page.c:86
 msgid "Stop Reformatting"
 msgstr "停止重新格式化"
 
 #. Continue Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:93
+#: gnome-image-installer/pages/install/gis-install-page.c:93
 msgid "Continue Reformatting"
 msgstr "繼續重新格式化"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:199
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
-#, no-c-format
+#: gnome-image-installer/pages/install/gis-install-page.c:199
+#: gnome-image-installer/pages/install/gis-install-page.ui:24
+#, c-format
 msgid "Step %d of %d"
 msgstr "步驟 %d 之 %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:341
-#: ../gnome-image-installer/pages/install/gis-scribe.c:932
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1397
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1509
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1549
-#: ../gnome-image-installer/util/gduxzdecompressor.c:136
+#: gnome-image-installer/pages/install/gis-install-page.c:341
+#: gnome-image-installer/pages/install/gis-scribe.c:932
+#: gnome-image-installer/pages/install/gis-scribe.c:1397
+#: gnome-image-installer/pages/install/gis-scribe.c:1509
+#: gnome-image-installer/pages/install/gis-scribe.c:1549
+#: gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "內部錯誤"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:414
+#: gnome-image-installer/pages/install/gis-install-page.c:414
 msgid "Reformatting"
 msgstr "正在重新格式化"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:4
+#: gnome-image-installer/pages/install/gis-install-page.ui:97
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "使用方式快速又簡單，功能強大，且無論網際網路連線或離線均可使用。\n\nEndless OS已預先載入超過 100 種應用程式，啟動即輕鬆上手。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:805
+#: gnome-image-installer/pages/install/gis-scribe.c:805
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
 msgstr "已寫入 %s 個位元組，但預期寫入 %s 個位元組。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1110
+#: gnome-image-installer/pages/install/gis-scribe.c:1110
 msgid "Image verification error."
 msgstr "影像驗證錯誤。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1157
+#: gnome-image-installer/pages/install/gis-scribe.c:1157
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "簽名檔案 ‘%s’ 並不存在。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1227
+#: gnome-image-installer/pages/install/gis-scribe.c:1227
 #, c-format
 msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1259
+#: gnome-image-installer/pages/install/gis-scribe.c:1259
 #, c-format
 msgid "The checksum file ‘%s’ does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1278
+#: gnome-image-installer/pages/install/gis-scribe.c:1278
 #, c-format
 msgid "The checksum file ‘%s’ does not contain a checksum."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1287
+#: gnome-image-installer/pages/install/gis-scribe.c:1287
 #, c-format
 msgid "The checksum ‘%s’ does not contain %d characters."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1297
+#: gnome-image-installer/pages/install/gis-scribe.c:1297
 #, c-format
 msgid "The checksum ‘%s’ contains invalid character ‘%c’."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1463
+#: gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
 msgstr "無法解壓圖像檔案。"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1680
+#: gnome-image-installer/pages/install/gis-scribe.c:1680
 #, c-format
 msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
 msgstr ""
@@ -404,7 +404,7 @@ msgstr ""
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
 #. * the file.
-#: ../gnome-image-installer/util/gis-unattended-config.c:201
+#: gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
 msgstr "%s 密鑰為空白"
@@ -412,23 +412,23 @@ msgstr "%s 密鑰為空白"
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
 #. * sections in an .ini-style file.
-#: ../gnome-image-installer/util/gis-unattended-config.c:258
+#: gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
 msgstr "多於一個 %s 分節（%s 和 %s）"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:122
+#: gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
 msgstr "無效的壓縮資料"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:129
+#: gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
 msgstr "記憶體不足"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:151
+#: gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
 msgstr "需要其他輸入"
 
-#: ../eos-installer-data/com.endlessm.Installer.desktop.in.in.h:1
+#: eos-installer-data/com.endlessm.Installer.desktop.in.in:3
 msgid "Reformat"
 msgstr "重新格式化"

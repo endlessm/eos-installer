@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eos-installer package.
 # 
 # Translators:
 # Andika Triwidada <andika@gmail.com>, 2012-2015
@@ -15,10 +15,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 15:02+0000\n"
-"PO-Revision-Date: 2021-11-25 04:38+0000\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"Report-Msgid-Bugs-To: https://github.com/endlessm/eos-installer/issues\n"
+"POT-Creation-Date: 2022-12-08 00:08+0000\n"
+"PO-Revision-Date: 2016-05-17 15:37+0000\n"
+"Last-Translator: Septira Taruna <septira@endlessm.com>, 2017\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-os/eos-installer/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,114 +26,114 @@ msgstr ""
 "Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../gnome-initial-setup/gis-assistant.c:290
+#: gnome-initial-setup/gis-assistant.c:291
 msgid "_Next"
 msgstr "Sela_njutnya"
 
-#: ../gnome-initial-setup/gis-assistant.c:426
+#: gnome-initial-setup/gis-assistant.c:427
 msgid "_Previous"
 msgstr "Se_belumya"
 
-#: ../gnome-initial-setup/gis-assistant.c:427
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
+#: gnome-initial-setup/gis-assistant.c:428
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:339
 msgid "_Cancel"
 msgstr "_Batal"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
-#: ../gnome-image-installer/gnome-image-installer.c:104
+#: gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
 msgstr "Galat memuat '%s': "
 
-#: ../gnome-image-installer/gnome-image-installer.c:268
+#: gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
 msgstr "Paksakan mode pengguna baru"
 
-#: ../gnome-image-installer/gnome-image-installer.c:272
+#: gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
 msgstr "- GNOME Penyiapan Awal"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:93
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:93
 #, c-format
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
 msgstr[0] "Instalasi akan berlangsung otomatis dalam %d detik."
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
 msgstr "Tak Diketahui"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
 msgstr "T_etap Lanjut dan Hancurkan Data"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
 msgstr "Instalasi tanpa pengawasan dibatalkan."
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
 msgstr "Instalasi Tanpa Pengawasan Endless OS"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:27
 msgid "Computer Vendor"
 msgstr "Vendor Komputer"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:61
 msgid "Product"
 msgstr "Produk"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:110
 msgid "Image"
 msgstr "Citra"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:141
 msgid "Target"
 msgstr "Target"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:172
 msgid "Device"
 msgstr "Perangkat"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:203
 msgid "Size"
 msgstr "Ukuran"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:256
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
 msgstr "Semua data di disk target ini akan dihancurkan. Anda akan kehilangan <b>semua aplikasi, berkas dan dokumen</b>."
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:297
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
 msgstr "Vendor komputer dan informasi produk yang dikonfigurasi tidak sesuai dengan komputer ini."
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:354
 msgid "C_ontinue and Destroy Data"
 msgstr "L_anjut dan Hancurkan Data"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
 msgid "More than one image was found."
 msgstr "Lebih dari satu citra ditemukan."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Basic"
 msgstr "Dasar"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
+#: gnome-image-installer/pages/install/gis-install-page.ui:77
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Endless OS Installer"
 msgstr "Pemasang Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS (non-free)"
 msgstr "Endless OS (non-free)"
 
@@ -141,156 +141,156 @@ msgstr "Endless OS (non-free)"
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
 msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
 msgid "Endless OS (DVD)"
 msgstr "Endless OS (DVD)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
 msgstr "Lengkap"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:403
 #, c-format
 msgid "Image file ‘%s’ does not exist."
 msgstr "Berkas gambar ‘%s’ tidak ada."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:484
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
 msgstr "Citra live ‘%s’ tidak sesuai dengan citra terkonfigurasi ‘%s’."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:496
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:503
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
 msgstr "Tak dapat menemukan perangkat citra ‘%s’ dan tak dapat menggunakan ‘%s’ secara langsung."
 
 #. Translators: the placeholder is a filename.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:559
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:566
 #, c-format
 msgid "Configured image ‘%s’ was not found."
 msgstr "Citra terkonfigurasi ‘%s’ tidak ditemukan."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:564
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:571
 msgid "No suitable images were found."
 msgstr "Tidak ditemukan file image yang tepat."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:666
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:673
 #, c-format
 msgid "Could not find partition holding Endless OS files."
 msgstr "Tak dapat menemukan partisi yang menyimpan berkas Endless OS."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:718
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:725
 msgid "Reformat with Endless OS"
 msgstr "Format ulang dengan Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.ui:37
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
 msgstr "Apakah ini versi Endless OS yang ingin Anda gunakan? Jika tidak, unduh versi yang lain."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.ui:104
 msgid "Use existing version:"
 msgstr "Gunakan versi yang sudah ada:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
-#, no-c-format
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:211
+#, c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
 msgstr "Lokasi yang Anda pilih terlalu kecil: Anda memerlukan %s untuk memformat ulang dengan %s."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
 msgstr "Lebih dari satu perangkat blokir kandidat ditemukan."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
 msgid "Finish"
 msgstr "Selesai"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
 msgid "Select Disk"
 msgstr "Pilih Disk"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:29
 msgid "Select the disk you'd like to reformat with Endless OS"
 msgstr "Pilih disk yang ingin Anda format ulang dengan Endless OS"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:55
 msgid "Select Disk:"
 msgstr "Pilih Diska:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:137
 msgid "I agree to erasing <b>all of my files and apps</b>"
 msgstr "Saya setuju untuk menghapus <b>semua berkas dan aplikasi saya</b>"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:162
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
 msgstr "Sepertinya Anda memiliki beberapa partisi di diska ini (misalnya drive C: dan D:). Memformat ulang dengan Endless OS akan menghapus <b>semua partisi</b> pada diska terpilih. Klik di sini untuk mengkonfirmasi."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:256
 msgid "No suitable disks found."
 msgstr "Diska yang tepat tidak ditemukan."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
+#: gnome-image-installer/pages/finished/gis-finished-page.c:160
 #, c-format
 msgid "A debug log has been saved as %s."
 msgstr "Sebuah debug log telah tersimpan sebagai %s."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
+#: gnome-image-installer/pages/finished/gis-finished-page.c:165
 msgid "Failed to save debug log: "
 msgstr "Gagal menyimpan log awakutu: "
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
+#: gnome-image-installer/pages/finished/gis-finished-page.c:251
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
 msgstr "Ups, terjadi sesuatu dengan konfigurasi instalasi tanpa pengawasan."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
+#: gnome-image-installer/pages/finished/gis-finished-page.c:255
 msgid "Oops, something is wrong with your Endless OS file."
 msgstr "Ups, ada masalah dengan berkas Endless OS Anda."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
+#: gnome-image-installer/pages/finished/gis-finished-page.c:259
 msgid "Oops, something went wrong while finding suitable disks to reformat."
 msgstr "Ups, terjadi sesuatu saat mencari disk yang cocok untuk format ulang."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
+#: gnome-image-installer/pages/finished/gis-finished-page.c:263
 msgid "Oops, something went wrong while reformatting."
 msgstr "Ups, terjadi sesuatu saat memformat ulang."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+#: gnome-image-installer/pages/finished/gis-finished-page.c:275
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:102
 msgid "Oops, something went wrong."
 msgstr "Ups, terjadi sesuatu."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
+#: gnome-image-installer/pages/finished/gis-finished-page.c:371
 msgid "Unattended installation configuration file created"
 msgstr "Berkas konfigurasi instalasi tanpa pengawasan telah dibuat"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
+#: gnome-image-installer/pages/finished/gis-finished-page.c:374
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
 msgstr "Berkas sebelumnya telah dinamai ulang menjadi ‘%s’."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
+#: gnome-image-installer/pages/finished/gis-finished-page.c:380
 msgid "Unattended installation configuration file could not be created."
 msgstr "Berkas konfigurasi instalasi tanpa pengawasan tak dapat dibuat."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
+#: gnome-image-installer/pages/finished/gis-finished-page.c:471
 msgid "Reformatting Finished"
 msgstr "Selesai Memformat Ulang"
 
 #. Translators: the %s is the customer support email address
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
+#: gnome-image-installer/pages/finished/gis-finished-page.c:482
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
@@ -298,113 +298,113 @@ msgid ""
 "troubleshoot."
 msgstr "Mohon hubungi %s atau bergabung dengan <a href=\"https://community.endlessos.com/\">Komunitas Endless</a> untuk menyelesaikan kendala yang dihadapi."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:40
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
 msgstr "Berhasil! Matikan komputer lalu lepas perangkat USB Anda. Ketika memulai ulang, Endless OS akan siap untuk Anda atur dan gunakan!"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:59
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
 msgstr "Berhasil! Matikan komputer lalu keluarkan DVD ini. Ketika memulai ulang, Endless OS akan siap untuk Anda atur dan gunakan!"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:173
 msgid "Power Off"
 msgstr "Matikan"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:59
+#: gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
 msgstr "Berhenti memformat diska?"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:61
+#: gnome-image-installer/pages/install/gis-install-page.c:61
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
 msgstr "Proses format ulang telah dimulai. Membatalkan sekarang akan menyebabkan sistem tidak dapat di-boot."
 
 #. Stop Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:86
+#: gnome-image-installer/pages/install/gis-install-page.c:86
 msgid "Stop Reformatting"
 msgstr "Berhenti Memformat Ulang"
 
 #. Continue Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:93
+#: gnome-image-installer/pages/install/gis-install-page.c:93
 msgid "Continue Reformatting"
 msgstr "Lanjutkan Memformat Ulang"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:199
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
-#, no-c-format
+#: gnome-image-installer/pages/install/gis-install-page.c:199
+#: gnome-image-installer/pages/install/gis-install-page.ui:24
+#, c-format
 msgid "Step %d of %d"
 msgstr "Langkah %d dari %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:341
-#: ../gnome-image-installer/pages/install/gis-scribe.c:932
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1397
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1509
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1549
-#: ../gnome-image-installer/util/gduxzdecompressor.c:136
+#: gnome-image-installer/pages/install/gis-install-page.c:341
+#: gnome-image-installer/pages/install/gis-scribe.c:932
+#: gnome-image-installer/pages/install/gis-scribe.c:1397
+#: gnome-image-installer/pages/install/gis-scribe.c:1509
+#: gnome-image-installer/pages/install/gis-scribe.c:1549
+#: gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "Kesalahan internal"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:414
+#: gnome-image-installer/pages/install/gis-install-page.c:414
 msgid "Reformatting"
 msgstr "Memformat Ulang"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:4
+#: gnome-image-installer/pages/install/gis-install-page.ui:97
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "Cepat, mudah, dan hebat – dengan ataupun tanpa internet.\n\nEndless OS dilengkapi dengan lebih dari 100 aplikasi, langsung bermanfaat begitu mulai Anda nyalakan."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:805
+#: gnome-image-installer/pages/install/gis-scribe.c:805
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
 msgstr "Menulis %s bita, tetapi diharapkan untuk menulis %s bita."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1110
+#: gnome-image-installer/pages/install/gis-scribe.c:1110
 msgid "Image verification error."
 msgstr "Kesalahan pada verifikasi berkas image."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1157
+#: gnome-image-installer/pages/install/gis-scribe.c:1157
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "Berkas khusus ‘%s’ tidak ada."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1227
+#: gnome-image-installer/pages/install/gis-scribe.c:1227
 #, c-format
 msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
 msgstr "Checksum citra '%s' tidak sesuai dengan checksum yang diharapkan '%s'."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1259
+#: gnome-image-installer/pages/install/gis-scribe.c:1259
 #, c-format
 msgid "The checksum file ‘%s’ does not exist."
 msgstr "Berkas checksum '%s' tidak ada."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1278
+#: gnome-image-installer/pages/install/gis-scribe.c:1278
 #, c-format
 msgid "The checksum file ‘%s’ does not contain a checksum."
 msgstr "Berkas checksum '%s' tidak berisi checksum."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1287
+#: gnome-image-installer/pages/install/gis-scribe.c:1287
 #, c-format
 msgid "The checksum ‘%s’ does not contain %d characters."
 msgstr "Checksum '%s' tidak mengandung karakter %d."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1297
+#: gnome-image-installer/pages/install/gis-scribe.c:1297
 #, c-format
 msgid "The checksum ‘%s’ contains invalid character ‘%c’."
 msgstr "Checksum '%s' berisi karakter tidak valid '%c'."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1463
+#: gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
 msgstr "Tidak dapat mendekompresi berkas citra."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1680
+#: gnome-image-installer/pages/install/gis-scribe.c:1680
 #, c-format
 msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
 msgstr "Baik berkas tanda tangan '%s' maupun file checksum '%s' tidak ada."
@@ -412,7 +412,7 @@ msgstr "Baik berkas tanda tangan '%s' maupun file checksum '%s' tidak ada."
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
 #. * the file.
-#: ../gnome-image-installer/util/gis-unattended-config.c:201
+#: gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
 msgstr "Kunci %s kosong"
@@ -420,23 +420,23 @@ msgstr "Kunci %s kosong"
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
 #. * sections in an .ini-style file.
-#: ../gnome-image-installer/util/gis-unattended-config.c:258
+#: gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
 msgstr "Lebih dari satu bagian %s (%s dan %s)"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:122
+#: gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
 msgstr "Data terkompresi tidak valid"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:129
+#: gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
 msgstr "Memori tidak cukup"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:151
+#: gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
 msgstr "Butuh lebih banyak input"
 
-#: ../eos-installer-data/com.endlessm.Installer.desktop.in.in.h:1
+#: eos-installer-data/com.endlessm.Installer.desktop.in.in:3
 msgid "Reformat"
 msgstr "Format Ulang"

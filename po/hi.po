@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eos-installer package.
 # 
 # Translators:
 # Chandan kumar <chandankumar.093047@gmail.com>, 2012-2013
@@ -11,10 +11,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-11-29 15:02+0000\n"
-"PO-Revision-Date: 2021-09-15 12:14+0000\n"
-"Last-Translator: endlessmobile_build <admin@endlessos.org>\n"
+"Report-Msgid-Bugs-To: https://github.com/endlessm/eos-installer/issues\n"
+"POT-Creation-Date: 2022-12-08 00:08+0000\n"
+"PO-Revision-Date: 2016-05-17 15:37+0000\n"
+"Last-Translator: Will Thompson <wjt@endlessos.org>, 2020\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-os/eos-installer/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,115 +22,115 @@ msgstr ""
 "Language: hi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../gnome-initial-setup/gis-assistant.c:290
+#: gnome-initial-setup/gis-assistant.c:291
 msgid "_Next"
 msgstr "अगला (_N)"
 
-#: ../gnome-initial-setup/gis-assistant.c:426
+#: gnome-initial-setup/gis-assistant.c:427
 msgid "_Previous"
 msgstr "पिछला (_P)"
 
-#: ../gnome-initial-setup/gis-assistant.c:427
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:9
+#: gnome-initial-setup/gis-assistant.c:428
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:339
 msgid "_Cancel"
 msgstr "रद्द करें (_C)"
 
 #. Translators: the placeholder is the name of a configuration file, such
 #. * as "/run/mount/eosimages/unattended.ini".
-#: ../gnome-image-installer/gnome-image-installer.c:104
+#: gnome-image-installer/gnome-image-installer.c:104
 #, c-format
 msgid "Error loading ‘%s’: "
 msgstr "‘%s’ लोड करने में गड़बड़ी हुई:"
 
-#: ../gnome-image-installer/gnome-image-installer.c:268
+#: gnome-image-installer/gnome-image-installer.c:268
 msgid "Force new user mode"
 msgstr "नया उपयोगकर्ता मोड बलपूर्वक डालें"
 
-#: ../gnome-image-installer/gnome-image-installer.c:272
+#: gnome-image-installer/gnome-image-installer.c:272
 msgid "- GNOME initial setup"
 msgstr "- गनोम प्रारंभिक सेटअप"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:93
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:93
 #, c-format
 msgid "Installation will commence automatically in %d second."
 msgid_plural "Installation will commence automatically in %d seconds."
 msgstr[0] "इंस्टालेशन %d सेकेंड में स्वचालित रूप से शुरू हो जाएगी."
 msgstr[1] "स्थापना %d सेकेंड में अपने आप  शुरू हो जाएगी"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:147
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:147
 msgid "Unknown"
 msgstr "अनजान"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:208
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:208
 msgid "C_ontinue Anyway and Destroy Data"
 msgstr "कैसे भी जारी रखें और डेटा नष्ट कर दें"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:227
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:227
 msgid "Unattended installation was cancelled."
 msgstr "अप्रयुक्त इंस्टालेशन रद्द कर दिया गया."
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.c:263
+#: gnome-image-installer/pages/confirm/gis-confirm-page.c:263
 msgid "Endless OS Unattended Installation"
 msgstr "एंडलेस ओएस का अप्रयुक्त इंस्टालेशन"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:1
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:27
 msgid "Computer Vendor"
 msgstr "कंप्यूटर विक्रेता"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:2
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:61
 msgid "Product"
 msgstr "उत्पाद"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:3
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:110
 msgid "Image"
 msgstr "छवि "
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:4
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:141
 msgid "Target"
 msgstr "लक्ष्य"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:5
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:172
 msgid "Device"
 msgstr "डिवाइस"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:6
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:203
 msgid "Size"
 msgstr "आकार"
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:7
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:256
 msgid ""
 "All data on this target disk will be destroyed. You will lose <b>all of your"
 " apps, files and documents</b>."
 msgstr "इस लक्ष्य डिस्क पर सभी डेटा नष्ट हो जाएगा. आप <b> अपने सभी ऐप्स, फाइलों और दस्तावेजों को खो देंगे </b>."
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:8
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:297
 msgid ""
 "Configured computer vendor and product information does not match this "
 "computer."
 msgstr "कॉन्फ़िगर किया गया कंप्यूटर विक्रेता और उत्पाद जानकारी इस कंप्यूटर से मेल नहीं खाती है."
 
-#: ../gnome-image-installer/pages/confirm/gis-confirm-page.ui.h:10
+#: gnome-image-installer/pages/confirm/gis-confirm-page.ui:354
 msgid "C_ontinue and Destroy Data"
 msgstr "C_ontinue और डेटा नष्ट करें"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:137
 msgid "More than one image was found."
 msgstr "एक से अधिक छवि मिलीं."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:179
 msgid "Basic"
 msgstr "मूल"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:3
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:233
+#: gnome-image-installer/pages/install/gis-install-page.ui:77
 msgid "Endless OS"
 msgstr "Endless OS"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:238
 msgid "Endless OS Installer"
 msgstr "Endless OS इंस्टॉलर"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:243
 msgid "Endless OS (non-free)"
 msgstr "Endless OS (शुल्क सहित)"
 
@@ -138,156 +138,156 @@ msgstr "Endless OS (शुल्क सहित)"
 #. * Original Equipment Manufacturers. If there is not a
 #. * widely-understood short translation of "OEM" in your language,
 #. * please do not translate this.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:253
 msgid "Endless OS (OEM)"
 msgstr "Endless OS (OEM)"
 
 #. Translators: this is the DVD-sized edition of Endless OS. Please
 #. * only translate this if "DVD" is not widely understood in your
 #. * language.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:262
 msgid "Endless OS (DVD)"
 msgstr "Endless OS (DVD)"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:292
 msgid "Full"
 msgstr "Full"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:396
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:403
 #, c-format
 msgid "Image file ‘%s’ does not exist."
 msgstr "छवि फ़ाइल '%s' मौजूद नहीं है."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:477
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:484
 #, c-format
 msgid "Live image ‘%s’ does not match configured image ‘%s’."
 msgstr "लाइव छवि '%s' कॉन्फ़िगर की गई छवि '%s' से मेल नहीं खाती है."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:496
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:503
 #, c-format
 msgid "Cannot find image device ‘%s’ and cannot use ‘%s’ directly."
 msgstr "छवि डिवाइस '%s' नहीं ढूंढ पा रहा और '%s' का सीधे उपयोग नहीं किया जा सकता."
 
 #. Translators: the placeholder is a filename.
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:559
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:566
 #, c-format
 msgid "Configured image ‘%s’ was not found."
 msgstr "कॉन्फ़िगर की गई छवि '%s' नहीं मिली."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:564
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:571
 msgid "No suitable images were found."
 msgstr "कोई भी उपयुक्त छवियां नहीं मिलीं."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:666
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:673
 #, c-format
 msgid "Could not find partition holding Endless OS files."
 msgstr "एंडलेस ओएस फाइलों को रखने वाला विभाजन नहीं मिल सका."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.c:718
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.c:725
 msgid "Reformat with Endless OS"
 msgstr "Endless OS से पुनः फ़ॉर्मेट करें"
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:1
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.ui:37
 msgid ""
 "Is this the Endless OS version you'd like to use? If not, download another."
 msgstr "क्या यह वही Endless OS संस्करण है, जिसका आप उपयोग करना चाहते हैं? यदि नहीं, तो दूसरा संस्करण डाउनलोड करें."
 
-#: ../gnome-image-installer/pages/diskimage/gis-diskimage-page.ui.h:2
+#: gnome-image-installer/pages/diskimage/gis-diskimage-page.ui:104
 msgid "Use existing version:"
 msgstr "मौजूदा संस्करण का उपयोग करें:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:6
-#, no-c-format
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:132
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:211
+#, c-format
 msgid ""
 "The location you have chosen is too small: you need %s to reformat with %s."
 msgstr "जो स्थान आपने चुना है, वह बहुत छोटा है: आपको %s को पुनः फॉर्मेट करने के लिए साथ में %s की आवश्यकता है."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:150
 msgid "More than one candidate block device was found."
 msgstr "एक से अधिक उम्मीदवार की ब्लॉक डिवाइस मिली."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
 msgid "Finish"
 msgstr "समाप्त करें"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
 msgid "Select Disk"
 msgstr "डिस्क का चयन करें"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:1
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:29
 msgid "Select the disk you'd like to reformat with Endless OS"
 msgstr "उस डिस्क का चयन करें जिस पर आप Endless OS से पुनः फ़ॉर्मेट करना चाहते हैं"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:2
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:55
 msgid "Select Disk:"
 msgstr "डिस्क का चयन करें:"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:3
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:137
 msgid "I agree to erasing <b>all of my files and apps</b>"
 msgstr "मैं <b>अपनी सभी फ़ाइलें और ऐप्लिकेशन</b> मिटाने पर सहमत हूं"
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:4
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:162
 msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
 msgstr "ऐसा लगता है कि आपके पास डिस्क पर एकाधिक पार्टिशन मौजूद हैं (उदाहरण के लिए ड्रा्इव C:  और  D:). Endless OS से पुनः फ़ॉर्मेट करने पर चयनित डिस्क पर मौजूद <b>सभी पार्टिशन</b> मिटा दिए जाते हैं. कृपया पुष्टि करने के लिए यहां क्लिक करें."
 
-#: ../gnome-image-installer/pages/disktarget/gis-disktarget-page.ui.h:7
+#: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:256
 msgid "No suitable disks found."
 msgstr "कोई उपयुक्त डिस्क नहीं मिली"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:175
+#: gnome-image-installer/pages/finished/gis-finished-page.c:160
 #, c-format
 msgid "A debug log has been saved as %s."
 msgstr "एक डीबग लॉग, %s के रूप में सहेजा गया है."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:180
+#: gnome-image-installer/pages/finished/gis-finished-page.c:165
 msgid "Failed to save debug log: "
 msgstr "डीबग लॉग सेव करने में असफल:"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:266
+#: gnome-image-installer/pages/finished/gis-finished-page.c:251
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
 msgstr "ओह, आपके अप्रत्याशित स्थापना कॉन्फ़िगरेशन में कुछ गड़बड़ है."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:270
+#: gnome-image-installer/pages/finished/gis-finished-page.c:255
 msgid "Oops, something is wrong with your Endless OS file."
 msgstr "ओह, आपकी Endless OS फ़ाइल के साथ कुछ गलत हुआ."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:274
+#: gnome-image-installer/pages/finished/gis-finished-page.c:259
 msgid "Oops, something went wrong while finding suitable disks to reformat."
 msgstr "ओह, रीफॉर्मेट करने के लिए उपयुक्त डिस्क खोजने के दौरान कुछ गलत हो गया."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:278
+#: gnome-image-installer/pages/finished/gis-finished-page.c:263
 msgid "Oops, something went wrong while reformatting."
 msgstr "ओह, सुधार करने के दौरान कुछ गलत हो गया."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:290
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:3
+#: gnome-image-installer/pages/finished/gis-finished-page.c:275
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:102
 msgid "Oops, something went wrong."
 msgstr "ओह! कुछ गलत हो गया है."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:391
+#: gnome-image-installer/pages/finished/gis-finished-page.c:371
 msgid "Unattended installation configuration file created"
 msgstr "अप्रत्याशित स्थापना विन्यास फाइल बनाई गई"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:394
+#: gnome-image-installer/pages/finished/gis-finished-page.c:374
 #, c-format
 msgid "The previous file was renamed to ‘%s’."
 msgstr "पिछली फ़ाइल का नाम बदलकर '%s' कर दिया गया."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:400
+#: gnome-image-installer/pages/finished/gis-finished-page.c:380
 msgid "Unattended installation configuration file could not be created."
 msgstr "अप्रयुक्त इंस्टालेशन कॉन्फ़िगरेशन फ़ाइल नहीं बनाई जा सकी."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:491
+#: gnome-image-installer/pages/finished/gis-finished-page.c:471
 msgid "Reformatting Finished"
 msgstr "पुनः फ़ॉर्मेट समाप्त हुआ"
 
 #. Translators: the %s is the customer support email address
-#: ../gnome-image-installer/pages/finished/gis-finished-page.c:502
+#: gnome-image-installer/pages/finished/gis-finished-page.c:482
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
@@ -295,113 +295,113 @@ msgid ""
 "troubleshoot."
 msgstr "कृपया समस्या निवारण के लिए %s से संपर्क करें या <a href=\"https://community.endlessos.com/\">Endless समुदाय</a>  में शामिल हो."
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:1
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:40
 msgid ""
 "Success! Power off your computer and then remove your USB device. When you "
 "restart, Endless OS will be ready for you to set up and enjoy!"
 msgstr "सफल! अपने कंप्यूटर को पावर ऑफ़ करें और अपना USB डिवाइस निकालें. जब आप पुनर्प्रारंभ करें, तो Endless OS सेट अप करने और आनंद लेने के लिए आपके लिए तैयार होगा!"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:2
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:59
 msgid ""
 "Success! Power off your computer and remove the DVD. When you restart, "
 "Endless OS will be ready for you to set up and enjoy!"
 msgstr "सफलता! अपने कंप्यूटर को बंद करें और DVD निकालें. जब आप पुनर्प्रारंभ करें, तो Endless OS आपके लिए सेट अप करने और आनंद लेने के लिए तैयार होगा!"
 
-#: ../gnome-image-installer/pages/finished/gis-finished-page.ui.h:4
+#: gnome-image-installer/pages/finished/gis-finished-page.ui:173
 msgid "Power Off"
 msgstr "पावर बंद"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:59
+#: gnome-image-installer/pages/install/gis-install-page.c:59
 msgid "Stop reformatting the disk?"
 msgstr "डिस्क को पुनः स्वरूपित करना बंद करें?"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:61
+#: gnome-image-installer/pages/install/gis-install-page.c:61
 msgid ""
 "The reformatting process has already begun. Cancelling now will leave this "
 "system unbootable."
 msgstr "पुनः स्वरूपण प्रक्रिया पहले ही शुरू हो चुकी है. अब इसे रद्द करने से यह सिस्टम बूट न करने योग्य रह जाएगा."
 
 #. Stop Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:86
+#: gnome-image-installer/pages/install/gis-install-page.c:86
 msgid "Stop Reformatting"
 msgstr "पुनः स्वरूपित करना बंद करें"
 
 #. Continue Reformatting
-#: ../gnome-image-installer/pages/install/gis-install-page.c:93
+#: gnome-image-installer/pages/install/gis-install-page.c:93
 msgid "Continue Reformatting"
 msgstr "पुनः स्वरूपित करना जारी रखें"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:199
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:2
-#, no-c-format
+#: gnome-image-installer/pages/install/gis-install-page.c:199
+#: gnome-image-installer/pages/install/gis-install-page.ui:24
+#, c-format
 msgid "Step %d of %d"
 msgstr "चरण %d में से %d"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:341
-#: ../gnome-image-installer/pages/install/gis-scribe.c:932
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1397
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1509
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1549
-#: ../gnome-image-installer/util/gduxzdecompressor.c:136
+#: gnome-image-installer/pages/install/gis-install-page.c:341
+#: gnome-image-installer/pages/install/gis-scribe.c:932
+#: gnome-image-installer/pages/install/gis-scribe.c:1397
+#: gnome-image-installer/pages/install/gis-scribe.c:1509
+#: gnome-image-installer/pages/install/gis-scribe.c:1549
+#: gnome-image-installer/util/gduxzdecompressor.c:136
 #, c-format
 msgid "Internal error"
 msgstr "आंतरिक त्रुटि"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.c:414
+#: gnome-image-installer/pages/install/gis-install-page.c:414
 msgid "Reformatting"
 msgstr "पुनः फ़ॉर्मेट हो रहा है"
 
-#: ../gnome-image-installer/pages/install/gis-install-page.ui.h:4
+#: gnome-image-installer/pages/install/gis-install-page.ui:97
 msgid ""
 "Fast, easy to use and powerful – with or without internet.\n"
 "\n"
 "Endless OS is preloaded with over 100 apps, making it useful from the moment you turn it on."
 msgstr "तीव्र, उपयोग में आसान और शक्तिशाली – इंटरनेट के साथ या उसके बिना.\n\nEndless OS में पहले से 100 से अधिक ऐप्स लोड होते हैं, जो आपके द्वारा इसे चालू करते ही इसे उपयोगी बना देता है."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:805
+#: gnome-image-installer/pages/install/gis-scribe.c:805
 #, c-format
 msgid "Wrote %s bytes, but expected to write %s bytes."
 msgstr "%s बाइट्स लिखें, लेकिन %s बाइट्स लिखने की उम्मीद थी। "
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1110
+#: gnome-image-installer/pages/install/gis-scribe.c:1110
 msgid "Image verification error."
 msgstr "छवि सत्यापन त्रुटि."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1157
+#: gnome-image-installer/pages/install/gis-scribe.c:1157
 #, c-format
 msgid "The signature file ‘%s’ does not exist."
 msgstr "सिग्नेचर फ़ाइल '%s' मौजूद नहीं है."
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1227
+#: gnome-image-installer/pages/install/gis-scribe.c:1227
 #, c-format
 msgid "Image checksum ‘%s‘ does not match expected checksum ‘%s‘."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1259
+#: gnome-image-installer/pages/install/gis-scribe.c:1259
 #, c-format
 msgid "The checksum file ‘%s’ does not exist."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1278
+#: gnome-image-installer/pages/install/gis-scribe.c:1278
 #, c-format
 msgid "The checksum file ‘%s’ does not contain a checksum."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1287
+#: gnome-image-installer/pages/install/gis-scribe.c:1287
 #, c-format
 msgid "The checksum ‘%s’ does not contain %d characters."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1297
+#: gnome-image-installer/pages/install/gis-scribe.c:1297
 #, c-format
 msgid "The checksum ‘%s’ contains invalid character ‘%c’."
 msgstr ""
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1463
+#: gnome-image-installer/pages/install/gis-scribe.c:1463
 msgid "Could not decompress the image file."
 msgstr "इमेज फ़ाइल डीकम्प्रेस नहीं कर सका"
 
-#: ../gnome-image-installer/pages/install/gis-scribe.c:1680
+#: gnome-image-installer/pages/install/gis-scribe.c:1680
 #, c-format
 msgid "Neither the signature file ‘%s’ nor the checksum file ‘%s’ exist."
 msgstr ""
@@ -409,7 +409,7 @@ msgstr ""
 #. Translators: this error refers to a configuration
 #. * file. The placeholder is the name of a field in
 #. * the file.
-#: ../gnome-image-installer/util/gis-unattended-config.c:201
+#: gnome-image-installer/util/gis-unattended-config.c:201
 #, c-format
 msgid "%s key is empty"
 msgstr "%s कुंजी खाली है "
@@ -417,23 +417,23 @@ msgstr "%s कुंजी खाली है "
 #. Translators: this error refers to a configuration
 #. * file. The placeholders are all the name of
 #. * sections in an .ini-style file.
-#: ../gnome-image-installer/util/gis-unattended-config.c:258
+#: gnome-image-installer/util/gis-unattended-config.c:258
 #, c-format
 msgid "More than one %s section (%s and %s)"
 msgstr "एक से अधिक %s सेक्शन (%s और %s)"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:122
+#: gnome-image-installer/util/gduxzdecompressor.c:122
 msgid "Invalid compressed data"
 msgstr "अमान्य संपीडित डेटा"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:129
+#: gnome-image-installer/util/gduxzdecompressor.c:129
 msgid "Not enough memory"
 msgstr "पर्याप्त मेमोरी नहीं"
 
-#: ../gnome-image-installer/util/gduxzdecompressor.c:151
+#: gnome-image-installer/util/gduxzdecompressor.c:151
 msgid "Need more input"
 msgstr "अधिक इनपुट आवश्यक"
 
-#: ../eos-installer-data/com.endlessm.Installer.desktop.in.in.h:1
+#: eos-installer-data/com.endlessm.Installer.desktop.in.in:3
 msgid "Reformat"
 msgstr "पुनः फ़ॉर्मेट करें"
