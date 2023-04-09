@@ -40,7 +40,6 @@ systemdsystemunitdir = systemd_dep.get_variable(
 )
 
 gpg = find_program('gpg')
-gpgconf = find_program('gpgconf')
 
 conf = configuration_data()
 conf.set_quoted('GETTEXT_PACKAGE', meson.project_name())
