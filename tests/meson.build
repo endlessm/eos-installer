@@ -15,20 +15,20 @@ test_env.set('GIO_MODULE_DIR', '')
 
 # TODO: it must surely be possible to do better than this with meson
 # generators
-gpg = find_program('gpg2', 'gpg')
-gpgconf = find_program('gpgconf')
+gpg = find_program('gpg2', 'gpg', native : true)
+gpgconf = find_program('gpgconf', native : true)
 sign_file = [
-  find_program('sign-file'),
+  find_program('sign-file', native : true),
   '--gpg-path', gpg,
   '--gpgconf-path', gpgconf,
   files('secret.asc'),
   '@INPUT@',
 ]
-gz = [find_program('gzip'), '-1', '--keep', '--force', '@INPUT@']
-xz = [find_program('xz'), '-0', '--keep', '--force', '@INPUT@']
-make_fake_image = find_program('make-fake-image')
-cut_off_my_toes = [find_program('cut-off-my-toes'), '@INPUT@', '--']
-sha256sum = [find_program('sha256sum'), '@INPUT@']
+gz = [find_program('gzip', native : true), '-1', '--keep', '--force', '@INPUT@']
+xz = [find_program('xz', native : true), '-0', '--keep', '--force', '@INPUT@']
+make_fake_image = find_program('make-fake-image', native : true)
+cut_off_my_toes = [find_program('cut-off-my-toes', native : true), '@INPUT@', '--']
+sha256sum = [find_program('sha256sum', native : true), '@INPUT@']
 
 test_scribe_cases = {
   # "OS image" consisting of the same byte repeated to 4 MiB
