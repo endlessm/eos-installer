@@ -7,6 +7,7 @@
 # Julia <juliette.tux@gmail.com>, 2013
 # Stas Solovey <whats_up@tut.by>, 2015-2016
 # Valery Kirichenko <valera5505@gmail.com>, 2014
+# Victor, 2024
 # Yuri Myasoedov <omerta13@yandex.ru>, 2012-2013
 # Yuri Myasoedov <ymyasoedov@yandex.ru>, 2012-2013,2015
 # Вадим INARIEL, 2023
@@ -15,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: https://github.com/endlessm/eos-installer/issues\n"
-"POT-Creation-Date: 2023-11-12 04:49+0000\n"
+"POT-Creation-Date: 2024-01-10 02:46+0000\n"
 "PO-Revision-Date: 2016-05-17 15:37+0000\n"
-"Last-Translator: Victor, 2023\n"
+"Last-Translator: Victor, 2024\n"
 "Language-Team: Russian (http://app.transifex.com/endless-os/eos-installer/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -214,7 +215,7 @@ msgstr "Найдено более одного устройства-кандид
 
 #: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:420
 msgid "Finish"
-msgstr "Закончить"
+msgstr "Завершить"
 
 #: gnome-image-installer/pages/disktarget/gis-disktarget-page.c:475
 msgid "Select Disk"
@@ -237,7 +238,7 @@ msgid ""
 "It looks like you have multiple partitions on this disk (for example drive "
 "C: and D:). Reformatting with Endless OS will erase <b>all partitions</b> on"
 " the selected disk. Please click here to confirm."
-msgstr "Похоже, что на этом диске есть несколько разделов (например, диск C: и D:). Переформатирование с помощью Endless OS приведет к стиранию <b>всех разделов</b> на выбранном диске. Пожалуйста, щелкните здесь для подтверждения."
+msgstr "Похоже, что на этом диске есть несколько разделов (например, диск C: и D:). Переформатирование с помощью Endless OS приведет к удалению <b>всех разделов</b> на выбранном диске. Пожалуйста, нажмите здесь для подтверждения."
 
 #: gnome-image-installer/pages/disktarget/gis-disktarget-page.ui:256
 msgid "No suitable disks found."
@@ -255,7 +256,7 @@ msgstr "Невозможно сохранить журнал отладки:"
 #: gnome-image-installer/pages/finished/gis-finished-page.c:251
 msgid ""
 "Oops, something is wrong with your unattended installation configuration."
-msgstr "Ой-йой, что-то не так с конфигурацией вашей неуправляемой установки."
+msgstr "Ой, что-то не так с вашей конфигурацией автоматической установки."
 
 #: gnome-image-installer/pages/finished/gis-finished-page.c:255
 msgid "Oops, something is wrong with your Endless OS file."
@@ -263,11 +264,11 @@ msgstr "Ой-йой, что-то не так с одним из вашим фа�
 
 #: gnome-image-installer/pages/finished/gis-finished-page.c:259
 msgid "Oops, something went wrong while finding suitable disks to reformat."
-msgstr "Ой-йой, что-то пошло не так при поиске подходящих дисков для возможности переформатировать."
+msgstr "Ой, что-то пошло не так при поиске подходящих дисков для возможности переформатировать."
 
 #: gnome-image-installer/pages/finished/gis-finished-page.c:263
 msgid "Oops, something went wrong while reformatting."
-msgstr "Ой-йой, что-то пошло не так при переформатировани."
+msgstr "Ой, что-то пошло не так при переформатировани."
 
 #: gnome-image-installer/pages/finished/gis-finished-page.c:275
 #: gnome-image-installer/pages/finished/gis-finished-page.ui:102
