@@ -25,8 +25,14 @@ install_data(
     install_dir: rules_dir,
 )
 
-icon_dir = 'icons/hicolor/64x64/apps'
+icon_dir = 'icons/hicolor/scalable/apps'
 install_data(
-    icon_dir / 'com.endlessm.Installer.png',
+    icon_dir / 'com.endlessm.Installer.svg',
     install_dir: datadir / icon_dir,
+)
+
+symbolic_icon_dir = 'icons/hicolor/symbolic/apps'
+install_data(
+    symbolic_icon_dir / 'com.endlessm.Installer-symbolic.svg',
+    install_dir: datadir / symbolic_icon_dir,
 )
