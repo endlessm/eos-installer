@@ -146,7 +146,7 @@ write_diagnostics_thread_func (GTask *task,
    * The additional complication is that, when running from the FBE, the user
    * can't get to a file manager or web browser. So there's only any point in
    * saving a log if the user can view it directly from the error page. (In
-   * particular, eosinstaller images do not include gedit or any other GUI text
+   * particular, eosinstaller images do not include any GUI text
    * editor; so, in that case, if we couldn't save to the image partition we
    * should just give up.)
    */

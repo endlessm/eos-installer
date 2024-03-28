@@ -47,7 +47,7 @@
 struct _GisFinishedPagePrivate {
   GtkAccelGroup *accel_group;
 
-  GDesktopAppInfo *gedit;
+  GDesktopAppInfo *text_editor;
 
   GtkWidget *success_box;
   GtkWidget *removelabel_usb;
@@ -144,7 +144,7 @@ write_diagnostics_cb (GObject      *source,
       g_autofree gchar *link = NULL;
       g_autofree gchar *markup = NULL;
 
-      if (priv->gedit != NULL)
+      if (priv->text_editor != NULL)
         {
           g_assert (error == NULL);
           g_autofree gchar *url = g_file_get_uri (output);
@@ -292,7 +292,7 @@ gis_finished_page_shown (GisPage *page)
            */
           GFile *image_dir = G_FILE (gis_store_get_object (GIS_STORE_IMAGE_DIR));
           /* See implementation of gis_write_diagnostics_async for rationale. */
-          const gchar *home_dir = priv->gedit != NULL ? g_get_home_dir () : NULL;
+          const gchar *home_dir = priv->text_editor != NULL ? g_get_home_dir () : NULL;
 
           g_application_hold (G_APPLICATION (page->driver));
           gis_write_diagnostics_async (NULL, image_dir, home_dir,
@@ -406,16 +406,17 @@ diagnostics_label_activate_link_cb (GtkLabel    *label,
 
   /* We cannot rely on the default handler, because the FBE session is
    * configured to associate a dummy handler (namely `/bin/true`) with all MIME
-   * types. So, explicitly launch gedit. (If it's not installed, there should
-   * be no link in this label, and this handler should not be connected.)
+   * types. So, explicitly launch the text editor. (If it's not installed,
+   * there should be no link in this label, and this handler should not be
+   * connected.)
    */
-  g_return_val_if_fail (priv->gedit != NULL, FALSE);
+  g_return_val_if_fail (priv->text_editor != NULL, FALSE);
 
-  if (g_app_info_launch_uris (G_APP_INFO (priv->gedit), uris, NULL,
+  if (g_app_info_launch_uris (G_APP_INFO (priv->text_editor), uris, NULL,
                               &error))
     return TRUE;
 
-  g_warning ("Failed to launch gedit for %s: %s", uri, error->message);
+  g_warning ("Failed to launch text_editor for %s: %s", uri, error->message);
   return FALSE;
 }
 
@@ -432,8 +433,11 @@ gis_finished_page_constructed (GObject *object)
 
   g_signal_connect (priv->restart_button, "clicked", G_CALLBACK (reboot_cb), page);
 
-  priv->gedit = g_desktop_app_info_new ("org.gnome.gedit.desktop");
-  if (priv->gedit != NULL)
+  priv->text_editor = g_desktop_app_info_new ("org.gnome.TextEditor.desktop");
+  if (priv->text_editor == NULL)
+    priv->text_editor = g_desktop_app_info_new ("org.gnome.gedit.desktop");
+
+  if (priv->text_editor != NULL)
     g_signal_connect (priv->diagnostics_label, "activate-link",
                       G_CALLBACK (diagnostics_label_activate_link_cb), page);
 
@@ -452,7 +456,7 @@ gis_finished_page_dispose (GObject *object)
   GisFinishedPagePrivate *priv = gis_finished_page_get_instance_private (self);
 
   g_clear_object (&priv->accel_group);
-  g_clear_object (&priv->gedit);
+  g_clear_object (&priv->text_editor);
 
   G_OBJECT_CLASS (gis_finished_page_parent_class)->dispose (object);
 }
