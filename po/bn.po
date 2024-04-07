@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-installer\n"
 "Report-Msgid-Bugs-To: https://github.com/endlessm/eos-installer/issues\n"
-"POT-Creation-Date: 2023-12-27 02:46+0000\n"
+"POT-Creation-Date: 2024-04-07 17:25+0000\n"
 "PO-Revision-Date: 2016-05-17 15:37+0000\n"
 "Last-Translator: Shimon Sharmin <oparthib@gmail.com>, 2016\n"
 "Language-Team: Bengali (http://app.transifex.com/endless-os/eos-installer/language/bn/)\n"
@@ -280,12 +280,12 @@ msgstr ""
 msgid "Unattended installation configuration file could not be created."
 msgstr ""
 
-#: gnome-image-installer/pages/finished/gis-finished-page.c:471
+#: gnome-image-installer/pages/finished/gis-finished-page.c:475
 msgid "Reformatting Finished"
 msgstr "পুনঃ ফর্ম্যাট শেষ "
 
 #. Translators: the %s is the customer support email address
-#: gnome-image-installer/pages/finished/gis-finished-page.c:482
+#: gnome-image-installer/pages/finished/gis-finished-page.c:486
 #, c-format
 msgid ""
 "Please contact %s or join the <a "
