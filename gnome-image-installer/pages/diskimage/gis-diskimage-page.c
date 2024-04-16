@@ -51,13 +51,14 @@ typedef struct _GisDiskImagePagePrivate GisDiskImagePagePrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GisDiskImagePage, gis_diskimage_page, GIS_TYPE_PAGE);
 
-/* A device-mapped copy of endless.img used in image boots.
- * We prefer to use this to endless.img from the filesystem for two reasons:
- * - 'error' is mapped over the sectors of the drive which correspond to the
- *   image, so we can't read it from the filesystem
- * - reading from the filesystem (via fuse) comes with a big overhead
+/* A symlink to the uncompressed endless.img loopback mount used in image
+ * boots, useful for 2 reasons:
+ * - We currently have no other way of reading the image within the squashfs,
+ *   if that is the setup that we have booted from.
+ * - udisks still uses FUSE-based NTFS drivers, which incur a big overhead,
+ *   for any less usual case where NTFS is being used for live boot.
  */
-static const gchar * const live_device_path = "/dev/mapper/endless-image";
+static const gchar * const live_device_path = "/dev/disk/endless-image";
 
 /* Deliberately out-of-order so that sorting is exercised in English */
 static const gchar * const sea_locales[] = {
