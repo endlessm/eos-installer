@@ -654,8 +654,24 @@ gis_diskimage_page_mount (GisPage *page)
       else
         {
           g_autofree gchar *path = NULL;
-          GVariant *options = g_variant_new ("a{sv}", NULL);
+          GVariantDict options_dict;
+          GVariant *options;
           gboolean ret;
+
+          g_variant_dict_init (&options_dict, NULL);
+
+          /* mount defaults to rw, and isn't always capable of falling
+           * back to ro in the iso9660 case where there is an existing
+           * mount of this device - as happens in the live-boot loopback
+           * case.
+           */
+          if (g_strcmp0 (udisks_block_get_id_type (block), "iso9660") == 0)
+            {
+              g_variant_dict_insert (&options_dict, "options", "s", "ro");
+            }
+
+          options = g_variant_dict_end (&options_dict);
+
           ret = udisks_filesystem_call_mount_sync (fs, options, &path,
                                                    NULL, &error);
           if (!ret) {
