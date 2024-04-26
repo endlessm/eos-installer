@@ -349,6 +349,16 @@ gis_disktarget_page_populate_model(GisPage *page, UDisksClient *client)
           skip_if (0 == g_strcmp0 (object_path, image_loop_path),
                    "it hosts the image partition");
 
+          UDisksFilesystem *fs = udisks_object_peek_filesystem (object);
+          if (fs != NULL)
+            {
+              const gchar * const *mount_points =
+                udisks_filesystem_get_mount_points (fs);
+              skip_if (mount_points != NULL && mount_points[0] != NULL,
+                       "it is mounted at (at least) %s",
+                       mount_points[0]);
+            }
+
           if (udisks_block_get_size (block) >= gis_store_get_required_size ())
             {
               priv->has_valid_disks = TRUE;
