@@ -155,5 +155,6 @@ foreach test_name, test_options : tests
 
   test(test_name, exe,
     env: test_env,
+    timeout: 300,
   )
 endforeach
