@@ -95,7 +95,6 @@ static void
 gis_window_init (GisWindow *window)
 {
   GisWindowPrivate *priv = gis_window_get_instance_private (window);
-  GdkGeometry size_hints;
 
   priv->assistant = g_object_new (GIS_TYPE_ASSISTANT, NULL);
   gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET (priv->assistant));
