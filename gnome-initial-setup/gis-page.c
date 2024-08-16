@@ -147,7 +147,6 @@ static void
 gis_page_constructed (GObject *object)
 {
   GisPage *page = GIS_PAGE (object);
-  GisPageClass *klass = GIS_PAGE_GET_CLASS (page);
 
   gis_page_locale_changed (page);
 
