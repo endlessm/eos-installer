@@ -10,6 +10,10 @@ project('eos-installer',
 )
 
 add_project_arguments('-D_GNU_SOURCE', language: 'c')
+add_project_arguments(
+    ['-Wno-unused-parameter'],
+    language: 'c',
+)
 
 cc = meson.get_compiler('c')
 gnome = import('gnome')
