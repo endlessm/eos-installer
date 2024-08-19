@@ -10,13 +10,31 @@ project('eos-installer',
 )
 
 add_project_arguments('-D_GNU_SOURCE', language: 'c')
+add_project_arguments(
+    ['-Wno-unused-parameter'],
+    language: 'c',
+)
 
 cc = meson.get_compiler('c')
 gnome = import('gnome')
 i18n = import('i18n')
 
+glib_major_version = '2'
+glib_minor_version = '76'
+glib_dep_version = '>= @0@.@1@'.format(glib_major_version, glib_minor_version)
+glib_version_define = 'GLIB_VERSION_@0@_@1@'.format(glib_major_version, glib_minor_version)
+
+gio_unix_dep = dependency('gio-unix-2.0', version: glib_dep_version)
+
+add_project_arguments(
+  [
+    '-DGLIB_VERSION_MIN_REQUIRED=@0@'.format(glib_version_define),
+    '-DGLIB_VERSION_MAX_ALLOWED=@0@'.format(glib_version_define),
+  ],
+  language: 'c',
+)
+
 libglnx_dep = subproject('libglnx').get_variable('libglnx_dep')
-gio_unix_dep = dependency('gio-unix-2.0', version: '>= 2.40.0')
 gtk_dep = dependency('gtk+-3.0', version: '>= 3.7.11')
 udisks_dep = dependency('udisks2')
 gnome_desktop_dep = dependency('gnome-desktop-3.0', version: '>= 3.7.5')

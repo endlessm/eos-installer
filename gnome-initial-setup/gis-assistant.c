@@ -72,8 +72,6 @@ struct _GisAssistantPagePrivate
 static void
 visible_child_changed (GisAssistant *assistant)
 {
-  GisAssistantPrivate *priv = gis_assistant_get_instance_private (assistant);
-
   g_signal_emit (assistant, signals[PAGE_CHANGED], 0);
 }
 
